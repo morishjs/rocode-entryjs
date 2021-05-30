@@ -3,12 +3,12 @@ module.exports = {
         return {
             ai_noti_img: {
                 skeleton: 'basic_text',
-                color: EntryStatic.colorSet.common.TRANSPARENT,
+                color: RoCodeStatic.colorSet.common.TRANSPARENT,
                 template: '%1',
                 params: [
                     {
                         type: 'Indicator',
-                        img: '/block_icon/working_hard_entry.svg',
+                        img: '/block_icon/working_hard_RoCode.svg',
                         class: 'notice',
                         size: 50,
                         position: {
@@ -28,13 +28,13 @@ module.exports = {
                         offsetY: -25,
                     },
                 },
-                color: EntryStatic.colorSet.common.TRANSPARENT,
+                color: RoCodeStatic.colorSet.common.TRANSPARENT,
                 template: '%1',
                 params: [
                     {
                         type: 'Text',
                         text: Lang.Workspace.blocks_comming_soon,
-                        color: EntryStatic.colorSet.common.TEXT,
+                        color: RoCodeStatic.colorSet.common.TEXT,
                         align: 'center',
                     },
                 ],

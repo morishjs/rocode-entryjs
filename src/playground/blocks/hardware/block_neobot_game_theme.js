@@ -1,4 +1,4 @@
-Entry.NeobotGameTheme = {
+RoCode.NeobotGameTheme = {
     id: '5.4',
     name: 'neobot_game_theme',
     url: 'http://www.neobot.co.kr',
@@ -18,7 +18,7 @@ Entry.NeobotGameTheme = {
         'JoystickMoveEvent',
     ],
     setZero: function() {
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     monitorTemplate: {
         imgPath: 'hw/neobot_game_theme.png',
@@ -52,45 +52,45 @@ Entry.NeobotGameTheme = {
             },
         },
         ports: {
-            /* JoystickX: { 
-                name: 'Joystick X', 
+            /* JoystickX: {
+                name: 'Joystick X',
                 type: 'input',
                 pos: { x: 200, y: 200 }
             },
             JoystickY: {
                 name: 'Joystick Y',
-                type: 'input', 
-                pos: { x: 200, y: 200 } 
+                type: 'input',
+                pos: { x: 200, y: 200 }
             },
             GyroX: {
-                name: 'Gyro X', 
-                type: 'input', 
-                pos: { x: 400, y: 200 } 
+                name: 'Gyro X',
+                type: 'input',
+                pos: { x: 400, y: 200 }
             },
             GyroY: {
-                name: 'Gyro Y', 
-                type: 'input', 
+                name: 'Gyro Y',
+                type: 'input',
                 pos: { x: 400, y: 200 }
             },
             Acceleration: {
-                name: 'Accel', 
-                type: 'input', 
-                pos: { x: 500, y: 200 } 
+                name: 'Accel',
+                type: 'input',
+                pos: { x: 500, y: 200 }
             },
             JoystickPressEvent: {
-                name: 'Joystick Press', 
-                type: 'input', 
-                pos: { x: 200, y: 500 } 
+                name: 'Joystick Press',
+                type: 'input',
+                pos: { x: 200, y: 500 }
             },
-            JoystickMoveEvent: { 
-                name: 'Joystick Move', 
-                type: 'input', 
-                pos: { x: 200, y: 500 } 
+            JoystickMoveEvent: {
+                name: 'Joystick Move',
+                type: 'input',
+                pos: { x: 200, y: 500 }
             },
-            BtnPressEvent: { 
-                name: 'Button', 
-                type: 'input', 
-                pos: { x: 400, y: 500 } 
+            BtnPressEvent: {
+                name: 'Button',
+                type: 'input',
+                pos: { x: 400, y: 500 }
             }, */
         },
         mode: 'both',
@@ -103,7 +103,7 @@ Entry.NeobotGameTheme = {
     },
 };
 
-Entry.NeobotGameTheme.setLanguage = function() {
+RoCode.NeobotGameTheme.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -316,7 +316,7 @@ Entry.NeobotGameTheme.setLanguage = function() {
     };
 };
 
-Entry.NeobotGameTheme.blockMenuBlocks = [
+RoCode.NeobotGameTheme.blockMenuBlocks = [
     'neobot_gyro_value',
     'neobot_joystick_value',
     'neobot_crash_value',
@@ -331,14 +331,14 @@ Entry.NeobotGameTheme.blockMenuBlocks = [
     'neobot_look',
 ];
 
-Entry.NeobotGameTheme.getBlocks = function() {
+RoCode.NeobotGameTheme.getBlocks = function() {
     return {
         /**
          *  Class neobot_value
          */
         neobot_gyro_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -351,8 +351,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
                     ],
                     value: 'GyroX',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -367,14 +367,14 @@ Entry.NeobotGameTheme.getBlocks = function() {
             isNotFor: ['neobot_game_theme'],
             func: function(sprite, script) {
                 var port = script.getStringField('PORT');
-                return port == 'GyroX' ? Entry.hw.portData[port] : Entry.hw.portData[port];
+                return port == 'GyroX' ? RoCode.hw.portData[port] : RoCode.hw.portData[port];
             },
             syntax: { js: [], py: ['NeobotGameTheme.gyro_value(%1)'] },
         },
 
         neobot_joystick_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -387,8 +387,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
                     ],
                     value: 'JoystickX',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -403,14 +403,14 @@ Entry.NeobotGameTheme.getBlocks = function() {
             isNotFor: ['neobot_game_theme'],
             func: function(sprite, script) {
                 var port = script.getStringField('PORT');
-                return port == 'JoystickX' ? Entry.hw.portData[port] : Entry.hw.portData[port];
+                return port == 'JoystickX' ? RoCode.hw.portData[port] : RoCode.hw.portData[port];
             },
             syntax: { js: [], py: ['NeobotGameTheme.joystick_value(%1)'] },
         },
 
         neobot_crash_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             def: {
@@ -419,14 +419,14 @@ Entry.NeobotGameTheme.getBlocks = function() {
             class: 'neobot_value',
             isNotFor: ['neobot_game_theme'],
             func: function(sprite, script) {
-                return Entry.hw.portData['Acceleration'];
+                return RoCode.hw.portData['Acceleration'];
             },
             syntax: { js: [], py: ['NeobotGameTheme.joystick_value(%1)'] },
         },
 
         neobot_random_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -439,8 +439,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
                     ],
                     value: 'X',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -470,8 +470,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
          *  Class neobot_judgement
          */
         neobot_judge_joystick_move: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             fontColor: '#fff',
             statements: [],
@@ -486,8 +486,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -502,7 +502,7 @@ Entry.NeobotGameTheme.getBlocks = function() {
             isNotFor: ['neobot_game_theme'],
             func: function(sprite, script) {
                 var move = script.getNumberField('MOVE');
-                var value = Entry.hw.portData['JoystickMoveEvent'];
+                var value = RoCode.hw.portData['JoystickMoveEvent'];
 
                 if (move == '1' && value == '1') return true;
                 else if (move == '2' && value == '3') return true;
@@ -513,8 +513,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
         },
 
         neobot_judge_joystick_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             fontColor: '#fff',
             statements: [],
@@ -529,8 +529,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -545,14 +545,14 @@ Entry.NeobotGameTheme.getBlocks = function() {
             isNotFor: ['neobot_game_theme'],
             func: function(sprite, script) {
                 var dir = script.getNumberField('DIR');
-                var value = Entry.hw.portData['JoystickPressEvent'];
+                var value = RoCode.hw.portData['JoystickPressEvent'];
                 return dir == value;
             },
         },
 
         neobot_judge_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             fontColor: '#fff',
             statements: [],
@@ -566,8 +566,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -582,15 +582,15 @@ Entry.NeobotGameTheme.getBlocks = function() {
             isNotFor: ['neobot_game_theme'],
             func: function(sprite, script) {
                 var button = script.getNumberField('BTN');
-                var value = Entry.hw.portData['BtnPressEvent'];
+                var value = RoCode.hw.portData['BtnPressEvent'];
                 return button == value;
             },
         },
 
         // don't use
         get_gyro_degree: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -637,8 +637,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
                     ],
                     value: '45',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -655,8 +655,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
         },
 
         get_number_type1: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -677,8 +677,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -695,8 +695,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
         },
 
         get_number_type2: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -717,8 +717,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
                     ],
                     value: '50',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -735,8 +735,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
         },
 
         neobot_judge_gyro_direction_angle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             fontColor: '#fff',
             statements: [],
@@ -751,8 +751,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -767,9 +767,9 @@ Entry.NeobotGameTheme.getBlocks = function() {
             isNotFor: ['neobot_game_theme'],
             func: function(sprite, script) {
                 var direction = script.getNumberField('DIR');
-                /* var degree = Entry.parseNumber(script.getStringValue('DEGREE')); */
-                var gyroX = Entry.hw.portData['GyroX'];
-                var gyroY = Entry.hw.portData['GyroY'];
+                /* var degree = RoCode.parseNumber(script.getStringValue('DEGREE')); */
+                var gyroX = RoCode.hw.portData['GyroX'];
+                var gyroY = RoCode.hw.portData['GyroY'];
                 var isTilted = false;
 
                 switch (direction) {
@@ -792,8 +792,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
         },
 
         neobot_judge_coord: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             fontColor: '#fff',
             statements: [],
@@ -806,8 +806,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
                     ],
                     value: 'X',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -818,8 +818,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
                     ],
                     value: '>',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -853,7 +853,7 @@ Entry.NeobotGameTheme.getBlocks = function() {
 
                 var ret = false;
                 var portValue =
-                    axis == 'X' ? Entry.hw.portData['JoystickX'] : Entry.hw.portData['JoystickY'];
+                    axis == 'X' ? RoCode.hw.portData['JoystickX'] : RoCode.hw.portData['JoystickY'];
                 switch (compare) {
                     case '>':
                         if (portValue > targetValue) ret = true;
@@ -874,8 +874,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
         },
 
         neobot_judge_crash: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             fontColor: '#fff',
             statements: [],
@@ -889,8 +889,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
                     ],
                     value: '>',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -916,10 +916,10 @@ Entry.NeobotGameTheme.getBlocks = function() {
             isNotFor: ['neobot_game_theme'],
             func: function(sprite, script) {
                 var compare = script.getStringField('COMPARE');
-                var targetValue = Entry.parseNumber(script.getStringValue('VALUE'));
+                var targetValue = RoCode.parseNumber(script.getStringValue('VALUE'));
 
                 var ret = false;
-                var portValue = Entry.hw.portData['Acceleration'];
+                var portValue = RoCode.hw.portData['Acceleration'];
                 switch (compare) {
                     case '>':
                         if (portValue > targetValue) ret = true;
@@ -940,8 +940,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
         },
 
         get_move_method: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -953,8 +953,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
                     ],
                     value: 'Realtime',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -971,8 +971,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
         },
 
         neobot_locate: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -988,8 +988,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
                     ],
                     value: 'Joystick',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1028,41 +1028,41 @@ Entry.NeobotGameTheme.getBlocks = function() {
 
                 switch (targetDevice) {
                     case 'Joystick':
-                        targetX = Entry.hw.portData['JoystickX'];
-                        targetY = Entry.hw.portData['JoystickY'];
+                        targetX = RoCode.hw.portData['JoystickX'];
+                        targetY = RoCode.hw.portData['JoystickY'];
                         break;
                     case 'Gyro':
-                        targetX = Entry.hw.portData['GyroX'];
-                        targetY = Entry.hw.portData['GyroY'];
+                        targetX = RoCode.hw.portData['GyroX'];
+                        targetY = RoCode.hw.portData['GyroY'];
                         break;
                     case 'JX':
-                        targetX = Entry.hw.portData['JoystickX'];
+                        targetX = RoCode.hw.portData['JoystickX'];
                         targetY = sprite.getY();
                         break;
                     case 'JY':
                         targetX = sprite.getX();
-                        targetY = Entry.hw.portData['JoystickY'];
+                        targetY = RoCode.hw.portData['JoystickY'];
                         break;
                     case 'GX':
-                        targetX = Entry.hw.portData['GyroX'];
+                        targetX = RoCode.hw.portData['GyroX'];
                         targetY = sprite.getY();
                         break;
                     case 'GY':
                         targetX = sprite.getX();
-                        targetY = Entry.hw.portData['GyroY'];
+                        targetY = RoCode.hw.portData['GyroY'];
                         break;
                 }
 
                 /* var targetX = (targetDevice == 'Joystick' ?
-                 Entry.hw.portData['JoystickX'] : Entry.hw.portData['GyroX'] );
-                var targetY = (targetDevice == 'Joystick' 
-                ? Entry.hw.portData['JoystickY'] : Entry.hw.portData['GyroY']
+                 RoCode.hw.portData['JoystickX'] : RoCode.hw.portData['GyroX'] );
+                var targetY = (targetDevice == 'Joystick'
+                ? RoCode.hw.portData['JoystickY'] : RoCode.hw.portData['GyroY']
                 ); */
 
                 var distX = targetX - sprite.getX();
                 var distY = targetY - sprite.getY();
 
-                const isNumber = Entry.NeobotGameTheme.isNumber(targetMethod);
+                const isNumber = RoCode.NeobotGameTheme.isNumber(targetMethod);
                 // 드롭다운 제거 후 별도 숫자, 센서 값 등을 입력한 경우
                 if (isNumber) {
                     var dist = Math.sqrt(Math.pow(distX, 2) + Math.pow(distY, 2));
@@ -1108,8 +1108,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
         },
 
         neobot_look: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1121,8 +1121,8 @@ Entry.NeobotGameTheme.getBlocks = function() {
                     ],
                     value: 'Joystick',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1144,12 +1144,12 @@ Entry.NeobotGameTheme.getBlocks = function() {
                 const targetDevice = script.getField('DEVICE', script);
                 var targetX =
                     targetDevice == 'Joystick'
-                        ? Entry.hw.portData['JoystickX']
-                        : Entry.hw.portData['GyroX'];
+                        ? RoCode.hw.portData['JoystickX']
+                        : RoCode.hw.portData['GyroX'];
                 var targetY =
                     targetDevice == 'Joystick'
-                        ? Entry.hw.portData['JoystickY']
-                        : Entry.hw.portData['GyroY'];
+                        ? RoCode.hw.portData['JoystickY']
+                        : RoCode.hw.portData['GyroY'];
                 const spriteX = sprite.getX();
                 const spriteY = sprite.getY();
                 let deltaX = targetX - spriteX;
@@ -1175,4 +1175,4 @@ Entry.NeobotGameTheme.getBlocks = function() {
     }; // end getBlocks
 };
 
-module.exports = Entry.NeobotGameTheme;
+module.exports = RoCode.NeobotGameTheme;

@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Arduino = {
+RoCode.Arduino = {
     id: ['1.1', '4.2', '8.1'],
     name: 'arduino',
     url: 'http://www.arduino.cc/',
@@ -10,12 +10,12 @@ Entry.Arduino = {
         en: 'Arduino',
     },
     setZero() {
-        Entry.hw.sendQueue.readablePorts = [];
+        RoCode.hw.sendQueue.readablePorts = [];
         for (let port = 0; port < 20; port++) {
-            Entry.hw.sendQueue[port] = 0;
-            Entry.hw.sendQueue.readablePorts.push(port);
+            RoCode.hw.sendQueue[port] = 0;
+            RoCode.hw.sendQueue.readablePorts.push(port);
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     monitorTemplate: {
         imgPath: 'hw/arduino.png',
@@ -117,7 +117,7 @@ Entry.Arduino = {
     },
 };
 
-Entry.Arduino.setLanguage = function() {
+RoCode.Arduino.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -152,7 +152,7 @@ Entry.Arduino.setLanguage = function() {
     };
 };
 
-Entry.Arduino.blockMenuBlocks = [
+RoCode.Arduino.blockMenuBlocks = [
     'arduino_get_number_sensor_value',
     'arduino_get_digital_value',
     'arduino_toggle_led',
@@ -160,7 +160,7 @@ Entry.Arduino.blockMenuBlocks = [
     'arduino_convert_scale',
 ];
 
-Entry.Arduino.getBlocks = function() {
+RoCode.Arduino.getBlocks = function() {
     return {
         //region arduino 아두이노
         arduino_text: {
@@ -191,7 +191,7 @@ Entry.Arduino.getBlocks = function() {
                             {
                                 type: 'TextInput',
                                 value: 10,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         keyOption: 'arduino_text',
@@ -200,8 +200,8 @@ Entry.Arduino.getBlocks = function() {
             },
         },
         arduino_get_sensor_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -217,8 +217,8 @@ Entry.Arduino.getBlocks = function() {
                     ],
                     value: 'A0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -250,9 +250,9 @@ Entry.Arduino.getBlocks = function() {
                                 ],
                                 value: 'A0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         keyOption: 'arduino_get_sensor_number',
@@ -261,8 +261,8 @@ Entry.Arduino.getBlocks = function() {
             },
         },
         arduino_get_port_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -286,8 +286,8 @@ Entry.Arduino.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -326,8 +326,8 @@ Entry.Arduino.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'arduino_get_port_number',
@@ -336,8 +336,8 @@ Entry.Arduino.getBlocks = function() {
             },
         },
         arduino_get_pwm_port_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -353,8 +353,8 @@ Entry.Arduino.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -385,9 +385,9 @@ Entry.Arduino.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         keyOption: 'arduino_get_pwm_port_number',
@@ -396,8 +396,8 @@ Entry.Arduino.getBlocks = function() {
             },
         },
         arduino_get_number_sensor_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -424,7 +424,7 @@ Entry.Arduino.getBlocks = function() {
             isNotFor: ['arduino'],
             func(sprite, script) {
                 const signal = script.getValue('VALUE', script);
-                return Entry.hw.getAnalogPortValue(signal[1]);
+                return RoCode.hw.getAnalogPortValue(signal[1]);
             },
             syntax: {
                 js: [],
@@ -443,8 +443,8 @@ Entry.Arduino.getBlocks = function() {
             },
         },
         arduino_get_digital_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -470,13 +470,13 @@ Entry.Arduino.getBlocks = function() {
             class: 'arduino_value',
             isNotFor: ['arduino'],
             func(sprite, script) {
-                const { hwModule = {} } = Entry.hw;
+                const { hwModule = {} } = RoCode.hw;
                 const { name } = hwModule;
                 if (name === 'ArduinoExt') {
-                    return Entry.block.arduino_ext_get_digital.func(sprite, script);
+                    return RoCode.block.arduino_ext_get_digital.func(sprite, script);
                 } else {
                     const signal = script.getNumberValue('PORT', script);
-                    return Entry.hw.getDigitalPortValue(signal);
+                    return RoCode.hw.getDigitalPortValue(signal);
                 }
             },
             syntax: {
@@ -497,8 +497,8 @@ Entry.Arduino.getBlocks = function() {
             },
         },
         arduino_toggle_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -515,8 +515,8 @@ Entry.Arduino.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -545,7 +545,7 @@ Entry.Arduino.getBlocks = function() {
                 const port = script.getNumberValue('VALUE');
                 const operator = script.getField('OPERATOR');
                 const value = operator == 'on' ? 255 : 0;
-                Entry.hw.setDigitalPortValue(port, value);
+                RoCode.hw.setDigitalPortValue(port, value);
                 return script.callReturn();
             },
             syntax: {
@@ -566,9 +566,9 @@ Entry.Arduino.getBlocks = function() {
                                 ],
                                 value: 'on',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -576,8 +576,8 @@ Entry.Arduino.getBlocks = function() {
             },
         },
         arduino_toggle_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -623,7 +623,7 @@ Entry.Arduino.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                Entry.hw.setDigitalPortValue(port, value);
+                RoCode.hw.setDigitalPortValue(port, value);
                 return script.callReturn();
             },
             syntax: {
@@ -646,8 +646,8 @@ Entry.Arduino.getBlocks = function() {
             },
         },
         arduino_convert_scale: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -730,8 +730,8 @@ Entry.Arduino.getBlocks = function() {
                 let isFloat = false;
 
                 if (
-                    (Entry.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
-                    (Entry.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
+                    (RoCode.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
+                    (RoCode.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
                 ) {
                     isFloat = true;
                 }
@@ -797,4 +797,4 @@ Entry.Arduino.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Arduino;
+module.exports = RoCode.Arduino;

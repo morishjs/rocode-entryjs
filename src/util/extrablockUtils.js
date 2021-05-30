@@ -26,17 +26,17 @@ const banBlocks = (blockNames = [], typedList, callback) => {
         console.warn('not exist extra block', extraBlockTypes);
         return;
     }
-    const currentObjectId = Entry.playground.object.id;
-    Entry.do('selectObject', currentObjectId);
+    const currentObjectId = RoCode.playground.object.id;
+    RoCode.do('selectObject', currentObjectId);
     extraBlockTypes.forEach((type) => {
         if (isActive(type, typedList)) {
             const blocks = typedList[type].getBlocks();
             Object.keys(blocks).forEach((blockType) => {
-                Entry.Utils.removeBlockByType(blockType);
+                RoCode.Utils.removeBlockByType(blockType);
             });
         }
     });
-    Entry.do('selectObject', currentObjectId).isPass(true);
+    RoCode.do('selectObject', currentObjectId).isPass(true);
     callback(extraBlockTypes);
 };
 
@@ -47,7 +47,7 @@ const isActive = (name, typedList) => {
         return;
     }
     const blocks = activeList.getBlocks();
-    return Object.keys(blocks).some((blockName) => Entry.Utils.isUsedBlockType(blockName));
+    return Object.keys(blocks).some((blockName) => RoCode.Utils.isUsedBlockType(blockName));
 };
 
 const getExtras = (blockList, categoryFlag) => {

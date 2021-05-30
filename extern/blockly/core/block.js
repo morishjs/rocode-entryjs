@@ -538,12 +538,12 @@ Blockly.Block.prototype.getHeightWidth = function() {
 };
 
 Blockly.Block.prototype.onDblClick_ = function(e) {
-  if (Entry.Func.isEdit)
+  if (RoCode.Func.isEdit)
     return;
 
-   var funcs = Entry.variableContainer.functions_;
+   var funcs = RoCode.variableContainer.functions_;
    if(funcs && funcs.length !== 0)
-      Entry.Func.edit(funcs[this.hashId]);
+      RoCode.Func.edit(funcs[this.hashId]);
 };
 
 /**
@@ -552,8 +552,8 @@ Blockly.Block.prototype.onDblClick_ = function(e) {
  * @private
  */
 Blockly.Block.prototype.onMouseDown_ = function(e) {
-  if (Entry.documentMousedown)
-      Entry.documentMousedown.notify(e);
+  if (RoCode.documentMousedown)
+      RoCode.documentMousedown.notify(e);
 
   if (this.isInFlyout) {
     this.select();
@@ -591,8 +591,8 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
     return;
   } else {
     // Left-click
-    if (typeof(Entry) == "object") {
-      Entry.dispatchEvent("entryBlocklyChanged");
+    if (typeof(RoCode) == "object") {
+      RoCode.dispatchEvent("RoCodeBlocklyChanged");
     }
     this.isDrag = false;
     Blockly.removeAllRanges();
@@ -650,9 +650,9 @@ Blockly.Block.prototype.onMouseUp_ = function(e) {
     this.stalkerBlock = null;
   }
 
-  if (!this.isDrag && typeof(Entry) == "object") {
+  if (!this.isDrag && typeof(RoCode) == "object") {
     //fire instant event
-    //Entry.fireInstantEvent(this.id);
+    //RoCode.fireInstantEvent(this.id);
   };
   Blockly.terminateDrag_();
   if (Blockly.selected && Blockly.highlightedConnection_) {
@@ -673,8 +673,8 @@ Blockly.Block.prototype.onMouseUp_ = function(e) {
       // Don't throw an object in the trash can if it just got connected.
       this.workspace.trashcan.close();
     }
-    if (typeof(Entry) == "object" && this.getParent() === this.isDisconnected) {
-      Entry.dispatchEvent("cancelLastCommand");
+    if (typeof(RoCode) == "object" && this.getParent() === this.isDisconnected) {
+      RoCode.dispatchEvent("cancelLastCommand");
     }
   } else if (this.workspace.trashcan && this.workspace.trashcan.isOpen) {
     var trashcan = this.workspace.trashcan;
@@ -687,12 +687,12 @@ Blockly.Block.prototype.onMouseUp_ = function(e) {
     Blockly.fireUiEvent(window, 'resize');
   } else if (this.isDisconnected) {
   } else {
-    if (typeof(Entry) == "object") {
-      Entry.dispatchEvent("cancelLastCommand");
+    if (typeof(RoCode) == "object") {
+      RoCode.dispatchEvent("cancelLastCommand");
     }
   }
-  if (typeof(Entry) == "object")
-    Entry.dispatchEvent("entryBlocklyMouseUp");
+  if (typeof(RoCode) == "object")
+    RoCode.dispatchEvent("RoCodeBlocklyMouseUp");
 
   if (Blockly.highlightedConnection_) {
     Blockly.highlightedConnection_.unhighlight();
@@ -719,8 +719,8 @@ Blockly.Block.prototype.showHelp_ = function() {
 Blockly.Block.prototype.duplicate_ = function() {
   // Create a duplicate via XML.
   var xmlBlock = Blockly.Xml.blockToDom_(this);
-  if (typeof(Entry) === "object") {
-      xmlBlock = Entry.changeXmlHashId(xmlBlock);
+  if (typeof(RoCode) === "object") {
+      xmlBlock = RoCode.changeXmlHashId(xmlBlock);
   } else if (typeof(Ntry) === "object") {
       xmlBlock = Ntry.changeXmlHashId(xmlBlock);
   }
@@ -759,8 +759,8 @@ Blockly.Block.prototype.showContextMenu_ = function(xy) {
       enabled: true,
       callback: function() {
         block.duplicate_();
-        if (typeof(Entry) == "object") {
-          Entry.dispatchEvent("entryBlocklyChanged");
+        if (typeof(RoCode) == "object") {
+          RoCode.dispatchEvent("RoCodeBlocklyChanged");
         }
       }
     };
@@ -795,8 +795,8 @@ Blockly.Block.prototype.showContextMenu_ = function(xy) {
       enabled: true,
       callback: function() {
         block.dispose(true, true);
-        if (typeof(Entry) == "object") {
-          Entry.dispatchEvent("entryBlocklyChanged");
+        if (typeof(RoCode) == "object") {
+          RoCode.dispatchEvent("RoCodeBlocklyChanged");
         }
       }
     };
@@ -952,7 +952,7 @@ Blockly.Block.prototype.onMouseMove_ = function(e) {
     var myConnections = this.getConnections_(false);
     var closestConnection = null;
     var localConnection = null;
-    var radiusConnection = Blockly.SNAP_RADIUS_ENTRY;
+    var radiusConnection = Blockly.SNAP_RADIUS_RoCode;
     //var radiusConnection = Blockly.SNAP_RADIUS;
     for (var i = 0; i < myConnections.length; i++) {
       var myConnection = myConnections[i];

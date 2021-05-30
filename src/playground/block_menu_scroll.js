@@ -27,15 +27,15 @@ class BlockMenuScroller {
 
         this._domHeight = 0;
         this._dResizeScrollBar = debounce(this.resizeScrollBar, 50);
-        if (Entry.windowResized) {
-            Entry.windowResized.attach(this, this._dResizeScrollBar);
+        if (RoCode.windowResized) {
+            RoCode.windowResized.attach(this, this._dResizeScrollBar);
         }
     }
 
     createScrollBar() {
         const r = this.RADIUS;
         const width = this.SCROLL_WIDTH;
-        const { common = {} } = EntryStatic.colorSet || {};
+        const { common = {} } = RoCodeStatic.colorSet || {};
 
         this.svgGroup = this.board.svgGroup.elem('g', {
             class: 'boardScrollbar',
@@ -204,8 +204,8 @@ class BlockMenuScroller {
         }
 
         if (e.button === 0 || (e.originalEvent && e.originalEvent.touches)) {
-            if (Entry.documentMousedown) {
-                Entry.documentMousedown.notify(e);
+            if (RoCode.documentMousedown) {
+                RoCode.documentMousedown.notify(e);
             }
 
             let mouseEvent;
@@ -218,7 +218,7 @@ class BlockMenuScroller {
             const doc = $(document);
             doc.bind('mousemove.scroll', onMouseMove);
             doc.bind('mouseup.scroll', onMouseUp);
-            this.dragInstance = new Entry.DragInstance({
+            this.dragInstance = new RoCode.DragInstance({
                 startY: mouseEvent.pageY,
                 offsetY: mouseEvent.pageY,
             });
@@ -228,6 +228,6 @@ class BlockMenuScroller {
     }
 }
 
-Entry.BlockMenuScroller = BlockMenuScroller;
+RoCode.BlockMenuScroller = BlockMenuScroller;
 
-(function(p) {})(Entry.BlockMenuScroller.prototype);
+(function(p) {})(RoCode.BlockMenuScroller.prototype);

@@ -52,11 +52,11 @@ AlbertAiController.prototype.controlAngleInitial = function(wheels, currentRadia
 	var diff = this.validateRadian(targetRadian - currentRadian);
 	var mag = Math.abs(diff);
 	if (mag < this.ORIENTATION_TOLERANCE_ROUGH) return true;
-	
+
 	var direction = diff > 0 ? 1 : -1;
 	if(mag < this.ORIENTATION_TOLERANCE_ROUGH_LARGE && direction * this.prevDirection < 0) return true;
 	this.prevDirection = direction;
-	
+
 	var value = 0;
 	if(diff > 0) {
 		value = Math.log(1 + mag) * this.GAIN_ANGLE;
@@ -82,7 +82,7 @@ AlbertAiController.prototype.controlAngleFinal = function(wheels, currentRadian,
 		if(++this.directionCountFinal > 3) return true;
 	}
 	this.prevDirectionFinal = direction;
-	
+
 	var value = 0;
 	if(diff > 0) {
 		value = Math.log(1 + mag) * this.GAIN_ANGLE_FINE;
@@ -155,7 +155,7 @@ AlbertAiController.prototype.controlPosition = function(wheels, currentX, curren
 	} else {
 		var base = (this.MINIMUM_WHEEL_SPEED + 0.5 / mag) * this.GAIN_BASE_SPEED;
 		if(base > this.MAX_BASE_SPEED) base = this.MAX_BASE_SPEED;
-		
+
 		var value = 0;
 		if(diff > 0) value = Math.log(1 + mag) * this.GAIN_POSITION;
 		else value = -Math.log(1 + mag) * this.GAIN_POSITION;
@@ -589,7 +589,7 @@ AlbertAiRobot.prototype.__cancelNote = function() {
 AlbertAiRobot.prototype.handleSensory = function() {
     const self = this;
     const sensory = self.sensory;
-    
+
     self.micClicked = sensory.micClicked == 1;
     self.volumeUpClicked = sensory.volumeUpClicked == 1;
     self.volumeDownClicked = sensory.volumeDownClicked == 1;
@@ -822,7 +822,7 @@ AlbertAiRobot.prototype.moveForwardUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -851,7 +851,7 @@ AlbertAiRobot.prototype.moveBackwardUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -893,7 +893,7 @@ AlbertAiRobot.prototype.turnUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -961,7 +961,7 @@ AlbertAiRobot.prototype.pivotUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -1110,7 +1110,7 @@ AlbertAiRobot.prototype.moveToOnBoard = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -1143,7 +1143,7 @@ AlbertAiRobot.prototype.setOrientationToOnBoard = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -1400,7 +1400,7 @@ AlbertAiRobot.prototype.playSoundUntil = function(script) {
 
         let sound = script.getField('SOUND');
         let count = script.getNumberValue('COUNT');
-        
+
         sound = this.__SOUNDS[sound];
         count = parseInt(count);
         this.motoring.buzzer = 0;
@@ -1420,7 +1420,7 @@ AlbertAiRobot.prototype.playSoundUntil = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -1563,7 +1563,7 @@ AlbertAiRobot.prototype.playNoteBeat = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         self.motoring.note = 0;
         return script.callReturn();
     }
@@ -1603,7 +1603,7 @@ AlbertAiRobot.prototype.restBeat = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -1636,23 +1636,23 @@ AlbertAiRobot.prototype.changeTempo = function(script) {
     return script.callReturn();
 };
 
-Entry.AlbertAi = {
+RoCode.AlbertAi = {
     robot: undefined,
     getRobot() {
-        if(Entry.AlbertAi.robot == undefined) Entry.AlbertAi.robot = new AlbertAiRobot(0);
-        Entry.AlbertAi.robot.setMotoring(Entry.hw.sendQueue);
-        return Entry.AlbertAi.robot;
+        if(RoCode.AlbertAi.robot == undefined) RoCode.AlbertAi.robot = new AlbertAiRobot(0);
+        RoCode.AlbertAi.robot.setMotoring(RoCode.hw.sendQueue);
+        return RoCode.AlbertAi.robot;
     },
     setZero() {
-        if(Entry.AlbertAi.robot) Entry.AlbertAi.robot.setZero();
-        Entry.hw.update();
+        if(RoCode.AlbertAi.robot) RoCode.AlbertAi.robot.setZero();
+        RoCode.hw.update();
     },
     afterReceive(pd) {
-        const robot = Entry.AlbertAi.getRobot();
+        const robot = RoCode.AlbertAi.getRobot();
         if(robot) robot.afterReceive(pd);
     },
     afterSend(sq) {
-        const robot = Entry.AlbertAi.getRobot();
+        const robot = RoCode.AlbertAi.getRobot();
         if(robot) robot.afterSend(sq);
     },
     id: '2.A',
@@ -1797,7 +1797,7 @@ Entry.AlbertAi = {
     }),
 };
 
-Entry.AlbertAi.setLanguage = () => ({
+RoCode.AlbertAi.setLanguage = () => ({
     ko: {
         template: {
             albertai_value: '%1',
@@ -2410,7 +2410,7 @@ Entry.AlbertAi.setLanguage = () => ({
     },
 });
 
-Entry.AlbertAi.blockMenuBlocks = [
+RoCode.AlbertAi.blockMenuBlocks = [
     'albertai_value',
     'albertai_hand_found',
     'albertai_touch_state',
@@ -2444,11 +2444,11 @@ Entry.AlbertAi.blockMenuBlocks = [
     'albertai_set_tempo_to',
 ];
 
-Entry.AlbertAi.getBlocks = function() {
+RoCode.AlbertAi.getBlocks = function() {
     return {
         albertai_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -2477,8 +2477,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'LEFT_PROXIMITY',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2492,7 +2492,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_sensor',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 if (robot) {
                     return robot.getValue(script);
                 }
@@ -2528,9 +2528,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'LEFT_PROXIMITY',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2538,8 +2538,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_hand_found: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -2552,7 +2552,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_sensor',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.checkHandFound(script) : false;
             },
             syntax: {
@@ -2566,8 +2566,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_touch_state: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -2583,8 +2583,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'MIC',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2595,8 +2595,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'CLICKED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2611,7 +2611,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_sensor',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.checkTouchState(script) : false;
             },
             syntax: {
@@ -2632,9 +2632,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'MIC',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2645,9 +2645,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'CLICKED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2655,8 +2655,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_is_oid: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -2682,7 +2682,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_sensor',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.checkOid(script) : false;
             },
             syntax: {
@@ -2702,8 +2702,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_boolean: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -2725,8 +2725,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'TILT_FORWARD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2740,7 +2740,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_sensor',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.checkBoolean(script) : false;
             },
             syntax: {
@@ -2767,9 +2767,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'TILT_FORWARD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2777,8 +2777,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_move_forward_unit: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2795,8 +2795,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'CM',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2823,7 +2823,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_wheel',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.moveForwardUnit(script) : script;
             },
             syntax: {
@@ -2845,9 +2845,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'CM',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2855,8 +2855,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_move_backward_unit: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2873,8 +2873,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'CM',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2901,7 +2901,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_wheel',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.moveBackwardUnit(script) : script;
             },
             syntax: {
@@ -2923,9 +2923,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'CM',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2933,8 +2933,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_turn_unit_in_place: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2946,8 +2946,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2962,8 +2962,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'DEG',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2992,7 +2992,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_wheel',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.turnUnit(script) : script;
             },
             syntax: {
@@ -3009,9 +3009,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -3026,9 +3026,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'DEG',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -3036,8 +3036,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_pivot_around_unit_in_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3049,8 +3049,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3065,8 +3065,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'DEG',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -3076,8 +3076,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'FORWARD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3108,7 +3108,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_wheel',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.pivotUnit(script) : script;
             },
             syntax: {
@@ -3125,9 +3125,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -3142,9 +3142,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'DEG',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3154,9 +3154,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'FORWARD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -3164,8 +3164,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_change_both_wheels_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3205,7 +3205,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_wheel',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.changeWheels(script) : script;
             },
             syntax: {
@@ -3228,8 +3228,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_set_both_wheels_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3269,7 +3269,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_wheel',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.setWheels(script) : script;
             },
             syntax: {
@@ -3292,8 +3292,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_change_wheel_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3306,8 +3306,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3338,7 +3338,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_wheel',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.changeWheel(script) : script;
             },
             syntax: {
@@ -3356,9 +3356,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -3370,8 +3370,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_set_wheel_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3384,8 +3384,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3416,7 +3416,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_wheel',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.setWheel(script) : script;
             },
             syntax: {
@@ -3434,9 +3434,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -3448,8 +3448,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3467,7 +3467,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_wheel',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.stop(script) : script;
             },
             syntax: {
@@ -3480,8 +3480,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_move_to_x_y_on_board: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3493,8 +3493,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'FORWARD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3534,7 +3534,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_wheel',
             isNotFor: ['albertai'],
             func: function(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.moveToOnBoard(script) : script;
             },
             syntax: {
@@ -3552,9 +3552,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'FORWARD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -3570,8 +3570,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_set_orientation_on_board: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3602,7 +3602,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_wheel',
             isNotFor: ['albertai'],
             func: function(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.setOrientationToOnBoard(script) : script;
             },
             syntax: {
@@ -3622,8 +3622,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_set_eye_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3636,8 +3636,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -3654,8 +3654,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3675,7 +3675,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_eye',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.setEyeColor(script) : script;
             },
             syntax: {
@@ -3693,9 +3693,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3712,9 +3712,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -3722,8 +3722,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_pick_eye: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3736,8 +3736,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Color',
@@ -3760,7 +3760,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_eye',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.pickEyeColor(script) : script;
             },
             syntax: {
@@ -3778,13 +3778,13 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Color',
-                                converter: Entry.block.converters.returnStringValue,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -3792,8 +3792,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_change_eye_by_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3806,8 +3806,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3856,7 +3856,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_eye',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.changeEyeRgb(script) : script;
             },
             syntax: {
@@ -3874,9 +3874,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -3896,8 +3896,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_set_eye_to_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3910,8 +3910,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3960,7 +3960,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_eye',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.setEyeRgb(script) : script;
             },
             syntax: {
@@ -3978,9 +3978,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -4000,8 +4000,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_clear_eye: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4014,8 +4014,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -4034,7 +4034,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_eye',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.clearEye(script) : script;
             },
             syntax: {
@@ -4052,9 +4052,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -4062,8 +4062,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_play_sound_times: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4079,8 +4079,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'BEEP',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -4111,7 +4111,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_sound',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.playSound(script) : script;
             },
             syntax: {
@@ -4132,9 +4132,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'BEEP',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -4146,8 +4146,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_play_sound_times_until_done: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4163,8 +4163,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'BEEP',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -4195,7 +4195,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_sound',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.playSoundUntil(script) : script;
             },
             syntax: {
@@ -4216,9 +4216,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'BEEP',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -4230,8 +4230,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_change_buzzer_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4262,7 +4262,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_sound',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.changeBuzzer(script) : script;
             },
             syntax: {
@@ -4281,8 +4281,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_set_buzzer_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4313,7 +4313,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_sound',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.setBuzzer(script) : script;
             },
             syntax: {
@@ -4332,8 +4332,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_clear_sound: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4351,7 +4351,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_sound',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.clearSound(script) : script;
             },
             syntax: {
@@ -4365,8 +4365,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_play_note: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4388,8 +4388,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -4404,8 +4404,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -4425,7 +4425,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_sound',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.playNote(script) : script;
             },
             syntax: {
@@ -4452,9 +4452,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'C',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -4469,9 +4469,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -4479,8 +4479,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_play_note_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4502,8 +4502,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -4518,8 +4518,8 @@ Entry.AlbertAi.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -4552,7 +4552,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_sound',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.playNoteBeat(script) : script;
             },
             syntax: {
@@ -4579,9 +4579,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: 'C',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -4596,9 +4596,9 @@ Entry.AlbertAi.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             {
                                 type: 'Block',
@@ -4610,8 +4610,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_rest_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4642,7 +4642,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_sound',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.restBeat(script) : script;
             },
             syntax: {
@@ -4661,8 +4661,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_change_tempo_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4693,7 +4693,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_sound',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.changeTempo(script) : script;
             },
             syntax: {
@@ -4712,8 +4712,8 @@ Entry.AlbertAi.getBlocks = function() {
             },
         },
         albertai_set_tempo_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4744,7 +4744,7 @@ Entry.AlbertAi.getBlocks = function() {
             class: 'albertai_sound',
             isNotFor: ['albertai'],
             func(sprite, script) {
-                const robot = Entry.AlbertAi.getRobot();
+                const robot = RoCode.AlbertAi.getRobot();
                 return robot ? robot.setTempo(script) : script;
             },
             syntax: {
@@ -4765,4 +4765,4 @@ Entry.AlbertAi.getBlocks = function() {
     };
 };
 
-module.exports = Entry.AlbertAi;
+module.exports = RoCode.AlbertAi;

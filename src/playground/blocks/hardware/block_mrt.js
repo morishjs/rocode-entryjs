@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.MRT = {
+RoCode.MRT = {
     id: '23.1',
     name: 'MRT-X',
     url: 'http://www.myrobottime.com/',
@@ -29,13 +29,13 @@ Entry.MRT = {
         duration: 0,
     },
     setZero: function() {
-        var portMap = Entry.MRT.PORT_MAP;
-        var sq = Entry.hw.sendQueue;
+        var portMap = RoCode.MRT.PORT_MAP;
+        var sq = RoCode.hw.sendQueue;
         for (var port in portMap) {
             sq[port] = portMap[port];
         }
-        Entry.hw.update();
-        var MRT = Entry.MRT;
+        RoCode.hw.update();
+        var MRT = RoCode.MRT;
         MRT.removeAllTimeouts();
     },
     timeouts: [],
@@ -56,7 +56,7 @@ Entry.MRT = {
     },
 };
 
-Entry.MRT.setLanguage = function() {
+RoCode.MRT.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -93,7 +93,7 @@ Entry.MRT.setLanguage = function() {
     };
 };
 
-Entry.MRT.blockMenuBlocks = [
+RoCode.MRT.blockMenuBlocks = [
     //region MRT-X Blocks added
     'mrt_digitalInput',
     'mrt_digitalOutput',
@@ -110,12 +110,12 @@ Entry.MRT.blockMenuBlocks = [
     //endregion end of MRT-X Blocks added
 ];
 
-Entry.MRT.getBlocks = function() {
+RoCode.MRT.getBlocks = function() {
     return {
         //region xbot 엑스봇
         mrt_analogValue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -130,8 +130,8 @@ Entry.MRT.getBlocks = function() {
                     ],
                     value: 'adc0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -145,15 +145,15 @@ Entry.MRT.getBlocks = function() {
             class: 'mrt_sensor',
             isNotFor: ['MRT-X'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 return pd[dev];
             },
             syntax: { js: [], py: ['MRT.analog_value(%1)'] },
         },
         mrt_ultra: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             fontColor: '#ffffff',
@@ -176,7 +176,7 @@ Entry.MRT.getBlocks = function() {
             class: 'mrt_sensor',
             isNotFor: ['MRT-X'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 return pd[dev];
             },
@@ -184,8 +184,8 @@ Entry.MRT.getBlocks = function() {
         },
 
         mrt_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             fontColor: '#ffffff',
@@ -208,7 +208,7 @@ Entry.MRT.getBlocks = function() {
             class: 'mrt_sensor',
             isNotFor: ['MRT-X'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 return pd[dev];
             },
@@ -216,8 +216,8 @@ Entry.MRT.getBlocks = function() {
         },
 
         mrt_remotecontrol: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             fontColor: '#ffffff',
@@ -240,7 +240,7 @@ Entry.MRT.getBlocks = function() {
             class: 'mrt_sensor',
             isNotFor: ['MRT-X'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 return pd[dev];
             },
@@ -248,8 +248,8 @@ Entry.MRT.getBlocks = function() {
         },
 
         mrt_keyvalue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             fontColor: '#ffffff',
@@ -272,7 +272,7 @@ Entry.MRT.getBlocks = function() {
             class: 'mrt_sensor',
             isNotFor: ['MRT-X'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 return pd[dev];
             },
@@ -280,8 +280,8 @@ Entry.MRT.getBlocks = function() {
         },
 
         mrt_gyro: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             fontColor: '#ffffff',
@@ -291,8 +291,8 @@ Entry.MRT.getBlocks = function() {
                     options: [['X', 'gyroX'], ['Y', 'gyroY'], ['Z', 'gyroZ']],
                     value: 'gyroX',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -306,7 +306,7 @@ Entry.MRT.getBlocks = function() {
             class: 'mrt_sensor',
             isNotFor: ['MRT-X'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 return pd[dev];
             },
@@ -314,8 +314,8 @@ Entry.MRT.getBlocks = function() {
         },
 
         mrt_digitalOutput: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -329,16 +329,16 @@ Entry.MRT.getBlocks = function() {
                     ],
                     value: 'LED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [[Lang.Blocks.XBOT_High, 'HIGH'], [Lang.Blocks.XBOT_Low, 'LOW']],
                     value: 'HIGH',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -358,7 +358,7 @@ Entry.MRT.getBlocks = function() {
             class: 'mrt_sensor',
             isNotFor: ['MRT-X'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var dev = script.getStringField('DEVICE', script);
                 var value = script.getStringField('VALUE', script);
 
@@ -392,8 +392,8 @@ Entry.MRT.getBlocks = function() {
         },
 
         mrt_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -402,8 +402,8 @@ Entry.MRT.getBlocks = function() {
                     options: [['OUT1', 'OUT1'], ['OUT2', 'OUT2'], ['OUT3', 'OUT3']],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -434,7 +434,7 @@ Entry.MRT.getBlocks = function() {
             class: 'mrt_motor',
             isNotFor: ['MRT-X'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var mtype = script.getStringField('DEVICE', script);
                 var angle = script.getNumberValue('VALUE', script);
 
@@ -451,8 +451,8 @@ Entry.MRT.getBlocks = function() {
             syntax: { js: [], py: ['MRT.servo(%1, %2)'] },
         },
         mrt_oneWheel: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -466,8 +466,8 @@ Entry.MRT.getBlocks = function() {
                     ],
                     value: 'RIGHT_WHEEL1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -499,7 +499,7 @@ Entry.MRT.getBlocks = function() {
             isNotFor: ['MRT-X'],
             func: function(sprite, script) {
                 //console.log('xbot_move_forward_for_secs');
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var dir = script.getStringField('DEVICE', script);
                 var speed = script.getNumberValue('VALUE', script);
 
@@ -514,8 +514,8 @@ Entry.MRT.getBlocks = function() {
         },
 
         mrt_lcd: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -524,8 +524,8 @@ Entry.MRT.getBlocks = function() {
                     options: [['0', '0'], ['1', '1']],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -556,7 +556,7 @@ Entry.MRT.getBlocks = function() {
             class: 'mrt_sensor',
             isNotFor: ['MRT-X'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var line = script.getNumberField('LINE', script);
                 var str = script.getStringValue('VALUE', script);
 
@@ -576,4 +576,4 @@ Entry.MRT.getBlocks = function() {
     };
 };
 
-module.exports = Entry.MRT;
+module.exports = RoCode.MRT;

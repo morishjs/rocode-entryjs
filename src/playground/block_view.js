@@ -2,10 +2,10 @@ import debounce from 'lodash/debounce';
 import _get from 'lodash/get';
 import Hammer from 'hammerjs';
 
-Entry.BlockView = class BlockView {
+RoCode.BlockView = class BlockView {
     schema = {
         id: 0,
-        type: Entry.STATIC.BLOCK_RENDER_MODEL,
+        type: RoCode.STATIC.BLOCK_RENDER_MODEL,
         x: 0,
         y: 0,
         offsetX: 0,
@@ -25,17 +25,17 @@ Entry.BlockView = class BlockView {
 
     constructor(block, board, mode) {
         const that = this;
-        Entry.Model(this, false);
+        RoCode.Model(this, false);
         this.block = block;
         this._lazyUpdatePos = debounce(block._updatePos.bind(block), 200);
-        this.mouseUpEvent = new Entry.Event(this);
+        this.mouseUpEvent = new RoCode.Event(this);
         this.disableMouseEvent = false;
 
         this.dAlignContent = this.alignContent;
         this._board = board;
         this._observers = [];
         this.set(block);
-        const hash = Entry.generateHash();
+        const hash = RoCode.generateHash();
         this.svgGroup = board.svgBlockGroup.elem('g');
         this.svgGroup.attr('id', hash);
         this.svgGroup.blockView = this;
@@ -45,7 +45,7 @@ Entry.BlockView = class BlockView {
             this.svgCommentGroup.blockView = this;
         }
 
-        this._schema = Entry.skinContainer.getSkin(block);
+        this._schema = RoCode.skinContainer.getSkin(block);
 
         if (this._schema === undefined) {
             this.block.destroy(false, false);
@@ -57,10 +57,10 @@ Entry.BlockView = class BlockView {
             if (workspace && workspace.getBlockViewRenderMode) {
                 this.renderMode = workspace.getBlockViewRenderMode();
             } else {
-                this.renderMode = Entry.BlockView.RENDER_MODE_BLOCK;
+                this.renderMode = RoCode.BlockView.RENDER_MODE_BLOCK;
             }
         } else {
-            this.renderMode = Entry.BlockView.RENDER_MODE_BLOCK;
+            this.renderMode = RoCode.BlockView.RENDER_MODE_BLOCK;
         }
 
         if (this._schema.deletable) {
@@ -72,7 +72,7 @@ Entry.BlockView = class BlockView {
         if (this._schema.display === false || block.display === false) {
             this.set({ display: false });
         }
-        this._skeleton = Entry.skeleton[this._schema.skeleton];
+        this._skeleton = RoCode.skeleton[this._schema.skeleton];
         const skeleton = this._skeleton;
         this._contents = [];
         this._statements = [];
@@ -87,11 +87,11 @@ Entry.BlockView = class BlockView {
             this._observers.push(this.observe(this, '_updateMagnet', ['contentHeight']));
         }
 
-        this.isInBlockMenu = this.getBoard() instanceof Entry.BlockMenu;
+        this.isInBlockMenu = this.getBoard() instanceof RoCode.BlockMenu;
         this.mouseHandler = function(e) {
             (_.result(that.block.events, 'mousedown') || []).forEach((fn) => {
-                if (Entry.documentMousedown) {
-                    Entry.documentMousedown.notify(e);
+                if (RoCode.documentMousedown) {
+                    RoCode.documentMousedown.notify(e);
                 }
                 return fn(that);
             });
@@ -113,10 +113,10 @@ Entry.BlockView = class BlockView {
         this._observers.push(this.observe(this, '_updateMagnet', ['offsetY']));
         this._observers.push(board.code.observe(this, '_setBoard', ['board'], false));
 
-        this.dragMode = Entry.DRAG_MODE_NONE;
-        Entry.Utils.disableContextmenu(this.svgGroup.node);
+        this.dragMode = RoCode.DRAG_MODE_NONE;
+        RoCode.Utils.disableContextmenu(this.svgGroup.node);
         const events = block.events.viewAdd || [];
-        if (Entry.type === 'workspace' && this._board instanceof Entry.Board) {
+        if (RoCode.type === 'workspace' && this._board instanceof RoCode.Board) {
             events.forEach((fn) => {
                 if (_.isFunction(fn)) {
                     fn(block);
@@ -152,8 +152,8 @@ Entry.BlockView = class BlockView {
         let fillColor = this._schema.color;
         const { deletable, emphasized } = this.block;
 
-        if (deletable === Entry.Block.DELETABLE_FALSE_LIGHTEN || emphasized) {
-            fillColor = this._schema.emphasizedColor || Entry.Utils.getEmphasizeColor(fillColor);
+        if (deletable === RoCode.Block.DELETABLE_FALSE_LIGHTEN || emphasized) {
+            fillColor = this._schema.emphasizedColor || RoCode.Utils.getEmphasizeColor(fillColor);
         }
 
         this._fillColor = fillColor;
@@ -217,7 +217,7 @@ Entry.BlockView = class BlockView {
         let template = this._getTemplate(mode) || '';
         const params = this._getSchemaParams(mode);
 
-        if (mode === Entry.BlockView.RENDER_MODE_TEXT) {
+        if (mode === RoCode.BlockView.RENDER_MODE_TEXT) {
             if (
                 /(if)+(.|\n)+(else)+/gim.test(template) &&
                 !reg.test(template) &&
@@ -248,7 +248,7 @@ Entry.BlockView = class BlockView {
                     if (!param) {
                         return;
                     }
-                    const field = new Entry[`Field${param.type}`](
+                    const field = new RoCode[`Field${param.type}`](
                         param,
                         this,
                         paramIndex,
@@ -259,13 +259,13 @@ Entry.BlockView = class BlockView {
                     this._paramMap[paramIndex] = field;
                 } else {
                     this._contents.push(
-                        new Entry.FieldText({ text: param, color: schema.fontColor }, this)
+                        new RoCode.FieldText({ text: param, color: schema.fontColor }, this)
                     );
                 }
             });
 
         (schema.statements || []).forEach((s, i) => {
-            this._statements.push(new Entry.FieldStatement(s, this, i));
+            this._statements.push(new RoCode.FieldStatement(s, this, i));
         });
 
         this.alignContent(false);
@@ -273,14 +273,14 @@ Entry.BlockView = class BlockView {
 
     _startExtension(mode) {
         this._extensions = this.block.extensions.map(
-            (e) => new Entry[`Ext${e.type}`](e, this, mode)
+            (e) => new RoCode[`Ext${e.type}`](e, this, mode)
         );
     }
 
     _updateSchema = this._startContentRender;
 
     changeType(type) {
-        this._schema = Entry.block[type || this.type];
+        this._schema = RoCode.block[type || this.type];
         this._updateSchema();
     }
 
@@ -296,7 +296,7 @@ Entry.BlockView = class BlockView {
 
         for (let i = 0; i < this._contents.length; i++) {
             const c = this._contents[i];
-            if (c instanceof Entry.FieldLineBreak) {
+            if (c instanceof RoCode.FieldLineBreak) {
                 this._alignStatement(animate, statementIndex);
                 c.align(statementIndex);
                 statementIndex++;
@@ -307,9 +307,9 @@ Entry.BlockView = class BlockView {
                 // space between content
                 if (
                     i !== this._contents.length - 1 &&
-                    !(c instanceof Entry.FieldText && c._text.length === 0)
+                    !(c instanceof RoCode.FieldText && c._text.length === 0)
                 ) {
-                    cursor.x += Entry.BlockView.PARAM_SPACE;
+                    cursor.x += RoCode.BlockView.PARAM_SPACE;
                 }
             }
 
@@ -345,7 +345,7 @@ Entry.BlockView = class BlockView {
         this.contentPos = contentPos;
         this._render();
         const comment = this.block.comment;
-        if (comment instanceof Entry.Comment) {
+        if (comment instanceof RoCode.Comment) {
             comment.updateParentPos();
         }
 
@@ -392,10 +392,10 @@ Entry.BlockView = class BlockView {
             return;
         }
 
-        if (false && Entry.ANIMATION_DURATION !== 0) {
+        if (false && RoCode.ANIMATION_DURATION !== 0) {
             const that = this;
             setTimeout(() => {
-                that._path.animate({ d: newPath }, Entry.ANIMATION_DURATION, mina.easeinout);
+                that._path.animate({ d: newPath }, RoCode.ANIMATION_DURATION, mina.easeinout);
             }, 0);
         } else {
             this._path.attr({ d: newPath });
@@ -502,8 +502,8 @@ Entry.BlockView = class BlockView {
         if (e.button == 1) {
             return;
         }
-        if (Entry.disposeEvent) {
-            Entry.disposeEvent.notify();
+        if (RoCode.disposeEvent) {
+            RoCode.disposeEvent.notify();
         }
 
         this.longPressTimer = null;
@@ -547,7 +547,7 @@ Entry.BlockView = class BlockView {
             }
             $doc.bind('mouseup.block', this.onMouseUp);
             document.addEventListener('touchend', this.onMouseUp);
-            this.dragInstance = new Entry.DragInstance({
+            this.dragInstance = new RoCode.DragInstance({
                 startX: mouseEvent.pageX,
                 startY: mouseEvent.pageY,
                 offsetX: mouseEvent.pageX,
@@ -557,9 +557,9 @@ Entry.BlockView = class BlockView {
             });
             board.set({ dragBlock: this });
             this.addDragging();
-            this.dragMode = Entry.DRAG_MODE_MOUSEDOWN;
+            this.dragMode = RoCode.DRAG_MODE_MOUSEDOWN;
 
-            if (eventType === 'touchstart' || Entry.isMobile()) {
+            if (eventType === 'touchstart' || RoCode.isMobile()) {
                 this.longPressTimer = setTimeout(() => {
                     if (this.longPressTimer) {
                         this.longPressTimer = null;
@@ -568,14 +568,14 @@ Entry.BlockView = class BlockView {
                     }
                 }, 700);
             }
-        } else if (Entry.Utils.isRightButton(e)) {
+        } else if (RoCode.Utils.isRightButton(e)) {
             this._rightClick(e);
         }
 
-        if (board.workspace.getMode() === Entry.Workspace.MODE_VIMBOARD && e) {
+        if (board.workspace.getMode() === RoCode.Workspace.MODE_VIMBOARD && e) {
             document
                 .getElementsByClassName('CodeMirror')[0]
-                .dispatchEvent(Entry.Utils.createMouseEvent('dragStart', e));
+                .dispatchEvent(RoCode.Utils.createMouseEvent('dragStart', e));
         }
     }
 
@@ -592,7 +592,7 @@ Entry.BlockView = class BlockView {
         const workspaceMode = board.workspace.getMode();
 
         let mouseEvent;
-        if (workspaceMode === Entry.Workspace.MODE_VIMBOARD) {
+        if (workspaceMode === RoCode.Workspace.MODE_VIMBOARD) {
             this.vimBoardEvent(e, 'dragOver');
         }
         if (e.originalEvent && e.originalEvent.touches) {
@@ -608,7 +608,7 @@ Entry.BlockView = class BlockView {
             Math.pow(mouseEvent.pageX - mouseDownCoordinate.x, 2) +
                 Math.pow(mouseEvent.pageY - mouseDownCoordinate.y, 2)
         );
-        if (this.dragMode == Entry.DRAG_MODE_DRAG || diff > Entry.BlockView.DRAG_RADIUS) {
+        if (this.dragMode == RoCode.DRAG_MODE_DRAG || diff > RoCode.BlockView.DRAG_RADIUS) {
             const blockView = this;
             if (
                 (blockView.isInBlockMenu &&
@@ -633,11 +633,11 @@ Entry.BlockView = class BlockView {
             if (!this.isInBlockMenu) {
                 let isFirst = false;
 
-                if (this.dragMode != Entry.DRAG_MODE_DRAG) {
+                if (this.dragMode != RoCode.DRAG_MODE_DRAG) {
                     this._toGlobalCoordinate(undefined, true);
-                    this.dragMode = Entry.DRAG_MODE_DRAG;
+                    this.dragMode = RoCode.DRAG_MODE_DRAG;
                     this.block.getThread().changeEvent.notify();
-                    Entry.GlobalSvg.setView(this, workspaceMode);
+                    RoCode.GlobalSvg.setView(this, workspaceMode);
                     isFirst = true;
                     this.fromBlockMenu = this.dragInstance && this.dragInstance.isNew;
                 }
@@ -658,7 +658,7 @@ Entry.BlockView = class BlockView {
                     false,
                     true
                 );
-                Entry.GlobalSvg.position();
+                RoCode.GlobalSvg.position();
 
                 dragInstance.set({
                     offsetX: mouseEvent.pageX,
@@ -710,7 +710,7 @@ Entry.BlockView = class BlockView {
             delete board.workingEvent;
         }
         this._setHoverBlockView({ that: this });
-        Entry.GlobalSvg.remove();
+        RoCode.GlobalSvg.remove();
         this.mouseUpEvent.notify();
 
         delete this.isVerticalMove;
@@ -722,27 +722,27 @@ Entry.BlockView = class BlockView {
         if (!event) {
             return;
         }
-        const dragEvent = Entry.Utils.createMouseEvent(type, event);
+        const dragEvent = RoCode.Utils.createMouseEvent(type, event);
         if (block) {
             dragEvent.block = block;
         }
-        $('.entryVimBoard>.CodeMirror')[0].dispatchEvent(dragEvent);
+        $('.RoCodeVimBoard>.CodeMirror')[0].dispatchEvent(dragEvent);
     }
 
     terminateDrag(e) {
-        const gs = Entry.GlobalSvg;
+        const gs = RoCode.GlobalSvg;
         const board = this.getBoard();
         const dragMode = this.dragMode;
         const block = this.block;
         const workspaceMode = board.workspace.getMode();
         this.removeDragging();
         this.set({ visible: true });
-        this.dragMode = Entry.DRAG_MODE_NONE;
+        this.dragMode = RoCode.DRAG_MODE_NONE;
 
         const gsRet = gs.terminateDrag(this);
 
-        if (workspaceMode === Entry.Workspace.MODE_VIMBOARD) {
-            if (board instanceof Entry.BlockMenu) {
+        if (workspaceMode === RoCode.Workspace.MODE_VIMBOARD) {
+            if (board instanceof RoCode.BlockMenu) {
                 board.terminateDrag();
                 gsRet === gs.DONE && this.vimBoardEvent(e, 'dragEnd', block);
             } else {
@@ -750,23 +750,23 @@ Entry.BlockView = class BlockView {
             }
         } else {
             const fromBlockMenu = this.dragInstance && this.dragInstance.isNew;
-            if (dragMode === Entry.DRAG_MODE_DRAG) {
+            if (dragMode === RoCode.DRAG_MODE_DRAG) {
                 let ripple = false;
                 const prevBlock = this.block.getPrevBlock(this.block);
                 let suffix = this._board.workspace.trashcan.isOver ? 'ForDestroy' : '';
                 switch (gsRet) {
                     case gs.DONE: {
                         let closeBlock = board.magnetedBlockView;
-                        if (closeBlock instanceof Entry.BlockView) {
+                        if (closeBlock instanceof RoCode.BlockView) {
                             closeBlock = closeBlock.block;
                         }
                         if (prevBlock && !closeBlock) {
-                            Entry.do(`separateBlock${suffix}`, block);
+                            RoCode.do(`separateBlock${suffix}`, block);
                         } else if (!prevBlock && !closeBlock && !fromBlockMenu) {
                             if (!block.getThread().view.isGlobal()) {
-                                Entry.do(`separateBlock${suffix}`, block);
+                                RoCode.do(`separateBlock${suffix}`, block);
                             } else {
-                                Entry.do(`moveBlock${suffix}`, block);
+                                RoCode.do(`moveBlock${suffix}`, block);
                                 this.dominate();
                             }
                         } else {
@@ -776,32 +776,32 @@ Entry.BlockView = class BlockView {
                                     this.dragMode = dragMode;
                                     const targetPointer = closeBlock.pointer();
                                     targetPointer[3] = -1;
-                                    Entry.do(`insertBlock${suffix}`, block, targetPointer).isPass(
+                                    RoCode.do(`insertBlock${suffix}`, block, targetPointer).isPass(
                                         fromBlockMenu
                                     );
 
-                                    Entry.ConnectionRipple.setView(closeBlock.view).dispose();
-                                    this.dragMode = Entry.DRAG_MODE_NONE;
+                                    RoCode.ConnectionRipple.setView(closeBlock.view).dispose();
+                                    this.dragMode = RoCode.DRAG_MODE_NONE;
                                 } else {
                                     if (closeBlock.getThread) {
                                         const thread = closeBlock.getThread();
                                         const closeBlockType = closeBlock.type;
                                         if (
                                             closeBlockType &&
-                                            thread instanceof Entry.FieldBlock &&
-                                            !Entry.block[closeBlockType].isPrimitive
+                                            thread instanceof RoCode.FieldBlock &&
+                                            !RoCode.block[closeBlockType].isPrimitive
                                         ) {
                                             suffix += 'FollowSeparate';
                                         }
                                     }
-                                    Entry.do(`insertBlock${suffix}`, block, closeBlock).isPass(
+                                    RoCode.do(`insertBlock${suffix}`, block, closeBlock).isPass(
                                         fromBlockMenu
                                     );
                                     ripple = true;
                                 }
-                                Entry.Utils.playSound('entryMagneting');
+                                RoCode.Utils.playSound('RoCodeMagneting');
                             } else {
-                                Entry.do(`moveBlock${suffix}`, block).isPass(fromBlockMenu);
+                                RoCode.do(`moveBlock${suffix}`, block).isPass(fromBlockMenu);
                                 this.dominate();
                             }
                         }
@@ -810,19 +810,19 @@ Entry.BlockView = class BlockView {
                     case gs.RETURN: {
                         const block = this.block;
                         if (fromBlockMenu) {
-                            Entry.do('destroyBlockBelow', this.block).isPass(true);
+                            RoCode.do('destroyBlockBelow', this.block).isPass(true);
                         } else {
                             if (prevBlock) {
                                 this.set({ animating: false });
-                                Entry.Utils.playSound('entryMagneting');
+                                RoCode.Utils.playSound('RoCodeMagneting');
                                 this.bindPrev(prevBlock);
                                 block.insert(prevBlock);
                             } else {
                                 const parent = block.getThread().view.getParent();
 
-                                if (!(parent instanceof Entry.Board)) {
-                                    Entry.Utils.playSound('entryMagneting');
-                                    Entry.do('insertBlock', block, parent);
+                                if (!(parent instanceof RoCode.Board)) {
+                                    RoCode.Utils.playSound('RoCodeMagneting');
+                                    RoCode.do('insertBlock', block, parent);
                                 } else {
                                     const originPos = this.originPos;
                                     this.moveTo(originPos.x, originPos.y, false);
@@ -833,21 +833,21 @@ Entry.BlockView = class BlockView {
                         break;
                     }
                     case gs.REMOVE:
-                        Entry.Utils.playSound('entryDelete');
-                        Entry.do('destroyBlockBelow', this.block).isPass(fromBlockMenu);
+                        RoCode.Utils.playSound('RoCodeDelete');
+                        RoCode.do('destroyBlockBelow', this.block).isPass(fromBlockMenu);
                         break;
                 }
 
                 board.setMagnetedBlock(null);
                 if (ripple) {
-                    Entry.ConnectionRipple.setView(block.view).dispose();
+                    RoCode.ConnectionRipple.setView(block.view).dispose();
                 }
             } else if (
                 gsRet === gs.REMOVE &&
                 fromBlockMenu &&
-                dragMode === Entry.DRAG_MODE_MOUSEDOWN
+                dragMode === RoCode.DRAG_MODE_MOUSEDOWN
             ) {
-                Entry.do('destroyBlockBelow', this.block).isPass(true);
+                RoCode.do('destroyBlockBelow', this.block).isPass(true);
             }
         }
 
@@ -923,7 +923,7 @@ Entry.BlockView = class BlockView {
         (this._statements || []).forEach(_destroyFunc);
 
         const block = this.block;
-        if (Entry.type === 'workspace' && !this.isInBlockMenu) {
+        if (RoCode.type === 'workspace' && !this.isInBlockMenu) {
             (block.events.viewDestroy || []).forEach((fn) => {
                 if (_.isFunction(fn)) {
                     fn(block);
@@ -934,7 +934,7 @@ Entry.BlockView = class BlockView {
 
     getShadow() {
         if (!this._shadow) {
-            this._shadow = Entry.SVG.createElement(this.svgGroup.cloneNode(true), { opacity: 0.5 });
+            this._shadow = RoCode.SVG.createElement(this.svgGroup.cloneNode(true), { opacity: 0.5 });
             this.getBoard().svgGroup.appendChild(this._shadow);
         }
         return this._shadow;
@@ -975,7 +975,7 @@ Entry.BlockView = class BlockView {
             // field block
             if (this.magneting) {
                 svgGroup.attr({
-                    filter: `url(#entryBlockHighlightFilter_${this.getBoard().suffix})`,
+                    filter: `url(#RoCodeBlockHighlightFilter_${this.getBoard().suffix})`,
                 });
                 svgGroup.addClass('outputHighlight');
             } else {
@@ -1017,7 +1017,7 @@ Entry.BlockView = class BlockView {
                 delete blockView.nextBackground;
             }
 
-            if (magneting === 'previous' && dragBlock.block.thread instanceof Entry.Thread) {
+            if (magneting === 'previous' && dragBlock.block.thread instanceof RoCode.Thread) {
                 const height = dragBlock.getBelowHeight() + this.offsetY;
                 blockView.originalHeight = blockView.offsetY;
                 blockView.set({
@@ -1052,12 +1052,12 @@ Entry.BlockView = class BlockView {
 
     addDragging() {
         this.svgGroup.addClass('dragging');
-        Entry.playground.setBackpackPointEvent(true);
+        RoCode.playground.setBackpackPointEvent(true);
     }
 
     removeDragging() {
         this.svgGroup.removeClass('dragging');
-        Entry.playground.setBackpackPointEvent(false);
+        RoCode.playground.setBackpackPointEvent(false);
     }
 
     addSelected() {
@@ -1092,13 +1092,13 @@ Entry.BlockView = class BlockView {
     }
 
     renderText() {
-        this.renderMode = Entry.BlockView.RENDER_MODE_TEXT;
-        this._startContentRender(Entry.BlockView.RENDER_MODE_TEXT);
+        this.renderMode = RoCode.BlockView.RENDER_MODE_TEXT;
+        this._startContentRender(RoCode.BlockView.RENDER_MODE_TEXT);
     }
 
     renderBlock() {
-        this.renderMode = Entry.BlockView.RENDER_MODE_BLOCK;
-        this._startContentRender(Entry.BlockView.RENDER_MODE_BLOCK);
+        this.renderMode = RoCode.BlockView.RENDER_MODE_BLOCK;
+        this._startContentRender(RoCode.BlockView.RENDER_MODE_BLOCK);
     }
 
     renderByMode(mode, isReDraw) {
@@ -1218,7 +1218,7 @@ Entry.BlockView = class BlockView {
         const board = this.getBoard();
         const { scale = 1 } = board || {};
         dragMode = dragMode !== undefined ? dragMode : this.dragMode;
-        if (dragMode === Entry.DRAG_MODE_DRAG) {
+        if (dragMode === RoCode.DRAG_MODE_DRAG) {
             return {
                 x: this.x,
                 y: this.y,
@@ -1254,10 +1254,10 @@ Entry.BlockView = class BlockView {
         let fillColor = this._schema.color;
         const { deletable, emphasized } = this.block;
 
-        if (deletable === Entry.Block.DELETABLE_FALSE_LIGHTEN || emphasized) {
+        if (deletable === RoCode.Block.DELETABLE_FALSE_LIGHTEN || emphasized) {
             const emphasizedColor = this._schema.emphasizedColor;
             if (!emphasizedColor) {
-                fillColor = Entry.Utils.getEmphasizeColor(fillColor);
+                fillColor = RoCode.Utils.getEmphasizeColor(fillColor);
             } else {
                 fillColor = emphasizedColor;
             }
@@ -1340,7 +1340,7 @@ Entry.BlockView = class BlockView {
             style.setAttribute('type', 'text/css');
             style.textContent = `
                 @font-face {
-                    font-family: EntryNG;
+                    font-family: RoCodeNG;
                     src: local(NanumGothic),
                         local(나눔고딕),
                         local(나눔고딕 Regular),
@@ -1354,7 +1354,7 @@ Entry.BlockView = class BlockView {
             const images = svgGroup.getElementsByTagName('image');
             const texts = svgGroup.getElementsByTagName('text');
 
-            const fontFamily = EntryStatic.getDefaultFontFamily();
+            const fontFamily = RoCodeStatic.getDefaultFontFamily();
             const boldTypes = ['≥', '≤'];
             const notResizeTypes = ['≥', '≤', '-', '>', '<', '=', '+', '-', 'x', '/'];
 
@@ -1428,7 +1428,7 @@ Entry.BlockView = class BlockView {
     }
 
     _rightClick(e, eventSource) {
-        const disposeEvent = Entry.disposeEvent;
+        const disposeEvent = RoCode.disposeEvent;
         if (disposeEvent) {
             disposeEvent.notify(e);
         }
@@ -1442,15 +1442,15 @@ Entry.BlockView = class BlockView {
             return this._schema.events.dblclick[0](this);
         }
 
-        const { clientX: x, clientY: y } = Entry.Utils.convertMouseEvent(e);
+        const { clientX: x, clientY: y } = RoCode.Utils.convertMouseEvent(e);
 
-        return Entry.ContextMenu.show(_getOptions(this), null, { x, y });
+        return RoCode.ContextMenu.show(_getOptions(this), null, { x, y });
 
         //helper functon get get context options
         function _getOptions(blockView) {
             const isBoardReadOnly = blockView._board.readOnly;
             const { block, isInBlockMenu, copyable } = blockView;
-            const { options: EntryOptions = {} } = Entry;
+            const { options: RoCodeOptions = {} } = RoCode;
             const {
                 Blocks: { Duplication_option, CONTEXT_COPY_option, Delete_Blocks },
                 Menus: { save_as_image },
@@ -1460,7 +1460,7 @@ Entry.BlockView = class BlockView {
                 text: Duplication_option,
                 enable: copyable && !isBoardReadOnly,
                 callback() {
-                    Entry.do('cloneBlock', block.copy());
+                    RoCode.do('cloneBlock', block.copy());
                 },
             };
 
@@ -1476,15 +1476,15 @@ Entry.BlockView = class BlockView {
                 text: Delete_Blocks,
                 enable: block.isDeletable() && !isBoardReadOnly,
                 callback() {
-                    Entry.do('destroyBlock', block);
+                    RoCode.do('destroyBlock', block);
                 },
             };
 
-            const addStorage = !EntryOptions.backpackDisable && {
+            const addStorage = !RoCodeOptions.backpackDisable && {
                 text: Lang.Blocks.add_my_storage,
                 enable: copyable && !isBoardReadOnly && !!window.user,
                 callback() {
-                    Entry.dispatchEvent('addStorage', {
+                    RoCode.dispatchEvent('addStorage', {
                         type: 'block',
                         data: block,
                     });
@@ -1499,13 +1499,13 @@ Entry.BlockView = class BlockView {
             };
 
             const hasComment = !!block._comment;
-            const comment = !EntryOptions.commentDisable && {
+            const comment = !RoCodeOptions.commentDisable && {
                 text: hasComment ? Lang.Blocks.delete_comment : Lang.Blocks.add_comment,
                 enable: block.isCommentable(),
                 callback() {
                     hasComment
-                        ? Entry.do('removeComment', block._comment)
-                        : Entry.do('createComment', { id: Entry.Utils.generateId() }, board, block);
+                        ? RoCode.do('removeComment', block._comment)
+                        : RoCode.do('createComment', { id: RoCode.Utils.generateId() }, board, block);
                 },
             };
 
@@ -1523,14 +1523,14 @@ Entry.BlockView = class BlockView {
             return options;
 
             function _isDownloadable() {
-                return Entry.Utils.isChrome() && Entry.type === 'workspace' && !Entry.isMobile();
+                return RoCode.Utils.isChrome() && RoCode.type === 'workspace' && !RoCode.isMobile();
             }
         }
     }
 
     addStorage() {
         if (this.block.view) {
-            Entry.dispatchEvent('addStorage', {
+            RoCode.dispatchEvent('addStorage', {
                 type: 'block',
                 data: this.block,
             });
@@ -1579,7 +1579,7 @@ Entry.BlockView = class BlockView {
     _getTemplate(renderMode) {
         let template;
 
-        if (renderMode === Entry.BlockView.RENDER_MODE_TEXT) {
+        if (renderMode === RoCode.BlockView.RENDER_MODE_TEXT) {
             const board = this.getBoard();
             let syntax;
             const workspace = board.workspace;
@@ -1605,7 +1605,7 @@ Entry.BlockView = class BlockView {
 
     _getSchemaParams(mode) {
         let params = this._schema.params;
-        if (mode === Entry.BlockView.RENDER_MODE_TEXT) {
+        if (mode === RoCode.BlockView.RENDER_MODE_TEXT) {
             const workspace = this.getBoard().workspace;
             if (workspace && workspace.vimBoard) {
                 const syntax = workspace.vimBoard.getBlockSyntax(this);
@@ -1672,9 +1672,9 @@ Entry.BlockView = class BlockView {
             return [];
         }
 
-        const THREAD = Entry.Thread;
-        const FIELD_BLOCK = Entry.FieldBlock;
-        const FIELD_OUTPUT = Entry.FieldOutput;
+        const THREAD = RoCode.Thread;
+        const FIELD_BLOCK = RoCode.FieldBlock;
+        const FIELD_OUTPUT = RoCode.FieldOutput;
 
         return (this._statements || []).reduce(
             (fields, statement) => {
@@ -1754,8 +1754,8 @@ Entry.BlockView = class BlockView {
 
     loadImage(src, width, height, notPng, multiplier = 1) {
         return new Promise((resolve, reject) => {
-            if (Entry.BlockView.pngMap[src] !== undefined) {
-                return resolve(Entry.BlockView.pngMap[src]);
+            if (RoCode.BlockView.pngMap[src] !== undefined) {
+                return resolve(RoCode.BlockView.pngMap[src]);
             }
 
             if (notPng) {
@@ -1781,7 +1781,7 @@ Entry.BlockView = class BlockView {
                     ctx.drawImage(img, 0, 0, width, height);
                     const data = canvas.toDataURL('image/png');
                     if (/\.png$/.test(src)) {
-                        Entry.BlockView.pngMap[src] = data;
+                        RoCode.BlockView.pngMap[src] = data;
                     }
                     return resolve(data);
                 } catch (e) {
@@ -1805,9 +1805,9 @@ Entry.BlockView = class BlockView {
     }
 };
 
-Entry.BlockView.PARAM_SPACE = 7;
-Entry.BlockView.DRAG_RADIUS = 5;
-Entry.BlockView.pngMap = {};
+RoCode.BlockView.PARAM_SPACE = 7;
+RoCode.BlockView.DRAG_RADIUS = 5;
+RoCode.BlockView.pngMap = {};
 
-Entry.BlockView.RENDER_MODE_BLOCK = 1;
-Entry.BlockView.RENDER_MODE_TEXT = 2;
+RoCode.BlockView.RENDER_MODE_BLOCK = 1;
+RoCode.BlockView.RENDER_MODE_TEXT = 2;

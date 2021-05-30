@@ -1,8 +1,8 @@
 'use strict';
 
-Entry.BlockModel = class BlockModel {
+RoCode.BlockModel = class BlockModel {
     constructor(context) {
-        Entry.Model(this);
+        RoCode.Model(this);
         this.schema = {
             id: null,
             x: 0,

@@ -1,4 +1,4 @@
-.entryPopup {
+.RoCodePopup {
     overflow: hidden;
     position: fixed;
     margin: 0;
@@ -11,7 +11,7 @@
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-.entryPopup.popupHelper {
+.RoCodePopup.popupHelper {
     position: fixed;
     display: -webkit-box;
     display: -moz-box;
@@ -27,7 +27,7 @@
     flex-direction: column;
 }
 
-.entryPopupWindow {
+.RoCodePopupWindow {
     width: 80%;
     height: 80%;
     overflow: hidden;
@@ -41,23 +41,23 @@
     max-height: 100%;
     /*overflow: hidden;*/
     z-index: 8000;
-    
+
     background-color: @white;
 }
 
-.entryPopup.hiddenPopup {
+.RoCodePopup.hiddenPopup {
     display: none;
 }
 
-.entryPopupHelperTopSpan,
-.entryPopupHelperBottomSpan {
+.RoCodePopupHelperTopSpan,
+.RoCodePopupHelperBottomSpan {
     -webkit-box-flex: 1;
     -moz-box-flex: 1;
     -ms-flex: 1;
     flex: 1;
 }
 
-.entryPopupHelperMiddleSpan {
+.RoCodePopupHelperMiddleSpan {
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -71,8 +71,8 @@
     -ms-flex-direction: row;
     flex-direction: row;
 
-    .entryPopupHelperLeftSpan,
-    .entryPopupHelperRightSpan {
+    .RoCodePopupHelperLeftSpan,
+    .RoCodePopupHelperRightSpan {
         -webkit-box-flex: 1;
         -moz-box-flex: 1;
         -ms-flex: 1;
@@ -80,11 +80,11 @@
     }
 }
 
-.entryPopup.buttonsHidden .entryEngineButtonWorkspace_w {
+.RoCodePopup.buttonsHidden .RoCodeEngineButtonWorkspace_w {
     display: none;
 }
 
-.entryPopup.learning_popup {
+.RoCodePopup.learning_popup {
     z-index: 7001;
     .ai_learning {
         overflow: hidden;

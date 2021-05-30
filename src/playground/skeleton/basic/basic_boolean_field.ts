@@ -1,4 +1,4 @@
-Entry.skeleton.basic_boolean_field = {
+RoCode.skeleton.basic_boolean_field = {
     path(blockView) {
         let width = blockView.contentWidth;
         let height = blockView.contentHeight;

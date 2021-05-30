@@ -16,7 +16,7 @@
  *  장치 기본 정의
  ***************************************************************************************/
 
-Entry.byrobot_drone_4 =
+RoCode.byrobot_drone_4 =
 {
     id: 'F.8',
     name: 'byrobot_drone_4',
@@ -31,26 +31,26 @@ Entry.byrobot_drone_4 =
     setZero()
     {
         // 초기화
-        Entry.byrobot_base.transferBufferClear();
+        RoCode.byrobot_base.transferBufferClear();
 
         // 한 번에 명령을 전송하면 hw까지 제대로 전달되지 않는 경우가 있어
         // 명령을 각각 분리하여 전송하게 함(2017.01.03)
         for (let i = 0; i < 1; i++)
         {
-            if( Entry.hw.portData['state_modeFlight'] == 0x10 )
+            if( RoCode.hw.portData['state_modeFlight'] == 0x10 )
             {
-                Entry.byrobot_base.transferCommand(0x10, 0x01, 0); // 드론, command = 0x01 (Stop)
+                RoCode.byrobot_base.transferCommand(0x10, 0x01, 0); // 드론, command = 0x01 (Stop)
             }
             else
             {
-                Entry.byrobot_base.transferCommand(0x10, 0x07, 0x12); // 0x12 : FlightEvent::Landing
+                RoCode.byrobot_base.transferCommand(0x10, 0x07, 0x12); // 0x12 : FlightEvent::Landing
             }
-            Entry.byrobot_base.transferBuzzer(0x20, 0, 0, 0);
-            Entry.byrobot_base.transferVibrator(0x20, 0, 0, 0, 0);
-            Entry.byrobot_base.transferLightManual(0x10, 0xffff, 0); // LED 초기화(모두 꺼짐)
-            Entry.byrobot_base.transferLightManual(0x20, 0xffff, 0); // LED 초기화(모두 꺼짐)
-            Entry.byrobot_base.transferLightModeColor(0x10, 0x22, 200, 255, 0, 0); // LED 초기화(드론)
-            Entry.byrobot_base.transferLightModeColor(0x20, 0x22, 200, 255, 0, 0); // LED 초기화(조종기)
+            RoCode.byrobot_base.transferBuzzer(0x20, 0, 0, 0);
+            RoCode.byrobot_base.transferVibrator(0x20, 0, 0, 0, 0);
+            RoCode.byrobot_base.transferLightManual(0x10, 0xffff, 0); // LED 초기화(모두 꺼짐)
+            RoCode.byrobot_base.transferLightManual(0x20, 0xffff, 0); // LED 초기화(모두 꺼짐)
+            RoCode.byrobot_base.transferLightModeColor(0x10, 0x22, 200, 255, 0, 0); // LED 초기화(드론)
+            RoCode.byrobot_base.transferLightModeColor(0x20, 0x22, 200, 255, 0, 0); // LED 초기화(조종기)
         }
     },
 };
@@ -59,7 +59,7 @@ Entry.byrobot_drone_4 =
 /***************************************************************************************
  *  언어 적용
  ***************************************************************************************/
-Entry.byrobot_drone_4.setLanguage = function() {
+RoCode.byrobot_drone_4.setLanguage = function() {
     return {
         ko: {
             // ko.js에 작성하던 내용
@@ -81,11 +81,11 @@ Entry.byrobot_drone_4.setLanguage = function() {
                 monitor_motion_angleRoll                            : '자세 Roll',
                 monitor_motion_anglePitch                           : '자세 Pitch',
                 monitor_motion_angleYaw                             : '자세 Yaw',
-                monitor_informationAssembledForEntry_positionX      : '위치 X',
-                monitor_informationAssembledForEntry_positionY      : '위치 Y',
-                monitor_informationAssembledForEntry_positionZ      : '위치 Z',
-                monitor_informationAssembledForEntry_altitude       : '고도',
-                monitor_informationAssembledForEntry_rangeHeight    : '거리 센서의 높이',
+                monitor_informationAssembledForRoCode_positionX      : '위치 X',
+                monitor_informationAssembledForRoCode_positionY      : '위치 Y',
+                monitor_informationAssembledForRoCode_positionZ      : '위치 Z',
+                monitor_informationAssembledForRoCode_altitude       : '고도',
+                monitor_informationAssembledForRoCode_rangeHeight    : '거리 센서의 높이',
                 monitor_joystick_left_x                             : '왼쪽 조이스틱 X',
                 monitor_joystick_left_y                             : '왼쪽 조이스틱 Y',
                 monitor_joystick_left_direction                     : '왼쪽 조이스틱 방향',
@@ -96,7 +96,7 @@ Entry.byrobot_drone_4.setLanguage = function() {
                 monitor_joystick_right_event                        : '오른쪽 조이스틱 이벤트',
                 monitor_button_button                               : '버튼',
                 monitor_button_event                                : '버튼 이벤트',
-                monitor_entryhw_countTransferReserved               : '전송 예정 데이터',
+                monitor_RoCodehw_countTransferReserved               : '전송 예정 데이터',
 
                 // 일반 블럭
                 common_light_color_red              : '빨강',
@@ -236,7 +236,7 @@ Entry.byrobot_drone_4.setLanguage = function() {
                 drone_state_control_speed       : '제어 속도',
                 drone_state_sensor_orientation  : '센서 방향',
                 drone_state_battery             : '배터리',
-                entryhw_count_transfer_reserved : '전송 예약된 데이터 수',
+                RoCodehw_count_transfer_reserved : '전송 예약된 데이터 수',
             },
 
             template: {
@@ -375,11 +375,11 @@ Entry.byrobot_drone_4.setLanguage = function() {
                 monitor_motion_angleRoll                            : 'Roll',
                 monitor_motion_anglePitch                           : 'Pitch',
                 monitor_motion_angleYaw                             : 'Yaw',
-                monitor_informationAssembledForEntry_positionX      : 'Position X',
-                monitor_informationAssembledForEntry_positionY      : 'Position Y',
-                monitor_informationAssembledForEntry_positionZ      : 'Position Z',
-                monitor_informationAssembledForEntry_altitude       : 'Altitude',
-                monitor_informationAssembledForEntry_rangeHeight    : 'Height',
+                monitor_informationAssembledForRoCode_positionX      : 'Position X',
+                monitor_informationAssembledForRoCode_positionY      : 'Position Y',
+                monitor_informationAssembledForRoCode_positionZ      : 'Position Z',
+                monitor_informationAssembledForRoCode_altitude       : 'Altitude',
+                monitor_informationAssembledForRoCode_rangeHeight    : 'Height',
                 monitor_joystick_left_x                             : 'Left Joystick X',
                 monitor_joystick_left_y                             : 'Left Joystick Y',
                 monitor_joystick_left_direction                     : 'Left Joystick Direction',
@@ -390,7 +390,7 @@ Entry.byrobot_drone_4.setLanguage = function() {
                 monitor_joystick_right_event                        : 'Right Joystick Event',
                 monitor_button_button                               : 'Button',
                 monitor_button_event                                : 'Button Event',
-                monitor_entryhw_countTransferReserved               : 'Transfer Buffer',
+                monitor_RoCodehw_countTransferReserved               : 'Transfer Buffer',
 
                 // 일반 블럭
                 common_light_color_red              : 'red',
@@ -529,7 +529,7 @@ Entry.byrobot_drone_4.setLanguage = function() {
                 drone_state_control_speed       : 'Speed',
                 drone_state_sensor_orientation  : 'Sensor direction',
                 drone_state_battery: 'Battery',
-                entryhw_count_transfer_reserved: 'Reserved data for transfer',
+                RoCodehw_count_transfer_reserved: 'Reserved data for transfer',
             },
 
             template: {
@@ -652,9 +652,9 @@ Entry.byrobot_drone_4.setLanguage = function() {
 };
 
 
-// Entry 좌측 하단 하드웨어 모니터 화면에 표시하는 속성
+// RoCode 좌측 하단 하드웨어 모니터 화면에 표시하는 속성
 // listPorts와 ports 두 곳 동시에 동일한 속성을 표시할 수는 없음
-Entry.byrobot_drone_4.monitorTemplate = function()
+RoCode.byrobot_drone_4.monitorTemplate = function()
 {
     return {
         /* 센서창 가림 현상을 해결하기 위해서 주석 처리함(2017.11.06)
@@ -681,11 +681,11 @@ Entry.byrobot_drone_4.monitorTemplate = function()
             motion_angleRoll:                           { name: Lang.Blocks.monitor_motion_angleRoll,                           type: 'input', pos: { x: 0, y: 0 } },
             motion_anglePitch:                          { name: Lang.Blocks.monitor_motion_anglePitch,                          type: 'input', pos: { x: 0, y: 0 } },
             motion_angleYaw:                            { name: Lang.Blocks.monitor_motion_angleYaw,                            type: 'input', pos: { x: 0, y: 0 } },
-            informationAssembledForEntry_positionX:     { name: Lang.Blocks.monitor_informationAssembledForEntry_positionX,     type: 'input', pos: { x: 0, y: 0 } },
-            informationAssembledForEntry_positionY:     { name: Lang.Blocks.monitor_informationAssembledForEntry_positionY,     type: 'input', pos: { x: 0, y: 0 } },
-            informationAssembledForEntry_positionZ:     { name: Lang.Blocks.monitor_informationAssembledForEntry_positionZ,     type: 'input', pos: { x: 0, y: 0 } },
-            informationAssembledForEntry_altitude:      { name: Lang.Blocks.monitor_informationAssembledForEntry_altitude,      type: 'input', pos: { x: 0, y: 0 } },
-            informationAssembledForEntry_rangeHeight:   { name: Lang.Blocks.monitor_informationAssembledForEntry_rangeHeight,   type: 'input', pos: { x: 0, y: 0 } },
+            informationAssembledForRoCode_positionX:     { name: Lang.Blocks.monitor_informationAssembledForRoCode_positionX,     type: 'input', pos: { x: 0, y: 0 } },
+            informationAssembledForRoCode_positionY:     { name: Lang.Blocks.monitor_informationAssembledForRoCode_positionY,     type: 'input', pos: { x: 0, y: 0 } },
+            informationAssembledForRoCode_positionZ:     { name: Lang.Blocks.monitor_informationAssembledForRoCode_positionZ,     type: 'input', pos: { x: 0, y: 0 } },
+            informationAssembledForRoCode_altitude:      { name: Lang.Blocks.monitor_informationAssembledForRoCode_altitude,      type: 'input', pos: { x: 0, y: 0 } },
+            informationAssembledForRoCode_rangeHeight:   { name: Lang.Blocks.monitor_informationAssembledForRoCode_rangeHeight,   type: 'input', pos: { x: 0, y: 0 } },
             joystick_left_x:                            { name: Lang.Blocks.monitor_joystick_left_x,                            type: 'input', pos: { x: 0, y: 0 } },
             joystick_left_y:                            { name: Lang.Blocks.monitor_joystick_left_y,                            type: 'input', pos: { x: 0, y: 0 } },
             joystick_left_direction:                    { name: Lang.Blocks.monitor_joystick_left_direction,                    type: 'input', pos: { x: 0, y: 0 } },
@@ -696,7 +696,7 @@ Entry.byrobot_drone_4.monitorTemplate = function()
             joystick_right_event:                       { name: Lang.Blocks.monitor_joystick_right_event,                       type: 'input', pos: { x: 0, y: 0 } },
             button_button:                              { name: Lang.Blocks.monitor_button_button,                              type: 'input', pos: { x: 0, y: 0 } },
             button_event:                               { name: Lang.Blocks.monitor_button_event,                               type: 'input', pos: { x: 0, y: 0 } },
-            entryhw_countTransferReserved:              { name: Lang.Blocks.monitor_entryhw_countTransferReserved,              type: 'output', pos: { x: 0, y: 0 } },
+            RoCodehw_countTransferReserved:              { name: Lang.Blocks.monitor_RoCodehw_countTransferReserved,              type: 'output', pos: { x: 0, y: 0 } },
         },
 
         // 모니터 화면 지정 위치와 선으로 연결하여 표시하는 값
@@ -710,7 +710,7 @@ Entry.byrobot_drone_4.monitorTemplate = function()
 /***************************************************************************************
  *  엔트리에 등록할 블록들의 블록명(다른 장치의 블록 이름과 달라야 함)
  ***************************************************************************************/
-Entry.byrobot_drone_4.blockMenuBlocks = [
+RoCode.byrobot_drone_4.blockMenuBlocks = [
     'byrobot_drone_4_drone_value_attitude',
     'byrobot_drone_4_drone_value_motion',
     'byrobot_drone_4_drone_value_position',
@@ -772,12 +772,12 @@ Entry.byrobot_drone_4.blockMenuBlocks = [
 /***************************************************************************************
  *  엔트리 블록 정의
  ***************************************************************************************/
-Entry.byrobot_drone_4.getBlocks = function()
+RoCode.byrobot_drone_4.getBlocks = function()
 {
     return {
         byrobot_drone_4_drone_value_attitude: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -790,8 +790,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: 'motion_angleRoll', // 초기 선택항목 지정
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -806,13 +806,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                return Entry.hw.portData[script.getField('DEVICE')];
+                return RoCode.hw.portData[script.getField('DEVICE')];
             },
         },
 
         byrobot_drone_4_drone_value_motion: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -828,8 +828,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: 'motion_accelX', // 초기 선택항목 지정
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -844,27 +844,27 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                return Entry.hw.portData[script.getField('DEVICE')];
+                return RoCode.hw.portData[script.getField('DEVICE')];
             },
         },
 
         byrobot_drone_4_drone_value_position: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
                     options: [
-                        [Lang.Blocks.drone_positionX,       'informationAssembledForEntry_positionX'],
-                        [Lang.Blocks.drone_positionY,       'informationAssembledForEntry_positionY'],
-                        [Lang.Blocks.drone_positionZ,       'informationAssembledForEntry_positionZ'],
+                        [Lang.Blocks.drone_positionX,       'informationAssembledForRoCode_positionX'],
+                        [Lang.Blocks.drone_positionY,       'informationAssembledForRoCode_positionY'],
+                        [Lang.Blocks.drone_positionZ,       'informationAssembledForRoCode_positionZ'],
                     ],
-                    value: 'informationAssembledForEntry_positionX', // 초기 선택항목 지정
+                    value: 'informationAssembledForRoCode_positionX', // 초기 선택항목 지정
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -879,26 +879,26 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                return Entry.hw.portData[script.getField('DEVICE')];
+                return RoCode.hw.portData[script.getField('DEVICE')];
             },
         },
 
         byrobot_drone_4_drone_value_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
                     options: [
-                        [Lang.Blocks.drone_range_height,    'informationAssembledForEntry_rangeHeight'],
-                        [Lang.Blocks.drone_altitude,        'informationAssembledForEntry_altitude'],
+                        [Lang.Blocks.drone_range_height,    'informationAssembledForRoCode_rangeHeight'],
+                        [Lang.Blocks.drone_altitude,        'informationAssembledForRoCode_altitude'],
                     ],
-                    value: 'informationAssembledForEntry_rangeHeight', // 초기 선택항목 지정
+                    value: 'informationAssembledForRoCode_rangeHeight', // 초기 선택항목 지정
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -913,13 +913,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                return Entry.hw.portData[script.getField('DEVICE')];
+                return RoCode.hw.portData[script.getField('DEVICE')];
             },
         },
 
         byrobot_drone_4_drone_value_etc: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -936,8 +936,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: 'state_battery', // 초기 선택항목 지정
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -952,13 +952,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                return Entry.hw.portData[script.getField('DEVICE')];
+                return RoCode.hw.portData[script.getField('DEVICE')];
             },
         },
 
         byrobot_drone_4_controller_value_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -970,8 +970,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: 'button_button', // 초기 선택항목 지정
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -986,13 +986,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                return Entry.hw.portData[script.getField('DEVICE')];
+                return RoCode.hw.portData[script.getField('DEVICE')];
             },
         },
 
         byrobot_drone_4_controller_value_joystick: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -1010,8 +1010,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: 'joystick_left_x', // 초기 선택항목 지정
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1026,13 +1026,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                return Entry.hw.portData[script.getField('DEVICE')];
+                return RoCode.hw.portData[script.getField('DEVICE')];
             },
         },
 
         byrobot_drone_4_controller_if_button_press: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -1055,8 +1055,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1071,7 +1071,7 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                const read = Entry.hw.portData;
+                const read = RoCode.hw.portData;
                 const button = 'button_button'; // paramsKeyMap에 정의된 이름 사용
                 const buttonevent = 'button_event'; // paramsKeyMap에 정의된 이름 사용
 
@@ -1085,8 +1085,8 @@ Entry.byrobot_drone_4.getBlocks = function()
         },
 
         byrobot_drone_4_controller_if_joystick_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -1099,8 +1099,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: 'joystick_left_direction',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1117,8 +1117,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '34',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1134,7 +1134,7 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                const read = Entry.hw.portData;
+                const read = RoCode.hw.portData;
                 const device = script.getField('DEVICE'); // paramsKeyMap에 정의된 이름 사용
 
                 if (read[device] == script.getField('DIRECTION'))
@@ -1149,8 +1149,8 @@ Entry.byrobot_drone_4.getBlocks = function()
         },
 
         byrobot_drone_4_controller_light_manual_single_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [{ type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 }],
@@ -1164,13 +1164,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                return Entry.byrobot_base.setLightManual(script, 0x20, 0xffff, 0);
+                return RoCode.byrobot_base.setLightManual(script, 0x20, 0xffff, 0);
             },
         },
 
         byrobot_drone_4_controller_light_color_preset: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1193,8 +1193,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: 'red',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1208,8 +1208,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '220',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
             ],
@@ -1229,13 +1229,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const mode        = 0x22;
                 const interval    = parseInt(script.getField('BRIGHTNESS'), 10);
                 const colorString = script.getField('COLOR');
-                return Entry.byrobot_base.setLightModeColorString(script, 0x20, mode, interval, colorString);
+                return RoCode.byrobot_base.setLightModeColorString(script, 0x20, mode, interval, colorString);
             },
         },
 
         byrobot_drone_4_controller_light_manual_single_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1262,13 +1262,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             {
                 const flags      = parseInt(script.getStringValue('FLAGS'));
                 const brightness = script.getNumberValue('BRIGHTNESS');
-                return Entry.byrobot_base.setLightManual(script, 0x20, flags, brightness);
+                return RoCode.byrobot_base.setLightManual(script, 0x20, flags, brightness);
             },
         },
 
         byrobot_drone_4_controller_light_color_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1289,8 +1289,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
@@ -1323,13 +1323,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const red       = script.getNumberValue('RED');
                 const green     = script.getNumberValue('GREEN');
                 const blue      = script.getNumberValue('BLUE');
-                return Entry.byrobot_base.setLightModeColor(script, 0x20, mode, interval, red, green, blue);
+                return RoCode.byrobot_base.setLightModeColor(script, 0x20, mode, interval, red, green, blue);
             },
         },
 
         byrobot_drone_4_controller_light_color_select: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1352,8 +1352,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: 'red',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1369,8 +1369,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
@@ -1392,13 +1392,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const mode        = 0x20 + parseInt(script.getField('MODE'), 10);
                 const interval    = script.getNumberValue('INTERVAL');
                 const colorString = script.getField('COLOR');
-                return Entry.byrobot_base.setLightModeColorString(script, 0x20, mode, interval, colorString);
+                return RoCode.byrobot_base.setLightModeColorString(script, 0x20, mode, interval, colorString);
             },
         },
 
         byrobot_drone_4_drone_light_manual_single_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [{ type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 }],
@@ -1412,13 +1412,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                return Entry.byrobot_base.setLightManual(script, 0x10, 0xff, 0);
+                return RoCode.byrobot_base.setLightManual(script, 0x10, 0xff, 0);
             },
         },
 
         byrobot_drone_4_drone_light_color_preset: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1441,8 +1441,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: 'red',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1456,8 +1456,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '220',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
             ],
@@ -1477,13 +1477,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const mode        = 0x22;
                 const interval    = parseInt(script.getField('BRIGHTNESS'), 10);
                 const colorString = script.getField('COLOR');
-                return Entry.byrobot_base.setLightModeColorString(script, 0x10, mode, interval, colorString);
+                return RoCode.byrobot_base.setLightModeColorString(script, 0x10, mode, interval, colorString);
             },
         },
 
         byrobot_drone_4_drone_light_manual_single_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1510,13 +1510,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             {
                 const flags      = parseInt(script.getStringValue('FLAGS'));
                 const brightness = script.getNumberValue('BRIGHTNESS');
-                return Entry.byrobot_base.setLightManual(script, 0x10, flags, brightness);
+                return RoCode.byrobot_base.setLightManual(script, 0x10, flags, brightness);
             },
         },
 
         byrobot_drone_4_drone_light_color_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1537,8 +1537,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
@@ -1571,13 +1571,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const green    = script.getNumberValue('GREEN');
                 const blue     = script.getNumberValue('BLUE');
                 const interval = script.getNumberValue('INTERVAL');
-                return Entry.byrobot_base.setLightModeColor(script, 0x10, mode, interval, red, green, blue);
+                return RoCode.byrobot_base.setLightModeColor(script, 0x10, mode, interval, red, green, blue);
             },
         },
 
         byrobot_drone_4_drone_light_color_select: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1600,8 +1600,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: 'red',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1617,8 +1617,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
@@ -1640,13 +1640,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const mode        = 0x20 + parseInt(script.getField('MODE'), 10);
                 const interval    = script.getNumberValue('INTERVAL');
                 const colorString = script.getField('COLOR');
-                return Entry.byrobot_base.setLightModeColorString(script, 0x10, mode, interval, colorString);
+                return RoCode.byrobot_base.setLightModeColorString(script, 0x10, mode, interval, colorString);
             },
         },
 
         byrobot_drone_4_controller_display_clear_all: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1658,8 +1658,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
             ],
@@ -1676,13 +1676,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             func(sprite, script)
             {
                 const pixel = parseInt(script.getField('PIXEL'), 10);
-                return Entry.byrobot_base.setDisplayClearAll(script, 0x20, pixel);
+                return RoCode.byrobot_base.setDisplayClearAll(script, 0x20, pixel);
             },
         },
 
         byrobot_drone_4_controller_display_clear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1698,8 +1698,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
             ],
@@ -1731,13 +1731,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const width = script.getNumberValue('WIDTH');
                 const height = script.getNumberValue('HEIGHT');
                 const pixel = parseInt(script.getField('PIXEL'), 10);
-                return Entry.byrobot_base.setDisplayClear(script, 0x20, pixel, x, y, width, height);
+                return RoCode.byrobot_base.setDisplayClear(script, 0x20, pixel, x, y, width, height);
             },
         },
 
         byrobot_drone_4_controller_display_draw_point: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1751,8 +1751,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
             ],
@@ -1778,13 +1778,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const x     = script.getNumberValue('X');
                 const y     = script.getNumberValue('Y');
                 const pixel = parseInt(script.getField('PIXEL'), 10);
-                return Entry.byrobot_base.setDisplayDrawPoint(script, 0x20, x, y, pixel);
+                return RoCode.byrobot_base.setDisplayDrawPoint(script, 0x20, x, y, pixel);
             },
         },
 
         byrobot_drone_4_controller_display_draw_line: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1800,8 +1800,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1812,8 +1812,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
             ],
@@ -1848,13 +1848,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const y2    = script.getNumberValue('Y2');
                 const pixel = parseInt(script.getField('PIXEL'), 10);
                 const line  = parseInt(script.getField('LINE'), 10);
-                return Entry.byrobot_base.setDisplayDrawLine(script, 0x20, x1, y1, x2, y2, pixel, line);
+                return RoCode.byrobot_base.setDisplayDrawLine(script, 0x20, x1, y1, x2, y2, pixel, line);
             },
         },
 
         byrobot_drone_4_controller_display_draw_rect: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1870,8 +1870,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1881,8 +1881,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1893,8 +1893,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
             ],
@@ -1932,13 +1932,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const pixel    = parseInt(script.getField('PIXEL'), 10);
                 const flagFill = parseInt(script.getField('FLAGFILL'), 10);
                 const line     = parseInt(script.getField('LINE'), 10);
-                return Entry.byrobot_base.setDisplayDrawRect(script, 0x20, x, y, width, height, pixel, flagFill, line);
+                return RoCode.byrobot_base.setDisplayDrawRect(script, 0x20, x, y, width, height, pixel, flagFill, line);
             },
         },
 
         byrobot_drone_4_controller_display_draw_circle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1953,8 +1953,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1964,8 +1964,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
             ],
@@ -1997,13 +1997,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const radius   = script.getNumberValue('RADIUS');
                 const pixel    = parseInt(script.getField('PIXEL'), 10);
                 const flagFill = parseInt(script.getField('FLAGFILL'), 10);
-                return Entry.byrobot_base.setDisplayDrawCircle(script, 0x20, x, y, radius, pixel, flagFill);
+                return RoCode.byrobot_base.setDisplayDrawCircle(script, 0x20, x, y, radius, pixel, flagFill);
             },
         },
 
         byrobot_drone_4_controller_display_draw_string: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2017,8 +2017,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2028,8 +2028,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
@@ -2062,13 +2062,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const font   = parseInt(script.getField('FONT'), 10);
                 const pixel  = parseInt(script.getField('PIXEL'), 10);
                 const string = script.getStringValue('STRING');
-                return Entry.byrobot_base.setDisplayDrawString(script, 0x20, x, y, font, pixel, string);
+                return RoCode.byrobot_base.setDisplayDrawString(script, 0x20, x, y, font, pixel, string);
             },
         },
 
         byrobot_drone_4_controller_display_draw_string_align: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2084,8 +2084,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2095,8 +2095,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2106,8 +2106,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
@@ -2146,13 +2146,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const font      = parseInt(script.getField('FONT'), 10);
                 const pixel     = parseInt(script.getField('PIXEL'), 10);
                 const string    = script.getStringValue('STRING');
-                return Entry.byrobot_base.setDisplayDrawStringAlign(script, 0x20, xStart, xEnd, y, align, font, pixel, string);
+                return RoCode.byrobot_base.setDisplayDrawStringAlign(script, 0x20, xStart, xEnd, y, align, font, pixel, string);
             },
         },
 
         byrobot_drone_4_controller_buzzer_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [{ type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 }],
@@ -2166,13 +2166,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                return Entry.byrobot_base.setBuzzerStop(script, 0x20);
+                return RoCode.byrobot_base.setBuzzerStop(script, 0x20);
             },
         },
 
         byrobot_drone_4_controller_buzzer_scale: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2190,8 +2190,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2212,8 +2212,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
             ],
@@ -2234,16 +2234,16 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const scale = parseInt(script.getField('SCALE'), 10);
 
                 if (scale == -1) {
-                    return Entry.byrobot_base.setBuzzerMute(script, 0x20, 60000, false, true);
+                    return RoCode.byrobot_base.setBuzzerMute(script, 0x20, 60000, false, true);
                 } else {
-                    return Entry.byrobot_base.setBuzzerScale(script, 0x20, octave, scale, 60000, false, true);
+                    return RoCode.byrobot_base.setBuzzerScale(script, 0x20, octave, scale, 60000, false, true);
                 }
             },
         },
 
         byrobot_drone_4_controller_buzzer_scale_delay: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2261,8 +2261,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2283,8 +2283,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
@@ -2313,16 +2313,16 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const time = script.getNumberValue('TIME') * 1000;
 
                 if (scale == -1) {
-                    return Entry.byrobot_base.setBuzzerMute(script, 0x20, time, true, true);
+                    return RoCode.byrobot_base.setBuzzerMute(script, 0x20, time, true, true);
                 } else {
-                    return Entry.byrobot_base.setBuzzerScale(script, 0x20, octave, scale, time, true, true);
+                    return RoCode.byrobot_base.setBuzzerScale(script, 0x20, octave, scale, time, true, true);
                 }
             },
         },
 
         byrobot_drone_4_controller_buzzer_scale_reserve: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2340,8 +2340,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2362,8 +2362,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
@@ -2392,16 +2392,16 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const time   = script.getNumberValue('TIME') * 1000;
 
                 if (scale == -1) {
-                    return Entry.byrobot_base.setBuzzerMute(script, 0x20, time, false, false);
+                    return RoCode.byrobot_base.setBuzzerMute(script, 0x20, time, false, false);
                 } else {
-                    return Entry.byrobot_base.setBuzzerScale(script, 0x20, octave, scale, time, false, false);
+                    return RoCode.byrobot_base.setBuzzerScale(script, 0x20, octave, scale, time, false, false);
                 }
             },
         },
 
         byrobot_drone_4_controller_buzzer_hz: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2421,13 +2421,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             func(sprite, script)
             {
                 const hz = script.getNumberValue('HZ');
-                return Entry.byrobot_base.setBuzzerHz(script, 0x20, hz, 60000, false, true);
+                return RoCode.byrobot_base.setBuzzerHz(script, 0x20, hz, 60000, false, true);
             },
         },
 
         byrobot_drone_4_controller_buzzer_hz_delay: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2450,13 +2450,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             {
                 const hz   = script.getNumberValue('HZ');
                 const time = script.getNumberValue('TIME') * 1000;
-                return Entry.byrobot_base.setBuzzerHz(script, 0x20, hz, time, true, true);
+                return RoCode.byrobot_base.setBuzzerHz(script, 0x20, hz, time, true, true);
             },
         },
 
         byrobot_drone_4_controller_buzzer_hz_reserve: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2483,13 +2483,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             {
                 const hz   = script.getNumberValue('HZ');
                 const time = script.getNumberValue('TIME') * 1000;
-                return Entry.byrobot_base.setBuzzerHz(script, 0x20, hz, time, false, false);
+                return RoCode.byrobot_base.setBuzzerHz(script, 0x20, hz, time, false, false);
             },
         },
 
         byrobot_drone_4_controller_vibrator_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [{ type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 }],
@@ -2503,13 +2503,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                return Entry.byrobot_base.setVibratorStop(script, 0x20);
+                return RoCode.byrobot_base.setVibratorStop(script, 0x20);
             },
         },
 
         byrobot_drone_4_controller_vibrator_on_delay: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2529,13 +2529,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             func(sprite, script)
             {
                 const timeOn = script.getNumberValue('TIMEON') * 1000;
-                return Entry.byrobot_base.setVibrator(script, 0x20, timeOn, 0, timeOn, true, true);
+                return RoCode.byrobot_base.setVibrator(script, 0x20, timeOn, 0, timeOn, true, true);
             },
         },
 
         byrobot_drone_4_controller_vibrator_on_reserve: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2555,13 +2555,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             func(sprite, script)
             {
                 const timeOn = script.getNumberValue('TIMEON') * 1000;
-                return Entry.byrobot_base.setVibrator(script, 0x20, timeOn, 0, timeOn, false, false);
+                return RoCode.byrobot_base.setVibrator(script, 0x20, timeOn, 0, timeOn, false, false);
             },
         },
 
         byrobot_drone_4_controller_vibrator_delay: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2592,13 +2592,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const timeOn  = script.getNumberValue('TIMEON') * 1000;
                 const timeOff = script.getNumberValue('TIMEOFF') * 1000;
                 const timeRun = script.getNumberValue('TIMERUN') * 1000;
-                return Entry.byrobot_base.setVibrator(script, 0x20, timeOn, timeOff, timeRun, true, true);
+                return RoCode.byrobot_base.setVibrator(script, 0x20, timeOn, timeOff, timeRun, true, true);
             },
         },
 
         byrobot_drone_4_controller_vibrator_reserve: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2629,13 +2629,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const timeOn  = script.getNumberValue('TIMEON') * 1000;
                 const timeOff = script.getNumberValue('TIMEOFF') * 1000;
                 const timeRun = script.getNumberValue('TIMERUN') * 1000;
-                return Entry.byrobot_base.setVibrator(script, 0x20, timeOn, timeOff, timeRun, false, false);
+                return RoCode.byrobot_base.setVibrator(script, 0x20, timeOn, timeOff, timeRun, false, false);
             },
         },
 
         byrobot_drone_4_drone_motor_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [{ type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 }],
@@ -2649,13 +2649,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                return Entry.byrobot_base.sendStop(script, 0x10);
+                return RoCode.byrobot_base.sendStop(script, 0x10);
             },
         },
 
         byrobot_drone_4_drone_motorsingle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2664,8 +2664,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     options: [['1(FR)', '0'], ['2(RR)', '1'], ['3(RL)', '2'], ['4(FL)', '3']],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
@@ -2686,13 +2686,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const motorIndex    = parseInt(script.getField('MOTORINDEX'), 10);
                 const motorSpeed    = script.getNumberValue('MOTORSPEED');
 
-                return Entry.byrobot_base.setMotorSingleV(script, 0x10, motorIndex, motorSpeed);
+                return RoCode.byrobot_base.setMotorSingleV(script, 0x10, motorIndex, motorSpeed);
             },
         },
 
         byrobot_drone_4_drone_motorsingle_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2716,13 +2716,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const motorIndex    = script.getNumberValue('MOTORINDEX') - 1;
                 const motorSpeed    = script.getNumberValue('MOTORSPEED');
 
-                return Entry.byrobot_base.setMotorSingleV(script, 0x10, motorIndex, motorSpeed);
+                return RoCode.byrobot_base.setMotorSingleV(script, 0x10, motorIndex, motorSpeed);
             },
         },
 
         byrobot_drone_4_drone_control_drone_takeoff: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [{ type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 }],
@@ -2736,13 +2736,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                return Entry.byrobot_base.setEventFlight(script, 0x10, 0x11, 5000); // 0x11 : FlightEvent::TakeOff
+                return RoCode.byrobot_base.setEventFlight(script, 0x10, 0x11, 5000); // 0x11 : FlightEvent::TakeOff
             },
         },
 
         byrobot_drone_4_drone_control_drone_landing: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [{ type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 }],
@@ -2756,13 +2756,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                return Entry.byrobot_base.setEventFlight(script, 0x10, 0x12, 5000); // 0x12 : FlightEvent::Landing
+                return RoCode.byrobot_base.setEventFlight(script, 0x10, 0x12, 5000); // 0x12 : FlightEvent::Landing
             },
         },
 
         byrobot_drone_4_drone_control_drone_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [{ type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 }],
@@ -2776,13 +2776,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                return Entry.byrobot_base.sendStop(script, 0x10);
+                return RoCode.byrobot_base.sendStop(script, 0x10);
             },
         },
 
         byrobot_drone_4_drone_control_headless: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2794,8 +2794,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
             ],
@@ -2812,13 +2812,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             func(sprite, script)
             {
                 const headless = script.getField('HEADLESS');
-                return Entry.byrobot_base.sendCommand(script, 0x10, 0x03, headless);
+                return RoCode.byrobot_base.sendCommand(script, 0x10, 0x03, headless);
             },
         },
 
         byrobot_drone_4_drone_control_drone_reset_heading: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [{ type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 }],
@@ -2832,13 +2832,13 @@ Entry.byrobot_drone_4.getBlocks = function()
             isNotFor: ['byrobot_drone_4'],
             func(sprite, script)
             {
-                return Entry.byrobot_base.sendCommand(script, 0x10, 0x07, 0xA0); // 0x22 : CommandType::FlightEvent  // 0xA0 : FlightEvent::ResetHeading
+                return RoCode.byrobot_base.sendCommand(script, 0x10, 0x07, 0xA0); // 0x22 : CommandType::FlightEvent  // 0xA0 : FlightEvent::ResetHeading
             },
         },
 
         byrobot_drone_4_drone_control_quad_one: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2852,8 +2852,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: 'control_quad8_pitch',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
@@ -2874,13 +2874,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const controlTarget = script.getField('CONTROLTARGET');
                 const value = script.getNumberValue('VALUE');
 
-                return Entry.byrobot_base.sendControlQuadSingle(script, 0x10, controlTarget, value, 0, false);
+                return RoCode.byrobot_base.sendControlQuadSingle(script, 0x10, controlTarget, value, 0, false);
             },
         },
 
         byrobot_drone_4_drone_control_quad_one_delay: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2894,8 +2894,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: 'control_quad8_pitch',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 { type: 'Block', accept: 'string' },
@@ -2924,13 +2924,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const value = script.getNumberValue('VALUE');
                 const time = script.getNumberValue('TIME') * 1000;
 
-                return Entry.byrobot_base.sendControlQuadSingle(script, 0x10, controlTarget, value, time, true);
+                return RoCode.byrobot_base.sendControlQuadSingle(script, 0x10, controlTarget, value, time, true);
             },
         },
 
         byrobot_drone_4_drone_control_quad: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2966,13 +2966,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const yaw      = script.getNumberValue('YAW');
                 const throttle = script.getNumberValue('THROTTLE');
 
-                return Entry.byrobot_base.sendControlQuad(script, 0x10, roll, pitch, yaw, throttle, 0, false);
+                return RoCode.byrobot_base.sendControlQuad(script, 0x10, roll, pitch, yaw, throttle, 0, false);
             },
         },
 
         byrobot_drone_4_drone_control_quad_delay: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3012,13 +3012,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                 const throttle  = script.getNumberValue('THROTTLE');
                 const time      = script.getNumberValue('TIME') * 1000;
 
-                return Entry.byrobot_base.sendControlQuad(script, 0x10, roll, pitch, yaw, throttle, time, true);
+                return RoCode.byrobot_base.sendControlQuad(script, 0x10, roll, pitch, yaw, throttle, time, true);
             },
         },
 
         byrobot_drone_4_drone_control_position_one: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3034,8 +3034,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: 'pitch_forward',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 { type: 'Block', accept: 'string' },
@@ -3079,13 +3079,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                     default:                z = -distance;  break;
                 }
 
-                return Entry.byrobot_base.sendControlPosition(script, 0x10, x, y, z, speed, 0, 0, time, true);
+                return RoCode.byrobot_base.sendControlPosition(script, 0x10, x, y, z, speed, 0, 0, time, true);
             },
         },
 
         byrobot_drone_4_drone_control_position_turn: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3097,8 +3097,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '+1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 { type: 'Block', accept: 'string' },
@@ -3135,13 +3135,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                     time = Math.abs(degree / speedYaw) * 2 * 1000 + 3000;
                 }
 
-                return Entry.byrobot_base.sendControlPosition(script, 0x10, 0, 0, 0, 0, yaw, speedYaw, time, true);
+                return RoCode.byrobot_base.sendControlPosition(script, 0x10, 0, 0, 0, 0, yaw, speedYaw, time, true);
             },
         },
 
         byrobot_drone_4_drone_control_position_location: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3153,8 +3153,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '+1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 {
@@ -3165,8 +3165,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '+1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 {
@@ -3177,8 +3177,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '+1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 { type: 'Block', accept: 'string' },
@@ -3229,13 +3229,13 @@ Entry.byrobot_drone_4.getBlocks = function()
                     time = Math.abs(distance / speed) * 1000 + Math.min(1000 * speed, 3000) + 3000;
                 }
 
-                return Entry.byrobot_base.sendControlPosition(script, 0x10, x, y, z, speed, 0, 0, time, true);
+                return RoCode.byrobot_base.sendControlPosition(script, 0x10, x, y, z, speed, 0, 0, time, true);
             },
         },
 
         byrobot_drone_4_drone_control_position_location_turn: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3247,8 +3247,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '+1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 {
@@ -3259,8 +3259,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '+1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 {
@@ -3271,8 +3271,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '+1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 { type: 'Block', accept: 'string' },
@@ -3284,8 +3284,8 @@ Entry.byrobot_drone_4.getBlocks = function()
                     ],
                     value: '+1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 { type: 'Block', accept: 'string' },
@@ -3354,12 +3354,12 @@ Entry.byrobot_drone_4.getBlocks = function()
 
                 const time = Math.max(timePosition, timeRotation);
 
-                return Entry.byrobot_base.sendControlPosition(script, 0x10, x, y, z, speed, yaw, speedYaw, time, true);
+                return RoCode.byrobot_base.sendControlPosition(script, 0x10, x, y, z, speed, yaw, speedYaw, time, true);
             },
         },
     };
 };
 
 
-module.exports = Entry.byrobot_drone_4;
+module.exports = RoCode.byrobot_drone_4;
 

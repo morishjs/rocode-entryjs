@@ -3,7 +3,7 @@
  * @fileoverview Show dialog on canvas
  */
 
-Entry.Reporter = class Reporter {
+RoCode.Reporter = class Reporter {
     constructor(isRealTime) {
         this.userId = null;
         this.projectId = null;
@@ -17,7 +17,7 @@ Entry.Reporter = class Reporter {
             if (window.location.href.indexOf('localhost') > -1) {
                 this.io = io('localhost:7000');
             } else {
-                this.io = io('play04.play-entry.com:7000');
+                this.io = io('play04.play-RoCode.com:7000');
             }
             this.io.emit('activity', {
                 message: 'start',

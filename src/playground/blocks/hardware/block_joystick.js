@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.joystick = {
+RoCode.joystick = {
     id: '1.4',
     name: 'joystick',
     url: 'http://www.kocoafab.cc/',
@@ -10,19 +10,19 @@ Entry.joystick = {
         en: 'Joystick Sensor Shield',
     },
     setZero: function() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            var keySet = Object.keys(Entry.hw.sendQueue.SET);
+            var keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach(function(key) {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     sensorTypes: {
         ALIVE: 0,
@@ -69,7 +69,7 @@ Entry.joystick = {
     BlockState: {},
 };
 
-Entry.joystick.setLanguage = function() {
+RoCode.joystick.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -120,7 +120,7 @@ Entry.joystick.setLanguage = function() {
     };
 };
 
-Entry.joystick.blockMenuBlocks = [
+RoCode.joystick.blockMenuBlocks = [
     'joystick_get_analog_value',
     'joystick_get_analog_value_map',
     'joystick_get_ultrasonic_value',
@@ -136,11 +136,11 @@ Entry.joystick.blockMenuBlocks = [
     'joystick_get_sensor_value',
 ];
 
-Entry.joystick.getBlocks = function() {
+RoCode.joystick.getBlocks = function() {
     return {
         joystick_analog_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -157,8 +157,8 @@ Entry.joystick.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -190,10 +190,10 @@ Entry.joystick.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                converter: Entry.block.converters.returnStringKey,
-                                codeMap: 'Entry.CodeMap.Arduino.joystick_analog_list[0]',
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringKey,
+                                codeMap: 'RoCode.CodeMap.Arduino.joystick_analog_list[0]',
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'joystick_analog_list',
@@ -202,8 +202,8 @@ Entry.joystick.getBlocks = function() {
             },
         },
         joystick_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -230,7 +230,7 @@ Entry.joystick.getBlocks = function() {
             isNotFor: ['joystick'],
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 if (port[0] === 'A') port = port.substring(1);
                 return ANALOG ? ANALOG[port] || 0 : 0;
             },
@@ -251,8 +251,8 @@ Entry.joystick.getBlocks = function() {
             },
         },
         joystick_get_analog_value_map: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -324,7 +324,7 @@ Entry.joystick.getBlocks = function() {
             isNotFor: ['joystick'],
             func: function(sprite, script) {
                 var result = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var value2 = script.getNumberValue('VALUE2', script);
                 var value3 = script.getNumberValue('VALUE3', script);
                 var value4 = script.getNumberValue('VALUE4', script);
@@ -334,8 +334,8 @@ Entry.joystick.getBlocks = function() {
                 var isFloat = false;
 
                 if (
-                    (Entry.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
-                    (Entry.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
+                    (RoCode.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
+                    (RoCode.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
                 ) {
                     isFloat = true;
                 }
@@ -397,8 +397,8 @@ Entry.joystick.getBlocks = function() {
             },
         },
         joystick_get_ultrasonic_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -438,20 +438,20 @@ Entry.joystick.getBlocks = function() {
                 var port1 = script.getNumberValue('PORT1', script);
                 var port2 = script.getNumberValue('PORT2', script);
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][port1];
-                delete Entry.hw.sendQueue['SET'][port2];
+                delete RoCode.hw.sendQueue['SET'][port1];
+                delete RoCode.hw.sendQueue['SET'][port2];
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.joystick.sensorTypes.ULTRASONIC] = {
+                RoCode.hw.sendQueue['GET'][RoCode.joystick.sensorTypes.ULTRASONIC] = {
                     port: [port1, port2],
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.ULTRASONIC || 0;
+                return RoCode.hw.portData.ULTRASONIC || 0;
             },
             syntax: {
                 js: [],
@@ -474,8 +474,8 @@ Entry.joystick.getBlocks = function() {
             },
         },
         joystick_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -501,21 +501,21 @@ Entry.joystick.getBlocks = function() {
             class: 'joystickGet',
             isNotFor: ['joystick'],
             func: function(sprite, script) {
-                const { hwModule = {} } = Entry.hw;
+                const { hwModule = {} } = RoCode.hw;
                 const { name } = hwModule;
                 if (name === 'joystick') {
                     var port = script.getNumberValue('PORT', script);
-                    var DIGITAL = Entry.hw.portData.DIGITAL;
-                    if (!Entry.hw.sendQueue['GET']) {
-                        Entry.hw.sendQueue['GET'] = {};
+                    var DIGITAL = RoCode.hw.portData.DIGITAL;
+                    if (!RoCode.hw.sendQueue['GET']) {
+                        RoCode.hw.sendQueue['GET'] = {};
                     }
-                    Entry.hw.sendQueue['GET'][Entry.joystick.sensorTypes.DIGITAL] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.joystick.sensorTypes.DIGITAL] = {
                         port: port,
                         time: new Date().getTime(),
                     };
                     return DIGITAL ? DIGITAL[port] || 0 : 0;
                 } else {
-                    return Entry.block.arduino_get_digital_value.func(sprite, script);
+                    return RoCode.block.arduino_get_digital_value.func(sprite, script);
                 }
             },
             syntax: {
@@ -535,8 +535,8 @@ Entry.joystick.getBlocks = function() {
             },
         },
         joystick_toggle_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -583,18 +583,18 @@ Entry.joystick.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.joystick.highList.indexOf(value) > -1) {
+                if (RoCode.joystick.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.joystick.lowList.indexOf(value) > -1) {
+                } else if (RoCode.joystick.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.joystick.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.joystick.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -620,8 +620,8 @@ Entry.joystick.getBlocks = function() {
             },
         },
         joystick_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -667,11 +667,11 @@ Entry.joystick.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.joystick.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.joystick.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -697,8 +697,8 @@ Entry.joystick.getBlocks = function() {
             },
         },
         joystick_tone_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -722,8 +722,8 @@ Entry.joystick.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -761,7 +761,7 @@ Entry.joystick.getBlocks = function() {
                                 ],
                                 value: 'C',
                                 fontSize: 11,
-                                converter: Entry.block.converters.returnStringValueUpperCase,
+                                converter: RoCode.block.converters.returnStringValueUpperCase,
                             },
                         ],
                         keyOption: 'joystick_tone_list',
@@ -770,8 +770,8 @@ Entry.joystick.getBlocks = function() {
             },
         },
         joystick_tone_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -807,8 +807,8 @@ Entry.joystick.getBlocks = function() {
             },
         },
         joystick_octave_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -825,8 +825,8 @@ Entry.joystick.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -850,8 +850,8 @@ Entry.joystick.getBlocks = function() {
             },
         },
         joystick_set_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -900,12 +900,12 @@ Entry.joystick.getBlocks = function() {
             class: 'joysticksensor',
             isNotFor: ['joystick'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = 6;
 
                 if (!script.isStart) {
                     var note = script.getValue('NOTE', script);
-                    if (!Entry.Utils.isNumber(note)) note = Entry.joystick.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note)) note = RoCode.joystick.toneTable[note];
 
                     if (note < 0) {
                         note = 0;
@@ -925,7 +925,7 @@ Entry.joystick.getBlocks = function() {
 
                     if (duration === 0) {
                         sq['SET'][port] = {
-                            type: Entry.joystick.sensorTypes.TONE,
+                            type: RoCode.joystick.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -942,7 +942,7 @@ Entry.joystick.getBlocks = function() {
                     var value = 0;
 
                     if (note != 0) {
-                        value = Entry.joystick.toneMap[note][octave];
+                        value = RoCode.joystick.toneMap[note][octave];
                     }
 
                     duration = duration * 1000;
@@ -950,7 +950,7 @@ Entry.joystick.getBlocks = function() {
                     script.timeFlag = 1;
 
                     sq['SET'][port] = {
-                        type: Entry.joystick.sensorTypes.TONE,
+                        type: RoCode.joystick.sensorTypes.TONE,
                         data: {
                             value: value,
                             duration: duration,
@@ -968,11 +968,11 @@ Entry.joystick.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
                     sq['SET'][port] = {
-                        type: Entry.joystick.sensorTypes.TONE,
+                        type: RoCode.joystick.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1004,8 +1004,8 @@ Entry.joystick.getBlocks = function() {
             },
         },
         joystick_set_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1043,7 +1043,7 @@ Entry.joystick.getBlocks = function() {
             class: 'joystick',
             isNotFor: ['joystick'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
                 var value = script.getNumberValue('VALUE', script);
                 value = Math.min(180, value);
@@ -1053,7 +1053,7 @@ Entry.joystick.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.joystick.sensorTypes.SERVO_PIN,
+                    type: RoCode.joystick.sensorTypes.SERVO_PIN,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1080,8 +1080,8 @@ Entry.joystick.getBlocks = function() {
             },
         },
         joystick_is_button_pressed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -1099,8 +1099,8 @@ Entry.joystick.getBlocks = function() {
                     ],
                     value: '16',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1114,21 +1114,21 @@ Entry.joystick.getBlocks = function() {
             class: 'joysticksensor',
             isNotFor: ['joystick'],
             func: function(sprite, script) {
-                const { hwModule = {} } = Entry.hw;
+                const { hwModule = {} } = RoCode.hw;
                 const { name } = hwModule;
                 if (name === 'joystick') {
                     var port = script.getNumberField('PORT', script);
-                    var DIGITAL = Entry.hw.portData.DIGITAL;
-                    if (!Entry.hw.sendQueue['GET']) {
-                        Entry.hw.sendQueue['GET'] = {};
+                    var DIGITAL = RoCode.hw.portData.DIGITAL;
+                    if (!RoCode.hw.sendQueue['GET']) {
+                        RoCode.hw.sendQueue['GET'] = {};
                     }
-                    Entry.hw.sendQueue['GET'][Entry.joystick.sensorTypes.DIGITAL] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.joystick.sensorTypes.DIGITAL] = {
                         port: port,
                         time: new Date().getTime(),
                     };
                     return DIGITAL ? !DIGITAL[port] || 0 : 0;
                 } else {
-                    return Entry.block.arduino_get_digital_value.func(sprite, script);
+                    return RoCode.block.arduino_get_digital_value.func(sprite, script);
                 }
             },
             syntax: {
@@ -1148,8 +1148,8 @@ Entry.joystick.getBlocks = function() {
             },
         },
         joystick_get_joystick_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -1168,8 +1168,8 @@ Entry.joystick.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1184,7 +1184,7 @@ Entry.joystick.getBlocks = function() {
             isNotFor: ['joystick'],
             func: function(sprite, script) {
                 var stick = script.getNumberField('STICK', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 if (stick === 1 && ANALOG[0] > 800) {
                     return 1;
                 } else if (stick === 2 && ANALOG[0] < 100) {
@@ -1222,8 +1222,8 @@ Entry.joystick.getBlocks = function() {
             },
         },
         joystick_get_sensor_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1236,8 +1236,8 @@ Entry.joystick.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1259,7 +1259,7 @@ Entry.joystick.getBlocks = function() {
                 } else {
                     port = '0';
                 }
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 if (port[0] === 'A') port = port.substring(1);
                 return ANALOG ? ANALOG[port] || 0 : 0;
             },
@@ -1280,8 +1280,8 @@ Entry.joystick.getBlocks = function() {
             },
         },
         joystick_toggle_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1318,18 +1318,18 @@ Entry.joystick.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.joystick.highList.indexOf(value) > -1) {
+                if (RoCode.joystick.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.joystick.lowList.indexOf(value) > -1) {
+                } else if (RoCode.joystick.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.joystick.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.joystick.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1351,8 +1351,8 @@ Entry.joystick.getBlocks = function() {
             },
         },
         joystick_get_led_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -1367,8 +1367,8 @@ Entry.joystick.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1388,8 +1388,8 @@ Entry.joystick.getBlocks = function() {
             },
         },
         joystick_toggle_shield_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1449,18 +1449,18 @@ Entry.joystick.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.joystick.highList.indexOf(value) > -1) {
+                if (RoCode.joystick.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.joystick.lowList.indexOf(value) > -1) {
+                } else if (RoCode.joystick.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.joystick.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.joystick.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1489,4 +1489,4 @@ Entry.joystick.getBlocks = function() {
     };
 };
 
-module.exports = Entry.joystick;
+module.exports = RoCode.joystick;

@@ -2,19 +2,19 @@
  */
 'use strict';
 
-import { ColorPicker } from '@entrylabs/tool';
+import { ColorPicker } from '@RoCodelabs/tool';
 import Extension from '../../extensions/extension';
 
 /*
  *
  */
-Entry.FieldColor = class FieldColor extends Entry.Field {
+RoCode.FieldColor = class FieldColor extends RoCode.Field {
     constructor(content, blockView, index) {
         super(content, blockView, index);
         this._block = blockView.block;
         this._blockView = blockView;
         const board = blockView.getBoard();
-        this.box = new Entry.BoxModel();
+        this.box = new RoCode.BoxModel();
         this.svgGroup = null;
         this._contents = content;
         this._index = index;
@@ -40,12 +40,12 @@ Entry.FieldColor = class FieldColor extends Entry.Field {
         }
         const { contentSvgGroup, renderMode } = this._blockView;
         this.svgGroup = contentSvgGroup.elem('g', {
-            class: 'entry-field-color',
+            class: 'RoCode-field-color',
         });
 
         let x, y, WIDTH, HEIGHT;
 
-        if (renderMode === Entry.BlockView.RENDER_MODE_TEXT) {
+        if (renderMode === RoCode.BlockView.RENDER_MODE_TEXT) {
             const rect = this.svgGroup.elem('rect', {
                 x: 0,
                 rx: 3,
@@ -57,7 +57,7 @@ Entry.FieldColor = class FieldColor extends Entry.Field {
             this.textElement = this.svgGroup.elem('text').attr({
                 style: 'white-space: pre;',
                 'font-size': `${this._fontSize}px`,
-                'font-family': EntryStatic.fontFamily || 'NanumGothic',
+                'font-family': RoCodeStatic.fontFamily || 'NanumGothic',
                 class: 'dragNone',
                 fill: this._color,
             });
@@ -119,7 +119,7 @@ Entry.FieldColor = class FieldColor extends Entry.Field {
                 this._selectBlockView();
             };
         }
-        this.disposeEvent = Entry.disposeEvent.attach(this, action);
+        this.disposeEvent = RoCode.disposeEvent.attach(this, action);
     }
 
     spoidClick = _.debounce(() => {
@@ -127,7 +127,7 @@ Entry.FieldColor = class FieldColor extends Entry.Field {
         this.colorPicker.data = {
             activeSpoid: true,
         };
-        const { canvas } = Entry.stage.canvas || {};
+        const { canvas } = RoCode.stage.canvas || {};
         this.dropper
             .show({
                 target: canvas,
@@ -144,8 +144,8 @@ Entry.FieldColor = class FieldColor extends Entry.Field {
     });
 
     renderOptions() {
-        this.optionGroup = Entry.Dom('div', {
-            class: 'entry-color-picker',
+        this.optionGroup = RoCode.Dom('div', {
+            class: 'RoCode-color-picker',
             parent: $('body'),
         });
         this.colorPicker = new ColorPicker({

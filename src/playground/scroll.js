@@ -1,6 +1,6 @@
 import debounce from 'lodash/debounce';
 
-Entry.Scroller = class Scroller {
+RoCode.Scroller = class Scroller {
     get SCROLL_WIDTH() {
         return 8;
     }
@@ -33,7 +33,7 @@ Entry.Scroller = class Scroller {
 
         this._bindEvent();
 
-        this._scrollCommand = debounce(Entry.do, 200);
+        this._scrollCommand = debounce(RoCode.do, 200);
     }
 
     onMouseMove = (e) => {
@@ -77,14 +77,14 @@ Entry.Scroller = class Scroller {
         if (e.button === 0 || e instanceof window.TouchEvent) {
             console.log('go into add event');
             this.scrollType = e.target.type;
-            if (Entry.documentMousedown) {
-                Entry.documentMousedown.notify(e);
+            if (RoCode.documentMousedown) {
+                RoCode.documentMousedown.notify(e);
             }
             this.addEventListener(document, ['mousemove', 'touchmove'], this.onMouseMove, {
                 passive: false,
             });
             this.addEventListener(document, ['mouseup', 'touchend'], this.onMouseUp);
-            this.dragInstance = new Entry.DragInstance({
+            this.dragInstance = new RoCode.DragInstance({
                 startX: e.pageX,
                 startY: e.pageY,
                 offsetX: e.pageX,
@@ -107,7 +107,7 @@ Entry.Scroller = class Scroller {
 
     createScrollBar() {
         const r = this.RADIUS;
-        const { common = {} } = EntryStatic.colorSet || {};
+        const { common = {} } = RoCodeStatic.colorSet || {};
         this.svgGroup = this.board.svg.elem('g').attr({ class: 'boardScrollbar' });
 
         if (this._horizontal) {
@@ -307,8 +307,8 @@ Entry.Scroller = class Scroller {
     _bindEvent() {
         const dResizeScrollBar = debounce(this.resizeScrollBar, 250);
         this.board.changeEvent.attach(this, dResizeScrollBar);
-        if (Entry.windowResized) {
-            Entry.windowResized.attach(this, dResizeScrollBar);
+        if (RoCode.windowResized) {
+            RoCode.windowResized.attach(this, dResizeScrollBar);
         }
     }
 };

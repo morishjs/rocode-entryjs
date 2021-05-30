@@ -1,28 +1,28 @@
-class EntryCommander {
+class RoCodeCommander {
     constructor() {
-        Entry.do = this.do.bind(this);
+        RoCode.do = this.do.bind(this);
 
-        Entry.undo = this.undo.bind(this);
+        RoCode.undo = this.undo.bind(this);
 
         this.editor = {};
 
         this.reporters = [];
 
-        Entry.Command.editor = this.editor;
+        RoCode.Command.editor = this.editor;
 
-        this.doEvent = new Entry.Event(this);
-        this.logEvent = new Entry.Event(this);
+        this.doEvent = new RoCode.Event(this);
+        this.logEvent = new RoCode.Event(this);
 
-        this.doCommandAll = Entry.doCommandAll;
+        this.doCommandAll = RoCode.doCommandAll;
         this._storage = null;
     }
 
     do(commandType, ...args) {
         const {
             stateManager,
-            Command: EntryCommand,
+            Command: RoCodeCommand,
             STATIC: { COMMAND_TYPES, getCommandName },
-        } = Entry;
+        } = RoCode;
 
         if (typeof commandType === 'string') {
             commandType = COMMAND_TYPES[commandType];
@@ -32,7 +32,7 @@ class EntryCommander {
         this.report(COMMAND_TYPES.do);
         this.report(commandType, args);
 
-        const command = EntryCommand[commandType];
+        const command = RoCodeCommand[commandType];
 
         console.log('commandType', commandType, getCommandName(commandType));
 
@@ -58,14 +58,14 @@ class EntryCommander {
     }
 
     undo(commandType, ...args) {
-        this.report(Entry.STATIC.COMMAND_TYPES.undo);
+        this.report(RoCode.STATIC.COMMAND_TYPES.undo);
 
-        const command = Entry.Command[commandType];
+        const command = RoCode.Command[commandType];
 
         let state;
-        if (Entry.stateManager && command.skipUndoStack !== true) {
-            state = Entry.stateManager.addCommand.apply(
-                Entry.stateManager,
+        if (RoCode.stateManager && command.skipUndoStack !== true) {
+            state = RoCode.stateManager.addCommand.apply(
+                RoCode.stateManager,
                 [commandType, this, this.do, command.undo].concat(command.state.apply(this, args))
             );
         }
@@ -78,13 +78,13 @@ class EntryCommander {
     }
 
     redo(commandType, ...args) {
-        this.report(Entry.STATIC.COMMAND_TYPES.redo);
+        this.report(RoCode.STATIC.COMMAND_TYPES.redo);
 
-        const command = Entry.Command[commandType];
+        const command = RoCode.Command[commandType];
 
-        if (Entry.stateManager && command.skipUndoStack !== true) {
-            Entry.stateManager.addCommand.apply(
-                Entry.stateManager,
+        if (RoCode.stateManager && command.skipUndoStack !== true) {
+            RoCode.stateManager.addCommand.apply(
+                RoCode.stateManager,
                 [commandType, this, this.undo, commandType].concat(command.state.apply(null, args))
             );
         }
@@ -96,22 +96,22 @@ class EntryCommander {
     }
 
     isPass(isPass = true) {
-        if (!Entry.stateManager) {
+        if (!RoCode.stateManager) {
             return;
         }
 
-        const lastCommand = Entry.stateManager.getLastCommand();
+        const lastCommand = RoCode.stateManager.getLastCommand();
         if (lastCommand) {
             lastCommand.isPass = isPass;
         }
     }
 
     isPassById(id, isPass = true, skipCount = 0) {
-        if (!id || !Entry.stateManager) {
+        if (!id || !RoCode.stateManager) {
             return;
         }
 
-        const lastCommand = Entry.stateManager.getLastCommandById(id);
+        const lastCommand = RoCode.stateManager.getLastCommandById(id);
         if (lastCommand) {
             lastCommand.isPass = isPass;
             if (skipCount) {
@@ -134,8 +134,8 @@ class EntryCommander {
     report(commandType, argumentsArray) {
         let data;
 
-        if (commandType && Entry.Command[commandType] && Entry.Command[commandType].log) {
-            data = Entry.Command[commandType].log.apply(this, argumentsArray);
+        if (commandType && RoCode.Command[commandType] && RoCode.Command[commandType].log) {
+            data = RoCode.Command[commandType].log.apply(this, argumentsArray);
         } else {
             data = argumentsArray;
         }
@@ -144,16 +144,16 @@ class EntryCommander {
     }
 
     applyOption() {
-        this.doCommandAll = Entry.doCommandAll;
+        this.doCommandAll = RoCode.doCommandAll;
     }
 
     _checkIsSkip(commandType) {
-        const { skipUndoStack } = Entry.Command[commandType];
+        const { skipUndoStack } = RoCode.Command[commandType];
         return (
             skipUndoStack === true ||
-            (!Entry.doCommandAll && _.includes(Entry.STATIC.COMMAND_TYPES_NOT_ALWAYS, commandType))
+            (!RoCode.doCommandAll && _.includes(RoCode.STATIC.COMMAND_TYPES_NOT_ALWAYS, commandType))
         );
     }
 }
 
-Entry.Commander = EntryCommander;
+RoCode.Commander = RoCodeCommander;

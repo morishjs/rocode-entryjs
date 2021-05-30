@@ -159,7 +159,7 @@ Blockly.Trashcan.prototype.createDom = function() {
                        function(e) {
   if (Blockly.isRightButton(e)) {
                            console.log('hi');
-    document.getElementById('entryBlockly').style.background = 'white';
+    document.getElementById('RoCodeBlockly').style.background = 'white';
   }
                        });
   this.svgBody_ = Blockly.createSvgElement('image',

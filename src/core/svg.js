@@ -11,25 +11,25 @@
  * @param {string} tag or html to construct dom element.
  * @param {?object} options include id, classes, parent etc.
  */
-Entry.SVG = function(id, svgDom) {
+RoCode.SVG = function(id, svgDom) {
     const element = svgDom ? svgDom : document.getElementById(id);
-    return Entry.SVG.createElement(element);
+    return RoCode.SVG.createElement(element);
 };
 
-Entry.SVG.NS = 'http://www.w3.org/2000/svg';
-Entry.SVG.NS_XLINK = 'http://www.w3.org/1999/xlink';
+RoCode.SVG.NS = 'http://www.w3.org/2000/svg';
+RoCode.SVG.NS_XLINK = 'http://www.w3.org/1999/xlink';
 
-Entry.SVG.createElement = function(tag, options) {
+RoCode.SVG.createElement = function(tag, options) {
     let el;
     if (typeof tag === 'string') {
-        el = document.createElementNS(Entry.SVG.NS, tag);
+        el = document.createElementNS(RoCode.SVG.NS, tag);
     } else {
         el = tag;
     }
 
     if (options) {
         if (options.href) {
-            el.setAttributeNS(Entry.SVG.NS_XLINK, 'href', options.href);
+            el.setAttributeNS(RoCode.SVG.NS_XLINK, 'href', options.href);
             delete options.href;
         }
 
@@ -39,14 +39,14 @@ Entry.SVG.createElement = function(tag, options) {
     }
 
     //add util functions
-    el.elem = Entry.SVG.createElement;
-    el.prepend = Entry.SVG.prepend;
-    el.attr = Entry.SVG.attr;
-    el.addClass = Entry.SVG.addClass;
-    el.removeClass = Entry.SVG.removeClass;
-    el.hasClass = Entry.SVG.hasClass;
-    el.remove = Entry.SVG.remove;
-    el.removeAttr = Entry.SVG.removeAttr;
+    el.elem = RoCode.SVG.createElement;
+    el.prepend = RoCode.SVG.prepend;
+    el.attr = RoCode.SVG.attr;
+    el.addClass = RoCode.SVG.addClass;
+    el.removeClass = RoCode.SVG.removeClass;
+    el.hasClass = RoCode.SVG.hasClass;
+    el.remove = RoCode.SVG.remove;
+    el.removeAttr = RoCode.SVG.removeAttr;
 
     if (tag === 'text') {
         el.setAttributeNS(
@@ -63,22 +63,22 @@ Entry.SVG.createElement = function(tag, options) {
     return el;
 };
 
-Entry.SVG.prepend = function(tag) {
+RoCode.SVG.prepend = function(tag) {
     let el;
     if (typeof tag === 'string') {
-        el = document.createElementNS(Entry.SVG.NS, tag);
+        el = document.createElementNS(RoCode.SVG.NS, tag);
     } else {
         el = tag;
     }
     //add util functions
-    el.elem = Entry.SVG.createElement;
-    el.prepend = Entry.SVG.prepend;
-    el.attr = Entry.SVG.attr;
-    el.addClass = Entry.SVG.addClass;
-    el.removeClass = Entry.SVG.removeClass;
-    el.hasClass = Entry.SVG.hasClass;
-    el.remove = Entry.SVG.remove;
-    el.removeAttr = Entry.SVG.removeAttr;
+    el.elem = RoCode.SVG.createElement;
+    el.prepend = RoCode.SVG.prepend;
+    el.attr = RoCode.SVG.attr;
+    el.addClass = RoCode.SVG.addClass;
+    el.removeClass = RoCode.SVG.removeClass;
+    el.hasClass = RoCode.SVG.hasClass;
+    el.remove = RoCode.SVG.remove;
+    el.removeAttr = RoCode.SVG.removeAttr;
 
     if (this instanceof SVGElement) {
         if (this.childNodes.length) {
@@ -90,7 +90,7 @@ Entry.SVG.prepend = function(tag) {
     return el;
 };
 
-Entry.SVG.attr = function(options, property) {
+RoCode.SVG.attr = function(options, property) {
     if (typeof options === 'string') {
         const o = {};
         o[options] = property;
@@ -99,7 +99,7 @@ Entry.SVG.attr = function(options, property) {
 
     if (options) {
         if (options.href) {
-            this.setAttributeNS(Entry.SVG.NS_XLINK, 'href', options.href);
+            this.setAttributeNS(RoCode.SVG.NS_XLINK, 'href', options.href);
             delete options.href;
         }
         for (const key in options) {
@@ -110,7 +110,7 @@ Entry.SVG.attr = function(options, property) {
     return this;
 };
 
-Entry.SVG.addClass = function(...classes) {
+RoCode.SVG.addClass = function(...classes) {
     const className = classes.reduce((acc, className) => {
         if (!this.hasClass(className)) {
             acc += ` ${  className}`;
@@ -121,7 +121,7 @@ Entry.SVG.addClass = function(...classes) {
     return this;
 };
 
-Entry.SVG.removeClass = function(...classes) {
+RoCode.SVG.removeClass = function(...classes) {
     const className = classes.reduce((acc, className) => {
         if (this.hasClass(className)) {
             acc = acc.replace(
@@ -137,7 +137,7 @@ Entry.SVG.removeClass = function(...classes) {
     return this;
 };
 
-Entry.SVG.hasClass = function(className) {
+RoCode.SVG.hasClass = function(className) {
     const attr = this.getAttribute('class');
     if (!attr) {
         return false;
@@ -146,12 +146,12 @@ Entry.SVG.hasClass = function(className) {
     }
 };
 
-Entry.SVG.remove = function() {
+RoCode.SVG.remove = function() {
     if (this.parentNode) {
         this.parentNode.removeChild(this);
     }
 };
 
-Entry.SVG.removeAttr = function(attrName) {
+RoCode.SVG.removeAttr = function(attrName) {
     this.removeAttribute(attrName);
 };

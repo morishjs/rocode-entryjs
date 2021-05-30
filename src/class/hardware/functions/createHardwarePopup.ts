@@ -6,34 +6,34 @@ export default function createHardwarePopup(onOkButtonClicked?: () => void) {
         type: 'confirm',
         title: Lang.Msgs.not_install_title,
         setPopupLayout(popup: any) {
-            const content = Entry.Dom('div', {
+            const content = RoCode.Dom('div', {
                 class: 'contentArea',
             });
-            const text = Entry.Dom('div', {
+            const text = RoCode.Dom('div', {
                 class: 'textArea',
                 parent: content,
             });
-            const text1 = Entry.Dom('div', {
+            const text1 = RoCode.Dom('div', {
                 class: 'text1',
                 parent: text,
             });
-            const text2 = Entry.Dom('div', {
+            const text2 = RoCode.Dom('div', {
                 class: 'text2',
                 parent: text,
             });
-            const text3 = Entry.Dom('div', {
+            const text3 = RoCode.Dom('div', {
                 class: 'text3',
                 parent: text,
             });
-            const text4 = Entry.Dom('div', {
+            const text4 = RoCode.Dom('div', {
                 class: 'text4',
                 parent: text,
             });
-            const cancel = Entry.Dom('div', {
+            const cancel = RoCode.Dom('div', {
                 classes: ['popupCancelBtn', 'popupDefaultBtn'],
                 parent: content,
             });
-            const ok = Entry.Dom('div', {
+            const ok = RoCode.Dom('div', {
                 classes: ['popupOkBtn', 'popupDefaultBtn'],
                 parent: content,
             });

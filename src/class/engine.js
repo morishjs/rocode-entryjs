@@ -1,23 +1,23 @@
 import { GEHelper } from '../graphicEngine/GEHelper';
 import audioUtils from '../util/audioUtils';
 
-const EntryEngineState = {
+const RoCodeEngineState = {
     stop: 'stop',
     pause: 'pause',
     run: 'run',
 };
 
-Entry.Engine = class Engine {
+RoCode.Engine = class Engine {
     constructor() {
         this.execPromises = [];
-        this.state = EntryEngineState.stop;
+        this.state = RoCodeEngineState.stop;
         this.popup = null;
         this.isUpdating = true;
         this.speeds = [1, 15, 30, 45, 60];
 
         this.attachKeyboardCapture();
 
-        const _addEventListener = Entry.addEventListener.bind(Entry);
+        const _addEventListener = RoCode.addEventListener.bind(RoCode);
 
         _addEventListener('canvasClick', () => this.fireEvent('mouse_clicked'));
         _addEventListener('canvasClickCanceled', () => this.fireEvent('mouse_click_cancled'));
@@ -28,7 +28,7 @@ Entry.Engine = class Engine {
             this.fireEventOnEntity('when_object_click_canceled', entity)
         );
 
-        if (Entry.type !== 'phone' && Entry.type !== 'playground') {
+        if (RoCode.type !== 'phone' && RoCode.type !== 'playground') {
             _addEventListener(
                 'stageMouseMove',
                 _.throttle(this.updateMouseView.bind(this), 100, {
@@ -44,7 +44,7 @@ Entry.Engine = class Engine {
 
         function arrowHandler(e) {
             const code = e.keyCode || e.which;
-            const input = Entry.stage.inputField;
+            const input = RoCode.stage.inputField;
 
             if (code === 32 && input && input.hasFocus()) {
                 return;
@@ -55,12 +55,12 @@ Entry.Engine = class Engine {
             }
         }
 
-        Entry.message = new Entry.Event(window);
+        RoCode.message = new RoCode.Event(window);
     }
 
     /**
      * Control bar view generator.
-     * @param {!Element} controlView controlView from Entry.
+     * @param {!Element} controlView controlView from RoCode.
      * @param {?string} option for choose type of view.
      */
     generateView(controlView, option = 'workspace') {
@@ -68,37 +68,37 @@ Entry.Engine = class Engine {
         if (option === 'workspace') {
             /** @type {!Element} */
             this.view_ = controlView;
-            this.view_.addClass('entryEngine_w').addClass('entryEngineWorkspace_w');
+            this.view_.addClass('RoCodeEngine_w').addClass('RoCodeEngineWorkspace_w');
 
-            this.speedButton = Entry.createElement('button')
+            this.speedButton = RoCode.createElement('button')
                 .addClass(
-                    'entrySpeedButtonWorkspace',
-                    'entryEngineTopWorkspace',
-                    'entryEngineButtonWorkspace_w'
+                    'RoCodeSpeedButtonWorkspace',
+                    'RoCodeEngineTopWorkspace',
+                    'RoCodeEngineButtonWorkspace_w'
                 )
                 .appendTo(this.view_)
                 .bindOnClick(function(e) {
-                    Entry.engine.toggleSpeedPanel();
+                    RoCode.engine.toggleSpeedPanel();
                     this.blur();
                 });
 
-            this.maximizeButton = Entry.createElement('button')
+            this.maximizeButton = RoCode.createElement('button')
                 .addClass(
-                    'entryEngineButtonWorkspace_w',
-                    'entryEngineTopWorkspace',
-                    'entryMaximizeButtonWorkspace_w'
+                    'RoCodeEngineButtonWorkspace_w',
+                    'RoCodeEngineTopWorkspace',
+                    'RoCodeMaximizeButtonWorkspace_w'
                 )
                 .appendTo(this.view_)
                 .bindOnClick(function(e) {
-                    Entry.engine.toggleFullScreen();
+                    RoCode.engine.toggleFullScreen();
                     this.blur();
                 });
 
-            this.coordinateButton = Entry.createElement('button')
+            this.coordinateButton = RoCode.createElement('button')
                 .addClass(
-                    'entryEngineButtonWorkspace_w',
-                    'entryEngineTopWorkspace',
-                    'entryCoordinateButtonWorkspace_w'
+                    'RoCodeEngineButtonWorkspace_w',
+                    'RoCodeEngineTopWorkspace',
+                    'RoCodeCoordinateButtonWorkspace_w'
                 )
                 .appendTo(this.view_)
                 .bindOnClick(function(e) {
@@ -109,101 +109,101 @@ Entry.Engine = class Engine {
                     }
 
                     this.blur();
-                    Entry.stage.toggleCoordinator();
+                    RoCode.stage.toggleCoordinator();
                 });
 
-            this.mouseView = Entry.createElement('div')
-                .addClass('entryMouseViewWorkspace_w')
-                .addClass('entryHide')
+            this.mouseView = RoCode.createElement('div')
+                .addClass('RoCodeMouseViewWorkspace_w')
+                .addClass('RoCodeHide')
                 .appendTo(this.view_);
 
-            this.mouseViewInput = Entry.createElement('input').appendTo(this.mouseView);
+            this.mouseViewInput = RoCode.createElement('input').appendTo(this.mouseView);
             $(this.mouseViewInput).attr('readonly', 'readonly');
 
-            this.buttonWrapper = Entry.createElement('div')
-                .addClass('entryEngineButtonWrapper')
+            this.buttonWrapper = RoCode.createElement('div')
+                .addClass('RoCodeEngineButtonWrapper')
                 .appendTo(this.view_);
-            this.addButton = Entry.createElement('button')
-                .addClass('entryEngineButtonWorkspace_w')
-                .addClass('entryAddButtonWorkspace_w')
+            this.addButton = RoCode.createElement('button')
+                .addClass('RoCodeEngineButtonWorkspace_w')
+                .addClass('RoCodeAddButtonWorkspace_w')
                 .bindOnClick(function() {
-                    Entry.do('addObjectButtonClick');
+                    RoCode.do('addObjectButtonClick');
                     this.blur();
                 })
                 .appendTo(this.buttonWrapper);
             this.addButton.innerHTML = Lang.Workspace.add_object;
-            if (!Entry.objectAddable) {
-                this.addButton.addClass('entryRemove');
+            if (!RoCode.objectAddable) {
+                this.addButton.addClass('RoCodeRemove');
             }
 
-            this.runButton = Entry.createElement('button')
-                .addClass('entryEngineButtonWorkspace_w')
-                .addClass('entryRunButtonWorkspace_w')
-                .bindOnClick(() => Entry.do('toggleRun', 'runButton'))
+            this.runButton = RoCode.createElement('button')
+                .addClass('RoCodeEngineButtonWorkspace_w')
+                .addClass('RoCodeRunButtonWorkspace_w')
+                .bindOnClick(() => RoCode.do('toggleRun', 'runButton'))
                 .appendTo(this.buttonWrapper);
             this.runButton.innerHTML = Lang.Workspace.run;
 
-            this.runButton2 = Entry.createElement('button')
-                .addClass('entryEngineButtonWorkspace_w')
-                .addClass('entryRunButtonWorkspace_w2')
+            this.runButton2 = RoCode.createElement('button')
+                .addClass('RoCodeEngineButtonWorkspace_w')
+                .addClass('RoCodeRunButtonWorkspace_w2')
                 .appendTo(this.buttonWrapper)
-                .bindOnClick(() => Entry.engine.toggleRun());
+                .bindOnClick(() => RoCode.engine.toggleRun());
 
-            this.pauseButton = Entry.createElement('button')
-                .addClass('entryEngineButtonWorkspace_w')
-                .addClass('entryPauseButtonWorkspace_w')
-                .addClass('entryRemove')
+            this.pauseButton = RoCode.createElement('button')
+                .addClass('RoCodeEngineButtonWorkspace_w')
+                .addClass('RoCodePauseButtonWorkspace_w')
+                .addClass('RoCodeRemove')
                 .appendTo(this.buttonWrapper)
                 .bindOnClick(function(e) {
                     this.blur();
-                    Entry.engine.togglePause();
+                    RoCode.engine.togglePause();
                 });
 
-            this.pauseButtonFull = Entry.createElement('button')
-                .addClass('entryEngineButtonWorkspace_w')
-                .addClass('entryPauseButtonWorkspace_full')
-                .addClass('entryRemove')
+            this.pauseButtonFull = RoCode.createElement('button')
+                .addClass('RoCodeEngineButtonWorkspace_w')
+                .addClass('RoCodePauseButtonWorkspace_full')
+                .addClass('RoCodeRemove')
                 .appendTo(this.buttonWrapper)
                 .bindOnClick(function() {
                     this.blur();
-                    Entry.engine.togglePause();
+                    RoCode.engine.togglePause();
                 });
 
-            this.stopButton = Entry.createElement('button')
-                .addClass('entryEngineButtonWorkspace_w')
-                .addClass('entryStopButtonWorkspace_w')
-                .addClass('entryRemove')
-                .bindOnClick(() => Entry.do('toggleStop', 'stopButton'))
+            this.stopButton = RoCode.createElement('button')
+                .addClass('RoCodeEngineButtonWorkspace_w')
+                .addClass('RoCodeStopButtonWorkspace_w')
+                .addClass('RoCodeRemove')
+                .bindOnClick(() => RoCode.do('toggleStop', 'stopButton'))
                 .appendTo(this.buttonWrapper);
             this.stopButton.innerHTML = Lang.Workspace.stop;
 
-            this.stopButton2 = Entry.createElement('button')
-                .addClass('entryEngineButtonWorkspace_w')
-                .addClass('entryStopButtonWorkspace_w2')
-                .addClass('entryRemove')
+            this.stopButton2 = RoCode.createElement('button')
+                .addClass('RoCodeEngineButtonWorkspace_w')
+                .addClass('RoCodeStopButtonWorkspace_w2')
+                .addClass('RoCodeRemove')
                 .bindOnClick(function() {
                     this.blur();
-                    Entry.engine.toggleStop();
+                    RoCode.engine.toggleStop();
                 })
                 .appendTo(this.buttonWrapper);
             this.stopButton2.innerHTML = Lang.Workspace.stop;
         } else if (option == 'minimize') {
             /** @type {!Element} */
             this.view_ = controlView;
-            this.view_.addClass('entryEngine');
-            this.view_.addClass('entryEngineMinimize');
+            this.view_.addClass('RoCodeEngine');
+            this.view_.addClass('RoCodeEngineMinimize');
 
-            this.maximizeButton = Entry.createElement('button');
-            this.maximizeButton.addClass('entryEngineButtonMinimize');
-            this.maximizeButton.addClass('entryMaximizeButtonMinimize');
+            this.maximizeButton = RoCode.createElement('button');
+            this.maximizeButton.addClass('RoCodeEngineButtonMinimize');
+            this.maximizeButton.addClass('RoCodeMaximizeButtonMinimize');
             this.view_.appendChild(this.maximizeButton);
             this.maximizeButton.bindOnClick((e) => {
-                Entry.engine.toggleFullScreen();
+                RoCode.engine.toggleFullScreen();
             });
 
-            this.coordinateButton = Entry.createElement('button');
-            this.coordinateButton.addClass('entryEngineButtonMinimize');
-            this.coordinateButton.addClass('entryCoordinateButtonMinimize');
+            this.coordinateButton = RoCode.createElement('button');
+            this.coordinateButton.addClass('RoCodeEngineButtonMinimize');
+            this.coordinateButton.addClass('RoCodeCoordinateButtonMinimize');
             this.view_.appendChild(this.coordinateButton);
             this.coordinateButton.bindOnClick(function(e) {
                 if (this.hasClass('toggleOn')) {
@@ -211,36 +211,36 @@ Entry.Engine = class Engine {
                 } else {
                     this.addClass('toggleOn');
                 }
-                Entry.stage.toggleCoordinator();
+                RoCode.stage.toggleCoordinator();
             });
 
-            this.stopButton = Entry.createElement('button');
-            this.stopButton.addClass('entryEngineButtonMinimize');
-            this.stopButton.addClass('entryStopButtonMinimize');
-            this.stopButton.addClass('entryRemove');
+            this.stopButton = RoCode.createElement('button');
+            this.stopButton.addClass('RoCodeEngineButtonMinimize');
+            this.stopButton.addClass('RoCodeStopButtonMinimize');
+            this.stopButton.addClass('RoCodeRemove');
             this.stopButton.innerHTML = Lang.Workspace.stop;
             this.view_.appendChild(this.stopButton);
             this.stopButton.bindOnClick(function(e) {
                 this.blur();
-                Entry.engine.toggleStop();
+                RoCode.engine.toggleStop();
             });
 
-            this.pauseButton = Entry.createElement('button');
+            this.pauseButton = RoCode.createElement('button');
             this.pauseButton.innerHTML = Lang.Workspace.pause;
-            this.pauseButton.addClass('entryEngineButtonMinimize');
-            this.pauseButton.addClass('entryPauseButtonMinimize');
-            this.pauseButton.addClass('entryRemove');
+            this.pauseButton.addClass('RoCodeEngineButtonMinimize');
+            this.pauseButton.addClass('RoCodePauseButtonMinimize');
+            this.pauseButton.addClass('RoCodeRemove');
             this.view_.appendChild(this.pauseButton);
             this.pauseButton.bindOnClick(function(e) {
                 this.blur();
-                Entry.engine.togglePause();
+                RoCode.engine.togglePause();
             });
 
-            this.mouseView = Entry.createElement('div');
-            this.mouseView.addClass('entryMouseViewMinimize');
-            this.mouseView.addClass('entryHide');
+            this.mouseView = RoCode.createElement('div');
+            this.mouseView.addClass('RoCodeMouseViewMinimize');
+            this.mouseView.addClass('RoCodeHide');
 
-            this.mouseViewInput = Entry.createElement('input').appendTo(this.mouseView);
+            this.mouseViewInput = RoCode.createElement('input').appendTo(this.mouseView);
             $(this.mouseViewInput).attr('readonly', 'readonly');
             $(this.mouseViewInput).attr(
                 'style',
@@ -253,78 +253,78 @@ Entry.Engine = class Engine {
                     return;
                 }
                 this.isLoaded = true;
-                const isSoundEmpty = Entry.soundQueue.urls.size < 1;
-                if (isSoundEmpty || Entry.soundQueue.loadComplete) {
-                    this.runButtonCurtain = Entry.Dom('div', {
-                        class: 'entryRunButtonBigMinimizeCurtain',
-                        parent: $('#entryCanvasWrapper'),
+                const isSoundEmpty = RoCode.soundQueue.urls.size < 1;
+                if (isSoundEmpty || RoCode.soundQueue.loadComplete) {
+                    this.runButtonCurtain = RoCode.Dom('div', {
+                        class: 'RoCodeRunButtonBigMinimizeCurtain',
+                        parent: $('#RoCodeCanvasWrapper'),
                     });
-                    this.runButton = Entry.Dom('div', {
-                        class: 'entryRunButtonBigMinimize',
+                    this.runButton = RoCode.Dom('div', {
+                        class: 'RoCodeRunButtonBigMinimize',
                         parent: this.runButtonCurtain,
                     });
-                    this.runButton.bindOnClick(() => Entry.engine.toggleRun());
+                    this.runButton.bindOnClick(() => RoCode.engine.toggleRun());
                 }
             };
 
-            Entry.addEventListener('loadComplete', () => setRunButton(true));
-            Entry.addEventListener('soundLoaded', () => setRunButton(this.isLoaded));
+            RoCode.addEventListener('loadComplete', () => setRunButton(true));
+            RoCode.addEventListener('soundLoaded', () => setRunButton(this.isLoaded));
         } else if (option == 'phone') {
             this.view_ = controlView;
-            this.view_.addClass('entryEngine', 'entryEnginePhone');
+            this.view_.addClass('RoCodeEngine', 'RoCodeEnginePhone');
 
-            this.headerView_ = Entry.createElement('div', 'entryEngineHeader');
-            this.headerView_.addClass('entryEngineHeaderPhone');
+            this.headerView_ = RoCode.createElement('div', 'RoCodeEngineHeader');
+            this.headerView_.addClass('RoCodeEngineHeaderPhone');
             this.view_.appendChild(this.headerView_);
 
-            this.maximizeButton = Entry.createElement('button');
-            this.maximizeButton.addClass('entryEngineButtonPhone', 'entryMaximizeButtonPhone');
+            this.maximizeButton = RoCode.createElement('button');
+            this.maximizeButton.addClass('RoCodeEngineButtonPhone', 'RoCodeMaximizeButtonPhone');
             this.headerView_.appendChild(this.maximizeButton);
             this.maximizeButton.bindOnClick((e) => {
-                Entry.engine.footerView_.addClass('entryRemove');
-                Entry.engine.headerView_.addClass('entryRemove');
-                Entry.launchFullScreen(Entry.engine.view_);
+                RoCode.engine.footerView_.addClass('RoCodeRemove');
+                RoCode.engine.headerView_.addClass('RoCodeRemove');
+                RoCode.launchFullScreen(RoCode.engine.view_);
             });
             document.addEventListener('fullscreenchange', (e) => {
-                Entry.engine.exitFullScreen();
+                RoCode.engine.exitFullScreen();
             });
             document.addEventListener('webkitfullscreenchange', (e) => {
-                Entry.engine.exitFullScreen();
+                RoCode.engine.exitFullScreen();
             });
             document.addEventListener('mozfullscreenchange', (e) => {
-                Entry.engine.exitFullScreen();
+                RoCode.engine.exitFullScreen();
             });
 
-            this.footerView_ = Entry.createElement('div', 'entryEngineFooter');
-            this.footerView_.addClass('entryEngineFooterPhone');
+            this.footerView_ = RoCode.createElement('div', 'RoCodeEngineFooter');
+            this.footerView_.addClass('RoCodeEngineFooterPhone');
             this.view_.appendChild(this.footerView_);
 
-            this.runButton = Entry.createElement('button');
-            this.runButton.addClass('entryEngineButtonPhone', 'entryRunButtonPhone');
-            if (Entry.objectAddable) {
+            this.runButton = RoCode.createElement('button');
+            this.runButton.addClass('RoCodeEngineButtonPhone', 'RoCodeRunButtonPhone');
+            if (RoCode.objectAddable) {
                 this.runButton.addClass('small');
             }
             this.runButton.innerHTML = Lang.Workspace.run;
 
             this.footerView_.appendChild(this.runButton);
             this.runButton.bindOnClick((e) => {
-                Entry.engine.toggleRun();
+                RoCode.engine.toggleRun();
             });
 
-            this.stopButton = Entry.createElement('button');
+            this.stopButton = RoCode.createElement('button');
             this.stopButton.addClass(
-                'entryEngineButtonPhone',
-                'entryStopButtonPhone',
-                'entryRemove'
+                'RoCodeEngineButtonPhone',
+                'RoCodeStopButtonPhone',
+                'RoCodeRemove'
             );
-            if (Entry.objectAddable) {
+            if (RoCode.objectAddable) {
                 this.stopButton.addClass('small');
             }
             this.stopButton.innerHTML = Lang.Workspace.stop;
 
             this.footerView_.appendChild(this.stopButton);
             this.stopButton.bindOnClick((e) => {
-                Entry.engine.toggleStop();
+                RoCode.engine.toggleStop();
             });
         }
     }
@@ -336,42 +336,42 @@ Entry.Engine = class Engine {
             delete this.audioShadePanel_;
         } else {
             this.audioShadePanelOn = true;
-            this.audioShadePanel_ = Entry.createElement('div', 'audioShadeCirclebox');
+            this.audioShadePanel_ = RoCode.createElement('div', 'audioShadeCirclebox');
             this.audioShadePanel_.addClass('audioShadeCirclebox');
-            const audioShadeMainCircle = Entry.createElement('div', 'audioShadeCircle').addClass(
+            const audioShadeMainCircle = RoCode.createElement('div', 'audioShadeCircle').addClass(
                 'audioShadeCircle'
             );
             audioShadeMainCircle.appendChild(
-                Entry.createElement('div', 'audioShadeInner').addClass('audioShadeInner')
+                RoCode.createElement('div', 'audioShadeInner').addClass('audioShadeInner')
             );
             audioShadeMainCircle.appendChild(
-                Entry.createElement('div', 'audioShadeInner').addClass('audioShadeInner')
+                RoCode.createElement('div', 'audioShadeInner').addClass('audioShadeInner')
             );
             audioShadeMainCircle.appendChild(
-                Entry.createElement('div', 'audioShadeInner').addClass('audioShadeInner')
+                RoCode.createElement('div', 'audioShadeInner').addClass('audioShadeInner')
             );
             this.audioShadePanel_.appendChild(audioShadeMainCircle);
-            const micImage = Entry.createElement('img', 'audioShadeImg').addClass('audioShadeImg');
-            micImage.src = `${Entry.mediaFilePath}ic-audio-sensing-mic.svg`;
+            const micImage = RoCode.createElement('img', 'audioShadeImg').addClass('audioShadeImg');
+            micImage.src = `${RoCode.mediaFilePath}ic-audio-sensing-mic.svg`;
             audioShadeMainCircle.appendChild(micImage);
 
-            const audioShadeText = Entry.createElement('div', 'audioShadeText').addClass(
+            const audioShadeText = RoCode.createElement('div', 'audioShadeText').addClass(
                 'audioShadeText'
             );
             audioShadeText.innerHTML = Lang.Msgs.ai_utilize_audio_listening;
             this.audioShadePanel_.appendChild(audioShadeText);
-            this.minimizedView_ = document.querySelector('#entryCanvasWrapper');
-            if (this.view_.classList[0] === 'entryEngine') {
-                this.minimizedView_.insertBefore(this.audioShadePanel_, Entry.stage.canvas.canvas);
+            this.minimizedView_ = document.querySelector('#RoCodeCanvasWrapper');
+            if (this.view_.classList[0] === 'RoCodeEngine') {
+                this.minimizedView_.insertBefore(this.audioShadePanel_, RoCode.stage.canvas.canvas);
             } else {
-                this.view_.insertBefore(this.audioShadePanel_, Entry.stage.canvas.canvas);
+                this.view_.insertBefore(this.audioShadePanel_, RoCode.stage.canvas.canvas);
             }
         }
     }
 
     toggleAudioProgressPanel() {
         if (this.audioShadePanelOn) {
-            Entry.engine.toggleAudioShadePanel();
+            RoCode.engine.toggleAudioShadePanel();
         }
         if (this.audioProgressPanelOn) {
             this.audioProgressPanelOn = false;
@@ -379,13 +379,13 @@ Entry.Engine = class Engine {
             delete this.audioProgressPanel_;
         } else {
             this.audioProgressPanelOn = true;
-            this.audioProgressPanel_ = Entry.createElement('div', 'audioShadeCirclebox');
+            this.audioProgressPanel_ = RoCode.createElement('div', 'audioShadeCirclebox');
             this.audioProgressPanel_.addClass('audioShadeCirclebox');
-            const audioShadeMainCircle = Entry.createElement('div', 'audioShadeCircle').addClass(
+            const audioShadeMainCircle = RoCode.createElement('div', 'audioShadeCircle').addClass(
                 'audioShadeCircle'
             );
 
-            const audioProgressSpinner = Entry.createElement(
+            const audioProgressSpinner = RoCode.createElement(
                 'canvas',
                 'audioProgressCanvas'
             ).addClass('audioProgress');
@@ -429,16 +429,16 @@ Entry.Engine = class Engine {
 
             this.audioProgressPanel_.appendChild(audioShadeMainCircle);
 
-            // const audioShadeText = Entry.createElement('div', 'audioShadeText').addClass(
+            // const audioShadeText = RoCode.createElement('div', 'audioShadeText').addClass(
             //     'audioShadeText'
             // );
             // audioShadeText.innerHTML = '진행중이에요';
             // this.audioProgressPanel_.appendChild(audioShadeText);
-            this.minimizedView_ = document.querySelector('#entryCanvasWrapper');
-            if (this.view_.classList[0] === 'entryEngine') {
-                this.minimizedView_.insertBefore(this.audioShadePanel_, Entry.stage.canvas.canvas);
+            this.minimizedView_ = document.querySelector('#RoCodeCanvasWrapper');
+            if (this.view_.classList[0] === 'RoCodeEngine') {
+                this.minimizedView_.insertBefore(this.audioShadePanel_, RoCode.stage.canvas.canvas);
             } else {
-                this.view_.insertBefore(this.audioProgressPanel_, Entry.stage.canvas.canvas);
+                this.view_.insertBefore(this.audioProgressPanel_, RoCode.stage.canvas.canvas);
             }
         }
     }
@@ -475,19 +475,19 @@ Entry.Engine = class Engine {
             this.speedPanelOn = true;
             this.speedButton.addClass('on');
 
-            const speedBox = Entry.createElement('div', 'entrySpeedBox');
-            speedBox.addClass('entrySpeedBox');
-            this.view_.insertBefore(speedBox, Entry.stage.canvas.canvas);
+            const speedBox = RoCode.createElement('div', 'RoCodeSpeedBox');
+            speedBox.addClass('RoCodeSpeedBox');
+            this.view_.insertBefore(speedBox, RoCode.stage.canvas.canvas);
 
-            this.speedLabel_ = Entry.createElement('div', 'entrySpeedLabelWorkspace');
+            this.speedLabel_ = RoCode.createElement('div', 'RoCodeSpeedLabelWorkspace');
             this.speedLabel_.innerHTML = Lang.Workspace.speed;
             speedBox.appendChild(this.speedLabel_);
 
-            this.speedProgress_ = Entry.createElement('table', 'entrySpeedProgressWorkspace');
-            const tr = Entry.createElement('tr').appendTo(this.speedProgress_);
+            this.speedProgress_ = RoCode.createElement('table', 'RoCodeSpeedProgressWorkspace');
+            const tr = RoCode.createElement('tr').appendTo(this.speedProgress_);
 
             this.speeds.forEach((speed, i) => {
-                Entry.createElement('td', `progressCell${i}`)
+                RoCode.createElement('td', `progressCell${i}`)
                     .addClass('progressCell')
                     .bindOnClick(() => {
                         this.setSpeedMeter(speed);
@@ -496,7 +496,7 @@ Entry.Engine = class Engine {
             });
 
             speedBox.appendChild(this.speedProgress_);
-            this.setSpeedMeter(Entry.FPS);
+            this.setSpeedMeter(RoCode.FPS);
         }
     }
 
@@ -517,21 +517,21 @@ Entry.Engine = class Engine {
                 }
             });
         }
-        if (Entry.FPS == FPS) {
+        if (RoCode.FPS == FPS) {
             return;
         }
         clearInterval(this.ticker);
-        Entry.tickTime = Math.floor(1000 / FPS);
-        this.ticker = setInterval(this.update, Entry.tickTime);
-        Entry.FPS = FPS;
+        RoCode.tickTime = Math.floor(1000 / FPS);
+        this.ticker = setInterval(this.update, RoCode.tickTime);
+        RoCode.FPS = FPS;
     }
 
     start() {
-        GEHelper.Ticker.setFPS(Entry.FPS);
+        GEHelper.Ticker.setFPS(RoCode.FPS);
 
         if (!this.ticker) {
-            Entry.tickTime = Math.floor(1000 / Entry.FPS);
-            this.ticker = setInterval(this.update, Entry.tickTime);
+            RoCode.tickTime = Math.floor(1000 / RoCode.FPS);
+            this.ticker = setInterval(this.update, RoCode.tickTime);
         }
     }
 
@@ -547,10 +547,10 @@ Entry.Engine = class Engine {
      * 추가로, 하드웨어의 데이터도 업데이트한다.
      */
     update = () => {
-        if (Entry.engine.isState('run')) {
-            Entry.container.mapObjectOnScene(this.computeFunction);
-            if (Entry.hw.communicationType !== 'manual') {
-                Entry.hw.update();
+        if (RoCode.engine.isState('run')) {
+            RoCode.container.mapObjectOnScene(this.computeFunction);
+            if (RoCode.hw.communicationType !== 'manual') {
+                RoCode.hw.update();
             }
         }
     };
@@ -591,21 +591,21 @@ Entry.Engine = class Engine {
             createjs.WebAudioPlugin.playEmptySound();
             this.isSoundInitialized = true;
         }
-        const variableContainer = Entry.variableContainer;
-        const container = Entry.container;
-        const WS = Entry.getMainWS();
+        const variableContainer = RoCode.variableContainer;
+        const container = RoCode.container;
+        const WS = RoCode.getMainWS();
 
-        if (this.state === EntryEngineState.pause) {
+        if (this.state === RoCodeEngineState.pause) {
             return this.togglePause();
         }
 
-        Entry.Utils.blur();
+        RoCode.Utils.blur();
 
         WS && WS.syncCode();
 
-        Entry.addActivity('run');
+        RoCode.addActivity('run');
 
-        if (this.state === EntryEngineState.stop) {
+        if (this.state === RoCodeEngineState.stop) {
             container.mapEntity((entity) => {
                 entity.takeSnapshot();
             });
@@ -619,42 +619,42 @@ Entry.Engine = class Engine {
             container.inputValue.takeSnapshot();
 
             container.takeSequenceSnapshot();
-            Entry.scene.takeStartSceneSnapshot();
-            this.state = EntryEngineState.run;
+            RoCode.scene.takeStartSceneSnapshot();
+            this.state = RoCodeEngineState.run;
             this.fireEvent('start');
             this.achieveEnabled = !(disableAchieve === false);
         }
-        this.state = EntryEngineState.run;
-        if (Entry.type === 'mobile') {
-            this.view_.addClass('entryEngineBlueWorkspace');
+        this.state = RoCodeEngineState.run;
+        if (RoCode.type === 'mobile') {
+            this.view_.addClass('RoCodeEngineBlueWorkspace');
         }
 
         if (this.runButton) {
             this.setPauseButton(this.option);
             this.runButton.addClass('run');
-            this.runButton.addClass('entryRemove');
+            this.runButton.addClass('RoCodeRemove');
             if (this.runButtonCurtain) {
-                this.runButtonCurtain.addClass('entryRemove');
+                this.runButtonCurtain.addClass('RoCodeRemove');
             }
-            this.stopButton.removeClass('entryRemove');
+            this.stopButton.removeClass('RoCodeRemove');
             if (this.addButton) {
-                this.addButton.addClass('entryRemove');
-                if (Entry.objectAddable) {
-                    this.pauseButton.removeClass('entryRemove');
+                this.addButton.addClass('RoCodeRemove');
+                if (RoCode.objectAddable) {
+                    this.pauseButton.removeClass('RoCodeRemove');
                 }
             }
-            if (this.pauseButton && (Entry.type === 'minimize' || Entry.objectAddable)) {
-                this.pauseButton.removeClass('entryRemove');
+            if (this.pauseButton && (RoCode.type === 'minimize' || RoCode.objectAddable)) {
+                this.pauseButton.removeClass('RoCodeRemove');
             }
 
             if (this.runButton2) {
-                this.runButton2.addClass('entryRemove');
+                this.runButton2.addClass('RoCodeRemove');
             }
             if (this.stopButton2) {
-                this.stopButton2.removeClass('entryRemove');
+                this.stopButton2.removeClass('RoCodeRemove');
             }
             if (this.pauseButtonFull) {
-                this.pauseButtonFull.removeClass('entryRemove');
+                this.pauseButtonFull.removeClass('RoCodeRemove');
             }
         }
 
@@ -665,25 +665,25 @@ Entry.Engine = class Engine {
 
         this.setEnableInputField(true);
 
-        this.selectedObject = Entry.stage.selectedObject;
-        Entry.stage.selectObject();
-        Entry.dispatchEvent('run');
+        this.selectedObject = RoCode.stage.selectedObject;
+        RoCode.stage.selectObject();
+        RoCode.dispatchEvent('run');
     }
 
     /**
      * toggle this engine state stop
      */
     async toggleStop() {
-        Entry.dispatchEvent('beforeStop');
+        RoCode.dispatchEvent('beforeStop');
         try {
             await Promise.all(this.execPromises);
         } catch (e) {}
-        const container = Entry.container;
-        const variableContainer = Entry.variableContainer;
+        const container = RoCode.container;
+        const variableContainer = RoCode.variableContainer;
 
-        Entry.Utils.blur();
+        RoCode.Utils.blur();
         audioUtils.stopRecord();
-        Entry.addActivity('stop');
+        RoCode.addActivity('stop');
 
         container.mapEntity((entity) => {
             entity.loadSnapshot();
@@ -704,8 +704,8 @@ Entry.Engine = class Engine {
             variable.loadSnapshot();
         });
         this.stopProjectTimer();
-        if (Entry.timerInstances) {
-            Entry.timerInstances.forEach((instance) => {
+        if (RoCode.timerInstances) {
+            RoCode.timerInstances.forEach((instance) => {
                 instance.destroy();
             });
         }
@@ -713,52 +713,52 @@ Entry.Engine = class Engine {
         container.loadSequenceSnapshot();
         this.projectTimer.loadSnapshot();
         container.inputValue.loadSnapshot();
-        Entry.scene.loadStartSceneSnapshot();
-        Entry.Func.clearThreads();
-        Entry.Utils.setVolume(1);
+        RoCode.scene.loadStartSceneSnapshot();
+        RoCode.Func.clearThreads();
+        RoCode.Utils.setVolume(1);
         createjs.Sound.setVolume(1);
         createjs.Sound.stop();
-        Entry.soundInstances = [];
-        Entry.targetChecker && Entry.targetChecker.clearListener();
+        RoCode.soundInstances = [];
+        RoCode.targetChecker && RoCode.targetChecker.clearListener();
 
-        this.view_.removeClass('entryEngineBlueWorkspace');
+        this.view_.removeClass('RoCodeEngineBlueWorkspace');
         if (this.runButton) {
-            this.runButton.removeClass('entryRemove');
+            this.runButton.removeClass('RoCodeRemove');
             if (this.runButtonCurtain) {
-                this.runButtonCurtain.removeClass('entryRemove');
+                this.runButtonCurtain.removeClass('RoCodeRemove');
             }
-            this.stopButton.addClass('entryRemove');
+            this.stopButton.addClass('RoCodeRemove');
             if (this.pauseButton) {
-                this.pauseButton.addClass('entryRemove');
+                this.pauseButton.addClass('RoCodeRemove');
             }
             if (this.pauseButtonFull) {
-                this.pauseButtonFull.addClass('entryRemove');
+                this.pauseButtonFull.addClass('RoCodeRemove');
             }
-            if (this.addButton && Entry.objectAddable) {
-                this.addButton.removeClass('entryRemove');
+            if (this.addButton && RoCode.objectAddable) {
+                this.addButton.removeClass('RoCodeRemove');
             }
 
             if (this.runButton2) {
-                this.runButton2.removeClass('entryRemove');
+                this.runButton2.removeClass('RoCodeRemove');
             }
             if (this.stopButton2) {
-                this.stopButton2.addClass('entryRemove');
+                this.stopButton2.addClass('RoCodeRemove');
             }
         }
 
-        this.state = EntryEngineState.stop;
+        this.state = RoCodeEngineState.stop;
         this.setEnableInputField(false);
-        Entry.dispatchEvent('stop');
-        Entry.stage.hideInputField();
+        RoCode.dispatchEvent('stop');
+        RoCode.stage.hideInputField();
         (function(w) {
-            w && w.getMode() === Entry.Workspace.MODE_VIMBOARD && w.codeToText();
-        })(Entry.getMainWS());
-        Entry.dispatchEvent('dispatchEventDidToggleStop');
-        Entry.stage.selectObject(this.selectedObject);
+            w && w.getMode() === RoCode.Workspace.MODE_VIMBOARD && w.codeToText();
+        })(RoCode.getMainWS());
+        RoCode.dispatchEvent('dispatchEventDidToggleStop');
+        RoCode.stage.selectObject(this.selectedObject);
     }
 
     setEnableInputField(on) {
-        const inputField = Entry.stage.inputField;
+        const inputField = RoCode.stage.inputField;
         if (inputField) {
             inputField._readonly = !on;
             if (!inputField._isHidden) {
@@ -771,8 +771,8 @@ Entry.Engine = class Engine {
      * toggle this engine state pause
      */
     togglePause({ visible = true } = {}) {
-        const timer = Entry.engine.projectTimer;
-        if (this.state === EntryEngineState.pause) {
+        const timer = RoCode.engine.projectTimer;
+        if (this.state === RoCodeEngineState.pause) {
             this.setEnableInputField(true);
             timer.pausedTime += new Date().getTime() - timer.pauseStart;
             if (timer.isPaused) {
@@ -780,27 +780,27 @@ Entry.Engine = class Engine {
             } else {
                 delete timer.pauseStart;
             }
-            this.state = EntryEngineState.run;
-            Entry.Utils.recoverSoundInstances();
+            this.state = RoCodeEngineState.run;
+            RoCode.Utils.recoverSoundInstances();
             if (visible && this.runButton) {
                 this.setPauseButton(this.option);
                 if (this.runButton2) {
-                    this.runButton2.addClass('entryRemove');
+                    this.runButton2.addClass('RoCodeRemove');
                 } else {
-                    this.runButton.addClass('entryRemove');
+                    this.runButton.addClass('RoCodeRemove');
                     if (this.runButtonCurtain) {
-                        this.runButtonCurtain.addClass('entryRemove');
+                        this.runButtonCurtain.addClass('RoCodeRemove');
                     }
                 }
             }
 
-            if (Entry.timerInstances) {
-                Entry.timerInstances.forEach((instance) => {
+            if (RoCode.timerInstances) {
+                RoCode.timerInstances.forEach((instance) => {
                     instance.resume();
                 });
             }
         } else {
-            this.state = EntryEngineState.pause;
+            this.state = RoCodeEngineState.pause;
             this.setEnableInputField(false);
             if (!timer.isPaused) {
                 timer.pauseStart = new Date().getTime();
@@ -808,36 +808,36 @@ Entry.Engine = class Engine {
                 timer.pausedTime += new Date().getTime() - timer.pauseStart;
                 timer.pauseStart = new Date().getTime();
             }
-            Entry.Utils.pauseSoundInstances();
+            RoCode.Utils.pauseSoundInstances();
             if (visible && this.runButton) {
                 this.setPauseButton(this.option);
-                this.stopButton.removeClass('entryRemove');
+                this.stopButton.removeClass('RoCodeRemove');
                 if (this.runButton2) {
-                    this.runButton2.removeClass('entryRemove');
+                    this.runButton2.removeClass('RoCodeRemove');
                 } else {
-                    this.runButton.removeClass('entryRemove');
+                    this.runButton.removeClass('RoCodeRemove');
                     if (this.runButtonCurtain) {
-                        this.runButtonCurtain.removeClass('entryRemove');
+                        this.runButtonCurtain.removeClass('RoCodeRemove');
                     }
                 }
             }
 
-            if (Entry.timerInstances) {
-                Entry.timerInstances.forEach((instance) => {
+            if (RoCode.timerInstances) {
+                RoCode.timerInstances.forEach((instance) => {
                     instance.pause();
                 });
             }
         }
-        Entry.dispatchEvent('dispatchEventDidTogglePause');
+        RoCode.dispatchEvent('dispatchEventDidTogglePause');
     }
 
     setPauseButton() {
-        if (this.state === EntryEngineState.pause) {
+        if (this.state === RoCodeEngineState.pause) {
             if (this.pauseButton) {
                 this.pauseButton.innerHTML = Lang.Workspace.restart;
                 if (this.option !== 'minimize') {
-                    this.pauseButton.removeClass('entryPauseButtonWorkspace_w');
-                    this.pauseButton.addClass('entryRestartButtonWorkspace_w');
+                    this.pauseButton.removeClass('RoCodePauseButtonWorkspace_w');
+                    this.pauseButton.addClass('RoCodeRestartButtonWorkspace_w');
                 }
             }
             if (this.pauseButtonFull) {
@@ -845,26 +845,26 @@ Entry.Engine = class Engine {
                 if (this.option !== 'minimize') {
                     // workspace && buttonWrapper check
                     if (this.buttonWrapper) {
-                        this.pauseButtonFull.addClass('entryPauseButtonWorkspace_full');
+                        this.pauseButtonFull.addClass('RoCodePauseButtonWorkspace_full');
                     } else {
-                        this.pauseButtonFull.removeClass('entryPauseButtonWorkspace_full');
+                        this.pauseButtonFull.removeClass('RoCodePauseButtonWorkspace_full');
                     }
-                    this.pauseButtonFull.addClass('entryRestartButtonWorkspace_full');
+                    this.pauseButtonFull.addClass('RoCodeRestartButtonWorkspace_full');
                 }
             }
         } else {
             if (this.pauseButton) {
                 this.pauseButton.innerHTML = Lang.Workspace.pause;
                 if (this.option !== 'minimize') {
-                    this.pauseButton.addClass('entryPauseButtonWorkspace_w');
-                    this.pauseButton.removeClass('entryRestartButtonWorkspace_w');
+                    this.pauseButton.addClass('RoCodePauseButtonWorkspace_w');
+                    this.pauseButton.removeClass('RoCodeRestartButtonWorkspace_w');
                 }
             }
             if (this.pauseButtonFull) {
                 this.pauseButtonFull.innerHTML = Lang.Workspace.pause;
                 if (this.option !== 'minimize') {
-                    this.pauseButtonFull.addClass('entryPauseButtonWorkspace_full');
-                    this.pauseButtonFull.removeClass('entryRestartButtonWorkspace_full');
+                    this.pauseButtonFull.addClass('RoCodePauseButtonWorkspace_full');
+                    this.pauseButtonFull.removeClass('RoCodeRestartButtonWorkspace_full');
                 }
             }
         }
@@ -874,15 +874,15 @@ Entry.Engine = class Engine {
      * @param {string} eventName
      */
     fireEvent(eventName) {
-        if (this.state !== EntryEngineState.run) {
+        if (this.state !== RoCodeEngineState.run) {
             return;
         }
-        Entry.container.mapEntityIncludeCloneOnScene(this.raiseEvent, eventName);
+        RoCode.container.mapEntityIncludeCloneOnScene(this.raiseEvent, eventName);
     }
 
     /**
      * this is callback function for map.
-     * @param {Entry.EntryObject} object
+     * @param {RoCode.RoCodeObject} object
      * @param {string} eventName
      */
     raiseEvent = (entity, eventName) => {
@@ -891,11 +891,11 @@ Entry.Engine = class Engine {
 
     /**
      * @param {string} eventName
-     * @param {Entry.EntityObject} entity
+     * @param {RoCode.EntityObject} entity
      */
     fireEventOnEntity(eventName, entity) {
-        if (this.state === EntryEngineState.run) {
-            Entry.container.mapEntityIncludeCloneOnScene(this.raiseEventOnEntity, [
+        if (this.state === RoCodeEngineState.run) {
+            RoCode.container.mapEntityIncludeCloneOnScene(this.raiseEventOnEntity, [
                 entity,
                 eventName,
             ]);
@@ -904,7 +904,7 @@ Entry.Engine = class Engine {
 
     /**
      * this is callback function for map.
-     * @param {Entry.EntryObject} object
+     * @param {RoCode.RoCodeObject} object
      * @param {Array} param
      */
     raiseEventOnEntity(entity, param) {
@@ -920,13 +920,13 @@ Entry.Engine = class Engine {
      * @param {boolean} isForce
      */
     captureKeyEvent(e, isForce) {
-        const keyCode = Entry.Utils.inputToKeycode(e);
+        const keyCode = RoCode.Utils.inputToKeycode(e);
         if (!keyCode) {
             return;
         }
-        const isWorkspace = Entry.type === 'workspace';
+        const isWorkspace = RoCode.type === 'workspace';
 
-        if (Entry.Utils.isInInput(e) && !isForce) {
+        if (RoCode.Utils.isInInput(e) && !isForce) {
             return;
         }
 
@@ -934,25 +934,25 @@ Entry.Engine = class Engine {
         if (keyCode !== 17 && e.ctrlKey && isWorkspace) {
             if (keyCode === 83) {
                 e.preventDefault();
-                Entry.dispatchEvent(e.shiftKey ? 'saveAsWorkspace' : 'saveWorkspace');
+                RoCode.dispatchEvent(e.shiftKey ? 'saveAsWorkspace' : 'saveWorkspace');
             } else if (keyCode === 82) {
                 e.preventDefault();
-                Entry.engine.run();
+                RoCode.engine.run();
             } else if (keyCode === 90) {
                 e.preventDefault();
-                Entry.dispatchEvent(e.shiftKey ? 'redo' : 'undo');
+                RoCode.dispatchEvent(e.shiftKey ? 'redo' : 'undo');
             }
-        } else if (Entry.engine.isState('run')) {
+        } else if (RoCode.engine.isState('run')) {
             e.preventDefault && e.preventDefault();
-            Entry.container.mapEntityIncludeCloneOnScene(Entry.engine.raiseKeyEvent, [
+            RoCode.container.mapEntityIncludeCloneOnScene(RoCode.engine.raiseKeyEvent, [
                 'keyPress',
                 keyCode,
             ]);
         }
 
-        if (Entry.engine.isState('stop')) {
+        if (RoCode.engine.isState('stop')) {
             if (isWorkspace && keyCode >= 37 && keyCode <= 40) {
-                Entry.stage.moveSprite(e);
+                RoCode.stage.moveSprite(e);
             }
         }
     }
@@ -962,39 +962,39 @@ Entry.Engine = class Engine {
     }
 
     updateMouseView() {
-        const { x, y } = Entry.stage.mouseCoordinate;
+        const { x, y } = RoCode.stage.mouseCoordinate;
         this.mouseViewInput.value = `X : ${x}, Y : ${y}`;
-        this.mouseView.removeClass('entryHide');
+        this.mouseView.removeClass('RoCodeHide');
     }
 
     hideMouseView() {
-        this.mouseView.addClass('entryHide');
+        this.mouseView.addClass('RoCodeHide');
     }
 
     toggleFullScreen(popupClassName) {
         if (!this.popup) {
-            this.popup = new Entry.Popup(popupClassName);
-            if (Entry.engine.speedPanelOn) {
-                Entry.engine.toggleSpeedPanel();
+            this.popup = new RoCode.Popup(popupClassName);
+            if (RoCode.engine.speedPanelOn) {
+                RoCode.engine.toggleSpeedPanel();
             }
-            if (Entry.type !== 'workspace') {
+            if (RoCode.type !== 'workspace') {
                 const $doc = $(document);
                 const body = $(this.popup.body_);
                 body.css('top', $doc.scrollTop());
                 $('body').css('overflow', 'hidden');
 
-                popup.window_.appendChild(Entry.stage.canvas.canvas);
-                popup.window_.appendChild(Entry.engine.runButton[0]);
+                popup.window_.appendChild(RoCode.stage.canvas.canvas);
+                popup.window_.appendChild(RoCode.engine.runButton[0]);
             }
-            popup.window_.appendChild(Entry.engine.view_);
-            if (Entry.type === 'workspace' && Entry.targetChecker) {
-                popup.window_.appendChild(Entry.targetChecker.getStatusView()[0]);
+            popup.window_.appendChild(RoCode.engine.view_);
+            if (RoCode.type === 'workspace' && RoCode.targetChecker) {
+                popup.window_.appendChild(RoCode.targetChecker.getStatusView()[0]);
             }
         } else {
             this.popup.remove();
             this.popup = null;
         }
-        Entry.windowResized.notify();
+        RoCode.windowResized.notify();
     }
 
     closeFullScreen() {
@@ -1003,20 +1003,20 @@ Entry.Engine = class Engine {
             this.popup = null;
         }
 
-        Entry.windowResized.notify();
+        RoCode.windowResized.notify();
     }
 
     exitFullScreen() {
         if (document.webkitIsFullScreen || document.mozIsFullScreen || document.isFullScreen) {
         } else {
-            Entry.engine.footerView_.removeClass('entryRemove');
-            Entry.engine.headerView_.removeClass('entryRemove');
+            RoCode.engine.footerView_.removeClass('RoCodeRemove');
+            RoCode.engine.headerView_.removeClass('RoCodeRemove');
         }
-        Entry.windowResized.notify();
+        RoCode.windowResized.notify();
     }
 
     showProjectTimer() {
-        const timer = Entry.engine.projectTimer;
+        const timer = RoCode.engine.projectTimer;
         if (!timer) {
             return;
         }
@@ -1028,7 +1028,7 @@ Entry.Engine = class Engine {
         if (!timer || !timer.isVisible() || this.isState('run')) {
             return;
         }
-        const objects = Entry.container.getAllObjects();
+        const objects = RoCode.container.getAllObjects();
 
         const timerTypes = [
             'get_project_timer_value',
@@ -1072,7 +1072,7 @@ Entry.Engine = class Engine {
         timer.isPaused = false;
         timer.pausedTime = 0;
         timer.tick = setInterval((e) => {
-            Entry.engine.updateProjectTimer();
+            RoCode.engine.updateProjectTimer();
         }, 1000 / 60);
     }
 
@@ -1112,7 +1112,7 @@ Entry.Engine = class Engine {
     }
 
     updateProjectTimer(value) {
-        const engine = Entry.engine;
+        const engine = RoCode.engine;
         const timer = engine.projectTimer;
         if (!timer) {
             return;
@@ -1132,8 +1132,8 @@ Entry.Engine = class Engine {
     }
 
     raiseMessage(value) {
-        Entry.message.notify(Entry.variableContainer.getMessage(value));
-        return Entry.container.mapEntityIncludeCloneOnScene(this.raiseKeyEvent, [
+        RoCode.message.notify(RoCode.variableContainer.getMessage(value));
+        return RoCode.container.mapEntityIncludeCloneOnScene(this.raiseKeyEvent, [
             'when_message_cast',
             value,
         ]);
@@ -1154,14 +1154,14 @@ Entry.Engine = class Engine {
     }
 
     attachKeyboardCapture() {
-        if (Entry.keyPressed) {
+        if (RoCode.keyPressed) {
             this._keyboardEvent && this.detachKeyboardCapture();
-            this._keyboardEvent = Entry.keyPressed.attach(this, this.captureKeyEvent);
+            this._keyboardEvent = RoCode.keyPressed.attach(this, this.captureKeyEvent);
         }
     }
 
     detachKeyboardCapture() {
-        if (Entry.keyPressed && this._keyboardEvent) {
+        if (RoCode.keyPressed && this._keyboardEvent) {
             this._keyboardEvent.destroy();
             delete this._keyboardEvent;
         }
@@ -1170,14 +1170,14 @@ Entry.Engine = class Engine {
     applyOption() {
         const SMALL = 'small';
 
-        if (Entry.objectAddable) {
+        if (RoCode.objectAddable) {
             this.runButton.addClass(SMALL);
             this.stopButton.addClass(SMALL);
-            this.addButton.removeClass('entryRemove');
+            this.addButton.removeClass('RoCodeRemove');
         } else {
             this.runButton.removeClass(SMALL);
             this.stopButton.removeClass(SMALL);
-            this.addButton.addClass('entryRemove');
+            this.addButton.addClass('RoCodeRemove');
         }
     }
 
@@ -1195,19 +1195,19 @@ Entry.Engine = class Engine {
         promises.forEach((promise, i) => {
             const execPromise = (async function() {
                 const result = await promise;
-                const j = Entry.engine.execPromises.indexOf(execPromise);
-                Entry.engine.execPromises[j] = result;
+                const j = RoCode.engine.execPromises.indexOf(execPromise);
+                RoCode.engine.execPromises[j] = result;
             })();
             this.execPromises[index + i] = execPromise;
         });
     }
 };
 
-Entry.Engine.computeThread = function(entity, script) {
-    Entry.engine.isContinue = true;
+RoCode.Engine.computeThread = function(entity, script) {
+    RoCode.engine.isContinue = true;
     let isSame = false;
-    while (script && Entry.engine.isContinue && !isSame) {
-        Entry.engine.isContinue = !script.isRepeat;
+    while (script && RoCode.engine.isContinue && !isSame) {
+        RoCode.engine.isContinue = !script.isRepeat;
         const newScript = script.run();
         isSame = newScript && newScript === script;
         script = newScript;

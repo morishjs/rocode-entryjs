@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.elio = {
+RoCode.elio = {
     id: '28.1', // 엔트리에서 발급받은 하드웨어 번호를 기술합니다.
     name: 'elio', // isNotFor 속성과 대소문자까지 정확하게 매치되어야 합니다.
     url: 'https://mobilian.biz/#/app/product/elio', // 생략 가능합니다. 엔트리 사이트에서 홍보시 사용됩니다.
@@ -10,16 +10,16 @@ Entry.elio = {
         'en': 'ELIO',
     },
     setZero: function() {
-        var sq = Entry.hw.sendQueue;
-        for (var port in  Entry.Power) {
+        var sq = RoCode.hw.sendQueue;
+        for (var port in  RoCode.Power) {
             sq[port] = 0;
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
 
 };
 
-Entry.Power = {
+RoCode.Power = {
     DC1: 0,
     DC2: 0,
     SV1: 0,
@@ -33,7 +33,7 @@ Entry.Power = {
     IO4: 0,
 };
 
-Entry.elio.getIO = function(data) {
+RoCode.elio.getIO = function(data) {
     if (data == '0') {
         return 'V3';
     } else if (data == '1') {
@@ -49,7 +49,7 @@ Entry.elio.getIO = function(data) {
     }
 };
 
-Entry.elio.getDC = function(data) {
+RoCode.elio.getDC = function(data) {
     if (data == '0') {
         return 'DC1';
     } else if (data == '1') {
@@ -57,7 +57,7 @@ Entry.elio.getDC = function(data) {
     }
 };
 
-Entry.elio.getSV = function(data) {
+RoCode.elio.getSV = function(data) {
     if (data == '0') {
         return 'SV1';
     } else if (data == '1') {
@@ -66,7 +66,7 @@ Entry.elio.getSV = function(data) {
 };
 
 // 언어 적용
-Entry.elio.setLanguage = function() {
+RoCode.elio.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -118,7 +118,7 @@ Entry.elio.setLanguage = function() {
 };
 
 // 엔트리에 등록할 블록들의 블록명 작성
-Entry.elio.blockMenuBlocks = [
+RoCode.elio.blockMenuBlocks = [
     'elio_config_block',
 
     'elio_io_block',
@@ -142,11 +142,11 @@ Entry.elio.blockMenuBlocks = [
 ];
 
 // 블록 생성
-Entry.elio.getBlocks = function() {
+RoCode.elio.getBlocks = function() {
     return {
         elio_config_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             params: [
@@ -158,8 +158,8 @@ Entry.elio.getBlocks = function() {
                         ['ON', '1'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -170,8 +170,8 @@ Entry.elio.getBlocks = function() {
                         ['ON', '1'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
 
@@ -183,8 +183,8 @@ Entry.elio.getBlocks = function() {
                         ['ON', '1'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -212,11 +212,11 @@ Entry.elio.getBlocks = function() {
                 var line1 = script.getStringField('LINE1', script);
                 var line2 = script.getStringField('LINE2', script);
 
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
-                Entry.hw.sendQueue['SONIC'] = sonic;
-                Entry.hw.sendQueue['LINE1'] = line1;
-                Entry.hw.sendQueue['LINE2'] = line2;
+                RoCode.hw.sendQueue['SONIC'] = sonic;
+                RoCode.hw.sendQueue['LINE1'] = line1;
+                RoCode.hw.sendQueue['LINE2'] = line2;
 
                 return script.callReturn();
             },
@@ -224,8 +224,8 @@ Entry.elio.getBlocks = function() {
 
 
         elio_io_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             params: [
@@ -241,8 +241,8 @@ Entry.elio.getBlocks = function() {
                         ['IO4', '5'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -269,17 +269,17 @@ Entry.elio.getBlocks = function() {
             class: 'elio',
             isNotFor: ['elio'],
             func: function(sprite, script) {
-                var io = Entry.elio.getIO(script.getStringField('IO', script));
+                var io = RoCode.elio.getIO(script.getStringField('IO', script));
                 var value = script.getValue('VALUE', script);
-                var sq = Entry.hw.sendQueue;
-                Entry.hw.sendQueue[io] = value;
+                var sq = RoCode.hw.sendQueue;
+                RoCode.hw.sendQueue[io] = value;
                 return script.callReturn();
             },
         },
 
         elio_io_all_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             params: [
@@ -295,8 +295,8 @@ Entry.elio.getBlocks = function() {
                         ['IO4', '5'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -316,8 +316,8 @@ Entry.elio.getBlocks = function() {
                         ['IO4', '5'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -337,8 +337,8 @@ Entry.elio.getBlocks = function() {
                         ['IO4', '5'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -358,8 +358,8 @@ Entry.elio.getBlocks = function() {
                         ['IO4', '5'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -379,8 +379,8 @@ Entry.elio.getBlocks = function() {
                         ['IO4', '5'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -400,8 +400,8 @@ Entry.elio.getBlocks = function() {
                         ['IO4', '5'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -444,32 +444,32 @@ Entry.elio.getBlocks = function() {
             class: 'elio',
             isNotFor: ['elio'],
             func: function(sprite, script) {
-                var io1 = Entry.elio.getIO(script.getStringField('IO1', script));
+                var io1 = RoCode.elio.getIO(script.getStringField('IO1', script));
                 var v1 = script.getValue('V1', script);
 
-                var io2 = Entry.elio.getIO(script.getStringField('IO2', script));
+                var io2 = RoCode.elio.getIO(script.getStringField('IO2', script));
                 var v2 = script.getValue('V2', script);
 
-                var io3 = Entry.elio.getIO(script.getStringField('IO3', script));
+                var io3 = RoCode.elio.getIO(script.getStringField('IO3', script));
                 var v3 = script.getValue('V3', script);
 
-                var io4 = Entry.elio.getIO(script.getStringField('IO4', script));
+                var io4 = RoCode.elio.getIO(script.getStringField('IO4', script));
                 var v4 = script.getValue('V4', script);
 
-                var io5 = Entry.elio.getIO(script.getStringField('IO5', script));
+                var io5 = RoCode.elio.getIO(script.getStringField('IO5', script));
                 var v5 = script.getValue('V5', script);
 
-                var io6 = Entry.elio.getIO(script.getStringField('IO6', script));
+                var io6 = RoCode.elio.getIO(script.getStringField('IO6', script));
                 var v6 = script.getValue('V6', script);
 
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
-                Entry.hw.sendQueue[io1] = v1;
-                Entry.hw.sendQueue[io2] = v2;
-                Entry.hw.sendQueue[io3] = v3;
-                Entry.hw.sendQueue[io4] = v4;
-                Entry.hw.sendQueue[io5] = v5;
-                Entry.hw.sendQueue[io6] = v6;
+                RoCode.hw.sendQueue[io1] = v1;
+                RoCode.hw.sendQueue[io2] = v2;
+                RoCode.hw.sendQueue[io3] = v3;
+                RoCode.hw.sendQueue[io4] = v4;
+                RoCode.hw.sendQueue[io5] = v5;
+                RoCode.hw.sendQueue[io6] = v6;
                 //왜 소스가 반영이 안되지...
                 return script.callReturn();
             },
@@ -477,8 +477,8 @@ Entry.elio.getBlocks = function() {
 
 
         elio_dc_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             params: [
@@ -490,8 +490,8 @@ Entry.elio.getBlocks = function() {
                         ['DC2', '1'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -516,19 +516,19 @@ Entry.elio.getBlocks = function() {
             class: 'elio',
             isNotFor: ['elio'],
             func: function(sprite, script) {
-                var dc1 = Entry.elio.getDC(script.getStringField('DC1', script));
+                var dc1 = RoCode.elio.getDC(script.getStringField('DC1', script));
                 var v1 = script.getValue('V1', script);
 
-                var sq = Entry.hw.sendQueue;
-                Entry.hw.sendQueue[dc1] = v1;
+                var sq = RoCode.hw.sendQueue;
+                RoCode.hw.sendQueue[dc1] = v1;
 
                 return script.callReturn();
             },
         },
 
         elio_dc_all_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             params: [
@@ -540,8 +540,8 @@ Entry.elio.getBlocks = function() {
                         ['DC2', '1'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -557,8 +557,8 @@ Entry.elio.getBlocks = function() {
                         ['DC2', '1'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -587,24 +587,24 @@ Entry.elio.getBlocks = function() {
             isNotFor: ['elio'],
             func: function(sprite, script) {
 
-                var dc1 = Entry.elio.getDC(script.getStringField('DC1', script));
+                var dc1 = RoCode.elio.getDC(script.getStringField('DC1', script));
                 var v1 = script.getValue('V1', script);
 
-                var dc2 = Entry.elio.getDC(script.getStringField('DC2', script));
+                var dc2 = RoCode.elio.getDC(script.getStringField('DC2', script));
                 var v2 = script.getValue('V2', script);
 
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
-                Entry.hw.sendQueue[dc1] = v1;
-                Entry.hw.sendQueue[dc2] = v2;
+                RoCode.hw.sendQueue[dc1] = v1;
+                RoCode.hw.sendQueue[dc2] = v2;
 
                 return script.callReturn();
             },
         },
 
         elio_servo_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             params: [
@@ -616,8 +616,8 @@ Entry.elio.getBlocks = function() {
                         ['방향2', '1'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -643,20 +643,20 @@ Entry.elio.getBlocks = function() {
             isNotFor: ['elio'],
             func: function(sprite, script) {
 
-                var sv1 = Entry.elio.getSV(script.getStringField('SV1', script));
+                var sv1 = RoCode.elio.getSV(script.getStringField('SV1', script));
                 var v1 = script.getValue('V1', script);
 
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
-                Entry.hw.sendQueue[sv1] = v1;
+                RoCode.hw.sendQueue[sv1] = v1;
 
                 return script.callReturn();
             },
         },
 
         elio_servo_all_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             params: [
@@ -668,8 +668,8 @@ Entry.elio.getBlocks = function() {
                         ['방향2', '1'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -685,8 +685,8 @@ Entry.elio.getBlocks = function() {
                         ['방향2', '1'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -714,24 +714,24 @@ Entry.elio.getBlocks = function() {
             class: 'elio',
             isNotFor: ['elio'],
             func: function(sprite, script) {
-                var sv1 = Entry.elio.getSV(script.getStringField('SV1', script));
+                var sv1 = RoCode.elio.getSV(script.getStringField('SV1', script));
                 var v1 = script.getValue('V1', script);
-                var sv2 = Entry.elio.getSV(script.getStringField('SV2', script));
+                var sv2 = RoCode.elio.getSV(script.getStringField('SV2', script));
                 var v2 = script.getValue('V2', script);
 
 
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
-                Entry.hw.sendQueue[sv1] = v1;
-                Entry.hw.sendQueue[sv2] = v2;
+                RoCode.hw.sendQueue[sv1] = v1;
+                RoCode.hw.sendQueue[sv2] = v2;
 
                 return script.callReturn();
             },
         },
 
         elio_all_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             params: [
@@ -743,8 +743,8 @@ Entry.elio.getBlocks = function() {
                         ['모터2', '1'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -760,8 +760,8 @@ Entry.elio.getBlocks = function() {
                         ['모터2', '1'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -777,8 +777,8 @@ Entry.elio.getBlocks = function() {
                         ['방향2', '1'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -794,8 +794,8 @@ Entry.elio.getBlocks = function() {
                         ['방향2', '1'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -816,8 +816,8 @@ Entry.elio.getBlocks = function() {
                         ['IO4', '5'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -837,8 +837,8 @@ Entry.elio.getBlocks = function() {
                         ['IO4', '5'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -858,8 +858,8 @@ Entry.elio.getBlocks = function() {
                         ['IO4', '5'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -879,8 +879,8 @@ Entry.elio.getBlocks = function() {
                         ['IO4', '5'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -900,8 +900,8 @@ Entry.elio.getBlocks = function() {
                         ['IO4', '5'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -921,8 +921,8 @@ Entry.elio.getBlocks = function() {
                         ['IO4', '5'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -989,50 +989,50 @@ Entry.elio.getBlocks = function() {
             class: 'elio',
             isNotFor: ['elio'],
             func: function(sprite, script) {
-                var dc1 = Entry.elio.getSV(script.getStringField('DC1', script));
+                var dc1 = RoCode.elio.getSV(script.getStringField('DC1', script));
                 var dc1_v = script.getValue('DC1_V', script);
 
-                var dc2 = Entry.elio.getSV(script.getStringField('DC2', script));
+                var dc2 = RoCode.elio.getSV(script.getStringField('DC2', script));
                 var dc2_v = script.getValue('DC2_V', script);
 
-                var sv1 = Entry.elio.getSV(script.getStringField('SV1', script));
+                var sv1 = RoCode.elio.getSV(script.getStringField('SV1', script));
                 var sv1_v = script.getValue('SV1_V', script);
 
-                var sv2 = Entry.elio.getSV(script.getStringField('SV2', script));
+                var sv2 = RoCode.elio.getSV(script.getStringField('SV2', script));
                 var sv2_v = script.getValue('SV2_V', script);
 
-                var v3 = Entry.elio.getSV(script.getStringField('V3', script));
+                var v3 = RoCode.elio.getSV(script.getStringField('V3', script));
                 var v3_v = script.getValue('V3_V', script);
 
-                var v5 = Entry.elio.getSV(script.getStringField('V5', script));
+                var v5 = RoCode.elio.getSV(script.getStringField('V5', script));
                 var v5_v = script.getValue('V5_V', script);
 
 
-                var io1 = Entry.elio.getSV(script.getStringField('IO1', script));
+                var io1 = RoCode.elio.getSV(script.getStringField('IO1', script));
                 var io1_v = script.getValue('IO1_V', script);
 
-                var io2 = Entry.elio.getSV(script.getStringField('IO2', script));
+                var io2 = RoCode.elio.getSV(script.getStringField('IO2', script));
                 var io2_v = script.getValue('IO2_V', script);
 
-                var io3 = Entry.elio.getSV(script.getStringField('IO3', script));
+                var io3 = RoCode.elio.getSV(script.getStringField('IO3', script));
                 var io3_v = script.getValue('IO3_V', script);
 
-                var io4 = Entry.elio.getSV(script.getStringField('IO4', script));
+                var io4 = RoCode.elio.getSV(script.getStringField('IO4', script));
                 var io4_v = script.getValue('IO4_V', script);
 
 
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
-                Entry.hw.sendQueue[dc1] = dc1_v;
-                Entry.hw.sendQueue[dc2] = dc2_v;
+                RoCode.hw.sendQueue[dc1] = dc1_v;
+                RoCode.hw.sendQueue[dc2] = dc2_v;
 
-                Entry.hw.sendQueue[sv1] = sv1_v;
-                Entry.hw.sendQueue[sv2] = sv2_v;
+                RoCode.hw.sendQueue[sv1] = sv1_v;
+                RoCode.hw.sendQueue[sv2] = sv2_v;
 
-                Entry.hw.sendQueue[io1] = io1_v;
-                Entry.hw.sendQueue[io2] = io2_v;
-                Entry.hw.sendQueue[io3] = io3_v;
-                Entry.hw.sendQueue[io4] = io4_v;
+                RoCode.hw.sendQueue[io1] = io1_v;
+                RoCode.hw.sendQueue[io2] = io2_v;
+                RoCode.hw.sendQueue[io3] = io3_v;
+                RoCode.hw.sendQueue[io4] = io4_v;
 
 
                 return script.callReturn();
@@ -1040,8 +1040,8 @@ Entry.elio.getBlocks = function() {
         },
 
         elio_dc_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             params: [
@@ -1054,8 +1054,8 @@ Entry.elio.getBlocks = function() {
 
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
 
@@ -1077,15 +1077,15 @@ Entry.elio.getBlocks = function() {
             class: 'elio',
             isNotFor: ['elio'],
             func: function(sprite, script) {
-                var port = Entry.elio.getDC(script.getStringField('VALUE', script));
-                var pd = Entry.hw.portData;
+                var port = RoCode.elio.getDC(script.getStringField('VALUE', script));
+                var pd = RoCode.hw.portData;
                 return pd[port];
             },
         },
 
         elio_servo_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             params: [
@@ -1098,8 +1098,8 @@ Entry.elio.getBlocks = function() {
 
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -1124,15 +1124,15 @@ Entry.elio.getBlocks = function() {
             class: 'elio',
             isNotFor: ['elio'],
             func: function(sprite, script) {
-                var port = Entry.elio.getSV(script.getStringField('VALUE', script));
-                var pd = Entry.hw.portData;
+                var port = RoCode.elio.getSV(script.getStringField('VALUE', script));
+                var pd = RoCode.hw.portData;
                 return pd[port];
             },
         },
 
         elio_io_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             params: [
@@ -1149,8 +1149,8 @@ Entry.elio.getBlocks = function() {
 
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -1175,15 +1175,15 @@ Entry.elio.getBlocks = function() {
             class: 'elio',
             isNotFor: ['elio'],
             func: function(sprite, script) {
-                var port = Entry.elio.getIO(script.getStringField('VALUE', script));
-                var pd = Entry.hw.portData;
+                var port = RoCode.elio.getIO(script.getStringField('VALUE', script));
+                var pd = RoCode.hw.portData;
                 return pd[port];
             },
         },
 
         elio_distance_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             params: [
@@ -1201,14 +1201,14 @@ Entry.elio.getBlocks = function() {
             class: 'elio',
             isNotFor: ['elio'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 return pd['SONIC'];
             },
         },
 
         elio_line1_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             params: [
@@ -1226,15 +1226,15 @@ Entry.elio.getBlocks = function() {
             class: 'elio',
             isNotFor: ['elio'],
             func: function(sprite, script) {
-                //var port = Entry.elio.getDC(script.getStringField('VALUE', script));
-                var pd = Entry.hw.portData;
+                //var port = RoCode.elio.getDC(script.getStringField('VALUE', script));
+                var pd = RoCode.hw.portData;
                 return pd['LINE1'];
             },
         },
 
         elio_line2_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             params: [
@@ -1252,8 +1252,8 @@ Entry.elio.getBlocks = function() {
             class: 'elio',
             isNotFor: ['elio'],
             func: function(sprite, script) {
-                //var port = Entry.elio.getDC(script.getStringField('VALUE', script));
-                var pd = Entry.hw.portData;
+                //var port = RoCode.elio.getDC(script.getStringField('VALUE', script));
+                var pd = RoCode.hw.portData;
                 return pd['LINE2'];
             },
         },
@@ -1261,4 +1261,4 @@ Entry.elio.getBlocks = function() {
 };
 
 // 엔트리에서 하드웨어 블록 클래스를 인식할 수 있도록 내보내기
-module.exports = Entry.elio;
+module.exports = RoCode.elio;

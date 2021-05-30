@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.NeobotPurple = {
+RoCode.NeobotPurple = {
     id: '5.5',
     name: 'neobot_purple',
     url: 'http://www.neobot.co.kr',
@@ -12,10 +12,10 @@ Entry.NeobotPurple = {
     LOCAL_MAP: ['IN1', 'IN2', 'IN3', 'IR', 'BAT'],
     REMOTE_MAP: ['OUT1', 'OUT2', 'OUT3', 'DCR', 'DCL', 'SND', 'FND', 'OPT'],
     setZero: function() {
-        for (var port in Entry.NeobotPurple.REMOTE_MAP) {
-            Entry.hw.sendQueue[Entry.NeobotPurple.REMOTE_MAP[port]] = 0;
+        for (var port in RoCode.NeobotPurple.REMOTE_MAP) {
+            RoCode.hw.sendQueue[RoCode.NeobotPurple.REMOTE_MAP[port]] = 0;
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     monitorTemplate: {
         imgPath: 'hw/neobot_purple.png',
@@ -42,7 +42,7 @@ Entry.NeobotPurple = {
     log_to_console: false,
 };
 
-Entry.NeobotPurple.setLanguage = function() {
+RoCode.NeobotPurple.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -391,7 +391,7 @@ Entry.NeobotPurple.setLanguage = function() {
     };
 };
 
-Entry.NeobotPurple.blockMenuBlocks = [
+RoCode.NeobotPurple.blockMenuBlocks = [
     // sensor
     'neobot_purple_sensor_value',
     'neobot_purple_sensor_convert_scale',
@@ -430,14 +430,14 @@ Entry.NeobotPurple.blockMenuBlocks = [
     'neobot_purple_servo_change_degree',
 ];
 
-Entry.NeobotPurple.getBlocks = function() {
+RoCode.NeobotPurple.getBlocks = function() {
     return {
         /*************************
          * class neobot_purple_sensor
          *************************/
         neobot_purple_sensor_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -453,8 +453,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -469,13 +469,13 @@ Entry.NeobotPurple.getBlocks = function() {
             isNotFor: ['neobot_purple'],
             func: function(sprite, script) {
                 var port = script.getStringField('PORT');
-                return Entry.hw.portData[port];
+                return RoCode.hw.portData[port];
             },
         },
 
         neobot_purple_sensor_convert_scale: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -489,8 +489,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -543,7 +543,7 @@ Entry.NeobotPurple.getBlocks = function() {
             isNotFor: ['neobot_purple'],
             func: function(sprite, script) {
                 var port = script.getStringField('PORT');
-                var value = Entry.hw.portData[port];
+                var value = RoCode.hw.portData[port];
                 var omin = script.getNumberValue('OMIN', script);
                 var omax = script.getNumberValue('OMAX', script);
                 var min = script.getNumberValue('MIN', script);
@@ -575,8 +575,8 @@ Entry.NeobotPurple.getBlocks = function() {
          * class neobot_purple_decision
          *************************/
         neobot_purple_decision_sensor_is_over: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -591,8 +591,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -605,8 +605,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '>',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -628,11 +628,11 @@ Entry.NeobotPurple.getBlocks = function() {
             func: function(sprite, script) {
                 const sensorTemp = script.getStringField('SENSOR');
                 const symbol = script.getStringField('SYMBOL');
-                const value = Entry.parseNumber(script.getStringValue('VALUE'));
+                const value = RoCode.parseNumber(script.getStringValue('VALUE'));
 
                 if (sensorTemp == 'IN12') {
-                    const sensor1 = Entry.hw.portData['IN1'];
-                    const sensor2 = Entry.hw.portData['IN2'];
+                    const sensor1 = RoCode.hw.portData['IN1'];
+                    const sensor2 = RoCode.hw.portData['IN2'];
                     if (symbol == '=') {
                         return sensor1 == value && sensor2 == value;
                     } else if (symbol == '>') {
@@ -645,7 +645,7 @@ Entry.NeobotPurple.getBlocks = function() {
                         return sensor1 <= value && sensor2 <= value;
                     }
                 } else {
-                    const sensor = Entry.hw.portData[sensorTemp];
+                    const sensor = RoCode.hw.portData[sensorTemp];
                     if (symbol == '=') {
                         if (sensor == value) return true;
                         else return false;
@@ -668,8 +668,8 @@ Entry.NeobotPurple.getBlocks = function() {
         },
 
         neobot_purple_decision_equal_with_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -683,8 +683,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -697,8 +697,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -714,7 +714,7 @@ Entry.NeobotPurple.getBlocks = function() {
             isNotFor: ['neobot_purple'],
             func: function(sprite, script) {
                 var sensorTemp = script.getStringField('SENSOR');
-                var sensor = Entry.hw.portData[sensorTemp];
+                var sensor = RoCode.hw.portData[sensorTemp];
                 var color = script.getNumberField('COLOR');
 
                 if (sensor >= 10 && sensor <= 50) {
@@ -738,8 +738,8 @@ Entry.NeobotPurple.getBlocks = function() {
         },
 
         neobot_purple_decision_sensor_angle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#FFFFFF',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -753,8 +753,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -767,8 +767,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '>',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -795,8 +795,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '90',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -813,9 +813,9 @@ Entry.NeobotPurple.getBlocks = function() {
             isNotFor: ['neobot_purple'],
             func: function(sprite, script) {
                 var sensorTemp = script.getStringField('SENSOR');
-                var sensor = Entry.hw.portData[sensorTemp];
+                var sensor = RoCode.hw.portData[sensorTemp];
                 var symbol = script.getStringField('SYMBOL');
-                var value = Entry.parseNumber(script.getStringValue('VALUE'));
+                var value = RoCode.parseNumber(script.getStringValue('VALUE'));
 
                 if (symbol == '=') {
                     if (sensor == value) return true;
@@ -841,8 +841,8 @@ Entry.NeobotPurple.getBlocks = function() {
          * class neobot_purple_remote
          *************************/
         neobot_purple_remote_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#FFFFFF',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -861,8 +861,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '10',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -877,7 +877,7 @@ Entry.NeobotPurple.getBlocks = function() {
             isNotFor: ['neobot_purple'],
             func: function(sprite, script) {
                 var key = script.getNumberField('KEY');
-                var value = Entry.hw.portData['IR'];
+                var value = RoCode.hw.portData['IR'];
                 if (key == value) {
                     return true;
                 } else {
@@ -890,8 +890,8 @@ Entry.NeobotPurple.getBlocks = function() {
          * class neobot_purple_led
          *************************/
         neobot_purple_led_on: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -905,8 +905,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -924,8 +924,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '255',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -964,42 +964,42 @@ Entry.NeobotPurple.getBlocks = function() {
                     const value = script.getNumberField('VALUE', script);
                     const duration = script.getStringValue('DURATION', script);
 
-                    if (Entry.NeobotPurple.log_to_console) {
-                        Entry.console.print('=== neobot_purple_led_on ===', 'speak');
-                        Entry.console.print('port : ' + port, 'speak');
-                        Entry.console.print('brightness : ' + value, 'speak');
-                        Entry.console.print('duration : ' + duration, 'speak');
-                        Entry.console.print('==========================', 'speak');
+                    if (RoCode.NeobotPurple.log_to_console) {
+                        RoCode.console.print('=== neobot_purple_led_on ===', 'speak');
+                        RoCode.console.print('port : ' + port, 'speak');
+                        RoCode.console.print('brightness : ' + value, 'speak');
+                        RoCode.console.print('duration : ' + duration, 'speak');
+                        RoCode.console.print('==========================', 'speak');
                     }
 
-                    if ((duration != '계속' && duration != 'constantly') && Entry.parseNumber(duration) <= 0) {
+                    if ((duration != '계속' && duration != 'constantly') && RoCode.parseNumber(duration) <= 0) {
                         return script.callReturn();
                     }
 
                     if (port == 'ALL') {
-                        Entry.hw.sendQueue['OUT1'] = value;
-                        Entry.hw.sendQueue['OUT2'] = value;
-                        Entry.hw.sendQueue['OUT3'] = value;
+                        RoCode.hw.sendQueue['OUT1'] = value;
+                        RoCode.hw.sendQueue['OUT2'] = value;
+                        RoCode.hw.sendQueue['OUT3'] = value;
                     } else {
-                        Entry.hw.sendQueue[port] = value;
+                        RoCode.hw.sendQueue[port] = value;
                     }
 
                     if (duration == '계속' || duration == 'constantly') {
                         return script.callReturn();
                     }
 
-                    const durationValue = Entry.parseNumber(duration);
+                    const durationValue = RoCode.parseNumber(duration);
                     script.isStart = true;
                     script.timeFlag = 1;
                     setTimeout(function() {
                         if (port == 'ALL') {
-                            Entry.hw.sendQueue['OUT1'] = 0;
-                            Entry.hw.sendQueue['OUT2'] = 0;
-                            Entry.hw.sendQueue['OUT3'] = 0;
+                            RoCode.hw.sendQueue['OUT1'] = 0;
+                            RoCode.hw.sendQueue['OUT2'] = 0;
+                            RoCode.hw.sendQueue['OUT3'] = 0;
                         } else {
-                            Entry.hw.sendQueue[port] = 0;
+                            RoCode.hw.sendQueue[port] = 0;
                         }
-                        if (Entry.NeobotPurple.log_to_console) Entry.console.print('neobot_purple_led_on : 0', 'speak');
+                        if (RoCode.NeobotPurple.log_to_console) RoCode.console.print('neobot_purple_led_on : 0', 'speak');
                         script.timeFlag = 0;
                     }, durationValue * 1000);
                     return script;
@@ -1008,15 +1008,15 @@ Entry.NeobotPurple.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
 
         neobot_purple_output_led_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1030,8 +1030,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1052,26 +1052,26 @@ Entry.NeobotPurple.getBlocks = function() {
             func: function(sprite, script) {
                 const port = script.getStringField('PORT', script);
 
-                if (Entry.NeobotPurple.log_to_console) {
-                    Entry.console.print('=== neobot_purple_output_led_off ===', 'speak');
-                    Entry.console.print('port : ' + port, 'speak');
-                    Entry.console.print('==========================', 'speak');
+                if (RoCode.NeobotPurple.log_to_console) {
+                    RoCode.console.print('=== neobot_purple_output_led_off ===', 'speak');
+                    RoCode.console.print('port : ' + port, 'speak');
+                    RoCode.console.print('==========================', 'speak');
                 }
 
                 if (port == 'ALL') {
-                    Entry.hw.sendQueue['OUT1'] = 0;
-                    Entry.hw.sendQueue['OUT2'] = 0;
-                    Entry.hw.sendQueue['OUT3'] = 0;
+                    RoCode.hw.sendQueue['OUT1'] = 0;
+                    RoCode.hw.sendQueue['OUT2'] = 0;
+                    RoCode.hw.sendQueue['OUT3'] = 0;
                 } else {
-                    Entry.hw.sendQueue[port] = 0;
+                    RoCode.hw.sendQueue[port] = 0;
                 }
                 return script.callReturn();
             },
         },
 
         neobot_purple_led_brightness_with_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1084,8 +1084,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1097,8 +1097,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1120,36 +1120,36 @@ Entry.NeobotPurple.getBlocks = function() {
             func: function(sprite, script) {
                 const inPort = script.getStringField('IN', script);
                 const outPort = script.getStringField('OUT', script);
-                let value = Entry.hw.portData[inPort];
+                let value = RoCode.hw.portData[inPort];
 
                 // edited 210421, IN 값 0~100 을 0~255로 변경, 센서 100 이상은 최대값으로 처리함.
                 value = Math.max(value, 0);
                 value = Math.min(value, 100);
                 value = Math.ceil(value / 100 * 255);
 
-                if (Entry.NeobotPurple.log_to_console) {
-                    Entry.console.print('=== neobot_purple_led_brightness_with_sensor ===', 'speak');
-                    Entry.console.print('out port : ' + outPort, 'speak');
-                    Entry.console.print('in port : ' + inPort, 'speak');
-                    Entry.console.print('sensor value : ' + Entry.hw.portData[inPort], 'speak');
-                    Entry.console.print('output value : ' + value, 'speak');
-                    Entry.console.print('==========================', 'speak');
+                if (RoCode.NeobotPurple.log_to_console) {
+                    RoCode.console.print('=== neobot_purple_led_brightness_with_sensor ===', 'speak');
+                    RoCode.console.print('out port : ' + outPort, 'speak');
+                    RoCode.console.print('in port : ' + inPort, 'speak');
+                    RoCode.console.print('sensor value : ' + RoCode.hw.portData[inPort], 'speak');
+                    RoCode.console.print('output value : ' + value, 'speak');
+                    RoCode.console.print('==========================', 'speak');
                 }
 
                 if (outPort == 'ALL') {
-                    Entry.hw.sendQueue['OUT1'] = value;
-                    Entry.hw.sendQueue['OUT2'] = value;
-                    Entry.hw.sendQueue['OUT3'] = value;
+                    RoCode.hw.sendQueue['OUT1'] = value;
+                    RoCode.hw.sendQueue['OUT2'] = value;
+                    RoCode.hw.sendQueue['OUT3'] = value;
                 } else {
-                    Entry.hw.sendQueue[outPort] = value;
+                    RoCode.hw.sendQueue[outPort] = value;
                 }
                 return script.callReturn();
             },
         },
 
         neobot_purple_color_led_on: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1163,8 +1163,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1239,13 +1239,13 @@ Entry.NeobotPurple.getBlocks = function() {
                     blue = Math.max(blue, 1);
                     blue = Math.min(blue, 251);
 
-                    if (Entry.NeobotPurple.log_to_console) {
-                        Entry.console.print('=== neobot_purple_color_led_on ===', 'speak');
-                        Entry.console.print('port : ' + port, 'speak');
-                        Entry.console.print('red : ' + red, 'speak');
-                        Entry.console.print('green : ' + green, 'speak');
-                        Entry.console.print('blue : ' + blue, 'speak');
-                        Entry.console.print('==========================', 'speak');
+                    if (RoCode.NeobotPurple.log_to_console) {
+                        RoCode.console.print('=== neobot_purple_color_led_on ===', 'speak');
+                        RoCode.console.print('port : ' + port, 'speak');
+                        RoCode.console.print('red : ' + red, 'speak');
+                        RoCode.console.print('green : ' + green, 'speak');
+                        RoCode.console.print('blue : ' + blue, 'speak');
+                        RoCode.console.print('==========================', 'speak');
                     }
 
                     const valRed = 252;
@@ -1256,40 +1256,40 @@ Entry.NeobotPurple.getBlocks = function() {
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    if (out1) Entry.hw.sendQueue['OUT1'] = valRed;
-                    if (out2) Entry.hw.sendQueue['OUT2'] = valRed;
-                    if (out3) Entry.hw.sendQueue['OUT3'] = valRed;
-                    if (Entry.NeobotPurple.log_to_console) Entry.console.print('neobot_purple_color_led_on : ' + valRed, 'speak');
+                    if (out1) RoCode.hw.sendQueue['OUT1'] = valRed;
+                    if (out2) RoCode.hw.sendQueue['OUT2'] = valRed;
+                    if (out3) RoCode.hw.sendQueue['OUT3'] = valRed;
+                    if (RoCode.NeobotPurple.log_to_console) RoCode.console.print('neobot_purple_color_led_on : ' + valRed, 'speak');
                     setTimeout(function() { // set red
-                        if (out1) Entry.hw.sendQueue['OUT1'] = red;
-                        if (out2) Entry.hw.sendQueue['OUT2'] = red;
-                        if (out3) Entry.hw.sendQueue['OUT3'] = red;
-                        if (Entry.NeobotPurple.log_to_console) Entry.console.print('neobot_purple_color_led_on : ' + red, 'speak');
+                        if (out1) RoCode.hw.sendQueue['OUT1'] = red;
+                        if (out2) RoCode.hw.sendQueue['OUT2'] = red;
+                        if (out3) RoCode.hw.sendQueue['OUT3'] = red;
+                        if (RoCode.NeobotPurple.log_to_console) RoCode.console.print('neobot_purple_color_led_on : ' + red, 'speak');
                         setTimeout(function() { // choose green
-                            if (out1) Entry.hw.sendQueue['OUT1'] = valGreen;
-                            if (out2) Entry.hw.sendQueue['OUT2'] = valGreen;
-                            if (out3) Entry.hw.sendQueue['OUT3'] = valGreen;
-                            if (Entry.NeobotPurple.log_to_console) Entry.console.print('neobot_purple_color_led_on : ' + valGreen, 'speak');
+                            if (out1) RoCode.hw.sendQueue['OUT1'] = valGreen;
+                            if (out2) RoCode.hw.sendQueue['OUT2'] = valGreen;
+                            if (out3) RoCode.hw.sendQueue['OUT3'] = valGreen;
+                            if (RoCode.NeobotPurple.log_to_console) RoCode.console.print('neobot_purple_color_led_on : ' + valGreen, 'speak');
                             setTimeout(function() { // set green
-                                if (out1) Entry.hw.sendQueue['OUT1'] = green;
-                                if (out2) Entry.hw.sendQueue['OUT2'] = green;
-                                if (out3) Entry.hw.sendQueue['OUT3'] = green;
-                                if (Entry.NeobotPurple.log_to_console) Entry.console.print('neobot_purple_color_led_on : ' + green, 'speak');
+                                if (out1) RoCode.hw.sendQueue['OUT1'] = green;
+                                if (out2) RoCode.hw.sendQueue['OUT2'] = green;
+                                if (out3) RoCode.hw.sendQueue['OUT3'] = green;
+                                if (RoCode.NeobotPurple.log_to_console) RoCode.console.print('neobot_purple_color_led_on : ' + green, 'speak');
                                 setTimeout(function() { // choose blue
-                                    if (out1) Entry.hw.sendQueue['OUT1'] = valBlue;
-                                    if (out2) Entry.hw.sendQueue['OUT2'] = valBlue;
-                                    if (out3) Entry.hw.sendQueue['OUT3'] = valBlue;
-                                    if (Entry.NeobotPurple.log_to_console) Entry.console.print('neobot_purple_color_led_on : ' + valBlue, 'speak');
+                                    if (out1) RoCode.hw.sendQueue['OUT1'] = valBlue;
+                                    if (out2) RoCode.hw.sendQueue['OUT2'] = valBlue;
+                                    if (out3) RoCode.hw.sendQueue['OUT3'] = valBlue;
+                                    if (RoCode.NeobotPurple.log_to_console) RoCode.console.print('neobot_purple_color_led_on : ' + valBlue, 'speak');
                                     setTimeout(function() { // set blue
-                                        if (out1) Entry.hw.sendQueue['OUT1'] = blue;
-                                        if (out2) Entry.hw.sendQueue['OUT2'] = blue;
-                                        if (out3) Entry.hw.sendQueue['OUT3'] = blue;
-                                        if (Entry.NeobotPurple.log_to_console) Entry.console.print('neobot_purple_color_led_on : ' + blue, 'speak');
+                                        if (out1) RoCode.hw.sendQueue['OUT1'] = blue;
+                                        if (out2) RoCode.hw.sendQueue['OUT2'] = blue;
+                                        if (out3) RoCode.hw.sendQueue['OUT3'] = blue;
+                                        if (RoCode.NeobotPurple.log_to_console) RoCode.console.print('neobot_purple_color_led_on : ' + blue, 'speak');
                                         setTimeout(function() { // accept
-                                            if (out1) Entry.hw.sendQueue['OUT1'] = valAccept;
-                                            if (out2) Entry.hw.sendQueue['OUT2'] = valAccept;
-                                            if (out3) Entry.hw.sendQueue['OUT3'] = valAccept;
-                                            if (Entry.NeobotPurple.log_to_console) Entry.console.print('neobot_purple_color_led_on : ' + valAccept, 'speak');
+                                            if (out1) RoCode.hw.sendQueue['OUT1'] = valAccept;
+                                            if (out2) RoCode.hw.sendQueue['OUT2'] = valAccept;
+                                            if (out3) RoCode.hw.sendQueue['OUT3'] = valAccept;
+                                            if (RoCode.NeobotPurple.log_to_console) RoCode.console.print('neobot_purple_color_led_on : ' + valAccept, 'speak');
                                             setTimeout(function() { // final delay
                                                 script.timeFlag = 0;
                                             }, 200);
@@ -1305,7 +1305,7 @@ Entry.NeobotPurple.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1315,8 +1315,8 @@ Entry.NeobotPurple.getBlocks = function() {
          * class neobot_purple_output
          *************************/
         neobot_purple_set_output: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1330,8 +1330,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1370,19 +1370,19 @@ Entry.NeobotPurple.getBlocks = function() {
                     value = 255;
                 }
 
-                if (Entry.NeobotPurple.log_to_console) {
-                    Entry.console.print('=== neobot_purple_set_output ===', 'speak');
-                    Entry.console.print('port : ' + port, 'speak');
-                    Entry.console.print('value : ' + value, 'speak');
-                    Entry.console.print('==========================', 'speak');
+                if (RoCode.NeobotPurple.log_to_console) {
+                    RoCode.console.print('=== neobot_purple_set_output ===', 'speak');
+                    RoCode.console.print('port : ' + port, 'speak');
+                    RoCode.console.print('value : ' + value, 'speak');
+                    RoCode.console.print('==========================', 'speak');
                 }
 
                 if (port == 'ALL') {
-                    Entry.hw.sendQueue['OUT1'] = value;
-                    Entry.hw.sendQueue['OUT2'] = value;
-                    Entry.hw.sendQueue['OUT3'] = value;
+                    RoCode.hw.sendQueue['OUT1'] = value;
+                    RoCode.hw.sendQueue['OUT2'] = value;
+                    RoCode.hw.sendQueue['OUT3'] = value;
                 } else {
-                    Entry.hw.sendQueue[port] = value;
+                    RoCode.hw.sendQueue[port] = value;
                 }
                 return script.callReturn();
             },
@@ -1392,8 +1392,8 @@ Entry.NeobotPurple.getBlocks = function() {
          * class neobot_purple_motor
          *************************/
         neobot_purple_robot: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1408,8 +1408,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1457,23 +1457,23 @@ Entry.NeobotPurple.getBlocks = function() {
                         break;
                 }
 
-                if (Entry.NeobotPurple.log_to_console) {
-                    Entry.console.print('=== neobot_purple_robot ===', 'speak');
-                    Entry.console.print('move : ' + move, 'speak');
-                    Entry.console.print('left value : ' + leftValue, 'speak');
-                    Entry.console.print('right value : ' + rightValue, 'speak');
-                    Entry.console.print('==========================', 'speak');
+                if (RoCode.NeobotPurple.log_to_console) {
+                    RoCode.console.print('=== neobot_purple_robot ===', 'speak');
+                    RoCode.console.print('move : ' + move, 'speak');
+                    RoCode.console.print('left value : ' + leftValue, 'speak');
+                    RoCode.console.print('right value : ' + rightValue, 'speak');
+                    RoCode.console.print('==========================', 'speak');
                 }
 
-                Entry.hw.sendQueue['DCL'] = leftValue;
-                Entry.hw.sendQueue['DCR'] = rightValue;
+                RoCode.hw.sendQueue['DCL'] = leftValue;
+                RoCode.hw.sendQueue['DCR'] = rightValue;
                 return script.callReturn();
             },
         },
 
         neobot_purple_motor_start: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1486,8 +1486,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1499,8 +1499,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1550,7 +1550,7 @@ Entry.NeobotPurple.getBlocks = function() {
                     const speed = script.getStringValue('SPEED', script);
                     const duration = script.getStringValue('DURATION', script);
 
-                    if (duration != '계속' && duration != 'constantly' && Entry.parseNumber(duration) <= 0) {
+                    if (duration != '계속' && duration != 'constantly' && RoCode.parseNumber(duration) <= 0) {
                         return script.callReturn();
                     }
 
@@ -1583,10 +1583,10 @@ Entry.NeobotPurple.getBlocks = function() {
 
                     // edited 210421, 0~100 을 0~15로 변환, 100 이상은 최대값(15)으로 처리함.
                     let speedValue = 0;
-                    if (Entry.Utils.isNumber(speed)) {
-                        speedValue = Entry.parseNumber(speed);
+                    if (RoCode.Utils.isNumber(speed)) {
+                        speedValue = RoCode.parseNumber(speed);
                     } else {
-                        speedValue = Entry.hw.portData[speed];
+                        speedValue = RoCode.hw.portData[speed];
                     }
                     speedValue = Math.max(speedValue, 0);
                     speedValue = Math.min(speedValue, 100);
@@ -1595,38 +1595,38 @@ Entry.NeobotPurple.getBlocks = function() {
                     const leftOutValue = leftDirectionValue + speedValue;
                     const rightOutValue = rightDirectionValue + speedValue;
 
-                    if (Entry.NeobotPurple.log_to_console) {
-                        Entry.console.print('=== neobot_purple_motor_start ===', 'speak');
-                        Entry.console.print('motor : ' + motor, 'speak');
-                        Entry.console.print('direction : ' + direction, 'speak');
-                        Entry.console.print('speed : ' + speed, 'speak');
-                        Entry.console.print('duration : ' + duration, 'speak');
-                        Entry.console.print('left direction value : ' + leftDirectionValue, 'speak');
-                        Entry.console.print('right direction value : ' + rightDirectionValue, 'speak');
-                        Entry.console.print('speed value : ' + speedValue, 'speak');
-                        Entry.console.print('left output value : ' + leftOutValue, 'speak');
-                        Entry.console.print('right output value : ' + rightOutValue, 'speak');
-                        Entry.console.print('==========================', 'speak');
+                    if (RoCode.NeobotPurple.log_to_console) {
+                        RoCode.console.print('=== neobot_purple_motor_start ===', 'speak');
+                        RoCode.console.print('motor : ' + motor, 'speak');
+                        RoCode.console.print('direction : ' + direction, 'speak');
+                        RoCode.console.print('speed : ' + speed, 'speak');
+                        RoCode.console.print('duration : ' + duration, 'speak');
+                        RoCode.console.print('left direction value : ' + leftDirectionValue, 'speak');
+                        RoCode.console.print('right direction value : ' + rightDirectionValue, 'speak');
+                        RoCode.console.print('speed value : ' + speedValue, 'speak');
+                        RoCode.console.print('left output value : ' + leftOutValue, 'speak');
+                        RoCode.console.print('right output value : ' + rightOutValue, 'speak');
+                        RoCode.console.print('==========================', 'speak');
                     }
 
                     if (moveLeft) {
-                        Entry.hw.sendQueue['DCL'] = leftOutValue;
+                        RoCode.hw.sendQueue['DCL'] = leftOutValue;
                     }
                     if (moveRight) {
-                        Entry.hw.sendQueue['DCR'] = rightOutValue;
+                        RoCode.hw.sendQueue['DCR'] = rightOutValue;
                     }
 
                     if (duration == '계속' || duration == 'constantly') {
                         return script.callReturn();
                     }
 
-                    const durationValue = Entry.parseNumber(duration);
+                    const durationValue = RoCode.parseNumber(duration);
                     script.isStart = true;
                     script.timeFlag = 1;
                     setTimeout(function() {
-                        Entry.hw.sendQueue['DCL'] = 0;
-                        Entry.hw.sendQueue['DCR'] = 0;
-                        if (Entry.NeobotPurple.log_to_console) Entry.console.print('neobot_purple_motor_start : 0', 'speak');
+                        RoCode.hw.sendQueue['DCL'] = 0;
+                        RoCode.hw.sendQueue['DCR'] = 0;
+                        if (RoCode.NeobotPurple.log_to_console) RoCode.console.print('neobot_purple_motor_start : 0', 'speak');
                         script.timeFlag = 0;
                     }, durationValue * 1000);
                     return script;
@@ -1635,15 +1635,15 @@ Entry.NeobotPurple.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
 
         neobot_purple_motor_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1656,8 +1656,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1680,19 +1680,19 @@ Entry.NeobotPurple.getBlocks = function() {
             func: function(sprite, script) {
                 const motor = script.getNumberField('MOTOR');
 
-                if (Entry.NeobotPurple.log_to_console) {
-                    Entry.console.print('=== neobot_purple_motor_stop ===', 'speak');
-                    Entry.console.print('motor : ' + motor, 'speak');
-                    Entry.console.print('==========================', 'speak');
+                if (RoCode.NeobotPurple.log_to_console) {
+                    RoCode.console.print('=== neobot_purple_motor_stop ===', 'speak');
+                    RoCode.console.print('motor : ' + motor, 'speak');
+                    RoCode.console.print('==========================', 'speak');
                 }
 
                 if (motor == 1) {
-                    Entry.hw.sendQueue['DCL'] = 0;
-                    Entry.hw.sendQueue['DCR'] = 0;
+                    RoCode.hw.sendQueue['DCL'] = 0;
+                    RoCode.hw.sendQueue['DCR'] = 0;
                 } else if (motor == 2) {
-                    Entry.hw.sendQueue['DCL'] = 0;
+                    RoCode.hw.sendQueue['DCL'] = 0;
                 } else {
-                    Entry.hw.sendQueue['DCR'] = 0;
+                    RoCode.hw.sendQueue['DCR'] = 0;
                 }
                 return script.callReturn();
             },
@@ -1702,8 +1702,8 @@ Entry.NeobotPurple.getBlocks = function() {
          * class neobot_purple_melody
          *************************/
         neobot_purple_play_note_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1726,8 +1726,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1741,8 +1741,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1754,8 +1754,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1784,22 +1784,22 @@ Entry.NeobotPurple.getBlocks = function() {
 
                     value = Math.min(value, 72);
 
-                    if (Entry.NeobotPurple.log_to_console) {
-                        Entry.console.print('=== neobot_purple_play_note_for ===', 'speak');
-                        Entry.console.print('note : ' + note, 'speak');
-                        Entry.console.print('octave : ' + octave, 'speak');
-                        Entry.console.print('duration : ' + duration, 'speak');
-                        Entry.console.print('value : ' + value, 'speak');
-                        Entry.console.print('==========================', 'speak');
+                    if (RoCode.NeobotPurple.log_to_console) {
+                        RoCode.console.print('=== neobot_purple_play_note_for ===', 'speak');
+                        RoCode.console.print('note : ' + note, 'speak');
+                        RoCode.console.print('octave : ' + octave, 'speak');
+                        RoCode.console.print('duration : ' + duration, 'speak');
+                        RoCode.console.print('value : ' + value, 'speak');
+                        RoCode.console.print('==========================', 'speak');
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SND'] = value;
+                    RoCode.hw.sendQueue['SND'] = value;
                     setTimeout(function() {
-                        Entry.hw.sendQueue['SND'] = 0;
-                        if (Entry.NeobotPurple.log_to_console) Entry.console.print('neobot_purple_play_note_for : 0', 'speak');
+                        RoCode.hw.sendQueue['SND'] = 0;
+                        if (RoCode.NeobotPurple.log_to_console) RoCode.console.print('neobot_purple_play_note_for : 0', 'speak');
                         script.timeFlag = 0;
                     }, 1 / duration * 2000);
                     return script;
@@ -1808,15 +1808,15 @@ Entry.NeobotPurple.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
 
         neobot_purple_melody_play_with_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1829,8 +1829,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1852,28 +1852,28 @@ Entry.NeobotPurple.getBlocks = function() {
             isNotFor: ['neobot_purple'],
             func: function(sprite, script) {
                 const input = script.getStringField('INPUT');
-                let value = Entry.hw.portData[input];
+                let value = RoCode.hw.portData[input];
 
                 // edited 210421, 0~100 을 0~65로 변환, 100 이상은 최대값으로 처리함.
                 value = Math.max(value, 0);
                 value = Math.min(value, 100);
                 value = Math.ceil(value / 100 * 65);
 
-                if (Entry.NeobotPurple.log_to_console) {
-                    Entry.console.print('=== neobot_purple_melody_play_with_sensor ===', 'speak');
-                    Entry.console.print('input : ' + input, 'speak');
-                    Entry.console.print('value : ' + value, 'speak');
-                    Entry.console.print('==========================', 'speak');
+                if (RoCode.NeobotPurple.log_to_console) {
+                    RoCode.console.print('=== neobot_purple_melody_play_with_sensor ===', 'speak');
+                    RoCode.console.print('input : ' + input, 'speak');
+                    RoCode.console.print('value : ' + value, 'speak');
+                    RoCode.console.print('==========================', 'speak');
                 }
 
-                Entry.hw.sendQueue['SND'] = value;
+                RoCode.hw.sendQueue['SND'] = value;
                 return script.callReturn();
             },
         },
 
         neobot_purple_melody_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1894,13 +1894,13 @@ Entry.NeobotPurple.getBlocks = function() {
             class: 'neobot_purple_melody',
             isNotFor: ['neobot_purple'],
             func: function(sprite, script) {
-                if (Entry.NeobotPurple.log_to_console) {
-                    Entry.console.print('=== neobot_purple_melody_stop ===', 'speak');
-                    Entry.console.print('value : 0', 'speak');
-                    Entry.console.print('==========================', 'speak');
+                if (RoCode.NeobotPurple.log_to_console) {
+                    RoCode.console.print('=== neobot_purple_melody_stop ===', 'speak');
+                    RoCode.console.print('value : 0', 'speak');
+                    RoCode.console.print('==========================', 'speak');
                 }
 
-                Entry.hw.sendQueue['SND'] = 0;
+                RoCode.hw.sendQueue['SND'] = 0;
                 return script.callReturn();
             },
         },
@@ -1909,8 +1909,8 @@ Entry.NeobotPurple.getBlocks = function() {
          * class neobot_purple_servo
          *************************/
         neobot_purple_servo_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1924,8 +1924,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1952,10 +1952,10 @@ Entry.NeobotPurple.getBlocks = function() {
                     const resetValue = 186;
                     const initValue = 1;
 
-                    if (Entry.NeobotPurple.log_to_console) {
-                        Entry.console.print('=== neobot_purple_servo_init ===', 'speak');
-                        Entry.console.print('port : ' + port, 'speak');
-                        Entry.console.print('==========================', 'speak');
+                    if (RoCode.NeobotPurple.log_to_console) {
+                        RoCode.console.print('=== neobot_purple_servo_init ===', 'speak');
+                        RoCode.console.print('port : ' + port, 'speak');
+                        RoCode.console.print('==========================', 'speak');
                     }
 
                     let out1 = port == 'OUT1';
@@ -1970,15 +1970,15 @@ Entry.NeobotPurple.getBlocks = function() {
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    if (out1) Entry.hw.sendQueue['OUT1'] = resetValue;
-                    if (out2) Entry.hw.sendQueue['OUT2'] = resetValue;
-                    if (out3) Entry.hw.sendQueue['OUT3'] = resetValue;
-                    if (Entry.NeobotPurple.log_to_console) Entry.console.print('neobot_purple_servo_init : ' + resetValue, 'speak');
+                    if (out1) RoCode.hw.sendQueue['OUT1'] = resetValue;
+                    if (out2) RoCode.hw.sendQueue['OUT2'] = resetValue;
+                    if (out3) RoCode.hw.sendQueue['OUT3'] = resetValue;
+                    if (RoCode.NeobotPurple.log_to_console) RoCode.console.print('neobot_purple_servo_init : ' + resetValue, 'speak');
                     setTimeout(function() {
-                        if (out1) Entry.hw.sendQueue['OUT1'] = initValue;
-                        if (out2) Entry.hw.sendQueue['OUT2'] = initValue;
-                        if (out3) Entry.hw.sendQueue['OUT3'] = initValue;
-                        if (Entry.NeobotPurple.log_to_console) Entry.console.print('neobot_purple_servo_init : ' + initValue, 'speak');
+                        if (out1) RoCode.hw.sendQueue['OUT1'] = initValue;
+                        if (out2) RoCode.hw.sendQueue['OUT2'] = initValue;
+                        if (out3) RoCode.hw.sendQueue['OUT3'] = initValue;
+                        if (RoCode.NeobotPurple.log_to_console) RoCode.console.print('neobot_purple_servo_init : ' + initValue, 'speak');
                         script.timeFlag = 0;
                     }, 200);
 
@@ -1988,15 +1988,15 @@ Entry.NeobotPurple.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
 
         neobot_purple_servo_rotate: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2010,8 +2010,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2021,8 +2021,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2044,8 +2044,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 50,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2080,10 +2080,10 @@ Entry.NeobotPurple.getBlocks = function() {
                     directionValue = 208; // 역방향
                 }
                 let speedValue;
-                if (Entry.Utils.isNumber(speed)) {
-                    speedValue = Entry.parseNumber(speed);
+                if (RoCode.Utils.isNumber(speed)) {
+                    speedValue = RoCode.parseNumber(speed);
                 } else {
-                    speedValue = Entry.hw.portData[speed];
+                    speedValue = RoCode.hw.portData[speed];
                 }
 
                 // edited 210421, 0~100 을 0~10 으로 변환
@@ -2093,30 +2093,30 @@ Entry.NeobotPurple.getBlocks = function() {
 
                 const outValue = directionValue + speedValue;
 
-                if (Entry.NeobotPurple.log_to_console) {
-                    Entry.console.print('=== neobot_purple_servo_rotate ===');
-                    Entry.console.print('port : ' + port, 'speak');
-                    Entry.console.print('direction : ' + direction, 'speak');
-                    Entry.console.print('speed : ' + speed, 'speak');
-                    Entry.console.print('direction value : ' + directionValue, 'speak');
-                    Entry.console.print('speed value : ' + speedValue, 'speak');
-                    Entry.console.print('output value : ' + outValue, 'speak');
-                    Entry.console.print('==========================', 'speak');
+                if (RoCode.NeobotPurple.log_to_console) {
+                    RoCode.console.print('=== neobot_purple_servo_rotate ===');
+                    RoCode.console.print('port : ' + port, 'speak');
+                    RoCode.console.print('direction : ' + direction, 'speak');
+                    RoCode.console.print('speed : ' + speed, 'speak');
+                    RoCode.console.print('direction value : ' + directionValue, 'speak');
+                    RoCode.console.print('speed value : ' + speedValue, 'speak');
+                    RoCode.console.print('output value : ' + outValue, 'speak');
+                    RoCode.console.print('==========================', 'speak');
                 }
 
                 if (port == 'ALL') {
-                    Entry.hw.sendQueue['OUT1'] = outValue;
-                    Entry.hw.sendQueue['OUT2'] = outValue;
-                    Entry.hw.sendQueue['OUT3'] = outValue;
+                    RoCode.hw.sendQueue['OUT1'] = outValue;
+                    RoCode.hw.sendQueue['OUT2'] = outValue;
+                    RoCode.hw.sendQueue['OUT3'] = outValue;
                 } else {
-                    Entry.hw.sendQueue[port] = outValue;
+                    RoCode.hw.sendQueue[port] = outValue;
                 }
                 return script.callReturn();
             },
         },
         neobot_purple_servo_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2130,8 +2130,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2156,27 +2156,27 @@ Entry.NeobotPurple.getBlocks = function() {
                 const port = script.getStringField('PORT', script);
                 let outValue = 254;
 
-                if (Entry.NeobotPurple.log_to_console) {
-                    Entry.console.print('=== neobot_purple_servo_stop ===', 'speak');
-                    Entry.console.print('port : ' + port, 'speak');
-                    Entry.console.print('output value: ' + outValue, 'speak');
-                    Entry.console.print('==========================', 'speak');
+                if (RoCode.NeobotPurple.log_to_console) {
+                    RoCode.console.print('=== neobot_purple_servo_stop ===', 'speak');
+                    RoCode.console.print('port : ' + port, 'speak');
+                    RoCode.console.print('output value: ' + outValue, 'speak');
+                    RoCode.console.print('==========================', 'speak');
                 }
 
                 if (port == 'ALL') {
-                    Entry.hw.sendQueue['OUT1'] = outValue;
-                    Entry.hw.sendQueue['OUT2'] = outValue;
-                    Entry.hw.sendQueue['OUT3'] = outValue;
+                    RoCode.hw.sendQueue['OUT1'] = outValue;
+                    RoCode.hw.sendQueue['OUT2'] = outValue;
+                    RoCode.hw.sendQueue['OUT3'] = outValue;
                 } else {
-                    Entry.hw.sendQueue[port] = outValue;
+                    RoCode.hw.sendQueue[port] = outValue;
                 }
                 return script.callReturn();
             },
         },
 
         neobot_purple_servo_change_degree: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2194,8 +2194,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2205,8 +2205,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2228,8 +2228,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 50,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2281,10 +2281,10 @@ Entry.NeobotPurple.getBlocks = function() {
                     }
 
                     let speedValue;
-                    if (Entry.Utils.isNumber(speed)) {
-                        speedValue = Entry.parseNumber(speed);
+                    if (RoCode.Utils.isNumber(speed)) {
+                        speedValue = RoCode.parseNumber(speed);
                     } else {
-                        speedValue = Entry.hw.portData[speed];
+                        speedValue = RoCode.hw.portData[speed];
                     }
 
                     // edited 210421, 0~100 을 240~250 으로 변환
@@ -2293,11 +2293,11 @@ Entry.NeobotPurple.getBlocks = function() {
                     speedValue = Math.ceil(speedValue / 10) + 240;
 
                     let degreeValue;
-                    if (Entry.Utils.isNumber(degree)) {
-                        degreeValue = Entry.parseNumber(degree);
+                    if (RoCode.Utils.isNumber(degree)) {
+                        degreeValue = RoCode.parseNumber(degree);
                     } else {
                         if (degree == 'IN1' || degree == 'IN2' || degree == 'IN3') {
-                            degreeValue = Entry.hw.portData[degree];
+                            degreeValue = RoCode.hw.portData[degree];
                         } else {
                             degreeValue = 0;
                         }
@@ -2307,36 +2307,36 @@ Entry.NeobotPurple.getBlocks = function() {
                     degreeValue = Math.min(degreeValue, 180);
                     degreeValue = degreeValue + 1;
 
-                    if (Entry.NeobotPurple.log_to_console) {
-                        Entry.console.print('=== neobot_purple_servo_change_degree ===', 'speak');
-                        Entry.console.print('port : ' + port, 'speak');
-                        Entry.console.print('direction : ' + direction, 'speak');
-                        Entry.console.print('speed : ' + speed, 'speak');
-                        Entry.console.print('degree : ' + degree, 'speak');
-                        Entry.console.print('directionValue : ' + directionValue, 'speak');
-                        Entry.console.print('speedValue : ' + speedValue, 'speak');
-                        Entry.console.print('degreeValue : ' + degreeValue, 'speak');
-                        Entry.console.print('==========================', 'speak');
+                    if (RoCode.NeobotPurple.log_to_console) {
+                        RoCode.console.print('=== neobot_purple_servo_change_degree ===', 'speak');
+                        RoCode.console.print('port : ' + port, 'speak');
+                        RoCode.console.print('direction : ' + direction, 'speak');
+                        RoCode.console.print('speed : ' + speed, 'speak');
+                        RoCode.console.print('degree : ' + degree, 'speak');
+                        RoCode.console.print('directionValue : ' + directionValue, 'speak');
+                        RoCode.console.print('speedValue : ' + speedValue, 'speak');
+                        RoCode.console.print('degreeValue : ' + degreeValue, 'speak');
+                        RoCode.console.print('==========================', 'speak');
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
 
                     // direction
-                    if (out1) Entry.hw.sendQueue['OUT1'] = directionValue;
-                    if (out2) Entry.hw.sendQueue['OUT2'] = directionValue;
-                    if (out3) Entry.hw.sendQueue['OUT3'] = directionValue;
-                    if (Entry.NeobotPurple.log_to_console) Entry.console.print('neobot_purple_servo_change_degree : ' + directionValue, 'speak');
+                    if (out1) RoCode.hw.sendQueue['OUT1'] = directionValue;
+                    if (out2) RoCode.hw.sendQueue['OUT2'] = directionValue;
+                    if (out3) RoCode.hw.sendQueue['OUT3'] = directionValue;
+                    if (RoCode.NeobotPurple.log_to_console) RoCode.console.print('neobot_purple_servo_change_degree : ' + directionValue, 'speak');
                     setTimeout(function() { // speed
-                        if (out1) Entry.hw.sendQueue['OUT1'] = speedValue;
-                        if (out2) Entry.hw.sendQueue['OUT2'] = speedValue;
-                        if (out3) Entry.hw.sendQueue['OUT3'] = speedValue;
-                        if (Entry.NeobotPurple.log_to_console) Entry.console.print('neobot_purple_servo_change_degree : ' + speedValue, 'speak');
+                        if (out1) RoCode.hw.sendQueue['OUT1'] = speedValue;
+                        if (out2) RoCode.hw.sendQueue['OUT2'] = speedValue;
+                        if (out3) RoCode.hw.sendQueue['OUT3'] = speedValue;
+                        if (RoCode.NeobotPurple.log_to_console) RoCode.console.print('neobot_purple_servo_change_degree : ' + speedValue, 'speak');
                         setTimeout(function() { // degree
-                            if (out1) Entry.hw.sendQueue['OUT1'] = degreeValue;
-                            if (out2) Entry.hw.sendQueue['OUT2'] = degreeValue;
-                            if (out3) Entry.hw.sendQueue['OUT3'] = degreeValue;
-                            if (Entry.NeobotPurple.log_to_console) Entry.console.print('neobot_purple_servo_change_degree : ' + degreeValue, 'speak');
+                            if (out1) RoCode.hw.sendQueue['OUT1'] = degreeValue;
+                            if (out2) RoCode.hw.sendQueue['OUT2'] = degreeValue;
+                            if (out3) RoCode.hw.sendQueue['OUT3'] = degreeValue;
+                            if (RoCode.NeobotPurple.log_to_console) RoCode.console.print('neobot_purple_servo_change_degree : ' + degreeValue, 'speak');
                             setTimeout(function() { // final delay
                                 script.timeFlag = 0;
                             }, 200);
@@ -2349,7 +2349,7 @@ Entry.NeobotPurple.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2359,8 +2359,8 @@ Entry.NeobotPurple.getBlocks = function() {
          * ARG Blocks
          *****************/
         neobot_purple_arg_led_duration: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -2380,8 +2380,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '계속',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2399,8 +2399,8 @@ Entry.NeobotPurple.getBlocks = function() {
         },
 
         neobot_purple_arg_motor_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -2424,8 +2424,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: 100,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2443,8 +2443,8 @@ Entry.NeobotPurple.getBlocks = function() {
         },
 
         neobot_purple_arg_motor_duration: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -2464,8 +2464,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '계속',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2483,8 +2483,8 @@ Entry.NeobotPurple.getBlocks = function() {
         },
 
         get_servo_degree: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -2534,8 +2534,8 @@ Entry.NeobotPurple.getBlocks = function() {
                     ],
                     value: '90',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2554,4 +2554,4 @@ Entry.NeobotPurple.getBlocks = function() {
     };
 };
 
-module.exports = Entry.NeobotPurple;
+module.exports = RoCode.NeobotPurple;

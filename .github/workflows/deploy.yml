@@ -1,4 +1,4 @@
-name: Entry Build and Deploy
+name: RoCode Build and Deploy
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
               with:
                   node-version: '10.x'
             - uses: bahmutov/npm-install@v1
-            - name: entry build
+            - name: RoCode build
               env:
                   NODE_OPTIONS: '--max-old-space-size=4096'
                   TOOL_NODE_FLAGS: '--max-old-space-size=4096'
@@ -45,7 +45,7 @@ jobs:
               env:
                 github_token: ${{ secrets.GH_TOKEN }}
                 TEST: ${{ secrets.TEST }}
-                TEST2: ${{ secrets.TEST2 }}                
+                TEST2: ${{ secrets.TEST2 }}
               run: |
                   sh ./scripts/deploy_action.sh
             - name: Push Changes into build branch

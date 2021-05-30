@@ -1,4 +1,4 @@
-Entry.skeleton.comment = {
+RoCode.skeleton.comment = {
     executable: false,
     path(blockView) {
         let width = blockView.contentWidth;

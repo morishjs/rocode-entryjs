@@ -1,6 +1,6 @@
 import { BaseTexture, resources } from 'pixi.js';
 
-export class EntryBaseTexture extends BaseTexture {
+export class RoCodeBaseTexture extends BaseTexture {
     private _hasSource: boolean;
 
     updateSource(src: HTMLImageElement | HTMLCanvasElement) {

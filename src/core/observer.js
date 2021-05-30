@@ -1,11 +1,11 @@
 'use strict';
 
 /*
- * Entry Observer object Constructor
+ * RoCode Observer object Constructor
  * @param {object} obj
  */
 
-Entry.Observer = class Observer {
+RoCode.Observer = class Observer {
     constructor(parent, object, funcName, attrs) {
         this.parent = parent;
         this.object = object;

@@ -168,7 +168,7 @@ class _GEHelper extends GEHelperBase {
 
     hitTestMouse(object: any): boolean {
         if (this._isWebGL) {
-            const pixiApp: PIXI.Application = Entry.stage._app;
+            const pixiApp: PIXI.Application = RoCode.stage._app;
             const im = pixiApp.renderer.plugins.interaction;
             const hitObject = im.hitTest(im.mouse.global, object);
             return !!hitObject;
@@ -176,7 +176,7 @@ class _GEHelper extends GEHelperBase {
             if (object.alpha < 0.001) {
                 return false;
             }
-            const stage = Entry.stage.canvas;
+            const stage = RoCode.stage.canvas;
             const pt = object.globalToLocal(stage.mouseX, stage.mouseY);
             return object.hitTest(pt.x, pt.y);
         }
@@ -184,9 +184,9 @@ class _GEHelper extends GEHelperBase {
 
     tickByEngine() {
         if (this._isWebGL) {
-            Entry.stage._app.ticker.start();
+            RoCode.stage._app.ticker.start();
         } else {
-            createjs.Ticker.addEventListener('tick', Entry.stage.canvas);
+            createjs.Ticker.addEventListener('tick', RoCode.stage.canvas);
         }
     }
     // for createJS ONLY issue, #12012
@@ -194,7 +194,7 @@ class _GEHelper extends GEHelperBase {
         if (this._isWebGL) {
             return;
         } else {
-            createjs.Ticker.removeEventListener('tick', Entry.stage.canvas);
+            createjs.Ticker.removeEventListener('tick', RoCode.stage.canvas);
         }
     }
 
@@ -254,7 +254,7 @@ class _GEHelper extends GEHelperBase {
 
     drawVideoElement(videoElement: PIXI.Sprite | createjs.Bitmap): any {
         if (!this.videoContainer) {
-            this.videoContainer = Entry.stage.canvas.getChildAt(2);
+            this.videoContainer = RoCode.stage.canvas.getChildAt(2);
         }
 
         this.videoContainer.addChild(videoElement);
@@ -264,15 +264,15 @@ class _GEHelper extends GEHelperBase {
     drawDetectedGraphic() {
         if (!this.poseIndicatorGraphic) {
             this.poseIndicatorGraphic = this.createNewIndicatorGraphic();
-            Entry.stage.canvas.addChildAt(this.poseIndicatorGraphic, 4);
+            RoCode.stage.canvas.addChildAt(this.poseIndicatorGraphic, 4);
         }
         if (!this.faceIndicatorGraphic) {
             this.faceIndicatorGraphic = this.createNewIndicatorGraphic();
-            Entry.stage.canvas.addChildAt(this.faceIndicatorGraphic, 4);
+            RoCode.stage.canvas.addChildAt(this.faceIndicatorGraphic, 4);
         }
         if (!this.objectIndicatorGraphic) {
             this.objectIndicatorGraphic = this.createNewIndicatorGraphic();
-            Entry.stage.canvas.addChildAt(this.objectIndicatorGraphic, 4);
+            RoCode.stage.canvas.addChildAt(this.objectIndicatorGraphic, 4);
         }
         this.tickByEngine();
     }
@@ -281,7 +281,7 @@ class _GEHelper extends GEHelperBase {
         if (!canvasVideo) {
             return;
         }
-        const targetContainer = Entry.stage.canvas.getChildAt(2);
+        const targetContainer = RoCode.stage.canvas.getChildAt(2);
         targetContainer.removeChild(canvasVideo);
     }
 

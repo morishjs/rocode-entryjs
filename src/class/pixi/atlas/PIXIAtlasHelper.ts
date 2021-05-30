@@ -20,11 +20,11 @@ class _PIXIAtlasHelper {
     }
 
     /**
-     * EntryObject를 전부 조회하여 지정된 장면에서 사용하는 picture의 경로 set 객체를 리턴.
+     * RoCodeObject를 전부 조회하여 지정된 장면에서 사용하는 picture의 경로 set 객체를 리턴.
      * @param sceneID
      */
     getScenePathSet(sceneID: string): PrimitiveSet {
-        const arrObj: any[] = Entry.container.getAllObjects();
+        const arrObj: any[] = RoCode.container.getAllObjects();
         const pathSet = new PrimitiveSet();
 
         const LEN = arrObj.length;

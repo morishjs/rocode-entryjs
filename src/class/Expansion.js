@@ -6,21 +6,21 @@ export default class Expansion {
     }
 
     banAllExpansionBlock() {
-        ExtraBlockUtils.banAllBlocks(this.playground, Entry.EXPANSION_BLOCK_LIST);
+        ExtraBlockUtils.banAllBlocks(this.playground, RoCode.EXPANSION_BLOCK_LIST);
     }
 
     banExpansionBlocks(expansionNames) {
-        ExtraBlockUtils.banBlocks(expansionNames, Entry.EXPANSION_BLOCK_LIST, (expansionTypes) =>
-            Entry.do('objectRemoveExpansionBlocks', expansionTypes).isPass(true)
+        ExtraBlockUtils.banBlocks(expansionNames, RoCode.EXPANSION_BLOCK_LIST, (expansionTypes) =>
+            RoCode.do('objectRemoveExpansionBlocks', expansionTypes).isPass(true)
         );
     }
 
     isActive(expansionName) {
-        return ExtraBlockUtils.isActive(expansionName, Entry.EXPANSION_BLOCK_LIST);
+        return ExtraBlockUtils.isActive(expansionName, RoCode.EXPANSION_BLOCK_LIST);
     }
 
     addExpansionBlocks(blockNames) {
-        Entry.do('objectAddExpansionBlocks', blockNames);
+        RoCode.do('objectAddExpansionBlocks', blockNames);
     }
 
     getExpansions(blockList) {

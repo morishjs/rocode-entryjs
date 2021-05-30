@@ -42,7 +42,7 @@
     .backgroundImage('layers_icon_lock.png');
 }
 
-.entryDisabled {
+.RoCodeDisabled {
     .objectInfo_visible {
         .backgroundImage('layers_icon_visible_disabled.png');
         cursor: default;
@@ -51,7 +51,7 @@
         .backgroundImage('layers_icon_lock_disabled.png');
         cursor: default;
     }
-    .entryObjectDeleteWorkspace {
+    .RoCodeObjectDeleteWorkspace {
         .backgroundImage('layers_icon_close_nor_new_disabled.png');
         background-size: 26px auto;
         cursor: default;
@@ -60,13 +60,13 @@
         color: #cbcbcb;
     }
     &.selectedObject {
-        .entryObjectWrapperWorkspace .entryObjectNameWorkspace {
+        .RoCodeObjectWrapperWorkspace .RoCodeObjectNameWorkspace {
             color: #cbcbcb;
         }
     }
 }
 
-.entryObjectThumbnailWorkspace {
+.RoCodeObjectThumbnailWorkspace {
     overflow: hidden;
     cursor: move;
     position: absolute;
@@ -81,19 +81,19 @@
     background-repeat: no-repeat;
     background-position: center;
 
-    &.entryObjectTextBox {
+    &.RoCodeObjectTextBox {
         .backgroundImage('text_icon.svg');
         background-size: cover;
     }
 }
 
-.entryObjectWrapperWorkspace {
+.RoCodeObjectWrapperWorkspace {
     overflow: hidden;
     position: relative;
     margin: 16px 78px 0 82px;
 }
 
-.entryObjectNameWorkspace {
+.RoCodeObjectNameWorkspace {
     overflow: hidden;
     float: left;
     box-sizing: border-box;
@@ -113,7 +113,7 @@
 }
 
 .selectedObject {
-    .entryObjectNameWorkspace:focus {
+    .RoCodeObjectNameWorkspace:focus {
         border-color: #4f80ff;
     }
 }
@@ -138,16 +138,16 @@
 }
 /*sj*/
 
-.selectedObject > .entryObjectWrapperWorkspace > .entryObjectNameWorkspace {
+.selectedObject > .RoCodeObjectWrapperWorkspace > .RoCodeObjectNameWorkspace {
     color: #2c313d;
-    font-family: EntryFont, NanumGothic !important;
+    font-family: RoCodeFont, NanumGothic !important;
 }
 
-.entryObjectNameWorkspace:disabled {
+.RoCodeObjectNameWorkspace:disabled {
     background-color: #fff;
 }
 
-.entryObjectDeleteWorkspace {
+.RoCodeObjectDeleteWorkspace {
     overflow: hidden;
     position: absolute;
     right: 26px;
@@ -164,7 +164,7 @@
     .backgroundImage('layers_icon_close_nor_new.png');
 }
 
-.entryObjectDeletePhone {
+.RoCodeObjectDeletePhone {
     float: left;
     position: absolute;
     width: 16px;
@@ -175,7 +175,7 @@
     .backgroundImage('layers_icon_close_nor.png');
 }
 
-.entryObjectEditPhone {
+.RoCodeObjectEditPhone {
     float: left;
     position: absolute;
     width: 24px;
@@ -189,21 +189,21 @@
     .backgroundImage('glyphicons_150_edit.png');
 }
 
-.entryObjectSelectedImgWorkspace {
+.RoCodeObjectSelectedImgWorkspace {
     position: absolute;
     width: 16px;
     right: 0;
     top: 45px;
     bottom: 0;
     cursor: col-resize;
-    .backgroundImage('entry_scroll.png');
+    .backgroundImage('RoCode_scroll.png');
     background-repeat: no-repeat;
     background-size: 6px auto;
     background-position: 50% 50%;
     z-index: 250;
 }
 
-.selectedObject .entryObjectSelectedImgWorkspace {
+.selectedObject .RoCodeObjectSelectedImgWorkspace {
     float: left;
     position: absolute;
     width: 14px;
@@ -211,10 +211,10 @@
     right: 0;
     top: 20px;
     cursor: col-resize;
-    .backgroundImage('entry_scroll.png');
+    .backgroundImage('RoCode_scroll.png');
 }
 
-.entryObjectCoordinateWorkspace {
+.RoCodeObjectCoordinateWorkspace {
     display: block;
     font-size: 12px;
     font-weight: 600;
@@ -223,17 +223,17 @@
     width: auto;
 }
 
-.entryObjectCoordinateSpanWorkspace {
+.RoCodeObjectCoordinateSpanWorkspace {
     display: inline-block;
     vertical-align: top;
     margin-top: 2px;
 }
 
-.selectedObject > .entryObjectWrapperWorkspace > .entryObjectCoordinateWorkspace {
+.selectedObject > .RoCodeObjectWrapperWorkspace > .RoCodeObjectCoordinateWorkspace {
     color: black;
 }
 
-.entryObjectInformationWorkspace {
+.RoCodeObjectInformationWorkspace {
     display: inline-block;
     right: 0;
     top: 9px;
@@ -247,19 +247,19 @@
     .backgroundImage('layers_arrow_down_nor.png');
 }
 
-.selectedObject .entryObjectInformationWorkspace {
+.selectedObject .RoCodeObjectInformationWorkspace {
     .backgroundImage('layers_arrow_up_nor.png');
 }
 
-.fold .entryObjectInformationWorkspace {
+.fold .RoCodeObjectInformationWorkspace {
     .backgroundImage('layers_arrow_down_nor.png');
 }
 
-.informationToggle > .entryObjectWrapperWorkspace > .entryObjectInformationWorkspace {
+.informationToggle > .RoCodeObjectWrapperWorkspace > .RoCodeObjectInformationWorkspace {
     .backgroundImage('layers_arrow_down_nor_1.png');
 }
 
-.entryObjectButtonWorkspace {
+.RoCodeObjectButtonWorkspace {
     display: none;
     float: right;
     position: relative;
@@ -279,45 +279,45 @@
     border: none;
 }
 
-.informationToggle > .entryObjectButtonWorkspace {
+.informationToggle > .RoCodeObjectButtonWorkspace {
     display: none;
 }
 
-.entryObjectSoundWorkspace {
+.RoCodeObjectSoundWorkspace {
     .backgroundImage('icon_sound.png');
     background-color: #6a9a1f;
 }
 
-.entryObjectSoundWorkspace:hover {
+.RoCodeObjectSoundWorkspace:hover {
     background-color: #83af3d;
 }
 
-.entryObjectPictureWorkspace {
+.RoCodeObjectPictureWorkspace {
     .backgroundImage('icon_picture.png');
     background-color: #f26724;
 }
 
-.entryObjectPictureWorkspace:hover {
+.RoCodeObjectPictureWorkspace:hover {
     background-color: #f3783c;
 }
 
-.entryObjectCodeWorkspace {
+.RoCodeObjectCodeWorkspace {
     .backgroundImage('icon_code.png');
     background-color: #00ace9;
 }
 
-.entryObjectCodeWorkspace:hover {
+.RoCodeObjectCodeWorkspace:hover {
     background-color: #5fc8ee;
 }
 
-.entryObjectTextWorkspace {
+.RoCodeObjectTextWorkspace {
     .backgroundImage('text_icon_white.png');
     background-color: #f3bb1d;
     background-position: 50% 20%;
     background-size: 75%;
 }
 
-.entryObjectRotationWrapperWorkspace {
+.RoCodeObjectRotationWrapperWorkspace {
     position: relative;
     display: none;
     width: 100%;
@@ -327,19 +327,19 @@
     clear: both;
 }
 
-.collapsed .entryObjectRotationWrapperWorkspace {
+.collapsed .RoCodeObjectRotationWrapperWorkspace {
     height: 90px;
 }
 
-.selectedObject .entryObjectRotationWrapperWorkspace {
+.selectedObject .RoCodeObjectRotationWrapperWorkspace {
     display: inline-block;
 }
 
-.fold .entryObjectRotationWrapperWorkspace {
+.fold .RoCodeObjectRotationWrapperWorkspace {
     display: none;
 }
 
-.informationToggle > .entryObjectRotationWrapperWorkspace {
+.informationToggle > .RoCodeObjectRotationWrapperWorkspace {
     display: inline-block;
 }
 
@@ -355,7 +355,7 @@
     bottom: 9px;
 }
 
-.entryObjectRotateMethodLabelWorkspace {
+.RoCodeObjectRotateMethodLabelWorkspace {
     display: inline-block;
     margin-top: 2px;
     font-size: 12px;
@@ -364,15 +364,15 @@
     vertical-align: top;
 }
 
-.entryObjectRotateLabelWrapperWorkspace {
+.RoCodeObjectRotateLabelWrapperWorkspace {
     margin-top: 16px;
     font-size: 12px;
     font-weight: 600;
     color: #2c313d;
 }
 
-.entryObjectRotateInputWorkspace,
-.entryObjectDirectionInputWorkspace {
+.RoCodeObjectRotateInputWorkspace,
+.RoCodeObjectDirectionInputWorkspace {
     width: 48px;
     height: 24px;
     box-sizing: border-box;
@@ -386,27 +386,27 @@
     letter-spacing: -0.4px;
     text-align: center;
 }
-.entryObjectRotateInputWorkspace:focus,
-.entryObjectRotateInputWorkspace:active,
-.entryObjectDirectionInputWorkspace:focus,
-.entryObjectDirectionInputWorkspace:active {
+.RoCodeObjectRotateInputWorkspace:focus,
+.RoCodeObjectRotateInputWorkspace:active,
+.RoCodeObjectDirectionInputWorkspace:focus,
+.RoCodeObjectDirectionInputWorkspace:active {
     border-color: #4f80ff;
 }
 
-.entryObjectDirectionSpanWorkspace,
-.entryObjectRotateSpanWorkspace {
+.RoCodeObjectDirectionSpanWorkspace,
+.RoCodeObjectRotateSpanWorkspace {
     display: inline-block;
     margin: 2px 0 0 0;
     vertical-align: top;
 }
-.entryObjectRotateInputWorkspace + .entryObjectDirectionSpanWorkspace {
+.RoCodeObjectRotateInputWorkspace + .RoCodeObjectDirectionSpanWorkspace {
     margin-left: 10px;
 }
-.entryObjectRotateInputWorkspace.entryRemove + .entryObjectDirectionSpanWorkspace {
+.RoCodeObjectRotateInputWorkspace.RoCodeRemove + .RoCodeObjectDirectionSpanWorkspace {
     margin-left: 0;
 }
 
-.entryObjectRotateModeWorkspace {
+.RoCodeObjectRotateModeWorkspace {
     cursor: pointer;
     display: inline-block;
     width: 30px;
@@ -415,39 +415,39 @@
     background-size: 30px auto;
 }
 
-.entryObjectRotateModeAWorkspace {
+.RoCodeObjectRotateModeAWorkspace {
     margin-left: 12px;
     .backgroundImage('layers_icon_rotate01_nor.png');
 }
 
-.entryObjectRotateModeAWorkspace.selected {
+.RoCodeObjectRotateModeAWorkspace.selected {
     .backgroundImage('layers_icon_rotate01_sel.png');
 }
 
-.entryObjectRotateModeBWorkspace {
+.RoCodeObjectRotateModeBWorkspace {
     margin-left: 12px;
     .backgroundImage('layers_icon_rotate02_nor.png');
 }
 
-.entryObjectRotateModeBWorkspace.selected {
+.RoCodeObjectRotateModeBWorkspace.selected {
     .backgroundImage('layers_icon_rotate02_sel.png');
 }
 
-.entryObjectRotateModeCWorkspace {
+.RoCodeObjectRotateModeCWorkspace {
     margin-left: 12px;
     .backgroundImage('layers_icon_rotate03_nor.png');
 }
 
-.entryObjectRotateModeCWorkspace.selected {
+.RoCodeObjectRotateModeCWorkspace.selected {
     .backgroundImage('layers_icon_rotate03_sel.png');
 }
 
-.entryObjectCoordinateSpanWorkspace:nth-child(3) {
+.RoCodeObjectCoordinateSpanWorkspace:nth-child(3) {
     margin-left: 12px;
     position: relative;
 }
 
-.entryObjectCoordinateSizeWorkspace {
+.RoCodeObjectCoordinateSizeWorkspace {
     display: inline-block;
     margin: 2px 0 0 10px;
     position: relative;
@@ -455,7 +455,7 @@
     vertical-align: top;
 }
 
-.entryObjectCoordinateInputWorkspace {
+.RoCodeObjectCoordinateInputWorkspace {
     width: 48px;
     height: 24px;
     margin-left: 6px;
@@ -469,12 +469,12 @@
     text-align: center;
     box-sizing: border-box;
 }
-.entryObjectCoordinateInputWorkspace:focus,
-.entryObjectCoordinateInputWorkspace:active {
+.RoCodeObjectCoordinateInputWorkspace:focus,
+.RoCodeObjectCoordinateInputWorkspace:active {
     border-color: #4f80ff;
 }
 
-.entryObjectCoordinateInputWorkspace_size {
+.RoCodeObjectCoordinateInputWorkspace_size {
     float: none;
     position: relative;
 }

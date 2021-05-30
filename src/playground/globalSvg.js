@@ -17,13 +17,13 @@ class GlobalSvg {
         $('#globalSvg').remove();
 
         const body = $('body');
-        this._container = Entry.Dom('div', {
-            classes: ['globalSvgSurface', 'entryRemove'],
+        this._container = RoCode.Dom('div', {
+            classes: ['globalSvgSurface', 'RoCodeRemove'],
             id: 'globalSvgSurface',
             parent: body,
         });
 
-        this.svgDom = Entry.Dom(
+        this.svgDom = RoCode.Dom(
             $(
                 '<svg id="globalSvg" width="1" height="1"' +
                     'version="1.1" xmlns="http://www.w3.org/2000/svg"></svg>'
@@ -31,7 +31,7 @@ class GlobalSvg {
             { parent: this._container }
         );
 
-        this.svg = Entry.SVG('globalSvg');
+        this.svg = RoCode.SVG('globalSvg');
         this.svgPoint = this.svg.createSVGPoint();
         this.left = 0;
         this.top = 0;
@@ -103,7 +103,7 @@ class GlobalSvg {
         if (this._svg) {
             this.remove();
         }
-        const isVimMode = this._mode == Entry.Workspace.MODE_VIMBOARD;
+        const isVimMode = this._mode == RoCode.Workspace.MODE_VIMBOARD;
         const bBox = blockView.svgGroup.getBBox();
         const { width, height } = bBox;
         this.svgDom.attr({
@@ -113,10 +113,10 @@ class GlobalSvg {
         this.xScaleDiff = (width * (this.scale - 1)) / (this.scale * 2);
         this.yscaleDiff = (height * (this.scale - 1)) / (this.scale * 2);
 
-        this.svgGroup = Entry.SVG.createElement(blockView.svgGroup.cloneNode(true), { opacity: 1 });
+        this.svgGroup = RoCode.SVG.createElement(blockView.svgGroup.cloneNode(true), { opacity: 1 });
         this.svg.appendChild(this.svgGroup);
         if (blockView.svgCommentGroup) {
-            this.svgCommentGroup = Entry.SVG.createElement(
+            this.svgCommentGroup = RoCode.SVG.createElement(
                 blockView.svgCommentGroup.cloneNode(true),
                 {
                     opacity: 1,
@@ -208,12 +208,12 @@ class GlobalSvg {
 
     show() {
         this.isShow = true;
-        this._container.removeClass('entryRemove');
+        this._container.removeClass('RoCodeRemove');
     }
 
     hide() {
         this.isShow = false;
-        this._container.addClass('entryRemove');
+        this._container.addClass('RoCodeRemove');
     }
 
     position(value) {
@@ -270,7 +270,7 @@ class GlobalSvg {
     }
 
     terminateDrag(blockView) {
-        const mousePos = Entry.mouseCoordinate;
+        const mousePos = RoCode.mouseCoordinate;
         const board = blockView.getBoard();
         const blockMenu = board.workspace.blockMenu;
         const bLeft = blockMenu.offset().left;
@@ -279,7 +279,7 @@ class GlobalSvg {
 
         let backPackWidth = 0;
         const windowWidth = window.innerWidth;
-        const backPackMode = Entry.playground.backPack.isShow;
+        const backPackMode = RoCode.playground.backPack.isShow;
         if (backPackMode) {
             backPackWidth = 135;
         }
@@ -359,4 +359,4 @@ class GlobalSvg {
     }
 }
 
-Entry.GlobalSvg = new GlobalSvg();
+RoCode.GlobalSvg = new GlobalSvg();

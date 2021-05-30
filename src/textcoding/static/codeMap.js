@@ -1,9 +1,9 @@
 'use strict';
 
-Entry.CodeMap = {};
+RoCode.CodeMap = {};
 
 (function(cc) {
-    cc.Entry = {
+    cc.RoCode = {
         start_neighbor_scene: [
             {
                 다음: 'next',
@@ -424,4 +424,4 @@ Entry.CodeMap = {};
             'turtle.note_b': 15,
         },
     };
-})(Entry.CodeMap);
+})(RoCode.CodeMap);

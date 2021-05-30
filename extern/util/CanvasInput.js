@@ -125,7 +125,7 @@
     }, true); // create the hidden input element
 
     self._hiddenInput = document.createElement('input');
-    self._hiddenInput.className = 'entryCanvasHiddenInput';
+    self._hiddenInput.className = 'RoCodeCanvasHiddenInput';
     self._hiddenInput.type = 'text';
     self._hiddenInput.style.position = 'absolute';
     self._hiddenInput.style.opacity = 0;
@@ -831,7 +831,7 @@
         // enter key
         e.preventDefault();
 
-        self._onsubmit(e, self); //Entry.dispatchEvent('canvasInputComplete');
+        self._onsubmit(e, self); //RoCode.dispatchEvent('canvasInputComplete');
 
       } else if (keyCode === 9) {
         // tab key
@@ -872,7 +872,7 @@
         return;
       }
 
-      var roundRect = Entry.stage.canvas.canvas.getBoundingClientRect();
+      var roundRect = RoCode.stage.canvas.canvas.getBoundingClientRect();
       var x = ((e.x - roundRect.left) / roundRect.width - 0.5) * 480;
       var y = ((e.y - roundRect.top) / roundRect.height - 0.5) * -270;
 
@@ -946,9 +946,9 @@
      * @param  {CanvasInput} self
      */
     mousedown: function mousedown(e, self) {
-      e = Entry.Utils.convertMouseEvent(e);
-      var roundRect = Entry.stage.getBoundRect();
-      var scrollPos = Entry.Utils.getScrollPos();
+      e = RoCode.Utils.convertMouseEvent(e);
+      var roundRect = RoCode.stage.getBoundRect();
+      var scrollPos = RoCode.Utils.getScrollPos();
       var x = ((e.pageX - roundRect.left - scrollPos.left) / roundRect.width - 0.5) * 480;
       var y = ((e.pageY - roundRect.top - scrollPos.top) / roundRect.height - 0.5) * -270;
 
@@ -958,7 +958,7 @@
 
 
       self._mouseDown = isOver;
-      var inputField = Entry.stage.inputField;
+      var inputField = RoCode.stage.inputField;
 
       if (isOver && !inputField._isHidden) {
         self._hasFocus = true;
@@ -996,7 +996,7 @@
       //     return;
       // self.render();
       // self.click(e,self);
-      // var roundRect = Entry.stage.canvas.canvas.getBoundingClientRect();
+      // var roundRect = RoCode.stage.canvas.canvas.getBoundingClientRect();
       // var x = ((e.clientX - roundRect.left) / roundRect.width - 0.5) * 480;
       // var y = ((e.clientY - roundRect.top) / roundRect.height - 0.5) * -270;
     },

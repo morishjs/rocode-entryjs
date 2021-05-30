@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.sciencecube = {
+RoCode.sciencecube = {
     id: '25.1',
     name: 'sciencecube',
     url: 'http://www.koreadigital.com/kr/main.asp',
@@ -13,7 +13,7 @@ Entry.sciencecube = {
     setZero: function() {},
     dataHandler: function(data) {
 
-        Entry.hw.sendQueue.data = {};
+        RoCode.hw.sendQueue.data = {};
 
         if (data['tempData']) {
             this.value['tempData'] = data['tempData'];
@@ -32,7 +32,7 @@ Entry.sciencecube = {
         }
     },
 };
-Entry.sciencecube.setLanguage = () => {
+RoCode.sciencecube.setLanguage = () => {
     return {
         ko: {
             template: {
@@ -59,7 +59,7 @@ Entry.sciencecube.setLanguage = () => {
     };
 };
 
-Entry.sciencecube.blockMenuBlocks = [
+RoCode.sciencecube.blockMenuBlocks = [
     //sciencecube start
     'sciencecube_temper',
     'sciencecube_voltage',
@@ -71,11 +71,11 @@ Entry.sciencecube.blockMenuBlocks = [
     //sciencecube end
 ];
 
-Entry.sciencecube.getBlocks = () => {
+RoCode.sciencecube.getBlocks = () => {
     return {
         sciencecube_temper: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -94,15 +94,15 @@ Entry.sciencecube.getBlocks = () => {
             class: 'sciencecubeBlock',
             isNotFor: ['sciencecube'],
             func: function(sprite, script) {
-                Entry.hw.update();
-                if (Entry.sciencecube.value['tempData']) {
-                    return Entry.sciencecube.value['tempData'].toFixed(2);
+                RoCode.hw.update();
+                if (RoCode.sciencecube.value['tempData']) {
+                    return RoCode.sciencecube.value['tempData'].toFixed(2);
                 } else return '현재 센서와 다릅니다. 다시 연결해주세요.';
             },
         },
         sciencecube_current: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -121,15 +121,15 @@ Entry.sciencecube.getBlocks = () => {
             class: 'sciencecubeBlock',
             isNotFor: ['sciencecube'],
             func: function(sprite, script) {
-                Entry.hw.update();
-                if (Entry.sciencecube.value['currentData']) {
-                    return Entry.sciencecube.value['currentData'].toFixed(2);
+                RoCode.hw.update();
+                if (RoCode.sciencecube.value['currentData']) {
+                    return RoCode.sciencecube.value['currentData'].toFixed(2);
                 } else return '현재 센서와 다릅니다. 다시 연결해주세요.';
             },
         },
         sciencecube_pressue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -148,15 +148,15 @@ Entry.sciencecube.getBlocks = () => {
             class: 'sciencecubeBlock',
             isNotFor: ['sciencecube'],
             func: function(sprite, script) {
-                Entry.hw.update();
-                if (Entry.sciencecube.value['pressueData']) {
-                    return Entry.sciencecube.value['pressueData'].toFixed(2);
+                RoCode.hw.update();
+                if (RoCode.sciencecube.value['pressueData']) {
+                    return RoCode.sciencecube.value['pressueData'].toFixed(2);
                 } else return '현재 센서와 다릅니다. 다시 연결해주세요.';
             },
         },
         sciencecube_voltage: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -175,15 +175,15 @@ Entry.sciencecube.getBlocks = () => {
             class: 'sciencecubeBlock',
             isNotFor: ['sciencecube'],
             func: function(sprite, script) {
-                Entry.hw.update();
-                if (Entry.sciencecube.value['voltageData']) {
-                    return Entry.sciencecube.value['voltageData'].toFixed(2);
+                RoCode.hw.update();
+                if (RoCode.sciencecube.value['voltageData']) {
+                    return RoCode.sciencecube.value['voltageData'].toFixed(2);
                 } else return '현재 센서와 다릅니다. 다시 연결해주세요.';
             },
         },
         sciencecube_ph: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -202,15 +202,15 @@ Entry.sciencecube.getBlocks = () => {
             class: 'sciencecubeBlock',
             isNotFor: ['sciencecube'],
             func: function(sprite, script) {
-                Entry.hw.update();
-                if (Entry.sciencecube.value['phData']) {
-                    return Entry.sciencecube.value['phData'].toFixed(2);
+                RoCode.hw.update();
+                if (RoCode.sciencecube.value['phData']) {
+                    return RoCode.sciencecube.value['phData'].toFixed(2);
                 } else return '현재 센서와 다릅니다. 다시 연결해주세요.';
             },
         },
         sciencecube_force: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -229,15 +229,15 @@ Entry.sciencecube.getBlocks = () => {
             class: 'sciencecubeBlock',
             isNotFor: ['sciencecube'],
             func: function(sprite, script) {
-                Entry.hw.update();
-                if (Entry.sciencecube.value['forceData']) {
-                    return Entry.sciencecube.value['forceData'].toFixed(2);
+                RoCode.hw.update();
+                if (RoCode.sciencecube.value['forceData']) {
+                    return RoCode.sciencecube.value['forceData'].toFixed(2);
                 } else return '현재 센서와 다릅니다. 다시 연결해주세요.';
             },
         },
         sciencecube_motion: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -256,13 +256,13 @@ Entry.sciencecube.getBlocks = () => {
             class: 'sciencecubeBlock',
             isNotFor: ['sciencecube'],
             func: function(sprite, script) {
-                Entry.hw.update();
-                if (Entry.sciencecube.value['motionData']) {
-                    return Entry.sciencecube.value['motionData'].toFixed(2);
+                RoCode.hw.update();
+                if (RoCode.sciencecube.value['motionData']) {
+                    return RoCode.sciencecube.value['motionData'].toFixed(2);
                 } else return '현재 센서와 다릅니다. 다시 연결해주세요.';
             },
         },
     };
 };
 
-module.exports = Entry.sciencecube;
+module.exports = RoCode.sciencecube;

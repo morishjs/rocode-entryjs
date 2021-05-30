@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.PalmKit = {
+RoCode.PalmKit = {
     id: 'E.1',
     name: 'palmkit',
     url: 'http://http://www.needsrobot.com/',
@@ -10,12 +10,12 @@ Entry.PalmKit = {
         'en': 'PALM KIT',
     },
     setZero: function() {
-        var mcell = Entry.PalmKit.KEY;
-        var sq = Entry.hw.sendQueue;
+        var mcell = RoCode.PalmKit.KEY;
+        var sq = RoCode.hw.sendQueue;
         for(var key in mcell)
-            delete sq[Entry.PalmKit.KEY[key]];
+            delete sq[RoCode.PalmKit.KEY[key]];
         sq.set_zero = {};
-        Entry.hw.update();
+        RoCode.hw.update();
         delete sq.set_zero;
     },
     KEY: {
@@ -83,9 +83,9 @@ Entry.PalmKit = {
 
         var p = 2*l - q;
 
-        var r = Math.max(0, Entry.PalmKit.hueToRGB(p, q, h + (1/3)));
-        var g = Math.max(0, Entry.PalmKit.hueToRGB(p, q, h));
-        var b = Math.max(0, Entry.PalmKit.hueToRGB(p, q, h - (1/3)));
+        var r = Math.max(0, RoCode.PalmKit.hueToRGB(p, q, h + (1/3)));
+        var g = Math.max(0, RoCode.PalmKit.hueToRGB(p, q, h));
+        var b = Math.max(0, RoCode.PalmKit.hueToRGB(p, q, h - (1/3)));
 
 
         rgb.r = Math.round(Math.min(r, 1) * 255);
@@ -109,7 +109,7 @@ Entry.PalmKit = {
 
 };
 
-Entry.PalmKit.blockMenuBlocks = [
+RoCode.PalmKit.blockMenuBlocks = [
     'palmkit_inputsensor',
     'palmkit_ispressed',
 
@@ -130,11 +130,11 @@ Entry.PalmKit.blockMenuBlocks = [
 //    'palmkit_rc_motor_for_secs',
 ];
 
-Entry.PalmKit.getBlocks = function() {
+RoCode.PalmKit.getBlocks = function() {
     return {
         palmkit_inputsensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -147,8 +147,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value: 'CDS',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -160,8 +160,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -176,14 +176,14 @@ Entry.PalmKit.getBlocks = function() {
             class: 'palmkit_input',
             isNotFor: ['palmkit'],
             func: function (sprite, script) {
-                var pd = Entry.hw.portData[script.getField('TYPE', script)+script.getField('INDEX', script)];
+                var pd = RoCode.hw.portData[script.getField('TYPE', script)+script.getField('INDEX', script)];
                 return pd;
             },
             syntax: { js: [], py: ['PalmKit.inputsensor(%1, %2)']},
         },
         palmkit_ispressed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
@@ -197,8 +197,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -212,15 +212,15 @@ Entry.PalmKit.getBlocks = function() {
             class: 'palmkit_input',
             isNotFor: ['palmkit'],
             func: function (sprite, script) {
-                var pd = Entry.hw.portData['TACT_SWITCH' + script.getField('INDEX', script)];
+                var pd = RoCode.hw.portData['TACT_SWITCH' + script.getField('INDEX', script)];
                 if(pd == 1) return true;
                 else return false;
             },
             syntax: { js: [], py: ['PalmKit.ispressed(%1)']},
         },
         palmkit_buzzer_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -234,8 +234,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -255,7 +255,7 @@ Entry.PalmKit.getBlocks = function() {
             isNotFor: ['palmkit'],
             func: function (sprite, script) {
                 var buf = {};
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var idx = script.getField('INDEX', script);
 
@@ -263,14 +263,14 @@ Entry.PalmKit.getBlocks = function() {
                 buf.value = 0;
 
                 sq.buzzer = buf;
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: ['PalmKit.buzzer_off(%1, %2)']}
         },
         palmkit_buzzer_note: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -284,8 +284,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -305,8 +305,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value:'48',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -327,7 +327,7 @@ Entry.PalmKit.getBlocks = function() {
             isNotFor: ['palmkit'],
             func: function (sprite, script) {
                 var buf = {};
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var idx = script.getField('INDEX', script);
                 var value = script.getNumberField('NOTE', script);
@@ -336,14 +336,14 @@ Entry.PalmKit.getBlocks = function() {
                 buf.value = value;
 
                 sq.buzzer = buf;
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: ['PalmKit.buzzer_note(%1, %2, %3)']}
         },
         palmkit_buzzer_note_delay: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -357,8 +357,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -378,8 +378,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value:'48',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     "type": "Block",
@@ -414,7 +414,7 @@ Entry.PalmKit.getBlocks = function() {
             isNotFor: ['palmkit'],
             func: function (sprite, script) {
                 var buf = {};
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var idx = script.getField('INDEX', script);
                 var value = script.getNumberField('NOTE', script);
@@ -438,20 +438,20 @@ Entry.PalmKit.getBlocks = function() {
                 } else {
                     delete script.isStart;
                     delete script.timeFlag;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
 
                     buf.idx = idx;
                     buf.value = 0;
                     sq.buzzer = buf;
-                    Entry.hw.update();
+                    RoCode.hw.update();
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: ['PalmKit.buzzer_note_delay(%1, %2, %3, %4)']}
         },
         palmkit_led_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -465,8 +465,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -476,8 +476,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value:'255',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -498,7 +498,7 @@ Entry.PalmKit.getBlocks = function() {
             isNotFor: ['palmkit'],
             func: function (sprite, script) {
                 var buf = {};
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var idx = script.getField('INDEX', script);
                 var value = script.getNumberField('VALUE', script);
@@ -511,14 +511,14 @@ Entry.PalmKit.getBlocks = function() {
                 sq.led_r = buf;
                 sq.led_g = buf;
                 sq.led_b = buf;
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: ['PalmKit.led_toggle(%1, %2, %3)']}
         },
         palmkit_led_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -532,8 +532,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Color',
@@ -557,11 +557,11 @@ Entry.PalmKit.getBlocks = function() {
             isNotFor: ['palmkit'],
             func: function (sprite, script) {
                 var buf = {};
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var idx = script.getField('INDEX', script);
                 var value = script.getField('VALUE', script);
-                var rgb = Entry.hex2rgb(value);
+                var rgb = RoCode.hex2rgb(value);
 
                 buf.idx = idx;
                 buf.value_r = rgb.r;
@@ -571,14 +571,14 @@ Entry.PalmKit.getBlocks = function() {
                 sq.led_r = buf;
                 sq.led_g = buf;
                 sq.led_b = buf;
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: ['PalmKit.led_color(%1, %2, %3)']}
         },
         palmkit_led_color_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -592,8 +592,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     'type': 'Block',
@@ -626,11 +626,11 @@ Entry.PalmKit.getBlocks = function() {
             isNotFor: ['palmkit'],
             func: function (sprite, script) {
                 var buf = {};
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var idx = script.getField('INDEX', script);
                 var value = script.getNumberValue('VALUE', script);
-                var rgb = Entry.PalmKit.toRGB(value);
+                var rgb = RoCode.PalmKit.toRGB(value);
 
                 buf.idx = idx;
                 buf.value_r = rgb.r;
@@ -640,14 +640,14 @@ Entry.PalmKit.getBlocks = function() {
                 sq.led_r = buf;
                 sq.led_g = buf;
                 sq.led_b = buf;
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: ['PalmKit.led_color_number(%1, %2, %3)']}
         },
         palmkit_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -661,8 +661,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -672,8 +672,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value:'255',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -683,8 +683,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value:'255',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -694,8 +694,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value:'255',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -718,7 +718,7 @@ Entry.PalmKit.getBlocks = function() {
             isNotFor: ['palmkit'],
             func: function (sprite, script) {
                 var buf = {};
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var idx = script.getField('INDEX', script);
                 var r = script.getNumberField('R', script);
@@ -733,14 +733,14 @@ Entry.PalmKit.getBlocks = function() {
                 sq.led_r = buf;
                 sq.led_g = buf;
                 sq.led_b = buf;
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: ['PalmKit.led(%1, %2, %3, %4, %5)']}
         },
         palmkit_led_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -754,8 +754,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     'type': 'Block',
@@ -806,7 +806,7 @@ Entry.PalmKit.getBlocks = function() {
             isNotFor: ['palmkit'],
             func: function (sprite, script) {
                 var buf = {};
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var idx = script.getField('INDEX', script);
                 var r = script.getNumberValue('R', script);
@@ -821,14 +821,14 @@ Entry.PalmKit.getBlocks = function() {
                 sq.led_r = buf;
                 sq.led_g = buf;
                 sq.led_b = buf;
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: ['PalmKit.led_pwm(%1, %2, %3, %4, %5)']}
         },
         palmkit_motor_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -848,20 +848,20 @@ Entry.PalmKit.getBlocks = function() {
             isNotFor: ['palmkit'],
             func: function (sprite, script) {
                 var buf = {};
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 if(sq.dc_motor) delete sq.dc_motor;
                 if(sq.servo_motor) delete sq.servo_motor;
 
                 sq.stop = buf;
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: ['PalmKit.motor_stop(%1)']}
         },
         palmkit_rc_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -875,8 +875,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     'type': 'Block',
@@ -918,7 +918,7 @@ Entry.PalmKit.getBlocks = function() {
             isNotFor: ['palmkit'],
             func: function (sprite, script) {
                 var buf = {};
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var idx = script.getField('INDEX');
                 var angle = script.getNumberValue('ANGLE');
@@ -933,14 +933,14 @@ Entry.PalmKit.getBlocks = function() {
 
                 if(sq.stop) delete sq.stop;
                 sq.servo_motor = buf;
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: ['PalmKit.rc_motor(%1, %2, %3, %4)']}
         },
         palmkit_dc_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -954,8 +954,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -965,8 +965,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value:'0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     'type': 'Block',
@@ -1001,7 +1001,7 @@ Entry.PalmKit.getBlocks = function() {
             isNotFor: ['palmkit'],
             func: function (sprite, script) {
                 var buf = {};
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var idx = script.getField('INDEX');
                 var dir = script.getField('DIR');
@@ -1013,14 +1013,14 @@ Entry.PalmKit.getBlocks = function() {
 
                 if(sq.stop) delete sq.stop;
                 sq.dc_motor = buf;
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: ['PalmKit.dc_motor(%1, %2, %3, %4)']}
         },
         palmkit_dc_motor_for_secs: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1034,8 +1034,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1045,8 +1045,8 @@ Entry.PalmKit.getBlocks = function() {
                     ],
                     value:'0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     'type': 'Block',
@@ -1090,7 +1090,7 @@ Entry.PalmKit.getBlocks = function() {
             isNotFor: ['palmkit'],
             func: function (sprite, script) {
                 var buf = {};
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var idx = script.getField('INDEX');
                 var dir = script.getField('DIR');
                 var speed = script.getNumberValue('SPEED');
@@ -1117,14 +1117,14 @@ Entry.PalmKit.getBlocks = function() {
                 } else {
                     delete script.isStart;
                     delete script.timeFlag;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
 
                     buf.idx = idx;
                     buf.dir = dir;
                     buf.speed = 0;
 
                     sq.dc_motor = buf;
-                    Entry.hw.update();
+                    RoCode.hw.update();
                     return script.callReturn();
                 }
             },
@@ -1133,7 +1133,7 @@ Entry.PalmKit.getBlocks = function() {
     };
 };
 
-Entry.PalmKit.setLanguage = function() {
+RoCode.PalmKit.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -1227,4 +1227,4 @@ Entry.PalmKit.setLanguage = function() {
     }
 };
 
-module.exports = Entry.PalmKit;
+module.exports = RoCode.PalmKit;

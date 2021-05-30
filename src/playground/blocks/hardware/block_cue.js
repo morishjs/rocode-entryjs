@@ -6,7 +6,7 @@ var CueState = {
     STATE_DONE: 'done',
 };
 
-Entry.Cue = {
+RoCode.Cue = {
     PORT_MAP: {
         seq: 0,
         category: 0,
@@ -20,15 +20,15 @@ Entry.Cue = {
         modeB: 0,
     },
     setZero: function () {
-        var portMap = Entry.Cue.PORT_MAP;
-        var sq = Entry.hw.sendQueue;
-        Entry.Cue.sequance = 1;
-        Entry.Cue.isStarted = false;
-        Entry.Cue.state = CueState.STATE_DONE;
+        var portMap = RoCode.Cue.PORT_MAP;
+        var sq = RoCode.hw.sendQueue;
+        RoCode.Cue.sequance = 1;
+        RoCode.Cue.isStarted = false;
+        RoCode.Cue.state = CueState.STATE_DONE;
         for (var port in portMap) {
             sq[port] = portMap[port];
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     id: '24.3',
     name: 'Cue',
@@ -47,7 +47,7 @@ Entry.Cue = {
     isStarted: false,
     state: CueState.STATE_DONE,
 };
-Entry.Cue.blockMenuBlocks = [
+RoCode.Cue.blockMenuBlocks = [
     'cue_sensor1',
     'cue_sensor2',
     'cue_turn_drive',
@@ -69,12 +69,12 @@ Entry.Cue.blockMenuBlocks = [
     'cue_sound_direction',
     'cue_my_sound',
 ];
-Entry.Cue.getBlocks = function () {
+RoCode.Cue.getBlocks = function () {
     return {
 
         cue_sensor1: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             template: '%1',
             params: [
@@ -89,8 +89,8 @@ Entry.Cue.getBlocks = function () {
                         ['소리', 0x0a],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -104,7 +104,7 @@ Entry.Cue.getBlocks = function () {
             class: 'Cue_senor',
             func: function (sprite, script) {
                 var var1 = script.getNumberField('VALUE', script);
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 switch (var1) {
                     case 0x05:
                         return pd.button0 ? true : false;
@@ -131,8 +131,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_sensor2: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             template: '%1',
             params: [
@@ -147,8 +147,8 @@ Entry.Cue.getBlocks = function () {
                         ['들림', 0x0a],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -162,7 +162,7 @@ Entry.Cue.getBlocks = function () {
             class: 'Cue_senor',
             func: function (sprite, script) {
                 var var1 = script.getNumberField('VALUE', script);
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 switch (var1) {
                     case 0x00:
                         return pd.barrier_front ? true : false;
@@ -190,8 +190,8 @@ Entry.Cue.getBlocks = function () {
         },
 
         cue_turn_drive: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -201,8 +201,8 @@ Entry.Cue.getBlocks = function () {
                     type: 'Dropdown',
                     options: [['시계 방향', 0x03], ['반 시계 방향', 0x04]],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -229,34 +229,34 @@ Entry.Cue.getBlocks = function () {
             func: function (sprite, script) {
                 var var1 = script.getNumberField('ROTATION', script);
                 var var2 = script.getNumberValue('VALUE', script);
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Cue.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 1;
                     sq.action = var1;
                     sq.param_cnt = 1;
                     sq.paramA = var2;
                     sq.modeA = 3;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             if (pd.isDriving) {
-                                Entry.Cue.state = CueState.STATE_WAIT;
+                                RoCode.Cue.state = CueState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             if (!pd.isDriving) {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -265,8 +265,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_turn_drive_360: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -276,8 +276,8 @@ Entry.Cue.getBlocks = function () {
                     type: 'Dropdown',
                     options: [['시계 방향', 0x03], ['반 시계 방향', 0x04]],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -297,34 +297,34 @@ Entry.Cue.getBlocks = function () {
             isNotFor: ['Cue'],
             func: function (sprite, script) {
                 var var1 = script.getNumberField('ROTATION', script);
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Cue.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 1;
                     sq.action = var1;
                     sq.param_cnt = 1;
                     sq.paramA = 360;
                     sq.modeA = 3;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             if (pd.isDriving) {
-                                Entry.Cue.state = CueState.STATE_WAIT;
+                                RoCode.Cue.state = CueState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             if (!pd.isDriving) {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -333,8 +333,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_drive: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -344,8 +344,8 @@ Entry.Cue.getBlocks = function () {
                     type: 'Dropdown',
                     options: [['앞', 0x01], ['뒤', 0x02]],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -361,8 +361,8 @@ Entry.Cue.getBlocks = function () {
                         ['매우 빠르게', 0x05],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -386,9 +386,9 @@ Entry.Cue.getBlocks = function () {
                 var var1 = script.getNumberField('DIRECTION', script);
                 var var2 = script.getNumberValue('DISTANCE', script);
                 var var3 = script.getNumberField('SPEED', script);
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Cue.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 1;
                     sq.action = var1;
                     sq.param_cnt = 2;
@@ -398,26 +398,26 @@ Entry.Cue.getBlocks = function () {
                     sq.paramA = var2;
                     sq.paramB = var3;
                     sq.modeA = 3;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             if (pd.isDriving) {
-                                Entry.Cue.state = CueState.STATE_WAIT;
+                                RoCode.Cue.state = CueState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             if (!pd.isDriving) {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -426,8 +426,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_wheel_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -437,8 +437,8 @@ Entry.Cue.getBlocks = function () {
                     type: 'Dropdown',
                     options: [['앞', 0x01], ['뒤', 0x02]],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -448,8 +448,8 @@ Entry.Cue.getBlocks = function () {
                     type: 'Dropdown',
                     options: [['앞', 0x01], ['뒤', 0x02]],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -479,9 +479,9 @@ Entry.Cue.getBlocks = function () {
                 var var2 = script.getNumberValue('SPEED_L', script);
                 var var3 = script.getNumberField('DIRECTION_R', script);
                 var var4 = script.getNumberValue('SPEED_R', script);
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Cue.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 0x01;
                     sq.action = 0x05;
                     sq.param_cnt = 0x04;
@@ -490,24 +490,24 @@ Entry.Cue.getBlocks = function () {
                     sq.paramC = var3;
                     sq.paramD = var4;
                     sq.modeA = 3;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             var timer = setTimeout(function () {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }, 50);
-                            Entry.Cue.state = CueState.STATE_WAIT;
+                            RoCode.Cue.state = CueState.STATE_WAIT;
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -516,8 +516,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_drive_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -540,31 +540,31 @@ Entry.Cue.getBlocks = function () {
             class: 'Cue_drive',
             isNotFor: ['Cue'],
             func: function (sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Cue.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 0x01;
                     sq.action = 0x06;
                     sq.param_cnt = 0;
                     sq.modeA = 3;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             var timer = setTimeout(function () {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }, 50);
-                            Entry.Cue.state = CueState.STATE_WAIT;
+                            RoCode.Cue.state = CueState.STATE_WAIT;
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -573,8 +573,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_v_head: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -584,8 +584,8 @@ Entry.Cue.getBlocks = function () {
                     type: 'Dropdown',
                     options: [['위쪽', 0x04], ['가운데', 0x05], ['아래쪽', 0x06]],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -605,31 +605,31 @@ Entry.Cue.getBlocks = function () {
             isNotFor: ['Cue'],
             func: function (sprite, script) {
                 var var1 = script.getNumberField('DIRECTION', script);
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Cue.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 3;
                     sq.action = var1;
                     sq.param_cnt = 0;
                     sq.modeA = 3;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             var timer = setTimeout(function () {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }, 500);
-                            Entry.Cue.state = CueState.STATE_WAIT;
+                            RoCode.Cue.state = CueState.STATE_WAIT;
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -638,8 +638,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_h_head: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -653,8 +653,8 @@ Entry.Cue.getBlocks = function () {
                         ['오른쪽', 0x03],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -669,8 +669,8 @@ Entry.Cue.getBlocks = function () {
                         ['120˚', 120],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -692,9 +692,9 @@ Entry.Cue.getBlocks = function () {
             func: function (sprite, script) {
                 var var1 = script.getNumberField('DIRECTION', script);
                 var var2 = script.getNumberField('VALUE', script);
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Cue.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 3;
                     sq.action = var1;
                     sq.param_cnt = 1;
@@ -703,24 +703,24 @@ Entry.Cue.getBlocks = function () {
                     }
                     sq.paramA = var2;
                     sq.modeA = 3;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             var timer = setTimeout(function () {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }, 1000);
-                            Entry.Cue.state = CueState.STATE_WAIT;
+                            RoCode.Cue.state = CueState.STATE_WAIT;
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -729,8 +729,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_forward_head: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -753,31 +753,31 @@ Entry.Cue.getBlocks = function () {
             class: 'Cue_head',
             isNotFor: ['Cue'],
             func: function (sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Cue.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 3;
                     sq.action = 0x02;
                     sq.param_cnt = 0;
                     sq.modeA = 3;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             var timer = setTimeout(function () {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }, 500);
-                            Entry.Cue.state = CueState.STATE_WAIT;
+                            RoCode.Cue.state = CueState.STATE_WAIT;
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -786,8 +786,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_voice_head: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -810,24 +810,24 @@ Entry.Cue.getBlocks = function () {
             class: 'Cue_head',
             isNotFor: ['Cue'],
             func: function (sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Cue.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 3;
                     sq.action = 7;
                     sq.param_cnt = 0;
                     sq.modeA = 3;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             if (pd.soundDirection) {
-                                Entry.Cue.state = CueState.STATE_WAIT;
+                                RoCode.Cue.state = CueState.STATE_WAIT;
                                 var timer = setTimeout(function () {
-                                    Entry.Cue.state = CueState.STATE_DONE;
+                                    RoCode.Cue.state = CueState.STATE_DONE;
                                 }, 100);
                             }
                             return script;
@@ -836,7 +836,7 @@ Entry.Cue.getBlocks = function () {
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -845,8 +845,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_light_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -862,8 +862,8 @@ Entry.Cue.getBlocks = function () {
                         ['버튼', 0x07],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Color',
@@ -888,9 +888,9 @@ Entry.Cue.getBlocks = function () {
             func: function (sprite, script) {
                 var var1 = script.getNumberField('LED', script);
                 var var2 = script.getStringField('COLOR', script);
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Cue.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 4;
                     sq.action = var1;
                     sq.param_cnt = 1;
@@ -898,24 +898,24 @@ Entry.Cue.getBlocks = function () {
                     sq.paramB = parseInt(parseInt(var2.substr(3, 2), 16));
                     sq.paramC = parseInt(parseInt(var2.substr(5, 2), 16));
                     sq.modeA = 3;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             var timer = setTimeout(function () {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }, 50);
-                            Entry.Cue.state = CueState.STATE_WAIT;
+                            RoCode.Cue.state = CueState.STATE_WAIT;
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -924,8 +924,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_eye: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -942,8 +942,8 @@ Entry.Cue.getBlocks = function () {
                         ['모두 켜기', 0x05],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -963,32 +963,32 @@ Entry.Cue.getBlocks = function () {
             isNotFor: ['Cue'],
             func: function (sprite, script) {
                 var var1 = script.getNumberField('EYE', script);
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Cue.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 4;
                     sq.action = 6;
                     sq.param_cnt = 1;
                     sq.paramA = var1;
                     sq.modeA = 3;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             var timer = setTimeout(function () {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }, 50);
-                            Entry.Cue.state = CueState.STATE_WAIT;
+                            RoCode.Cue.state = CueState.STATE_WAIT;
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -997,8 +997,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_sound_emotion: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1015,8 +1015,8 @@ Entry.Cue.getBlocks = function () {
                         ['무작위', 0],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1035,10 +1035,10 @@ Entry.Cue.getBlocks = function () {
             class: 'Cue_Sound',
             isNotFor: ['Cue'],
             func: function (sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var var1 = script.getNumberField('SOUND', script);
-                if (!Entry.Cue.isStarted) {
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 5;
                     sq.action = 2;
                     sq.param_cnt = 1;
@@ -1047,26 +1047,26 @@ Entry.Cue.getBlocks = function () {
                     }
                     sq.paramA = var1;
                     sq.modeA = 2;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             if (pd.isPlaying) {
-                                Entry.Cue.state = CueState.STATE_WAIT;
+                                RoCode.Cue.state = CueState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             if (!pd.isPlaying) {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -1075,8 +1075,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_sound_moving: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1098,8 +1098,8 @@ Entry.Cue.getBlocks = function () {
                         ['무작위', 0],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1118,10 +1118,10 @@ Entry.Cue.getBlocks = function () {
             class: 'Cue_Sound',
             isNotFor: ['Cue'],
             func: function (sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var var1 = script.getNumberField('SOUND', script);
-                if (!Entry.Cue.isStarted) {
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 5;
                     sq.action = 2;
                     sq.param_cnt = 1;
@@ -1130,26 +1130,26 @@ Entry.Cue.getBlocks = function () {
                     }
                     sq.paramA = var1;
                     sq.modeA = 2;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             if (pd.isPlaying) {
-                                Entry.Cue.state = CueState.STATE_WAIT;
+                                RoCode.Cue.state = CueState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             if (!pd.isPlaying) {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -1158,8 +1158,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_sound_greeting: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1175,8 +1175,8 @@ Entry.Cue.getBlocks = function () {
                         ['무작위', 0],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1195,10 +1195,10 @@ Entry.Cue.getBlocks = function () {
             class: 'Cue_Sound',
             isNotFor: ['Cue'],
             func: function (sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var var1 = script.getNumberField('SOUND', script);
-                if (!Entry.Cue.isStarted) {
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 5;
                     sq.action = 2;
                     sq.param_cnt = 1;
@@ -1207,26 +1207,26 @@ Entry.Cue.getBlocks = function () {
                     }
                     sq.paramA = var1;
                     sq.modeA = 2;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             if (pd.isPlaying) {
-                                Entry.Cue.state = CueState.STATE_WAIT;
+                                RoCode.Cue.state = CueState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             if (!pd.isPlaying) {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -1235,8 +1235,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_sound_shape: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1251,8 +1251,8 @@ Entry.Cue.getBlocks = function () {
                         ['무작위', 0],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1271,10 +1271,10 @@ Entry.Cue.getBlocks = function () {
             class: 'Cue_Sound',
             isNotFor: ['Cue'],
             func: function (sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var var1 = script.getNumberField('SOUND', script);
-                if (!Entry.Cue.isStarted) {
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 5;
                     sq.action = 2;
                     sq.param_cnt = 1;
@@ -1283,26 +1283,26 @@ Entry.Cue.getBlocks = function () {
                     }
                     sq.paramA = var1;
                     sq.modeA = 2;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             if (pd.isPlaying) {
-                                Entry.Cue.state = CueState.STATE_WAIT;
+                                RoCode.Cue.state = CueState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             if (!pd.isPlaying) {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -1311,8 +1311,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_sound_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1329,8 +1329,8 @@ Entry.Cue.getBlocks = function () {
                         ['무작위', 0],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1349,10 +1349,10 @@ Entry.Cue.getBlocks = function () {
             class: 'Cue_Sound',
             isNotFor: ['Cue'],
             func: function (sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var var1 = script.getNumberField('SOUND', script);
-                if (!Entry.Cue.isStarted) {
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 5;
                     sq.action = 2;
                     sq.param_cnt = 1;
@@ -1361,26 +1361,26 @@ Entry.Cue.getBlocks = function () {
                     }
                     sq.paramA = var1;
                     sq.modeA = 2;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             if (pd.isPlaying) {
-                                Entry.Cue.state = CueState.STATE_WAIT;
+                                RoCode.Cue.state = CueState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             if (!pd.isPlaying) {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -1389,8 +1389,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_sound_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1405,8 +1405,8 @@ Entry.Cue.getBlocks = function () {
                         ['무작위', 0],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1425,10 +1425,10 @@ Entry.Cue.getBlocks = function () {
             class: 'Cue_Sound',
             isNotFor: ['Cue'],
             func: function (sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var var1 = script.getNumberField('SOUND', script);
-                if (!Entry.Cue.isStarted) {
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 5;
                     sq.action = 2;
                     sq.param_cnt = 1;
@@ -1437,26 +1437,26 @@ Entry.Cue.getBlocks = function () {
                     }
                     sq.paramA = var1;
                     sq.modeA = 2;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             if (pd.isPlaying) {
-                                Entry.Cue.state = CueState.STATE_WAIT;
+                                RoCode.Cue.state = CueState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             if (!pd.isPlaying) {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -1465,8 +1465,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_sound_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1482,8 +1482,8 @@ Entry.Cue.getBlocks = function () {
                         ['무작위', 0],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1502,10 +1502,10 @@ Entry.Cue.getBlocks = function () {
             class: 'Cue_Sound',
             isNotFor: ['Cue'],
             func: function (sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var var1 = script.getNumberField('SOUND', script);
-                if (!Entry.Cue.isStarted) {
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 5;
                     sq.action = 2;
                     sq.param_cnt = 1;
@@ -1514,26 +1514,26 @@ Entry.Cue.getBlocks = function () {
                     }
                     sq.paramA = var1;
                     sq.modeA = 2;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             if (pd.isPlaying) {
-                                Entry.Cue.state = CueState.STATE_WAIT;
+                                RoCode.Cue.state = CueState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             if (!pd.isPlaying) {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -1542,8 +1542,8 @@ Entry.Cue.getBlocks = function () {
             },
         },
         cue_my_sound: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1564,8 +1564,8 @@ Entry.Cue.getBlocks = function () {
                         ['#10', 0x09],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1584,35 +1584,35 @@ Entry.Cue.getBlocks = function () {
             class: 'Cue_Sound',
             isNotFor: ['Cue'],
             func: function (sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var var1 = script.getNumberField('SOUND', script);
-                if (!Entry.Cue.isStarted) {
+                if (!RoCode.Cue.isStarted) {
                     sq.category = 5;
                     sq.action = 1;
                     sq.param_cnt = 1;
                     sq.paramA = var1;
                     sq.modeA = 2;
-                    sq.seq = Entry.Cue.sequance++;
-                    Entry.Cue.isStarted = true;
-                    Entry.Cue.state = CueState.STATE_READY;
+                    sq.seq = RoCode.Cue.sequance++;
+                    RoCode.Cue.isStarted = true;
+                    RoCode.Cue.state = CueState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Cue.state) {
+                    switch (RoCode.Cue.state) {
                         case CueState.STATE_READY:
                             if (pd.isPlaying) {
-                                Entry.Cue.state = CueState.STATE_WAIT;
+                                RoCode.Cue.state = CueState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case CueState.STATE_WAIT:
                             if (!pd.isPlaying) {
-                                Entry.Cue.state = CueState.STATE_DONE;
+                                RoCode.Cue.state = CueState.STATE_DONE;
                             }
                             return script;
                             break;
                         case CueState.STATE_DONE:
-                            Entry.Cue.isStarted = false;
+                            RoCode.Cue.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -1623,4 +1623,4 @@ Entry.Cue.getBlocks = function () {
     };
 };
 
-module.exports = Entry.Cue;
+module.exports = RoCode.Cue;

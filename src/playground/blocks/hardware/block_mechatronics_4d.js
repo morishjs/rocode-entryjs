@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Mechatronics_4D = {
+RoCode.Mechatronics_4D = {
     id: '1A.1',
     name: 'Mechatronics_4D',
     url: 'http://4dblock.com/',
@@ -9,21 +9,21 @@ Entry.Mechatronics_4D = {
         'ko': '4D 메카트로닉스',
         'en': '4D Mechatronics'
     },
-    
+
     setZero: function() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            var keySet = Object.keys(Entry.hw.sendQueue.SET);
+            var keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach(function(key) {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     sensorTypes: {
         ALIVE: 0,
@@ -70,7 +70,7 @@ Entry.Mechatronics_4D = {
     BlockState: {},
 };
 
-Entry.Mechatronics_4D.blockMenuBlocks = [ //작성할 블록의 이름을 이곳에 추가합니다.
+RoCode.Mechatronics_4D.blockMenuBlocks = [ //작성할 블록의 이름을 이곳에 추가합니다.
     'Mechatronics_4D_get_analog_value',
     'Mechatronics_4D_get_analog_value_map',
     'Mechatronics_4D_get_ultrasonic_value',
@@ -86,7 +86,7 @@ Entry.Mechatronics_4D.blockMenuBlocks = [ //작성할 블록의 이름을 이곳
     "Mechatronics_4D_set_servo",
 ];
 
-Entry.Mechatronics_4D.setLanguage = () => { //블록 언어 템플릿
+RoCode.Mechatronics_4D.setLanguage = () => { //블록 언어 템플릿
     return {
         ko: {
             template: {
@@ -101,7 +101,7 @@ Entry.Mechatronics_4D.setLanguage = () => { //블록 언어 템플릿
                 Mechatronics_4D_on_motor: '%1 %2 %3 DC모터를 %4으로 움직이기 %5',
                 Mechatronics_4D_controll_motor_speed1: '%1 %2 뒤 DC모터를 %3 %4 속도로 움직이기 %5',
                 Mechatronics_4D_controll_motor_speed2: '%1 %2 뒤 DC모터를 %3 %4 속도로 움직이기 %5',
-                Mechatronics_4D_off_motor: '%1 %2 %3 DC모터를 멈추기 %4',   
+                Mechatronics_4D_off_motor: '%1 %2 %3 DC모터를 멈추기 %4',
                 Mechatronics_4D_set_servo: '%1 %2 서보 모터의 각도를 %3(으)로 정하기 %4',
             }
         },
@@ -125,12 +125,12 @@ Entry.Mechatronics_4D.setLanguage = () => { //블록 언어 템플릿
     }
 }
 
-Entry.Mechatronics_4D.getBlocks = () => {
+RoCode.Mechatronics_4D.getBlocks = () => {
     return {
         //region Mechatronics_4D 메카트로닉스4D
         Mechatronics_4D_analog_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -147,8 +147,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -164,8 +164,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
         },
 
         Mechatronics_4D_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -192,15 +192,15 @@ Entry.Mechatronics_4D.getBlocks = () => {
             isNotFor: ['Mechatronics_4D'],
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 if (port[0] === 'A') port = port.substring(1);
                 return ANALOG ? ANALOG[port] || 0 : 0;
             },
         },
 
         Mechatronics_4D_get_analog_value_map: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -272,7 +272,7 @@ Entry.Mechatronics_4D.getBlocks = () => {
             isNotFor: ['Mechatronics_4D'],
             func: function(sprite, script) {
                 var result = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var value2 = script.getNumberValue('VALUE2', script);
                 var value3 = script.getNumberValue('VALUE3', script);
                 var value4 = script.getNumberValue('VALUE4', script);
@@ -282,8 +282,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
                 var isFloat = false;
 
                 if (
-                    (Entry.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
-                    (Entry.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
+                    (RoCode.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
+                    (RoCode.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
                 ) {
                     isFloat = true;
                 }
@@ -315,8 +315,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
         },
 
         Mechatronics_4D_get_ultrasonic_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -356,26 +356,26 @@ Entry.Mechatronics_4D.getBlocks = () => {
                 var port1 = script.getNumberValue('PORT1', script);
                 var port2 = script.getNumberValue('PORT2', script);
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][port1];
-                delete Entry.hw.sendQueue['SET'][port2];
+                delete RoCode.hw.sendQueue['SET'][port1];
+                delete RoCode.hw.sendQueue['SET'][port2];
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.Mechatronics_4D.sensorTypes.ULTRASONIC] = {
+                RoCode.hw.sendQueue['GET'][RoCode.Mechatronics_4D.sensorTypes.ULTRASONIC] = {
                     port: [port1, port2],
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.ULTRASONIC || 0;
+                return RoCode.hw.portData.ULTRASONIC || 0;
             },
         },
 
         Mechatronics_4D_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -401,28 +401,28 @@ Entry.Mechatronics_4D.getBlocks = () => {
             class: 'Mechatronics_4D_Get',
             isNotFor: ['Mechatronics_4D'],
             func: function(sprite, script) {
-                const { hwModule = {} } = Entry.hw;
+                const { hwModule = {} } = RoCode.hw;
                 const { name } = hwModule;
                 if (name === 'Mechatronics_4D') {
                     var port = script.getNumberValue('PORT', script);
-                    var DIGITAL = Entry.hw.portData.DIGITAL;
-                    if (!Entry.hw.sendQueue['GET']) {
-                        Entry.hw.sendQueue['GET'] = {};
+                    var DIGITAL = RoCode.hw.portData.DIGITAL;
+                    if (!RoCode.hw.sendQueue['GET']) {
+                        RoCode.hw.sendQueue['GET'] = {};
                     }
-                    Entry.hw.sendQueue['GET'][Entry.Mechatronics_4D.sensorTypes.DIGITAL] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.Mechatronics_4D.sensorTypes.DIGITAL] = {
                         port: port,
                         time: new Date().getTime(),
                     };
                     return DIGITAL ? DIGITAL[port] || 0 : 0;
                 } else {
-                    return Entry.block.arduino_get_digital_value.func(sprite, script);
+                    return RoCode.block.arduino_get_digital_value.func(sprite, script);
                 }
             },
         },
 
         Mechatronics_4D_toggle_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -469,18 +469,18 @@ Entry.Mechatronics_4D.getBlocks = () => {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.Mechatronics_4D.highList.indexOf(value) > -1) {
+                if (RoCode.Mechatronics_4D.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.Mechatronics_4D.lowList.indexOf(value) > -1) {
+                } else if (RoCode.Mechatronics_4D.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.Mechatronics_4D.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.Mechatronics_4D.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -489,8 +489,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
         },
 
         Mechatronics_4D_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -536,11 +536,11 @@ Entry.Mechatronics_4D.getBlocks = () => {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.Mechatronics_4D.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.Mechatronics_4D.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -549,8 +549,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
         },
 
         Mechatronics_4D_tone_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -574,8 +574,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -591,8 +591,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
         },
 
         Mechatronics_4D_tone_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -620,8 +620,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
         },
 
         Mechatronics_4D_set_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -680,12 +680,12 @@ Entry.Mechatronics_4D.getBlocks = () => {
             class: 'Mechatronics_4D',
             isNotFor: ['Mechatronics_4D'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
 
                 if (!script.isStart) {
                     var note = script.getValue('NOTE', script);
-                    if (!Entry.Utils.isNumber(note)) note = Entry.Mechatronics_4D.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note)) note = RoCode.Mechatronics_4D.toneTable[note];
 
                     if (note < 0) {
                         note = 0;
@@ -705,7 +705,7 @@ Entry.Mechatronics_4D.getBlocks = () => {
 
                     if (duration === 0) {
                         sq['SET'][port] = {
-                            type: Entry.Mechatronics_4D.sensorTypes.TONE,
+                            type: RoCode.Mechatronics_4D.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -722,7 +722,7 @@ Entry.Mechatronics_4D.getBlocks = () => {
                     var value = 0;
 
                     if (note != 0) {
-                        value = Entry.Mechatronics_4D.toneMap[note][octave];
+                        value = RoCode.Mechatronics_4D.toneMap[note][octave];
                     }
 
                     duration = duration * 1000;
@@ -730,7 +730,7 @@ Entry.Mechatronics_4D.getBlocks = () => {
                     script.timeFlag = 1;
 
                     sq['SET'][port] = {
-                        type: Entry.Mechatronics_4D.sensorTypes.TONE,
+                        type: RoCode.Mechatronics_4D.sensorTypes.TONE,
                         data: {
                             value: value,
                             duration: duration,
@@ -748,19 +748,19 @@ Entry.Mechatronics_4D.getBlocks = () => {
                     delete script.timeFlag;
                     delete script.isStart;
                     sq['SET'][port] = {
-                        type: Entry.Mechatronics_4D.sensorTypes.TONE,
+                        type: RoCode.Mechatronics_4D.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
 
         Mechatronics_4D_board_version_list: { //보드 버전 리스트
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statement: [],
             template: '%1',
@@ -773,8 +773,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -790,8 +790,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
         },
 
         Mechatronics_4D_motor_list: {//왼쪽 모터, 오른쪽 모터 드랍다운 블록
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statement: [],
             template: '%1',
@@ -804,8 +804,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
                     ],
                     value: 'left',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -821,8 +821,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
         },
 
         Mechatronics_4D_motor_side_list: { // 앞쪽 모터, 오른쪽 모터 드랍다운 블록
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statement: [],
             template: '%1',
@@ -835,8 +835,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
                     ],
                     value: 'front',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -850,10 +850,10 @@ Entry.Mechatronics_4D.getBlocks = () => {
                 return script.getField('SIDE');
             },
         },
-        
+
         Mechatronics_4D_rotation_list: { //시계방향, 반시계방향 드랍다운 블록
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statement: [],
             template: '%1',
@@ -866,8 +866,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
                     ],
                     value: 'clock',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -883,8 +883,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
         },
 
         Mechatronics_4D_on_motor: { //모터 작동 블록(속도 조절 불가능)
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             params: [
                 {
@@ -943,7 +943,7 @@ Entry.Mechatronics_4D.getBlocks = () => {
                 var side = script.getValue('SIDE');
                 //DC모터의 회전 방향
                 var rotation = script.getValue('ROTATION');
-                
+
                 //제어할 DC모터의 핀 번호
                 var port1, port2;
 
@@ -954,32 +954,32 @@ Entry.Mechatronics_4D.getBlocks = () => {
                 if(typeof motor === 'string') {
                     motor = motor.toLowerCase();
                 }
-                
+
                 if(typeof rotation === 'string') {
                     rotation = rotation.toLowerCase();
                 }
 
                 switch(version){  //보드의 버전을 구분
                     case 3: //v3
-                        if(Entry.Mechatronics_4D.highList.indexOf(motor) > -1) {
-                            if(Entry.Mechatronics_4D.highList.indexOf(side) > -1) {
+                        if(RoCode.Mechatronics_4D.highList.indexOf(motor) > -1) {
+                            if(RoCode.Mechatronics_4D.highList.indexOf(side) > -1) {
                                 //왼쪽 앞단 DC모터를 제어하는 14번핀과 15번핀(A0, A1)
                                 port1 = '14';
                                 port2 = '15';
                             }
-                            else if(Entry.Mechatronics_4D.lowList.indexOf(side) > -1) {
+                            else if(RoCode.Mechatronics_4D.lowList.indexOf(side) > -1) {
                                 //왼쪽 뒷단 DC모터를 제어하는 5번핀과 6번핀
                                 port1 = '5';
                                 port2 = '6';
                             }
                         }
-                        else if(Entry.Mechatronics_4D.lowList.indexOf(motor) > -1) {
-                            if(Entry.Mechatronics_4D.highList.indexOf(side) > -1) {
+                        else if(RoCode.Mechatronics_4D.lowList.indexOf(motor) > -1) {
+                            if(RoCode.Mechatronics_4D.highList.indexOf(side) > -1) {
                                 //오른쪽 앞단 DC모터를 제어하는 16번 핀과 17번핀(A3, A4)
                                 port1 = '17';
                                 port2 = '16';
                             }
-                                else if(Entry.Mechatronics_4D.lowList.indexOf(side) > -1) {
+                                else if(RoCode.Mechatronics_4D.lowList.indexOf(side) > -1) {
                                 //오른쪽 뒷단 DC모터를 제어하는 9번핀과 10번핀
                                 port1 = '10';
                                 port2 = '9';
@@ -991,25 +991,25 @@ Entry.Mechatronics_4D.getBlocks = () => {
                         break;
 
                     case 4: //v4
-                        if(Entry.Mechatronics_4D.highList.indexOf(motor) > -1) {
-                            if(Entry.Mechatronics_4D.highList.indexOf(side) > -1) {
+                        if(RoCode.Mechatronics_4D.highList.indexOf(motor) > -1) {
+                            if(RoCode.Mechatronics_4D.highList.indexOf(side) > -1) {
                                 //왼쪽 앞단 DC모터를 제어하는 16번핀과 17번핀
                                 port1 = '16';
                                 port2 = '17';
                             }
-                            else if(Entry.Mechatronics_4D.lowList.indexOf(side) > -1) {
+                            else if(RoCode.Mechatronics_4D.lowList.indexOf(side) > -1) {
                                 //왼쪽 뒷단 DC모터를 제어하는 9번핀과 10번핀
                                 port1 = '9';
-                                port2 = '10';                                
+                                port2 = '10';
                             }
                         }
-                        else if(Entry.Mechatronics_4D.lowList.indexOf(motor) > -1) {
-                            if(Entry.Mechatronics_4D.highList.indexOf(side) > -1) {
+                        else if(RoCode.Mechatronics_4D.lowList.indexOf(motor) > -1) {
+                            if(RoCode.Mechatronics_4D.highList.indexOf(side) > -1) {
                                 //오른쪽 앞단 DC모터를 제어하는 14번핀과 15번핀(A3, A4)
                                 port1 = '14';
                                 port2 = '15';
                             }
-                            else if(Entry.Mechatronics_4D.lowList.indexOf(side) > -1) {
+                            else if(RoCode.Mechatronics_4D.lowList.indexOf(side) > -1) {
                                 //오른쪽 뒷단 DC모터를 제어하는 5번핀과 6번핀
                                 port1 = '5';
                                 port2 = '6';
@@ -1020,13 +1020,13 @@ Entry.Mechatronics_4D.getBlocks = () => {
                         }
                         break;
                 }
-            
-                if(Entry.Mechatronics_4D.highList.indexOf(rotation) > -1) {
+
+                if(RoCode.Mechatronics_4D.highList.indexOf(rotation) > -1) {
                     //정방향 회전
                     value1 = 0;
                     value2 = 1;
                 }
-                else if(Entry.Mechatronics_4D.lowList.indexOf(rotation) > -1) {
+                else if(RoCode.Mechatronics_4D.lowList.indexOf(rotation) > -1) {
                     //역방향 회전
                     value1 = 1;
                     value2 = 0;
@@ -1034,30 +1034,30 @@ Entry.Mechatronics_4D.getBlocks = () => {
                 else {
                     throw new Error();
                 }
-               
-                if(!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+
+                if(!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 //각 핀에 데이터 보냄
-                Entry.hw.sendQueue['SET'][port1] = {
-                    type : Entry.Mechatronics_4D.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port1] = {
+                    type : RoCode.Mechatronics_4D.sensorTypes.DIGITAL,
                     data : value1,
                     time: new Date().getTime(),
                 };
 
-                Entry.hw.sendQueue['SET'][port2] = {
-                    type : Entry.Mechatronics_4D.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port2] = {
+                    type : RoCode.Mechatronics_4D.sensorTypes.DIGITAL,
                     data : value2,
                     time: new Date().getTime(),
                 };
             }
         },
 
-        // 14~17(A0~A3)번 핀은 속도 조절이 불가능함 
+        // 14~17(A0~A3)번 핀은 속도 조절이 불가능함
         Mechatronics_4D_controll_motor_speed1: { //모터 작동 블록(속도 조절 가능)
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             params: [
                 {
@@ -1121,7 +1121,7 @@ Entry.Mechatronics_4D.getBlocks = () => {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                
+
                 //제어할 DC모터의 핀 번호
                 var port1, port2;
 
@@ -1133,12 +1133,12 @@ Entry.Mechatronics_4D.getBlocks = () => {
                 }
                 switch(version){ //보드의 버전을 구분
                     case 3: //v3
-                        if(Entry.Mechatronics_4D.highList.indexOf(motor) > -1) {
+                        if(RoCode.Mechatronics_4D.highList.indexOf(motor) > -1) {
                             //왼쪽 DC모터를 제어하는 5번핀과 6번핀
                             port1 = '5';
                             port2 = '6';
                         }
-                        else if(Entry.Mechatronics_4D.lowList.indexOf(motor) > -1) {
+                        else if(RoCode.Mechatronics_4D.lowList.indexOf(motor) > -1) {
                             //오른쪽 DC모터를 제어하는 9번핀과 10번핀
                             port1 = '10';
                             port2 = '9';
@@ -1149,12 +1149,12 @@ Entry.Mechatronics_4D.getBlocks = () => {
                         break;
 
                     case 4: //v4
-                        if(Entry.Mechatronics_4D.highList.indexOf(motor) > -1) {
+                        if(RoCode.Mechatronics_4D.highList.indexOf(motor) > -1) {
                             //왼쪽 DC모터를 제어하는 9번핀과 10번핀
                             port1 = '9';
                             port2 = '10';
                         }
-                        else if(Entry.Mechatronics_4D.lowList.indexOf(motor) > -1) {
+                        else if(RoCode.Mechatronics_4D.lowList.indexOf(motor) > -1) {
                             //오른쪽 DC모터를 제어하는 5번핀과 6번핀
                             port1 = '5';
                             port2 = '6';
@@ -1164,18 +1164,18 @@ Entry.Mechatronics_4D.getBlocks = () => {
                         }
                         break;
                 }
-               
+
 
                 if(typeof rotation === 'string') {
                     rotation = rotation.toLowerCase();
                 }
 
-                if(Entry.Mechatronics_4D.highList.indexOf(rotation) > -1) {
+                if(RoCode.Mechatronics_4D.highList.indexOf(rotation) > -1) {
                     //정방향 회전
                     value1 = 0;
                     value2 = value;
                 }
-                else if(Entry.Mechatronics_4D.lowList.indexOf(rotation) > -1) {
+                else if(RoCode.Mechatronics_4D.lowList.indexOf(rotation) > -1) {
                     //역방향 회전
                     value1 = value;
                     value2 = 0;
@@ -1184,28 +1184,28 @@ Entry.Mechatronics_4D.getBlocks = () => {
                     throw new Error();
                 }
 
-                if(!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if(!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 //각 핀에 데이터 보냄
-                Entry.hw.sendQueue['SET'][port1] = {
-                    type : Entry.Mechatronics_4D.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port1] = {
+                    type : RoCode.Mechatronics_4D.sensorTypes.PWM,
                     data : value1,
                     time: new Date().getTime(),
                 };
 
-                Entry.hw.sendQueue['SET'][port2] = {
-                    type : Entry.Mechatronics_4D.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port2] = {
+                    type : RoCode.Mechatronics_4D.sensorTypes.PWM,
                     data : value2,
                     time: new Date().getTime(),
                 };
             }
         },
-        
+
         Mechatronics_4D_motor_speed_list: { //시계방향, 반시계방향 드랍다운 블록
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statement: [],
             template: '%1',
@@ -1221,8 +1221,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
                     ],
                     value: '140',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1238,8 +1238,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
         },
 
         Mechatronics_4D_controll_motor_speed2: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             params: [
                 {
@@ -1297,7 +1297,7 @@ Entry.Mechatronics_4D.getBlocks = () => {
                 //DC모터의 회전 방향
                 var rotation = script.getValue('ROTATION');
                 var speed = script.getNumberValue('SPEED');
-                
+
                 //제어할 DC모터의 핀 번호
                 var port1, port2;
 
@@ -1307,15 +1307,15 @@ Entry.Mechatronics_4D.getBlocks = () => {
                 if(typeof motor === 'string') {
                     motor = motor.toLowerCase();
                 }
-                
+
                 switch(version){
                     case 3: //v3
-                        if(Entry.Mechatronics_4D.highList.indexOf(motor) > -1) {
+                        if(RoCode.Mechatronics_4D.highList.indexOf(motor) > -1) {
                             //왼쪽 DC모터를 제어하는 5번핀과 6번핀
                             port1 = '5';
                             port2 = '6';
                         }
-                        else if(Entry.Mechatronics_4D.lowList.indexOf(motor) > -1) {
+                        else if(RoCode.Mechatronics_4D.lowList.indexOf(motor) > -1) {
                             //오른쪽 DC모터를 제어하는 9번핀과 10번핀
                             port1 = '10';
                             port2 = '9';
@@ -1326,12 +1326,12 @@ Entry.Mechatronics_4D.getBlocks = () => {
                         break;
 
                     case 4: //v4
-                        if(Entry.Mechatronics_4D.highList.indexOf(motor) > -1) {
+                        if(RoCode.Mechatronics_4D.highList.indexOf(motor) > -1) {
                             //왼쪽 DC모터를 제어하는 9번핀과 10번핀
                             port1 = '9';
                             port2 = '10';
                         }
-                        else if(Entry.Mechatronics_4D.lowList.indexOf(motor) > -1) {
+                        else if(RoCode.Mechatronics_4D.lowList.indexOf(motor) > -1) {
                             //오른쪽 DC모터를 제어하는 5번핀과 6번핀
                             port1 = '5';
                             port2 = '6';
@@ -1346,12 +1346,12 @@ Entry.Mechatronics_4D.getBlocks = () => {
                     rotation = rotation.toLowerCase();
                 }
 
-                if(Entry.Mechatronics_4D.highList.indexOf(rotation) > -1) {
+                if(RoCode.Mechatronics_4D.highList.indexOf(rotation) > -1) {
                     //정방향 회전
                     value1 = 0;
                     value2 = speed;
                 }
-                else if(Entry.Mechatronics_4D.lowList.indexOf(rotation) > -1) {
+                else if(RoCode.Mechatronics_4D.lowList.indexOf(rotation) > -1) {
                     //역방향 회전
                     value1 = speed;
                     value2 = 0;
@@ -1360,19 +1360,19 @@ Entry.Mechatronics_4D.getBlocks = () => {
                     throw new Error();
                 }
 
-                if(!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if(!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 //각 핀에 데이터 보냄
-                Entry.hw.sendQueue['SET'][port1] = {
-                    type : Entry.Mechatronics_4D.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port1] = {
+                    type : RoCode.Mechatronics_4D.sensorTypes.PWM,
                     data : value1,
                     time: new Date().getTime(),
                 };
 
-                Entry.hw.sendQueue['SET'][port2] = {
-                    type : Entry.Mechatronics_4D.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port2] = {
+                    type : RoCode.Mechatronics_4D.sensorTypes.PWM,
                     data : value2,
                     time: new Date().getTime(),
                 };
@@ -1380,8 +1380,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
         },
 
         Mechatronics_4D_off_motor: { //모터 작동 중지 블록
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             params: [
                 {
@@ -1438,28 +1438,28 @@ Entry.Mechatronics_4D.getBlocks = () => {
                 if(typeof motor === 'string') {
                     motor = motor.toLowerCase();
                 }
-                
+
                 switch(version){  //보드의 버전을 구분
                     case 3: //v3
-                        if(Entry.Mechatronics_4D.highList.indexOf(motor) > -1) {
-                            if(Entry.Mechatronics_4D.highList.indexOf(side) > -1) {
+                        if(RoCode.Mechatronics_4D.highList.indexOf(motor) > -1) {
+                            if(RoCode.Mechatronics_4D.highList.indexOf(side) > -1) {
                                 //왼쪽 앞단 DC모터를 제어하는 14번핀과 15번핀(A0, A1)
                                 port1 = '14';
                                 port2 = '15';
                             }
-                            else if(Entry.Mechatronics_4D.lowList.indexOf(side) > -1) {
+                            else if(RoCode.Mechatronics_4D.lowList.indexOf(side) > -1) {
                                 //왼쪽 뒷단 DC모터를 제어하는 5번핀과 6번핀
                                 port1 = '5';
                                 port2 = '6';
                             }
                         }
-                        else if(Entry.Mechatronics_4D.lowList.indexOf(motor) > -1) {
-                            if(Entry.Mechatronics_4D.highList.indexOf(side) > -1) {
+                        else if(RoCode.Mechatronics_4D.lowList.indexOf(motor) > -1) {
+                            if(RoCode.Mechatronics_4D.highList.indexOf(side) > -1) {
                                 //오른쪽 앞단 DC모터를 제어하는 16번 핀과 17번핀(A3, A4)
                                 port1 = '17';
                                 port2 = '16';
                             }
-                                else if(Entry.Mechatronics_4D.lowList.indexOf(side) > -1) {
+                                else if(RoCode.Mechatronics_4D.lowList.indexOf(side) > -1) {
                                 //오른쪽 뒷단 DC모터를 제어하는 9번핀과 10번핀
                                 port1 = '10';
                                 port2 = '9';
@@ -1471,25 +1471,25 @@ Entry.Mechatronics_4D.getBlocks = () => {
                         break;
 
                     case 4: //v4
-                        if(Entry.Mechatronics_4D.highList.indexOf(motor) > -1) {
-                            if(Entry.Mechatronics_4D.highList.indexOf(side) > -1) {
+                        if(RoCode.Mechatronics_4D.highList.indexOf(motor) > -1) {
+                            if(RoCode.Mechatronics_4D.highList.indexOf(side) > -1) {
                                 //왼쪽 앞단 DC모터를 제어하는 16번핀과 17번핀
                                 port1 = '16';
                                 port2 = '17';
                             }
-                            else if(Entry.Mechatronics_4D.lowList.indexOf(side) > -1) {
+                            else if(RoCode.Mechatronics_4D.lowList.indexOf(side) > -1) {
                                 //왼쪽 뒷단 DC모터를 제어하는 9번핀과 10번핀
                                 port1 = '9';
-                                port2 = '10';                                
+                                port2 = '10';
                             }
                         }
-                        else if(Entry.Mechatronics_4D.lowList.indexOf(motor) > -1) {
-                            if(Entry.Mechatronics_4D.highList.indexOf(side) > -1) {
+                        else if(RoCode.Mechatronics_4D.lowList.indexOf(motor) > -1) {
+                            if(RoCode.Mechatronics_4D.highList.indexOf(side) > -1) {
                                 //오른쪽 앞단 DC모터를 제어하는 14번핀과 15번핀(A3, A4)
                                 port1 = '14';
                                 port2 = '15';
                             }
-                            else if(Entry.Mechatronics_4D.lowList.indexOf(side) > -1) {
+                            else if(RoCode.Mechatronics_4D.lowList.indexOf(side) > -1) {
                                 //오른쪽 뒷단 DC모터를 제어하는 5번핀과 6번핀
                                 port1 = '5';
                                 port2 = '6';
@@ -1500,20 +1500,20 @@ Entry.Mechatronics_4D.getBlocks = () => {
                         }
                         break;
                 }
-                
-                if(!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+
+                if(!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 //각 핀에 데이터 보냄
-                Entry.hw.sendQueue['SET'][port1] = {
-                    type : Entry.Mechatronics_4D.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port1] = {
+                    type : RoCode.Mechatronics_4D.sensorTypes.DIGITAL,
                     data : value,
                     time: new Date().getTime(),
                 };
 
-                Entry.hw.sendQueue['SET'][port2] = {
-                    type : Entry.Mechatronics_4D.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port2] = {
+                    type : RoCode.Mechatronics_4D.sensorTypes.DIGITAL,
                     data : value,
                     time: new Date().getTime(),
                 };
@@ -1521,8 +1521,8 @@ Entry.Mechatronics_4D.getBlocks = () => {
         },
 
         Mechatronics_4D_set_servo: { //서보모터 작동 블록
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             params: [
                 {
@@ -1577,11 +1577,11 @@ Entry.Mechatronics_4D.getBlocks = () => {
                     motor = motor.toLowerCase();
                 }
 
-                if(Entry.Mechatronics_4D.highList.indexOf(motor) > -1) {
+                if(RoCode.Mechatronics_4D.highList.indexOf(motor) > -1) {
                     //왼쪽 서보모터를 제어하는 11번핀
                     port = '11';
                 }
-                else if(Entry.Mechatronics_4D.lowList.indexOf(motor) > -1) {
+                else if(RoCode.Mechatronics_4D.lowList.indexOf(motor) > -1) {
                     //오른쪽 서보모터를 제어하는 3번핀
                     port = '3';
                 }
@@ -1589,13 +1589,13 @@ Entry.Mechatronics_4D.getBlocks = () => {
                     throw new Error();
                 }
 
-                if(!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if(!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 //핀에 데이터 보냄
-                Entry.hw.sendQueue['SET'][port] = {
-                    type : Entry.Mechatronics_4D.sensorTypes.SERVO_PIN,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type : RoCode.Mechatronics_4D.sensorTypes.SERVO_PIN,
                     data : angle,
                     time: new Date().getTime(),
                 };
@@ -1606,4 +1606,4 @@ Entry.Mechatronics_4D.getBlocks = () => {
      //endregion Mechatronics_4D 메카트로닉스4D
 }
 
-module.exports = Entry.Mechatronics_4D;
+module.exports = RoCode.Mechatronics_4D;

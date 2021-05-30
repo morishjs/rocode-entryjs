@@ -2,7 +2,7 @@ import Variable from './variable';
 
 class TimerVariable extends Variable {
     constructor(variable) {
-        Entry.assert(variable.variableType === 'timer', 'Invalid variable type given');
+        RoCode.assert(variable.variableType === 'timer', 'Invalid variable type given');
         super(variable);
     }
 
@@ -34,7 +34,7 @@ class TimerVariable extends Variable {
 
             this._adjustSingleViewBox('#f4af18');
         }
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 }
 

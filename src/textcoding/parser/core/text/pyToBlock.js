@@ -3,7 +3,7 @@
  */
 'use strict';
 
-Entry.PyToBlockParser = class {
+RoCode.PyToBlockParser = class {
     constructor(blockSyntax) {
         this._type = 'PyToBlockParser';
         this.dic = blockSyntax['#dic'];
@@ -14,7 +14,7 @@ Entry.PyToBlockParser = class {
 
         this._isInFuncDef = false;
 
-        this.util = Entry.TextCodingUtil;
+        this.util = RoCode.TextCodingUtil;
 
         this.binaryOperator = {
             '==': 'EQUAL',
@@ -59,11 +59,11 @@ Entry.PyToBlockParser = class {
         this.createFunctionMap();
         this._funcParamMap = {};
         this._isInFuncDef = false;
-        const ws = Entry.playground.mainWorkspace;
+        const ws = RoCode.playground.mainWorkspace;
         if (ws && !ws.board.code) {
             return [];
         }
-        this.object = ws ? ws.board.code.object : Entry.playground.object;
+        this.object = ws ? ws.board.code.object : RoCode.playground.object;
 
         let result;
         if (!astArr[0]) {
@@ -161,12 +161,12 @@ Entry.PyToBlockParser = class {
                 throw new Error(`keyboard input is empty`);
             }
             const value = component.arguments[0].value;
-            if (!Entry.KeyboardCode.map[typeof value === 'string' ? value.toLowerCase() : value]) {
+            if (!RoCode.KeyboardCode.map[typeof value === 'string' ? value.toLowerCase() : value]) {
                 throw new Error(`${value} is not supported key name`);
             }
             obj.params = [
                 `${
-                    Entry.KeyboardCode.map[typeof value === 'string' ? value.toLowerCase() : value]
+                    RoCode.KeyboardCode.map[typeof value === 'string' ? value.toLowerCase() : value]
                 }`,
             ];
         }
@@ -183,7 +183,7 @@ Entry.PyToBlockParser = class {
             };
         }
 
-        const variable = Entry.variableContainer.getVariableByName(name);
+        const variable = RoCode.variableContainer.getVariableByName(name);
         if (variable) {
             return {
                 type: 'get_variable',
@@ -191,7 +191,7 @@ Entry.PyToBlockParser = class {
             };
         }
 
-        const list = Entry.variableContainer.getListByName(name);
+        const list = RoCode.variableContainer.getListByName(name);
         if (list) {
             return {
                 type: 'get_list',
@@ -229,13 +229,13 @@ Entry.PyToBlockParser = class {
                     const leftName = left.object.name;
                     if (leftName === 'self') {
                         result.type = 'set_variable';
-                        leftVar = Entry.variableContainer.getVariableByName(
+                        leftVar = RoCode.variableContainer.getVariableByName(
                             left.property.name,
                             true,
                             this.object.id
                         );
                         if (!leftVar) {
-                            Entry.variableContainer.addVariable({
+                            RoCode.variableContainer.addVariable({
                                 variableType: 'variable',
                                 name: left.property.name,
                                 visible: true,
@@ -243,7 +243,7 @@ Entry.PyToBlockParser = class {
                                 value: 0,
                             });
 
-                            leftVar = Entry.variableContainer.getVariableByName(
+                            leftVar = RoCode.variableContainer.getVariableByName(
                                 left.property.name,
                                 true,
                                 this.object.id
@@ -252,7 +252,7 @@ Entry.PyToBlockParser = class {
 
                         result.params.push(leftVar.id_);
                     } else {
-                        leftVar = Entry.variableContainer.getListByName(leftName);
+                        leftVar = RoCode.variableContainer.getListByName(leftName);
                         this.assert(leftVar, leftName, left.object, 'NO_LIST', 'LIST');
                         result.params.push(leftVar.id_);
                         result.params.push(this.ListIndex(this.Node(left.property.arguments[1])));
@@ -260,15 +260,15 @@ Entry.PyToBlockParser = class {
                     break;
                 case 'Identifier':
                     result.type = 'set_variable';
-                    leftVar = Entry.variableContainer.getVariableByName(left.name, false);
+                    leftVar = RoCode.variableContainer.getVariableByName(left.name, false);
                     if (!leftVar) {
-                        Entry.variableContainer.addVariable({
+                        RoCode.variableContainer.addVariable({
                             variableType: 'variable',
                             name: left.name,
                             visible: true,
                             value: 0,
                         });
-                        leftVar = Entry.variableContainer.getVariableByName(left.name, false);
+                        leftVar = RoCode.variableContainer.getVariableByName(left.name, false);
                     }
                     result.params.push(leftVar.id_);
                     break;
@@ -355,7 +355,7 @@ Entry.PyToBlockParser = class {
         const result = {};
         if (component.object.name === 'self') {
             // local variable
-            let localVar = Entry.variableContainer.getVariableByName(
+            let localVar = RoCode.variableContainer.getVariableByName(
                 component.property.name,
                 true,
                 this.object.id
@@ -366,7 +366,7 @@ Entry.PyToBlockParser = class {
                     params: [localVar.id_],
                 };
             }
-            localVar = Entry.variableContainer.getListByName(
+            localVar = RoCode.variableContainer.getListByName(
                 component.property.name,
                 true,
                 this.object.id
@@ -640,7 +640,7 @@ Entry.PyToBlockParser = class {
         const startBlock = {};
 
         const funcName = component.id.name;
-        this.assert(!this._isInFuncDef, funcName, component, 'NO_ENTRY_EVENT_FUNCTION', 'FUNCTION');
+        this.assert(!this._isInFuncDef, funcName, component, 'NO_RoCode_EVENT_FUNCTION', 'FUNCTION');
 
         this._isInFuncDef = true;
         this.assert(component.body.body[0], funcName, component, 'NO_OBJECT', 'OBJECT');
@@ -652,14 +652,14 @@ Entry.PyToBlockParser = class {
             } else {
                 const value = component.arguments[0].name;
                 if (
-                    !Entry.KeyboardCode.map[typeof value === 'string' ? value.toLowerCase() : value]
+                    !RoCode.KeyboardCode.map[typeof value === 'string' ? value.toLowerCase() : value]
                 ) {
                     throw new Error(`${value} is not supported key name`);
                 }
                 startBlock.params = [
                     null,
                     `${
-                        Entry.KeyboardCode.map[
+                        RoCode.KeyboardCode.map[
                             typeof value === 'string' ? value.toLowerCase() : value
                         ]
                     }`,
@@ -744,7 +744,7 @@ Entry.PyToBlockParser = class {
         let defParams;
         let sortedArgs;
         let blockSchema;
-        blockSchema = Entry.block[blockType];
+        blockSchema = RoCode.block[blockType];
         if ((blockType && blockType.substr(0, 5) === 'func_') || !blockSchema) {
             // function block, etc
             sortedArgs = args;
@@ -839,13 +839,13 @@ Entry.PyToBlockParser = class {
         }
         name = name.replace(/_space_/gi, ' ');
 
-        let objects = Entry.variableContainer.messages_.filter((obj) => obj.name === name);
+        let objects = RoCode.variableContainer.messages_.filter((obj) => obj.name === name);
 
         if (objects.length <= 0) {
-            Entry.variableContainer.addMessage({
+            RoCode.variableContainer.addMessage({
                 name,
             });
-            objects = Entry.variableContainer.messages_.filter((obj) => obj.name === name);
+            objects = RoCode.variableContainer.messages_.filter((obj) => obj.name === name);
         }
 
         let object;
@@ -868,7 +868,7 @@ Entry.PyToBlockParser = class {
             case 'sprites':
 
             case 'spritesWithMouse':
-                objects = Entry.container.objects_.filter((obj) => obj.name === value);
+                objects = RoCode.container.objects_.filter((obj) => obj.name === value);
 
                 if (objects && objects.length > 0) {
                     object = objects[0].id;
@@ -884,14 +884,14 @@ Entry.PyToBlockParser = class {
                 } else if (value == 'self') {
                     object = value;
                 } else {
-                    objects = Entry.container.objects_.filter((obj) => obj.name === value);
+                    objects = RoCode.container.objects_.filter((obj) => obj.name === value);
 
                     object = objects[0].id;
                 }
 
                 return object;
             case 'collision':
-                objects = Entry.container.objects_.filter((obj) => obj.name === value);
+                objects = RoCode.container.objects_.filter((obj) => obj.name === value);
 
                 if (objects && objects.length > 0) {
                     object = objects[0].id;
@@ -914,13 +914,13 @@ Entry.PyToBlockParser = class {
                 let variable;
                 if (value.length > 1) {
                     // self variable
-                    variable = Entry.variableContainer.getVariableByName(
+                    variable = RoCode.variableContainer.getVariableByName(
                         value[1],
                         true,
                         this.object.id
                     );
                 } else {
-                    variable = Entry.variableContainer.getVariableByName(
+                    variable = RoCode.variableContainer.getVariableByName(
                         value[0],
                         false,
                         this.object.id
@@ -935,13 +935,13 @@ Entry.PyToBlockParser = class {
                 let list;
                 if (value.length > 1) {
                     // self variable
-                    list = Entry.variableContainer.getListByName(value[1], true, this.object.id);
+                    list = RoCode.variableContainer.getListByName(value[1], true, this.object.id);
                 } else {
-                    list = Entry.variableContainer.getListByName(value[0], false, this.object.id);
+                    list = RoCode.variableContainer.getListByName(value[0], false, this.object.id);
                 }
                 return list ? list.id_ : undefined;
             case 'scenes':
-                const scenes = Entry.scene.scenes_.filter((s) => s.name === value);
+                const scenes = RoCode.scene.scenes_.filter((s) => s.name === value);
                 return scenes[0] ? scenes[0].id : undefined;
             case 'sounds':
                 if (!value) {
@@ -958,7 +958,7 @@ Entry.PyToBlockParser = class {
                 } else if (value == 'self') {
                     object = value;
                 } else {
-                    const objects = Entry.container.objects_.filter((obj) => obj.name === value);
+                    const objects = RoCode.container.objects_.filter((obj) => obj.name === value);
 
                     object = objects[0] ? objects[0].id : null;
                 }
@@ -1018,9 +1018,9 @@ Entry.PyToBlockParser = class {
     }
 
     CodeMap(blockType) {
-        for (const objName in Entry.CodeMap) {
-            if (Entry.CodeMap[objName] && Entry.CodeMap[objName][blockType]) {
-                return Entry.CodeMap[objName][blockType];
+        for (const objName in RoCode.CodeMap) {
+            if (RoCode.CodeMap[objName] && RoCode.CodeMap[objName][blockType]) {
+                return RoCode.CodeMap[objName][blockType];
             }
         }
     }
@@ -1069,12 +1069,12 @@ Entry.PyToBlockParser = class {
         if (data) {
             return;
         }
-        Entry.TextCodingError.error(
-            Entry.TextCodingError.TITLE_CONVERTING,
-            Entry.TextCodingError[`MESSAGE_CONV_${message || 'NO_SUPPORT'}`],
+        RoCode.TextCodingError.error(
+            RoCode.TextCodingError.TITLE_CONVERTING,
+            RoCode.TextCodingError[`MESSAGE_CONV_${message || 'NO_SUPPORT'}`],
             keyword,
             errorNode.loc,
-            Entry.TextCodingError[`SUBJECT_CONV_${subject || 'GENERAL'}`]
+            RoCode.TextCodingError[`SUBJECT_CONV_${subject || 'GENERAL'}`]
         );
     }
 
@@ -1110,7 +1110,7 @@ Entry.PyToBlockParser = class {
             const right = n.right;
             let name;
             let type = 'variables_';
-            const id = Entry.generateHash();
+            const id = RoCode.generateHash();
             let value;
             let array;
 
@@ -1185,7 +1185,7 @@ Entry.PyToBlockParser = class {
                     obj.variableType = type.slice(0, length - 2);
                     obj.name = name;
                     obj.object = object;
-                    Entry.variableContainer[functionType](obj);
+                    RoCode.variableContainer[functionType](obj);
                 }
             }
         }, this);
@@ -1194,11 +1194,11 @@ Entry.PyToBlockParser = class {
     }
 
     variableExist(name, type) {
-        let variables_ = Entry.variableContainer[type];
+        let variables_ = RoCode.variableContainer[type];
         variables_ = variables_.map((v) => v.name_);
 
         if (variables_.indexOf(name) > -1) {
-            return Entry.variableContainer[type][variables_.indexOf(name)];
+            return RoCode.variableContainer[type][variables_.indexOf(name)];
         }
         return false;
     }
@@ -1244,7 +1244,7 @@ Entry.PyToBlockParser = class {
         obj.params = this.Arguments(blockInfo.key, component.arguments);
         if (component.arguments.length > 2) {
             obj.params[0] =
-                Entry.CodeMap.Hamster.hamster_play_note_for[0][this.toLowerCase(obj.params[0])];
+                RoCode.CodeMap.Hamster.hamster_play_note_for[0][this.toLowerCase(obj.params[0])];
         }
         return obj;
     }
@@ -1299,9 +1299,9 @@ Entry.PyToBlockParser = class {
 
     createFunctionMap() {
         this._funcMap = {};
-        const functions = Entry.variableContainer.functions_;
+        const functions = RoCode.variableContainer.functions_;
         for (const key in functions) {
-            const funcSchema = Entry.block[`func_${key}`];
+            const funcSchema = RoCode.block[`func_${key}`];
             const funcName = funcSchema.template
                 .trim()
                 .split(' ')[0]
@@ -1315,11 +1315,11 @@ Entry.PyToBlockParser = class {
 
     createFunction(component, funcName, blocks) {
         const params = component.arguments ? component.arguments.map(this.Node, this) : [];
-        const functions = Entry.variableContainer.functions_;
+        const functions = RoCode.variableContainer.functions_;
 
-        let funcId = Entry.generateHash();
+        let funcId = RoCode.generateHash();
         for (const key in functions) {
-            const funcSchema = Entry.block[`func_${key}`];
+            const funcSchema = RoCode.block[`func_${key}`];
             if (
                 funcSchema.params.length === params.length + 1 &&
                 funcSchema.template
@@ -1361,7 +1361,7 @@ Entry.PyToBlockParser = class {
         while (params.length) {
             // generate param
             const param = params.shift();
-            let paramId = Entry.Func.requestParamBlock('string');
+            let paramId = RoCode.Func.requestParamBlock('string');
             const newFuncParam = {
                 type: 'function_field_string',
                 params: [
@@ -1384,11 +1384,11 @@ Entry.PyToBlockParser = class {
         func.content = JSON.stringify(func.content);
         if (functions[funcId]) {
             const targetFunc = functions[funcId];
-            targetFunc.content = new Entry.Code(func.content);
+            targetFunc.content = new RoCode.Code(func.content);
             targetFunc.generateBlock(true);
-            Entry.Func.generateWsBlock(targetFunc);
+            RoCode.Func.generateWsBlock(targetFunc);
         } else {
-            Entry.variableContainer.setFunctions([func]);
+            RoCode.variableContainer.setFunctions([func]);
         }
     }
 
@@ -1445,10 +1445,10 @@ Entry.PyToBlockParser = class {
         let appliedParams;
         let doNotCheckParams = false;
 
-        if (datum instanceof Entry.BlockView) {
+        if (datum instanceof RoCode.BlockView) {
             schema = datum.block._schema;
             appliedParams = datum.block.data.params;
-        } else if (datum instanceof Entry.Block) {
+        } else if (datum instanceof RoCode.Block) {
             schema = datum._schema;
             appliedParams = datum.params;
         } else {

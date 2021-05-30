@@ -2,14 +2,14 @@ import _floor from 'lodash/floor';
 
 const DropDownDynamicGenerator = {
     labels: () => {
-        if (Entry?.aiLearning?.labels?.length) {
-            return Entry.aiLearning.labels.map((name, index) => [name, index]);
+        if (RoCode?.aiLearning?.labels?.length) {
+            return RoCode.aiLearning.labels.map((name, index) => [name, index]);
         } else {
             return [[Lang.Blocks.no_target, 'null']];
         }
     },
     tableAttrFields: () => {
-        const table = Entry.aiLearning?.getTableData?.();
+        const table = RoCode.aiLearning?.getTableData?.();
         if (table) {
             const { select = [], fields } = table || {};
             const attr = select?.[0] || [];
@@ -19,8 +19,8 @@ const DropDownDynamicGenerator = {
         }
     },
     tablePredictDataDistinct: () => {
-        if (Entry.aiLearning.labels) {
-            return Entry.aiLearning.labels.map((item) => [item, item]);
+        if (RoCode.aiLearning.labels) {
+            return RoCode.aiLearning.labels.map((item) => [item, item]);
         } else {
             return [[Lang.Blocks.no_target, 'null']];
         }
@@ -31,12 +31,12 @@ module.exports = {
         return {
             learning_title_image: {
                 skeleton: 'basic_text',
-                color: EntryStatic.colorSet.common.TRANSPARENT,
+                color: RoCodeStatic.colorSet.common.TRANSPARENT,
                 params: [
                     {
                         type: 'Text',
                         text: Lang.template.learning_title_image_str,
-                        color: EntryStatic.colorSet.common.TEXT,
+                        color: RoCodeStatic.colorSet.common.TEXT,
                         align: 'center',
                     },
                 ],
@@ -49,12 +49,12 @@ module.exports = {
             },
             learning_title_speech: {
                 skeleton: 'basic_text',
-                color: EntryStatic.colorSet.common.TRANSPARENT,
+                color: RoCodeStatic.colorSet.common.TRANSPARENT,
                 params: [
                     {
                         type: 'Text',
                         text: Lang.template.learning_title_speech_str,
-                        color: EntryStatic.colorSet.common.TEXT,
+                        color: RoCodeStatic.colorSet.common.TEXT,
                         align: 'center',
                     },
                 ],
@@ -67,12 +67,12 @@ module.exports = {
             },
             learning_title_text: {
                 skeleton: 'basic_text',
-                color: EntryStatic.colorSet.common.TRANSPARENT,
+                color: RoCodeStatic.colorSet.common.TRANSPARENT,
                 params: [
                     {
                         type: 'Text',
                         text: Lang.template.learning_title_text_str,
-                        color: EntryStatic.colorSet.common.TEXT,
+                        color: RoCodeStatic.colorSet.common.TEXT,
                         align: 'center',
                     },
                 ],
@@ -85,12 +85,12 @@ module.exports = {
             },
             learning_title_number: {
                 skeleton: 'basic_text',
-                color: EntryStatic.colorSet.common.TRANSPARENT,
+                color: RoCodeStatic.colorSet.common.TRANSPARENT,
                 params: [
                     {
                         type: 'Text',
                         text: Lang.template.learning_title_number_str,
-                        color: EntryStatic.colorSet.common.TEXT,
+                        color: RoCodeStatic.colorSet.common.TEXT,
                         align: 'center',
                     },
                 ],
@@ -103,12 +103,12 @@ module.exports = {
             },
             learning_title_regression: {
                 skeleton: 'basic_text',
-                color: EntryStatic.colorSet.common.TRANSPARENT,
+                color: RoCodeStatic.colorSet.common.TRANSPARENT,
                 params: [
                     {
                         type: 'Text',
                         text: Lang.template.learning_title_regression_str,
-                        color: EntryStatic.colorSet.common.TEXT,
+                        color: RoCodeStatic.colorSet.common.TEXT,
                         align: 'center',
                     },
                 ],
@@ -121,12 +121,12 @@ module.exports = {
             },
             learning_title_cluster: {
                 skeleton: 'basic_text',
-                color: EntryStatic.colorSet.common.TRANSPARENT,
+                color: RoCodeStatic.colorSet.common.TRANSPARENT,
                 params: [
                     {
                         type: 'Text',
                         text: Lang.template.learning_title_cluster_str,
-                        color: EntryStatic.colorSet.common.TEXT,
+                        color: RoCodeStatic.colorSet.common.TEXT,
                         align: 'center',
                     },
                 ],
@@ -138,8 +138,8 @@ module.exports = {
                 events: {},
             },
             insert_data_for_test: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -164,10 +164,10 @@ module.exports = {
                 func(sprite, script) {
                     if (!script.isStart) {
                         script.isStart = true;
-                        Entry.aiLearning.openInputPopup();
+                        RoCode.aiLearning.openInputPopup();
                         return script;
                     }
-                    if (!Entry.aiLearning.isLoading) {
+                    if (!RoCode.aiLearning.isLoading) {
                         delete script.isStart;
                         return script.callReturn();
                     }
@@ -179,8 +179,8 @@ module.exports = {
                 },
             },
             insert_text_block_for_test: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -199,7 +199,7 @@ module.exports = {
                     params: [
                         {
                             type: 'text',
-                            params: [Lang.Blocks.entry],
+                            params: [Lang.Blocks.RoCode],
                         },
                         null,
                     ],
@@ -216,7 +216,7 @@ module.exports = {
                 isNotFor: ['ai_learning_text'],
                 async func(sprite, script) {
                     const text = script.getStringValue('TEXT', script);
-                    await Entry.aiLearning.predict(text);
+                    await RoCode.aiLearning.predict(text);
                     return script.callReturn();
                 },
                 syntax: {
@@ -225,8 +225,8 @@ module.exports = {
                 },
             },
             test_result: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [],
@@ -243,7 +243,7 @@ module.exports = {
                 class: 'ai_learning',
                 isNotFor: ['ai_learning_classification'],
                 func(sprite, script) {
-                    return Entry.aiLearning.getPredictResult().className;
+                    return RoCode.aiLearning.getPredictResult().className;
                 },
                 syntax: {
                     js: [],
@@ -251,8 +251,8 @@ module.exports = {
                 },
             },
             accuracy_of_result: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -262,8 +262,8 @@ module.exports = {
                         menuName: DropDownDynamicGenerator.labels,
                         needDeepCopy: true,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.AI_LEARNING,
-                        arrowColor: EntryStatic.colorSet.common.WHITE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
+                        arrowColor: RoCodeStatic.colorSet.common.WHITE,
                         defaultValue: (value, options) => {
                             if (options[0] && options[0][1]) {
                                 return options[0][1];
@@ -288,7 +288,7 @@ module.exports = {
                 isNotFor: ['ai_learning_classification'],
                 func(sprite, script) {
                     const group = script.getNumberValue('GROUP', script);
-                    return Entry.aiLearning.getPredictResult(group).probability;
+                    return RoCode.aiLearning.getPredictResult(group).probability;
                 },
                 syntax: {
                     js: [],
@@ -296,8 +296,8 @@ module.exports = {
                 },
             },
             is_group: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
@@ -307,8 +307,8 @@ module.exports = {
                         menuName: DropDownDynamicGenerator.labels,
                         needDeepCopy: true,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.AI_LEARNING,
-                        arrowColor: EntryStatic.colorSet.common.WHITE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
+                        arrowColor: RoCodeStatic.colorSet.common.WHITE,
                         defaultValue: (value, options) => {
                             if (options[0] && options[0][1]) {
                                 return options[0][1];
@@ -329,8 +329,8 @@ module.exports = {
                 },
                 func(sprite, script) {
                     const group = script.getNumberValue('GROUP', script);
-                    const { labels } = Entry.aiLearning;
-                    const result = Entry.aiLearning.getPredictResult().className;
+                    const { labels } = RoCode.aiLearning;
+                    const result = RoCode.aiLearning.getPredictResult().className;
                     return result === labels[group];
                 },
                 syntax: {
@@ -339,8 +339,8 @@ module.exports = {
                 },
             },
             retrain_model: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -367,7 +367,7 @@ module.exports = {
                 class: 'ai_learning',
                 isNotFor: ['ai_learning_train'],
                 async func(sprite, script) {
-                    Entry.aiLearning.train();
+                    RoCode.aiLearning.train();
                     return script.callReturn();
                 },
                 syntax: {
@@ -376,8 +376,8 @@ module.exports = {
                 },
             },
             model_is_trained: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
@@ -389,7 +389,7 @@ module.exports = {
                 class: 'ai_learning',
                 isNotFor: ['ai_learning_train'],
                 func(sprite, script) {
-                    return Entry.aiLearning.isTrained();
+                    return RoCode.aiLearning.isTrained();
                 },
                 syntax: {
                     js: [],
@@ -397,8 +397,8 @@ module.exports = {
                 },
             },
             set_train_visible: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -409,8 +409,8 @@ module.exports = {
                             [Lang.AiLearning.hide, 'hide'],
                         ],
                         value: 'show',
-                        bgColor: EntryStatic.colorSet.block.darken.AI_LEARNING,
-                        arrowColor: EntryStatic.colorSet.common.WHITE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
+                        arrowColor: RoCodeStatic.colorSet.common.WHITE,
                     },
                     {
                         type: 'Indicator',
@@ -437,7 +437,7 @@ module.exports = {
                 isNotFor: ['ai_learning_train'],
                 async func(sprite, script) {
                     const visible = script.getField('VISIBLE');
-                    Entry.aiLearning.setVisible(visible === 'show' ? true : false);
+                    RoCode.aiLearning.setVisible(visible === 'show' ? true : false);
                     return script.callReturn();
                 },
                 syntax: {
@@ -446,8 +446,8 @@ module.exports = {
                 },
             },
             set_train_chart: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -458,8 +458,8 @@ module.exports = {
                             [Lang.AiLearning.close, 'close'],
                         ],
                         value: 'open',
-                        bgColor: EntryStatic.colorSet.block.darken.AI_LEARNING,
-                        arrowColor: EntryStatic.colorSet.common.WHITE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
+                        arrowColor: RoCodeStatic.colorSet.common.WHITE,
                     },
                     {
                         type: 'Indicator',
@@ -486,7 +486,7 @@ module.exports = {
                 isNotFor: ['ai_learning_train_chart'],
                 async func(sprite, script) {
                     const visible = script.getField('VISIBLE');
-                    Entry.aiLearning.setChartVisible(visible === 'open' ? true : false);
+                    RoCode.aiLearning.setChartVisible(visible === 'open' ? true : false);
                     return script.callReturn();
                 },
                 syntax: {
@@ -495,8 +495,8 @@ module.exports = {
                 },
             },
             set_regression_option: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -508,8 +508,8 @@ module.exports = {
                             [Lang.AiLearning.train_param_validationRate, 'validationRate'],
                         ],
                         value: 'learningRate',
-                        bgColor: EntryStatic.colorSet.block.darken.AI_LEARNING,
-                        arrowColor: EntryStatic.colorSet.common.WHITE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
+                        arrowColor: RoCodeStatic.colorSet.common.WHITE,
                     },
                     {
                         type: 'Block',
@@ -539,7 +539,7 @@ module.exports = {
                 func(sprite, script) {
                     const option = script.getField('OPTION', script);
                     const value = script.getNumberValue('VALUE', script);
-                    Entry.aiLearning.setTrainOption(option, parseFloat(value));
+                    RoCode.aiLearning.setTrainOption(option, parseFloat(value));
                     return script.callReturn();
                 },
                 syntax: {
@@ -548,17 +548,17 @@ module.exports = {
                 },
             },
             get_regression_predict_1: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[0]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -585,8 +585,8 @@ module.exports = {
                 isNotFor: ['regression_attr_1'],
                 async func(sprite, script) {
                     const x = script.getNumberValue('ATTR1', script);
-                    await Entry.aiLearning.predict(x);
-                    return Entry.aiLearning.getPredictResult();
+                    await RoCode.aiLearning.predict(x);
+                    return RoCode.aiLearning.getPredictResult();
                 },
                 syntax: {
                     js: [],
@@ -594,17 +594,17 @@ module.exports = {
                 },
             },
             get_regression_predict_2: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[0]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -618,9 +618,9 @@ module.exports = {
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[1]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -649,8 +649,8 @@ module.exports = {
                 async func(sprite, script) {
                     const x = script.getNumberValue('ATTR1', script);
                     const y = script.getNumberValue('ATTR2', script);
-                    await Entry.aiLearning.predict([x, y]);
-                    return Entry.aiLearning.getPredictResult();
+                    await RoCode.aiLearning.predict([x, y]);
+                    return RoCode.aiLearning.getPredictResult();
                 },
                 syntax: {
                     js: [],
@@ -658,17 +658,17 @@ module.exports = {
                 },
             },
             get_regression_predict_3: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[0]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -682,9 +682,9 @@ module.exports = {
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[1]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -698,9 +698,9 @@ module.exports = {
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[2]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -731,8 +731,8 @@ module.exports = {
                     const x = script.getNumberValue('ATTR1', script);
                     const y = script.getNumberValue('ATTR2', script);
                     const z = script.getNumberValue('ATTR3', script);
-                    await Entry.aiLearning.predict([x, y, z]);
-                    return Entry.aiLearning.getPredictResult();
+                    await RoCode.aiLearning.predict([x, y, z]);
+                    return RoCode.aiLearning.getPredictResult();
                 },
                 syntax: {
                     js: [],
@@ -740,8 +740,8 @@ module.exports = {
                 },
             },
             get_regression_accuracy: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [],
@@ -757,7 +757,7 @@ module.exports = {
                 class: 'ai_learning',
                 isNotFor: ['ai_learning_regression'],
                 async func(sprite, script) {
-                    return Entry.aiLearning?.getTrainResult()?.rsquared;
+                    return RoCode.aiLearning?.getTrainResult()?.rsquared;
                 },
                 syntax: {
                     js: [],
@@ -765,8 +765,8 @@ module.exports = {
                 },
             },
             set_cluster_option_k: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -800,7 +800,7 @@ module.exports = {
                 isNotFor: ['ai_learning_cluster'],
                 async func(sprite, script) {
                     const value = script.getStringValue('VALUE', script);
-                    Entry.aiLearning.setTrainOption('k', parseInt(value));
+                    RoCode.aiLearning.setTrainOption('k', parseInt(value));
                     return script.callReturn();
                 },
                 syntax: {
@@ -809,8 +809,8 @@ module.exports = {
                 },
             },
             set_cluster_option_centroids: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -821,8 +821,8 @@ module.exports = {
                             [Lang.AiLearning.cluster_option_centroids_random, 'random'],
                         ],
                         value: 'kmpp',
-                        bgColor: EntryStatic.colorSet.block.darken.AI_LEARNING,
-                        arrowColor: EntryStatic.colorSet.common.WHITE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
+                        arrowColor: RoCodeStatic.colorSet.common.WHITE,
                     },
                     {
                         type: 'Indicator',
@@ -849,7 +849,7 @@ module.exports = {
                 isNotFor: ['ai_learning_cluster'],
                 async func(sprite, script) {
                     const value = script.getField('CENTRIOD_TYPE');
-                    Entry.aiLearning.setTrainOption('initialCentroids', value);
+                    RoCode.aiLearning.setTrainOption('initialCentroids', value);
                     return script.callReturn();
                 },
                 syntax: {
@@ -858,8 +858,8 @@ module.exports = {
                 },
             },
             get_cluster_centriod_count: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [],
@@ -876,7 +876,7 @@ module.exports = {
                 class: 'ai_learning',
                 isNotFor: ['ai_learning_cluster'],
                 func(sprite, script) {
-                    const { k = 0 } = Entry.aiLearning.getTrainOption() || {};
+                    const { k = 0 } = RoCode.aiLearning.getTrainOption() || {};
                     return k;
                 },
                 syntax: {
@@ -885,8 +885,8 @@ module.exports = {
                 },
             },
             get_cluster_centriod_value: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -901,8 +901,8 @@ module.exports = {
                         menuName: DropDownDynamicGenerator.tableAttrFields,
                         needDeepCopy: true,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.AI_LEARNING,
-                        arrowColor: EntryStatic.colorSet.common.WHITE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
+                        arrowColor: RoCodeStatic.colorSet.common.WHITE,
                         defaultValue: (value, options) => {
                             if(options[0] && options[0][1]){
                                 return options[0][1];
@@ -929,7 +929,7 @@ module.exports = {
                 func(sprite, script) {
                     const k = script.getNumberValue('K');
                     const attr = script.getField('ATTR');
-                    const { centroids } = Entry.aiLearning.getTrainResult();
+                    const { centroids } = RoCode.aiLearning.getTrainResult();
                     return centroids?.[k - 1]?.[attr] || NaN;
                 },
                 syntax: {
@@ -938,17 +938,17 @@ module.exports = {
                 },
             },
             get_cluster_centriod_index_1: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[0]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -975,8 +975,8 @@ module.exports = {
                 isNotFor: ['cluster_attr_1'],
                 async func(sprite, script) {
                     const x = script.getNumberValue('ATTR1', script);
-                    await Entry.aiLearning.predict({x});
-                    return Entry.aiLearning.getPredictResult();
+                    await RoCode.aiLearning.predict({x});
+                    return RoCode.aiLearning.getPredictResult();
                 },
                 syntax: {
                     js: [],
@@ -984,17 +984,17 @@ module.exports = {
                 },
             },
             get_cluster_centriod_index_2: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[0]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1008,9 +1008,9 @@ module.exports = {
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[1]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1039,8 +1039,8 @@ module.exports = {
                 async func(sprite, script) {
                     const x = script.getNumberValue('ATTR1', script);
                     const y = script.getNumberValue('ATTR2', script);
-                    await Entry.aiLearning.predict({x, y});
-                    return Entry.aiLearning.getPredictResult();
+                    await RoCode.aiLearning.predict({x, y});
+                    return RoCode.aiLearning.getPredictResult();
                 },
                 syntax: {
                     js: [],
@@ -1048,17 +1048,17 @@ module.exports = {
                 },
             },
             get_cluster_centriod_index_3: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[0]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1072,9 +1072,9 @@ module.exports = {
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[1]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1088,9 +1088,9 @@ module.exports = {
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[2]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1121,8 +1121,8 @@ module.exports = {
                     const x = script.getNumberValue('ATTR1', script);
                     const y = script.getNumberValue('ATTR2', script);
                     const z = script.getNumberValue('ATTR3', script);
-                    await Entry.aiLearning.predict({x, y, z});
-                    return Entry.aiLearning.getPredictResult();
+                    await RoCode.aiLearning.predict({x, y, z});
+                    return RoCode.aiLearning.getPredictResult();
                 },
                 syntax: {
                     js: [],
@@ -1130,8 +1130,8 @@ module.exports = {
                 },
             },
             set_number_learning_option_k: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1165,7 +1165,7 @@ module.exports = {
                 isNotFor: ['ai_learning_number'],
                 async func(sprite, script) {
                     const value = script.getNumberValue('VALUE', script);
-                    Entry.aiLearning.setTrainOption('neighbors', parseInt(value));
+                    RoCode.aiLearning.setTrainOption('neighbors', parseInt(value));
                     return script.callReturn();
                 },
                 syntax: {
@@ -1174,17 +1174,17 @@ module.exports = {
                 },
             },
             get_number_learning_predict_1: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[0]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1211,8 +1211,8 @@ module.exports = {
                 isNotFor: ['number_learning_attr_1'],
                 async func(sprite, script) {
                     const x = script.getNumberValue('ATTR1', script);
-                    await Entry.aiLearning.predict([x]);
-                    const [{ className }] = Entry.aiLearning.getPredictResult();
+                    await RoCode.aiLearning.predict([x]);
+                    const [{ className }] = RoCode.aiLearning.getPredictResult();
                     return className;
                 },
                 syntax: {
@@ -1221,17 +1221,17 @@ module.exports = {
                 },
             },
             get_number_learning_predict_2: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[0]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1245,9 +1245,9 @@ module.exports = {
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[1]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1276,8 +1276,8 @@ module.exports = {
                 async func(sprite, script) {
                     const x = script.getNumberValue('ATTR1', script);
                     const y = script.getNumberValue('ATTR2', script);
-                    await Entry.aiLearning.predict([x, y]);
-                    const [{ className }] = Entry.aiLearning.getPredictResult();
+                    await RoCode.aiLearning.predict([x, y]);
+                    const [{ className }] = RoCode.aiLearning.getPredictResult();
                     return className;
                 },
                 syntax: {
@@ -1286,17 +1286,17 @@ module.exports = {
                 },
             },
             get_number_learning_predict_3: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[0]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1310,9 +1310,9 @@ module.exports = {
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[1]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1326,9 +1326,9 @@ module.exports = {
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[2]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1359,8 +1359,8 @@ module.exports = {
                     const x = script.getNumberValue('ATTR1', script);
                     const y = script.getNumberValue('ATTR2', script);
                     const z = script.getNumberValue('ATTR3', script);
-                    await Entry.aiLearning.predict([x, y, z]);
-                    const [{ className }] = Entry.aiLearning.getPredictResult();
+                    await RoCode.aiLearning.predict([x, y, z]);
+                    const [{ className }] = RoCode.aiLearning.getPredictResult();
                     return className;
                 },
                 syntax: {
@@ -1369,17 +1369,17 @@ module.exports = {
                 },
             },
             get_number_learning_predict_param_1: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[0]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1396,8 +1396,8 @@ module.exports = {
                         menuName: DropDownDynamicGenerator.tablePredictDataDistinct,
                         needDeepCopy: true,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.AI_LEARNING,
-                        arrowColor: EntryStatic.colorSet.common.WHITE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
+                        arrowColor: RoCodeStatic.colorSet.common.WHITE,
                         defaultValue: (value, options) => {
                             if(options[0] && options[0][1]){
                                 return options[0][1];
@@ -1412,8 +1412,8 @@ module.exports = {
                             [Lang.AiLearning.neighbor_count, 'count'],
                         ],
                         value: 'probability',
-                        bgColor: EntryStatic.colorSet.block.darken.AI_LEARNING,
-                        arrowColor: EntryStatic.colorSet.common.WHITE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
+                        arrowColor: RoCodeStatic.colorSet.common.WHITE,
                     },
                 ],
                 events: {},
@@ -1435,8 +1435,8 @@ module.exports = {
                     const x = script.getNumberValue('ATTR1', script);
                     const clazz = script.getField('CLASS', script);
                     const option = script.getField('OPTION', script);
-                    await Entry.aiLearning.predict([x]);
-                    const result = Entry.aiLearning.getPredictResult();
+                    await RoCode.aiLearning.predict([x]);
+                    const result = RoCode.aiLearning.getPredictResult();
                     const classData = result.find(({className}) => className === clazz) || {};
                     return classData[option] || 0;
                 },
@@ -1446,17 +1446,17 @@ module.exports = {
                 },
             },
             get_number_learning_predict_param_2: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[0]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1470,9 +1470,9 @@ module.exports = {
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[1]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1489,8 +1489,8 @@ module.exports = {
                         menuName: DropDownDynamicGenerator.tablePredictDataDistinct,
                         needDeepCopy: true,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.AI_LEARNING,
-                        arrowColor: EntryStatic.colorSet.common.WHITE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
+                        arrowColor: RoCodeStatic.colorSet.common.WHITE,
                         defaultValue: (value, options) => {
                             if(options[0] && options[0][1]){
                                 return options[0][1];
@@ -1505,8 +1505,8 @@ module.exports = {
                             [Lang.AiLearning.neighbor_count, 'count'],
                         ],
                         value: 'probability',
-                        bgColor: EntryStatic.colorSet.block.darken.AI_LEARNING,
-                        arrowColor: EntryStatic.colorSet.common.WHITE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
+                        arrowColor: RoCodeStatic.colorSet.common.WHITE,
                     },
                 ],
                 events: {},
@@ -1530,8 +1530,8 @@ module.exports = {
                     const y = script.getNumberValue('ATTR2', script);
                     const clazz = script.getField('CLASS', script);
                     const option = script.getField('OPTION', script);
-                    await Entry.aiLearning.predict([x, y]);
-                    const result = Entry.aiLearning.getPredictResult();
+                    await RoCode.aiLearning.predict([x, y]);
+                    const result = RoCode.aiLearning.getPredictResult();
                     const classData = result.find(({className}) => className === clazz) || {};
                     return classData[option] || 0;
                 },
@@ -1541,17 +1541,17 @@ module.exports = {
                 },
             },
             get_number_learning_predict_param_3: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[0]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1565,9 +1565,9 @@ module.exports = {
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[1]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1581,9 +1581,9 @@ module.exports = {
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[2]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1600,8 +1600,8 @@ module.exports = {
                         menuName: DropDownDynamicGenerator.tablePredictDataDistinct,
                         needDeepCopy: true,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.AI_LEARNING,
-                        arrowColor: EntryStatic.colorSet.common.WHITE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
+                        arrowColor: RoCodeStatic.colorSet.common.WHITE,
                         defaultValue: (value, options) => {
                             if(options[0] && options[0][1]){
                                 return options[0][1];
@@ -1616,8 +1616,8 @@ module.exports = {
                             [Lang.AiLearning.neighbor_count, 'count'],
                         ],
                         value: 'probability',
-                        bgColor: EntryStatic.colorSet.block.darken.AI_LEARNING,
-                        arrowColor: EntryStatic.colorSet.common.WHITE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
+                        arrowColor: RoCodeStatic.colorSet.common.WHITE,
                     },
                 ],
                 events: {},
@@ -1643,8 +1643,8 @@ module.exports = {
                     const z = script.getNumberValue('ATTR3', script);
                     const clazz = script.getField('CLASS', script);
                     const option = script.getField('OPTION', script);
-                    await Entry.aiLearning.predict([x, y, z]);
-                    const result = Entry.aiLearning.getPredictResult();
+                    await RoCode.aiLearning.predict([x, y, z]);
+                    const result = RoCode.aiLearning.getPredictResult();
                     const classData = result.find(({className}) => className === clazz) || {};
                     return classData[option] || 0;
                 },
@@ -1654,17 +1654,17 @@ module.exports = {
                 },
             },
             is_number_learning_group_1: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[0]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1681,8 +1681,8 @@ module.exports = {
                         menuName: DropDownDynamicGenerator.tablePredictDataDistinct,
                         needDeepCopy: true,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.AI_LEARNING,
-                        arrowColor: EntryStatic.colorSet.common.WHITE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
+                        arrowColor: RoCodeStatic.colorSet.common.WHITE,
                         defaultValue: (value, options) => {
                             if(options[0] && options[0][1]){
                                 return options[0][1];
@@ -1709,8 +1709,8 @@ module.exports = {
                 async func(sprite, script) {
                     const x = script.getNumberValue('ATTR1', script);
                     const clazz = script.getField('CLASS', script);
-                    await Entry.aiLearning.predict([x]);
-                    const [{className}] = Entry.aiLearning.getPredictResult();
+                    await RoCode.aiLearning.predict([x]);
+                    const [{className}] = RoCode.aiLearning.getPredictResult();
                     return className === clazz;
                 },
                 syntax: {
@@ -1719,17 +1719,17 @@ module.exports = {
                 },
             },
             is_number_learning_group_2: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[0]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1743,9 +1743,9 @@ module.exports = {
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[1]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1762,8 +1762,8 @@ module.exports = {
                         menuName: DropDownDynamicGenerator.tablePredictDataDistinct,
                         needDeepCopy: true,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.AI_LEARNING,
-                        arrowColor: EntryStatic.colorSet.common.WHITE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
+                        arrowColor: RoCodeStatic.colorSet.common.WHITE,
                         defaultValue: (value, options) => {
                             if(options[0] && options[0][1]){
                                 return options[0][1];
@@ -1792,8 +1792,8 @@ module.exports = {
                     const x = script.getNumberValue('ATTR1', script);
                     const y = script.getNumberValue('ATTR2', script);
                     const clazz = script.getField('CLASS', script);
-                    await Entry.aiLearning.predict([x, y]);
-                    const [{className}] = Entry.aiLearning.getPredictResult();
+                    await RoCode.aiLearning.predict([x, y]);
+                    const [{className}] = RoCode.aiLearning.getPredictResult();
                     return className === clazz;
                 },
                 syntax: {
@@ -1802,17 +1802,17 @@ module.exports = {
                 },
             },
             is_number_learning_group_3: {
-                color: EntryStatic.colorSet.block.default.AI_LEARNING,
-                outerLine: EntryStatic.colorSet.block.darken.AI_LEARNING,
+                color: RoCodeStatic.colorSet.block.default.AI_LEARNING,
+                outerLine: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[0]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1826,9 +1826,9 @@ module.exports = {
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[1]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1842,9 +1842,9 @@ module.exports = {
                     {
                         type: 'TextDynamic',
                         setValue: () => {
-                            const table = Entry.aiLearning?.getTableData?.();
+                            const table = RoCode.aiLearning?.getTableData?.();
                             if(table) {
-                                const {select = [], fields = []} = Entry.aiLearning?.getTableData?.();
+                                const {select = [], fields = []} = RoCode.aiLearning?.getTableData?.();
                                 return fields[select?.[0]?.[2]] || Lang.AiLearning.model_attr_str;
                             }
                             return Lang.AiLearning.model_attr_str;
@@ -1861,8 +1861,8 @@ module.exports = {
                         menuName: DropDownDynamicGenerator.tablePredictDataDistinct,
                         needDeepCopy: true,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.AI_LEARNING,
-                        arrowColor: EntryStatic.colorSet.common.WHITE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.AI_LEARNING,
+                        arrowColor: RoCodeStatic.colorSet.common.WHITE,
                         defaultValue: (value, options) => {
                             if(options[0] && options[0][1]){
                                 return options[0][1];
@@ -1893,8 +1893,8 @@ module.exports = {
                     const y = script.getNumberValue('ATTR2', script);
                     const z = script.getNumberValue('ATTR3', script);
                     const clazz = script.getField('CLASS', script);
-                    await Entry.aiLearning.predict([x, y, z]);
-                    const [{className}] = Entry.aiLearning.getPredictResult();
+                    await RoCode.aiLearning.predict([x, y, z]);
+                    const [{className}] = RoCode.aiLearning.getPredictResult();
                     return className === clazz;
                 },
                 syntax: {

@@ -1,9 +1,9 @@
-Entry.skeleton.basic_param = {
+RoCode.skeleton.basic_param = {
     path(blockView) {
         let width = blockView.contentWidth;
         const output = blockView._contents[blockView._contents.length - 1];
         if (output) {
-            width -= output.box.width + Entry.BlockView.PARAM_SPACE - 2;
+            width -= output.box.width + RoCode.BlockView.PARAM_SPACE - 2;
         }
         width = Math.max(0, width);
         return `m 2 0

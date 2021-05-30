@@ -1,13 +1,13 @@
 import { ImageRect } from '../../../maxrect-packer/geom/ImageRect';
-import { EntryBaseTexture } from './EntryBaseTexture';
-import { EntryTextureBase } from './EntryTextureBase';
+import { RoCodeBaseTexture } from './RoCodeBaseTexture';
+import { RoCodeTextureBase } from './RoCodeTextureBase';
 
-export class EntryTexture extends EntryTextureBase {
-    constructor(baseTexture: EntryBaseTexture, imageRect: ImageRect) {
+export class RoCodeTexture extends RoCodeTextureBase {
+    constructor(baseTexture: RoCodeBaseTexture, imageRect: ImageRect) {
         super(baseTexture, imageRect);
     }
 
-    getBaseTexture(): EntryBaseTexture {
-        return this.baseTexture as EntryBaseTexture;
+    getBaseTexture(): RoCodeBaseTexture {
+        return this.baseTexture as RoCodeBaseTexture;
     }
 }

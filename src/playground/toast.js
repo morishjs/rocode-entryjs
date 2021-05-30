@@ -12,12 +12,12 @@ export default class Toast {
 
     generateView() {
         const template = `
-            <div class="entryMobileToast hideToast">
+            <div class="RoCodeMobileToast hideToast">
                 <div class="content"/>
             </div>
         `;
-        this.$view = $('<div class="entryMobileToastWrapper">').append(template);
-        this.$toast = this.$view.find('.entryMobileToast');
+        this.$view = $('<div class="RoCodeMobileToastWrapper">').append(template);
+        this.$toast = this.$view.find('.RoCodeMobileToast');
         this.$content = this.$view.find('.content');
         if (!this.$boardView.has(this.$view).length) {
             this.$boardView.append(this.$view);

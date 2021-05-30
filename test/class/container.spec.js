@@ -1,5 +1,5 @@
 test('Container 샘플 테스트', async () => {
-    // global.Entry = {};
+    // global.RoCode = {};
     // const Container = await import('../../src/class/container');
-    // expect(typeof Entry.Container).toEqual('function');
+    // expect(typeof RoCode.Container).toEqual('function');
 });

@@ -1,9 +1,9 @@
-class EntryFunc {
+class RoCodeFunc {
     static isEdit = false;
     static threads = {};
 
     static registerFunction(func) {
-        const workspace = Entry && Entry.getMainWS();
+        const workspace = RoCode && RoCode.getMainWS();
         if (!workspace) {
             return;
         }
@@ -22,7 +22,7 @@ class EntryFunc {
 
     static executeFunction(threadHash) {
         let script = this.threads[threadHash];
-        script = Entry.Engine.computeThread(script.entity, script);
+        script = RoCode.Engine.computeThread(script.entity, script);
         if (script) {
             this.threads[threadHash] = script;
             return true;
@@ -39,7 +39,7 @@ class EntryFunc {
     static edit(func) {
         let funcElement = func;
         if (typeof func === 'string') {
-            funcElement = Entry.variableContainer.getFunction(/(func_)?(.*)/.exec(func)[2]);
+            funcElement = RoCode.variableContainer.getFunction(/(func_)?(.*)/.exec(func)[2]);
         }
         if (!funcElement) {
             console.error('no function');
@@ -51,16 +51,16 @@ class EntryFunc {
         this.cancelEdit();
 
         this.targetFunc = funcElement;
-        EntryFunc.isEdit = true;
-        Entry.getMainWS().blockMenu.deleteRendered('variable');
+        RoCodeFunc.isEdit = true;
+        RoCode.getMainWS().blockMenu.deleteRendered('variable');
         if (this.initEditView(funcElement.content) === false) {
-            EntryFunc.isEdit = false;
+            RoCodeFunc.isEdit = false;
             return;
         } // edit fail
         this.bindFuncChangeEvent(funcElement);
         this.updateMenu();
         setTimeout(() => {
-            const schema = Entry.block[`func_${funcElement.id}`];
+            const schema = RoCode.block[`func_${funcElement.id}`];
             if (schema && schema.paramsBackupEvent) {
                 schema.paramsBackupEvent.notify();
             }
@@ -73,8 +73,8 @@ class EntryFunc {
         if (!this.menuCode) {
             this.setupMenuCode();
         }
-        const workspace = Entry.getMainWS();
-        if (workspace.setMode(Entry.Workspace.MODE_OVERLAYBOARD) === false) {
+        const workspace = RoCode.getMainWS();
+        if (workspace.setMode(RoCode.Workspace.MODE_OVERLAYBOARD) === false) {
             this.endEdit('cancelEdit');
             return false;
         }
@@ -82,7 +82,7 @@ class EntryFunc {
 
         this._workspaceStateEvent = workspace.changeEvent.attach(this, (message = 'cancelEdit') => {
             this.endEdit(message);
-            if (workspace.getMode() === Entry.Workspace.MODE_VIMBOARD) {
+            if (workspace.getMode() === RoCode.Workspace.MODE_VIMBOARD) {
                 workspace.blockMenu.banClass('functionInit');
             }
         });
@@ -111,9 +111,9 @@ class EntryFunc {
         this._backupContent = null;
 
         delete this.targetFunc;
-        EntryFunc.isEdit = false;
-        Entry.getMainWS().blockMenu.deleteRendered('variable');
-        const blockSchema = Entry.block[`func_${targetFuncId}`];
+        RoCodeFunc.isEdit = false;
+        RoCode.getMainWS().blockMenu.deleteRendered('variable');
+        const blockSchema = RoCode.block[`func_${targetFuncId}`];
         if (blockSchema && blockSchema.destroyParamsBackupEvent) {
             blockSchema.destroyParamsBackupEvent.notify();
         }
@@ -122,7 +122,7 @@ class EntryFunc {
 
     static save() {
         this.targetFunc.generateBlock(true);
-        Entry.variableContainer.saveFunction(this.targetFunc);
+        RoCode.variableContainer.saveFunction(this.targetFunc);
 
         this._restoreBoardToVimBoard();
     }
@@ -134,8 +134,8 @@ class EntryFunc {
 
         if (!this.targetFunc.block) {
             this._targetFuncBlock.destroy();
-            delete Entry.variableContainer.functions_[this.targetFunc.id];
-            delete Entry.variableContainer.selected;
+            delete RoCode.variableContainer.functions_[this.targetFunc.id];
+            delete RoCode.variableContainer.selected;
         } else {
             if (this._backupContent) {
                 this.targetFunc.content.load(this._backupContent);
@@ -143,13 +143,13 @@ class EntryFunc {
                 this.generateWsBlock(this.targetFunc, true);
             }
         }
-        Entry.variableContainer.updateList();
+        RoCode.variableContainer.updateList();
 
         this._restoreBoardToVimBoard();
     }
 
     static setupMenuCode() {
-        const workspace = Entry.getMainWS();
+        const workspace = RoCode.getMainWS();
         if (!workspace) {
             return;
         }
@@ -196,7 +196,7 @@ class EntryFunc {
     }
 
     static refreshMenuCode() {
-        if (!Entry.playground.mainWorkspace) {
+        if (!RoCode.playground.mainWorkspace) {
             return;
         }
         if (!this.menuCode) {
@@ -211,17 +211,17 @@ class EntryFunc {
         let blockPrototype;
         switch (type) {
             case 'string':
-                blockPrototype = Entry.block.function_param_string;
+                blockPrototype = RoCode.block.function_param_string;
                 break;
             case 'boolean':
-                blockPrototype = Entry.block.function_param_boolean;
+                blockPrototype = RoCode.block.function_param_boolean;
                 break;
             default:
                 return null;
         }
 
-        const blockType = `${type}Param_${Entry.generateHash()}`;
-        Entry.block[blockType] = EntryFunc.createParamBlock(blockType, blockPrototype, type);
+        const blockType = `${type}Param_${RoCode.generateHash()}`;
+        RoCode.block[blockType] = RoCodeFunc.createParamBlock(blockType, blockPrototype, type);
         return blockType;
     }
 
@@ -232,9 +232,9 @@ class EntryFunc {
 
         let blockPrototype;
         if (type.indexOf('stringParam') > -1) {
-            blockPrototype = Entry.block.function_param_string;
+            blockPrototype = RoCode.block.function_param_string;
         } else if (type.indexOf('booleanParam') > -1) {
-            blockPrototype = Entry.block.function_param_boolean;
+            blockPrototype = RoCode.block.function_param_boolean;
         }
 
         //not a function param block
@@ -242,7 +242,7 @@ class EntryFunc {
             return;
         }
 
-        EntryFunc.createParamBlock(type, blockPrototype, type);
+        RoCodeFunc.createParamBlock(type, blockPrototype, type);
     }
 
     static createParamBlock(type, blockPrototype, originalType) {
@@ -252,16 +252,16 @@ class EntryFunc {
         let BlockSchema = function() {};
         BlockSchema.prototype = blockPrototype;
         BlockSchema = new BlockSchema();
-        BlockSchema.changeEvent = new Entry.Event();
+        BlockSchema.changeEvent = new RoCode.Event();
         BlockSchema.template = Lang.template[originalTypeFullName];
         BlockSchema.fontColor = blockPrototype.fontColor || '#FFF';
 
-        Entry.block[type] = BlockSchema;
+        RoCode.block[type] = BlockSchema;
         return BlockSchema;
     }
 
     static updateMenu() {
-        const workspace = Entry.getMainWS();
+        const workspace = RoCode.getMainWS();
         if (!workspace) {
             return;
         }
@@ -278,7 +278,7 @@ class EntryFunc {
     }
 
     static generateBlock(func) {
-        const blockSchema = Entry.block[`func_${func.id}`];
+        const blockSchema = RoCode.block[`func_${func.id}`];
         const block = {
             template: blockSchema.template,
             params: blockSchema.params,
@@ -337,7 +337,7 @@ class EntryFunc {
                     schemaTemplate = `${schemaTemplate} ${value}`;
                     break;
                 case 'function_field_boolean':
-                    Entry.Mutator.mutate(valueType, {
+                    RoCode.Mutator.mutate(valueType, {
                         template: `${Lang.Blocks.FUNCTION_logical_variable} ${booleanIndex + 1}`,
                     });
                     hashMap[valueType] = false;
@@ -351,7 +351,7 @@ class EntryFunc {
                     blockIds.push(outputBlock.id);
                     break;
                 case 'function_field_string':
-                    Entry.Mutator.mutate(valueType, {
+                    RoCode.Mutator.mutate(valueType, {
                         template: `${Lang.Blocks.FUNCTION_character_variable} ${stringIndex + 1}`,
                     });
                     hashMap[valueType] = false;
@@ -376,7 +376,7 @@ class EntryFunc {
         });
 
         const funcName = `func_${targetFunc.id}`;
-        const block = Entry.block[funcName];
+        const block = RoCode.block[funcName];
 
         const originParams = block.params.slice(0, block.params.length - 1);
         const newParams = schemaParams.slice(0, schemaParams.length - 1);
@@ -421,7 +421,7 @@ class EntryFunc {
 
         targetFunc.outputBlockIds = blockIds;
 
-        Entry.Mutator.mutate(
+        RoCode.Mutator.mutate(
             funcName,
             {
                 params: schemaParams,
@@ -437,7 +437,7 @@ class EntryFunc {
                     ? Lang.Blocks.FUNCTION_character_variable
                     : Lang.Blocks.FUNCTION_logical_variable;
 
-                Entry.Mutator.mutate(key, { template: text });
+                RoCode.Mutator.mutate(key, { template: text });
             } else {
                 hashMap[key] = true;
             }
@@ -482,16 +482,16 @@ class EntryFunc {
 
     static _generateFunctionSchema(functionId) {
         const prefixedFunctionId = `func_${functionId}`;
-        if (Entry.block[prefixedFunctionId]) {
+        if (RoCode.block[prefixedFunctionId]) {
             return;
         }
         let BlockSchema = function() {};
-        BlockSchema.prototype = Entry.block.function_general;
+        BlockSchema.prototype = RoCode.block.function_general;
         BlockSchema = new BlockSchema();
-        BlockSchema.changeEvent = new Entry.Event();
+        BlockSchema.changeEvent = new RoCode.Event();
         BlockSchema.template = Lang.template.function_general;
 
-        Entry.block[prefixedFunctionId] = BlockSchema;
+        RoCode.block[prefixedFunctionId] = BlockSchema;
     }
 
     /**
@@ -499,27 +499,27 @@ class EntryFunc {
      * @private
      */
     static _restoreBoardToVimBoard() {
-        const ws = Entry.getMainWS();
-        if (ws && ws.overlayModefrom === Entry.Workspace.MODE_VIMBOARD) {
+        const ws = RoCode.getMainWS();
+        if (ws && ws.overlayModefrom === RoCode.Workspace.MODE_VIMBOARD) {
             ws.setMode({
-                boardType: Entry.Workspace.MODE_VIMBOARD,
-                textType: Entry.Vim.TEXT_TYPE_PY,
-                runType: Entry.Vim.WORKSPACE_MODE,
+                boardType: RoCode.Workspace.MODE_VIMBOARD,
+                textType: RoCode.Vim.TEXT_TYPE_PY,
+                runType: RoCode.Vim.WORKSPACE_MODE,
             });
-            Entry.variableContainer.functionAddButton_.addClass('disable');
+            RoCode.variableContainer.functionAddButton_.addClass('disable');
         }
     }
 
     constructor(func) {
-        this.id = func && func.id ? func.id : Entry.generateHash();
+        this.id = func && func.id ? func.id : RoCode.generateHash();
         let content;
         //inspect empty content
         if (func && func.content && func.content.length > 4) {
             content = func.content;
         }
         this.content = content
-            ? new Entry.Code(content)
-            : new Entry.Code([
+            ? new RoCode.Code(content)
+            : new RoCode.Code([
                   [
                       {
                           type: 'function_create',
@@ -535,19 +535,19 @@ class EntryFunc {
         this.hashMap = {};
         this.paramMap = {};
 
-        EntryFunc._generateFunctionSchema(this.id);
+        RoCodeFunc._generateFunctionSchema(this.id);
 
         if (func && func.content) {
             const blockMap = this.content._blockMap;
             for (const key in blockMap) {
-                EntryFunc.registerParamBlock(blockMap[key].type);
+                RoCodeFunc.registerParamBlock(blockMap[key].type);
             }
-            EntryFunc.generateWsBlock(this);
+            RoCodeFunc.generateWsBlock(this);
         }
 
-        EntryFunc.registerFunction(this);
+        RoCodeFunc.registerFunction(this);
 
-        EntryFunc.updateMenu();
+        RoCodeFunc.updateMenu();
     }
 
     destroy() {
@@ -555,23 +555,23 @@ class EntryFunc {
     }
 
     edit() {
-        if (EntryFunc.isEdit) {
+        if (RoCodeFunc.isEdit) {
             return;
         }
-        EntryFunc.isEdit = true;
-        Entry.getMainWS().blockMenu.deleteRendered('variable');
-        if (!EntryFunc.svg) {
-            EntryFunc.isEdit = EntryFunc.initEditView();
+        RoCodeFunc.isEdit = true;
+        RoCode.getMainWS().blockMenu.deleteRendered('variable');
+        if (!RoCodeFunc.svg) {
+            RoCodeFunc.isEdit = RoCodeFunc.initEditView();
         } else {
             this.parentView.appendChild(this.svg);
         }
     }
 
     generateBlock() {
-        const generatedInfo = EntryFunc.generateBlock(this);
+        const generatedInfo = RoCodeFunc.generateBlock(this);
         this.block = generatedInfo.block;
         this.description = generatedInfo.description;
     }
 }
 
-Entry.Func = EntryFunc;
+RoCode.Func = RoCodeFunc;

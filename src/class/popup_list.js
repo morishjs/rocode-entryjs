@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.PopupList = class PopupList {
+RoCode.PopupList = class PopupList {
     constructor(dom) {
         this.view = dom;
     }

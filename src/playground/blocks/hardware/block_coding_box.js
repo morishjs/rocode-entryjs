@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.CodingBox = {
+RoCode.CodingBox = {
     id: '1.C',
     name: 'CodingBox',
     url: 'http://smartstore.naver.com/domekit',
@@ -10,23 +10,23 @@ Entry.CodingBox = {
         en: 'CodingBox',
     },
     setZero: function() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
-            Entry.hw.sendQueue['SET'][Entry.CodingBox.sensorTypes.LCD_INIT] = {
+            RoCode.hw.sendQueue['SET'][RoCode.CodingBox.sensorTypes.LCD_INIT] = {
                 port: 0,
                 time: new Date().getTime(),
             };
         } else {
-            var keySet = Object.keys(Entry.hw.sendQueue.SET);
+            var keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach(function(key) {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     pins: {
         POTENTIOMETER: 0,
@@ -94,7 +94,7 @@ Entry.CodingBox = {
     BlockState: {},
 };
 
-Entry.CodingBox.setLanguage = function() {
+RoCode.CodingBox.setLanguage = function() {
     return {
         ko: {
             Blocks: {
@@ -171,7 +171,7 @@ Entry.CodingBox.setLanguage = function() {
         },
     };
 };
-Entry.CodingBox.blockMenuBlocks = [
+RoCode.CodingBox.blockMenuBlocks = [
     'cbx_read_line',
     'cbx_read_mic',
     'cbx_read_switch',
@@ -194,11 +194,11 @@ Entry.CodingBox.blockMenuBlocks = [
     'cbx_arduino_write_tone',
 ];
 //region CodingBox 아두이노 확장모드
-Entry.CodingBox.getBlocks = function() {
+RoCode.CodingBox.getBlocks = function() {
     return {
         coding_box_analog_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -215,8 +215,8 @@ Entry.CodingBox.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -249,11 +249,11 @@ Entry.CodingBox.getBlocks = function() {
                                 value: '0',
                                 fontSize: 11,
                                 converter:
-                                    Entry.block.converters.returnStringKey,
+                                    RoCode.block.converters.returnStringKey,
                                 codeMap:
-                                    'Entry.CodeMap.Arduino.arduino_ext_analog_list[0]',
-                                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                    'RoCode.CodeMap.Arduino.arduino_ext_analog_list[0]',
+                                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'coding_box_analog_list',
@@ -262,8 +262,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_arduino_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -289,7 +289,7 @@ Entry.CodingBox.getBlocks = function() {
             isNotFor: ['CodingBox'],
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 if (port[0] === 'A') port = port.substring(1);
                 return ANALOG ? ANALOG[port] || 0 : 0;
             },
@@ -310,8 +310,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_arduino_get_analog_value_map: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -378,7 +378,7 @@ Entry.CodingBox.getBlocks = function() {
             isNotFor: ['CodingBox'],
             func: function(sprite, script) {
                 var result = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var value2 = script.getNumberValue('VALUE2', script);
                 var value3 = script.getNumberValue('VALUE3', script);
                 var value4 = script.getNumberValue('VALUE4', script);
@@ -388,9 +388,9 @@ Entry.CodingBox.getBlocks = function() {
                 var isFloat = false;
 
                 if (
-                    (Entry.Utils.isNumber(stringValue4) &&
+                    (RoCode.Utils.isNumber(stringValue4) &&
                         stringValue4.indexOf('.') > -1) ||
-                    (Entry.Utils.isNumber(stringValue5) &&
+                    (RoCode.Utils.isNumber(stringValue5) &&
                         stringValue5.indexOf('.') > -1)
                 ) {
                     isFloat = true;
@@ -453,8 +453,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_arudino_read_ultrasonic_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -492,22 +492,22 @@ Entry.CodingBox.getBlocks = function() {
                 var port1 = script.getNumberValue('PORT1', script);
                 var port2 = script.getNumberValue('PORT2', script);
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][port1];
-                delete Entry.hw.sendQueue['SET'][port2];
+                delete RoCode.hw.sendQueue['SET'][port1];
+                delete RoCode.hw.sendQueue['SET'][port2];
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][
-                    Entry.CodingBox.sensorTypes.ULTRASONIC
+                RoCode.hw.sendQueue['GET'][
+                    RoCode.CodingBox.sensorTypes.ULTRASONIC
                 ] = {
                     port: [port1, port2],
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.ULTRASONIC || 0;
+                return RoCode.hw.portData.ULTRASONIC || 0;
             },
             syntax: {
                 js: [],
@@ -530,8 +530,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_arduino_read_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -556,24 +556,24 @@ Entry.CodingBox.getBlocks = function() {
             class: 'CodingBoxArduinoRead',
             isNotFor: ['CodingBox'],
             func: function(sprite, script) {
-                const { hwModule = {} } = Entry.hw;
+                const { hwModule = {} } = RoCode.hw;
                 const { name } = hwModule;
 
                 if (name === 'CodingBox') {
                     var port = script.getNumberValue('PORT', script);
-                    var DIGITAL = Entry.hw.portData.DIGITAL;
-                    if (!Entry.hw.sendQueue['GET']) {
-                        Entry.hw.sendQueue['GET'] = {};
+                    var DIGITAL = RoCode.hw.portData.DIGITAL;
+                    if (!RoCode.hw.sendQueue['GET']) {
+                        RoCode.hw.sendQueue['GET'] = {};
                     }
-                    Entry.hw.sendQueue['GET'][
-                        Entry.CodingBox.sensorTypes.DIGITAL
+                    RoCode.hw.sendQueue['GET'][
+                        RoCode.CodingBox.sensorTypes.DIGITAL
                     ] = {
                         port: port,
                         time: new Date().getTime(),
                     };
                     return DIGITAL ? DIGITAL[port] || 0 : 0;
                 } else {
-                    return Entry.block.arduino_get_digital_value.func(
+                    return RoCode.block.arduino_get_digital_value.func(
                         sprite,
                         script
                     );
@@ -596,8 +596,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         arduino_get_digital_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -609,8 +609,8 @@ Entry.CodingBox.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -638,12 +638,12 @@ Entry.CodingBox.getBlocks = function() {
                                 value: 'on',
                                 fontSize: 11,
                                 converter:
-                                    Entry.block.converters
+                                    RoCode.block.converters
                                         .returnStringValueUpperCase,
                                 codeMap:
-                                    'Entry.CodeMap.Arduino.arduino_get_digital_toggle[0]',
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                    'RoCode.CodeMap.Arduino.arduino_get_digital_toggle[0]',
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'arduino_get_digital_toggle',
@@ -652,8 +652,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_arduino_toggle_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -699,18 +699,18 @@ Entry.CodingBox.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.CodingBox.highList.indexOf(value) > -1) {
+                if (RoCode.CodingBox.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.CodingBox.lowList.indexOf(value) > -1) {
+                } else if (RoCode.CodingBox.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.CodingBox.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.CodingBox.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -736,8 +736,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_arduino_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -781,11 +781,11 @@ Entry.CodingBox.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.CodingBox.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.CodingBox.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -811,8 +811,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         coding_box_tone_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -836,8 +836,8 @@ Entry.CodingBox.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -876,10 +876,10 @@ Entry.CodingBox.getBlocks = function() {
                                 value: 'C',
                                 fontSize: 11,
                                 converter:
-                                    Entry.block.converters
+                                    RoCode.block.converters
                                         .returnStringValueUpperCase,
-                                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'coding_box_tone_list',
@@ -888,8 +888,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         coding_box_tone_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -925,8 +925,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         coding_box_octave_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -943,8 +943,8 @@ Entry.CodingBox.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -968,8 +968,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_arduino_write_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1025,13 +1025,13 @@ Entry.CodingBox.getBlocks = function() {
             class: 'CodingBoxArduinoWrite',
             isNotFor: ['CodingBox'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
 
                 if (!script.isStart) {
                     var note = script.getValue('NOTE', script);
-                    if (!Entry.Utils.isNumber(note))
-                        note = Entry.CodingBox.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note))
+                        note = RoCode.CodingBox.toneTable[note];
 
                     if (note < 0) {
                         note = 0;
@@ -1051,7 +1051,7 @@ Entry.CodingBox.getBlocks = function() {
 
                     if (duration === 0) {
                         sq['SET'][port] = {
-                            type: Entry.CodingBox.sensorTypes.TONE,
+                            type: RoCode.CodingBox.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -1068,7 +1068,7 @@ Entry.CodingBox.getBlocks = function() {
                     var value = 0;
 
                     if (note != 0) {
-                        value = Entry.CodingBox.toneMap[note][octave];
+                        value = RoCode.CodingBox.toneMap[note][octave];
                     }
 
                     duration = duration * 1000;
@@ -1076,7 +1076,7 @@ Entry.CodingBox.getBlocks = function() {
                     script.timeFlag = 1;
 
                     sq['SET'][port] = {
-                        type: Entry.CodingBox.sensorTypes.TONE,
+                        type: RoCode.CodingBox.sensorTypes.TONE,
                         data: {
                             value: value,
                             duration: duration,
@@ -1094,11 +1094,11 @@ Entry.CodingBox.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
                     sq['SET'][port] = {
-                        type: Entry.CodingBox.sensorTypes.TONE,
+                        type: RoCode.CodingBox.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1130,8 +1130,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_arduino_write_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1167,7 +1167,7 @@ Entry.CodingBox.getBlocks = function() {
             class: 'CodingBoxArduinoWrite',
             isNotFor: ['CodingBox'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
                 var value = script.getNumberValue('VALUE', script);
 
@@ -1178,7 +1178,7 @@ Entry.CodingBox.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodingBox.sensorTypes.SERVO_PIN,
+                    type: RoCode.CodingBox.sensorTypes.SERVO_PIN,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1208,8 +1208,8 @@ Entry.CodingBox.getBlocks = function() {
         //CodingBox Only
         //////
         cbx_read_ultrasonic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1217,25 +1217,25 @@ Entry.CodingBox.getBlocks = function() {
             class: 'CodingBoxRead',
             isNotFor: ['CodingBox'],
             func: function(sprite, script) {
-                var port1 = Entry.CodingBox.pins.ULTRASONIC_TRIG;
-                var port2 = Entry.CodingBox.pins.ULTRASONIC_ECHO;
+                var port1 = RoCode.CodingBox.pins.ULTRASONIC_TRIG;
+                var port2 = RoCode.CodingBox.pins.ULTRASONIC_ECHO;
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][port1];
-                delete Entry.hw.sendQueue['SET'][port2];
+                delete RoCode.hw.sendQueue['SET'][port1];
+                delete RoCode.hw.sendQueue['SET'][port2];
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][
-                    Entry.CodingBox.sensorTypes.ULTRASONIC
+                RoCode.hw.sendQueue['GET'][
+                    RoCode.CodingBox.sensorTypes.ULTRASONIC
                 ] = {
                     port: [port1, port2],
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.ULTRASONIC || 0;
+                return RoCode.hw.portData.ULTRASONIC || 0;
             },
             syntax: {
                 js: [],
@@ -1258,8 +1258,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_read_switch: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1285,7 +1285,7 @@ Entry.CodingBox.getBlocks = function() {
             isNotFor: ['CodingBox'],
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var value = ANALOG ? ANALOG[port] || 0 : 0;
                 var isPush = 0;
 
@@ -1315,8 +1315,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_read_potentiometer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             //      statements: [],
@@ -1331,8 +1331,8 @@ Entry.CodingBox.getBlocks = function() {
             class: 'CodingBoxRead',
             isNotFor: ['CodingBox'],
             func: function(sprite, script) {
-                var port = Entry.CodingBox.pins.POTENTIOMETER;
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var port = RoCode.CodingBox.pins.POTENTIOMETER;
+                var ANALOG = RoCode.hw.portData.ANALOG;
 
                 if (port[0] === 'A') port = port.substring(1);
                 return ANALOG ? ANALOG[port] || 0 : 0;
@@ -1354,8 +1354,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_read_mic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1370,8 +1370,8 @@ Entry.CodingBox.getBlocks = function() {
             class: 'CodingBoxRead',
             isNotFor: ['CodingBox'],
             func: function(sprite, script) {
-                var port = Entry.CodingBox.pins.MIC;
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var port = RoCode.CodingBox.pins.MIC;
+                var ANALOG = RoCode.hw.portData.ANALOG;
 
                 if (port[0] === 'A') port = port.substring(1);
                 return ANALOG ? ANALOG[port] || 0 : 0;
@@ -1393,8 +1393,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_read_line: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             params: [
@@ -1409,15 +1409,15 @@ Entry.CodingBox.getBlocks = function() {
             isNotFor: ['CodingBox'],
             func: function(sprite, script) {
                 const port = 3;
-                const { hwModule = {} } = Entry.hw;
+                const { hwModule = {} } = RoCode.hw;
                 const { name } = hwModule;
-                var DIGITAL = Entry.hw.portData.DIGITAL;
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][
-                    Entry.CodingBox.sensorTypes.DIGITAL
+                RoCode.hw.sendQueue['GET'][
+                    RoCode.CodingBox.sensorTypes.DIGITAL
                 ] = {
                     port: port,
                     time: new Date().getTime(),
@@ -1441,8 +1441,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_write_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1487,11 +1487,11 @@ Entry.CodingBox.getBlocks = function() {
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.CodingBox.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.CodingBox.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1499,8 +1499,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_write_lcd: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1547,7 +1547,7 @@ Entry.CodingBox.getBlocks = function() {
             class: 'CodingBoxWrite',
             isNotFor: ['CodingBox'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var row = script.getNumberValue('ROW');
                 var column = script.getNumberValue('COLUMN');
                 var text = script.getValue('TEXT');
@@ -1562,11 +1562,11 @@ Entry.CodingBox.getBlocks = function() {
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = 60 / fps * 50;
 
                     sq['SET'][15] = {
-                        type: Entry.CodingBox.sensorTypes.LCD_PRINT,
+                        type: RoCode.CodingBox.sensorTypes.LCD_PRINT,
                         data: {
                             row,
                             column,
@@ -1584,7 +1584,7 @@ Entry.CodingBox.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
 
@@ -1601,8 +1601,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_clear_lcd: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1621,14 +1621,14 @@ Entry.CodingBox.getBlocks = function() {
             class: 'CodingBoxWrite',
             isNotFor: ['CodingBox'],
             func: function(sprite, script) {
-                let sq = Entry.hw.sendQueue;
+                let sq = RoCode.hw.sendQueue;
                 let time = new Date().getTime();
 
                 if (!sq['SET']) {
                     sq['SET'] = {};
                 }
                 sq['SET'][14] = {
-                    type: Entry.CodingBox.sensorTypes.LCD_CLEAR,
+                    type: RoCode.CodingBox.sensorTypes.LCD_CLEAR,
                     data: 255,
                     time: time,
                 };
@@ -1646,8 +1646,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_write_rgb_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1693,9 +1693,9 @@ Entry.CodingBox.getBlocks = function() {
             class: 'CodingBoxWrite',
             isNotFor: ['CodingBox'],
             func: function(sprite, script) {
-                var redPort = Entry.CodingBox.pins.RGB_R;
-                var greenPort = Entry.CodingBox.pins.RGB_G;
-                var bluePort = Entry.CodingBox.pins.RGB_B;
+                var redPort = RoCode.CodingBox.pins.RGB_R;
+                var greenPort = RoCode.CodingBox.pins.RGB_G;
+                var bluePort = RoCode.CodingBox.pins.RGB_B;
                 var redPWM = script.getNumberValue('R');
                 var greenPWM = script.getNumberValue('G');
                 var bluePWM = script.getNumberValue('B');
@@ -1710,21 +1710,21 @@ Entry.CodingBox.getBlocks = function() {
                 bluePWM = Math.max(bluePWM, 0);
                 bluePWM = Math.min(bluePWM, 1);
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][redPort] = {
-                    type: Entry.CodingBox.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][redPort] = {
+                    type: RoCode.CodingBox.sensorTypes.DIGITAL,
                     data: redPWM,
                     time: new Date().getTime(),
                 };
-                Entry.hw.sendQueue['SET'][greenPort] = {
-                    type: Entry.CodingBox.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][greenPort] = {
+                    type: RoCode.CodingBox.sensorTypes.DIGITAL,
                     data: greenPWM,
                     time: new Date().getTime(),
                 };
-                Entry.hw.sendQueue['SET'][bluePort] = {
-                    type: Entry.CodingBox.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][bluePort] = {
+                    type: RoCode.CodingBox.sensorTypes.DIGITAL,
                     data: bluePWM,
                     time: new Date().getTime(),
                 };
@@ -1750,8 +1750,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_led_number_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1761,8 +1761,8 @@ Entry.CodingBox.getBlocks = function() {
                     options: [['LED1', '10'], ['LED2', '11']],
                     value: '10',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1787,10 +1787,10 @@ Entry.CodingBox.getBlocks = function() {
                                 value: '3',
                                 fontSize: 11,
                                 converter:
-                                    Entry.block.converters
+                                    RoCode.block.converters
                                         .returnStringOrNumberByValue,
-                                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'cbx_led_number_list',
@@ -1799,8 +1799,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_rgb_led_value_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1813,8 +1813,8 @@ Entry.CodingBox.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1842,10 +1842,10 @@ Entry.CodingBox.getBlocks = function() {
                                 value: '3',
                                 fontSize: 11,
                                 converter:
-                                    Entry.block.converters
+                                    RoCode.block.converters
                                         .returnStringOrNumberByValue,
-                                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'cbx_led_value_list',
@@ -1854,8 +1854,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_led_value_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1872,8 +1872,8 @@ Entry.CodingBox.getBlocks = function() {
                     ],
                     value: '255',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1906,10 +1906,10 @@ Entry.CodingBox.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                                 converter:
-                                    Entry.block.converters
+                                    RoCode.block.converters
                                         .returnStringOrNumberByValue,
                             },
                         ],
@@ -1919,8 +1919,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_dcm_speed_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1937,8 +1937,8 @@ Entry.CodingBox.getBlocks = function() {
                     ],
                     value: '255',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1969,10 +1969,10 @@ Entry.CodingBox.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                                 converter:
-                                    Entry.block.converters
+                                    RoCode.block.converters
                                         .returnStringOrNumberByValue,
                             },
                         ],
@@ -1982,8 +1982,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_servo_angle_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -2001,8 +2001,8 @@ Entry.CodingBox.getBlocks = function() {
                     ],
                     value: '255',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2033,10 +2033,10 @@ Entry.CodingBox.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                                 converter:
-                                    Entry.block.converters
+                                    RoCode.block.converters
                                         .returnStringOrNumberByValue,
                             },
                         ],
@@ -2046,8 +2046,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_lcd_column_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -2074,8 +2074,8 @@ Entry.CodingBox.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2116,10 +2116,10 @@ Entry.CodingBox.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                                 converter:
-                                    Entry.block.converters
+                                    RoCode.block.converters
                                         .returnStringOrNumberByValue,
                             },
                         ],
@@ -2129,8 +2129,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_lcd_row_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -2140,8 +2140,8 @@ Entry.CodingBox.getBlocks = function() {
                     options: [['1', '0'], ['2', '1']],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2165,10 +2165,10 @@ Entry.CodingBox.getBlocks = function() {
                                 options: [['1', '0'], ['2', '1']],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                                 converter:
-                                    Entry.block.converters
+                                    RoCode.block.converters
                                         .returnStringOrNumberByValue,
                             },
                         ],
@@ -2178,8 +2178,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_switch_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -2187,13 +2187,13 @@ Entry.CodingBox.getBlocks = function() {
                 {
                     type: 'Dropdown',
                     options: [
-                        ['switch1', Entry.CodingBox.pins.SWITCH_1],
-                        ['switch2', Entry.CodingBox.pins.SWITCH_2],
+                        ['switch1', RoCode.CodingBox.pins.SWITCH_1],
+                        ['switch2', RoCode.CodingBox.pins.SWITCH_2],
                     ],
-                    value: Entry.CodingBox.pins.SWITCH_1,
+                    value: RoCode.CodingBox.pins.SWITCH_1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2215,15 +2215,15 @@ Entry.CodingBox.getBlocks = function() {
                             {
                                 type: 'Dropdown',
                                 options: [
-                                    ['switch1', Entry.CodingBox.pins.SWITCH_1],
-                                    ['switch2', Entry.CodingBox.pins.SWITCH_2],
+                                    ['switch1', RoCode.CodingBox.pins.SWITCH_1],
+                                    ['switch2', RoCode.CodingBox.pins.SWITCH_2],
                                 ],
-                                value: Entry.CodingBox.pins.SWITCH_1,
+                                value: RoCode.CodingBox.pins.SWITCH_1,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                                 converter:
-                                    Entry.block.converters
+                                    RoCode.block.converters
                                         .returnStringOrNumberByValue,
                             },
                         ],
@@ -2233,8 +2233,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_dcm_direction_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -2247,8 +2247,8 @@ Entry.CodingBox.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2272,10 +2272,10 @@ Entry.CodingBox.getBlocks = function() {
                                 options: [['forward', '1'], ['reverse', '0']],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                                 converter:
-                                    Entry.block.converters
+                                    RoCode.block.converters
                                         .returnStringOrNumberByValue,
                             },
                         ],
@@ -2285,8 +2285,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_write_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2317,8 +2317,8 @@ Entry.CodingBox.getBlocks = function() {
             class: 'CodingBoxWrite',
             isNotFor: ['CodingBox'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var port = Entry.CodingBox.pins.SERVO;
+                var sq = RoCode.hw.sendQueue;
+                var port = RoCode.CodingBox.pins.SERVO;
                 var angle = script.getNumberValue('ANGLE', script);
 
                 angle = Math.min(180, angle);
@@ -2328,7 +2328,7 @@ Entry.CodingBox.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodingBox.sensorTypes.SERVO_PIN,
+                    type: RoCode.CodingBox.sensorTypes.SERVO_PIN,
                     data: angle,
                     time: new Date().getTime(),
                 };
@@ -2355,8 +2355,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_write_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2403,13 +2403,13 @@ Entry.CodingBox.getBlocks = function() {
             class: 'CodingBoxWrite',
             isNotFor: ['CodingBox'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var port = Entry.CodingBox.pins.BUZZER;
+                var sq = RoCode.hw.sendQueue;
+                var port = RoCode.CodingBox.pins.BUZZER;
 
                 if (!script.isStart) {
                     var note = script.getValue('NOTE', script);
-                    if (!Entry.Utils.isNumber(note))
-                        note = Entry.CodingBox.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note))
+                        note = RoCode.CodingBox.toneTable[note];
 
                     if (note < 0) {
                         note = 0;
@@ -2429,7 +2429,7 @@ Entry.CodingBox.getBlocks = function() {
 
                     if (duration === 0) {
                         sq['SET'][port] = {
-                            type: Entry.CodingBox.sensorTypes.TONE,
+                            type: RoCode.CodingBox.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -2446,7 +2446,7 @@ Entry.CodingBox.getBlocks = function() {
                     var value = 0;
 
                     if (note != 0) {
-                        value = Entry.CodingBox.toneMap[note][octave];
+                        value = RoCode.CodingBox.toneMap[note][octave];
                     }
 
                     duration = duration * 1000;
@@ -2454,7 +2454,7 @@ Entry.CodingBox.getBlocks = function() {
                     script.timeFlag = 1;
 
                     sq['SET'][port] = {
-                        type: Entry.CodingBox.sensorTypes.TONE,
+                        type: RoCode.CodingBox.sensorTypes.TONE,
                         data: {
                             value: value,
                             duration: duration,
@@ -2472,11 +2472,11 @@ Entry.CodingBox.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
                     sq['SET'][port] = {
-                        type: Entry.CodingBox.sensorTypes.TONE,
+                        type: RoCode.CodingBox.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2508,8 +2508,8 @@ Entry.CodingBox.getBlocks = function() {
             },
         },
         cbx_write_dcm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2547,8 +2547,8 @@ Entry.CodingBox.getBlocks = function() {
             class: 'CodingBoxWrite',
             isNotFor: ['CodingBox'],
             func: function(sprite, script) {
-                var dcmAPin = Entry.CodingBox.pins.DCM_A;
-                var dcmBPin = Entry.CodingBox.pins.DCM_B;
+                var dcmAPin = RoCode.CodingBox.pins.DCM_A;
+                var dcmBPin = RoCode.CodingBox.pins.DCM_B;
                 var direction = script.getNumberValue('DIRECTION');
                 var speed = script.getNumberValue('SPEED', script);
                 var dcmASpeed = 0;
@@ -2566,16 +2566,16 @@ Entry.CodingBox.getBlocks = function() {
                     dcmBSpeed = speed;
                 }
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][dcmAPin] = {
-                    type: Entry.CodingBox.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][dcmAPin] = {
+                    type: RoCode.CodingBox.sensorTypes.PWM,
                     data: dcmASpeed,
                     time: new Date().getTime(),
                 };
-                Entry.hw.sendQueue['SET'][dcmBPin] = {
-                    type: Entry.CodingBox.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][dcmBPin] = {
+                    type: RoCode.CodingBox.sensorTypes.PWM,
                     data: dcmBSpeed,
                     time: new Date().getTime(),
                 };
@@ -2605,4 +2605,4 @@ Entry.CodingBox.getBlocks = function() {
 };
 //endregion CodingBox
 
-module.exports = Entry.CodingBox;
+module.exports = RoCode.CodingBox;

@@ -9,7 +9,7 @@ require('./parser/core/text/jsToBlock');
 require('./parser/core/block/blockToPy');
 require('./parser/core/block/blockToJs');
 
-Entry.Parser = function(mode, type, cm, syntax) {
+RoCode.Parser = function(mode, type, cm, syntax) {
     this._mode = mode; // maze ai workspace
     this.syntax = {}; //for maze
     this.codeMirror = cm;
@@ -21,16 +21,16 @@ Entry.Parser = function(mode, type, cm, syntax) {
     this._pyThreadCount = 1;
     this._pyBlockCount = {};
 
-    Entry.Parser.PARSE_GENERAL = 1;
-    Entry.Parser.PARSE_SYNTAX = 2;
-    Entry.Parser.PARSE_VARIABLE = 3;
-    Entry.Parser.PARSE_BLOCK = 4;
+    RoCode.Parser.PARSE_GENERAL = 1;
+    RoCode.Parser.PARSE_SYNTAX = 2;
+    RoCode.Parser.PARSE_VARIABLE = 3;
+    RoCode.Parser.PARSE_BLOCK = 4;
 
     this._onError = false;
     this._onRunError = false;
 
-    if (Entry.type === 'workspace') {
-        this._console = new Entry.Console();
+    if (RoCode.type === 'workspace') {
+        this._console = new RoCode.Console();
 
         const hwFunc = function() {
             const _mode = this._mode;
@@ -46,7 +46,7 @@ Entry.Parser = function(mode, type, cm, syntax) {
 
         //after hw code generated update syntax for this
         //and update python hinter syntax
-        Entry.addEventListener('hwCodeGenerated', hwFunc);
+        RoCode.addEventListener('hwCodeGenerated', hwFunc);
     }
 };
 
@@ -96,22 +96,22 @@ Entry.Parser = function(mode, type, cm, syntax) {
         this.syntax = this.mappingSyntax(mode);
 
         switch (type) {
-            case Entry.Vim.PARSER_TYPE_JS_TO_BLOCK:
-                this._execParser = new Entry.JsToBlockParser(this.syntax, this);
-                this._execParserType = Entry.Vim.PARSER_TYPE_JS_TO_BLOCK;
+            case RoCode.Vim.PARSER_TYPE_JS_TO_BLOCK:
+                this._execParser = new RoCode.JsToBlockParser(this.syntax, this);
+                this._execParserType = RoCode.Vim.PARSER_TYPE_JS_TO_BLOCK;
                 break;
-            case Entry.Vim.PARSER_TYPE_PY_TO_BLOCK:
-                this._execParser = new Entry.PyToBlockParser(this.syntax);
-                this._execParserType = Entry.Vim.PARSER_TYPE_PY_TO_BLOCK;
+            case RoCode.Vim.PARSER_TYPE_PY_TO_BLOCK:
+                this._execParser = new RoCode.PyToBlockParser(this.syntax);
+                this._execParserType = RoCode.Vim.PARSER_TYPE_PY_TO_BLOCK;
                 break;
-            case Entry.Vim.PARSER_TYPE_BLOCK_TO_JS:
-                this._execParser = new Entry.BlockToJsParser(this.syntax, this);
-                this._execParserType = Entry.Vim.PARSER_TYPE_BLOCK_TO_JS;
+            case RoCode.Vim.PARSER_TYPE_BLOCK_TO_JS:
+                this._execParser = new RoCode.BlockToJsParser(this.syntax, this);
+                this._execParserType = RoCode.Vim.PARSER_TYPE_BLOCK_TO_JS;
                 break;
-            case Entry.Vim.PARSER_TYPE_BLOCK_TO_PY:
-                this._execParser = new Entry.BlockToPyParser(this.syntax);
+            case RoCode.Vim.PARSER_TYPE_BLOCK_TO_PY:
+                this._execParser = new RoCode.BlockToPyParser(this.syntax);
                 cm && cm.setOption('mode', { name: 'python', globalVars: true });
-                this._execParserType = Entry.Vim.PARSER_TYPE_BLOCK_TO_PY;
+                this._execParserType = RoCode.Vim.PARSER_TYPE_BLOCK_TO_PY;
                 break;
         }
     };
@@ -121,7 +121,7 @@ Entry.Parser = function(mode, type, cm, syntax) {
         let result = '';
 
         switch (type) {
-            case Entry.Vim.PARSER_TYPE_JS_TO_BLOCK:
+            case RoCode.Vim.PARSER_TYPE_JS_TO_BLOCK:
                 try {
                     const threads = [];
                     threads.push(code);
@@ -176,24 +176,24 @@ Entry.Parser = function(mode, type, cm, syntax) {
                             errorMsg = '자바스크립트 문법을 확인해주세요.';
                         }
 
-                        Entry.toast.alert(errorTitle, errorMsg);
+                        RoCode.toast.alert(errorTitle, errorMsg);
 
                         const mode = {};
-                        mode.boardType = Entry.Workspace.MODE_BOARD;
-                        mode.textType = Entry.Vim.TEXT_TYPE_JS;
-                        mode.runType = Entry.Vim.MAZE_MODE;
+                        mode.boardType = RoCode.Workspace.MODE_BOARD;
+                        mode.textType = RoCode.Vim.TEXT_TYPE_JS;
+                        mode.runType = RoCode.Vim.MAZE_MODE;
                         Ntry.dispatchEvent('textError', mode);
                         throw error;
                     }
                     result = [];
                 }
                 break;
-            case Entry.Vim.PARSER_TYPE_PY_TO_BLOCK:
+            case RoCode.Vim.PARSER_TYPE_PY_TO_BLOCK:
                 try {
                     this._pyBlockCount = {};
                     this._pyThreadCount = 1;
 
-                    const pyAstGenerator = new Entry.PyAstGenerator();
+                    const pyAstGenerator = new RoCode.PyAstGenerator();
                     const threads = this.makeThreads(code);
 
                     const astArray = [];
@@ -280,25 +280,25 @@ Entry.Parser = function(mode, type, cm, syntax) {
                             message = error.message;
                         }
 
-                        Entry.toast.alert(title, message);
+                        RoCode.toast.alert(title, message);
                         throw error;
                     }
                 }
 
                 break;
 
-            case Entry.Vim.PARSER_TYPE_BLOCK_TO_JS:
+            case RoCode.Vim.PARSER_TYPE_BLOCK_TO_JS:
                 var textCode = this._execParser.Code(code, parseMode);
                 result = textCode;
                 break;
-            case Entry.Vim.PARSER_TYPE_BLOCK_TO_PY: {
+            case RoCode.Vim.PARSER_TYPE_BLOCK_TO_PY: {
                 try {
-                    Entry.getMainWS().blockMenu.renderText();
+                    RoCode.getMainWS().blockMenu.renderText();
                     result = '';
                     let funcKeysBackup;
 
                     if (
-                        parseMode === Entry.Parser.PARSE_BLOCK &&
+                        parseMode === RoCode.Parser.PARSE_BLOCK &&
                         code.type.substr(0, 5) === 'func_'
                     ) {
                         funcKeysBackup = Object.keys(this._execParser.funcDefMap);
@@ -306,14 +306,14 @@ Entry.Parser = function(mode, type, cm, syntax) {
 
                     const textCode = this._execParser.Code(code, parseMode);
                     if (!this._pyHinter) {
-                        this._pyHinter = new Entry.PyHint(this.syntax);
+                        this._pyHinter = new RoCode.PyHint(this.syntax);
                     }
 
                     if (!this._hasDeclaration) {
                         this.initDeclaration();
                     }
 
-                    if (parseMode === Entry.Parser.PARSE_GENERAL) {
+                    if (parseMode === RoCode.Parser.PARSE_GENERAL) {
                         if (this.py_variableDeclaration) {
                             result += this.py_variableDeclaration;
                         }
@@ -340,7 +340,7 @@ Entry.Parser = function(mode, type, cm, syntax) {
                         }
 
                         result += fd;
-                    } else if (parseMode === Entry.Parser.PARSE_BLOCK) {
+                    } else if (parseMode === RoCode.Parser.PARSE_BLOCK) {
                         if (funcKeysBackup && funcKeysBackup.indexOf(code.type) < 0) {
                             result += `${this._execParser.funcDefMap[code.type]}\n\n`;
                         }
@@ -356,7 +356,7 @@ Entry.Parser = function(mode, type, cm, syntax) {
                 } catch (e) {
                     console.error(e);
                     if (e.block) {
-                        Entry.toast.alert(
+                        RoCode.toast.alert(
                             Lang.TextCoding.title_converting,
                             Lang.TextCoding.alert_legacy_no_support
                         );
@@ -395,25 +395,25 @@ Entry.Parser = function(mode, type, cm, syntax) {
             return this._syntax_cache[mode];
         }
 
-        const types = Object.keys(Entry.block);
+        const types = Object.keys(RoCode.block);
         const availables = this.setAvailableCode();
         const syntax = {};
-        if (mode === Entry.Vim.WORKSPACE_MODE) {
+        if (mode === RoCode.Vim.WORKSPACE_MODE) {
             syntax['#dic'] = {};
         }
 
         for (let i = 0; i < types.length; i++) {
             const type = types[i];
-            //if (Entry.type !== 'invisible' && (availables && (availables.indexOf(type) < 0)))
+            //if (RoCode.type !== 'invisible' && (availables && (availables.indexOf(type) < 0)))
             //continue;
 
-            if (mode === Entry.Vim.MAZE_MODE && availables && availables.indexOf(type) < 0) {
+            if (mode === RoCode.Vim.MAZE_MODE && availables && availables.indexOf(type) < 0) {
                 continue;
             }
 
-            const block = Entry.block[type];
+            const block = RoCode.block[type];
 
-            if (mode === Entry.Vim.MAZE_MODE) {
+            if (mode === RoCode.Vim.MAZE_MODE) {
                 const syntaxArray = block.syntax;
                 if (!syntaxArray) {
                     continue;
@@ -440,7 +440,7 @@ Entry.Parser = function(mode, type, cm, syntax) {
                         syntaxTemp = syntaxTemp[key];
                     }
                 }
-            } else if (mode === Entry.Vim.WORKSPACE_MODE) {
+            } else if (mode === RoCode.Vim.WORKSPACE_MODE) {
                 var key = type;
                 const pySyntax = block.syntax && block.syntax.py;
 
@@ -527,14 +527,14 @@ Entry.Parser = function(mode, type, cm, syntax) {
     };
 
     p.setAvailableCode = function() {
-        const WS = Entry.getMainWS();
+        const WS = RoCode.getMainWS();
         if (!WS) {
             return;
         }
 
         const blockMenu = WS.blockMenu;
         const board = WS.board;
-        const container = Entry.conatainer;
+        const container = RoCode.conatainer;
 
         let blocks = [];
 
@@ -570,17 +570,17 @@ Entry.Parser = function(mode, type, cm, syntax) {
         const threads = [];
 
         let optText = '';
-        let onEntryEvent = false;
+        let onRoCodeEvent = false;
 
         let startLine = 0;
 
-        // # 엔트리봇 ~ import Entry 제외
+        // # 엔트리봇 ~ import RoCode 제외
         for (let i = 4; i < textArr.length; i++) {
             const textLine = `${textArr[i]}\n`;
 
             if (textLine.trim().startsWith('#')) {
                 threads.push(`${textLine.trim()}\n`);
-            } else if (Entry.TextCodingUtil.isEntryEventFuncByFullText(textLine.trim())) {
+            } else if (RoCode.TextCodingUtil.isRoCodeEventFuncByFullText(textLine.trim())) {
                 if (optText.length !== 0) {
                     threads.push(makeLine(optText));
                     startLine = i - 2;
@@ -588,19 +588,19 @@ Entry.Parser = function(mode, type, cm, syntax) {
 
                 optText = '';
                 optText += textLine;
-                onEntryEvent = true;
+                onRoCodeEvent = true;
             } else {
-                if (textLine.length === 1 && !onEntryEvent) {
+                if (textLine.length === 1 && !onRoCodeEvent) {
                     //empty line
                     threads.push(makeLine(optText));
                     startLine = i - 2;
                     optText = '';
-                } else if (textLine.length !== 1 && textLine.charAt(0) !== ' ' && onEntryEvent) {
+                } else if (textLine.length !== 1 && textLine.charAt(0) !== ' ' && onRoCodeEvent) {
                     //general line
                     threads.push(makeLine(optText));
                     startLine = i - 2;
                     optText = '';
-                    onEntryEvent = false;
+                    onRoCodeEvent = false;
                 }
                 optText += textLine;
             }
@@ -625,8 +625,8 @@ Entry.Parser = function(mode, type, cm, syntax) {
     };
 
     p.initDeclaration = function() {
-        this.py_variableDeclaration = Entry.TextCodingUtil.generateVariablesDeclaration();
-        this.py_listDeclaration = Entry.TextCodingUtil.generateListsDeclaration();
+        this.py_variableDeclaration = RoCode.TextCodingUtil.generateVariablesDeclaration();
+        this.py_listDeclaration = RoCode.TextCodingUtil.generateListsDeclaration();
         this._hasDeclaration = true;
     };
 
@@ -648,4 +648,4 @@ Entry.Parser = function(mode, type, cm, syntax) {
             return syntax;
         }
     };
-})(Entry.Parser.prototype);
+})(RoCode.Parser.prototype);

@@ -1,19 +1,19 @@
 'use strict';
 
-Entry.Sally = {
+RoCode.Sally = {
     setZero() {
-        Entry.Robomation.setZero();
+        RoCode.Robomation.setZero();
     },
     afterReceive(pd) {
-        Entry.Robomation.afterReceive(pd, false);
+        RoCode.Robomation.afterReceive(pd, false);
     },
     afterSend(sq) {
-        Entry.Robomation.afterSend(sq);
+        RoCode.Robomation.afterSend(sq);
     },
     getRobot() {
-        const robot = Entry.Robomation.getRobot('line', 0);
+        const robot = RoCode.Robomation.getRobot('line', 0);
         if (robot) {
-            robot.setMotoring(Entry.hw.sendQueue);
+            robot.setMotoring(RoCode.hw.sendQueue);
         }
         return robot;
     },
@@ -124,7 +124,7 @@ Entry.Sally = {
     }),
 };
 
-Entry.Sally.setLanguage = () => ({
+RoCode.Sally.setLanguage = () => ({
     ko: {
         template: {
             sally_touching_color: '%1 에 닿았는가?',
@@ -767,7 +767,7 @@ Entry.Sally.setLanguage = () => ({
     },
 });
 
-Entry.Sally.blockMenuBlocks = [
+RoCode.Sally.blockMenuBlocks = [
     'sally_value',
     'sally_touching_color',
     'sally_is_color_pattern',
@@ -807,11 +807,11 @@ Entry.Sally.blockMenuBlocks = [
     'sally_set_tempo_to',
 ];
 
-Entry.Sally.getBlocks = function() {
+RoCode.Sally.getBlocks = function() {
     return {
         sally_touching_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -831,8 +831,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -846,7 +846,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_sensor',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.checkTouchingColor(script) : false;
             },
             syntax: {
@@ -871,9 +871,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -881,8 +881,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_is_color_pattern: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -900,8 +900,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'BLACK',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -916,8 +916,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -932,7 +932,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_sensor',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.checkColorPattern(script) : false;
             },
             syntax: {
@@ -955,9 +955,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'BLACK',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -972,9 +972,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -982,8 +982,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_button_state: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -997,8 +997,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'CLICKED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1012,7 +1012,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_sensor',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.checkButtonState(script) : false;
             },
             syntax: {
@@ -1031,9 +1031,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'CLICKED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1041,8 +1041,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_boolean: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -1064,8 +1064,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'TILT_FORWARD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1079,7 +1079,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_sensor',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.checkBoolean(script) : false;
             },
             syntax: {
@@ -1106,9 +1106,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'TILT_FORWARD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1116,8 +1116,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1140,8 +1140,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'COLOR_NUMBER',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1155,7 +1155,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_sensor',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 if (robot) {
                     return robot.getValue(script);
                 }
@@ -1185,9 +1185,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'COLOR_NUMBER',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1195,8 +1195,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_move_forward_unit: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1213,8 +1213,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'CM',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1241,7 +1241,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_wheel',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.moveForwardUnit(script) : script;
             },
             syntax: {
@@ -1263,9 +1263,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'CM',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1273,8 +1273,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_move_backward_unit: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1291,8 +1291,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'CM',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1319,7 +1319,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_wheel',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.moveBackwardUnit(script) : script;
             },
             syntax: {
@@ -1341,9 +1341,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'CM',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1351,8 +1351,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_turn_unit_in_place: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1364,8 +1364,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1380,8 +1380,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'DEG',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1410,7 +1410,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_wheel',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.turnUnit(script) : script;
             },
             syntax: {
@@ -1427,9 +1427,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -1444,9 +1444,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'DEG',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1454,8 +1454,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_pivot_around_wheel_unit_in_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1467,8 +1467,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1483,8 +1483,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'DEG',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1494,8 +1494,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'FORWARD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1526,7 +1526,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_wheel',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.pivotUnit(script) : script;
             },
             syntax: {
@@ -1543,9 +1543,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -1560,9 +1560,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'DEG',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -1572,9 +1572,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'FORWARD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1582,8 +1582,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_turn_unit_with_radius_in_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1595,8 +1595,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1610,8 +1610,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'SEC',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1625,8 +1625,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'FORWARD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1662,7 +1662,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_wheel',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.circleUnit(script) : script;
             },
             syntax: {
@@ -1679,9 +1679,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -1695,9 +1695,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'SEC',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -1711,9 +1711,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'FORWARD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1721,8 +1721,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_change_wheels_by_left_right: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1762,7 +1762,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_wheel',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.changeWheels(script) : script;
             },
             syntax: {
@@ -1785,8 +1785,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_set_wheels_to_left_right: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1826,7 +1826,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_wheel',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.setWheels(script) : script;
             },
             syntax: {
@@ -1849,8 +1849,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_change_wheel_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1863,8 +1863,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1895,7 +1895,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_wheel',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.changeWheel(script) : script;
             },
             syntax: {
@@ -1913,9 +1913,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -1927,8 +1927,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_set_wheel_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1941,8 +1941,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1973,7 +1973,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_wheel',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.setWheel(script) : script;
             },
             syntax: {
@@ -1991,9 +1991,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -2005,8 +2005,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_follow_line: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2024,7 +2024,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_wheel',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.followLine(script) : script;
             },
             syntax: {
@@ -2037,8 +2037,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_follow_line_until: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2055,8 +2055,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2075,7 +2075,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_wheel',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.followLineUntil(script) : script;
             },
             syntax: {
@@ -2097,9 +2097,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2107,8 +2107,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_follow_line_until_intersection: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2126,7 +2126,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_wheel',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.followLineUntilIntersection(script) : script;
             },
             syntax: {
@@ -2139,8 +2139,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_cross_intersection: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2158,7 +2158,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_wheel',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.crossIntersection(script) : script;
             },
             syntax: {
@@ -2171,8 +2171,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_turn_at_intersection: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2185,8 +2185,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2205,7 +2205,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_wheel',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.turnAtIntersection(script) : script;
             },
             syntax: {
@@ -2223,9 +2223,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2233,8 +2233,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_jump_line: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2246,8 +2246,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2266,7 +2266,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_wheel',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.jumpLine(script) : script;
             },
             syntax: {
@@ -2283,9 +2283,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2293,8 +2293,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_set_following_speed_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2312,8 +2312,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2332,7 +2332,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_wheel',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.setLineTracerSpeed(script) : script;
             },
             syntax: {
@@ -2355,9 +2355,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -2365,8 +2365,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2384,7 +2384,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_wheel',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.stop(script) : script;
             },
             syntax: {
@@ -2397,8 +2397,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_set_led_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2417,8 +2417,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2437,7 +2437,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_led',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.setLedColor(script) : script;
             },
             syntax: {
@@ -2461,9 +2461,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2471,8 +2471,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_pick_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2496,7 +2496,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_led',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.pickLedColor(script) : script;
             },
             syntax: {
@@ -2507,7 +2507,7 @@ Entry.Sally.getBlocks = function() {
                         textParams: [
                             {
                                 type: 'Color',
-                                converter: Entry.block.converters.returnStringValue,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2515,8 +2515,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_change_led_by_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2565,7 +2565,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_led',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.changeLedRgb(script) : script;
             },
             syntax: {
@@ -2592,8 +2592,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_set_led_to_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2642,7 +2642,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_led',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.setLedRgb(script) : script;
             },
             syntax: {
@@ -2669,8 +2669,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_clear_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2688,7 +2688,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_led',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.clearLed(script) : script;
             },
             syntax: {
@@ -2701,8 +2701,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_play_sound_times: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2727,8 +2727,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'BEEP',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2759,7 +2759,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_sound',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.playSound(script) : script;
             },
             syntax: {
@@ -2789,9 +2789,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'BEEP',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -2800,8 +2800,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_play_sound_times_until_done: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2826,8 +2826,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'BEEP',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2858,7 +2858,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_sound',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.playSoundUntil(script) : script;
             },
             syntax: {
@@ -2888,9 +2888,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'BEEP',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -2899,8 +2899,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_change_buzzer_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2931,7 +2931,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_sound',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.changeBuzzer(script) : script;
             },
             syntax: {
@@ -2944,8 +2944,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_set_buzzer_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2976,7 +2976,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_sound',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.setBuzzer(script) : script;
             },
             syntax: {
@@ -2989,8 +2989,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_clear_sound: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3008,7 +3008,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_sound',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.clearSound(script) : script;
             },
             syntax: {
@@ -3021,8 +3021,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_play_note: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3044,8 +3044,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -3060,8 +3060,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3081,7 +3081,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_sound',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.playNote(script) : script;
             },
             syntax: {
@@ -3108,9 +3108,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'C',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3125,9 +3125,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -3135,8 +3135,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_play_note_for_beats: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3158,8 +3158,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -3174,8 +3174,8 @@ Entry.Sally.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3208,7 +3208,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_sound',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.playNoteBeat(script) : script;
             },
             syntax: {
@@ -3235,9 +3235,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: 'C',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3252,9 +3252,9 @@ Entry.Sally.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -3263,8 +3263,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_rest_for_beats: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3295,7 +3295,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_sound',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.restBeat(script) : script;
             },
             syntax: {
@@ -3314,8 +3314,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_change_tempo_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3346,7 +3346,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_sound',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.changeTempo(script) : script;
             },
             syntax: {
@@ -3365,8 +3365,8 @@ Entry.Sally.getBlocks = function() {
             },
         },
         sally_set_tempo_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3397,7 +3397,7 @@ Entry.Sally.getBlocks = function() {
             class: 'sally_sound',
             isNotFor: ['sally'],
             func(sprite, script) {
-                const robot = Entry.Sally.getRobot();
+                const robot = RoCode.Sally.getRobot();
                 return robot ? robot.setTempo(script) : script;
             },
             syntax: {
@@ -3418,4 +3418,4 @@ Entry.Sally.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Sally;
+module.exports = RoCode.Sally;

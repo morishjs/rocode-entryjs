@@ -1,5 +1,5 @@
 /**
- * @fileoverview entity object is class for entry object canvas view.
+ * @fileoverview entity object is class for RoCode object canvas view.
  */
 
 'use strict';
@@ -13,18 +13,18 @@ const TEXT_BOX_REPOSITION_OFFSET = 10;
 
 /**
  * Construct entity class
- * @param {!Entry.EntryObject} object
+ * @param {!RoCode.RoCodeObject} object
  * @constructor
  */
-Entry.EntityObject = class EntityObject {
+RoCode.EntityObject = class EntityObject {
     constructor(object) {
         /** @type {!string} */
         this.parent = object;
         this.type = object.objectType;
         /** @type {Array<xml script>} */
         this.flip = false;
-        this.collision = Entry.Utils.COLLISION.NONE;
-        this.id = Entry.generateHash();
+        this.collision = RoCode.Utils.COLLISION.NONE;
+        this.id = RoCode.generateHash();
         this.removed = false;
         this.stamps = [];
         this.shapes = [];
@@ -83,29 +83,29 @@ Entry.EntityObject = class EntityObject {
 
         this.object.on(GEDragHelper.types.DOWN, function({ stageX, stageY }) {
             const id = this.entity.parent.id;
-            Entry.dispatchEvent('entityClick', this.entity);
-            Entry.stage.isObjectClick = true;
+            RoCode.dispatchEvent('entityClick', this.entity);
+            RoCode.stage.isObjectClick = true;
 
-            if (Entry.type !== 'minimize' && Entry.stage.isEntitySelectable()) {
+            if (RoCode.type !== 'minimize' && RoCode.stage.isEntitySelectable()) {
                 this.offset = {
                     x: -this.parent.x + this.entity.getX() - (stageX * 0.75 - 240),
                     y: -this.parent.y - this.entity.getY() - (stageY * 0.75 - 135),
                 };
                 this.cursor = 'move';
                 this.entity.initCommand();
-                Entry.container.selectObject(id);
+                RoCode.container.selectObject(id);
             }
         });
 
         this.object.on(GEDragHelper.types.UP, function() {
-            Entry.dispatchEvent('entityClickCanceled', this.entity);
+            RoCode.dispatchEvent('entityClickCanceled', this.entity);
             this.cursor = 'pointer';
             this.entity.checkCommand();
         });
 
-        if (Entry.type !== 'minimize') {
+        if (RoCode.type !== 'minimize') {
             this.object.on(GEDragHelper.types.MOVE, function({ stageX, stageY }) {
-                if (Entry.stage.isEntitySelectable()) {
+                if (RoCode.stage.isEntitySelectable()) {
                     const entity = this.entity;
                     if (entity.parent.getLock()) {
                         return;
@@ -115,7 +115,7 @@ Entry.EntityObject = class EntityObject {
                         entity.setX(stageX * 0.75 - 240 + this.offset.x);
                         entity.setY(-(stageY * 0.75 - 135) - this.offset.y);
                     }
-                    Entry.stage.updateObject();
+                    RoCode.stage.updateObject();
                 }
             });
         }
@@ -188,7 +188,7 @@ Entry.EntityObject = class EntityObject {
     }
 
     initCommand() {
-        if (!Entry.engine.isState('stop')) {
+        if (!RoCode.engine.isState('stop')) {
             return;
         }
 
@@ -196,7 +196,7 @@ Entry.EntityObject = class EntityObject {
     }
 
     checkCommand() {
-        if (!Entry.engine.isState('stop')) {
+        if (!RoCode.engine.isState('stop')) {
             return;
         }
 
@@ -208,18 +208,18 @@ Entry.EntityObject = class EntityObject {
             return;
         }
 
-        Entry.do('entitySetModel', this.parent.id, json, oldModel);
+        RoCode.do('entitySetModel', this.parent.id, json, oldModel);
     }
 
     /**
      * for redo and undo
      * @param {!entity model} entityModel
-     * @return {Entry.State} capture current state
+     * @return {RoCode.State} capture current state
      */
     setModel(entityModel) {
         this.syncModel_(entityModel);
-        Entry.dispatchEvent('updateObject');
-        Entry.stage.updateObject();
+        RoCode.dispatchEvent('updateObject');
+        RoCode.stage.updateObject();
     }
 
     /**
@@ -236,7 +236,7 @@ Entry.EntityObject = class EntityObject {
         this.object.x = this.x + this._rndPosX;
         !this.isClone && this.parent.updateCoordinateView();
         this.updateDialog();
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -245,7 +245,7 @@ Entry.EntityObject = class EntityObject {
      */
     getX(toFixedValue) {
         if (toFixedValue) {
-            return Entry.Utils.toFixed(this.x, toFixedValue);
+            return RoCode.Utils.toFixed(this.x, toFixedValue);
         } else {
             return this.x;
         }
@@ -265,7 +265,7 @@ Entry.EntityObject = class EntityObject {
         this.object.y = -this.y + this._rndPosY;
         !this.isClone && this.parent.updateCoordinateView();
         this.updateDialog();
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -274,7 +274,7 @@ Entry.EntityObject = class EntityObject {
      */
     getY(toFixedValue) {
         if (toFixedValue) {
-            return Entry.Utils.toFixed(this.y, toFixedValue);
+            return RoCode.Utils.toFixed(this.y, toFixedValue);
         } else {
             return this.y;
         }
@@ -286,7 +286,7 @@ Entry.EntityObject = class EntityObject {
      */
     getDirection(toFixedValue) {
         if (toFixedValue) {
-            return Entry.Utils.toFixed(this.direction, toFixedValue);
+            return RoCode.Utils.toFixed(this.direction, toFixedValue);
         } else {
             return this.direction;
         }
@@ -306,7 +306,7 @@ Entry.EntityObject = class EntityObject {
             const afterIsRight = direction >= 0 && direction < 180;
             if (previousIsRight != afterIsRight) {
                 this.setScaleX(-this.getScaleX());
-                Entry.stage.updateObject();
+                RoCode.stage.updateObject();
                 this.flip = !this.flip;
             }
         }
@@ -314,8 +314,8 @@ Entry.EntityObject = class EntityObject {
         this.direction = direction;
         this.object.direction = this.direction * GEHelper.rotateWrite;
         !this.isClone && parent.updateRotationView();
-        Entry.dispatchEvent('updateObject');
-        Entry.requestUpdate = true;
+        RoCode.dispatchEvent('updateObject');
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -332,8 +332,8 @@ Entry.EntityObject = class EntityObject {
         this.object.rotation = this.rotation * GEHelper.rotateWrite;
         this.updateDialog();
         !this.isClone && this.parent.updateRotationView();
-        Entry.dispatchEvent('updateObject');
-        Entry.requestUpdate = true;
+        RoCode.dispatchEvent('updateObject');
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -342,7 +342,7 @@ Entry.EntityObject = class EntityObject {
      */
     getRotation(toFixedValue) {
         if (toFixedValue) {
-            return Entry.Utils.toFixed(this.rotation, toFixedValue);
+            return RoCode.Utils.toFixed(this.rotation, toFixedValue);
         } else {
             return this.rotation;
         }
@@ -363,7 +363,7 @@ Entry.EntityObject = class EntityObject {
         } else {
             this.object.regX = this.regX;
         }
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -389,7 +389,7 @@ Entry.EntityObject = class EntityObject {
         } else {
             this.object.regY = this.regY;
         }
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -417,7 +417,7 @@ Entry.EntityObject = class EntityObject {
         }
         this.parent.updateCoordinateView();
         this.updateDialog();
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -445,7 +445,7 @@ Entry.EntityObject = class EntityObject {
         }
         this.parent.updateCoordinateView();
         this.updateDialog();
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -465,7 +465,7 @@ Entry.EntityObject = class EntityObject {
         this.setScaleX(this.getScaleX() * scale);
         this.setScaleY(this.getScaleY() * scale);
         !this.isClone && this.parent.updateCoordinateView();
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -478,7 +478,7 @@ Entry.EntityObject = class EntityObject {
                 this.getHeight() * Math.abs(this.getScaleY())) /
             2;
         if (toFixedValue) {
-            return Entry.Utils.toFixed(value, toFixedValue);
+            return RoCode.Utils.toFixed(value, toFixedValue);
         }
         return value;
     }
@@ -501,7 +501,7 @@ Entry.EntityObject = class EntityObject {
         }
         this.updateDialog();
         this.updateBG();
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -526,7 +526,7 @@ Entry.EntityObject = class EntityObject {
         }
         this.updateDialog();
         this.updateBG();
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -554,7 +554,7 @@ Entry.EntityObject = class EntityObject {
         if (this.textObject) {
             GEHelper.textHelper.setColor(this.textObject, this.colour);
         }
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -585,7 +585,7 @@ Entry.EntityObject = class EntityObject {
         this.bgColor = colour;
         this.updateBG();
         //this.object.color = this.colour;
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -603,7 +603,7 @@ Entry.EntityObject = class EntityObject {
         } else {
             this.textObject.underLine = underLine;
         }
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     getUnderLine() {
@@ -617,7 +617,7 @@ Entry.EntityObject = class EntityObject {
         } else {
             this.textObject.strike = strike;
         }
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     getStrike() {
@@ -684,7 +684,7 @@ Entry.EntityObject = class EntityObject {
         this.setFontType(fontArray.join(' '));
 
         this._syncFontStyle();
-        Entry.stage.update();
+        RoCode.stage.update();
 
         // NT11576 wodnjs6512
         // #3513 기존의 텍스트 상자 리사이즈가 필요없는 경우에는 disable 할수 있도록 옵션으로 실행 default = 실행
@@ -693,8 +693,8 @@ Entry.EntityObject = class EntityObject {
         }
 
         this.updateBG();
-        Entry.stage.update();
-        Entry.stage.updateObject();
+        RoCode.stage.update();
+        RoCode.stage.updateObject();
     }
 
     setLineHeight() {
@@ -711,7 +711,7 @@ Entry.EntityObject = class EntityObject {
         const textObject = this.textObject;
         this._syncFontStyle();
         this.setLineHeight();
-        Entry.stage.update();
+        RoCode.stage.update();
         if (this.getLineBreak()) {
             if (this.fontType === 'Nanum Gothic Coding') {
                 textObject.y = textObject.getMeasuredLineHeight() / 2 - this.getHeight() / 2 + 10;
@@ -720,8 +720,8 @@ Entry.EntityObject = class EntityObject {
             this.setWidth(textObject.getMeasuredWidth());
             this.setHeight(textObject.getMeasuredHeight());
         }
-        Entry.stage.updateObject();
-        Entry.requestUpdate = true;
+        RoCode.stage.updateObject();
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -770,7 +770,7 @@ Entry.EntityObject = class EntityObject {
     setFontBold(isFontBold = false) {
         this.fontBold = isFontBold;
         this.syncFont();
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -788,7 +788,7 @@ Entry.EntityObject = class EntityObject {
     setFontItalic(isFontItalic = false) {
         this.fontItalic = isFontItalic;
         this.syncFont();
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -887,7 +887,7 @@ Entry.EntityObject = class EntityObject {
             this.parent.updateCoordinateView();
         }
         this.updateBG();
-        Entry.stage.updateObject();
+        RoCode.stage.updateObject();
     }
 
     /**
@@ -916,14 +916,14 @@ Entry.EntityObject = class EntityObject {
      * textAlign setter
      * @param {number} textAlign
      */
-    setTextAlign(textAlign = Entry.TEXT_ALIGN_CENTER) {
+    setTextAlign(textAlign = RoCode.TEXT_ALIGN_CENTER) {
         if (this.parent.objectType !== 'textBox') {
             return;
         }
         this.textAlign = textAlign;
 
         const textObj = this.textObject;
-        const alignValue = Entry.TEXT_ALIGNS[textAlign];
+        const alignValue = RoCode.TEXT_ALIGNS[textAlign];
         if (GEHelper.isWebGL) {
             const anchorX = [0.5, 0, 1];
             textObj.anchor.x = anchorX[textAlign];
@@ -934,7 +934,7 @@ Entry.EntityObject = class EntityObject {
 
         this.alignTextBox();
         this.updateBG();
-        Entry.stage.updateObject();
+        RoCode.stage.updateObject();
         /*
         this.setWidth(this.textObject.getMeasuredWidth());
         this.updateBG();
@@ -995,7 +995,7 @@ Entry.EntityObject = class EntityObject {
             }
         }
 
-        Entry.stage.updateObject();
+        RoCode.stage.updateObject();
     }
 
     /**
@@ -1017,7 +1017,7 @@ Entry.EntityObject = class EntityObject {
         if (this.dialog) {
             this.syncDialogVisible();
         }
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
         return this.visible;
     }
 
@@ -1037,9 +1037,9 @@ Entry.EntityObject = class EntityObject {
         const that = this;
         delete pictureModel._id;
 
-        Entry.assert(this.type === 'sprite', 'Set image is only for sprite object');
+        RoCode.assert(this.type === 'sprite', 'Set image is only for sprite object');
         if (!pictureModel.id) {
-            pictureModel.id = Entry.generateHash();
+            pictureModel.id = RoCode.generateHash();
         }
 
         this.picture = pictureModel;
@@ -1077,7 +1077,7 @@ Entry.EntityObject = class EntityObject {
                   }
                   const hasFilter = !_.isEmpty(that.object.filters);
                   GEHelper.colorFilter.setCache(this, hasFilter);
-                  Entry.requestUpdate = true;
+                  RoCode.requestUpdate = true;
               };
 
         GEHelper.resManager.reqResource(
@@ -1091,7 +1091,7 @@ Entry.EntityObject = class EntityObject {
             this.object.refreshFilter();
         }
 
-        Entry.dispatchEvent('updateObject');
+        RoCode.dispatchEvent('updateObject');
     }
 
     /**
@@ -1112,7 +1112,7 @@ Entry.EntityObject = class EntityObject {
 
         (function(e, obj) {
             const f = [];
-            const adjust = Entry.adjustValueWithMaxMin;
+            const adjust = RoCode.adjustValueWithMaxMin;
 
             if (~diffEffects.indexOf('brightness')) {
                 const brightness = adjust(e.brightness, -100, 100);
@@ -1316,7 +1316,7 @@ Entry.EntityObject = class EntityObject {
         if (this.dialog) {
             this.dialog.update();
         }
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -1324,7 +1324,7 @@ Entry.EntityObject = class EntityObject {
      */
     takeSnapshot() {
         this.snapshot_ = this.toJSON();
-        this.collision = Entry.Utils.COLLISION.NONE;
+        this.collision = RoCode.Utils.COLLISION.NONE;
     }
 
     /**
@@ -1338,7 +1338,7 @@ Entry.EntityObject = class EntityObject {
             this.setImage(this.parent.getPicture());
         }
 
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -1373,7 +1373,7 @@ Entry.EntityObject = class EntityObject {
      * @return {JSON}
      */
     toJSON() {
-        const _cut = Entry.cutDecimal;
+        const _cut = RoCode.cutDecimal;
 
         const json = {};
         json.x = _cut(this.getX());
@@ -1408,7 +1408,7 @@ Entry.EntityObject = class EntityObject {
      */
     setInitialEffectValue() {
         this.effect = this.getInitialEffectValue();
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /*
@@ -1463,7 +1463,7 @@ Entry.EntityObject = class EntityObject {
                 const opacity = 1 - brush.opacity / 100;
                 brush.clear();
                 brush.setStrokeStyle(thickness);
-                brush.beginStrokeFast(Entry.rgb2Number(r, g, b), opacity);
+                brush.beginStrokeFast(RoCode.rgb2Number(r, g, b), opacity);
             } else {
                 // 기존 스펙으로 롤백(#11434)
                 const stroke = brush._stroke.style;
@@ -1474,11 +1474,11 @@ Entry.EntityObject = class EntityObject {
                     .beginStroke(stroke);
             }
         }
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     _removeShapes() {
-        const container = Entry.stage.selectedObjectContainer;
+        const container = RoCode.stage.selectedObjectContainer;
         const shapes = this.shapes;
         const LEN = shapes.length;
         let s;
@@ -1507,13 +1507,13 @@ Entry.EntityObject = class EntityObject {
         } else {
             const fontAlign = this.getTextAlign();
             switch (fontAlign) {
-                case Entry.TEXT_ALIGN_LEFT:
+                case RoCode.TEXT_ALIGN_LEFT:
                     this.bgObject.x = width / 2;
                     break;
-                case Entry.TEXT_ALIGN_CENTER:
+                case RoCode.TEXT_ALIGN_CENTER:
                     this.bgObject.x = 0;
                     break;
-                case Entry.TEXT_ALIGN_RIGHT:
+                case RoCode.TEXT_ALIGN_RIGHT:
                     this.bgObject.x = -width / 2;
                     break;
             }
@@ -1544,13 +1544,13 @@ Entry.EntityObject = class EntityObject {
             }
 
             switch (this.textAlign) {
-                case Entry.TEXT_ALIGN_CENTER:
+                case RoCode.TEXT_ALIGN_CENTER:
                     textObject.x = 0;
                     break;
-                case Entry.TEXT_ALIGN_LEFT:
+                case RoCode.TEXT_ALIGN_LEFT:
                     textObject.x = -this.getWidth() / 2;
                     break;
-                case Entry.TEXT_ALIGN_RIGHT:
+                case RoCode.TEXT_ALIGN_RIGHT:
                     textObject.x = this.getWidth() / 2;
                     break;
             }
@@ -1572,18 +1572,18 @@ Entry.EntityObject = class EntityObject {
     }
 
     addStamp() {
-        const stampEntity = new Entry.StampEntity(this.parent, this);
-        const stage = Entry.stage;
+        const stampEntity = new RoCode.StampEntity(this.parent, this);
+        const stage = RoCode.stage;
         stage.loadEntity(stampEntity, stage.selectedObjectContainer.getChildIndex(this.object));
         this.stamps.push(stampEntity);
 
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     removeStamps() {
         this.stamps.forEach((s) => s.destroy());
         this.stamps = [];
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     destroy(isClone) {
@@ -1612,7 +1612,7 @@ Entry.EntityObject = class EntityObject {
 
         _.result(this.dialog, 'remove');
         this.brush && this.removeBrush();
-        Entry.stage.unloadEntity(this);
+        RoCode.stage.unloadEntity(this);
 
         //pixi 전용 코드
         object && object.destroy && object.destroy({ children: true });
@@ -1624,7 +1624,7 @@ Entry.EntityObject = class EntityObject {
             if (!GEHelper.isWebGL) {
                 object.cache(0, 0, this.getWidth(), this.getHeight());
             }
-            Entry.requestUpdate = true;
+            RoCode.requestUpdate = true;
         }
     }
 

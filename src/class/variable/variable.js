@@ -33,13 +33,13 @@ class Variable {
     }
 
     constructor(variable) {
-        Entry.assert(typeof variable.name === 'string', 'Variable name must be given');
+        RoCode.assert(typeof variable.name === 'string', 'Variable name must be given');
         /** @type {string} */
         this.name_ = variable.name;
         /** @type {string} */
-        this.id_ = variable.id ? variable.id : Entry.generateHash();
+        this.id_ = variable.id ? variable.id : RoCode.generateHash();
         this.type = variable.variableType || 'variable';
-        /** @type {entry object.id} */
+        /** @type {RoCode object.id} */
         this.object_ = variable.object || null;
         /** @type {boolean} */
         this.isCloud_ = variable.isCloud || false;
@@ -51,7 +51,7 @@ class Variable {
         this._valueWidth = null;
 
         /** @type {number||string} */
-        const parsedValue = Entry.parseNumber(variable.value);
+        const parsedValue = RoCode.parseNumber(variable.value);
         if (typeof parsedValue === 'number') {
             this.value_ = parsedValue;
         } else if (!variable.value) {
@@ -68,13 +68,13 @@ class Variable {
             this.x_ = variable.x ? variable.x : null;
             /** @type {number} */
             this.y_ = variable.y ? variable.y : null;
-            const fontFamily = EntryStatic.fontFamily || 'NanumGothic';
+            const fontFamily = RoCodeStatic.fontFamily || 'NanumGothic';
             this.BORDER = 6;
             this.FONT = `10pt ${fontFamily}`;
             this.VALUE_FONT = `9pt ${fontFamily}`;
         }
 
-        Entry.addEventListener('workspaceChangeMode', this.updateView.bind(this));
+        RoCode.addEventListener('workspaceChangeMode', this.updateView.bind(this));
     }
 
     /**
@@ -114,7 +114,7 @@ class Variable {
                 '#ffffff',
                 'alphabetic'
             );
-            const variableLength = Entry.variableContainer.variables_.length;
+            const variableLength = RoCode.variableContainer.variables_.length;
 
             const { x, y } = VariableBP.add(
                 this.id_,
@@ -141,11 +141,11 @@ class Variable {
             }
 
             this.view_.addChild(this.valueView_);
-            if (Entry.type === 'workspace') {
+            if (RoCode.type === 'workspace') {
                 this.view_.cursor = 'move';
             }
             this.view_.on(GEDragHelper.types.DOWN, function(evt) {
-                if (Entry.type !== 'workspace') {
+                if (RoCode.type !== 'workspace') {
                     return;
                 }
                 this.offset = {
@@ -155,7 +155,7 @@ class Variable {
             });
 
             this.view_.on(GEDragHelper.types.MOVE, function(evt) {
-                if (Entry.type !== 'workspace') {
+                if (RoCode.type !== 'workspace') {
                     return;
                 }
                 this.variable.setX(evt.stageX * 0.75 - 240 + this.offset.x);
@@ -165,7 +165,7 @@ class Variable {
         }
 
         this.setVisible(this.isVisible());
-        Entry.stage.loadVariable(this);
+        RoCode.stage.loadVariable(this);
     }
 
     /**
@@ -182,7 +182,7 @@ class Variable {
             const oldContent = this.textView_.text;
             let newContent;
             if (this.object_) {
-                const obj = Entry.container.getObject(this.object_);
+                const obj = RoCode.container.getObject(this.object_);
                 if (obj) {
                     newContent = `${obj.name}:${this.getName()}`;
                 } else {
@@ -198,7 +198,7 @@ class Variable {
             }
 
             if (this.isNumber()) {
-                if (this.value_[0] !== 0 && Entry.isInteger(this.value_)) {
+                if (this.value_[0] !== 0 && RoCode.isInteger(this.value_)) {
                     this.valueView_.text = `${this.getValue()}`;
                 } else {
                     this.valueView_.text = Number(this.getValue())
@@ -219,12 +219,12 @@ class Variable {
             if (this._valueWidth === null) {
                 this._valueWidth = this.valueView_.getMeasuredWidth();
             }
-            const colorSet = EntryStatic.colorSet.canvas || {};
+            const colorSet = RoCodeStatic.colorSet.canvas || {};
             this._adjustSingleViewBox(colorSet.variable || '#4f80ff');
         }
 
         bpReplace(this.id_, this.x_, this.y_, this.getRealWidth(), this.getRealHeight());
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -236,7 +236,7 @@ class Variable {
      */
     _adjustSingleViewBox(boxFillAndStrokeColor) {
         // TODO slider updateView 만 rect_.graphics 를 따로 씀. rr 인자 constants 로 묶을 것.
-        const colorSet = EntryStatic.colorSet.canvas || {};
+        const colorSet = RoCodeStatic.colorSet.canvas || {};
         this.rect_.graphics
             .clear()
             .f('#ffffff')
@@ -278,11 +278,11 @@ class Variable {
      * @param {!string} variableName
      */
     setName(variableName) {
-        Entry.assert(typeof variableName === 'string', 'Variable name must be string');
+        RoCode.assert(typeof variableName === 'string', 'Variable name must be string');
         this.name_ = variableName;
         this._nameWidth = null;
         this.updateView();
-        Entry.requestUpdateTwice = true;
+        RoCode.requestUpdateTwice = true;
     }
 
     /**
@@ -319,7 +319,7 @@ class Variable {
      * @return {boolean}
      */
     isNumber() {
-        return Entry.Utils.isNumber(this.value_);
+        return RoCode.Utils.isNumber(this.value_);
     }
 
     /**
@@ -331,7 +331,7 @@ class Variable {
             this.value_ = value;
             this._valueWidth = null;
             this.updateView();
-            Entry.requestUpdateTwice = true;
+            RoCode.requestUpdateTwice = true;
         } else {
             return new Promise(async (resolve, reject) => {
                 try {
@@ -345,7 +345,7 @@ class Variable {
                     this.value_ = value;
                     this._valueWidth = null;
                     this.updateView();
-                    Entry.requestUpdateTwice = true;
+                    RoCode.requestUpdateTwice = true;
                     resolve();
                 } catch (e) {
                     reject(e);
@@ -367,7 +367,7 @@ class Variable {
      * @param {!boolean} visibleState
      */
     setVisible(visibleState) {
-        Entry.assert(typeof visibleState === 'boolean', 'Variable visible state must be boolean');
+        RoCode.assert(typeof visibleState === 'boolean', 'Variable visible state must be boolean');
         if (this.visible_ === visibleState) {
             return;
         }
@@ -520,14 +520,14 @@ class Variable {
     remove() {
         //this.parent.dialog = null;
         VariableBP.remove(this.id_);
-        Entry.stage.removeVariable(this);
+        RoCode.stage.removeVariable(this);
     }
 
     /**
      * clone self
      */
     clone() {
-        return Entry.Variable.create(Object.assign(this.toJSON(), { isClone: true }));
+        return RoCode.Variable.create(Object.assign(this.toJSON(), { isClone: true }));
     }
 
     getType() {
@@ -546,7 +546,7 @@ class Variable {
         if (this.value_ < minValue) {
             this.setValue(minValue);
         }
-        this.isMinFloat = Entry.isFloat(this.minValue_);
+        this.isMinFloat = RoCode.isFloat(this.minValue_);
         this.updateView();
     }
 
@@ -562,7 +562,7 @@ class Variable {
         if (this.value_ > maxValue) {
             this.value_ = maxValue;
         }
-        this.isMaxFloat = Entry.isFloat(this.maxValue_);
+        this.isMaxFloat = RoCode.isFloat(this.maxValue_);
         this.updateView();
     }
 
@@ -585,10 +585,10 @@ class Variable {
     setArray(array) {
         this.array_ = array;
         this.updateView();
-        Entry.requestUpdateTwice = true;
+        RoCode.requestUpdateTwice = true;
     }
 }
 
-// Entry.Variable = Variable;
+// RoCode.Variable = Variable;
 // add export
 export default Variable;

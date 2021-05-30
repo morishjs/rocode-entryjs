@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Xbot = {
+RoCode.Xbot = {
     PORT_MAP: {
         rightWheel: 0,
         leftWheel: 0,
@@ -22,13 +22,13 @@ Entry.Xbot = {
         duration: 0,
     },
     setZero: function() {
-        var portMap = Entry.Xbot.PORT_MAP;
-        var sq = Entry.hw.sendQueue;
+        var portMap = RoCode.Xbot.PORT_MAP;
+        var sq = RoCode.hw.sendQueue;
         for (var port in portMap) {
             sq[port] = portMap[port];
         }
-        Entry.hw.update();
-        var Xbot = Entry.Xbot;
+        RoCode.hw.update();
+        var Xbot = RoCode.Xbot;
         Xbot.removeAllTimeouts();
     },
     timeouts: [],
@@ -57,7 +57,7 @@ Entry.Xbot = {
     },
 };
 
-Entry.Xbot.setLanguage = function() {
+RoCode.Xbot.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -180,7 +180,7 @@ Entry.Xbot.setLanguage = function() {
     };
 };
 
-Entry.Xbot.blockMenuBlocks = [
+RoCode.Xbot.blockMenuBlocks = [
     //XBOT Blocks added
     'xbot_analogValue',
     'xbot_digitalInput',
@@ -195,12 +195,12 @@ Entry.Xbot.blockMenuBlocks = [
     'xbot_lcd',
     //end of XBOT Blocks added
 ];
-Entry.Xbot.getBlocks = function() {
+RoCode.Xbot.getBlocks = function() {
     return {
         //region xbot 엑스봇
         xbot_digitalInput: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
@@ -213,8 +213,8 @@ Entry.Xbot.getBlocks = function() {
                     ],
                     value: 'D2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -228,15 +228,15 @@ Entry.Xbot.getBlocks = function() {
             class: 'xbot_sensor',
             isNotFor: ['xbot_epor_edge'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 return pd[dev];
             },
             syntax: { js: [], py: ['Xbot.digital_input(%1)'] },
         },
         xbot_analogValue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -252,8 +252,8 @@ Entry.Xbot.getBlocks = function() {
                     ],
                     value: 'light',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -267,15 +267,15 @@ Entry.Xbot.getBlocks = function() {
             class: 'xbot_sensor',
             isNotFor: ['xbot_epor_edge'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 return pd[dev];
             },
             syntax: { js: [], py: ['Xbot.analog_value(%1)'] },
         },
         xbot_digitalOutput: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -289,8 +289,8 @@ Entry.Xbot.getBlocks = function() {
                     ],
                     value: 'D13',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -300,8 +300,8 @@ Entry.Xbot.getBlocks = function() {
                     ],
                     value: 'HIGH',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -321,7 +321,7 @@ Entry.Xbot.getBlocks = function() {
             class: 'xbot_sensor',
             isNotFor: ['xbot_epor_edge'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var dev = script.getStringField('DEVICE', script);
                 var value = script.getStringField('VALUE', script);
 
@@ -354,8 +354,8 @@ Entry.Xbot.getBlocks = function() {
             syntax: { js: [], py: ['Xbot.digital_output(%1, %2)'] },
         },
         xbot_analogOutput: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -367,8 +367,8 @@ Entry.Xbot.getBlocks = function() {
                     ],
                     value: 'analogD5',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -399,7 +399,7 @@ Entry.Xbot.getBlocks = function() {
             class: 'xbot_sensor',
             isNotFor: ['xbot_epor_edge'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var dev = script.getStringField('DEVICE', script);
                 var value = script.getNumberValue('VALUE', script);
 
@@ -413,8 +413,8 @@ Entry.Xbot.getBlocks = function() {
             syntax: { js: [], py: ['Xbot.analog_output(%1, %2)'] },
         },
         xbot_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -427,8 +427,8 @@ Entry.Xbot.getBlocks = function() {
                     ],
                     value: 'head',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -459,7 +459,7 @@ Entry.Xbot.getBlocks = function() {
             class: 'xbot_motor',
             isNotFor: ['xbot_epor_edge'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var mtype = script.getStringField('DEVICE', script);
                 var angle = script.getNumberValue('VALUE', script);
 
@@ -476,8 +476,8 @@ Entry.Xbot.getBlocks = function() {
             syntax: { js: [], py: ['Xbot.servo(%1, %2)'] },
         },
         xbot_oneWheel: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -490,8 +490,8 @@ Entry.Xbot.getBlocks = function() {
                     ],
                     value: 'rightWheel',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -523,7 +523,7 @@ Entry.Xbot.getBlocks = function() {
             isNotFor: ['xbot_epor_edge'],
             func: function(sprite, script) {
                 //console.log('xbot_move_forward_for_secs');
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var dir = script.getStringField('DEVICE', script);
                 var speed = script.getNumberValue('VALUE', script);
 
@@ -536,8 +536,8 @@ Entry.Xbot.getBlocks = function() {
             syntax: { js: [], py: ['Xbot.one_wheel(%1, %2)'] },
         },
         xbot_twoWheel: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -578,7 +578,7 @@ Entry.Xbot.getBlocks = function() {
             isNotFor: ['xbot_epor_edge'],
             func: function(sprite, script) {
                 //console.log('xbot_move_forward_for_secs');
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 sq.rightWheel = script.getNumberValue('rightWheel');
                 sq.leftWheel = script.getNumberValue('leftWheel');
@@ -588,8 +588,8 @@ Entry.Xbot.getBlocks = function() {
             syntax: { js: [], py: ['Xbot.two_wheel(%1, %2)'] },
         },
         xbot_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -638,7 +638,7 @@ Entry.Xbot.getBlocks = function() {
             class: 'xbot_rgb',
             isNotFor: ['xbot_epor_edge'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 sq.ledR = script.getNumberValue('ledR');
                 sq.ledG = script.getNumberValue('ledG');
@@ -650,8 +650,8 @@ Entry.Xbot.getBlocks = function() {
             syntax: { js: [], py: ['Xbot.rgb(%1, %2, %3)'] },
         },
         xbot_rgb_picker: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -676,7 +676,7 @@ Entry.Xbot.getBlocks = function() {
             isNotFor: ['xbot_epor_edge'],
             func: function(sprite, script) {
                 var port = script.getStringField('VALUE');
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 sq.ledR = parseInt(parseInt(port.substr(1, 2), 16) * 0.3);
                 sq.ledG = parseInt(parseInt(port.substr(3, 2), 16) * 0.3);
@@ -687,8 +687,8 @@ Entry.Xbot.getBlocks = function() {
             syntax: { js: [], py: ['Xbot.rgb_picker(%1)'] },
         },
         xbot_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -705,8 +705,8 @@ Entry.Xbot.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -720,8 +720,8 @@ Entry.Xbot.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -754,7 +754,7 @@ Entry.Xbot.getBlocks = function() {
             class: 'xbot_sensor',
             isNotFor: ['xbot_epor_edge'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 if (!script.isStart) {
                     var note = script.getStringField('NOTE', script);
@@ -817,16 +817,16 @@ Entry.Xbot.getBlocks = function() {
                     var timeValue = duration * 1000;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.Xbot.removeTimeout(timer);
+                        RoCode.Xbot.removeTimeout(timer);
                     }, timeValue);
-                    Entry.Xbot.timeouts.push(timer);
+                    RoCode.Xbot.timeouts.push(timer);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
                 } else {
                     delete script.isStart;
                     delete script.timeFlag;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     sq.duration = 0;
                     return script.callReturn();
                 }
@@ -834,8 +834,8 @@ Entry.Xbot.getBlocks = function() {
             syntax: { js: [], py: ['Xbot.buzzer(%1, %2, %3)'] },
         },
         xbot_lcd: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -847,8 +847,8 @@ Entry.Xbot.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -879,7 +879,7 @@ Entry.Xbot.getBlocks = function() {
             class: 'xbot_sensor',
             isNotFor: ['xbot_epor_edge'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var line = script.getNumberField('LINE', script);
                 var str = script.getStringValue('VALUE', script);
 
@@ -899,4 +899,4 @@ Entry.Xbot.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Xbot;
+module.exports = RoCode.Xbot;

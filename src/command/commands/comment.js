@@ -1,11 +1,11 @@
 'use strict';
 
 (function(c) {
-    const COMMAND_TYPES = Entry.STATIC.COMMAND_TYPES;
+    const COMMAND_TYPES = RoCode.STATIC.COMMAND_TYPES;
 
     c[COMMAND_TYPES.createComment] = {
         do(data, board, block) {
-            const comment = new Entry.Comment(data, board, block);
+            const comment = new RoCode.Comment(data, board, block);
             if (block) {
                 block.connectComment(comment);
             } else {
@@ -99,7 +99,7 @@
 
     c[COMMAND_TYPES.cloneComment] = {
         do(data, board) {
-            const comment = new Entry.Comment(data, board);
+            const comment = new RoCode.Comment(data, board);
             board.code.createThread([comment], 0);
             board.set({ isVisibleComment: true });
         },
@@ -172,4 +172,4 @@
         },
         undo: 'writeComment',
     };
-})(Entry.Command);
+})(RoCode.Command);

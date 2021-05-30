@@ -148,8 +148,8 @@ Blockly.FieldColour.prototype.showEditor_ = function() {
           }
         }
         if (colour !== null) {
-          if (typeof(Entry) == "object" && thisObj.getValue() != colour) {
-            Entry.dispatchEvent("entryBlocklyChanged");
+          if (typeof(RoCode) == "object" && thisObj.getValue() != colour) {
+            RoCode.dispatchEvent("RoCodeBlocklyChanged");
           }
           thisObj.setValue(colour);
         }

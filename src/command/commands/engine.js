@@ -4,11 +4,11 @@
 'use strict';
 
 (function(c) {
-    var COMMAND_TYPES = Entry.STATIC.COMMAND_TYPES;
+    var COMMAND_TYPES = RoCode.STATIC.COMMAND_TYPES;
 
     c[COMMAND_TYPES.toggleRun] = {
         do: function(callerName) {
-            Entry.engine.toggleRun();
+            RoCode.engine.toggleRun();
         },
         state: function() {
             return [];
@@ -17,11 +17,11 @@
             return [['callerName', callerName]];
         },
         restrict: function(data, domQuery, callback, restrictor) {
-            var engine = Entry.engine;
+            var engine = RoCode.engine;
             if (!engine.isState('stop')) engine.toggleStop();
 
             var isDone = false;
-            return new Entry.Tooltip(
+            return new RoCode.Tooltip(
                 [
                     {
                         title: data.tooltip.title,
@@ -37,14 +37,14 @@
             );
         },
         validate: false,
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         undo: 'toggleStop',
         dom: ['engine', '&0'],
     };
 
     c[COMMAND_TYPES.toggleStop] = {
         do: function(callerName) {
-            Entry.engine.toggleStop();
+            RoCode.engine.toggleStop();
         },
         state: function() {
             return [];
@@ -53,11 +53,11 @@
             return [['callerName', callerName]];
         },
         restrict: function(data, domQuery, callback, restrictor) {
-            var engine = Entry.engine;
-            if (Entry.engine.popup) Entry.engine.closeFullScreen();
+            var engine = RoCode.engine;
+            if (RoCode.engine.popup) RoCode.engine.closeFullScreen();
             if (!engine.isState('run')) engine.toggleRun(false);
 
-            return new Entry.Tooltip(
+            return new RoCode.Tooltip(
                 [
                     {
                         title: data.tooltip.title,
@@ -75,8 +75,8 @@
             );
         },
         validate: false,
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         undo: 'toggleRun',
         dom: ['engine', '&0'],
     };
-})(Entry.Command);
+})(RoCode.Command);

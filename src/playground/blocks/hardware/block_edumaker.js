@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.EduMaker = {
+RoCode.EduMaker = {
     id: '1B.1',
     name: 'EduMaker',
     imageName: 'edumaker.png',
@@ -9,19 +9,19 @@ Entry.EduMaker = {
         en: 'EduMaker Board',
     },
     setZero: function() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            var keySet = Object.keys(Entry.hw.sendQueue.SET);
+            var keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach(function(key) {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     sensorTypes: {
         ALIVE: 0,
@@ -67,7 +67,7 @@ Entry.EduMaker = {
     lowList: ['low', '0', 'off'],
     BlockState: {},
 };
-Entry.EduMaker.blockMenuBlocks = [
+RoCode.EduMaker.blockMenuBlocks = [
     // EduMaker Added 2017-11-30
     'edumaker_get_analog_value',
     'edumaker_get_analog_value_map',
@@ -80,7 +80,7 @@ Entry.EduMaker.blockMenuBlocks = [
     // EduMaker Added 2017-11-30
 ];
 
-Entry.EduMaker.setLanguage = function() {
+RoCode.EduMaker.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -111,12 +111,12 @@ Entry.EduMaker.setLanguage = function() {
     };
 };
 
-Entry.EduMaker.getBlocks = function() {
+RoCode.EduMaker.getBlocks = function() {
     return {
         //region edumaker 에듀메이커
         edumaker_analog_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -133,8 +133,8 @@ Entry.EduMaker.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -150,8 +150,8 @@ Entry.EduMaker.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         edumaker_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -177,15 +177,15 @@ Entry.EduMaker.getBlocks = function() {
             isNotFor: ['EduMaker'],
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 if (port[0] === 'A') port = port.substring(1);
                 return ANALOG ? ANALOG[port] || 0 : 0;
             },
             syntax: { js: [], py: [] },
         },
         edumaker_get_analog_value_map: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -252,7 +252,7 @@ Entry.EduMaker.getBlocks = function() {
             isNotFor: ['EduMaker'],
             func: function(sprite, script) {
                 var result = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var value2 = script.getNumberValue('VALUE2', script);
                 var value3 = script.getNumberValue('VALUE3', script);
                 var value4 = script.getNumberValue('VALUE4', script);
@@ -262,8 +262,8 @@ Entry.EduMaker.getBlocks = function() {
                 var isFloat = false;
 
                 if (
-                    (Entry.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
-                    (Entry.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
+                    (RoCode.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
+                    (RoCode.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
                 ) {
                     isFloat = true;
                 }
@@ -295,8 +295,8 @@ Entry.EduMaker.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         edumaker_get_ultrasonic_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -334,26 +334,26 @@ Entry.EduMaker.getBlocks = function() {
                 var port1 = script.getNumberValue('PORT1', script);
                 var port2 = script.getNumberValue('PORT2', script);
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][port1];
-                delete Entry.hw.sendQueue['SET'][port2];
+                delete RoCode.hw.sendQueue['SET'][port1];
+                delete RoCode.hw.sendQueue['SET'][port2];
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.ArduinoExt.sensorTypes.ULTRASONIC] = {
+                RoCode.hw.sendQueue['GET'][RoCode.ArduinoExt.sensorTypes.ULTRASONIC] = {
                     port: [port1, port2],
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.ULTRASONIC || 0;
+                return RoCode.hw.portData.ULTRASONIC || 0;
             },
             syntax: { js: [], py: [] },
         },
         edumaker_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -379,11 +379,11 @@ Entry.EduMaker.getBlocks = function() {
             isNotFor: ['EduMaker'],
             func: function(sprite, script) {
                 var port = script.getNumberValue('PORT', script);
-                var DIGITAL = Entry.hw.portData.DIGITAL;
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.ArduinoExt.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue['GET'][RoCode.ArduinoExt.sensorTypes.DIGITAL] = {
                     port: port,
                     time: new Date().getTime(),
                 };
@@ -392,8 +392,8 @@ Entry.EduMaker.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         edumaker_digital_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -405,8 +405,8 @@ Entry.EduMaker.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -422,8 +422,8 @@ Entry.EduMaker.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         edumaker_toggle_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -469,18 +469,18 @@ Entry.EduMaker.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.ArduinoExt.highList.indexOf(value) > -1) {
+                if (RoCode.ArduinoExt.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.ArduinoExt.lowList.indexOf(value) > -1) {
+                } else if (RoCode.ArduinoExt.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.ArduinoExt.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.ArduinoExt.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -489,8 +489,8 @@ Entry.EduMaker.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         edumaker_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -534,11 +534,11 @@ Entry.EduMaker.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.ArduinoExt.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.ArduinoExt.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -547,8 +547,8 @@ Entry.EduMaker.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         edumaker_tone_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -572,8 +572,8 @@ Entry.EduMaker.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -589,8 +589,8 @@ Entry.EduMaker.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         edumaker_tone_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -618,8 +618,8 @@ Entry.EduMaker.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         edumaker_octave_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -636,8 +636,8 @@ Entry.EduMaker.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -653,8 +653,8 @@ Entry.EduMaker.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         edumaker_set_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -710,12 +710,12 @@ Entry.EduMaker.getBlocks = function() {
             class: 'EduMaker',
             isNotFor: ['EduMaker'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
 
                 if (!script.isStart) {
                     var note = script.getValue('NOTE', script);
-                    if (!Entry.Utils.isNumber(note)) note = Entry.ArduinoExt.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note)) note = RoCode.ArduinoExt.toneTable[note];
 
                     if (note < 0) {
                         note = 0;
@@ -735,7 +735,7 @@ Entry.EduMaker.getBlocks = function() {
 
                     if (duration === 0) {
                         sq['SET'][port] = {
-                            type: Entry.ArduinoExt.sensorTypes.TONE,
+                            type: RoCode.ArduinoExt.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -752,7 +752,7 @@ Entry.EduMaker.getBlocks = function() {
                     var value = 0;
 
                     if (note != 0) {
-                        value = Entry.ArduinoExt.toneMap[note][octave];
+                        value = RoCode.ArduinoExt.toneMap[note][octave];
                     }
 
                     duration = duration * 1000;
@@ -760,7 +760,7 @@ Entry.EduMaker.getBlocks = function() {
                     script.timeFlag = 1;
 
                     sq['SET'][port] = {
-                        type: Entry.ArduinoExt.sensorTypes.TONE,
+                        type: RoCode.ArduinoExt.sensorTypes.TONE,
                         data: {
                             value: value,
                             duration: duration,
@@ -778,19 +778,19 @@ Entry.EduMaker.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
                     sq['SET'][port] = {
-                        type: Entry.ArduinoExt.sensorTypes.TONE,
+                        type: RoCode.ArduinoExt.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         edumaker_set_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -826,7 +826,7 @@ Entry.EduMaker.getBlocks = function() {
             class: 'EduMaker',
             isNotFor: ['EduMaker'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
                 var value = script.getNumberValue('VALUE', script);
                 value = Math.min(180, value);
@@ -836,7 +836,7 @@ Entry.EduMaker.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.ArduinoExt.sensorTypes.SERVO_PIN,
+                    type: RoCode.ArduinoExt.sensorTypes.SERVO_PIN,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -849,4 +849,4 @@ Entry.EduMaker.getBlocks = function() {
     };
 };
 
-module.exports = Entry.EduMaker;
+module.exports = RoCode.EduMaker;

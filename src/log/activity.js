@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Activity = function(name, data) {
+RoCode.Activity = function(name, data) {
     this.name = name;
     this.timestamp = new Date();
     var arr = [];

@@ -4,7 +4,7 @@ body {
     }
 }
 
-.entrySceneWorkspace {
+.RoCodeSceneWorkspace {
     position: absolute;
     left: 0;
     top: 0;
@@ -20,7 +20,7 @@ body {
     }
 }
 
-.entrySceneListWorkspace {
+.RoCodeSceneListWorkspace {
     overflow: hidden;
     float: left;
     margin: 0;
@@ -39,7 +39,7 @@ body {
     }
 }
 
-.entrySceneElementWorkspace {
+.RoCodeSceneElementWorkspace {
     overflow: hidden;
     margin: 5px 2px 0 0;
     color: white;
@@ -47,12 +47,12 @@ body {
     z-index: 10;
 }
 
-.entrySceneElementWorkspace.selectedScene {
+.RoCodeSceneElementWorkspace.selectedScene {
     position: relative;
     margin-top: 0;
     z-index: 888;
 }
-.entrySceneAddButtonWorkspace{
+.RoCodeSceneAddButtonWorkspace{
     float: left;
     position: relative;
     margin: 3px 0px 0px -2px;
@@ -63,7 +63,7 @@ body {
     background-size: 44px 34px;
 }
 
-.entryScenePrevButtonWorkspace {
+.RoCodeScenePrevButtonWorkspace {
     position: absolute;
     width: 25px;
     height: 39px;
@@ -85,7 +85,7 @@ body {
     }
 }
 
-.entrySceneNextButtonWorkspace {
+.RoCodeSceneNextButtonWorkspace {
     position: absolute;
     background-color: #4f80ff;
     width: 72px;
@@ -94,7 +94,7 @@ body {
     opacity: .8;
     z-index: 299;
     margin: 0px;
-    
+
     .nextBtn {
         position: absolute;
         width: 28px;
@@ -121,12 +121,12 @@ body {
 }
 
 .selectedScene {
-    .entrySceneInputCover {
+    .RoCodeSceneInputCover {
         min-width: 97px;
     }
 }
 
-.entrySceneInputCover {
+.RoCodeSceneInputCover {
     display: block;
     overflow: hidden;
     height: 32px;
@@ -136,7 +136,7 @@ body {
     border-radius: 10px 10px 0 0;
 }
 
-.entrySceneFieldWorkspace {
+.RoCodeSceneFieldWorkspace {
     cursor: text !important;
     display: inline-block;
     overflow: hidden;
@@ -153,7 +153,7 @@ body {
     line-height: 24px;
 }
 
-.selectedScene .entrySceneInputCover {
+.selectedScene .RoCodeSceneInputCover {
     height: 37px;
     padding: 7px 30px 0 10px;
     background-color: #fff;
@@ -161,17 +161,17 @@ body {
     border-bottom-color: #ffb500;
 }
 
-.selectedScene .entrySceneFieldWorkspace {
+.selectedScene .RoCodeSceneFieldWorkspace {
     background-color: #fff;
     font-size: 14px;
     color: #ffb500;
 }
-.selectedScene .entrySceneFieldWorkspace:focus {
+.selectedScene .RoCodeSceneFieldWorkspace:focus {
     font-size: 12px;
     border: 1px solid #e2e2e2;
     color: #2c313d;
 }
-.entrySceneRemoveButtonWorkspace {
+.RoCodeSceneRemoveButtonWorkspace {
     position: absolute;
     right: 0;
     top: 3px;
@@ -187,22 +187,22 @@ body {
     background-color: transparent;
 }
 
-.minValue .entrySceneRemoveButtonWorkspace {
+.minValue .RoCodeSceneRemoveButtonWorkspace {
     display: none;
 }
 
-.selectedScene .entrySceneRemoveButtonWorkspace {
+.selectedScene .RoCodeSceneRemoveButtonWorkspace {
     display: block;
     top: 3px;
     background-color: transparent;
     .backgroundImage("scene_delete.png");
 }
 
-// .entrySceneRemoveButtonWorkspace:hover {
+// .RoCodeSceneRemoveButtonWorkspace:hover {
 //     .backgroundImage("scene_delete_hover.png");
 // }
 
-.entrySceneDummyView {
+.RoCodeSceneDummyView {
     width: 55px;
     height: 40px;
     background-color: orange;
@@ -216,18 +216,18 @@ body {
 }
 
 .tablet {
-    .entrySceneRemoveButtonWorkspace {
+    .RoCodeSceneRemoveButtonWorkspace {
         width: 14px;
         height: 14px;
         right: 48px;
         .backgroundImage("scene_delete_unselect_big.png");
     }
 
-    .selectedScene .entrySceneRemoveButtonWorkspace {
+    .selectedScene .RoCodeSceneRemoveButtonWorkspace {
         .backgroundImage("scene_delete_big.png");
     }
 
-    .entrySceneRemoveButtonWorkspace:hover {
+    .RoCodeSceneRemoveButtonWorkspace:hover {
         .backgroundImage("scene_delete_hover_big.png");
     }
 }

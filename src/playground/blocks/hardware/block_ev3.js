@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.EV3 = {
+RoCode.EV3 = {
     PORT_MAP: {
         A: 0,
         B: 0,
@@ -56,16 +56,16 @@ Entry.EV3 = {
         Object.keys(portMap).forEach(function(port) {
             var regex = /[A-D]/i;
             if (regex.test(port)) {
-                Entry.hw.sendQueue[port] = {
-                    type: Entry.EV3.motorMovementTypes.Power,
+                RoCode.hw.sendQueue[port] = {
+                    type: RoCode.EV3.motorMovementTypes.Power,
                     power: 0,
                 };
             } else {
-                Entry.hw.sendQueue[port] = portMap[port];
+                RoCode.hw.sendQueue[port] = portMap[port];
             }
         });
-        Entry.hw.sendQueue.STATUS_COLOR = 'GREEN';
-        Entry.hw.update();
+        RoCode.hw.sendQueue.STATUS_COLOR = 'GREEN';
+        RoCode.hw.update();
     },
     id: '12.1',
     name: 'EV3',
@@ -77,7 +77,7 @@ Entry.EV3 = {
     },
 };
 
-Entry.EV3.setLanguage = function() {
+RoCode.EV3.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -125,7 +125,7 @@ Entry.EV3.setLanguage = function() {
         },
     };
 };
-Entry.EV3.blockMenuBlocks = [
+RoCode.EV3.blockMenuBlocks = [
     'ev3_get_sensor_value',
     'ev3_touch_sensor',
     'ev3_button_pressed',
@@ -135,12 +135,12 @@ Entry.EV3.blockMenuBlocks = [
     'ev3_motor_degrees',
     'ev3_status_led',
 ];
-Entry.EV3.getBlocks = function() {
+RoCode.EV3.getBlocks = function() {
     return {
         //region ev3 이브이3
         ev3_color_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -155,8 +155,8 @@ Entry.EV3.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -168,8 +168,8 @@ Entry.EV3.getBlocks = function() {
                     ],
                     value: 'RGB',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -186,30 +186,30 @@ Entry.EV3.getBlocks = function() {
             func: function(sprite, script) {
                 var port = script.getStringField('PORT', script);
                 var rgb = script.getStringField('RGB', script);
-                var portData = Entry.hw.getDigitalPortValue(script.getNumberField('PORT', script));
+                var portData = RoCode.hw.getDigitalPortValue(script.getNumberField('PORT', script));
                 var result = '';
-                if (portData.type == Entry.EV3.deviceTypes.Color) {
+                if (portData.type == RoCode.EV3.deviceTypes.Color) {
                     if (portData.siValue == 0) {
                         result = '';
                     } else {
                         switch (rgb) {
                             case 'RGB':
-                                result = Entry.EV3.colorSensorValue[portData.siValue];
+                                result = RoCode.EV3.colorSensorValue[portData.siValue];
                                 break;
                             case 'R':
-                                result = Entry.EV3.colorSensorValue[portData.siValue].substring(
+                                result = RoCode.EV3.colorSensorValue[portData.siValue].substring(
                                     0,
                                     2
                                 );
                                 break;
                             case 'G':
-                                result = Entry.EV3.colorSensorValue[portData.siValue].substring(
+                                result = RoCode.EV3.colorSensorValue[portData.siValue].substring(
                                     2,
                                     4
                                 );
                                 break;
                             case 'B':
-                                result = Entry.EV3.colorSensorValue[portData.siValue].substring(
+                                result = RoCode.EV3.colorSensorValue[portData.siValue].substring(
                                     4,
                                     6
                                 );
@@ -223,8 +223,8 @@ Entry.EV3.getBlocks = function() {
             },
         },
         ev3_get_sensor_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -239,8 +239,8 @@ Entry.EV3.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -255,7 +255,7 @@ Entry.EV3.getBlocks = function() {
             isNotFor: ['EV3'],
             func: function(sprite, script) {
                 var port = script.getStringField('PORT', script);
-                var portData = Entry.hw.getDigitalPortValue(script.getNumberField('PORT', script));
+                var portData = RoCode.hw.getDigitalPortValue(script.getNumberField('PORT', script));
                 var result;
                 if ($.isPlainObject(portData)) {
                     result = portData.siValue || 0;
@@ -264,8 +264,8 @@ Entry.EV3.getBlocks = function() {
             },
         },
         ev3_motor_degrees: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -279,8 +279,8 @@ Entry.EV3.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -290,8 +290,8 @@ Entry.EV3.getBlocks = function() {
                     ],
                     value: 'CW',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -331,9 +331,9 @@ Entry.EV3.getBlocks = function() {
                     degree = 720;
                 }
                 var direction = script.getStringField('DIRECTION', script);
-                Entry.hw.sendQueue[port] = {
+                RoCode.hw.sendQueue[port] = {
                     id: Math.floor(Math.random() * 100000, 0),
-                    type: Entry.EV3.motorMovementTypes.Degrees,
+                    type: RoCode.EV3.motorMovementTypes.Degrees,
                     degree: degree,
                     power: direction == 'CW' ? 50 : -50,
                 };
@@ -341,8 +341,8 @@ Entry.EV3.getBlocks = function() {
             },
         },
         ev3_motor_power: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -356,8 +356,8 @@ Entry.EV3.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -390,17 +390,17 @@ Entry.EV3.getBlocks = function() {
             func: function(sprite, script) {
                 var port = script.getStringField('PORT', script);
                 var value = script.getValue('VALUE', script);
-                Entry.hw.sendQueue[port] = {
+                RoCode.hw.sendQueue[port] = {
                     id: Math.floor(Math.random() * 100000, 0),
-                    type: Entry.EV3.motorMovementTypes.Power,
+                    type: RoCode.EV3.motorMovementTypes.Power,
                     power: value,
                 };
                 return script.callReturn();
             },
         },
         ev3_motor_power_on_time: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -414,8 +414,8 @@ Entry.EV3.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -456,34 +456,34 @@ Entry.EV3.getBlocks = function() {
             class: 'ev3_output',
             isNotFor: ['EV3'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getStringField('PORT', script);
                 if (!script.isStart) {
                     var time = script.getValue('TIME', script);
                     var value = script.getValue('VALUE', script);
                     script.isStart = true;
                     script.timeFlag = 1;
-                    Entry.hw.sendQueue[port] = {
+                    RoCode.hw.sendQueue[port] = {
                         id: Math.floor(Math.random() * 100000, 0),
-                        type: Entry.EV3.motorMovementTypes.Power,
+                        type: RoCode.EV3.motorMovementTypes.Power,
                         power: value,
                     };
                     var timeValue = time * 1000;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.EV3.removeTimeout(timer);
+                        RoCode.EV3.removeTimeout(timer);
                     }, timeValue);
-                    Entry.EV3.timeouts.push(timer);
+                    RoCode.EV3.timeouts.push(timer);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
                 } else {
                     delete script.isStart;
                     delete script.timeFlag;
-                    Entry.engine.isContinue = false;
-                    Entry.hw.sendQueue[port] = {
+                    RoCode.engine.isContinue = false;
+                    RoCode.hw.sendQueue[port] = {
                         id: Math.floor(Math.random() * 100000, 0),
-                        type: Entry.EV3.motorMovementTypes.Power,
+                        type: RoCode.EV3.motorMovementTypes.Power,
                         power: 0,
                     };
                     return script.callReturn();
@@ -491,8 +491,8 @@ Entry.EV3.getBlocks = function() {
             },
         },
         ev3_touch_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -507,8 +507,8 @@ Entry.EV3.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -523,9 +523,9 @@ Entry.EV3.getBlocks = function() {
             isNotFor: ['EV3'],
             func: function(sprite, script) {
                 var port = script.getStringField('PORT', script);
-                var portData = Entry.hw.getDigitalPortValue(script.getNumberField('PORT', script));
+                var portData = RoCode.hw.getDigitalPortValue(script.getNumberField('PORT', script));
                 var result = false;
-                if (portData.type == Entry.EV3.deviceTypes.Touch) {
+                if (portData.type == RoCode.EV3.deviceTypes.Touch) {
                     if (Number(portData.siValue) >= 1) {
                         result = true;
                     }
@@ -535,8 +535,8 @@ Entry.EV3.getBlocks = function() {
             },
         },
         ev3_button_pressed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -553,8 +553,8 @@ Entry.EV3.getBlocks = function() {
                     ],
                     value: 'UP',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -569,7 +569,7 @@ Entry.EV3.getBlocks = function() {
             isNotFor: ['EV3'],
             func: function(sprite, script) {
                 const buttonValue = script.getStringField('BUTTON', script);
-                var buttonData = Entry.hw.getDigitalPortValue(buttonValue);
+                var buttonData = RoCode.hw.getDigitalPortValue(buttonValue);
                 var result = false;
                 if (buttonData.pressed) {
                     return true;
@@ -579,8 +579,8 @@ Entry.EV3.getBlocks = function() {
             },
         },
         ev3_status_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -601,8 +601,8 @@ Entry.EV3.getBlocks = function() {
                     ],
                     value: 'ORANGE',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -621,11 +621,11 @@ Entry.EV3.getBlocks = function() {
             class: 'ev3_output',
             isNotFor: ['EV3'],
             func: function(sprite, script) {
-                Entry.hw.sendQueue.STATUS_COLOR = script.getStringField('COLOR', script);
+                RoCode.hw.sendQueue.STATUS_COLOR = script.getStringField('COLOR', script);
             },
         },
         //endregion ev3 이브이3
     };
 };
 
-module.exports = Entry.EV3;
+module.exports = RoCode.EV3;

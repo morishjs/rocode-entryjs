@@ -10,7 +10,7 @@ let LineOneFlag = 1;
 const ServeAngle = [0, 0, 0, 0, 0, 0, 0, 0];
 const OutPort = [0, 0, 0, 0, 0, 0, 0, 0];
 
-Entry.LineCoding = {
+RoCode.LineCoding = {
     id: '3D.1',
     name: 'LineCoding',
     url: 'http://www.ssmake.co.kr/',
@@ -22,29 +22,29 @@ Entry.LineCoding = {
 
     setZero: () => {
         //  하드웨어 초기화 로직
-        /*       if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        /*       if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            const keySet = Object.keys(Entry.hw.sendQueue.SET);
+            const keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach((key) => {
-                Entry.hw.sendQueue.SET[parseInt(key)].data = 0;
-                Entry.hw.sendQueue.SET[parseInt(key)].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[parseInt(key)].data = 0;
+                RoCode.hw.sendQueue.SET[parseInt(key)].time = new Date().getTime();
             });
         } */
 
-        Entry.hw.sendQueue = {
+        RoCode.hw.sendQueue = {
             GET: {},
             SET: {},
         };
-        Entry.hw.sendQueue.SET[9] = {
-            type: Entry.LineCoding.sensorTypes.LINE_EASY,
+        RoCode.hw.sendQueue.SET[9] = {
+            type: RoCode.LineCoding.sensorTypes.LINE_EASY,
             data: 0,
             time: new Date().getTime(),
         };
-        Entry.hw.update();
+        RoCode.hw.update();
         LmotorSpeed = 0;
         RmotorSpeed = 0;
         LineNum = 20;
@@ -148,7 +148,7 @@ Entry.LineCoding = {
     BlockState: {},
 };
 
-Entry.LineCoding.blockMenuBlocks = [
+RoCode.LineCoding.blockMenuBlocks = [
     /// 하드웨어 블록 등록 , 여기에 등록된 블록이 순서대로 나열되며 설정한 이름으로 화면에 보임
     'LineCodingStart',
     'LineCodingStop',
@@ -206,7 +206,7 @@ Entry.LineCoding.blockMenuBlocks = [
     'LineCodingMotorStop',
 ];
 
-Entry.LineCoding.setLanguage = function() {
+RoCode.LineCoding.setLanguage = function() {
     // 블록 이름  번역
     return {
         ko: {
@@ -318,11 +318,11 @@ Entry.LineCoding.setLanguage = function() {
     };
 };
 
-Entry.LineCoding.getBlocks = function() {
+RoCode.LineCoding.getBlocks = function() {
     return {
         LineCodingDigitalPortOnOffList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -336,8 +336,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -352,8 +352,8 @@ Entry.LineCoding.getBlocks = function() {
             },
         },
         LineCodingBacklightOnoffList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -367,8 +367,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -383,8 +383,8 @@ Entry.LineCoding.getBlocks = function() {
             },
         },
         LineCodingEasylineList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -399,8 +399,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -415,8 +415,8 @@ Entry.LineCoding.getBlocks = function() {
             },
         },
         LineCodingEasyMotorList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -432,8 +432,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -448,8 +448,8 @@ Entry.LineCoding.getBlocks = function() {
             },
         },
         LineCodingStartList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -464,8 +464,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -480,8 +480,8 @@ Entry.LineCoding.getBlocks = function() {
             },
         },
         LineCodingEasySetList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -495,8 +495,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: '55',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -511,8 +511,8 @@ Entry.LineCoding.getBlocks = function() {
             },
         },
         LineCodingCrossroadList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -530,8 +530,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: '21',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -546,8 +546,8 @@ Entry.LineCoding.getBlocks = function() {
             },
         },
         LineCodingRemotKeyList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -574,8 +574,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -590,8 +590,8 @@ Entry.LineCoding.getBlocks = function() {
             },
         },
         LineCodingOctaveList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -608,8 +608,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -624,8 +624,8 @@ Entry.LineCoding.getBlocks = function() {
             },
         },
         LineCodingToneList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -650,8 +650,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -666,8 +666,8 @@ Entry.LineCoding.getBlocks = function() {
             },
         },
         LineCodingTurnList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -685,8 +685,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -702,8 +702,8 @@ Entry.LineCoding.getBlocks = function() {
         },
 
         LineCodingMotorList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -717,8 +717,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -733,8 +733,8 @@ Entry.LineCoding.getBlocks = function() {
             },
         },
         LineCodingLineSensortList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -754,8 +754,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -770,8 +770,8 @@ Entry.LineCoding.getBlocks = function() {
             },
         },
         LineCodingSensorNumtList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -791,8 +791,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -808,8 +808,8 @@ Entry.LineCoding.getBlocks = function() {
         },
 
         LineCodingDigitalPortList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -837,8 +837,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -853,8 +853,8 @@ Entry.LineCoding.getBlocks = function() {
             },
         },
         LineCodingServoPortList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -874,8 +874,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: '1', // 기본 표시값
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -891,8 +891,8 @@ Entry.LineCoding.getBlocks = function() {
         },
 
         LineCodingAllOnOffList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -906,8 +906,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -922,8 +922,8 @@ Entry.LineCoding.getBlocks = function() {
             },
         },
         LineCodingAnalogPortList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -943,8 +943,8 @@ Entry.LineCoding.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -960,8 +960,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         // 1. 저장 시작하기
         LineCodingStart: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -997,11 +997,11 @@ Entry.LineCoding.getBlocks = function() {
                 // 1 시작
                 // delay(100);
                 const value = script.getNumberValue('STAY');
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                    type: Entry.LineCoding.sensorTypes.LINE_EASY,
+                RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                    type: RoCode.LineCoding.sensorTypes.LINE_EASY,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1011,8 +1011,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         // 2. 저장 종료
         LineCodingStop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1038,11 +1038,11 @@ Entry.LineCoding.getBlocks = function() {
                 LineSaveFlag = 0;
                 // 2 종료
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[400] = {
-                    type: Entry.LineCoding.sensorTypes.LINE_EASY,
+                RoCode.hw.sendQueue.SET[400] = {
+                    type: RoCode.LineCoding.sensorTypes.LINE_EASY,
                     data: 2,
                     time: new Date().getTime(),
                 };
@@ -1052,8 +1052,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         // 3. 쉬운주행
         LineCodingLineEasy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1089,18 +1089,18 @@ Entry.LineCoding.getBlocks = function() {
                     if (LineSaveFlag == 1) {
                         ++LineNum;
                     }
-                    LineInit = Entry.hw.portData.DIGITAL[0];
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    LineInit = RoCode.hw.portData.DIGITAL[0];
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
-                    Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                        type: Entry.LineCoding.sensorTypes.LINE_EASY,
+                    RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                        type: RoCode.LineCoding.sensorTypes.LINE_EASY,
                         data: value,
                         time: new Date().getTime(),
                     };
                     LineOneFlag = 0;
                 }
-                if (Entry.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
+                if (RoCode.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
                     return script;
                 } else {
                     LineOneFlag = 1;
@@ -1111,8 +1111,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         // 4. 쉬운주행 설정
         LineCodingEasySet: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1158,20 +1158,20 @@ Entry.LineCoding.getBlocks = function() {
                     if (LineSaveFlag == 1) {
                         ++LineNum;
                     }
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
                     if (port == 55) {
-                        Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                            type: Entry.LineCoding.sensorTypes.LINE_FW_SPEED,
+                        RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                            type: RoCode.LineCoding.sensorTypes.LINE_FW_SPEED,
                             data: [num],
                             time: new Date().getTime(),
                         };
                     } else {
-                        Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                            type: Entry.LineCoding.sensorTypes.LINE_TURN_SPEED,
+                        RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                            type: RoCode.LineCoding.sensorTypes.LINE_TURN_SPEED,
                             data: [num],
                             time: new Date().getTime(),
                         };
@@ -1185,7 +1185,7 @@ Entry.LineCoding.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1193,8 +1193,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         // 직진시간설정
         LineCodingEasyTimeSet: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1231,15 +1231,15 @@ Entry.LineCoding.getBlocks = function() {
                     if (LineSaveFlag == 1) {
                         ++LineNum;
                     }
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
                     time2 = Math.min(2500, time2);
                     time2 = Math.max(0, time2);
                     script.isStart = true;
                     script.timeFlag = 1;
-                    Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                        type: Entry.LineCoding.sensorTypes.LINE_CROSS_TIME,
+                    RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                        type: RoCode.LineCoding.sensorTypes.LINE_CROSS_TIME,
                         data: {
                             time: time2,
                         },
@@ -1254,7 +1254,7 @@ Entry.LineCoding.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1263,8 +1263,8 @@ Entry.LineCoding.getBlocks = function() {
 
         // 5.  쉬운 모터이동
         LineCodingEasyMotor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1314,12 +1314,12 @@ Entry.LineCoding.getBlocks = function() {
                     time2 = Math.max(0, time2);
                     direction2 = Math.min(6, direction2);
                     direction2 = Math.max(3, direction2);
-                    LineInit = Entry.hw.portData.DIGITAL[0];
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    LineInit = RoCode.hw.portData.DIGITAL[0];
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
-                    Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                        type: Entry.LineCoding.sensorTypes.LINE_EASY_MOTOR,
+                    RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                        type: RoCode.LineCoding.sensorTypes.LINE_EASY_MOTOR,
                         data: {
                             direction: direction2,
                             time: time2,
@@ -1328,7 +1328,7 @@ Entry.LineCoding.getBlocks = function() {
                     };
                     LineOneFlag = 0;
                 }
-                if (Entry.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
+                if (RoCode.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
                     return script;
                 } else {
                     LineOneFlag = 1;
@@ -1339,8 +1339,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         // 리스타트
         LineCodingRestart: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1377,18 +1377,18 @@ Entry.LineCoding.getBlocks = function() {
                     ++LineNum;
                 }
                 if (LineOneFlag == 1) {
-                    LineInit = Entry.hw.portData.DIGITAL[0];
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    LineInit = RoCode.hw.portData.DIGITAL[0];
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
-                    Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                        type: Entry.LineCoding.sensorTypes.LINE_RESTART,
+                    RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                        type: RoCode.LineCoding.sensorTypes.LINE_RESTART,
                         data: [num],
                         time: new Date().getTime(),
                     };
                     LineOneFlag = 0;
                 }
-                if (Entry.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
+                if (RoCode.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
                     return script;
                 } else {
                     LineOneFlag = 1;
@@ -1399,8 +1399,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         // 딜레이
         LineCodingDelay: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1439,12 +1439,12 @@ Entry.LineCoding.getBlocks = function() {
                 if (LineOneFlag == 1) {
                     time2 = Math.min(10000, time2);
                     time2 = Math.max(0, time2);
-                    LineInit = Entry.hw.portData.DIGITAL[0];
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    LineInit = RoCode.hw.portData.DIGITAL[0];
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
-                    Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                        type: Entry.LineCoding.sensorTypes.LINE_DELAY,
+                    RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                        type: RoCode.LineCoding.sensorTypes.LINE_DELAY,
                         data: {
                             time: time2,
                         },
@@ -1452,7 +1452,7 @@ Entry.LineCoding.getBlocks = function() {
                     };
                     LineOneFlag = 0;
                 }
-                if (Entry.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
+                if (RoCode.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
                     return script;
                 } else {
                     LineOneFlag = 1;
@@ -1463,8 +1463,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         // 5.  line
         LineCodingLine: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1520,17 +1520,17 @@ Entry.LineCoding.getBlocks = function() {
                     ++LineNum;
                 }
                 if (LineOneFlag == 1) {
-                    LineInit = Entry.hw.portData.DIGITAL[0];
+                    LineInit = RoCode.hw.portData.DIGITAL[0];
                     time2 = Math.min(10000, time2);
                     time2 = Math.max(-10000, time2);
                     speed2 = Math.min(20, speed2);
                     speed2 = Math.max(0, speed2);
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
-                    Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                        type: Entry.LineCoding.sensorTypes.LINE_LINE,
+                    RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                        type: RoCode.LineCoding.sensorTypes.LINE_LINE,
                         data: {
                             cross: cross2,
                             speed: speed2,
@@ -1540,7 +1540,7 @@ Entry.LineCoding.getBlocks = function() {
                     };
                     LineOneFlag = 0;
                 }
-                if (Entry.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
+                if (RoCode.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
                     return script;
                 } else {
                     LineOneFlag = 1;
@@ -1552,8 +1552,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         //  turn lt rt
         LineCodingTurn: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1609,7 +1609,7 @@ Entry.LineCoding.getBlocks = function() {
                     ++LineNum;
                 }
                 if (LineOneFlag == 1) {
-                    LineInit = Entry.hw.portData.DIGITAL[0];
+                    LineInit = RoCode.hw.portData.DIGITAL[0];
                     cross2 = Math.min(8, cross2);
                     cross2 = Math.max(1, cross2);
                     time2 = Math.min(1000, time2);
@@ -1617,11 +1617,11 @@ Entry.LineCoding.getBlocks = function() {
                     speed2 = Math.min(20, speed2);
                     speed2 = Math.max(0, speed2);
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
-                    Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                        type: Entry.LineCoding.sensorTypes.LINE_TURN,
+                    RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                        type: RoCode.LineCoding.sensorTypes.LINE_TURN,
                         data: {
                             cross: cross2,
                             speed: speed2,
@@ -1631,7 +1631,7 @@ Entry.LineCoding.getBlocks = function() {
                     };
                     LineOneFlag = 0;
                 }
-                if (Entry.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
+                if (RoCode.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
                     return script;
                 } else {
                     LineOneFlag = 1;
@@ -1642,8 +1642,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         //  motor
         LineCodingMotor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1700,7 +1700,7 @@ Entry.LineCoding.getBlocks = function() {
                     ++LineNum;
                 }
                 if (LineOneFlag == 1) {
-                    LineInit = Entry.hw.portData.DIGITAL[0];
+                    LineInit = RoCode.hw.portData.DIGITAL[0];
                     time2 = Math.min(1000, time2);
                     time2 = Math.max(0, time2);
                     cross2 = Math.min(20, cross2);
@@ -1708,11 +1708,11 @@ Entry.LineCoding.getBlocks = function() {
                     speed2 = Math.min(20, speed2);
                     speed2 = Math.max(-20, speed2);
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
-                    Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                        type: Entry.LineCoding.sensorTypes.LINE_MOTOR,
+                    RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                        type: RoCode.LineCoding.sensorTypes.LINE_MOTOR,
                         data: {
                             cross: cross2,
                             speed: speed2,
@@ -1722,7 +1722,7 @@ Entry.LineCoding.getBlocks = function() {
                     };
                     LineOneFlag = 0;
                 }
-                if (Entry.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
+                if (RoCode.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
                     return script;
                 } else {
                     LineOneFlag = 1;
@@ -1733,8 +1733,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         //  bmotor bwmotor
         LineCodingBmotor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1799,7 +1799,7 @@ Entry.LineCoding.getBlocks = function() {
                     ++LineNum;
                 }
                 if (LineOneFlag == 1) {
-                    LineInit = Entry.hw.portData.DIGITAL[0];
+                    LineInit = RoCode.hw.portData.DIGITAL[0];
                     mode2 = Math.min(2, mode2);
                     mode2 = Math.max(1, mode2);
                     lspeed2 = Math.min(20, lspeed2);
@@ -1809,12 +1809,12 @@ Entry.LineCoding.getBlocks = function() {
                     sensor2 = Math.min(8, sensor2);
                     sensor2 = Math.max(1, sensor2);
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
                     if (mode2 == 1) {
-                        Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                            type: Entry.LineCoding.sensorTypes.LINE_BMOTOR,
+                        RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                            type: RoCode.LineCoding.sensorTypes.LINE_BMOTOR,
                             data: {
                                 mode: mode2,
                                 lspeed: lspeed2,
@@ -1824,8 +1824,8 @@ Entry.LineCoding.getBlocks = function() {
                             time: new Date().getTime(),
                         };
                     } else {
-                        Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                            type: Entry.LineCoding.sensorTypes.LINE_BWMOTOR,
+                        RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                            type: RoCode.LineCoding.sensorTypes.LINE_BWMOTOR,
                             data: {
                                 mode: mode2,
                                 lspeed: lspeed2,
@@ -1837,7 +1837,7 @@ Entry.LineCoding.getBlocks = function() {
                     }
                     LineOneFlag = 0;
                 }
-                if (Entry.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
+                if (RoCode.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
                     return script;
                 } else {
                     LineOneFlag = 1;
@@ -1848,8 +1848,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         //DC 모터 속도 정하기 wheel
         LineCodingWheel: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1898,8 +1898,8 @@ Entry.LineCoding.getBlocks = function() {
                 rspeed2 = Math.max(-20, rspeed2);
 
                 if (!(LmotorSpeed === lspeed2) || !(RmotorSpeed === rspeed2) || LineSaveFlag == 1) {
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
                     if (LineSaveFlag == 1) {
                         ++LineNum;
@@ -1911,8 +1911,8 @@ Entry.LineCoding.getBlocks = function() {
                             WheelNum = 18;
                         }
                     }
-                    Entry.hw.sendQueue.SET[parseInt(WheelNum, 10)] = {
-                        type: Entry.LineCoding.sensorTypes.LINE_WHEEL,
+                    RoCode.hw.sendQueue.SET[parseInt(WheelNum, 10)] = {
+                        type: RoCode.LineCoding.sensorTypes.LINE_WHEEL,
                         data: {
                             lspeed: lspeed2,
                             rspeed: rspeed2,
@@ -1930,8 +1930,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         // 5.  서보 모터 각도 설정하기
         LineCodingServo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1997,12 +1997,12 @@ Entry.LineCoding.getBlocks = function() {
                 //angle += 1;
                 if (ServeAngle[sport2 - 1] != angle2) {
                     ServeAngle[sport2 - 1] = angle2;
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
                     if (LineSaveFlag == 1) {
-                        Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                            type: Entry.LineCoding.sensorTypes.LINE_SERVO,
+                        RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                            type: RoCode.LineCoding.sensorTypes.LINE_SERVO,
                             data: {
                                 sport: sport2,
                                 angle: angle2,
@@ -2011,8 +2011,8 @@ Entry.LineCoding.getBlocks = function() {
                             time: new Date().getTime(),
                         };
                     } else {
-                        Entry.hw.sendQueue.SET[parseInt(sport2, 10)] = {
-                            type: Entry.LineCoding.sensorTypes.LINE_SERVO,
+                        RoCode.hw.sendQueue.SET[parseInt(sport2, 10)] = {
+                            type: RoCode.LineCoding.sensorTypes.LINE_SERVO,
                             data: {
                                 sport: sport2,
                                 angle: angle2,
@@ -2030,8 +2030,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         // 디지털  출력
         LineCodingDigitalOnOff: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -2074,13 +2074,13 @@ Entry.LineCoding.getBlocks = function() {
                 const value2 = script.getNumberValue('VALUE');
                 if (OutPort[dport2 - 1] != value2) {
                     OutPort[dport2 - 1] = value2;
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
                     if (LineSaveFlag == 1) {
                         ++LineNum;
-                        Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {  //18
-                            type: Entry.LineCoding.sensorTypes.LINE_PORT,
+                        RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {  //18
+                            type: RoCode.LineCoding.sensorTypes.LINE_PORT,
                             /// 출력 디바이스
                             data: {
                                 dport: dport2,
@@ -2090,8 +2090,8 @@ Entry.LineCoding.getBlocks = function() {
                         };
                     }
                     else {
-                        Entry.hw.sendQueue.SET[parseInt(dport2, 10)] = {  //18
-                            type: Entry.LineCoding.sensorTypes.LINE_PORT,
+                        RoCode.hw.sendQueue.SET[parseInt(dport2, 10)] = {  //18
+                            type: RoCode.LineCoding.sensorTypes.LINE_PORT,
                             /// 출력 디바이스
                             data: {
                                 dport: dport2,
@@ -2109,8 +2109,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         //  스피커 멜로디
         LineCodingMelody: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -2166,8 +2166,8 @@ Entry.LineCoding.getBlocks = function() {
                 }
                 if (!script.isStart) {
                     let note = script.getValue('NOTE');
-                    if (!Entry.Utils.isNumber(note)) {
-                        note = Entry.LineCoding.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note)) {
+                        note = RoCode.LineCoding.toneTable[note];
                     }
                     if (note < 0) {
                         note = 0;
@@ -2177,13 +2177,13 @@ Entry.LineCoding.getBlocks = function() {
                     if (duration2 < 0) {
                         duration2 = 0;
                     }
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
                     if (duration2 === 0) {
                         // 음 길이가 0 이면
-                        Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                            type: Entry.LineCoding.sensorTypes.TONE,
+                        RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                            type: RoCode.LineCoding.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -2195,7 +2195,7 @@ Entry.LineCoding.getBlocks = function() {
                         octave = 4;
                     }
                     if (note != 0) {
-                        value2 = Entry.LineCoding.toneMap[note][octave];
+                        value2 = RoCode.LineCoding.toneMap[note][octave];
                     }
                     if (duration2 > 30) {
                         duration2 = 30;
@@ -2206,8 +2206,8 @@ Entry.LineCoding.getBlocks = function() {
                     script.timeFlag = 1;
                     // 시간플래그 셋
 
-                    Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                        type: Entry.LineCoding.sensorTypes.TONE,
+                    RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                        type: RoCode.LineCoding.sensorTypes.TONE,
                         data: {
                             value: value2,
                             duration: duration2,
@@ -2224,12 +2224,12 @@ Entry.LineCoding.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                        type: Entry.LineCoding.sensorTypes.TONE,
+                    RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                        type: RoCode.LineCoding.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2238,8 +2238,8 @@ Entry.LineCoding.getBlocks = function() {
 
         // 11. 디지털입력
         LineCodingGetDgitalValue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             //basic_boolean_field
@@ -2267,24 +2267,24 @@ Entry.LineCoding.getBlocks = function() {
             isNotFor: ['LineCoding'],
             func: (sprite, script) => {
                 const port2 = script.getNumberValue('PORT');
-                //const DIGITAL = Entry.hw.portData.DIGITAL;
+                //const DIGITAL = RoCode.hw.portData.DIGITAL;
 
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
-                Entry.hw.sendQueue.GET[Entry.LineCoding.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue.GET[RoCode.LineCoding.sensorTypes.DIGITAL] = {
                     port: port2,
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.DIGITAL[parseInt(port2, 10)];
+                return RoCode.hw.portData.DIGITAL[parseInt(port2, 10)];
             },
             syntax: { js: [], py: [] },
         },
 
         // 12. 아날로그 읽기
         LineCodingGetAnalogValue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.LineCodingGetAnalogValue,
@@ -2315,7 +2315,7 @@ Entry.LineCoding.getBlocks = function() {
             isNotFor: ['LineCoding'],
             func: (sprite, script) => {
                 const BtnIndex = script.getNumberValue('PORT');
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
 
                 return ANALOG[parseInt(BtnIndex, 10)];
             },
@@ -2323,8 +2323,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         // LCD글자출력
         LineCodingSetLcdString: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -2374,7 +2374,7 @@ Entry.LineCoding.getBlocks = function() {
             class: 'LineCoding_LINE3',
             isNotFor: ['LineCoding'],
             func: (sprite, script) => {
-                // var sq = Entry.hw.sendQueue;
+                // var sq = RoCode.hw.sendQueue;
                 const line2 = script.getValue('LINE', script);
                 const column2 = script.getValue('COLUMN', script);
                 const string = script.getValue('STRING', script);
@@ -2384,24 +2384,24 @@ Entry.LineCoding.getBlocks = function() {
                 if (!script.isStart) {
                     if (typeof string === 'string') {
                         for (var i = 0; i < string.length; i++) {
-                            buf = Entry.memaker.toByte(string[parseInt(i, 10)]);
+                            buf = RoCode.memaker.toByte(string[parseInt(i, 10)]);
                             text[parseInt(i, 10)] = buf;
                         }
                     } else {
                         text[0] = string;
                     }
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    //var fps = Entry.FPS || 60;
+                    //var fps = RoCode.FPS || 60;
                    // var timeValue = 60 / fps * 50;
 
-                    Entry.hw.sendQueue.SET[3] = {
-                        type: Entry.LineCoding.sensorTypes.LCD_SET,
+                    RoCode.hw.sendQueue.SET[3] = {
+                        type: RoCode.LineCoding.sensorTypes.LCD_SET,
                         data: {
                             line: line2,
                             column: column2,
@@ -2438,7 +2438,7 @@ Entry.LineCoding.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = true;
+                    RoCode.engine.isContinue = true;
                     return script.callReturn();
                 }
                  
@@ -2448,8 +2448,8 @@ Entry.LineCoding.getBlocks = function() {
 
         // LCD 지우기
         LineCodingSetLcdClear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,	
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,	
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -2473,11 +2473,11 @@ Entry.LineCoding.getBlocks = function() {
             func: (sprite, script) => {
                 //var port = 0;
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[4] = {
-                    type: Entry.LineCoding.sensorTypes.LCD_SET,
+                RoCode.hw.sendQueue.SET[4] = {
+                    type: RoCode.LineCoding.sensorTypes.LCD_SET,
                     data: [4, 4, 4,],
                     time: new Date().getTime(),
                 };
@@ -2487,8 +2487,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         //  mapping 값
         LineCodingGetAnalogMapping: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.LineCodingGetAnalogMapping,
@@ -2579,8 +2579,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         // 조종기 수신
         LineCodingRemotRx: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -2624,11 +2624,11 @@ Entry.LineCoding.getBlocks = function() {
                 if (LineSaveFlag == 1) {
                     ++LineNum;
                 }
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                    type: Entry.LineCoding.sensorTypes.LINE_REMOT,
+                RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                    type: RoCode.LineCoding.sensorTypes.LINE_REMOT,
                     data: {
                         dport: dport2,
                         value: value2,
@@ -2641,8 +2641,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         //.  linedelay
         LineCodingLineDelay: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -2699,7 +2699,7 @@ Entry.LineCoding.getBlocks = function() {
                     ++LineNum;
                 }
                 if (LineOneFlag == 1) {
-                    LineInit = Entry.hw.portData.DIGITAL[0];
+                    LineInit = RoCode.hw.portData.DIGITAL[0];
                     linetime2 = Math.min(10000, linetime2);
                     linetime2 = Math.max(0, linetime2);
                     time2 = Math.min(2550, time2);
@@ -2707,11 +2707,11 @@ Entry.LineCoding.getBlocks = function() {
                     speed2 = Math.min(20, speed2);
                     speed2 = Math.max(0, speed2);
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
-                    Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                        type: Entry.LineCoding.sensorTypes.LINE_LINEDELAY,
+                    RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                        type: RoCode.LineCoding.sensorTypes.LINE_LINEDELAY,
                         data: {
                             linetime: linetime2,
                             speed: speed2,
@@ -2721,7 +2721,7 @@ Entry.LineCoding.getBlocks = function() {
                     };
                     LineOneFlag = 0;
                 }
-                if (Entry.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
+                if (RoCode.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
                     return script;
                 } else {
                     LineOneFlag = 1;
@@ -2733,8 +2733,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         //absh
         LineCodingABSH: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -2834,13 +2834,13 @@ Entry.LineCoding.getBlocks = function() {
                     absh6 = Math.min(20, absh6);
                     absh6 = Math.max(0, absh6);
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                        type: Entry.LineCoding.sensorTypes.LINE_ABSH,
+                    RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                        type: RoCode.LineCoding.sensorTypes.LINE_ABSH,
                         data: {
                             absh1,
                             absh2,
@@ -2860,7 +2860,7 @@ Entry.LineCoding.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2868,8 +2868,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         //  부저명령
         LineCodingBuzzerOnOff: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -2932,12 +2932,12 @@ Entry.LineCoding.getBlocks = function() {
                     offtime = Math.max(0, offtime);
                     count = Math.min(255, count);
                     count = Math.max(0, count);
-                    LineInit = Entry.hw.portData.DIGITAL[0];
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    LineInit = RoCode.hw.portData.DIGITAL[0];
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
-                    Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                        type: Entry.LineCoding.sensorTypes.LINE_BUZZER,
+                    RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                        type: RoCode.LineCoding.sensorTypes.LINE_BUZZER,
                         data: {
                             linetime: ontime,
                             speed: count,
@@ -2947,7 +2947,7 @@ Entry.LineCoding.getBlocks = function() {
                     };
                     LineOneFlag = 0;
                 }
-                if (Entry.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
+                if (RoCode.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
                     return script;
                 } else {
                     LineOneFlag = 1;
@@ -2958,8 +2958,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         //  LED명령
         LineCodingLED: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -3033,12 +3033,12 @@ Entry.LineCoding.getBlocks = function() {
                     count2 = Math.max(0, count2);
                     outport2 = Math.min(8, outport2);
                     outport2 = Math.max(1, outport2);
-                    LineInit = Entry.hw.portData.DIGITAL[0];
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    LineInit = RoCode.hw.portData.DIGITAL[0];
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
-                    Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                        type: Entry.LineCoding.sensorTypes.LINE_LED,
+                    RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                        type: RoCode.LineCoding.sensorTypes.LINE_LED,
                         data: {
                             ontime: ontime2,
                             offtime: offtime2,
@@ -3049,7 +3049,7 @@ Entry.LineCoding.getBlocks = function() {
                     };
                     LineOneFlag = 0;
                 }
-                if (Entry.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
+                if (RoCode.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
                     return script;
                 } else {
                     LineOneFlag = 1;
@@ -3059,8 +3059,8 @@ Entry.LineCoding.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         LineCodingBlackForwardF: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -3147,12 +3147,12 @@ Entry.LineCoding.getBlocks = function() {
                     lsen2 = Math.max(0, lsen2);
                     rsen2 = Math.min(7, rsen2);
                     rsen2 = Math.max(0, rsen2);
-                    LineInit = Entry.hw.portData.DIGITAL[0];
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    LineInit = RoCode.hw.portData.DIGITAL[0];
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
-                    Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                        type: Entry.LineCoding.sensorTypes.LINE_BLACKFORWARDF,
+                    RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                        type: RoCode.LineCoding.sensorTypes.LINE_BLACKFORWARDF,
                         data: {
                             fsp: fsp2,
                             bsp: bsp2,
@@ -3164,7 +3164,7 @@ Entry.LineCoding.getBlocks = function() {
                     };
                     LineOneFlag = 0;
                 }
-                if (Entry.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
+                if (RoCode.hw.portData.DIGITAL[0] == LineInit && LineSaveFlag == 0) {
                     return script;
                 } else {
                     LineOneFlag = 1;
@@ -3175,8 +3175,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         //DC 모터 직진편차보정 ffmotor
         LineCodingFFmotor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -3226,11 +3226,11 @@ Entry.LineCoding.getBlocks = function() {
                 rspeed2 = Math.min(255, rspeed2);
                 rspeed2 = Math.max(0, rspeed2);
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                    type: Entry.LineCoding.sensorTypes.LINE_FFMOTOR,
+                RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                    type: RoCode.LineCoding.sensorTypes.LINE_FFMOTOR,
                     data: {
                         lspeed: lspeed2,
                         rspeed: rspeed2,
@@ -3246,8 +3246,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         //DC 모터 후진편차보정 bbmotor
         LineCodingBBmotor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -3297,11 +3297,11 @@ Entry.LineCoding.getBlocks = function() {
                 rspeed2 = Math.min(255, rspeed2);
                 rspeed2 = Math.max(0, rspeed2);
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                    type: Entry.LineCoding.sensorTypes.LINE_BBMOTOR,
+                RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                    type: RoCode.LineCoding.sensorTypes.LINE_BBMOTOR,
                     data: {
                         lspeed: lspeed2,
                         rspeed: rspeed2,
@@ -3317,8 +3317,8 @@ Entry.LineCoding.getBlocks = function() {
         },
         //DC 모터 정지보정 motorstop
         LineCodingMotorStop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -3367,13 +3367,13 @@ Entry.LineCoding.getBlocks = function() {
                 rspeed2 = Math.min(255, rspeed2);
                 rspeed2 = Math.max(0, rspeed2);
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
 
                 ++LineNum;
-                Entry.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
-                    type: Entry.LineCoding.sensorTypes.LINE_MOTORSTOP,
+                RoCode.hw.sendQueue.SET[parseInt(LineNum, 10)] = {
+                    type: RoCode.LineCoding.sensorTypes.LINE_MOTORSTOP,
                     data: {
                         lspeed: lspeed2,
                         rspeed: rspeed2,
@@ -3389,4 +3389,4 @@ Entry.LineCoding.getBlocks = function() {
         },
     };
 };
-module.exports = Entry.LineCoding;
+module.exports = RoCode.LineCoding;

@@ -4,21 +4,21 @@
  */
 'use strict';
 
-import { Backpack, ColorPicker, Dropdown, Sortable } from '@entrylabs/tool';
+import { Backpack, ColorPicker, Dropdown, Sortable } from '@RoCodelabs/tool';
 import Toast from '../playground/toast';
-import EntryEvent from '@entrylabs/event';
+import RoCodeEvent from '@RoCodelabs/event';
 import { Destroyer } from '../util/destroyer/Destroyer';
 import { saveAs } from 'file-saver';
 import DataTable from './DataTable';
 
-const Entry = require('../entry');
+const RoCode = require('../RoCode');
 
 /**
  * Class for a playground.
  * This manage all view related with block.
  * @constructor
  */
-Entry.Playground = class Playground {
+RoCode.Playground = class Playground {
     constructor() {
         this._destroyer = this._destroyer || new Destroyer();
         this._destroyer.destroy();
@@ -31,12 +31,12 @@ Entry.Playground = class Playground {
          * @type {string}
          */
         this.viewMode_ = 'default';
-        Entry.addEventListener('textEdited', () => {
+        RoCode.addEventListener('textEdited', () => {
             this.injectText();
         });
-        Entry.addEventListener('commentVisibleChanged', this.toggleCommentButtonVisible.bind(this));
+        RoCode.addEventListener('commentVisibleChanged', this.toggleCommentButtonVisible.bind(this));
 
-        Entry.windowResized.attach(this, this.clearClientRectMemo.bind(this));
+        RoCode.windowResized.attach(this, this.clearClientRectMemo.bind(this));
     }
 
     setMode(mode) {
@@ -45,86 +45,86 @@ Entry.Playground = class Playground {
 
     /**
      * Control bar view generator.
-     * @param {!Element} playgroundView playgroundView from Entry.
+     * @param {!Element} playgroundView playgroundView from RoCode.
      * @param {?string} option for choose type of view.
      */
     generateView(playgroundView, option = 'workspace') {
         /** @type {!Element} */
         this.view_ = playgroundView;
-        this.view_.addClass('entryPlayground');
+        this.view_.addClass('RoCodePlayground');
         if (option === 'workspace' || option === 'playground') {
-            this.view_.addClass('entryPlaygroundWorkspace');
+            this.view_.addClass('RoCodePlaygroundWorkspace');
 
-            const tabView = Entry.createElement('div', 'entryCategoryTab')
-                .addClass('entryPlaygroundTabWorkspace')
+            const tabView = RoCode.createElement('div', 'RoCodeCategoryTab')
+                .addClass('RoCodePlaygroundTabWorkspace')
                 .appendTo(this.view_);
             this.generateTabView(tabView);
             this.tabView_ = tabView;
 
-            const tabButtonView = Entry.createElement('div', 'entryButtonTab')
-                .addClass('entryPlaygroundButtonTabWorkspace')
+            const tabButtonView = RoCode.createElement('div', 'RoCodeButtonTab')
+                .addClass('RoCodePlaygroundButtonTabWorkspace')
                 .appendTo(this.view_);
             this.tabButtonView_ = tabButtonView;
             this.createButtonTabView(tabButtonView);
 
-            const curtainView = Entry.createElement('div', 'entryCurtain')
-                .addClass('entryPlaygroundCurtainWorkspace entryRemove')
+            const curtainView = RoCode.createElement('div', 'RoCodeCurtain')
+                .addClass('RoCodePlaygroundCurtainWorkspace RoCodeRemove')
                 .appendTo(this.view_);
             curtainView.innerHTML = Lang.Workspace.cannot_edit_click_to_stop;
             curtainView.addEventListener('click', () => {
-                Entry.engine.toggleStop();
+                RoCode.engine.toggleStop();
             });
             this.curtainView_ = curtainView;
 
-            const pictureView = Entry.createElement('div', 'entryPicture')
-                .addClass('entryPlaygroundPictureWorkspace entryRemove')
+            const pictureView = RoCode.createElement('div', 'RoCodePicture')
+                .addClass('RoCodePlaygroundPictureWorkspace RoCodeRemove')
                 .appendTo(this.view_);
             this.generatePictureView(pictureView);
             this.pictureView_ = pictureView;
 
-            const pictureCurtainView = Entry.createElement('div', 'entryPictureCurtain')
-                .addClass('entryPlaygroundPictureCurtainWorkspace entryRemove')
+            const pictureCurtainView = RoCode.createElement('div', 'RoCodePictureCurtain')
+                .addClass('RoCodePlaygroundPictureCurtainWorkspace RoCodeRemove')
                 .appendTo(pictureView);
             this.pictureCurtainView_ = pictureCurtainView;
 
-            const pictureCurtainText = Entry.createElement('span', 'entryPictureCurtainText')
-                .addClass('entryPlaygroundPictureCurtainWorkspaceText')
+            const pictureCurtainText = RoCode.createElement('span', 'RoCodePictureCurtainText')
+                .addClass('RoCodePlaygroundPictureCurtainWorkspaceText')
                 .appendTo(pictureCurtainView);
             pictureCurtainText.innerHTML = Lang.Workspace.add_object_before_edit;
 
-            const textView = Entry.createElement('div', 'entryText')
-                .addClass('entryPlaygroundTextWorkspace entryRemove')
+            const textView = RoCode.createElement('div', 'RoCodeText')
+                .addClass('RoCodePlaygroundTextWorkspace RoCodeRemove')
                 .appendTo(this.view_);
             this.generateTextView(textView);
             this.textView_ = textView;
 
-            const soundView = Entry.createElement('div', 'entrySound')
-                .addClass('entryPlaygroundSoundWorkspace entryRemove')
+            const soundView = RoCode.createElement('div', 'RoCodeSound')
+                .addClass('RoCodePlaygroundSoundWorkspace RoCodeRemove')
                 .appendTo(this.view_);
             this.generateSoundView(soundView);
             this.soundView_ = soundView;
 
-            const defaultView = Entry.createElement('div', 'entryDefault')
-                .addClass('entryPlaygroundDefaultWorkspace')
+            const defaultView = RoCode.createElement('div', 'RoCodeDefault')
+                .addClass('RoCodePlaygroundDefaultWorkspace')
                 .appendTo(this.view_);
             this.generateDefaultView(defaultView);
             this.defaultView_ = defaultView;
 
             //Code view must be append at last.
-            const codeView = Entry.createElement('div', 'entryCode')
-                .addClass('entryPlaygroundCodeWorkspace entryRemove')
+            const codeView = RoCode.createElement('div', 'RoCodeCode')
+                .addClass('RoCodePlaygroundCodeWorkspace RoCodeRemove')
                 .appendTo(this.view_);
             this.generateCodeView(codeView);
             this.codeView_ = codeView;
 
-            const backPackView = Entry.createElement('div', 'entryBackPackView')
-                .addClass('entryPlaygroundBackPackView')
+            const backPackView = RoCode.createElement('div', 'RoCodeBackPackView')
+                .addClass('RoCodePlaygroundBackPackView')
                 .appendTo(this.view_);
             this.backPackView = backPackView;
             this.createBackPackView(backPackView);
 
-            const resizeHandle = Entry.createElement('div')
-                .addClass('entryPlaygroundResizeWorkspace', 'entryRemove')
+            const resizeHandle = RoCode.createElement('div')
+                .addClass('RoCodePlaygroundResizeWorkspace', 'RoCodeRemove')
                 .appendTo(codeView);
             this.resizeHandle_ = resizeHandle;
             this.initializeResizeHandle(resizeHandle);
@@ -132,11 +132,11 @@ Entry.Playground = class Playground {
             /** @type {!Element} */
             this.codeView_ = codeView;
 
-            Entry.addEventListener('run', () => {
-                Entry.playground.curtainView_.removeClass('entryRemove');
+            RoCode.addEventListener('run', () => {
+                RoCode.playground.curtainView_.removeClass('RoCodeRemove');
             });
-            Entry.addEventListener('stop', () => {
-                Entry.playground.curtainView_.addClass('entryRemove');
+            RoCode.addEventListener('stop', () => {
+                RoCode.playground.curtainView_.addClass('RoCodeRemove');
             });
             this.applyTabOption();
         }
@@ -159,56 +159,56 @@ Entry.Playground = class Playground {
      */
     generateTabView(tabView) {
         const that = this;
-        const tabList = Entry.createElement('ul').addClass('entryTabListWorkspace');
+        const tabList = RoCode.createElement('ul').addClass('RoCodeTabListWorkspace');
         this.tabList_ = tabList;
         tabView.appendChild(tabList);
 
         this.tabViewElements = {};
-        const codeTab = Entry.createElement('li', 'entryCodeTab')
-            .addClass('entryTabListItemWorkspace entryTabSelected')
+        const codeTab = RoCode.createElement('li', 'RoCodeCodeTab')
+            .addClass('RoCodeTabListItemWorkspace RoCodeTabSelected')
             .bindOnClick(() => {
-                Entry.do('playgroundChangeViewMode', 'code', that.selectedViewMode);
+                RoCode.do('playgroundChangeViewMode', 'code', that.selectedViewMode);
             })
             .appendTo(tabList);
         codeTab.innerHTML = Lang.Workspace.tab_code;
         this.tabViewElements.code = codeTab;
         this._codeTab = codeTab;
 
-        const pictureTab = Entry.createElement('li', 'entryPictureTab')
-            .addClass('entryTabListItemWorkspace')
+        const pictureTab = RoCode.createElement('li', 'RoCodePictureTab')
+            .addClass('RoCodeTabListItemWorkspace')
             .bindOnClick(() => {
-                Entry.do('playgroundChangeViewMode', 'picture', that.selectedViewMode);
+                RoCode.do('playgroundChangeViewMode', 'picture', that.selectedViewMode);
             })
             .appendTo(tabList);
         pictureTab.innerHTML = Lang.Workspace.tab_picture;
         this.tabViewElements.picture = pictureTab;
         this.pictureTab = pictureTab;
 
-        const textboxTab = Entry.createElement('li', 'entryTextboxTab')
-            .addClass('entryTabListItemWorkspace entryRemove')
+        const textboxTab = RoCode.createElement('li', 'RoCodeTextboxTab')
+            .addClass('RoCodeTabListItemWorkspace RoCodeRemove')
             .appendTo(tabList)
             .bindOnClick(() => {
-                Entry.do('playgroundChangeViewMode', 'text', that.selectedViewMode);
+                RoCode.do('playgroundChangeViewMode', 'text', that.selectedViewMode);
             });
         textboxTab.innerHTML = Lang.Workspace.tab_text;
         this.tabViewElements.text = textboxTab;
         this.textboxTab = textboxTab;
 
-        const soundTab = Entry.createElement('li', 'entrySoundTab')
-            .addClass('entryTabListItemWorkspace')
+        const soundTab = RoCode.createElement('li', 'RoCodeSoundTab')
+            .addClass('RoCodeTabListItemWorkspace')
             .appendTo(tabList)
             .bindOnClick(() => {
-                Entry.do('playgroundChangeViewMode', 'sound', that.selectedViewMode);
+                RoCode.do('playgroundChangeViewMode', 'sound', that.selectedViewMode);
             });
         soundTab.innerHTML = Lang.Workspace.tab_sound;
         this.tabViewElements.sound = soundTab;
         this.soundTab = soundTab;
 
-        const variableTab = Entry.createElement('li', 'entryVariableTab')
-            .addClass('entryTabListItemWorkspace entryVariableTabWorkspace')
+        const variableTab = RoCode.createElement('li', 'RoCodeVariableTab')
+            .addClass('RoCodeTabListItemWorkspace RoCodeVariableTabWorkspace')
             .appendTo(tabList)
             .bindOnClick(() => {
-                Entry.do('playgroundChangeViewMode', 'variable', that.selectedViewMode);
+                RoCode.do('playgroundChangeViewMode', 'variable', that.selectedViewMode);
             });
         variableTab.innerHTML = Lang.Workspace.tab_attribute;
         this.tabViewElements.variable = variableTab;
@@ -216,12 +216,12 @@ Entry.Playground = class Playground {
     }
 
     createButtonTabView(tabButtonView) {
-        const { options = {} } = Entry;
+        const { options = {} } = RoCode;
         const { commentDisable, backpackDisable } = options;
 
         if (!commentDisable) {
-            const commentToggleButton = Entry.createElement('div')
-                .addClass('entryPlaygroundCommentButtonWorkspace showComment')
+            const commentToggleButton = RoCode.createElement('div')
+                .addClass('RoCodePlaygroundCommentButtonWorkspace showComment')
                 .appendTo(tabButtonView);
             commentToggleButton.setAttribute('alt', Lang.Blocks.show_all_comment);
             commentToggleButton.setAttribute('title', Lang.Blocks.show_all_comment);
@@ -234,15 +234,15 @@ Entry.Playground = class Playground {
 
         // TODO: 백팩(나의보관함) 숨김처리
         if (!backpackDisable) {
-            const backPackButton = Entry.createElement('div')
-                .addClass('entryPlaygroundBackPackButtonWorkspace')
+            const backPackButton = RoCode.createElement('div')
+                .addClass('RoCodePlaygroundBackPackButtonWorkspace')
                 .appendTo(tabButtonView);
             backPackButton.setAttribute('alt', Lang.Workspace.my_storage);
             backPackButton.setAttribute('title', Lang.Workspace.my_storage);
 
             this.backPackButton_ = backPackButton;
             backPackButton.bindOnClick(() => {
-                Entry.dispatchEvent('openBackPack');
+                RoCode.dispatchEvent('openBackPack');
             });
         }
     }
@@ -253,31 +253,31 @@ Entry.Playground = class Playground {
             data: {
                 items: [],
                 onClose: () => {
-                    Entry.dispatchEvent('closeBackPack');
+                    RoCode.dispatchEvent('closeBackPack');
                 },
                 onRemoveItem: (id) => {
-                    Entry.dispatchEvent('removeBackPackItem', id);
+                    RoCode.dispatchEvent('removeBackPackItem', id);
                 },
                 onChangeTitle: (id, title) => {
-                    Entry.dispatchEvent('changeBackPackTitle', id, title);
+                    RoCode.dispatchEvent('changeBackPackTitle', id, title);
                 },
                 onCustomDragEnter: ({ type, value, onDragEnter }) => {
-                    if (Entry.GlobalSvg.isShow && Entry.GlobalSvg.canAddStorageBlock) {
-                        const { _view = {} } = Entry.GlobalSvg;
+                    if (RoCode.GlobalSvg.isShow && RoCode.GlobalSvg.canAddStorageBlock) {
+                        const { _view = {} } = RoCode.GlobalSvg;
                         onDragEnter({
                             type: 'block',
                             value: _view,
                         });
-                    } else if (Entry.container.isObjectDragging) {
+                    } else if (RoCode.container.isObjectDragging) {
                         onDragEnter({
                             type: 'object',
-                            value: Entry.container.dragObjectKey,
+                            value: RoCode.container.dragObjectKey,
                         });
                     }
                 },
                 onDropItem: ({ type, value }) => {
                     if (type === 'object') {
-                        const object = Entry.container.getObject(value);
+                        const object = RoCode.container.getObject(value);
                         object.addStorage();
                     } else if (type === 'block') {
                         if (value.addStorage) {
@@ -288,20 +288,20 @@ Entry.Playground = class Playground {
             },
             container: this.backPackView,
         });
-        this.blockBackPackArea = Entry.Dom('div')
+        this.blockBackPackArea = RoCode.Dom('div')
             .addClass('blockBackPackDrop')
             .appendTo(backPackView);
-        this.objectBackPackArea = Entry.Dom('div')
+        this.objectBackPackArea = RoCode.Dom('div')
             .addClass('objectBackPackDrop')
             .appendTo(backPackView);
-        const icon = Entry.Dom('div', {
+        const icon = RoCode.Dom('div', {
             class: 'blockBackPackIcon',
         });
-        const desc = Entry.Dom('div', {
+        const desc = RoCode.Dom('div', {
             class: 'blockBackPackDesc',
             text: Lang.Workspace.playground_block_drop,
         });
-        const desc2 = Entry.Dom('div', {
+        const desc2 = RoCode.Dom('div', {
             class: 'objectBackPackDesc',
             text: Lang.Workspace.container_object_drop,
         });
@@ -313,13 +313,13 @@ Entry.Playground = class Playground {
         const { view: blockView } = this.board || {};
         if (blockView) {
             const dom = blockView[0];
-            const eventDom = new EntryEvent(dom);
+            const eventDom = new RoCodeEvent(dom);
             this.blockBackPackEvent = eventDom;
-            const areaDom = new EntryEvent(this.blockBackPackArea[0]);
+            const areaDom = new RoCodeEvent(this.blockBackPackArea[0]);
             this.blockBackPackAreaEvent = areaDom;
             areaDom.on('dropitem', (e) => {
                 const data = this.backPack.getData('data');
-                Entry.dispatchEvent('addBackPackToEntry', 'block', data);
+                RoCode.dispatchEvent('addBackPackToRoCode', 'block', data);
                 this.blockBackPackArea.css({
                     display: 'none',
                 });
@@ -345,19 +345,19 @@ Entry.Playground = class Playground {
             });
         }
 
-        const { modes = {} } = Entry.propertyPanel || {};
+        const { modes = {} } = RoCode.propertyPanel || {};
         const { object = {} } = modes;
         const { contentDom: objectView } = object;
         if (objectView) {
             const dom = objectView[0];
-            const eventDom = new EntryEvent(dom);
+            const eventDom = new RoCodeEvent(dom);
             this.objectBackPackEvent = eventDom;
-            const areaDom = new EntryEvent(this.objectBackPackArea[0]);
+            const areaDom = new RoCodeEvent(this.objectBackPackArea[0]);
             this.objectBackPackAreaEvent = areaDom;
 
             areaDom.on('dropitem', (e) => {
                 const data = this.backPack.getData('data');
-                Entry.dispatchEvent('addBackPackToEntry', 'object', data);
+                RoCode.dispatchEvent('addBackPackToRoCode', 'object', data);
                 this.objectBackPackArea.css({
                     display: 'none',
                 });
@@ -385,7 +385,7 @@ Entry.Playground = class Playground {
             });
         }
 
-        const globalEvent = new EntryEvent(document);
+        const globalEvent = new RoCodeEvent(document);
         globalEvent.data = {};
         this.globalEvent = globalEvent;
 
@@ -396,7 +396,7 @@ Entry.Playground = class Playground {
                     (e) => {
                         const isDragging = this.backPack.getData('isDragging');
                         if (isDragging) {
-                            const point = Entry.Utils.getPosition(e);
+                            const point = RoCode.Utils.getPosition(e);
                             const { data } = globalEvent;
                             const { dom: objectDom } = this.objectBackPackEvent;
                             const { dom: blockDom } = this.blockBackPackEvent;
@@ -407,27 +407,27 @@ Entry.Playground = class Playground {
                             });
                             if (
                                 !data.isObjectMouseEnter &&
-                                Entry.Utils.isPointInRect(point, objectRect)
+                                RoCode.Utils.isPointInRect(point, objectRect)
                             ) {
                                 data.isObjectMouseEnter = true;
                                 this.objectBackPackEvent.trigger('enteritem');
                             } else if (
                                 data.isObjectMouseEnter &&
-                                !Entry.Utils.isPointInRect(point, objectRect)
+                                !RoCode.Utils.isPointInRect(point, objectRect)
                             ) {
                                 data.isObjectMouseEnter = false;
                                 this.objectBackPackAreaEvent.trigger('leaveitem');
                             }
-                            if (Entry.getMainWS().mode === Entry.Workspace.MODE_BOARD) {
+                            if (RoCode.getMainWS().mode === RoCode.Workspace.MODE_BOARD) {
                                 if (
                                     !data.isBlockMouseEnter &&
-                                    Entry.Utils.isPointInRect(point, blockRect)
+                                    RoCode.Utils.isPointInRect(point, blockRect)
                                 ) {
                                     data.isBlockMouseEnter = true;
                                     this.blockBackPackEvent.trigger('enteritem');
                                 } else if (
                                     data.isBlockMouseEnter &&
-                                    !Entry.Utils.isPointInRect(point, blockRect)
+                                    !RoCode.Utils.isPointInRect(point, blockRect)
                                 ) {
                                     data.isBlockMouseEnter = false;
                                     this.blockBackPackAreaEvent.trigger('leaveitem');
@@ -490,21 +490,21 @@ Entry.Playground = class Playground {
     showBackPack(args) {
         this.backPack.setData({ ...args });
         this.backPack.show();
-        this.backPackView.removeClass('entryRemove');
+        this.backPackView.removeClass('RoCodeRemove');
     }
 
     hideBackPack() {
         this.backPack.hide();
-        this.backPackView.addClass('entryRemove');
+        this.backPackView.addClass('RoCodeRemove');
     }
 
     toggleCommentButton() {
         if (this.board.isVisibleComment) {
             this.toast.show(Lang.Blocks.hide_all_comment);
-            Entry.do('hideAllComment', this.board);
+            RoCode.do('hideAllComment', this.board);
         } else {
             this.toast.show(Lang.Blocks.show_all_comment);
-            Entry.do('showAllComment', this.board);
+            RoCode.do('showAllComment', this.board);
         }
         this.toggleCommentButtonVisible();
     }
@@ -533,51 +533,51 @@ Entry.Playground = class Playground {
         codeView.appendChild(variableView);
         this.variableView_ = variableView;
 
-        codeView = Entry.Dom(codeView);
-        const boardView = Entry.Dom('div', {
+        codeView = RoCode.Dom(codeView);
+        const boardView = RoCode.Dom('div', {
             parent: codeView,
-            id: 'entryWorkspaceBoard',
-            class: 'entryWorkspaceBoard',
+            id: 'RoCodeWorkspaceBoard',
+            class: 'RoCodeWorkspaceBoard',
         });
 
-        const blockMenuView = Entry.Dom('div', {
+        const blockMenuView = RoCode.Dom('div', {
             parent: codeView,
-            id: 'entryWorkspaceBlockMenu',
-            class: 'entryWorkspaceBlockMenu',
+            id: 'RoCodeWorkspaceBlockMenu',
+            class: 'RoCodeWorkspaceBlockMenu',
         });
 
         const initOpts = {
             blockMenu: {
                 dom: blockMenuView,
                 align: 'LEFT',
-                categoryData: EntryStatic.getAllBlocks(),
+                categoryData: RoCodeStatic.getAllBlocks(),
                 scroll: true,
             },
             board: {
                 dom: boardView,
             },
-            readOnly: Entry.readOnly,
+            readOnly: RoCode.readOnly,
         };
-        if (Entry.textCodingEnable) {
+        if (RoCode.textCodingEnable) {
             initOpts.vimBoard = { dom: boardView };
         }
 
-        this.mainWorkspace = new Entry.Workspace(initOpts);
+        this.mainWorkspace = new RoCode.Workspace(initOpts);
         this.blockMenu = this.mainWorkspace.blockMenu;
         this.board = this.mainWorkspace.board;
         this.toast = new Toast(this.board);
         this.blockMenu.banClass('checker');
-        Entry.expansion.banAllExpansionBlock();
-        Entry.aiUtilize.banAllAIUtilizeBlock();
+        RoCode.expansion.banAllExpansionBlock();
+        RoCode.aiUtilize.banAllAIUtilizeBlock();
         DataTable.banAllBlock();
-        Entry.aiLearning.banBlocks();
+        RoCode.aiLearning.banBlocks();
         this.vimBoard = this.mainWorkspace.vimBoard;
 
         this._destroyer.add(this.mainWorkspace);
         this._destroyer.add(this.toast);
 
-        if (Entry.hw) {
-            Entry.hw.refreshHardwareBlockMenu();
+        if (RoCode.hw) {
+            RoCode.hw.refreshHardwareBlockMenu();
         }
     }
 
@@ -587,18 +587,18 @@ Entry.Playground = class Playground {
      * @return {Element}
      */
     generatePictureView(PictureView) {
-        if (Entry.type === 'workspace') {
-            const pictureAdd = Entry.createElement('div', 'entryAddPicture')
-                .addClass('entryPlaygroundAddPicture')
+        if (RoCode.type === 'workspace') {
+            const pictureAdd = RoCode.createElement('div', 'RoCodeAddPicture')
+                .addClass('RoCodePlaygroundAddPicture')
                 .appendTo(PictureView);
 
-            const innerPictureAdd = Entry.createElement('div', 'entryAddPictureInner')
-                .addClass('entryPlaygroundAddPictureInner')
+            const innerPictureAdd = RoCode.createElement('div', 'RoCodeAddPictureInner')
+                .addClass('RoCodePlaygroundAddPictureInner')
                 .bindOnClick(() => {
-                    if (!Entry.container || Entry.container.isSceneObjectsExist()) {
-                        Entry.do('playgroundClickAddPicture');
+                    if (!RoCode.container || RoCode.container.isSceneObjectsExist()) {
+                        RoCode.do('playgroundClickAddPicture');
                     } else {
-                        Entry.toast.alert(
+                        RoCode.toast.alert(
                             Lang.Workspace.add_object_alert,
                             Lang.Workspace.add_object_alert_msg
                         );
@@ -608,20 +608,20 @@ Entry.Playground = class Playground {
             innerPictureAdd.innerHTML = Lang.Workspace.picture_add;
             this._pictureAddButton = innerPictureAdd;
 
-            this.pictureListView_ = Entry.createElement('ul', 'entryPictureList')
-                .addClass('entryPlaygroundPictureList')
+            this.pictureListView_ = RoCode.createElement('ul', 'RoCodePictureList')
+                .addClass('RoCodePlaygroundPictureList')
                 .appendTo(PictureView);
 
-            const painterDom = Entry.createElement('div', 'entryPainter')
-                .addClass('entryPlaygroundPainter')
+            const painterDom = RoCode.createElement('div', 'RoCodePainter')
+                .addClass('RoCodePlaygroundPainter')
                 .appendTo(PictureView);
 
-            switch (Entry.paintMode) {
-                case 'entry-paint':
-                    this.painter = new Entry.Painter(painterDom);
+            switch (RoCode.paintMode) {
+                case 'RoCode-paint':
+                    this.painter = new RoCode.Painter(painterDom);
                     break;
                 case 'literallycanvas':
-                    this.painter = new Entry.LiterallycanvasPainter(painterDom);
+                    this.painter = new RoCode.LiterallycanvasPainter(painterDom);
                     break;
             }
         }
@@ -635,13 +635,13 @@ Entry.Playground = class Playground {
         this.pictureSortableListWidget = new Sortable({
             data: {
                 height: '100%',
-                sortableTarget: ['entryPlaygroundPictureThumbnail'],
+                sortableTarget: ['RoCodePlaygroundPictureThumbnail'],
                 lockAxis: 'y',
                 items: this._getSortablePictureList(),
             },
             container: this.pictureListView_,
         }).on('change', ([newIndex, oldIndex]) => {
-            Entry.playground.movePicture(newIndex, oldIndex);
+            RoCode.playground.movePicture(newIndex, oldIndex);
         });
     }
 
@@ -672,22 +672,22 @@ Entry.Playground = class Playground {
      */
     generateTextView(textView) {
         const that = this;
-        const wrap = Entry.createElement('div')
+        const wrap = RoCode.createElement('div')
             .addClass('write_box')
             .appendTo(textView);
-        const writeSet = Entry.createElement('div').addClass('write_set');
-        const inputArea = Entry.createElement('div').addClass('input_box');
+        const writeSet = RoCode.createElement('div').addClass('write_set');
+        const inputArea = RoCode.createElement('div').addClass('input_box');
         wrap.appendChild(writeSet);
         wrap.appendChild(inputArea);
 
         //write set 글 속성 탭
-        const fontSelect = Entry.createElement('div').addClass('pop_selectbox');
-        const fontLink = Entry.createElement('a', 'entryTextBoxAttrFontName').addClass(
+        const fontSelect = RoCode.createElement('div').addClass('pop_selectbox');
+        const fontLink = RoCode.createElement('a', 'RoCodeTextBoxAttrFontName').addClass(
             'select_link imico_pop_select_arr_down'
         );
 
         fontLink.bindOnClick(() => {
-            const options = EntryStatic.fonts
+            const options = RoCodeStatic.fonts
                 .filter((font) => font.visible)
                 .map((font) => [font.name, font, font.style]);
             fontLink.addClass('imico_pop_select_arr_up');
@@ -701,19 +701,19 @@ Entry.Playground = class Playground {
                     if (that.object.entity.getLineBreak()) {
                         textValue = textEditArea.value;
                     }
-                    const { options = {} } = Entry;
+                    const { options = {} } = RoCode;
                     const { textOptions = {} } = options;
                     const { hanjaEnable } = textOptions;
                     if (!hanjaEnable) {
                         if (/[\u4E00-\u9FFF]/.exec(textValue) != null) {
                             font = options[0][1];
-                            entrylms.alert(Lang.Menus.not_supported_text);
+                            RoCodelms.alert(Lang.Menus.not_supported_text);
                         }
                     }
                     fontLink.innerText = font.name;
                     this.textEditArea.style.fontFamily = font.family;
                     this.textEditInput.style.fontFamily = font.family;
-                    $('#entryTextBoxAttrFontName').data('font', font);
+                    $('#RoCodeTextBoxAttrFontName').data('font', font);
                     this.object.entity.setFontType(font.family);
                 },
                 () => {
@@ -726,57 +726,57 @@ Entry.Playground = class Playground {
         writeSet.appendChild(fontSelect);
 
         //스타일 박스
-        const alignBox = Entry.createElement('div').addClass('font_style_box');
+        const alignBox = RoCode.createElement('div').addClass('font_style_box');
         writeSet.appendChild(alignBox);
 
-        const alignLeft = Entry.createElement('a')
+        const alignLeft = RoCode.createElement('a')
             .addClass('style_link imbtn_pop_font_align_left')
             .bindOnClick(() => {
-                Entry.playground.setFontAlign(Entry.TEXT_ALIGN_LEFT);
+                RoCode.playground.setFontAlign(RoCode.TEXT_ALIGN_LEFT);
             });
         alignLeft.setAttribute('title', Lang.Workspace.align_left);
         alignBox.appendChild(alignLeft);
         this.alignLeftBtn = alignLeft;
-        const alignMiddle = Entry.createElement('a')
+        const alignMiddle = RoCode.createElement('a')
             .addClass('style_link imbtn_pop_font_align_middle')
             .bindOnClick(() => {
-                Entry.playground.setFontAlign(Entry.TEXT_ALIGN_CENTER);
+                RoCode.playground.setFontAlign(RoCode.TEXT_ALIGN_CENTER);
             });
         alignMiddle.setAttribute('title', Lang.Workspace.align_center);
         alignBox.appendChild(alignMiddle);
         this.alignCenterBtn = alignMiddle;
-        const alignRight = Entry.createElement('a')
+        const alignRight = RoCode.createElement('a')
             .addClass('style_link imbtn_pop_font_align_right')
             .bindOnClick(() => {
-                Entry.playground.setFontAlign(Entry.TEXT_ALIGN_RIGHT);
+                RoCode.playground.setFontAlign(RoCode.TEXT_ALIGN_RIGHT);
             });
         alignRight.setAttribute('title', Lang.Workspace.align_right);
         alignBox.appendChild(alignRight);
         this.alignRightBtn = alignRight;
 
-        const styleBox = Entry.createElement('div').addClass('font_style_box');
+        const styleBox = RoCode.createElement('div').addClass('font_style_box');
         writeSet.appendChild(styleBox);
 
-        const bold = Entry.createElement('a')
+        const bold = RoCode.createElement('a')
             .addClass('style_link imbtn_pop_font_bold')
             .bindOnClick((e) => {
                 $(e.currentTarget).toggleClass('on');
-                Entry.playground.object.entity.toggleFontBold();
+                RoCode.playground.object.entity.toggleFontBold();
                 $(this.textEditArea).toggleClass('bold');
                 $(this.textEditInput).toggleClass('bold');
             });
         bold.setAttribute('title', Lang.Workspace.bold);
         styleBox.appendChild(bold);
 
-        const underLine = Entry.createElement('a')
+        const underLine = RoCode.createElement('a')
             .addClass('style_link imbtn_pop_font_underline')
             .bindOnClick((e) => {
-                const underLineState = !Entry.playground.object.entity.getUnderLine() || false;
+                const underLineState = !RoCode.playground.object.entity.getUnderLine() || false;
                 $(e.currentTarget).toggleClass('on');
-                Entry.playground.object.entity.setUnderLine(underLineState);
+                RoCode.playground.object.entity.setUnderLine(underLineState);
 
                 const effect = `${underLineState ? 'underline' : ''} ${
-                    Entry.playground.object.entity.getStrike() ? 'line-through' : ''
+                    RoCode.playground.object.entity.getStrike() ? 'line-through' : ''
                 }`.trim();
                 this.textEditArea.style.textDecoration = effect;
                 this.textEditInput.style.textDecoration = effect;
@@ -784,26 +784,26 @@ Entry.Playground = class Playground {
         underLine.setAttribute('title', Lang.Workspace.font_underline);
         styleBox.appendChild(underLine);
 
-        const italic = Entry.createElement('a')
+        const italic = RoCode.createElement('a')
             .addClass('style_link imbtn_pop_font_italic')
             .bindOnClick((e) => {
                 $(e.currentTarget).toggleClass('on');
-                Entry.playground.object.entity.toggleFontItalic();
+                RoCode.playground.object.entity.toggleFontItalic();
                 $(this.textEditArea).toggleClass('italic');
                 $(this.textEditInput).toggleClass('italic');
             });
         italic.setAttribute('title', Lang.Workspace.font_tilt);
         styleBox.appendChild(italic);
 
-        const through = Entry.createElement('a')
+        const through = RoCode.createElement('a')
             .addClass('style_link imbtn_pop_font_through')
             .bindOnClick((e) => {
                 $(e.currentTarget).toggleClass('on');
-                const strikeState = !Entry.playground.object.entity.getStrike() || false;
-                Entry.playground.object.entity.setStrike(strikeState);
+                const strikeState = !RoCode.playground.object.entity.getStrike() || false;
+                RoCode.playground.object.entity.setStrike(strikeState);
 
                 const effect = `${strikeState ? 'line-through' : ''} ${
-                    Entry.playground.object.entity.getUnderLine() ? 'underline' : ''
+                    RoCode.playground.object.entity.getUnderLine() ? 'underline' : ''
                 }`.trim();
                 this.textEditArea.style.textDecoration = effect;
                 this.textEditInput.style.textDecoration = effect;
@@ -811,8 +811,8 @@ Entry.Playground = class Playground {
         through.setAttribute('title', Lang.Workspace.font_cancel);
         styleBox.appendChild(through);
 
-        const color = Entry.createElement('a').addClass('imbtn_pop_font_color');
-        color.appendChild(Entry.createElement('em'));
+        const color = RoCode.createElement('a').addClass('imbtn_pop_font_color');
+        color.appendChild(RoCode.createElement('em'));
         color.bindOnClick(() =>
             this.openColourPicker(
                 color,
@@ -824,9 +824,9 @@ Entry.Playground = class Playground {
         color.setAttribute('title', Lang.Workspace.font_color);
         styleBox.appendChild(color);
 
-        const backgroundColor = Entry.createElement('a').addClass('imbtn_pop_font_backgroundcolor');
+        const backgroundColor = RoCode.createElement('a').addClass('imbtn_pop_font_backgroundcolor');
         backgroundColor.setAttribute('title', Lang.Workspace.font_fill);
-        backgroundColor.appendChild(Entry.createElement('em'));
+        backgroundColor.appendChild(RoCode.createElement('em'));
         backgroundColor.bindOnClick(() =>
             this.openColourPicker(
                 backgroundColor,
@@ -837,38 +837,38 @@ Entry.Playground = class Playground {
         );
         styleBox.appendChild(backgroundColor);
 
-        const writeTypeBox = Entry.createElement('div').addClass('write_type_box');
-        const singleLine = Entry.createElement('a');
+        const writeTypeBox = RoCode.createElement('div').addClass('write_type_box');
+        const singleLine = RoCode.createElement('a');
         singleLine.innerText = Lang.Buttons.single_line;
-        singleLine.bindOnClick(() => Entry.playground.toggleLineBreak(false));
-        const multiLine = Entry.createElement('a');
+        singleLine.bindOnClick(() => RoCode.playground.toggleLineBreak(false));
+        const multiLine = RoCode.createElement('a');
         multiLine.innerText = Lang.Buttons.multi_line;
-        multiLine.bindOnClick(() => Entry.playground.toggleLineBreak(true));
+        multiLine.bindOnClick(() => RoCode.playground.toggleLineBreak(true));
         writeTypeBox.appendChild(singleLine);
         writeTypeBox.appendChild(multiLine);
         inputArea.appendChild(writeTypeBox);
 
         //글자 크기 조절 슬라이드.
-        const fontSizeWrapper = Entry.createElement('div').addClass(
-            'entryPlaygroundFontSizeWrapper multi'
+        const fontSizeWrapper = RoCode.createElement('div').addClass(
+            'RoCodePlaygroundFontSizeWrapper multi'
         );
         inputArea.appendChild(fontSizeWrapper);
         this.fontSizeWrapper = fontSizeWrapper;
 
-        const fontSizeLabel = Entry.createElement('div').addClass('entryPlaygroundFontSizeLabel');
+        const fontSizeLabel = RoCode.createElement('div').addClass('RoCodePlaygroundFontSizeLabel');
         fontSizeLabel.innerHTML = Lang.General.font_size;
         fontSizeWrapper.appendChild(fontSizeLabel);
 
-        const fontSizeSlider = Entry.createElement('div').addClass('entryPlaygroundFontSizeSlider');
+        const fontSizeSlider = RoCode.createElement('div').addClass('RoCodePlaygroundFontSizeSlider');
         fontSizeWrapper.appendChild(fontSizeSlider);
 
-        const fontSizeIndiciator = Entry.createElement('div').addClass(
-            'entryPlaygroundFontSizeIndicator'
+        const fontSizeIndiciator = RoCode.createElement('div').addClass(
+            'RoCodePlaygroundFontSizeIndicator'
         );
         fontSizeSlider.appendChild(fontSizeIndiciator);
         this.fontSizeIndiciator = fontSizeIndiciator;
 
-        const fontSizeKnob = Entry.createElement('div').addClass('entryPlaygroundFontSizeKnob');
+        const fontSizeKnob = RoCode.createElement('div').addClass('RoCodePlaygroundFontSizeKnob');
         fontSizeSlider.appendChild(fontSizeKnob);
         this.fontSizeKnob = fontSizeKnob;
 
@@ -890,7 +890,7 @@ Entry.Playground = class Playground {
                 fontSizeKnob.style.left = `${left}px`;
                 left /= 1.36;
                 fontSizeIndiciator.style.width = `${left}%`;
-                Entry.playground.object.entity.setFontSize(left);
+                RoCode.playground.object.entity.setFontSize(left);
             }
 
             function onMouseUp() {
@@ -898,20 +898,20 @@ Entry.Playground = class Playground {
             }
         });
 
-        const inputInner = Entry.createElement('div').addClass('input_inner');
+        const inputInner = RoCode.createElement('div').addClass('input_inner');
         inputArea.appendChild(inputInner);
 
-        const textEditInput = Entry.createElement('input').addClass(
-            'entryPlayground_textBox single'
+        const textEditInput = RoCode.createElement('input').addClass(
+            'RoCodePlayground_textBox single'
         );
         textEditInput.type = 'text';
         textEditInput.placeholder = Lang.Workspace.textbox_input;
         const textChangeApply = function() {
-            const object = Entry.playground.object;
+            const object = RoCode.playground.object;
             const entity = object.entity;
-            const selected = $('#entryTextBoxAttrFontName').data('font');
-            const defaultFont = EntryStatic.fonts[0];
-            const { options = {} } = Entry;
+            const selected = $('#RoCodeTextBoxAttrFontName').data('font');
+            const defaultFont = RoCodeStatic.fonts[0];
+            const { options = {} } = RoCode;
             const { textOptions = {} } = options;
             const { hanjaEnable } = textOptions;
             if (
@@ -919,9 +919,9 @@ Entry.Playground = class Playground {
                 (selected.family === 'Nanum Pen Script' || selected.family === 'Jeju Hallasan')
             ) {
                 if (/[\u4E00-\u9FFF]/.exec(this.value) != null) {
-                    $('#entryTextBoxAttrFontName').text(defaultFont.name);
+                    $('#RoCodeTextBoxAttrFontName').text(defaultFont.name);
                     entity.setFontType(defaultFont.family);
-                    entrylms.alert(Lang.Menus.not_supported_text);
+                    RoCodelms.alert(Lang.Menus.not_supported_text);
                 }
             }
             object.setText(this.value);
@@ -935,16 +935,16 @@ Entry.Playground = class Playground {
         });
         textEditInput.onblur = function() {
             if (textEditInput.value !== textEditInput.prevText) {
-                Entry.do('editText', textEditInput.value, textEditInput.prevText);
+                RoCode.do('editText', textEditInput.value, textEditInput.prevText);
             }
-            // Entry.dispatchEvent('textEdited');
+            // RoCode.dispatchEvent('textEdited');
         };
         this.textEditInput = textEditInput;
         inputInner.appendChild(textEditInput);
 
-        const textEditArea = Entry.createElement('textarea');
+        const textEditArea = RoCode.createElement('textarea');
         textEditArea.placeholder = Lang.Workspace.textbox_input;
-        textEditArea.addClass('entryPlayground_textArea multi');
+        textEditArea.addClass('RoCodePlayground_textArea multi');
         textEditArea.style.display = 'none';
         textEditArea.onkeyup = textChangeApply;
         textEditArea.onchange = textChangeApply;
@@ -954,21 +954,21 @@ Entry.Playground = class Playground {
         });
         textEditArea.onblur = function() {
             if (textEditArea.value !== textEditArea.prevText) {
-                Entry.do('editText', textEditArea.value, textEditArea.prevText);
+                RoCode.do('editText', textEditArea.value, textEditArea.prevText);
             }
         };
         this.textEditArea = textEditArea;
         inputInner.appendChild(textEditArea);
 
-        const singleDesc = Entry.createElement('ul').addClass('list single');
-        singleDesc.appendChild(Entry.createElement('li').text(Lang.Menus.linebreak_off_desc_1));
-        singleDesc.appendChild(Entry.createElement('li').text(Lang.Menus.linebreak_off_desc_2));
-        singleDesc.appendChild(Entry.createElement('li').text(Lang.Menus.linebreak_off_desc_3));
+        const singleDesc = RoCode.createElement('ul').addClass('list single');
+        singleDesc.appendChild(RoCode.createElement('li').text(Lang.Menus.linebreak_off_desc_1));
+        singleDesc.appendChild(RoCode.createElement('li').text(Lang.Menus.linebreak_off_desc_2));
+        singleDesc.appendChild(RoCode.createElement('li').text(Lang.Menus.linebreak_off_desc_3));
 
-        const multiDesc = Entry.createElement('ul').addClass('list multi');
-        multiDesc.appendChild(Entry.createElement('li').text(Lang.Menus.linebreak_on_desc_1));
-        multiDesc.appendChild(Entry.createElement('li').text(Lang.Menus.linebreak_on_desc_2));
-        multiDesc.appendChild(Entry.createElement('li').text(Lang.Menus.linebreak_on_desc_3));
+        const multiDesc = RoCode.createElement('ul').addClass('list multi');
+        multiDesc.appendChild(RoCode.createElement('li').text(Lang.Menus.linebreak_on_desc_1));
+        multiDesc.appendChild(RoCode.createElement('li').text(Lang.Menus.linebreak_on_desc_2));
+        multiDesc.appendChild(RoCode.createElement('li').text(Lang.Menus.linebreak_on_desc_3));
 
         inputArea.appendChild(singleDesc);
         inputArea.appendChild(multiDesc);
@@ -979,18 +979,18 @@ Entry.Playground = class Playground {
      * @private
      */
     _createSoundEditView() {
-        const soundEditView = Entry.createElement('div', 'entrySoundEdit').addClass(
-            'entryPlaygroundSoundEdit'
+        const soundEditView = RoCode.createElement('div', 'RoCodeSoundEdit').addClass(
+            'RoCodePlaygroundSoundEdit'
         );
 
-        const tempNotificationWrapper = Entry.createElement('div').addClass(
-            'entryPlaygroundSoundEditWrapper'
+        const tempNotificationWrapper = RoCode.createElement('div').addClass(
+            'RoCodePlaygroundSoundEditWrapper'
         );
 
-        const tempImage = Entry.createElement('div').addClass('entryPlaygroundSoundEditImage');
+        const tempImage = RoCode.createElement('div').addClass('RoCodePlaygroundSoundEditImage');
 
-        const tempNotification = Entry.createElement('span').addClass(
-            'entryPlaygroundSoundEditText'
+        const tempNotification = RoCode.createElement('span').addClass(
+            'RoCodePlaygroundSoundEditText'
         );
         tempNotification.innerHTML = Lang.Menus.sound_edit_warn;
 
@@ -1009,17 +1009,17 @@ Entry.Playground = class Playground {
      * @param soundView
      */
     generateSoundView(soundView) {
-        if (Entry.type === 'workspace') {
-            const soundAdd = Entry.createElement('div', 'entryAddSound');
-            soundAdd.addClass('entryPlaygroundAddSound');
-            const innerSoundAdd = Entry.createElement('div', 'entryAddSoundInner').addClass(
-                'entryPlaygroundAddSoundInner'
+        if (RoCode.type === 'workspace') {
+            const soundAdd = RoCode.createElement('div', 'RoCodeAddSound');
+            soundAdd.addClass('RoCodePlaygroundAddSound');
+            const innerSoundAdd = RoCode.createElement('div', 'RoCodeAddSoundInner').addClass(
+                'RoCodePlaygroundAddSoundInner'
             );
             innerSoundAdd.bindOnClick(() => {
-                if (!Entry.container || Entry.container.isSceneObjectsExist()) {
-                    Entry.do('playgroundClickAddSound');
+                if (!RoCode.container || RoCode.container.isSceneObjectsExist()) {
+                    RoCode.do('playgroundClickAddSound');
                 } else {
-                    Entry.toast.alert(
+                    RoCode.toast.alert(
                         Lang.Workspace.add_object_alert,
                         Lang.Workspace.add_object_alert_msg
                     );
@@ -1028,8 +1028,8 @@ Entry.Playground = class Playground {
             innerSoundAdd.innerHTML = Lang.Workspace.sound_add;
             soundAdd.appendChild(innerSoundAdd);
             soundView.appendChild(soundAdd);
-            const soundList = Entry.createElement('ul', 'entrySoundList').addClass(
-                'entryPlaygroundSoundList'
+            const soundList = RoCode.createElement('ul', 'RoCodeSoundList').addClass(
+                'RoCodePlaygroundSoundList'
             );
 
             soundView.appendChild(soundList);
@@ -1049,13 +1049,13 @@ Entry.Playground = class Playground {
         this.soundSortableListWidget = new Sortable({
             data: {
                 height: '100%',
-                sortableTarget: ['entryPlaygroundSoundThumbnail'],
+                sortableTarget: ['RoCodePlaygroundSoundThumbnail'],
                 lockAxis: 'y',
                 items: this._getSortableSoundList(),
             },
             container: this.soundListView_,
         }).on('change', ([newIndex, oldIndex]) => {
-            Entry.playground.moveSound(newIndex, oldIndex);
+            RoCode.playground.moveSound(newIndex, oldIndex);
         });
     }
 
@@ -1081,10 +1081,10 @@ Entry.Playground = class Playground {
 
     /**
      * Inject object
-     * @param {?Entry.EntryObject} object
+     * @param {?RoCode.RoCodeObject} object
      */
     injectObject(object) {
-        /** @type {Entry.Entryobject} */
+        /** @type {RoCode.RoCodeobject} */
         if (!object) {
             this.object = null; //[박봉배-2018.11.12] - 아래 위치에 있으면 죽은 object의 메서드를 호출함. 그래서 위로 올림.
             this.changeViewMode('code');
@@ -1102,19 +1102,19 @@ Entry.Playground = class Playground {
         this.injectCode();
 
         const { text: textTab, picture: pictureTab } = this.tabViewElements;
-        if (objectType === 'sprite' && Entry.pictureEditable) {
+        if (objectType === 'sprite' && RoCode.pictureEditable) {
             if (textTab) {
-                textTab.addClass('entryRemove');
+                textTab.addClass('RoCodeRemove');
             }
             if (pictureTab) {
-                pictureTab.removeClass('entryRemove');
+                pictureTab.removeClass('RoCodeRemove');
             }
         } else if (objectType === 'textBox') {
             if (pictureTab) {
-                pictureTab.addClass('entryRemove');
+                pictureTab.addClass('RoCodeRemove');
             }
             if (textTab) {
-                textTab.removeClass('entryRemove');
+                textTab.removeClass('RoCodeRemove');
             }
         }
 
@@ -1137,7 +1137,7 @@ Entry.Playground = class Playground {
 
     /**
      * Inject object
-     * @param {?Entry.EntryObject} object
+     * @param {?RoCode.RoCodeObject} object
      */
     injectEmptyObject() {
         this.object = null;
@@ -1147,7 +1147,7 @@ Entry.Playground = class Playground {
      * Inject code
      */
     injectCode() {
-        const workspace = Entry.getMainWS();
+        const workspace = RoCode.getMainWS();
         if (!workspace) {
             return;
         }
@@ -1155,13 +1155,13 @@ Entry.Playground = class Playground {
         const object = this.object;
         const vimBoard = workspace.vimBoard;
 
-        if (vimBoard && Entry.textCodingEnable && !vimBoard._parser._onError) {
+        if (vimBoard && RoCode.textCodingEnable && !vimBoard._parser._onError) {
             vimBoard._changedObject = object;
             vimBoard._currentScene = object.scene;
         }
 
         const board = workspace.getBoard();
-        const engine = Entry.engine;
+        const engine = RoCode.engine;
         workspace.changeBoardCode(
             object.script,
             engine && engine.isState('run') ? undefined : board.adjustThreadsPosition.bind(board)
@@ -1179,11 +1179,11 @@ Entry.Playground = class Playground {
 
         if (!this.object) {
             this.painter.lc && this.painter.lc.pointerDown();
-            delete Entry.stage.selectedObject;
-            Entry.dispatchEvent('pictureSelected');
+            delete RoCode.stage.selectedObject;
+            RoCode.dispatchEvent('pictureSelected');
         } else {
             (this.object.pictures || []).forEach((picture, i) => {
-                !picture.view && Entry.playground.generatePictureElement(picture);
+                !picture.view && RoCode.playground.generatePictureElement(picture);
                 const element = picture.view;
                 element.orderHolder.innerHTML = i + 1;
             });
@@ -1206,16 +1206,16 @@ Entry.Playground = class Playground {
         }
         delete tempPicture.view;
 
-        picture = Entry.Utils.copy(tempPicture);
+        picture = RoCode.Utils.copy(tempPicture);
         if (!picture.id) {
-            picture.id = Entry.generateHash();
+            picture.id = RoCode.generateHash();
         }
 
-        picture.name = Entry.getOrderedName(picture.name, this.object.pictures);
+        picture.name = RoCode.getOrderedName(picture.name, this.object.pictures);
 
         this.generatePictureElement(picture);
 
-        Entry.do('objectAddPicture', picture.objectId || this.object.id, picture, isSelect);
+        RoCode.do('objectAddPicture', picture.objectId || this.object.id, picture, isSelect);
     }
 
     /**
@@ -1223,7 +1223,7 @@ Entry.Playground = class Playground {
      * @param {picture}
      */
     setPicture(picture) {
-        const element = Entry.container.getPictureElement(picture.id, picture.objectId);
+        const element = RoCode.container.getPictureElement(picture.id, picture.objectId);
         const $element = $(element);
         if (element) {
             picture.view = element;
@@ -1236,7 +1236,7 @@ Entry.Playground = class Playground {
                 // deprecated
                 const fileName = picture.filename;
                 thumbnailView.style.backgroundImage = `url("${
-                    Entry.defaultPath
+                    RoCode.defaultPath
                 }/uploads/${fileName.substring(0, 2)}/${fileName.substring(
                     2,
                     4
@@ -1246,8 +1246,8 @@ Entry.Playground = class Playground {
             sizeView.innerHTML = `${picture.dimension.width} X ${picture.dimension.height}`;
         }
 
-        Entry.container.setPicture(picture);
-        // Entry.playground.object.setPicture(picture);
+        RoCode.container.setPicture(picture);
+        // RoCode.playground.object.setPicture(picture);
     }
 
     /**
@@ -1255,9 +1255,9 @@ Entry.Playground = class Playground {
      * @param {!String} pictureId
      */
     downloadPicture(pictureId) {
-        const picture = Entry.playground.object.getPicture(pictureId);
+        const picture = RoCode.playground.object.getPicture(pictureId);
         const { imageType = 'png' } = picture;
-        Entry.dispatchEvent('downloadPicture', picture);
+        RoCode.dispatchEvent('downloadPicture', picture);
     }
 
     /**
@@ -1265,7 +1265,7 @@ Entry.Playground = class Playground {
      * @param {!String} pictureId
      */
     clonePicture(pictureId) {
-        const sourcePicture = Entry.playground.object.getPicture(pictureId);
+        const sourcePicture = RoCode.playground.object.getPicture(pictureId);
         this.addPicture(sourcePicture, true);
     }
 
@@ -1279,22 +1279,22 @@ Entry.Playground = class Playground {
             const target = pictures[i];
             const view = target.view;
             if (target.id === picture.id) {
-                view.addClass('entryPictureSelected');
+                view.addClass('RoCodePictureSelected');
             } else {
-                view.removeClass('entryPictureSelected');
+                view.removeClass('RoCodePictureSelected');
             }
         }
 
         let objectId_;
         if (picture && picture.id) {
-            objectId_ = Entry.container.selectPicture(picture.id, picture.objectId);
+            objectId_ = RoCode.container.selectPicture(picture.id, picture.objectId);
         }
 
         if (this.object.id === objectId_) {
             if (!picture.objectId) {
                 picture.objectId = this.object.id;
             }
-            Entry.dispatchEvent('pictureSelected', picture, removed);
+            RoCode.dispatchEvent('pictureSelected', picture, removed);
         }
     }
 
@@ -1324,15 +1324,15 @@ Entry.Playground = class Playground {
         this.textEditInput.value = text;
         this.textEditArea.value = text;
 
-        const font = EntryStatic.fonts
+        const font = RoCodeStatic.fonts
             .filter((font) => font.visible)
             .find((font) => font.family === entity.getFontName());
         if (font) {
-            $('#entryText #entryTextBoxAttrFontName').text(font.name);
-            $('#entryText #entryTextBoxAttrFontName').data('font', font);
+            $('#RoCodeText #RoCodeTextBoxAttrFontName').text(font.name);
+            $('#RoCodeText #RoCodeTextBoxAttrFontName').data('font', font);
         } else {
-            $('#entryText #entryTextBoxAttrFontName').text('');
-            $('#entryText #entryTextBoxAttrFontName').data('font', EntryStatic.fonts[0]);
+            $('#RoCodeText #RoCodeTextBoxAttrFontName').text('');
+            $('#RoCodeText #RoCodeTextBoxAttrFontName').data('font', RoCodeStatic.fonts[0]);
         }
 
         $('.style_link.imbtn_pop_font_bold').toggleClass('on', entity.fontBold);
@@ -1351,15 +1351,15 @@ Entry.Playground = class Playground {
 
         if (entity.getLineBreak()) {
             const LANG = Lang.Menus;
-            $('.entryPlaygroundLinebreakDescription > p').html(LANG.linebreak_on_desc_1);
-            const pDoms = $('.entryPlaygroundLinebreakDescription > ul > li');
+            $('.RoCodePlaygroundLinebreakDescription > p').html(LANG.linebreak_on_desc_1);
+            const pDoms = $('.RoCodePlaygroundLinebreakDescription > ul > li');
             pDoms.eq(0).text(LANG.linebreak_on_desc_2);
             pDoms.eq(1).text(LANG.linebreak_on_desc_3);
             this._setFontFontUI();
         }
 
         this.setFontAlign(entity.getTextAlign());
-        Entry.stage.updateForce();
+        RoCode.stage.updateForce();
     }
 
     _setFontFontUI() {
@@ -1378,10 +1378,10 @@ Entry.Playground = class Playground {
         }
 
         if (!this.object) {
-            delete Entry.stage.selectedObject;
+            delete RoCode.stage.selectedObject;
         } else {
             (this.object.sounds || []).forEach((sound, i) => {
-                !sound.view && Entry.playground.generateSoundElement(sound);
+                !sound.view && RoCode.playground.generateSoundElement(sound);
                 const element = sound.view;
                 element.orderHolder.innerHTML = i + 1;
             });
@@ -1404,24 +1404,24 @@ Entry.Playground = class Playground {
     }
 
     addExpansionBlocks(items) {
-        Entry.expansion.addExpansionBlocks(items.map(({ name }) => name));
+        RoCode.expansion.addExpansionBlocks(items.map(({ name }) => name));
     }
 
     removeExpansionBlocks(items) {
-        Entry.expansion.banExpansionBlocks(items.map(({ name }) => name));
+        RoCode.expansion.banExpansionBlocks(items.map(({ name }) => name));
     }
 
     addAIUtilizeBlocks(items) {
-        Entry.aiUtilize.addAIUtilizeBlocks(items.map(({ name }) => name));
+        RoCode.aiUtilize.addAIUtilizeBlocks(items.map(({ name }) => name));
     }
 
     removeAIUtilizeBlocks(items) {
-        Entry.aiUtilize.banAIUtilizeBlocks(items.map(({ name }) => name));
+        RoCode.aiUtilize.banAIUtilizeBlocks(items.map(({ name }) => name));
     }
 
     setAiLearningBlock(url, info) {
-        Entry.aiLearning.removeLearningBlocks();
-        Entry.aiLearning.load({ url, ...info });
+        RoCode.aiLearning.removeLearningBlocks();
+        RoCode.aiLearning.load({ url, ...info });
     }
 
     /**
@@ -1436,20 +1436,20 @@ Entry.Playground = class Playground {
             delete tempSound.id;
         }
 
-        sound = Entry.Utils.copy(tempSound);
+        sound = RoCode.Utils.copy(tempSound);
         if (!sound.id) {
-            sound.id = Entry.generateHash();
+            sound.id = RoCode.generateHash();
         }
-        sound.name = Entry.getOrderedName(sound.name, this.object.sounds);
+        sound.name = RoCode.getOrderedName(sound.name, this.object.sounds);
 
         this.generateSoundElement(sound);
-        Entry.do('objectAddSound', this.object.id, sound);
+        RoCode.do('objectAddSound', this.object.id, sound);
         this.injectSound();
     }
 
     downloadSound(soundId) {
-        const sound = Entry.playground.object.getSound(soundId);
-        Entry.dispatchEvent('downloadSound', sound);
+        const sound = RoCode.playground.object.getSound(soundId);
+        RoCode.dispatchEvent('downloadSound', sound);
     }
 
     /**
@@ -1461,28 +1461,28 @@ Entry.Playground = class Playground {
             return;
         }
         for (const i in this.tabViewElements) {
-            this.tabViewElements[i].removeClass('entryTabSelected');
+            this.tabViewElements[i].removeClass('RoCodeTabSelected');
         }
         if (viewType !== 'default') {
-            this.tabViewElements[viewType].addClass('entryTabSelected');
+            this.tabViewElements[viewType].addClass('RoCodeTabSelected');
         }
         if (viewType === 'variable') {
-            Entry.playground.toggleOnVariableView();
-            this.tabViewElements.code.removeClass('entryTabSelected');
-            this.tabViewElements[viewType].addClass('entryTabSelected');
+            RoCode.playground.toggleOnVariableView();
+            this.tabViewElements.code.removeClass('RoCodeTabSelected');
+            this.tabViewElements[viewType].addClass('RoCodeTabSelected');
             return;
         }
         const views = this.view_.children;
         for (let i = 0; i < views.length; i++) {
             const view = views[i];
             if (view.id.toUpperCase().indexOf(viewType.toUpperCase()) > -1) {
-                view.removeClass('entryRemove');
+                view.removeClass('RoCodeRemove');
             } else {
-                view.addClass('entryRemove');
+                view.addClass('RoCodeRemove');
             }
         }
 
-        if (Entry.pictureEditable) {
+        if (RoCode.pictureEditable) {
             if (viewType === 'picture') {
                 this.painter.show();
                 this.initSortablePictureWidget();
@@ -1526,15 +1526,15 @@ Entry.Playground = class Playground {
         }
 
         if (viewType === 'code') {
-            this.resizeHandle_ && this.resizeHandle_.removeClass('entryRemove');
-            this.tabButtonView_ && this.tabButtonView_.addClass('entryCode');
+            this.resizeHandle_ && this.resizeHandle_.removeClass('RoCodeRemove');
+            this.tabButtonView_ && this.tabButtonView_.addClass('RoCodeCode');
             this.blockMenu.reDraw();
         } else {
-            this.tabButtonView_ && this.tabButtonView_.removeClass('entryCode');
+            this.tabButtonView_ && this.tabButtonView_.removeClass('RoCodeCode');
         }
 
-        if (Entry.engine.isState('run')) {
-            this.curtainView_.removeClass('entryRemove');
+        if (RoCode.engine.isState('run')) {
+            this.curtainView_.removeClass('RoCodeRemove');
         }
         this.viewMode_ = viewType;
         this.selectedViewMode = viewType;
@@ -1546,14 +1546,14 @@ Entry.Playground = class Playground {
      * @return {!Element}
      */
     createVariableView() {
-        const view = Entry.createElement('div');
-        if (!Entry.type || Entry.type === 'workspace') {
-            view.addClass('entryVariablePanelWorkspace');
-        } else if (Entry.type === 'phone') {
-            view.addClass('entryVariablePanelPhone');
+        const view = RoCode.createElement('div');
+        if (!RoCode.type || RoCode.type === 'workspace') {
+            view.addClass('RoCodeVariablePanelWorkspace');
+        } else if (RoCode.type === 'phone') {
+            view.addClass('RoCodeVariablePanelPhone');
         }
         this.variableViewWrapper_ = view;
-        Entry.variableContainer.createDom(view);
+        RoCode.variableContainer.createDom(view);
         return view;
     }
 
@@ -1561,17 +1561,17 @@ Entry.Playground = class Playground {
      * toggle on variable view
      */
     toggleOnVariableView() {
-        Entry.playground.changeViewMode('code');
+        RoCode.playground.changeViewMode('code');
         this.hideBlockMenu();
-        this.variableView_.removeClass('entryRemove');
-        this.resizeHandle_.removeClass('entryRemove');
+        this.variableView_.removeClass('RoCodeRemove');
+        this.resizeHandle_.removeClass('RoCodeRemove');
         this.viewMode_ = 'variable';
         this.selectedViewMode = 'variable';
     }
 
     toggleOffVariableView() {
         this.showBlockMenu();
-        this.variableView_.addClass('entryRemove');
+        this.variableView_.addClass('RoCodeRemove');
     }
 
     /**
@@ -1622,15 +1622,15 @@ Entry.Playground = class Playground {
         const that = this;
         $(handle).bind('mousedown touchstart', function(e) {
             e.preventDefault();
-            if (Entry.disposeEvent) {
-                Entry.disposeEvent.notify();
+            if (RoCode.disposeEvent) {
+                RoCode.disposeEvent.notify();
             }
             that.resizing = true;
-            if (Entry.documentMousemove) {
-                listener = Entry.documentMousemove.attach(this, ({ clientX }) => {
+            if (RoCode.documentMousemove) {
+                listener = RoCode.documentMousemove.attach(this, ({ clientX }) => {
                     if (that.resizing) {
-                        Entry.resizeElement({
-                            menuWidth: clientX - Entry.interfaceState.canvasWidth,
+                        RoCode.resizeElement({
+                            menuWidth: clientX - RoCode.interfaceState.canvasWidth,
                         });
                     }
                 });
@@ -1650,7 +1650,7 @@ Entry.Playground = class Playground {
      * Reload playground
      */
     reloadPlayground() {
-        const engine = Entry.engine;
+        const engine = RoCode.engine;
 
         if (engine && engine.isState('run')) {
             return;
@@ -1663,11 +1663,11 @@ Entry.Playground = class Playground {
      */
     flushPlayground() {
         this.object = null;
-        if (Entry.playground && Entry.playground.view_) {
+        if (RoCode.playground && RoCode.playground.view_) {
             this.injectPicture();
             this.injectSound();
 
-            const mainWS = Entry.getMainWS();
+            const mainWS = RoCode.getMainWS();
             if (mainWS) {
                 const board = mainWS.getBoard();
                 board.clear();
@@ -1677,7 +1677,7 @@ Entry.Playground = class Playground {
     }
 
     refreshPlayground() {
-        if (Entry.playground && Entry.playground.view_) {
+        if (RoCode.playground && RoCode.playground.view_) {
             if (this.getViewMode() === 'picture') {
                 this.injectPicture();
             }
@@ -1695,18 +1695,18 @@ Entry.Playground = class Playground {
     }
 
     nameViewBlur() {
-        if (!Entry.playground.nameViewFocus) {
+        if (!RoCode.playground.nameViewFocus) {
             return;
         }
         if (this.nameView.value.trim() === '') {
-            entrylms.alert(Lang.Workspace.enter_the_name).on('hide', () => {
+            RoCodelms.alert(Lang.Workspace.enter_the_name).on('hide', () => {
                 this.nameView.focus();
             });
             return true;
         }
 
-        let nameViewArray = $('.entryPlaygroundPictureName');
-        if (nameViewArray.length !== Entry.playground.object.pictures.length) {
+        let nameViewArray = $('.RoCodePlaygroundPictureName');
+        if (nameViewArray.length !== RoCode.playground.object.pictures.length) {
             nameViewArray = nameViewArray.slice(0, -1); // pop last element (드래그 시 발생하는 임시 엘리먼트임)
         }
 
@@ -1715,7 +1715,7 @@ Entry.Playground = class Playground {
                 nameViewArray.eq(i).val() == this.nameView.value &&
                 nameViewArray[i] != this.nameView
             ) {
-                entrylms.alert(Lang.Workspace.name_already_exists).on('hide', () => {
+                RoCodelms.alert(Lang.Workspace.name_already_exists).on('hide', () => {
                     this.nameView.focus();
                 });
                 return true;
@@ -1723,7 +1723,7 @@ Entry.Playground = class Playground {
         }
         const newValue = this.nameView.value;
         this.nameView.picture.name = newValue;
-        const playground = Entry.playground;
+        const playground = RoCode.playground;
         if (playground) {
             if (playground.object) {
                 const pic = playground.object.getPicture(this.nameView.picture.id);
@@ -1738,13 +1738,13 @@ Entry.Playground = class Playground {
 
             playground.reloadPlayground();
         }
-        Entry.dispatchEvent('pictureNameChanged', this.nameView.picture);
-        Entry.playground.nameViewFocus = false;
+        RoCode.dispatchEvent('pictureNameChanged', this.nameView.picture);
+        RoCode.playground.nameViewFocus = false;
     }
 
     isDuplicatedTableName(name, selectedIndex = -1) {
-        let nameViewArray = $('.entryPlaygroundTableName');
-        if (nameViewArray.length !== Entry.playground.dataTable.tables.length) {
+        let nameViewArray = $('.RoCodePlaygroundTableName');
+        if (nameViewArray.length !== RoCode.playground.dataTable.tables.length) {
             nameViewArray = nameViewArray.slice(0, -1);
         }
 
@@ -1758,16 +1758,16 @@ Entry.Playground = class Playground {
     }
 
     generatePictureElement(picture) {
-        const element = Entry.createElement('li', picture.id)
-            .addClass('entryPlaygroundPictureElement')
+        const element = RoCode.createElement('li', picture.id)
+            .addClass('RoCodePlaygroundPictureElement')
             .bindOnClick(function() {
-                Entry.playground.selectPicture(this.picture);
+                RoCode.playground.selectPicture(this.picture);
             });
         picture.view = element;
         element.picture = picture;
 
-        Entry.Utils.disableContextmenu(picture.view);
-        Entry.ContextMenu.onContextmenu(picture.view, (coordinate) => {
+        RoCode.Utils.disableContextmenu(picture.view);
+        RoCode.ContextMenu.onContextmenu(picture.view, (coordinate) => {
             const options = [
                 {
                     text: Lang.Workspace.context_rename,
@@ -1778,31 +1778,31 @@ Entry.Playground = class Playground {
                 {
                     text: Lang.Workspace.context_duplicate,
                     callback() {
-                        Entry.playground.clonePicture(picture.id);
+                        RoCode.playground.clonePicture(picture.id);
                     },
                 },
                 {
                     text: Lang.Workspace.context_remove,
                     callback() {
-                        Entry.playground._removePicture(picture, element);
+                        RoCode.playground._removePicture(picture, element);
                     },
                 },
                 {
                     text: Lang.Workspace.context_download,
                     callback() {
-                        Entry.playground.downloadPicture(picture.id);
+                        RoCode.playground.downloadPicture(picture.id);
                     },
                 },
             ];
-            Entry.ContextMenu.show(options, 'workspace-contextmenu', coordinate);
+            RoCode.ContextMenu.show(options, 'workspace-contextmenu', coordinate);
         });
 
-        element.orderHolder = Entry.createElement('div')
-            .addClass('entryPlaygroundPictureOrder')
+        element.orderHolder = RoCode.createElement('div')
+            .addClass('RoCodePlaygroundPictureOrder')
             .appendTo(element);
 
-        const thumbnailView = Entry.createElement('div', `t_${picture.id}`).addClass(
-            'entryPlaygroundPictureThumbnail'
+        const thumbnailView = RoCode.createElement('div', `t_${picture.id}`).addClass(
+            'RoCodePlaygroundPictureThumbnail'
         );
 
         thumbnailView.addEventListener('touchmove', (e) => {
@@ -1815,33 +1815,33 @@ Entry.Playground = class Playground {
             // deptecated
             const fileName = picture.filename;
             thumbnailView.style.backgroundImage = `url("${
-                Entry.defaultPath
+                RoCode.defaultPath
             }/uploads/${fileName.substring(0, 2)}/${fileName.substring(
                 2,
                 4
             )}/thumb/${fileName}.png")`;
         }
         element.appendChild(thumbnailView);
-        const nameView = Entry.createElement('input')
-            .addClass('entryPlaygroundPictureName')
-            .addClass('entryEllipsis');
+        const nameView = RoCode.createElement('input')
+            .addClass('RoCodePlaygroundPictureName')
+            .addClass('RoCodeEllipsis');
         nameView.picture = picture;
         nameView.value = picture.name;
-        Entry.attachEventListener(nameView, 'blur', this.nameViewBlur.bind(this));
-        Entry.attachEventListener(nameView, 'focus', (e) => {
+        RoCode.attachEventListener(nameView, 'blur', this.nameViewBlur.bind(this));
+        RoCode.attachEventListener(nameView, 'focus', (e) => {
             this.nameView = e.target;
             this.nameViewFocus = true;
         });
 
-        nameView.onkeypress = Entry.Utils.blurWhenEnter;
+        nameView.onkeypress = RoCode.Utils.blurWhenEnter;
         element.appendChild(nameView);
-        Entry.createElement('div', `s_${picture.id}`)
-            .addClass('entryPlaygroundPictureSize')
+        RoCode.createElement('div', `s_${picture.id}`)
+            .addClass('RoCodePlaygroundPictureSize')
             .appendTo(
                 element
             ).innerHTML = `${picture.dimension.width} X ${picture.dimension.height}`;
 
-        const removeButton = Entry.createElement('div').addClass('entryPlayground_del');
+        const removeButton = RoCode.createElement('div').addClass('RoCodePlayground_del');
         const { Buttons = {} } = Lang || {};
         const { delete: delText = '삭제' } = Buttons;
         removeButton.appendTo(element).innerText = delText;
@@ -1850,7 +1850,7 @@ Entry.Playground = class Playground {
                 e.stopPropagation();
                 this._removePicture(picture, element);
             } catch (e) {
-                Entry.toast.alert(
+                RoCode.toast.alert(
                     Lang.Workspace.shape_remove_fail,
                     Lang.Workspace.shape_remove_fail_msg
                 );
@@ -1859,15 +1859,15 @@ Entry.Playground = class Playground {
     }
 
     _removePicture(picture, element) {
-        if (Entry.playground.object.pictures.length > 1) {
-            Entry.do('objectRemovePicture', picture.objectId, picture);
-            Entry.removeElement(element);
-            Entry.toast.success(
+        if (RoCode.playground.object.pictures.length > 1) {
+            RoCode.do('objectRemovePicture', picture.objectId, picture);
+            RoCode.removeElement(element);
+            RoCode.toast.success(
                 Lang.Workspace.shape_remove_ok,
                 `${picture.name} ${Lang.Workspace.shape_remove_ok_msg}`
             );
         } else {
-            Entry.toast.alert(
+            RoCode.toast.alert(
                 Lang.Workspace.shape_remove_fail,
                 Lang.Workspace.shape_remove_fail_msg
             );
@@ -1875,14 +1875,14 @@ Entry.Playground = class Playground {
     }
 
     generateSoundElement(sound) {
-        const element = Entry.createElement('sound', sound.id).addClass(
-            'entryPlaygroundSoundElement'
+        const element = RoCode.createElement('sound', sound.id).addClass(
+            'RoCodePlaygroundSoundElement'
         );
         sound.view = element;
         element.sound = sound;
 
-        Entry.Utils.disableContextmenu(sound.view);
-        Entry.ContextMenu.onContextmenu(sound.view, (coordinate) => {
+        RoCode.Utils.disableContextmenu(sound.view);
+        RoCode.ContextMenu.onContextmenu(sound.view, (coordinate) => {
             const options = [
                 {
                     text: Lang.Workspace.context_rename,
@@ -1893,46 +1893,46 @@ Entry.Playground = class Playground {
                 {
                     text: Lang.Workspace.context_duplicate,
                     callback() {
-                        Entry.playground.addSound(sound, true, true);
+                        RoCode.playground.addSound(sound, true, true);
                     },
                 },
                 {
                     text: Lang.Workspace.context_remove,
                     callback() {
-                        const result = Entry.do(
+                        const result = RoCode.do(
                             'objectRemoveSound',
-                            Entry.playground.object.id,
+                            RoCode.playground.object.id,
                             sound
                         );
                         if (result) {
-                            Entry.removeElement(element);
-                            Entry.dispatchEvent('removeSound', sound);
-                            Entry.toast.success(
+                            RoCode.removeElement(element);
+                            RoCode.dispatchEvent('removeSound', sound);
+                            RoCode.toast.success(
                                 Lang.Workspace.sound_remove_ok,
                                 `${sound.name} ${Lang.Workspace.sound_remove_ok_msg}`
                             );
                         } else {
-                            Entry.toast.alert(Lang.Workspace.sound_remove_fail, '');
+                            RoCode.toast.alert(Lang.Workspace.sound_remove_fail, '');
                         }
-                        Entry.removeElement(element);
+                        RoCode.removeElement(element);
                     },
                 },
                 {
                     text: Lang.Workspace.context_download,
                     callback() {
-                        Entry.playground.downloadSound(sound.id);
+                        RoCode.playground.downloadSound(sound.id);
                     },
                 },
             ];
-            Entry.ContextMenu.show(options, 'workspace-contextmenu', coordinate);
+            RoCode.ContextMenu.show(options, 'workspace-contextmenu', coordinate);
         });
 
-        element.orderHolder = Entry.createElement('div')
-            .addClass('entryPlaygroundSoundOrder')
+        element.orderHolder = RoCode.createElement('div')
+            .addClass('RoCodePlaygroundSoundOrder')
             .appendTo(element);
 
-        const thumbnailView = Entry.createElement('div')
-            .addClass('entryPlaygroundSoundThumbnail entryPlaygroundSoundPlay')
+        const thumbnailView = RoCode.createElement('div')
+            .addClass('RoCodePlaygroundSoundThumbnail RoCodePlaygroundSoundPlay')
             .appendTo(element);
         let isPlaying = false;
         let soundInstance;
@@ -1950,94 +1950,94 @@ Entry.Playground = class Playground {
 
             if (isPlaying) {
                 isPlaying = false;
-                thumbnailView.removeClass('entryPlaygroundSoundStop');
-                thumbnailView.addClass('entryPlaygroundSoundPlay');
+                thumbnailView.removeClass('RoCodePlaygroundSoundStop');
+                thumbnailView.addClass('RoCodePlaygroundSoundPlay');
                 soundInstance.stop();
                 return;
             } else {
                 isPlaying = true;
-                thumbnailView.removeClass('entryPlaygroundSoundPlay');
-                thumbnailView.addClass('entryPlaygroundSoundStop');
-                soundInstance = Entry.Utils.playSound(sound.id);
-                Entry.Utils.addSoundInstances(soundInstance);
+                thumbnailView.removeClass('RoCodePlaygroundSoundPlay');
+                thumbnailView.addClass('RoCodePlaygroundSoundStop');
+                soundInstance = RoCode.Utils.playSound(sound.id);
+                RoCode.Utils.addSoundInstances(soundInstance);
             }
 
             soundInstance.addEventListener('complete', () => {
-                thumbnailView.removeClass('entryPlaygroundSoundStop');
-                thumbnailView.addClass('entryPlaygroundSoundPlay');
+                thumbnailView.removeClass('RoCodePlaygroundSoundStop');
+                thumbnailView.addClass('RoCodePlaygroundSoundPlay');
                 isPlaying = false;
             });
         });
 
-        const nameView = Entry.createElement('input')
-            .addClass('entryPlaygroundSoundName')
+        const nameView = RoCode.createElement('input')
+            .addClass('RoCodePlaygroundSoundName')
             .appendTo(element);
         nameView.sound = sound;
         nameView.value = sound.name;
 
-        Entry.attachEventListener(nameView, 'blur', nameViewBlur);
+        RoCode.attachEventListener(nameView, 'blur', nameViewBlur);
 
         function nameViewBlur() {
             if (this.value.trim() === '') {
-                return entrylms.alert(Lang.Workspace.enter_the_name).on('hide', () => {
+                return RoCodelms.alert(Lang.Workspace.enter_the_name).on('hide', () => {
                     nameView.focus();
                 });
             }
 
-            let nameViewArray = $('.entryPlaygroundSoundName');
-            if (nameViewArray.length !== Entry.playground.object.sounds.length) {
+            let nameViewArray = $('.RoCodePlaygroundSoundName');
+            if (nameViewArray.length !== RoCode.playground.object.sounds.length) {
                 nameViewArray = nameViewArray.slice(0, -1); // pop last element (드래그 시 발생하는 임시 엘리먼트임)
             }
 
             for (let i = 0; i < nameViewArray.length; i++) {
                 if (nameViewArray.eq(i).val() == nameView.value && nameViewArray[i] != this) {
-                    return entrylms.alert(Lang.Workspace.name_already_exists).on('hide', () => {
+                    return RoCodelms.alert(Lang.Workspace.name_already_exists).on('hide', () => {
                         nameView.focus();
                     });
                 }
             }
             const newValue = this.value;
             this.sound.name = newValue;
-            Entry.playground.reloadPlayground();
+            RoCode.playground.reloadPlayground();
         }
 
-        nameView.onkeypress = Entry.Utils.blurWhenEnter;
-        Entry.createElement('div')
-            .addClass('entryPlaygroundSoundLength')
+        nameView.onkeypress = RoCode.Utils.blurWhenEnter;
+        RoCode.createElement('div')
+            .addClass('RoCodePlaygroundSoundLength')
             .appendTo(element).innerHTML = `${sound.duration} ${Lang.General.second}`;
-        const removeButton = Entry.createElement('div').addClass('entryPlayground_del');
+        const removeButton = RoCode.createElement('div').addClass('RoCodePlayground_del');
         const { Buttons = {} } = Lang || {};
         const { delete: delText = '삭제' } = Buttons;
         removeButton.appendTo(element).innerText = delText;
         removeButton.bindOnClick(() => {
             try {
-                Entry.Utils.forceStopSounds();
-                const result = Entry.do('objectRemoveSound', Entry.playground.object.id, sound);
+                RoCode.Utils.forceStopSounds();
+                const result = RoCode.do('objectRemoveSound', RoCode.playground.object.id, sound);
                 if (result) {
-                    Entry.dispatchEvent('removeSound', sound);
-                    Entry.toast.success(
+                    RoCode.dispatchEvent('removeSound', sound);
+                    RoCode.toast.success(
                         Lang.Workspace.sound_remove_ok,
                         `${sound.name} ${Lang.Workspace.sound_remove_ok_msg}`
                     );
                 } else {
-                    Entry.toast.alert(Lang.Workspace.sound_remove_fail, '');
+                    RoCode.toast.alert(Lang.Workspace.sound_remove_fail, '');
                 }
-                Entry.removeElement(element);
+                RoCode.removeElement(element);
             } catch (e) {
-                Entry.toast.alert(Lang.Workspace.sound_remove_fail, '');
+                RoCode.toast.alert(Lang.Workspace.sound_remove_fail, '');
             }
         });
     }
 
     openDropDown = (options, target, callback, closeCallback) => {
-        const containers = $('.entry-widget-dropdown');
+        const containers = $('.RoCode-widget-dropdown');
         if (containers.length > 0) {
             closeCallback();
             return containers.remove();
         }
 
-        const container = Entry.Dom('div', {
-            class: 'entry-widget-dropdown',
+        const container = RoCode.Dom('div', {
+            class: 'RoCode-widget-dropdown',
             parent: $('body'),
         })[0];
 
@@ -2067,13 +2067,13 @@ Entry.Playground = class Playground {
     };
 
     openColourPicker = (target, color, canTransparent, callback) => {
-        const containers = $('.entry-color-picker');
+        const containers = $('.RoCode-color-picker');
         if (containers.length > 0) {
             $(target).removeClass('on');
             return containers.remove();
         }
-        const container = Entry.Dom('div', {
-            class: 'entry-color-picker',
+        const container = RoCode.Dom('div', {
+            class: 'RoCode-color-picker',
             parent: $('body'),
         })[0];
         $(target).addClass('on');
@@ -2107,9 +2107,9 @@ Entry.Playground = class Playground {
     selectSound(sound) {
         this.object.sounds.forEach((item) => {
             if (item.id !== sound.id) {
-                item.view.removeClass('entrySoundSelected');
+                item.view.removeClass('RoCodeSoundSelected');
             } else {
-                item.view.addClass('entrySoundSelected');
+                item.view.addClass('RoCodeSoundSelected');
             }
         });
     }
@@ -2137,11 +2137,11 @@ Entry.Playground = class Playground {
     }
 
     checkVariables() {
-        if (Entry.forEBS) {
+        if (RoCode.forEBS) {
             return;
         }
         const blockMenu = this.blockMenu;
-        const { lists_, variables_ } = Entry.variableContainer;
+        const { lists_, variables_ } = RoCode.variableContainer;
 
         if (lists_.length) {
             blockMenu.unbanClass('listNotExist');
@@ -2166,7 +2166,7 @@ Entry.Playground = class Playground {
             return;
         }
 
-        Object.values(Entry.EXPANSION_BLOCK_LIST).forEach((block) => {
+        Object.values(RoCode.EXPANSION_BLOCK_LIST).forEach((block) => {
             blockMenu.banClass(block.name, true);
             blockMenu.banClass(`${block.name}_legacy`, true);
         });
@@ -2178,7 +2178,7 @@ Entry.Playground = class Playground {
             return;
         }
 
-        Object.values(Entry.AI_UTILIZE_BLOCK_LIST).forEach((block) => {
+        Object.values(RoCode.AI_UTILIZE_BLOCK_LIST).forEach((block) => {
             blockMenu.banClass(block.name, true);
             blockMenu.banClass(`${block.name}_legacy`, true);
         });
@@ -2219,13 +2219,13 @@ Entry.Playground = class Playground {
         this.alignCenterBtn.removeClass('on');
         this.alignRightBtn.removeClass('on');
         switch (fontAlign) {
-            case Entry.TEXT_ALIGN_LEFT:
+            case RoCode.TEXT_ALIGN_LEFT:
                 this.alignLeftBtn.addClass('on');
                 break;
-            case Entry.TEXT_ALIGN_CENTER:
+            case RoCode.TEXT_ALIGN_CENTER:
                 this.alignCenterBtn.addClass('on');
                 break;
-            case Entry.TEXT_ALIGN_RIGHT:
+            case RoCode.TEXT_ALIGN_RIGHT:
                 this.alignRightBtn.addClass('on');
                 break;
         }
@@ -2233,11 +2233,11 @@ Entry.Playground = class Playground {
     }
 
     showPictureCurtain() {
-        this.pictureCurtainView_ && this.pictureCurtainView_.removeClass('entryRemove');
+        this.pictureCurtainView_ && this.pictureCurtainView_.removeClass('RoCodeRemove');
     }
 
     hidePictureCurtain() {
-        this.pictureCurtainView_ && this.pictureCurtainView_.addClass('entryRemove');
+        this.pictureCurtainView_ && this.pictureCurtainView_.addClass('RoCodeRemove');
     }
 
     hideBlockMenu() {
@@ -2268,19 +2268,19 @@ Entry.Playground = class Playground {
     }
 
     applyTabOption() {
-        this.textboxTab.addClass('entryRemove');
-        this.pictureTab.addClass('entryRemove');
-        this.soundTab.addClass('entryRemove');
-        this.variableTab.addClass('entryRemove');
-        if (Entry.pictureEditable) {
-            this.pictureTab.removeClass('entryRemove');
-            this.textboxTab.removeClass('entryRemove');
+        this.textboxTab.addClass('RoCodeRemove');
+        this.pictureTab.addClass('RoCodeRemove');
+        this.soundTab.addClass('RoCodeRemove');
+        this.variableTab.addClass('RoCodeRemove');
+        if (RoCode.pictureEditable) {
+            this.pictureTab.removeClass('RoCodeRemove');
+            this.textboxTab.removeClass('RoCodeRemove');
         }
-        if (Entry.soundEditable) {
-            this.soundTab.removeClass('entryRemove');
+        if (RoCode.soundEditable) {
+            this.soundTab.removeClass('RoCodeRemove');
         }
-        if (Entry.hasVariableManager) {
-            this.variableTab.removeClass('entryRemove');
+        if (RoCode.hasVariableManager) {
+            this.variableTab.removeClass('RoCodeRemove');
         }
     }
 

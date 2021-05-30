@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.ActivityReporter = function() {
+RoCode.ActivityReporter = function() {
     this._activities = [];
 };
 
@@ -8,10 +8,10 @@ Entry.ActivityReporter = function() {
     p.add = function(data) {
         if (!data || data.length === 0) return;
         var activity;
-        if (data instanceof Entry.Activity) activity = data;
+        if (data instanceof RoCode.Activity) activity = data;
         else {
             var type = data.shift();
-            activity = new Entry.Activity(type, data);
+            activity = new RoCode.Activity(type, data);
         }
 
         this._activities.push(activity);
@@ -26,4 +26,4 @@ Entry.ActivityReporter = function() {
     };
 
     p.report = function() {};
-})(Entry.ActivityReporter.prototype);
+})(RoCode.ActivityReporter.prototype);

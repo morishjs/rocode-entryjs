@@ -1,4 +1,4 @@
-.entryVariablePanelWorkspace {
+.RoCodeVariablePanelWorkspace {
     position: absolute;
     overflow: hidden;
     overflow-y: auto;
@@ -11,14 +11,14 @@
     border-radius: 0 0 0 6px;
 }
 
-.entryVariablePanelPhone {
+.RoCodeVariablePanelPhone {
     width: 250px;
     top: 47px;
     bottom: 0px;
     padding: 6px 4px 0px 4px;
 }
 
-.entryVariableSelectorWorkspace {
+.RoCodeVariableSelectorWorkspace {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
@@ -27,19 +27,19 @@
     margin: 0;
     table-layout: fixed;
 }
-.entryVariableSelectorWorkspace tr:first-child td:first-child {
+.RoCodeVariableSelectorWorkspace tr:first-child td:first-child {
     width: 56px;
 }
 
-.entryVariableSelectButtonWorkspace {
-    font-family: EntryFont, NanumGothic !important;
+.RoCodeVariableSelectButtonWorkspace {
+    font-family: RoCodeFont, NanumGothic !important;
     width: 88px;
     padding: 0;
     margin: 0;
     cursor: pointer;
     vertical-align: top;
 }
-.entryVariableSelectButtonWorkspace div {
+.RoCodeVariableSelectButtonWorkspace div {
     position: relative;
     height: 40px;
     padding-left: 8px;
@@ -50,11 +50,11 @@
     letter-spacing: -0.4px;
     line-height: 40px;
 }
-.entryVariableSelectButtonWorkspace.selected div {
+.RoCodeVariableSelectButtonWorkspace.selected div {
     color: #4f80ff;
     z-index: 10;
 }
-.entryVariableSelectButtonWorkspace.allButton div {
+.RoCodeVariableSelectButtonWorkspace.allButton div {
     height: 80px;
     padding: 0;
     border-radius: 6px 0 0 6px;
@@ -62,19 +62,19 @@
     line-height: 80px;
 }
 
-.entryVariableSelectButtonWorkspace.message div {
+.RoCodeVariableSelectButtonWorkspace.message div {
     border-radius: 0 6px 0 0;
 }
 
-.entryVariableSelectButtonWorkspace.func div {
+.RoCodeVariableSelectButtonWorkspace.func div {
     border-radius: 0 0 6px 0;
 }
 
-.entryVariableSelectButtonWorkspace.disable div {
+.RoCodeVariableSelectButtonWorkspace.disable div {
     cursor: default;
 }
 
-.entryVariableSelectButtonWorkspace div:after {
+.RoCodeVariableSelectButtonWorkspace div:after {
     position: absolute;
     left: 0;
     right: 0;
@@ -84,33 +84,33 @@
     content: '';
 }
 
-.entryVariableSelectButtonWorkspace.selected div:after {
+.RoCodeVariableSelectButtonWorkspace.selected div:after {
     border-color: #4f80ff;
 }
 
-.entryVariableSelectButtonWorkspace.allButton div:after {
+.RoCodeVariableSelectButtonWorkspace.allButton div:after {
     right: -1px;
     border-radius: 6px 0 0 6px;
 }
-.entryVariableSelectButtonWorkspace.allButton div .text {
+.RoCodeVariableSelectButtonWorkspace.allButton div .text {
     margin: 0;
 }
-.entryVariableSelectButtonWorkspace.variable div:after {
+.RoCodeVariableSelectButtonWorkspace.variable div:after {
     right: -1px;
 }
-.entryVariableSelectButtonWorkspace.message div:after {
+.RoCodeVariableSelectButtonWorkspace.message div:after {
     border-radius: 0 6px 0 0;
 }
-.entryVariableSelectButtonWorkspace.list div:after {
+.RoCodeVariableSelectButtonWorkspace.list div:after {
     right: -1px;
     top: -1px;
 }
-.entryVariableSelectButtonWorkspace.func div:after {
+.RoCodeVariableSelectButtonWorkspace.func div:after {
     top: -1px;
     border-radius: 0 0 6px 0;
 }
 
-.entryVariableSelectButtonWorkspace div:before {
+.RoCodeVariableSelectButtonWorkspace div:before {
     position: absolute;
     left: 8px;
     top: 8px;
@@ -121,39 +121,39 @@
     content: '';
 }
 
-.entryVariableSelectButtonWorkspace.allButton div:before {
+.RoCodeVariableSelectButtonWorkspace.allButton div:before {
     display: none;
 }
 
-.entryVariableSelectButtonWorkspace.variable div:before {
+.RoCodeVariableSelectButtonWorkspace.variable div:before {
     .backgroundImage('ic_attr_variable.png');
 }
-.entryVariableSelectButtonWorkspace.message div:before {
+.RoCodeVariableSelectButtonWorkspace.message div:before {
     .backgroundImage('ic_attr_message.png');
 }
-.entryVariableSelectButtonWorkspace.list div:before {
+.RoCodeVariableSelectButtonWorkspace.list div:before {
     margin-right: 6px;
     .backgroundImage('ic_attr_list.png');
 }
-.entryVariableSelectButtonWorkspace.func div:before {
+.RoCodeVariableSelectButtonWorkspace.func div:before {
     .backgroundImage('ic_attr_func.png');
 }
 
-.entryVariableSelectButtonWorkspace.variable.selected div:before {
+.RoCodeVariableSelectButtonWorkspace.variable.selected div:before {
     .backgroundImage('ic_attr_variable_on.png');
 }
-.entryVariableSelectButtonWorkspace.message.selected div:before {
+.RoCodeVariableSelectButtonWorkspace.message.selected div:before {
     .backgroundImage('ic_attr_message_on.png');
 }
-.entryVariableSelectButtonWorkspace.list.selected div:before {
+.RoCodeVariableSelectButtonWorkspace.list.selected div:before {
     margin-right: 6px;
     .backgroundImage('ic_attr_list_on.png');
 }
-.entryVariableSelectButtonWorkspace.func.selected div:before {
+.RoCodeVariableSelectButtonWorkspace.func.selected div:before {
     .backgroundImage('ic_attr_func_on.png');
 }
 
-.entryVariableSelectButtonWorkspace .text {
+.RoCodeVariableSelectButtonWorkspace .text {
     display: block;
     overflow: hidden;
     margin: 0 8px 0 34px;
@@ -161,7 +161,7 @@
     white-space: nowrap;
 }
 
-.entryVariableListElementWorkspace {
+.RoCodeVariableListElementWorkspace {
     background-repeat: no-repeat;
     background-position: 14px 10px;
     background-color: #efefef;
@@ -170,7 +170,7 @@
     min-height: 50px;
 }
 
-.entryVariableListWorkspace {
+.RoCodeVariableListWorkspace {
     overflow: auto;
     position: absolute;
     top: 112px;
@@ -181,7 +181,7 @@
     margin: 0;
     border-top: 1px solid #d5d6e9f4;
 }
-.entryVariableAdd_box .entryVariableAddWorkspace {
+.RoCodeVariableAdd_box .RoCodeVariableAddWorkspace {
     display: block;
     overflow: hidden;
     width: 146px;
@@ -200,27 +200,27 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
-.entryVariableAdd_box .entryVariableAddWorkspace.disabled {
+.RoCodeVariableAdd_box .RoCodeVariableAddWorkspace.disabled {
     border: 1px solid #e2e2e2;
     background-color: #f9f9f9;
     color: #cbcbcb;
     cursor: default;
 }
-.entryVariableAdd_box .entryVariableAddSpaceWorkspace {
+.RoCodeVariableAdd_box .RoCodeVariableAddSpaceWorkspace {
     padding: 16px 10px;
     background-color: #d6e9f4;
 }
-.entryVariableAdd_box.entryVariableContainerTextMode .entryVariableAddSpaceWorkspace {
+.RoCodeVariableAdd_box.RoCodeVariableContainerTextMode .RoCodeVariableAddSpaceWorkspace {
     display: none;
 }
-.entryVariableAdd_box .message_inpt {
+.RoCodeVariableAdd_box .message_inpt {
     padding: 16px 26px 16px 8px;
     border-top: 1px solid #d6e9f4;
 }
-.entryVariableAdd_box .message_inpt.off {
+.RoCodeVariableAdd_box .message_inpt.off {
     display: none;
 }
-.entryVariableAdd_box .message_inpt input[type='text'] {
+.RoCodeVariableAdd_box .message_inpt input[type='text'] {
     width: 100%;
     padding: 6px 8px 5px;
     border: 1px solid #e2e2e2;
@@ -233,26 +233,26 @@
     letter-spacing: -0.2px;
     line-height: 11px;
 }
-.entryVariableAdd_box .message_inpt input[type='text']::-webkit-input-placeholder {
+.RoCodeVariableAdd_box .message_inpt input[type='text']::-webkit-input-placeholder {
     color: #979797;
 }
-.entryVariableAdd_box .message_inpt input[type='text']:-ms-input-placeholder {
+.RoCodeVariableAdd_box .message_inpt input[type='text']:-ms-input-placeholder {
     color: #979797;
 }
-.entryVariableAdd_box .message_inpt input[type='text']::-ms-input-placeholder {
+.RoCodeVariableAdd_box .message_inpt input[type='text']::-ms-input-placeholder {
     color: #979797;
 }
-.entryVariableAdd_box .message_inpt input[type='text']::placeholder {
+.RoCodeVariableAdd_box .message_inpt input[type='text']::placeholder {
     color: #979797;
 }
-.entryVariableAdd_box .message_inpt .entryVariableAddSpaceButtonWrapperWorkspace {
+.RoCodeVariableAdd_box .message_inpt .RoCodeVariableAddSpaceButtonWrapperWorkspace {
     border: 0;
     margin: 0;
 }
-.entryVariableAdd_box .entryVariableAddSpaceWorkspace.off {
+.RoCodeVariableAdd_box .RoCodeVariableAddSpaceWorkspace.off {
     display: none;
 }
-.entryVariableAddSpaceNameWrapperWorkspace .entryVariableAddSpaceInputLabelWorkspace {
+.RoCodeVariableAddSpaceNameWrapperWorkspace .RoCodeVariableAddSpaceInputLabelWorkspace {
     display: block;
     font-size: 12px;
     font-weight: 600;
@@ -260,7 +260,7 @@
     line-height: 14px;
     vertical-align: top;
 }
-.entryVariableAddSpaceNameWrapperWorkspace .entryVariableAddSpaceInputLabelWorkspace:before {
+.RoCodeVariableAddSpaceNameWrapperWorkspace .RoCodeVariableAddSpaceInputLabelWorkspace:before {
     display: inline-block;
     overflow: hidden;
     width: 4px;
@@ -271,7 +271,7 @@
     vertical-align: top;
     content: '';
 }
-.entryVariableAddSpaceNameWrapperWorkspace .entryVariableAddSpaceInputWorkspace {
+.RoCodeVariableAddSpaceNameWrapperWorkspace .RoCodeVariableAddSpaceInputWorkspace {
     overflow: hidden;
     width: 100%;
     margin-top: 9px;
@@ -288,22 +288,22 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
-.entryVariableAddSpaceNameWrapperWorkspace
-    .entryVariableAddSpaceInputWorkspace::-webkit-input-placeholder {
+.RoCodeVariableAddSpaceNameWrapperWorkspace
+    .RoCodeVariableAddSpaceInputWorkspace::-webkit-input-placeholder {
     color: #979797;
 }
-.entryVariableAddSpaceNameWrapperWorkspace
-    .entryVariableAddSpaceInputWorkspace:-ms-input-placeholder {
+.RoCodeVariableAddSpaceNameWrapperWorkspace
+    .RoCodeVariableAddSpaceInputWorkspace:-ms-input-placeholder {
     color: #979797;
 }
-.entryVariableAddSpaceNameWrapperWorkspace
-    .entryVariableAddSpaceInputWorkspace::-ms-input-placeholder {
+.RoCodeVariableAddSpaceNameWrapperWorkspace
+    .RoCodeVariableAddSpaceInputWorkspace::-ms-input-placeholder {
     color: #979797;
 }
-.entryVariableAddSpaceNameWrapperWorkspace .entryVariableAddSpaceInputWorkspace::placeholder {
+.RoCodeVariableAddSpaceNameWrapperWorkspace .RoCodeVariableAddSpaceInputWorkspace::placeholder {
     color: #979797;
 }
-.entryVariableAddSpaceGlobalWrapperWorkspace {
+.RoCodeVariableAddSpaceGlobalWrapperWorkspace {
     position: relative;
     margin: 16px 0 0 14px;
     padding: 0 0 0 26px;
@@ -313,14 +313,14 @@
     cursor: pointer;
     line-height: 14px;
 }
-.entryVariableAddSpaceGlobalWrapperWorkspace + .entryVariableAddSpaceGlobalWrapperWorkspace {
+.RoCodeVariableAddSpaceGlobalWrapperWorkspace + .RoCodeVariableAddSpaceGlobalWrapperWorkspace {
     margin-top: 22px;
 }
-.entryVariableAddSpaceGlobalWrapperWorkspace .Workspace_text {
+.RoCodeVariableAddSpaceGlobalWrapperWorkspace .Workspace_text {
     display: inline-block;
     padding: 4px 0 2px;
 }
-.entryVariableAddSpaceGlobalWrapperWorkspace .entryVariableAddSpaceCheckWorkspace {
+.RoCodeVariableAddSpaceGlobalWrapperWorkspace .RoCodeVariableAddSpaceCheckWorkspace {
     position: absolute;
     left: 0;
     top: 0;
@@ -329,10 +329,10 @@
     background-size: 20px auto;
     .backgroundImage('btn_radio.png');
 }
-.entryVariableAddSpaceGlobalWrapperWorkspace.on .entryVariableAddSpaceCheckWorkspace {
+.RoCodeVariableAddSpaceGlobalWrapperWorkspace.on .RoCodeVariableAddSpaceCheckWorkspace {
     .backgroundImage('btn_radio_on.png');
 }
-.entryVariableAddSpaceGlobalWrapperWorkspace .entryVariableAddSpaceCloudWrapperWorkspace {
+.RoCodeVariableAddSpaceGlobalWrapperWorkspace .RoCodeVariableAddSpaceCloudWrapperWorkspace {
     display: none;
     position: relative;
     margin: 14px 0 -6px;
@@ -344,18 +344,18 @@
     cursor: pointer;
     letter-spacing: -0.5px;
 }
-.entryVariableAddSpaceGlobalWrapperWorkspace
-    .entryVariableAddSpaceCloudWrapperWorkspace
-    .entryVariableAddSpaceCloudSpanWorkspace {
+.RoCodeVariableAddSpaceGlobalWrapperWorkspace
+    .RoCodeVariableAddSpaceCloudWrapperWorkspace
+    .RoCodeVariableAddSpaceCloudSpanWorkspace {
     display: inline-block;
     line-height: 1.33;
     letter-spacing: -0.48px;
     white-space: pre;
 }
-.entryVariableAddSpaceGlobalWrapperWorkspace
-    .entryVariableAddSpaceCloudWrapperWorkspace
-    .entryCloudTypeWrapper
-    .entryVariableAddSpaceCheckWorkspace {
+.RoCodeVariableAddSpaceGlobalWrapperWorkspace
+    .RoCodeVariableAddSpaceCloudWrapperWorkspace
+    .RoCodeCloudTypeWrapper
+    .RoCodeVariableAddSpaceCheckWorkspace {
     position: absolute;
     left: -28px;
     width: 20px;
@@ -363,18 +363,18 @@
     background-size: 20px auto;
     .backgroundImage('btn_radio.png');
 }
-.entryVariableAddSpaceGlobalWrapperWorkspace
-    .entryVariableAddSpaceCloudWrapperWorkspace
-    .entryCloudTypeWrapper.on
-    .entryVariableAddSpaceCheckWorkspace {
+.RoCodeVariableAddSpaceGlobalWrapperWorkspace
+    .RoCodeVariableAddSpaceCloudWrapperWorkspace
+    .RoCodeCloudTypeWrapper.on
+    .RoCodeVariableAddSpaceCheckWorkspace {
     .backgroundImage('btn_radio_on.png');
 }
-.entryVariableAddSpaceGlobalWrapperWorkspace.on .entryVariableAddSpaceCloudWrapperWorkspace {
+.RoCodeVariableAddSpaceGlobalWrapperWorkspace.on .RoCodeVariableAddSpaceCloudWrapperWorkspace {
     display: block;
 }
 
-.entryVariableAddSpaceCloudWrapperWorkspace {
-    .entryCloudTypeWrapper {
+.RoCodeVariableAddSpaceCloudWrapperWorkspace {
+    .RoCodeCloudTypeWrapper {
         position: relative;
         margin-bottom: 12px;
         &:last-child {
@@ -383,7 +383,7 @@
     }
 }
 
-.entryVariableAddSpaceButtonWrapperWorkspace {
+.RoCodeVariableAddSpaceButtonWrapperWorkspace {
     overflow: hidden;
     margin-top: 16px;
     padding-top: 16px;
@@ -391,7 +391,7 @@
     font-size: 0;
     text-align: center;
 }
-.entryVariableAddSpaceButtonWorkspace {
+.RoCodeVariableAddSpaceButtonWorkspace {
     display: inline-block;
     overflow: hidden;
     width: 64px;
@@ -408,18 +408,18 @@
     line-height: 30px;
     vertical-align: top;
 }
-.entryVariableAddSpaceConfirmWorkspace {
+.RoCodeVariableAddSpaceConfirmWorkspace {
     color: #fff;
     background-color: #4f80ff;
 }
-.entryVariableSplitterWorkspace {
+.RoCodeVariableSplitterWorkspace {
     border: 1px solid #d6e9f4;
     border-width: 1px 0;
 }
-.entryVariableSplitterWorkspace + .entryVariableSplitterWorkspace {
+.RoCodeVariableSplitterWorkspace + .RoCodeVariableSplitterWorkspace {
     border-top: 0;
 }
-.entryVariableSplitterWorkspace .attr_link {
+.RoCodeVariableSplitterWorkspace .attr_link {
     position: relative;
     display: block;
     padding: 18px 10px 16px 24px;
@@ -431,7 +431,7 @@
     cursor: default;
     line-height: 14px;
 }
-.entryVariableSplitterWorkspace .attr_link:before {
+.RoCodeVariableSplitterWorkspace .attr_link:before {
     overflow: hidden;
     position: absolute;
     left: 10px;
@@ -442,43 +442,43 @@
     background-color: #4f80ff;
     content: '';
 }
-.entryVariableSplitterWorkspace .list {
+.RoCodeVariableSplitterWorkspace .list {
     overflow: hidden;
 }
-.entryVariableSplitterWorkspace .list + .list {
+.RoCodeVariableSplitterWorkspace .list + .list {
     border-top: 1px solid #d6e9f4;
 }
-.entryVariableSplitterWorkspace .list + .list {
+.RoCodeVariableSplitterWorkspace .list + .list {
     border-top: 1px solid #d6e9f4;
 }
-.entryVariableSplitterWorkspace .list .inpt_box {
+.RoCodeVariableSplitterWorkspace .list .inpt_box {
     position: relative;
     -webkit-box-sizing: content-box;
     box-sizing: content-box;
     padding: 13px 112px 13px 38px;
     background-color: #d6e9f4;
 }
-.entryVariableSplitterWorkspace .list.default_val + .list,
-.entryVariableSplitterWorkspace .list.global_val + .list,
-.entryVariableSplitterWorkspace .list.local_val + .list,
-.entryVariableSplitterWorkspace .list.default_list + .list,
-.entryVariableSplitterWorkspace .list.global_list + .list,
-.entryVariableSplitterWorkspace .list.local_list + .list {
+.RoCodeVariableSplitterWorkspace .list.default_val + .list,
+.RoCodeVariableSplitterWorkspace .list.global_val + .list,
+.RoCodeVariableSplitterWorkspace .list.local_val + .list,
+.RoCodeVariableSplitterWorkspace .list.default_list + .list,
+.RoCodeVariableSplitterWorkspace .list.global_list + .list,
+.RoCodeVariableSplitterWorkspace .list.local_list + .list {
     border-top: 1px solid #aac5d5;
 }
-.entryVariableSplitterWorkspace.all .list + .list {
+.RoCodeVariableSplitterWorkspace.all .list + .list {
     border-top: 1px solid #d6e9f4;
 }
-.entryVariableSplitterWorkspace.all {
+.RoCodeVariableSplitterWorkspace.all {
     border-top: none;
 }
-.entryVariableSplitterWorkspace.all .list .inpt_box {
+.RoCodeVariableSplitterWorkspace.all .list .inpt_box {
     background-color: #ecf8ff;
 }
-.entryVariableSplitterWorkspace.all .list.unfold .inpt_box {
+.RoCodeVariableSplitterWorkspace.all .list.unfold .inpt_box {
     background-color: #fff;
 }
-.entryVariableSplitterWorkspace .list .inpt_box:before {
+.RoCodeVariableSplitterWorkspace .list .inpt_box:before {
     position: absolute;
     left: 10px;
     top: 14px;
@@ -487,17 +487,17 @@
     background-size: 22px auto;
     content: '';
 }
-.entryVariableSplitterWorkspace .list .inpt {
+.RoCodeVariableSplitterWorkspace .list .inpt {
     position: relative;
     height: 24px;
     padding-right: 16px;
 }
-.entryVariableSplitterWorkspace .list .inpt .editBoxInput {
+.RoCodeVariableSplitterWorkspace .list .inpt .editBoxInput {
     border: 1px solid #e2e2e2;
     background-color: #f9f9f9;
     color: #cbcbcb;
 }
-.entryVariableSplitterWorkspace .list .inpt:after {
+.RoCodeVariableSplitterWorkspace .list .inpt:after {
     position: absolute;
     right: 0;
     top: 50%;
@@ -507,7 +507,7 @@
     background-size: 8px auto;
     content: '';
 }
-.entryVariableSplitterWorkspace .list .inpt input[type='text'] {
+.RoCodeVariableSplitterWorkspace .list .inpt input[type='text'] {
     width: 100%;
     padding: 6px 8px 5px;
     border: 1px solid #e2e2e2;
@@ -522,7 +522,7 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
-.entryVariableSplitterWorkspace .list .inpt span {
+.RoCodeVariableSplitterWorkspace .list .inpt span {
     width: 100%;
     padding: 6px 8px 5px;
     font-size: 12px;
@@ -537,16 +537,16 @@
     white-space: nowrap;
     display: block;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box {
     display: none;
     border-top: 1px solid #aac5d5;
     padding: 12px 26px 10px 26px;
     background-color: #bfd8e6;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .caution_dsc {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .caution_dsc {
     padding: 18px 0 5px;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .box_sjt {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .box_sjt {
     display: block;
     font-size: 12px;
     font-weight: 600;
@@ -556,7 +556,7 @@
     line-height: 12px;
     margin-bottom: 9px;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .box_sjt:before {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .box_sjt:before {
     display: inline-block;
     width: 4px;
     height: 4px;
@@ -566,7 +566,7 @@
     vertical-align: top;
     content: '';
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .val_attr .attr_inpt {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .val_attr .attr_inpt {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -575,10 +575,10 @@
     margin-bottom: 10px;
     border-bottom: 1px solid #ecf8ff;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .val_attr .attr_inpt.hidden {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .val_attr .attr_inpt.hidden {
     display: none;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .val_attr .attr_inpt label {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .val_attr .attr_inpt label {
     -webkit-box-flex: 0;
     -ms-flex: 0 1 auto;
     flex: 0 1 auto;
@@ -590,14 +590,14 @@
     line-height: 27px;
     white-space: nowrap;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .val_attr .attr_inpt .val_inptbox {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .val_attr .attr_inpt .val_inptbox {
     display: block;
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     margin-left: 8px;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .val_attr .attr_inpt input[type='text'] {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .val_attr .attr_inpt input[type='text'] {
     width: 100%;
     padding: 6px 8px 5px;
     border: 1px solid #e2e2e2;
@@ -612,17 +612,17 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .val_attr .slide_inpt {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .val_attr .slide_inpt {
     margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid #ecf8ff;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .val_attr .slide_inpt .chk_box {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .val_attr .slide_inpt .chk_box {
     position: relative;
     font-size: 0;
     cursor: pointer;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .val_attr .slide_inpt .chk_text {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .val_attr .slide_inpt .chk_text {
     display: inline-block;
     margin: 3px 0 0 8px;
     font-size: 12px;
@@ -631,12 +631,12 @@
     letter-spacing: -0.4px;
     vertical-align: top;
 }
-.entryVariableSplitterWorkspace
+.RoCodeVariableSplitterWorkspace
     .list
     .attr_inner_box
     .val_attr
     .slide_inpt
-    .entryVariableAddSpaceCheckWorkspace {
+    .RoCodeVariableAddSpaceCheckWorkspace {
     display: inline-block;
     width: 16px;
     height: 16px;
@@ -644,28 +644,28 @@
     .backgroundImage('btn_checkbox.png');
     vertical-align: top;
 }
-.entryVariableSplitterWorkspace
+.RoCodeVariableSplitterWorkspace
     .list
     .attr_inner_box
     .val_attr
     .slide_inpt
-    .entryVariableAddSpaceCheckWorkspace {
+    .RoCodeVariableAddSpaceCheckWorkspace {
     .backgroundImage('btn_checkbox.png');
 }
-.entryVariableSplitterWorkspace
+.RoCodeVariableSplitterWorkspace
     .list
     .attr_inner_box
     .val_attr
     .slide_inpt
-    .entryVariableAddSpaceCheckWorkspace.on {
+    .RoCodeVariableAddSpaceCheckWorkspace.on {
     .backgroundImage('btn_checkbox_on.png');
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .val_attr .slide_inpt .cnt_box {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .val_attr .slide_inpt .cnt_box {
     overflow: hidden;
     margin-top: 12px;
     font-size: 0;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .val_attr .slide_inpt .cnt_box .dash {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .val_attr .slide_inpt .cnt_box .dash {
     padding: 0 8px;
     font-size: 12px;
     font-weight: 600;
@@ -673,7 +673,7 @@
     letter-spacing: -0.4px;
     line-height: 24px;
 }
-.entryVariableSplitterWorkspace
+.RoCodeVariableSplitterWorkspace
     .list
     .attr_inner_box
     .val_attr
@@ -692,7 +692,7 @@
     letter-spacing: -0.2px;
     line-height: 11px;
 }
-.entryVariableSplitterWorkspace
+.RoCodeVariableSplitterWorkspace
     .list
     .attr_inner_box
     .val_attr
@@ -703,13 +703,13 @@
     background-color: #f9f9f9;
     color: #cbcbcb;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .use_obj .obj_list {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .use_obj .obj_list {
     overflow: hidden;
     margin: 6px 0 -4px 0;
     padding: 0;
     list-style: none;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .use_obj .obj_list li {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .use_obj .obj_list li {
     position: relative;
     -webkit-box-sizing: content-box;
     box-sizing: content-box;
@@ -719,10 +719,10 @@
     padding: 4px 4px 4px 42px;
     border-top: 1px solid #ecf8ff;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .use_obj .obj_list li:first-child {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .use_obj .obj_list li:first-child {
     border-top: 0;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .use_obj .obj_list .thmb {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .use_obj .obj_list .thmb {
     overflow: hidden;
     position: absolute;
     top: 4px;
@@ -736,7 +736,7 @@
     background-repeat: no-repeat;
     background-position: center;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .use_obj .obj_list .text {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .use_obj .obj_list .text {
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -749,24 +749,24 @@
     white-space: nowrap;
     line-height: 34px;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .use_obj .obj_list .text.red {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .use_obj .obj_list .text.red {
     color: #ff4b4b;
     padding-left: 10px;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr {
     margin-bottom: 15px;
     padding-bottom: 10px;
     border-bottom: 1px solid #ecf8ff;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr.hidden {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr.hidden {
     display: none;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .btn_box {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .btn_box {
     overflow: hidden;
     margin-top: 8px;
     font-size: 0;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .btn_box .btn_list {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .btn_box .btn_list {
     display: inline-block;
     overflow: hidden;
     width: 95px;
@@ -782,23 +782,23 @@
     text-align: center;
     line-height: 30px;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .btn_box .btn_list + .btn_list {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .btn_box .btn_list + .btn_list {
     margin-left: 7px;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .list_cnt {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .list_cnt {
     overflow: hidden;
     margin-top: 8px;
     padding-top: 8px;
     border-top: 1px solid #ecf8ff;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .list_cnt .cnt_sjt {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .list_cnt .cnt_sjt {
     float: left;
     font-size: 12px;
     font-weight: 600;
     color: #2c313d;
     letter-spacing: -0.4px;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .list_cnt .cnt_inpt {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .list_cnt .cnt_inpt {
     float: right;
     overflow: hidden;
     position: relative;
@@ -809,7 +809,7 @@
     padding: 0 32px;
     border-radius: 4px;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .list_cnt .cnt_inpt .btn_cnt {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .list_cnt .cnt_inpt .btn_cnt {
     overflow: hidden;
     position: absolute;
     left: 0;
@@ -825,7 +825,7 @@
     text-align: center;
     line-height: 34px;
 }
-.entryVariableSplitterWorkspace
+.RoCodeVariableSplitterWorkspace
     .list
     .attr_inner_box
     .list_attr
@@ -837,7 +837,7 @@
     right: 0;
     border-radius: 0 4px 4px 0;
 }
-.entryVariableSplitterWorkspace
+.RoCodeVariableSplitterWorkspace
     .list
     .attr_inner_box
     .list_attr
@@ -858,37 +858,37 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .cnt_group {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .cnt_group {
     margin-top: 8px;
     padding-top: 8px;
     border-top: 1px solid #ecf8ff;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .scroll_box {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .scroll_box {
     max-height: 160px;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .scroll_box.on {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .scroll_box.on {
     padding-right: 20px;
 }
 .scroll_box:not(.on) .simplebar-vertical {
     display: none;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .scroll_box .simplebar-scrollbar {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .scroll_box .simplebar-scrollbar {
     opacity: 0.8;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .cnt_list {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .cnt_list {
     margin: 0;
     padding: 0;
     list-style: none;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .cnt_list li {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .cnt_list li {
     position: relative;
     margin: 8px 0 0 0;
     padding: 0 34px 0 28px;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .cnt_list li:first-child {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .cnt_list li:first-child {
     margin-top: 0;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .cnt_list .cnt {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .cnt_list .cnt {
     position: absolute;
     left: 0;
     top: 50%;
@@ -901,11 +901,11 @@
     line-height: 12px;
     text-align: right;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .cnt_list .del {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .cnt_list .del {
     right: 0;
     top: 0;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .cnt_list input[type='text'] {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .cnt_list input[type='text'] {
     width: 100%;
     padding: 6px 8px 5px;
     border: 1px solid #e2e2e2;
@@ -920,7 +920,7 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .caution_dsc {
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .caution_dsc {
     padding: 7px 10px 2px;
     margin: 0;
     font-size: 12px;
@@ -935,12 +935,12 @@
     padding: 0;
     list-style: none;
 }
-.entryVariableSplitterWorkspace .list .use_block {
+.RoCodeVariableSplitterWorkspace .list .use_block {
     display: none;
     padding: 4px 26px 4px 32px;
     background-color: #d6e9f4;
 }
-.entryVariableSplitterWorkspace .list .use_block .obj_list li {
+.RoCodeVariableSplitterWorkspace .list .use_block .obj_list li {
     position: relative;
     -webkit-box-sizing: content-box;
     box-sizing: content-box;
@@ -950,10 +950,10 @@
     padding: 4px 4px 4px 42px;
     border-top: 1px solid #aac5d5;
 }
-.entryVariableSplitterWorkspace .list .use_block .obj_list li:first-child {
+.RoCodeVariableSplitterWorkspace .list .use_block .obj_list li:first-child {
     border-top: 0;
 }
-.entryVariableSplitterWorkspace .list .use_block .obj_list .thmb {
+.RoCodeVariableSplitterWorkspace .list .use_block .obj_list .thmb {
     overflow: hidden;
     position: absolute;
     top: 4px;
@@ -967,7 +967,7 @@
     background-repeat: no-repeat;
     background-position: center;
 }
-.entryVariableSplitterWorkspace .list .use_block .obj_list .text {
+.RoCodeVariableSplitterWorkspace .list .use_block .obj_list .text {
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -980,7 +980,7 @@
     white-space: nowrap;
     line-height: 34px;
 }
-.entryVariableSplitterWorkspace .list .watch {
+.RoCodeVariableSplitterWorkspace .list .watch {
     position: absolute;
     right: 60px;
     top: 13px;
@@ -990,7 +990,7 @@
     .backgroundImage('layers_icon_unvisible24.png');
     background-size: 24px auto;
 }
-.entryVariableSplitterWorkspace .list .caution_dsc {
+.RoCodeVariableSplitterWorkspace .list .caution_dsc {
     display: none;
     padding: 16px 36px 15px;
     margin: 0;
@@ -1001,10 +1001,10 @@
     line-height: 11px;
     background-color: #bfd8e6;
 }
-.entryVariableSplitterWorkspace .list .watch.on {
+.RoCodeVariableSplitterWorkspace .list .watch.on {
     .backgroundImage('layers_icon_visible24.png');
 }
-.entryVariableSplitterWorkspace .list .del {
+.RoCodeVariableSplitterWorkspace .list .del {
     overflow: hidden;
     position: absolute;
     right: 26px;
@@ -1018,46 +1018,46 @@
     background-size: 10px auto;
     font-size: 0;
 }
-.entryVariableSplitterWorkspace .list.default_val .inpt_box:before {
+.RoCodeVariableSplitterWorkspace .list.default_val .inpt_box:before {
     .backgroundImage('ic_attr_variable_on.png');
 }
-.entryVariableSplitterWorkspace .list.cloud_val .inpt_box:before {
+.RoCodeVariableSplitterWorkspace .list.cloud_val .inpt_box:before {
     .backgroundImage('ic_attr_variable_cloud_on.png');
 }
-.entryVariableSplitterWorkspace .list.cloud_val .inpt_box:before {
+.RoCodeVariableSplitterWorkspace .list.cloud_val .inpt_box:before {
     .backgroundImage('ic_attr_variable_real_time_on.png');
 }
-.entryVariableSplitterWorkspace .list.local_val .inpt_box:before {
+.RoCodeVariableSplitterWorkspace .list.local_val .inpt_box:before {
     .backgroundImage('ic_attr_variable_local_on.png');
 }
-.entryVariableSplitterWorkspace .list.default_list .inpt_box:before {
+.RoCodeVariableSplitterWorkspace .list.default_list .inpt_box:before {
     .backgroundImage('ic_attr_list_on.png');
 }
-.entryVariableSplitterWorkspace .list.cloud_list .inpt_box:before {
+.RoCodeVariableSplitterWorkspace .list.cloud_list .inpt_box:before {
     .backgroundImage('ic_attr_list_cloud_on.png');
 }
-.entryVariableSplitterWorkspace .list.real_time_list .inpt_box:before {
+.RoCodeVariableSplitterWorkspace .list.real_time_list .inpt_box:before {
     .backgroundImage('ic_attr_list_real_time_on.png');
 }
-.entryVariableSplitterWorkspace .list.local_list .inpt_box:before {
+.RoCodeVariableSplitterWorkspace .list.local_list .inpt_box:before {
     .backgroundImage('ic_attr_list_local_on.png');
 }
-.entryVariableSplitterWorkspace .list.default_func .inpt_box:before {
+.RoCodeVariableSplitterWorkspace .list.default_func .inpt_box:before {
     left: 10px;
     .backgroundImage('ic_attr_func_on.png');
 }
-.entryVariableSplitterWorkspace .list.default_message .inpt_box:before {
+.RoCodeVariableSplitterWorkspace .list.default_message .inpt_box:before {
     left: 10px;
     .backgroundImage('ic_attr_message_on.png');
 }
-.entryVariableSplitterWorkspace.fold .attr_link {
+.RoCodeVariableSplitterWorkspace.fold .attr_link {
     cursor: pointer;
 }
-.entryVariableSplitterWorkspace.unfold .attr_link {
+.RoCodeVariableSplitterWorkspace.unfold .attr_link {
     background-color: #fff;
     cursor: pointer;
 }
-.entryVariableSplitterWorkspace.fold .attr_link:before {
+.RoCodeVariableSplitterWorkspace.fold .attr_link:before {
     width: 6px;
     height: 8px;
     border-radius: 0;
@@ -1065,7 +1065,7 @@
     background-color: inherit;
     background-size: 6px auto;
 }
-.entryVariableSplitterWorkspace.unfold .attr_link:before {
+.RoCodeVariableSplitterWorkspace.unfold .attr_link:before {
     width: 8px;
     height: 6px;
     border-radius: 0;
@@ -1073,34 +1073,34 @@
     background-color: inherit;
     background-size: 8px auto;
 }
-.entryVariableSplitterWorkspace .attr_box {
+.RoCodeVariableSplitterWorkspace .attr_box {
     display: none;
 }
-.entryVariableSplitterWorkspace.unfold .attr_box {
+.RoCodeVariableSplitterWorkspace.unfold .attr_box {
     display: block;
 }
-.entryVariableSplitterWorkspace .list.unfold .attr_inner_box {
+.RoCodeVariableSplitterWorkspace .list.unfold .attr_inner_box {
     display: block;
 }
-.entryVariableSplitterWorkspace .list.unfold .use_block {
+.RoCodeVariableSplitterWorkspace .list.unfold .use_block {
     display: block;
 }
-.entryVariableSplitterWorkspace .list.unfold .caution_dsc {
+.RoCodeVariableSplitterWorkspace .list.unfold .caution_dsc {
     display: block;
 }
-.entryVariableSplitterWorkspace .list.unfold .inpt:after {
+.RoCodeVariableSplitterWorkspace .list.unfold .inpt:after {
     .backgroundImage('layers_arrow_up_nor.png');
 }
-.entryVariableSplitterWorkspace .list.fold .inpt:after {
+.RoCodeVariableSplitterWorkspace .list.fold .inpt:after {
     .backgroundImage('layers_arrow_down_nor.png');
 }
-.entryVariableSplitterWorkspace .list.default_func .inpt_box,
-.entryVariableSplitterWorkspace .list.default_message .inpt_box {
+.RoCodeVariableSplitterWorkspace .list.default_func .inpt_box,
+.RoCodeVariableSplitterWorkspace .list.default_message .inpt_box {
     padding: 13px 80px 13px 36px;
     background-color: #ecf8ff;
 }
-.entryVariableSplitterWorkspace .list.default_func .inpt_box:after,
-.entryVariableSplitterWorkspace .list.default_message .inpt_box:after {
+.RoCodeVariableSplitterWorkspace .list.default_func .inpt_box:after,
+.RoCodeVariableSplitterWorkspace .list.default_message .inpt_box:after {
     .backgroundImage('layers_arrow_down_nor.png');
     position: absolute;
     right: 64px;
@@ -1111,22 +1111,22 @@
     background-size: 8px auto;
     content: '';
 }
-.entryVariableSplitterWorkspace .list.default_func .inpt,
-.entryVariableSplitterWorkspace .list.default_message .inpt {
+.RoCodeVariableSplitterWorkspace .list.default_func .inpt,
+.RoCodeVariableSplitterWorkspace .list.default_message .inpt {
     padding: 2px 0;
 }
-.entryVariableSplitterWorkspace .list.default_func .inpt:after,
-.entryVariableSplitterWorkspace .list.default_message .inpt:after {
+.RoCodeVariableSplitterWorkspace .list.default_func .inpt:after,
+.RoCodeVariableSplitterWorkspace .list.default_message .inpt:after {
     display: none;
 }
-.entryVariableSplitterWorkspace .list.default_func.unfold .inpt_box,
-.entryVariableSplitterWorkspace .list.default_message.unfold .inpt_box {
+.RoCodeVariableSplitterWorkspace .list.default_func.unfold .inpt_box,
+.RoCodeVariableSplitterWorkspace .list.default_message.unfold .inpt_box {
     background-color: #fff;
     -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
-.entryVariableSplitterWorkspace .list.default_func.unfold .inpt_box:after,
-.entryVariableSplitterWorkspace .list.default_message.unfold .inpt_box:after {
+.RoCodeVariableSplitterWorkspace .list.default_func.unfold .inpt_box:after,
+.RoCodeVariableSplitterWorkspace .list.default_message.unfold .inpt_box:after {
     .backgroundImage('layers_arrow_up_nor.png');
     position: absolute;
     right: 64px;
@@ -1137,20 +1137,20 @@
     background-size: 8px auto;
     content: '';
 }
-.entryVariableAdd_box .message_inpt input[type='text']:focus,
-.entryVariableAdd_box .message_inpt input[type='text']:active {
+.RoCodeVariableAdd_box .message_inpt input[type='text']:focus,
+.RoCodeVariableAdd_box .message_inpt input[type='text']:active {
     border-color: #4f80ff;
 }
-.entryVariableAddSpaceNameWrapperWorkspace .entryVariableAddSpaceInputWorkspace:focus,
-.entryVariableAddSpaceNameWrapperWorkspace .entryVariableAddSpaceInputWorkspace:active {
+.RoCodeVariableAddSpaceNameWrapperWorkspace .RoCodeVariableAddSpaceInputWorkspace:focus,
+.RoCodeVariableAddSpaceNameWrapperWorkspace .RoCodeVariableAddSpaceInputWorkspace:active {
     border-color: #4f80ff;
 }
-.entryVariableSplitterWorkspace .list .inpt input[type='text']:focus,
-.entryVariableSplitterWorkspace .list .inpt input[type='text']:active {
+.RoCodeVariableSplitterWorkspace .list .inpt input[type='text']:focus,
+.RoCodeVariableSplitterWorkspace .list .inpt input[type='text']:active {
     border-color: #4f80ff;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .val_attr .attr_inpt input[type='text']:focus,
-.entryVariableSplitterWorkspace
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .val_attr .attr_inpt input[type='text']:focus,
+.RoCodeVariableSplitterWorkspace
     .list
     .attr_inner_box
     .val_attr
@@ -1158,8 +1158,8 @@
     input[type='text']:active {
     border-color: #4f80ff;
 }
-.entryVariableSplitterWorkspace .list .attr_inner_box .list_attr .cnt_list input[type='text']:focus,
-.entryVariableSplitterWorkspace
+.RoCodeVariableSplitterWorkspace .list .attr_inner_box .list_attr .cnt_list input[type='text']:focus,
+.RoCodeVariableSplitterWorkspace
     .list
     .attr_inner_box
     .list_attr

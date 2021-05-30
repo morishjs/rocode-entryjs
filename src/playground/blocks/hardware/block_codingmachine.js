@@ -1,5 +1,5 @@
 'use strict';
-Entry.Codingmachine = {
+RoCode.Codingmachine = {
     id: '26.1',
     name: 'Codingmachine',
     url: 'http://wonn.co.kr/',
@@ -47,7 +47,7 @@ Entry.Codingmachine = {
         /*추가*/
     },
     setZero: function() {
-        Entry.hw.sendQueue.CMD = [
+        RoCode.hw.sendQueue.CMD = [
             0xf0,
             0x00,
             0x00,
@@ -71,7 +71,7 @@ Entry.Codingmachine = {
             0x00,
             /* -------- 추가 ------- */
         ];
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     monitorTemplate: {
         imgPath: 'hw/coconut.png',
@@ -156,7 +156,7 @@ Entry.Codingmachine = {
         mode: 'both',
     },
 };
-Entry.Codingmachine.setLanguage = function() {
+RoCode.Codingmachine.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -206,7 +206,7 @@ Entry.Codingmachine.setLanguage = function() {
         }
     };
 };
-Entry.Codingmachine.blockMenuBlocks = [
+RoCode.Codingmachine.blockMenuBlocks = [
     //Codingmachine Blocks
     'codingmachine_led',
     'codingmachine_tune',
@@ -229,13 +229,13 @@ Entry.Codingmachine.blockMenuBlocks = [
     'codingmachine_servo',
     //Added 2018-09-24
 ];
-Entry.Codingmachine.getBlocks = function() {
+RoCode.Codingmachine.getBlocks = function() {
     return {
         //region JDKit
         /* ----------- 추가 --------- */
         codingmachine_analog_in: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -245,8 +245,8 @@ Entry.Codingmachine.getBlocks = function() {
                     options: [['A4', 1], ['A5', 2]],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -260,11 +260,11 @@ Entry.Codingmachine.getBlocks = function() {
             class: 'codingmachine_arduino',
             isNotFor: ['Codingmachine'],
             func: function(sprite, script) {
-                var sensorData = Entry.hw.portData.CMD;
+                var sensorData = RoCode.hw.portData.CMD;
                 var analog_sel = script.getField('ANALOG_SENSOR');
-                if (analog_sel == 1) return sensorData[Entry.Codingmachine.Sensor.ANALOG_A4];
-                else if (analog_sel == 2) return sensorData[Entry.Codingmachine.Sensor.ANALOG_A5];
-                else return sensorData[Entry.Codingmachine.Sensor.ANALOG_A4];
+                if (analog_sel == 1) return sensorData[RoCode.Codingmachine.Sensor.ANALOG_A4];
+                else if (analog_sel == 2) return sensorData[RoCode.Codingmachine.Sensor.ANALOG_A5];
+                else return sensorData[RoCode.Codingmachine.Sensor.ANALOG_A4];
             },
             syntax: { js: [], py: [] },
         },
@@ -282,8 +282,8 @@ Entry.Codingmachine.getBlocks = function() {
 
         /* ----------- 추가 --------- */
         codingmachine_digital_in: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -303,8 +303,8 @@ Entry.Codingmachine.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -318,17 +318,17 @@ Entry.Codingmachine.getBlocks = function() {
             class: 'codingmachine_arduino',
             isNotFor: ['Codingmachine'],
             func: function(sprite, script) {
-                var sensorData = Entry.hw.portData.CMD;
+                var sensorData = RoCode.hw.portData.CMD;
                 var digital_pin = script.getField('DIGITAL_PIN');
                 if (digital_pin <= 3) {
-                    return sensorData[Entry.Codingmachine.Sensor.DIGITAL_IN1] &
+                    return sensorData[RoCode.Codingmachine.Sensor.DIGITAL_IN1] &
                         (0x01 << digital_pin)
                         ? 0
                         : 1;
                 } else if (digital_pin == 4) {
-                    return sensorData[Entry.JDKit.Codingmachine.DIGITAL_IN2] & (0x01 << 0) ? 0 : 1;
+                    return sensorData[RoCode.JDKit.Codingmachine.DIGITAL_IN2] & (0x01 << 0) ? 0 : 1;
                 } else {
-                    return sensorData[Entry.Codingmachine.Sensor.DIGITAL_IN2] &
+                    return sensorData[RoCode.Codingmachine.Sensor.DIGITAL_IN2] &
                         (0x01 << (digital_pin - 4))
                         ? 0
                         : 1;
@@ -396,8 +396,8 @@ Entry.Codingmachine.getBlocks = function() {
 
         /* -------- 추가 ------- */
         codingmachine_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -415,8 +415,8 @@ Entry.Codingmachine.getBlocks = function() {
                     ],
                     value: 3,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -442,8 +442,8 @@ Entry.Codingmachine.getBlocks = function() {
             class: 'codingmachine_arduino',
             isNotFor: ['Codingmachine'],
             func: function(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined')
-                    Entry.hw.sendQueue.CMD = [
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined')
+                    RoCode.hw.sendQueue.CMD = [
                         0xf0,
                         0,
                         0,
@@ -467,11 +467,11 @@ Entry.Codingmachine.getBlocks = function() {
                         0x00,
                         /* -------- 추가 ------- */
                     ];
-                var cmd = Entry.hw.sendQueue.CMD;
+                var cmd = RoCode.hw.sendQueue.CMD;
                 var digital_pin = script.getField('DIGITAL_PIN', script);
                 var act_val = script.getNumberValue('ACTION', script);
-                cmd[Entry.Codingmachine.Cmd.SERVOPORT] |= digital_pin;
-                cmd[Entry.Codingmachine.Cmd.SERVODGREE] = act_val;
+                cmd[RoCode.Codingmachine.Cmd.SERVOPORT] |= digital_pin;
+                cmd[RoCode.Codingmachine.Cmd.SERVODGREE] = act_val;
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
@@ -479,8 +479,8 @@ Entry.Codingmachine.getBlocks = function() {
         /* -------- 추가 ------- */
         /* -------- 추가 ------- */
         codingmachine_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -489,8 +489,8 @@ Entry.Codingmachine.getBlocks = function() {
                     options: [['D3', 1], ['D5', 2], ['D6', 3], ['D11', 4]],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -516,8 +516,8 @@ Entry.Codingmachine.getBlocks = function() {
             class: 'codingmachine_arduino',
             isNotFor: ['Codingmachine'],
             func: function(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined')
-                    Entry.hw.sendQueue.CMD = [
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined')
+                    RoCode.hw.sendQueue.CMD = [
                         0xf0,
                         0,
                         0,
@@ -541,11 +541,11 @@ Entry.Codingmachine.getBlocks = function() {
                         0x00,
                         /* -------- 추가 ------- */
                     ];
-                var cmd = Entry.hw.sendQueue.CMD;
+                var cmd = RoCode.hw.sendQueue.CMD;
                 var digital_pin = script.getField('DIGITAL_PIN', script);
                 var act_value = script.getNumberValue('ACTION_VALUE', script);
-                cmd[Entry.Codingmachine.Cmd.DIGITAL_OUT3] = (digital_pin << 4) & 0xf0;
-                cmd[Entry.Codingmachine.Cmd.DIGITAL_PWM] = act_value;
+                cmd[RoCode.Codingmachine.Cmd.DIGITAL_OUT3] = (digital_pin << 4) & 0xf0;
+                cmd[RoCode.Codingmachine.Cmd.DIGITAL_PWM] = act_value;
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
@@ -553,8 +553,8 @@ Entry.Codingmachine.getBlocks = function() {
         /* -------- 추가 ------- */
         /* -------- 추가 ------- */
         codingmachine_digital_out: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -573,8 +573,8 @@ Entry.Codingmachine.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -584,8 +584,8 @@ Entry.Codingmachine.getBlocks = function() {
                     ],
                     value: 3,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -605,8 +605,8 @@ Entry.Codingmachine.getBlocks = function() {
             class: 'codingmachine_arduino',
             isNotFor: ['Codingmachine'],
             func: function(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined')
-                    Entry.hw.sendQueue.CMD = [
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined')
+                    RoCode.hw.sendQueue.CMD = [
                         0xf0,
                         0,
                         0,
@@ -630,30 +630,30 @@ Entry.Codingmachine.getBlocks = function() {
                         0x00,
                         /* -------- 추가 ------- */
                     ];
-                var cmd = Entry.hw.sendQueue.CMD;
+                var cmd = RoCode.hw.sendQueue.CMD;
                 var digital_pin = script.getField('DIGITAL_PIN', script);
                 var act = script.getField('ACTION', script);
                 if (act == 3) {
                     if (digital_pin <= 2) {//D3, D4, D5
-                        cmd[Entry.Codingmachine.Cmd.DIGITAL_OUT1] |= (0x01 << (digital_pin * 2 + 1));
-                        cmd[Entry.Codingmachine.Cmd.DIGITAL_OUT1] |= (0x01 << digital_pin * 2);
+                        cmd[RoCode.Codingmachine.Cmd.DIGITAL_OUT1] |= (0x01 << (digital_pin * 2 + 1));
+                        cmd[RoCode.Codingmachine.Cmd.DIGITAL_OUT1] |= (0x01 << digital_pin * 2);
                     } else if (digital_pin <= 5) {//D6, D7, D11
-                        cmd[Entry.Codingmachine.Cmd.DIGITAL_OUT2] |= (0x01 << ((digital_pin - 3) * 2 + 1));
-                        cmd[Entry.Codingmachine.Cmd.DIGITAL_OUT2] |= (0x01 << (digital_pin - 3) * 2);
+                        cmd[RoCode.Codingmachine.Cmd.DIGITAL_OUT2] |= (0x01 << ((digital_pin - 3) * 2 + 1));
+                        cmd[RoCode.Codingmachine.Cmd.DIGITAL_OUT2] |= (0x01 << (digital_pin - 3) * 2);
                     } else {   //D12, D13
-                        cmd[Entry.Codingmachine.Cmd.DIGITAL_OUT3] |= (0x01 << ((digital_pin - 6) * 2 + 1));
-                        cmd[Entry.Codingmachine.Cmd.DIGITAL_OUT3] |= (0x01 << (digital_pin - 6) * 2);
+                        cmd[RoCode.Codingmachine.Cmd.DIGITAL_OUT3] |= (0x01 << ((digital_pin - 6) * 2 + 1));
+                        cmd[RoCode.Codingmachine.Cmd.DIGITAL_OUT3] |= (0x01 << (digital_pin - 6) * 2);
                     }
                 } else {
                     if (digital_pin <= 2) {
-                        cmd[Entry.Codingmachine.Cmd.DIGITAL_OUT1] |= (0x01 << (digital_pin * 2 + 1));
-                        cmd[Entry.Codingmachine.Cmd.DIGITAL_OUT1] &= ~(0x01 << digital_pin * 2);
+                        cmd[RoCode.Codingmachine.Cmd.DIGITAL_OUT1] |= (0x01 << (digital_pin * 2 + 1));
+                        cmd[RoCode.Codingmachine.Cmd.DIGITAL_OUT1] &= ~(0x01 << digital_pin * 2);
                     } else if (digital_pin <= 5) {
-                        cmd[Entry.Codingmachine.Cmd.DIGITAL_OUT2] |= (0x01 << ((digital_pin - 3) * 2 + 1));
-                        cmd[Entry.Codingmachine.Cmd.DIGITAL_OUT2] &= ~(0x01 << (digital_pin - 3) * 2);
+                        cmd[RoCode.Codingmachine.Cmd.DIGITAL_OUT2] |= (0x01 << ((digital_pin - 3) * 2 + 1));
+                        cmd[RoCode.Codingmachine.Cmd.DIGITAL_OUT2] &= ~(0x01 << (digital_pin - 3) * 2);
                     } else {
-                        cmd[Entry.Codingmachine.Cmd.DIGITAL_OUT3] |= (0x01 << ((digital_pin - 6) * 2 + 1));
-                        cmd[Entry.Codingmachine.Cmd.DIGITAL_OUT3] &= ~(0x01 << (digital_pin - 6) * 2);
+                        cmd[RoCode.Codingmachine.Cmd.DIGITAL_OUT3] |= (0x01 << ((digital_pin - 6) * 2 + 1));
+                        cmd[RoCode.Codingmachine.Cmd.DIGITAL_OUT3] &= ~(0x01 << (digital_pin - 6) * 2);
                     }
                 }
                 return script.callReturn();
@@ -761,4 +761,4 @@ Entry.Codingmachine.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Codingmachine;
+module.exports = RoCode.Codingmachine;

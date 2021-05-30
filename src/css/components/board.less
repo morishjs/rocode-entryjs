@@ -1,10 +1,10 @@
-.entryBoard {
+.RoCodeBoard {
     cursor: move;
     position: absolute;
     -ms-touch-action: none;
 }
 
-.entryOverlayBoard {
+.RoCodeOverlayBoard {
     background: rgba(138, 163, 178, 0.7);
 }
 
@@ -23,7 +23,7 @@
     opacity: 0.6;
 }
 
-.entryBoardWrapper {
+.RoCodeBoardWrapper {
     position: absolute;
     top: 0;
     left: 0;
@@ -31,7 +31,7 @@
     height: 100%;
 }
 
-.entryVimBoard {
+.RoCodeVimBoard {
     z-index: 0;
     position: absolute;
     top: 0;
@@ -40,7 +40,7 @@
     width: 100%;
 }
 
-.entryFunctionButton {
+.RoCodeFunctionButton {
     font-family: ng !important;
     font-size: 13 !important;
     text-anchor: middle;
@@ -48,7 +48,7 @@
     cursor: pointer !important;
 }
 
-.entryFunctionButtonText {
+.RoCodeFunctionButtonText {
     font-family: ng !important;
     font-size: 13 !important;
     text-anchor: middle;
@@ -56,7 +56,7 @@
     cursor: pointer !important;
 }
 
-.entryFunctionButtonBorder {
+.RoCodeFunctionButtonBorder {
     font-family: ng !important;
     font-size: 13 !important;
     text-anchor: middle;
@@ -66,7 +66,7 @@
     stroke-width: 1;
 }
 
-.entryWorkspaceBoard {
+.RoCodeWorkspaceBoard {
     position: absolute;
     left: 254px;
     top: 0;
@@ -75,10 +75,10 @@
     border: 1px solid #d6e9f4;
     border-width: 1px 0;
     overflow: hidden;
-    .backgroundImage('entry_bg.svg');
+    .backgroundImage('RoCode_bg.svg');
 }
 
-.entryWorkspaceBoard.folding {
+.RoCodeWorkspaceBoard.folding {
     z-index: 252;
     // border-left: solid 1px #c4c4b9;
     .animation-duration(0.7s);
@@ -118,7 +118,7 @@
     }
 }
 
-.entryWorkspaceBoard.foldOut {
+.RoCodeWorkspaceBoard.foldOut {
     z-index: 300;
     .animation-duration(0.7s);
     .animation-name(foldOutBoard);

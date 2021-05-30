@@ -5,8 +5,8 @@ import SlideVariable from './slideVariable';
 import TimerVariable from './timerVariable';
 import Variable from './variable';
 
-Entry.Variable = Variable;
-Entry.Variable.create = (variableMetadata) => {
+RoCode.Variable = Variable;
+RoCode.Variable.create = (variableMetadata) => {
     const { variableType } = variableMetadata;
     switch (variableType) {
         case 'stt':

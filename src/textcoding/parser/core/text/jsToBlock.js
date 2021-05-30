@@ -3,7 +3,7 @@
  */
 "use strict";
 
-Entry.JsToBlockParser = function(syntax, parentParser) {
+RoCode.JsToBlockParser = function(syntax, parentParser) {
     this._type ="JsToBlockParser";
     this.syntax = syntax;
 
@@ -130,10 +130,10 @@ Entry.JsToBlockParser = function(syntax, parentParser) {
             var bodyData = body[i];
             var block = this[bodyData.type](bodyData);
 
-            if(!Entry.TextCodingUtil.hasBlockInfo(bodyData, this._blockInfo))
+            if(!RoCode.TextCodingUtil.hasBlockInfo(bodyData, this._blockInfo))
                 this._blockCount++;
 
-            Entry.TextCodingUtil.updateBlockInfo(bodyData, this._blockInfo);
+            RoCode.TextCodingUtil.updateBlockInfo(bodyData, this._blockInfo);
 
             if(!block) continue;
             else if (block.type === undefined) {
@@ -143,7 +143,7 @@ Entry.JsToBlockParser = function(syntax, parentParser) {
                     node : bodyData,
                     blockCount : this._blockCount
                 };
-            } else if (Entry.TextCodingUtil.isParamBlock(block)) {
+            } else if (RoCode.TextCodingUtil.isParamBlock(block)) {
             } else if (block) {
                 blocks.push(block);
             }
@@ -480,7 +480,7 @@ Entry.JsToBlockParser = function(syntax, parentParser) {
             if(left.type == "Literal" || left.type == "Identifier") {
                 var args = [];
                 args.push(left);
-                var paramsMeta = Entry.block[type].params;
+                var paramsMeta = RoCode.block[type].params;
 
                 for(var p in paramsMeta) {
                     var paramType = paramsMeta[p].type;
@@ -500,21 +500,21 @@ Entry.JsToBlockParser = function(syntax, parentParser) {
                     var argument = args[i];
 
                     var param = this[argument.type](argument);
-                    param = Entry.TextCodingUtil.radarVariableConvertor(param);
+                    param = RoCode.TextCodingUtil.radarVariableConvertor(param);
 
                     if(param && param != null)
                         params.push(param);
                 }
             } else {
                 param = this[left.type](left);
-                param = Entry.TextCodingUtil.radarVariableConvertor(param);
+                param = RoCode.TextCodingUtil.radarVariableConvertor(param);
                 if(param)
                     params.push(param);
             }
 
             operator = String(node.operator);
             if(operator) {
-                operator = Entry.TextCodingUtil.jTobBinaryOperatorConvertor(operator);
+                operator = RoCode.TextCodingUtil.jTobBinaryOperatorConvertor(operator);
                 param = operator;
                 if(param)
                     params.push(param);
@@ -527,7 +527,7 @@ Entry.JsToBlockParser = function(syntax, parentParser) {
             if(right.type == "Literal" || right.type == "Identifier") {
                 var args = [];
                 args.push(right);
-                var paramsMeta = Entry.block[type].params;
+                var paramsMeta = RoCode.block[type].params;
 
                 for(var p in paramsMeta) {
                     var paramType = paramsMeta[p].type;
@@ -565,7 +565,7 @@ Entry.JsToBlockParser = function(syntax, parentParser) {
                             params.splice(1, 1);
                         }
 
-                        param = Entry.TextCodingUtil.tTobDropdownValueConvertor(param);
+                        param = RoCode.TextCodingUtil.tTobDropdownValueConvertor(param);
                         params.push(param);
 
                         if(params[2] && params[2].type != "text" && params[2].type != "ai_distance_value") {
@@ -622,7 +622,7 @@ Entry.JsToBlockParser = function(syntax, parentParser) {
         if(left.type == "Literal" || left.type == "Identifier") {
             var args = [];
             args.push(left);
-            var paramsMeta = Entry.block[type].params;
+            var paramsMeta = RoCode.block[type].params;
 
             for(var p in paramsMeta) {
                 var paramType = paramsMeta[p].type;
@@ -652,7 +652,7 @@ Entry.JsToBlockParser = function(syntax, parentParser) {
 
         operator = String(node.operator);
         if(operator) {
-            operator = Entry.TextCodingUtil.logicalExpressionConvert(operator);
+            operator = RoCode.TextCodingUtil.logicalExpressionConvert(operator);
             param = operator;
             params.push(param);
         }
@@ -662,8 +662,8 @@ Entry.JsToBlockParser = function(syntax, parentParser) {
         if(right.type == "Literal" || right.type == "Identifier") {
             var args = [];
             args.push(right);
-            var paramsMeta = Entry.block[type].params;
-            //var paramsDefMeta = Entry.block[type].def.params;
+            var paramsMeta = RoCode.block[type].params;
+            //var paramsDefMeta = RoCode.block[type].def.params;
 
             for(var p in paramsMeta) {
                 var paramType = paramsMeta[p].type;
@@ -782,7 +782,7 @@ Entry.JsToBlockParser = function(syntax, parentParser) {
         var blockType = this[callee.type](callee);
 
         var type = this.syntax.Scope[blockType];
-        var block = Entry.block[type];
+        var block = RoCode.block[type];
         var blockParams = block.params;
 
         for(var i = 0; i < args.length; i++) {
@@ -816,7 +816,7 @@ Entry.JsToBlockParser = function(syntax, parentParser) {
                 content = content
                     .replace('&(calleeName)', callee.name)
                     .replace('&(lineNumber)', lineNumber);
-                Entry.toast.warning(title, content);
+                RoCode.toast.warning(title, content);
             }
         }
 
@@ -1023,4 +1023,4 @@ Entry.JsToBlockParser = function(syntax, parentParser) {
     };
 
     p.searchSyntax = function(datum) { return null; };
-})(Entry.JsToBlockParser.prototype);
+})(RoCode.JsToBlockParser.prototype);

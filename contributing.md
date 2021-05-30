@@ -2,7 +2,7 @@
 
 하드웨어 업체에서는
 
-entryjs 레포지토리에서 Pull Request를 보내실때 
+RoCodejs 레포지토리에서 Pull Request를 보내실때 
 
 devleop-hw브랜치로 보내주시기 바랍니다.
 

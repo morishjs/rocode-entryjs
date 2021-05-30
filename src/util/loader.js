@@ -1,18 +1,18 @@
 'use strict';
 
-Entry.Loader = {
+RoCode.Loader = {
     queueCount: 0,
     totalCount: 0,
     loaded: false,
 };
 
-Entry.Loader.addQueue = function(type) {
-    if (!this.queueCount) Entry.dispatchEvent('loadStart');
+RoCode.Loader.addQueue = function(type) {
+    if (!this.queueCount) RoCode.dispatchEvent('loadStart');
     this.queueCount++;
     this.totalCount++;
 };
 
-Entry.Loader.removeQueue = function(type) {
+RoCode.Loader.removeQueue = function(type) {
     this.queueCount--;
     if (!this.queueCount) {
         this.totalCount = 0;
@@ -20,17 +20,17 @@ Entry.Loader.removeQueue = function(type) {
     }
 };
 
-Entry.Loader.getLoadedPercent = function() {
+RoCode.Loader.getLoadedPercent = function() {
     if (this.totalCount === 0) return 1;
     else return this.queueCount / this.totalCount;
 };
 
-Entry.Loader.isLoaded = function() {
+RoCode.Loader.isLoaded = function() {
     return !this.queueCount && !this.totalCount;
 };
 
-Entry.Loader.handleLoad = function() {
+RoCode.Loader.handleLoad = function() {
     if (this.loaded) return;
     this.loaded = true;
-    Entry.dispatchEvent('loadComplete');
+    RoCode.dispatchEvent('loadComplete');
 };

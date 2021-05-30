@@ -1,7 +1,7 @@
 'use strict';
 
 /* eslint-disable */
-var EntryStatic = {
+var RoCodeStatic = {
     fontFamily: 'NanumGothic',
     exportBlockFontFamily:
         "NanumGothic, 'NanumGothic', '나눔고딕','NanumGothicWeb', '맑은 고딕', 'Malgun Gothic', Dotum",
@@ -10,7 +10,7 @@ var EntryStatic = {
     objectTypes: ['sprite', 'textBox'],
 };
 
-EntryStatic.usageList = [
+RoCodeStatic.usageList = [
     'usage_sequence',
     'usage_repeat',
     'usage_condition_repeat',
@@ -43,7 +43,7 @@ EntryStatic.usageList = [
     'usage_expansion',
 ];
 
-EntryStatic.conceptList = [
+RoCodeStatic.conceptList = [
     'concept_resource_analytics',
     'concept_individual',
     'concept_abstractive',
@@ -53,7 +53,7 @@ EntryStatic.conceptList = [
     'concept_parallel',
 ];
 
-EntryStatic.subjectList = [
+RoCodeStatic.subjectList = [
     'subject_korean',
     'subject_mathmatics',
     'subject_social',
@@ -66,11 +66,11 @@ EntryStatic.subjectList = [
     'subject_progmatic',
 ];
 
-EntryStatic.lectureLevels = [1, 2, 3];
+RoCodeStatic.lectureLevels = [1, 2, 3];
 
-// EntryStatic.lectureLevels = ['level_high', 'level_mid','level_row'];
+// RoCodeStatic.lectureLevels = ['level_high', 'level_mid','level_row'];
 
-EntryStatic.lectureGrades = [
+RoCodeStatic.lectureGrades = [
     'e_1',
     'e_2',
     'e_3',
@@ -83,7 +83,7 @@ EntryStatic.lectureGrades = [
     'general',
 ];
 
-EntryStatic.categoryList = [
+RoCodeStatic.categoryList = [
     'category_game',
     'category_animation',
     'category_media_art',
@@ -91,7 +91,7 @@ EntryStatic.categoryList = [
     'category_etc',
 ];
 
-EntryStatic.variableBlockList = [
+RoCodeStatic.variableBlockList = [
     'get_variable',
     'change_variable',
     'set_variable',
@@ -108,11 +108,11 @@ EntryStatic.variableBlockList = [
     'hide_list',
 ];
 
-EntryStatic.messageBlockList = ['when_message_cast', 'message_cast', 'message_cast_wait'];
+RoCodeStatic.messageBlockList = ['when_message_cast', 'message_cast', 'message_cast_wait'];
 
-EntryStatic.requiredTimes = [1, 2, 3, 4, 5];
+RoCodeStatic.requiredTimes = [1, 2, 3, 4, 5];
 
-EntryStatic.searchProjectOption = [
+RoCodeStatic.searchProjectOption = [
     {
         key: 'search_updated',
         lang: 'search_updated',
@@ -145,7 +145,7 @@ EntryStatic.searchProjectOption = [
     },
 ];
 
-EntryStatic.categoryProjectOption = [
+RoCodeStatic.categoryProjectOption = [
     {
         key: 'search_genre_all',
         lang: 'search_전체',
@@ -178,7 +178,7 @@ EntryStatic.categoryProjectOption = [
     },
 ];
 
-EntryStatic.getAllBlocks = function() {
+RoCodeStatic.getAllBlocks = function() {
     return [
         {
             category: 'start',
@@ -505,12 +505,12 @@ EntryStatic.getAllBlocks = function() {
                 // 'download_guide',
                 'arduino_download_source',
                 'arduino_noti',
-            ].concat(EntryStatic.DynamicHardwareBlocks),
+            ].concat(RoCodeStatic.DynamicHardwareBlocks),
         },
     ];
 };
-EntryStatic.DynamicHardwareBlocks = [];
-EntryStatic.discussCategories = [
+RoCodeStatic.DynamicHardwareBlocks = [];
+RoCodeStatic.discussCategories = [
     // 'notice',
     'qna',
     'tips',
@@ -519,7 +519,7 @@ EntryStatic.discussCategories = [
     'notice',
 ];
 
-EntryStatic.artCategories = [
+RoCodeStatic.artCategories = [
     {
         key: 'art_category_',
         lang: 'art_category_all',
@@ -552,7 +552,7 @@ EntryStatic.artCategories = [
     },
 ];
 
-EntryStatic.artSortOptions = [
+RoCodeStatic.artSortOptions = [
     {
         key: 'art_sort_updated',
         lang: 'art_sort_updated',
@@ -575,7 +575,7 @@ EntryStatic.artSortOptions = [
     },
 ];
 
-EntryStatic.discussSortOptions = [
+RoCodeStatic.discussSortOptions = [
     {
         lang: 'discuss_sort_created',
         value: 'created',
@@ -593,7 +593,7 @@ EntryStatic.discussSortOptions = [
         value: 'commentsLength',
     },
 ];
-EntryStatic.discussPeriodOptions = [
+RoCodeStatic.discussPeriodOptions = [
     {
         key: 'discuss_period_',
         lang: 'discuss_period_all',
@@ -621,7 +621,7 @@ EntryStatic.discussPeriodOptions = [
     },
 ];
 
-EntryStatic.artPeriodOptions = [
+RoCodeStatic.artPeriodOptions = [
     {
         key: 'art_period_',
         lang: 'art_period_all',
@@ -649,11 +649,11 @@ EntryStatic.artPeriodOptions = [
     },
 ];
 
-EntryStatic.getCategoryByBlock = function(blockName) {
+RoCodeStatic.getCategoryByBlock = function(blockName) {
     if (!blockName) {
         return false;
     }
-    const allBlocks = EntryStatic.getAllBlocks();
+    const allBlocks = RoCodeStatic.getAllBlocks();
     for (let i = 0, len = allBlocks.length; i < len; i++) {
         const blocks = allBlocks[i].blocks;
         if (blocks.indexOf(blockName) > -1) {
@@ -663,8 +663,8 @@ EntryStatic.getCategoryByBlock = function(blockName) {
     return false;
 };
 
-EntryStatic.objectMainCategories = [
-    'entrybot_friends',
+RoCodeStatic.objectMainCategories = [
+    'RoCodebot_friends',
     'people',
     'animal',
     'plant',
@@ -678,8 +678,8 @@ EntryStatic.objectMainCategories = [
     'background',
 ];
 
-EntryStatic.objectSubCategories = {
-    entrybot_friends: [],
+RoCodeStatic.objectSubCategories = {
+    RoCodebot_friends: [],
     people: [],
     animal: ['animal_flying', 'animal_land', 'animal_water', 'animal_others'],
     plant: ['plant_flower', 'plant_grass', 'plant_tree', 'plant_others'],
@@ -699,7 +699,7 @@ EntryStatic.objectSubCategories = {
 };
 
 /* eslint-disable */
-Object.defineProperty(EntryStatic, 'fonts', {
+Object.defineProperty(RoCodeStatic, 'fonts', {
     get: function() {
         return [
             {
@@ -856,7 +856,7 @@ Object.defineProperty(EntryStatic, 'fonts', {
     },
 });
 
-EntryStatic.colorSet = {
+RoCodeStatic.colorSet = {
     arrow: {
         default: {
             DEFAULT: '#FFFFFF',
@@ -961,7 +961,7 @@ EntryStatic.colorSet = {
     },
 };
 
-EntryStatic.COMMAND_TYPES = {
+RoCodeStatic.COMMAND_TYPES = {
     addThread: 101,
     destroyThread: 102,
     destroyBlock: 103,
@@ -981,7 +981,7 @@ EntryStatic.COMMAND_TYPES = {
     redo: 303,
 };
 
-EntryStatic.getQuestionCategoryData = function() {
+RoCodeStatic.getQuestionCategoryData = function() {
     return {
         category: 'dummy',
         blocks: [
@@ -995,21 +995,21 @@ EntryStatic.getQuestionCategoryData = function() {
     };
 };
 
-EntryStatic.getDefaultFontFamily = function() {
+RoCodeStatic.getDefaultFontFamily = function() {
     const localLang = Lang || {};
     const type = localLang.type;
     const fallbackType = localLang.fallbackType;
     const langType = type || fallbackType || 'en';
     switch (langType) {
         default:
-            return "EntryNG, NanumGothic, 나눔고딕, NanumGothicWeb, '맑은 고딕', 'Malgun Gothic', Dotum";
+            return "RoCodeNG, NanumGothic, 나눔고딕, NanumGothicWeb, '맑은 고딕', 'Malgun Gothic', Dotum";
     }
 };
 
 // for server node js code
 if (typeof exports === 'object') {
-    exports.blockInfo = EntryStatic.blockInfo;
-    exports.getAllBlocks = EntryStatic.getAllBlocks;
-    exports.getCategoryByBlock = EntryStatic.getCategoryByBlock;
-    exports.EntryStatic = EntryStatic;
+    exports.blockInfo = RoCodeStatic.blockInfo;
+    exports.getAllBlocks = RoCodeStatic.getAllBlocks;
+    exports.getCategoryByBlock = RoCodeStatic.getCategoryByBlock;
+    exports.RoCodeStatic = RoCodeStatic;
 }

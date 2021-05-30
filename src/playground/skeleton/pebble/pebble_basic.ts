@@ -1,4 +1,4 @@
-Entry.skeleton.pebble_basic = {
+RoCode.skeleton.pebble_basic = {
     executable: true,
     fontSize: 15,
     morph: ['prev', 'next'],

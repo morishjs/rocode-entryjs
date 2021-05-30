@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.rokoboard = {
+RoCode.rokoboard = {
     id: '13.1',
     name: 'rokoboard',
     url: 'http://www.r-steam.com/',
@@ -10,12 +10,12 @@ Entry.rokoboard = {
         en: 'rokoboard',
     },
     setZero: function() {
-        Entry.hw.sendQueue.readablePorts = [];
+        RoCode.hw.sendQueue.readablePorts = [];
         for (var port = 0; port < 20; port++) {
-            Entry.hw.sendQueue[port] = 0;
-            Entry.hw.sendQueue.readablePorts.push(port);
+            RoCode.hw.sendQueue[port] = 0;
+            RoCode.hw.sendQueue.readablePorts.push(port);
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     monitorTemplate: {
         imgPath: 'hw/arduino.png',
@@ -117,13 +117,13 @@ Entry.rokoboard = {
     },
 };
 
-Entry.rokoboard.blockMenuBlocks = [
+RoCode.rokoboard.blockMenuBlocks = [
     //rokoboard Blocks
     'rokoboard_get_sensor_value_by_name',
     'rokoboard_is_button_pressed',
 ];
 
-Entry.rokoboard.setLanguage = function() {
+RoCode.rokoboard.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -158,13 +158,13 @@ Entry.rokoboard.setLanguage = function() {
     };
 };
 
-Entry.rokoboard.getBlocks = function() {
+RoCode.rokoboard.getBlocks = function() {
     return {
         //region rokoboard 로코보드
         // rokoboard Implementation
         rokoboard_get_sensor_value_by_name: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -182,8 +182,8 @@ Entry.rokoboard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -198,13 +198,13 @@ Entry.rokoboard.getBlocks = function() {
             isNotFor: ['rokoboard'],
             func: function(sprite, script) {
                 var port = script.getField('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[port] || 0 : 0;
             },
         },
         rokoboard_is_button_pressed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -228,7 +228,7 @@ Entry.rokoboard.getBlocks = function() {
             isNotFor: ['rokoboard'],
             func: function(sprite, script) {
                 var port = 7;
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[port] < 1 : false;
             },
         },
@@ -236,4 +236,4 @@ Entry.rokoboard.getBlocks = function() {
     };
 };
 
-module.exports = Entry.rokoboard;
+module.exports = RoCode.rokoboard;

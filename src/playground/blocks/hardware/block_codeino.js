@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.CODEino = {
+RoCode.CODEino = {
     id: '1.3',
     name: 'CODEino',
     url: 'http://www.codable.co.kr/page/?pid=codeino',
@@ -22,65 +22,65 @@ Entry.CODEino = {
         return new Date().getTime() + type;
     },
     setZero: function() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            var keySet = Object.keys(Entry.hw.sendQueue.SET);
+            var keySet = Object.keys(RoCode.hw.sendQueue.SET);
             let isFirst = true;
             keySet.forEach(function(key) {
                 if (
-                    Entry.hw.sendQueue.SET[key].type === Entry.CODEino.sensorTypes.DEFAULT_NEOPIXEL
+                    RoCode.hw.sendQueue.SET[key].type === RoCode.CODEino.sensorTypes.DEFAULT_NEOPIXEL
                 ) {
-                    Entry.hw.sendQueue.SET[key].data = {
+                    RoCode.hw.sendQueue.SET[key].data = {
                         rValue: 0,
                         gValue: 0,
                         bValue: 0,
                         brightness: 22,
                     };
-                    Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                    RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
                 } else if (
-                    Entry.hw.sendQueue.SET[key].type ===
-                    Entry.CODEino.sensorTypes.CUSTOM_NEOPIXEL_POWER
+                    RoCode.hw.sendQueue.SET[key].type ===
+                    RoCode.CODEino.sensorTypes.CUSTOM_NEOPIXEL_POWER
                 ) {
-                    Entry.CODEino.CUSTOM_NEOPIXEL_BRIGHTNESS_VALUE = 22;
-                    Entry.hw.sendQueue.SET[key].data = {
+                    RoCode.CODEino.CUSTOM_NEOPIXEL_BRIGHTNESS_VALUE = 22;
+                    RoCode.hw.sendQueue.SET[key].data = {
                         isOn: 0,
-                        brightness: Entry.CODEino.CUSTOM_NEOPIXEL_BRIGHTNESS_VALUE,
+                        brightness: RoCode.CODEino.CUSTOM_NEOPIXEL_BRIGHTNESS_VALUE,
                     };
-                    Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                    RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
                 } else if (
-                    Entry.hw.sendQueue.SET[key].type ===
-                    Entry.CODEino.sensorTypes.CUSTOM_NEOPIXEL_LED_HANDLE
+                    RoCode.hw.sendQueue.SET[key].type ===
+                    RoCode.CODEino.sensorTypes.CUSTOM_NEOPIXEL_LED_HANDLE
                 ) {
-                    delete Entry.hw.sendQueue.SET[key];
+                    delete RoCode.hw.sendQueue.SET[key];
                 } else if (
-                    Entry.hw.sendQueue.SET[key].type === Entry.CODEino.sensorTypes.RGBLED_PIN ||
-                    Entry.hw.sendQueue.SET[key].type === Entry.CODEino.sensorTypes.ULTRASONIC
+                    RoCode.hw.sendQueue.SET[key].type === RoCode.CODEino.sensorTypes.RGBLED_PIN ||
+                    RoCode.hw.sendQueue.SET[key].type === RoCode.CODEino.sensorTypes.ULTRASONIC
                 ) {
                     if (isFirst) {
-                        Entry.CODEino.LED_VALUES = [0, 0, 0];
-                        Entry.hw.sendQueue.SET[key].type = Entry.CODEino.sensorTypes.RESET;
-                        Entry.hw.sendQueue.SET[key].data = {
-                            r: Entry.CODEino.LED_VALUES[0],
-                            g: Entry.CODEino.LED_VALUES[1],
-                            b: Entry.CODEino.LED_VALUES[2],
+                        RoCode.CODEino.LED_VALUES = [0, 0, 0];
+                        RoCode.hw.sendQueue.SET[key].type = RoCode.CODEino.sensorTypes.RESET;
+                        RoCode.hw.sendQueue.SET[key].data = {
+                            r: RoCode.CODEino.LED_VALUES[0],
+                            g: RoCode.CODEino.LED_VALUES[1],
+                            b: RoCode.CODEino.LED_VALUES[2],
                         };
-                        Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                        RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
                         isFirst = false;
                     } else {
-                        delete Entry.hw.sendQueue.SET[key];
+                        delete RoCode.hw.sendQueue.SET[key];
                     }
                 } else {
-                    Entry.hw.sendQueue.SET[key].data = 0;
-                    Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                    RoCode.hw.sendQueue.SET[key].data = 0;
+                    RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
                 }
             });
         }
-        Entry.CODEino.LAST_ORDER_PORT = 0;
-        Entry.hw.update();
+        RoCode.CODEino.LAST_ORDER_PORT = 0;
+        RoCode.hw.update();
     },
     monitorTemplate: {
         imgPath: 'hw/codeino.png',
@@ -250,7 +250,7 @@ Entry.CODEino = {
     LAST_ORDER_PORT: 0,
 };
 
-Entry.CODEino.setLanguage = function() {
+RoCode.CODEino.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -434,7 +434,7 @@ Entry.CODEino.setLanguage = function() {
         },
     };
 };
-Entry.CODEino.blockMenuBlocks = [
+RoCode.CODEino.blockMenuBlocks = [
     'CODEino_get_sensor_number',
     'CODEino_get_named_sensor_value',
     'CODEino_get_sound_status',
@@ -473,11 +473,11 @@ Entry.CODEino.blockMenuBlocks = [
     'CODEino_get_ultrasonic',
     'CODEino_set_servo',
 ];
-Entry.CODEino.getBlocks = function() {
+RoCode.CODEino.getBlocks = function() {
     return {
         CODEino_get_sensor_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -494,8 +494,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: 'A0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -510,8 +510,8 @@ Entry.CODEino.getBlocks = function() {
             },
         },
         CODEino_get_named_sensor_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -529,8 +529,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -545,21 +545,21 @@ Entry.CODEino.getBlocks = function() {
             isNotFor: ['CODEino'],
             func: function(sprite, script) {
                 var port = script.getField('PORT', script);
-                var nowTime = Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.ANALOG);
-                var hardwareTime = Entry.hw.portData['TIME'] || 0;
+                var nowTime = RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.ANALOG);
+                var hardwareTime = RoCode.hw.portData['TIME'] || 0;
                 var scope = script.executor.scope;
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 if (!scope.isStart) {
                     scope.isStart = true;
                     scope.stamp = nowTime;
-                    if (!Entry.hw.sendQueue['GET']) {
-                        Entry.hw.sendQueue['GET'] = {};
+                    if (!RoCode.hw.sendQueue['GET']) {
+                        RoCode.hw.sendQueue['GET'] = {};
                     }
-                    Entry.hw.sendQueue['GET'][Entry.CODEino.sensorTypes.ANALOG] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.CODEino.sensorTypes.ANALOG] = {
                         port: port,
-                        time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.ANALOG),
+                        time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.ANALOG),
                     };
-                    throw new Entry.Utils.AsyncError();
+                    throw new RoCode.Utils.AsyncError();
                     return;
                 } else if (hardwareTime && hardwareTime === scope.stamp) {
                     delete scope.isStart;
@@ -570,14 +570,14 @@ Entry.CODEino.getBlocks = function() {
                     delete scope.stamp;
                     return ANALOG ? ANALOG[port] || 0 : 0;
                 } else {
-                    throw new Entry.Utils.AsyncError();
+                    throw new RoCode.Utils.AsyncError();
                     return;
                 }
             },
         },
         CODEino_get_sound_status: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -590,8 +590,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: 'GREAT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -607,21 +607,21 @@ Entry.CODEino.getBlocks = function() {
             func: function(sprite, script) {
                 var value1 = script.getField('STATUS', script);
                 var value2 = 1;
-                var nowTime = Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.ANALOG);
-                var hardwareTime = Entry.hw.portData['TIME'] || 0;
+                var nowTime = RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.ANALOG);
+                var hardwareTime = RoCode.hw.portData['TIME'] || 0;
                 var scope = script.executor.scope;
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 if (!scope.isStart) {
                     scope.isStart = true;
                     scope.stamp = nowTime;
-                    if (!Entry.hw.sendQueue['GET']) {
-                        Entry.hw.sendQueue['GET'] = {};
+                    if (!RoCode.hw.sendQueue['GET']) {
+                        RoCode.hw.sendQueue['GET'] = {};
                     }
-                    Entry.hw.sendQueue['GET'][Entry.CODEino.sensorTypes.ANALOG] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.CODEino.sensorTypes.ANALOG] = {
                         port: 0,
-                        time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.ANALOG),
+                        time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.ANALOG),
                     };
-                    throw new Entry.Utils.AsyncError();
+                    throw new RoCode.Utils.AsyncError();
                     return;
                 } else if (hardwareTime && hardwareTime === scope.stamp) {
                     delete scope.isStart;
@@ -634,14 +634,14 @@ Entry.CODEino.getBlocks = function() {
                     if (value1 == 'GREAT') return ANALOG[0] > 600 ? 1 : 0;
                     else return ANALOG[0] <= 600 ? 1 : 0;
                 } else {
-                    throw new Entry.Utils.AsyncError();
+                    throw new RoCode.Utils.AsyncError();
                     return;
                 }
             },
         },
         CODEino_get_light_status: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -654,8 +654,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: 'BRIGHT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -671,21 +671,21 @@ Entry.CODEino.getBlocks = function() {
             func: function(sprite, script) {
                 var value1 = script.getField('STATUS', script);
                 var value2 = 1;
-                var nowTime = Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.ANALOG);
-                var hardwareTime = Entry.hw.portData['TIME'] || 0;
+                var nowTime = RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.ANALOG);
+                var hardwareTime = RoCode.hw.portData['TIME'] || 0;
                 var scope = script.executor.scope;
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 if (!scope.isStart) {
                     scope.isStart = true;
                     scope.stamp = nowTime;
-                    if (!Entry.hw.sendQueue['GET']) {
-                        Entry.hw.sendQueue['GET'] = {};
+                    if (!RoCode.hw.sendQueue['GET']) {
+                        RoCode.hw.sendQueue['GET'] = {};
                     }
-                    Entry.hw.sendQueue['GET'][Entry.CODEino.sensorTypes.ANALOG] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.CODEino.sensorTypes.ANALOG] = {
                         port: 1,
-                        time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.ANALOG),
+                        time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.ANALOG),
                     };
-                    throw new Entry.Utils.AsyncError();
+                    throw new RoCode.Utils.AsyncError();
                     return;
                 } else if (hardwareTime && hardwareTime === scope.stamp) {
                     delete scope.isStart;
@@ -698,14 +698,14 @@ Entry.CODEino.getBlocks = function() {
                     if (value1 == 'GREAT') return ANALOG[value2] < 800 ? 1 : 0;
                     else return ANALOG[value2] <= 800 ? 1 : 0;
                 } else {
-                    throw new Entry.Utils.AsyncError();
+                    throw new RoCode.Utils.AsyncError();
                     return;
                 }
             },
         },
         CODEino_is_button_pressed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -721,8 +721,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -738,21 +738,21 @@ Entry.CODEino.getBlocks = function() {
             func: function(sprite, script) {
                 var port = script.getNumberField('PORT', script);
                 if (port < 10) {
-                    var nowTime = Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.DIGITAL);
-                    var hardwareTime = Entry.hw.portData['TIME'] || 0;
+                    var nowTime = RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.DIGITAL);
+                    var hardwareTime = RoCode.hw.portData['TIME'] || 0;
                     var scope = script.executor.scope;
-                    var DIGITAL = Entry.hw.portData.DIGITAL;
+                    var DIGITAL = RoCode.hw.portData.DIGITAL;
                     if (!scope.isStart) {
                         scope.isStart = true;
                         scope.stamp = nowTime;
-                        if (!Entry.hw.sendQueue['GET']) {
-                            Entry.hw.sendQueue['GET'] = {};
+                        if (!RoCode.hw.sendQueue['GET']) {
+                            RoCode.hw.sendQueue['GET'] = {};
                         }
-                        Entry.hw.sendQueue['GET'][Entry.CODEino.sensorTypes.DIGITAL] = {
+                        RoCode.hw.sendQueue['GET'][RoCode.CODEino.sensorTypes.DIGITAL] = {
                             port: 4,
-                            time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.DIGITAL),
+                            time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.DIGITAL),
                         };
-                        throw new Entry.Utils.AsyncError();
+                        throw new RoCode.Utils.AsyncError();
                         return;
                     } else if (hardwareTime && hardwareTime === scope.stamp) {
                         delete scope.isStart;
@@ -763,25 +763,25 @@ Entry.CODEino.getBlocks = function() {
                         delete scope.stamp;
                         return DIGITAL ? !(DIGITAL[port] || 0) : 0;
                     } else {
-                        throw new Entry.Utils.AsyncError();
+                        throw new RoCode.Utils.AsyncError();
                         return;
                     }
                 } else {
-                    var nowTime = Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.ANALOG);
-                    var hardwareTime = Entry.hw.portData['TIME'] || 0;
+                    var nowTime = RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.ANALOG);
+                    var hardwareTime = RoCode.hw.portData['TIME'] || 0;
                     var scope = script.executor.scope;
-                    var ANALOG = Entry.hw.portData.ANALOG;
+                    var ANALOG = RoCode.hw.portData.ANALOG;
                     if (!scope.isStart) {
                         scope.isStart = true;
                         scope.stamp = nowTime;
-                        if (!Entry.hw.sendQueue['GET']) {
-                            Entry.hw.sendQueue['GET'] = {};
+                        if (!RoCode.hw.sendQueue['GET']) {
+                            RoCode.hw.sendQueue['GET'] = {};
                         }
-                        Entry.hw.sendQueue['GET'][Entry.CODEino.sensorTypes.ANALOG] = {
+                        RoCode.hw.sendQueue['GET'][RoCode.CODEino.sensorTypes.ANALOG] = {
                             port: port - 14,
-                            time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.ANALOG),
+                            time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.ANALOG),
                         };
-                        throw new Entry.Utils.AsyncError();
+                        throw new RoCode.Utils.AsyncError();
                         return;
                     } else if (hardwareTime && hardwareTime === scope.stamp) {
                         delete scope.isStart;
@@ -792,15 +792,15 @@ Entry.CODEino.getBlocks = function() {
                         delete scope.stamp;
                         return ANALOG[port - 14] < 1000 ? 1 : 0;
                     } else {
-                        throw new Entry.Utils.AsyncError();
+                        throw new RoCode.Utils.AsyncError();
                         return;
                     }
                 }
             },
         },
         CODEino_get_accelerometer_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -816,8 +816,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -833,10 +833,10 @@ Entry.CODEino.getBlocks = function() {
             func: function(sprite, script) {
                 var value1 = script.getField('DIRECTION', script);
                 var port = 0;
-                var nowTime = Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.ANALOG);
-                var hardwareTime = Entry.hw.portData['TIME'] || 0;
+                var nowTime = RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.ANALOG);
+                var hardwareTime = RoCode.hw.portData['TIME'] || 0;
                 var scope = script.executor.scope;
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var value4 = 265;
                 var value5 = 402;
                 var value6 = -90;
@@ -849,14 +849,14 @@ Entry.CODEino.getBlocks = function() {
                 if (!scope.isStart) {
                     scope.isStart = true;
                     scope.stamp = nowTime;
-                    if (!Entry.hw.sendQueue['GET']) {
-                        Entry.hw.sendQueue['GET'] = {};
+                    if (!RoCode.hw.sendQueue['GET']) {
+                        RoCode.hw.sendQueue['GET'] = {};
                     }
-                    Entry.hw.sendQueue['GET'][Entry.CODEino.sensorTypes.ANALOG] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.CODEino.sensorTypes.ANALOG] = {
                         port: port,
-                        time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.ANALOG),
+                        time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.ANALOG),
                     };
-                    throw new Entry.Utils.AsyncError();
+                    throw new RoCode.Utils.AsyncError();
                     return;
                 } else if (hardwareTime && hardwareTime === scope.stamp) {
                     delete scope.isStart;
@@ -885,14 +885,14 @@ Entry.CODEino.getBlocks = function() {
                     else if (value1 == 'RIGHT' || value1 == 'FRONT') return result > 30 ? 1 : 0;
                     else if (value1 == 'REVERSE') return result < -50 ? 1 : 0;
                 } else {
-                    throw new Entry.Utils.AsyncError();
+                    throw new RoCode.Utils.AsyncError();
                     return;
                 }
             },
         },
         CODEino_get_accelerometer_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -906,8 +906,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -922,22 +922,22 @@ Entry.CODEino.getBlocks = function() {
             isNotFor: ['CODEino'],
             func: function(sprite, script) {
                 var port = script.getNumberField('PORT', script);
-                var nowTime = Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.ANALOG);
-                var hardwareTime = Entry.hw.portData['TIME'] || 0;
+                var nowTime = RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.ANALOG);
+                var hardwareTime = RoCode.hw.portData['TIME'] || 0;
                 var scope = script.executor.scope;
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var result = 0;
                 if (!scope.isStart) {
                     scope.isStart = true;
                     scope.stamp = nowTime;
-                    if (!Entry.hw.sendQueue['GET']) {
-                        Entry.hw.sendQueue['GET'] = {};
+                    if (!RoCode.hw.sendQueue['GET']) {
+                        RoCode.hw.sendQueue['GET'] = {};
                     }
-                    Entry.hw.sendQueue['GET'][Entry.CODEino.sensorTypes.ANALOG] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.CODEino.sensorTypes.ANALOG] = {
                         port: port,
-                        time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.ANALOG),
+                        time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.ANALOG),
                     };
-                    throw new Entry.Utils.AsyncError();
+                    throw new RoCode.Utils.AsyncError();
                     return;
                 } else if (hardwareTime && hardwareTime === scope.stamp) {
                     delete scope.isStart;
@@ -956,14 +956,14 @@ Entry.CODEino.getBlocks = function() {
                     result = Math.max(-90, result);
                     return Math.round(result);
                 } else {
-                    throw new Entry.Utils.AsyncError();
+                    throw new RoCode.Utils.AsyncError();
                     return;
                 }
             },
         },
         CODEino_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -981,8 +981,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -997,21 +997,21 @@ Entry.CODEino.getBlocks = function() {
             isNotFor: ['CODEino'],
             func: function(sprite, script) {
                 var port = script.getField('PORT', script);
-                var nowTime = Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.ANALOG);
-                var hardwareTime = Entry.hw.portData['TIME'] || 0;
+                var nowTime = RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.ANALOG);
+                var hardwareTime = RoCode.hw.portData['TIME'] || 0;
                 var scope = script.executor.scope;
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 if (!scope.isStart) {
                     scope.isStart = true;
                     scope.stamp = nowTime;
-                    if (!Entry.hw.sendQueue['GET']) {
-                        Entry.hw.sendQueue['GET'] = {};
+                    if (!RoCode.hw.sendQueue['GET']) {
+                        RoCode.hw.sendQueue['GET'] = {};
                     }
-                    Entry.hw.sendQueue['GET'][Entry.CODEino.sensorTypes.ANALOG] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.CODEino.sensorTypes.ANALOG] = {
                         port: port,
-                        time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.ANALOG),
+                        time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.ANALOG),
                     };
-                    throw new Entry.Utils.AsyncError();
+                    throw new RoCode.Utils.AsyncError();
                     return;
                 } else if (hardwareTime && hardwareTime === scope.stamp) {
                     delete scope.isStart;
@@ -1022,14 +1022,14 @@ Entry.CODEino.getBlocks = function() {
                     delete scope.stamp;
                     return ANALOG ? ANALOG[port] || 0 : 0;
                 } else {
-                    throw new Entry.Utils.AsyncError();
+                    throw new RoCode.Utils.AsyncError();
                     return;
                 }
             },
         },
         CODEino_get_digital_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -1051,8 +1051,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1067,21 +1067,21 @@ Entry.CODEino.getBlocks = function() {
             isNotFor: ['CODEino'],
             func: function(sprite, script) {
                 var port = script.getNumberValue('PORT', script);
-                var nowTime = Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.DIGITAL);
-                var hardwareTime = Entry.hw.portData['TIME'] || 0;
+                var nowTime = RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.DIGITAL);
+                var hardwareTime = RoCode.hw.portData['TIME'] || 0;
                 var scope = script.executor.scope;
-                var DIGITAL = Entry.hw.portData.DIGITAL;
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
                 if (!scope.isStart) {
                     scope.isStart = true;
                     scope.stamp = nowTime;
-                    if (!Entry.hw.sendQueue['GET']) {
-                        Entry.hw.sendQueue['GET'] = {};
+                    if (!RoCode.hw.sendQueue['GET']) {
+                        RoCode.hw.sendQueue['GET'] = {};
                     }
-                    Entry.hw.sendQueue['GET'][Entry.CODEino.sensorTypes.DIGITAL] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.CODEino.sensorTypes.DIGITAL] = {
                         port: port,
-                        time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.DIGITAL),
+                        time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.DIGITAL),
                     };
-                    throw new Entry.Utils.AsyncError();
+                    throw new RoCode.Utils.AsyncError();
                     return;
                 } else if (hardwareTime && hardwareTime === scope.stamp) {
                     delete scope.isStart;
@@ -1092,14 +1092,14 @@ Entry.CODEino.getBlocks = function() {
                     delete scope.stamp;
                     return DIGITAL ? DIGITAL[port] || 0 : 0;
                 } else {
-                    throw new Entry.Utils.AsyncError();
+                    throw new RoCode.Utils.AsyncError();
                     return;
                 }
             },
         },
         CODEino_set_digital_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1122,8 +1122,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: '13',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1132,8 +1132,8 @@ Entry.CODEino.getBlocks = function() {
                         [Lang.Blocks.ARDUINO_off, '0'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1156,20 +1156,20 @@ Entry.CODEino.getBlocks = function() {
                 var port = script.getNumberValue('PORT');
                 var value = script.getNumberField('VALUE');
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
-                if (Entry.CODEino.LAST_ORDER_PORT === port) {
-                    Entry.hw.update();
+                if (RoCode.CODEino.LAST_ORDER_PORT === port) {
+                    RoCode.hw.update();
                 } else {
-                    Entry.CODEino.LAST_ORDER_PORT = port;
+                    RoCode.CODEino.LAST_ORDER_PORT = port;
                 }
 
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.CODEino.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.CODEino.sensorTypes.DIGITAL,
                     data: value,
-                    time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.DIGITAL),
+                    time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.DIGITAL),
                 };
 
                 return script.callReturn();
@@ -1194,8 +1194,8 @@ Entry.CODEino.getBlocks = function() {
             },
         },
         CODEino_set_pwm_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1240,18 +1240,18 @@ Entry.CODEino.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                if (Entry.CODEino.LAST_ORDER_PORT === port) {
-                    Entry.hw.update();
+                if (RoCode.CODEino.LAST_ORDER_PORT === port) {
+                    RoCode.hw.update();
                 } else {
-                    Entry.CODEino.LAST_ORDER_PORT = port;
+                    RoCode.CODEino.LAST_ORDER_PORT = port;
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.CODEino.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.CODEino.sensorTypes.PWM,
                     data: value,
-                    time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.PWM),
+                    time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.PWM),
                 };
                 return script.callReturn();
             },
@@ -1275,8 +1275,8 @@ Entry.CODEino.getBlocks = function() {
             },
         },
         CODEino_convert_scale: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1363,8 +1363,8 @@ Entry.CODEino.getBlocks = function() {
             },
         },
         CODEino_set_rgb_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1377,8 +1377,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: '17',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1407,24 +1407,24 @@ Entry.CODEino.getBlocks = function() {
 
                 value = Math.min(255, value);
                 value = Math.max(0, value);
-                Entry.CODEino.LED_VALUES[port - 17] = value;
+                RoCode.CODEino.LED_VALUES[port - 17] = value;
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                if (Entry.CODEino.LAST_ORDER_PORT === 18) {
-                    Entry.hw.update();
+                if (RoCode.CODEino.LAST_ORDER_PORT === 18) {
+                    RoCode.hw.update();
                 } else {
-                    Entry.CODEino.LAST_ORDER_PORT = 18;
+                    RoCode.CODEino.LAST_ORDER_PORT = 18;
                 }
-                Entry.hw.sendQueue['SET'][18] = {
-                    type: Entry.CODEino.sensorTypes.RGBLED_PIN,
+                RoCode.hw.sendQueue['SET'][18] = {
+                    type: RoCode.CODEino.sensorTypes.RGBLED_PIN,
                     data: {
-                        r: Entry.CODEino.LED_VALUES[0],
-                        g: Entry.CODEino.LED_VALUES[1],
-                        b: Entry.CODEino.LED_VALUES[2],
+                        r: RoCode.CODEino.LED_VALUES[0],
+                        g: RoCode.CODEino.LED_VALUES[1],
+                        b: RoCode.CODEino.LED_VALUES[2],
                     },
-                    time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.RGBLED_PIN),
+                    time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.RGBLED_PIN),
                 };
                 return script.callReturn();
             },
@@ -1448,8 +1448,8 @@ Entry.CODEino.getBlocks = function() {
             },
         },
         CODEino_set_rgb_add_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1462,8 +1462,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: '17',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1489,33 +1489,33 @@ Entry.CODEino.getBlocks = function() {
                 var port = script.getNumberField('PORT', script);
                 var value = script.getNumberValue('VALUE', script);
 
-                value += Entry.CODEino.LED_VALUES[port - 17];
+                value += RoCode.CODEino.LED_VALUES[port - 17];
                 value = Math.min(255, value);
                 value = Math.max(0, value);
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                if (Entry.CODEino.LAST_ORDER_PORT === 18) {
-                    Entry.hw.update();
+                if (RoCode.CODEino.LAST_ORDER_PORT === 18) {
+                    RoCode.hw.update();
                 } else {
-                    Entry.CODEino.LAST_ORDER_PORT = 18;
+                    RoCode.CODEino.LAST_ORDER_PORT = 18;
                 }
-                Entry.hw.sendQueue['SET'][18] = {
-                    type: Entry.CODEino.sensorTypes.RGBLED_PIN,
+                RoCode.hw.sendQueue['SET'][18] = {
+                    type: RoCode.CODEino.sensorTypes.RGBLED_PIN,
                     data: {
-                        r: Entry.CODEino.LED_VALUES[0],
-                        g: Entry.CODEino.LED_VALUES[1],
-                        b: Entry.CODEino.LED_VALUES[2],
+                        r: RoCode.CODEino.LED_VALUES[0],
+                        g: RoCode.CODEino.LED_VALUES[1],
+                        b: RoCode.CODEino.LED_VALUES[2],
                     },
-                    time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.RGBLED_PIN),
+                    time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.RGBLED_PIN),
                 };
                 return script.callReturn();
             },
         },
         CODEino_rgb_set_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1540,9 +1540,9 @@ Entry.CODEino.getBlocks = function() {
             isNotFor: ['CODEino'],
             func: function(sprite, script) {
                 var value = script.getStringField('VALUE');
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
-                Entry.CODEino.LED_VALUES = [
+                RoCode.CODEino.LED_VALUES = [
                     parseInt(value.substr(1, 2), 16),
                     parseInt(value.substr(3, 2), 16),
                     parseInt(value.substr(5, 2), 16),
@@ -1551,27 +1551,27 @@ Entry.CODEino.getBlocks = function() {
                 if (!sq['SET']) {
                     sq['SET'] = {};
                 }
-                if (Entry.CODEino.LAST_ORDER_PORT === 18) {
-                    Entry.hw.update();
+                if (RoCode.CODEino.LAST_ORDER_PORT === 18) {
+                    RoCode.hw.update();
                 } else {
-                    Entry.CODEino.LAST_ORDER_PORT = 18;
+                    RoCode.CODEino.LAST_ORDER_PORT = 18;
                 }
                 sq['SET'][18] = {
-                    type: Entry.CODEino.sensorTypes.RGBLED_PIN,
+                    type: RoCode.CODEino.sensorTypes.RGBLED_PIN,
                     data: {
-                        r: Entry.CODEino.LED_VALUES[0],
-                        g: Entry.CODEino.LED_VALUES[1],
-                        b: Entry.CODEino.LED_VALUES[2],
+                        r: RoCode.CODEino.LED_VALUES[0],
+                        g: RoCode.CODEino.LED_VALUES[1],
+                        b: RoCode.CODEino.LED_VALUES[2],
                     },
-                    time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.RGBLED_PIN),
+                    time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.RGBLED_PIN),
                 };
 
                 return script.callReturn();
             },
         },
         CODEino_set_rgb_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1589,25 +1589,25 @@ Entry.CODEino.getBlocks = function() {
             class: 'CODEino_RGBLED_mode',
             isNotFor: ['CODEino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
-                Entry.CODEino.LED_VALUES = [0, 0, 0];
+                RoCode.CODEino.LED_VALUES = [0, 0, 0];
                 if (!sq['SET']) {
                     sq['SET'] = {};
                 }
-                if (Entry.CODEino.LAST_ORDER_PORT === 18) {
-                    Entry.hw.update();
+                if (RoCode.CODEino.LAST_ORDER_PORT === 18) {
+                    RoCode.hw.update();
                 } else {
-                    Entry.CODEino.LAST_ORDER_PORT = 18;
+                    RoCode.CODEino.LAST_ORDER_PORT = 18;
                 }
                 sq['SET'][18] = {
-                    type: Entry.CODEino.sensorTypes.RGBLED_PIN,
+                    type: RoCode.CODEino.sensorTypes.RGBLED_PIN,
                     data: {
-                        r: Entry.CODEino.LED_VALUES[0],
-                        g: Entry.CODEino.LED_VALUES[1],
-                        b: Entry.CODEino.LED_VALUES[2],
+                        r: RoCode.CODEino.LED_VALUES[0],
+                        g: RoCode.CODEino.LED_VALUES[1],
+                        b: RoCode.CODEino.LED_VALUES[2],
                     },
-                    time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.RGBLED_PIN),
+                    time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.RGBLED_PIN),
                 };
                 return script.callReturn();
             },
@@ -1632,8 +1632,8 @@ Entry.CODEino.getBlocks = function() {
         },
         CODEino_set__led_by_rgb: {
             // r값 g값 b값 수동으로 주는 블록
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1682,7 +1682,7 @@ Entry.CODEino.getBlocks = function() {
             class: 'CODEino_RGBLED_mode',
             isNotFor: ['CODEino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 let values = [
                     script.getNumberValue('rValue'),
                     script.getNumberValue('gValue'),
@@ -1690,34 +1690,34 @@ Entry.CODEino.getBlocks = function() {
                 ];
                 for (let i = 0; i < values.length; ++i) {
                     if (values[i] >= 0 && values[i] <= 255) {
-                        Entry.CODEino.LED_VALUES[i] = values[i];
+                        RoCode.CODEino.LED_VALUES[i] = values[i];
                     }
                 }
 
                 if (!sq['SET']) {
                     sq['SET'] = {};
                 }
-                if (Entry.CODEino.LAST_ORDER_PORT === 18) {
-                    Entry.hw.update();
+                if (RoCode.CODEino.LAST_ORDER_PORT === 18) {
+                    RoCode.hw.update();
                 } else {
-                    Entry.CODEino.LAST_ORDER_PORT = 18;
+                    RoCode.CODEino.LAST_ORDER_PORT = 18;
                 }
                 sq['SET'][18] = {
-                    type: Entry.CODEino.sensorTypes.RGBLED_PIN,
+                    type: RoCode.CODEino.sensorTypes.RGBLED_PIN,
                     data: {
-                        r: Entry.CODEino.LED_VALUES[0],
-                        g: Entry.CODEino.LED_VALUES[1],
-                        b: Entry.CODEino.LED_VALUES[2],
+                        r: RoCode.CODEino.LED_VALUES[0],
+                        g: RoCode.CODEino.LED_VALUES[1],
+                        b: RoCode.CODEino.LED_VALUES[2],
                     },
-                    time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.RGBLED_PIN),
+                    time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.RGBLED_PIN),
                 };
 
                 return script.callReturn();
             },
         },
         CODEino_led_by_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1735,26 +1735,26 @@ Entry.CODEino.getBlocks = function() {
             class: 'CODEino_RGBLED_mode',
             isNotFor: ['CODEino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
-                Entry.CODEino.LED_VALUES = [100, 100, 100];
+                RoCode.CODEino.LED_VALUES = [100, 100, 100];
 
                 if (!sq['SET']) {
                     sq['SET'] = {};
                 }
-                if (Entry.CODEino.LAST_ORDER_PORT === 18) {
-                    Entry.hw.update();
+                if (RoCode.CODEino.LAST_ORDER_PORT === 18) {
+                    RoCode.hw.update();
                 } else {
-                    Entry.CODEino.LAST_ORDER_PORT = 18;
+                    RoCode.CODEino.LAST_ORDER_PORT = 18;
                 }
                 sq['SET'][18] = {
-                    type: Entry.CODEino.sensorTypes.RGBLED_PIN,
+                    type: RoCode.CODEino.sensorTypes.RGBLED_PIN,
                     data: {
-                        r: Entry.CODEino.LED_VALUES[0],
-                        g: Entry.CODEino.LED_VALUES[1],
-                        b: Entry.CODEino.LED_VALUES[2],
+                        r: RoCode.CODEino.LED_VALUES[0],
+                        g: RoCode.CODEino.LED_VALUES[1],
+                        b: RoCode.CODEino.LED_VALUES[2],
                     },
-                    time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.RGBLED_PIN),
+                    time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.RGBLED_PIN),
                 };
 
                 return script.callReturn();
@@ -1811,8 +1811,8 @@ Entry.CODEino.getBlocks = function() {
         },
 
         CODEino_default_neopixel_on: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1837,7 +1837,7 @@ Entry.CODEino.getBlocks = function() {
             isNotFor: ['CODEino'],
             func: function(sprite, script) {
                 var value = script.getStringField('VALUE');
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = 11;
 
                 let red = parseInt(value.substr(1, 2), 16);
@@ -1847,33 +1847,33 @@ Entry.CODEino.getBlocks = function() {
                     sq.SET = {};
                 }
 
-                Entry.CODEino.DEFAULT_NEOPIXEL_RED_VALUE = red;
-                Entry.CODEino.DEFAULT_NEOPIXEL_GREEN_VALUE = green;
-                Entry.CODEino.DEFAULT_NEOPIXEL_BLUE_VALUE = blue;
+                RoCode.CODEino.DEFAULT_NEOPIXEL_RED_VALUE = red;
+                RoCode.CODEino.DEFAULT_NEOPIXEL_GREEN_VALUE = green;
+                RoCode.CODEino.DEFAULT_NEOPIXEL_BLUE_VALUE = blue;
 
-                if (Entry.CODEino.LAST_ORDER_PORT === port) {
-                    Entry.hw.update();
+                if (RoCode.CODEino.LAST_ORDER_PORT === port) {
+                    RoCode.hw.update();
                 } else {
-                    Entry.CODEino.LAST_ORDER_PORT = port;
+                    RoCode.CODEino.LAST_ORDER_PORT = port;
                 }
 
                 sq.SET[port] = {
-                    type: Entry.CODEino.sensorTypes.DEFAULT_NEOPIXEL,
+                    type: RoCode.CODEino.sensorTypes.DEFAULT_NEOPIXEL,
                     data: {
-                        rValue: Entry.CODEino.DEFAULT_NEOPIXEL_RED_VALUE,
-                        gValue: Entry.CODEino.DEFAULT_NEOPIXEL_GREEN_VALUE,
-                        bValue: Entry.CODEino.DEFAULT_NEOPIXEL_BLUE_VALUE,
-                        brightness: Entry.CODEino.DEFAULT_NEOPIXEL_BRIGHTNESS_VALUE,
+                        rValue: RoCode.CODEino.DEFAULT_NEOPIXEL_RED_VALUE,
+                        gValue: RoCode.CODEino.DEFAULT_NEOPIXEL_GREEN_VALUE,
+                        bValue: RoCode.CODEino.DEFAULT_NEOPIXEL_BLUE_VALUE,
+                        brightness: RoCode.CODEino.DEFAULT_NEOPIXEL_BRIGHTNESS_VALUE,
                     },
-                    time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.DEFAULT_NEOPIXEL),
+                    time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.DEFAULT_NEOPIXEL),
                 };
 
                 return script.callReturn();
             },
         },
         CODEino_default_neopixel_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1891,39 +1891,39 @@ Entry.CODEino.getBlocks = function() {
             class: 'CODEino_default_neopixel_mode',
             isNotFor: ['CODEino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var port = 11;
                 if (!sq.SET) {
                     sq.SET = {};
                 }
-                Entry.CODEino.DEFAULT_NEOPIXEL_RED_VALUE = 0;
-                Entry.CODEino.DEFAULT_NEOPIXEL_GREEN_VALUE = 0;
-                Entry.CODEino.DEFAULT_NEOPIXEL_BLUE_VALUE = 0;
+                RoCode.CODEino.DEFAULT_NEOPIXEL_RED_VALUE = 0;
+                RoCode.CODEino.DEFAULT_NEOPIXEL_GREEN_VALUE = 0;
+                RoCode.CODEino.DEFAULT_NEOPIXEL_BLUE_VALUE = 0;
 
-                if (Entry.CODEino.LAST_ORDER_PORT === port) {
-                    Entry.hw.update();
+                if (RoCode.CODEino.LAST_ORDER_PORT === port) {
+                    RoCode.hw.update();
                 } else {
-                    Entry.CODEino.LAST_ORDER_PORT = port;
+                    RoCode.CODEino.LAST_ORDER_PORT = port;
                 }
 
                 sq.SET[port] = {
-                    type: Entry.CODEino.sensorTypes.DEFAULT_NEOPIXEL,
+                    type: RoCode.CODEino.sensorTypes.DEFAULT_NEOPIXEL,
                     data: {
-                        rValue: Entry.CODEino.DEFAULT_NEOPIXEL_RED_VALUE,
-                        gValue: Entry.CODEino.DEFAULT_NEOPIXEL_GREEN_VALUE,
-                        bValue: Entry.CODEino.DEFAULT_NEOPIXEL_BLUE_VALUE,
-                        brightness: Entry.CODEino.DEFAULT_NEOPIXEL_BRIGHTNESS_VALUE,
+                        rValue: RoCode.CODEino.DEFAULT_NEOPIXEL_RED_VALUE,
+                        gValue: RoCode.CODEino.DEFAULT_NEOPIXEL_GREEN_VALUE,
+                        bValue: RoCode.CODEino.DEFAULT_NEOPIXEL_BLUE_VALUE,
+                        brightness: RoCode.CODEino.DEFAULT_NEOPIXEL_BRIGHTNESS_VALUE,
                     },
-                    time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.DEFAULT_NEOPIXEL),
+                    time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.DEFAULT_NEOPIXEL),
                 };
 
                 return script.callReturn();
             },
         },
         CODEino_default_neopixel_setBrightness: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1955,38 +1955,38 @@ Entry.CODEino.getBlocks = function() {
             isNotFor: ['CODEino'],
             func: function(sprite, script) {
                 var value = script.getNumberValue('VALUE', script);
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var port = 11;
 
                 if (!sq.SET) {
                     sq.SET = {};
                 }
-                Entry.CODEino.DEFAULT_NEOPIXEL_BRIGHTNESS_VALUE = value;
+                RoCode.CODEino.DEFAULT_NEOPIXEL_BRIGHTNESS_VALUE = value;
 
-                if (Entry.CODEino.LAST_ORDER_PORT === port) {
-                    Entry.hw.update();
+                if (RoCode.CODEino.LAST_ORDER_PORT === port) {
+                    RoCode.hw.update();
                 } else {
-                    Entry.CODEino.LAST_ORDER_PORT = port;
+                    RoCode.CODEino.LAST_ORDER_PORT = port;
                 }
 
                 sq.SET[port] = {
-                    type: Entry.CODEino.sensorTypes.DEFAULT_NEOPIXEL,
+                    type: RoCode.CODEino.sensorTypes.DEFAULT_NEOPIXEL,
                     data: {
-                        rValue: Entry.CODEino.DEFAULT_NEOPIXEL_RED_VALUE,
-                        gValue: Entry.CODEino.DEFAULT_NEOPIXEL_GREEN_VALUE,
-                        bValue: Entry.CODEino.DEFAULT_NEOPIXEL_BLUE_VALUE,
-                        brightness: Entry.CODEino.DEFAULT_NEOPIXEL_BRIGHTNESS_VALUE,
+                        rValue: RoCode.CODEino.DEFAULT_NEOPIXEL_RED_VALUE,
+                        gValue: RoCode.CODEino.DEFAULT_NEOPIXEL_GREEN_VALUE,
+                        bValue: RoCode.CODEino.DEFAULT_NEOPIXEL_BLUE_VALUE,
+                        brightness: RoCode.CODEino.DEFAULT_NEOPIXEL_BRIGHTNESS_VALUE,
                     },
-                    time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.DEFAULT_NEOPIXEL),
+                    time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.DEFAULT_NEOPIXEL),
                 };
 
                 return script.callReturn();
             },
         },
         CODEino_default_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2035,13 +2035,13 @@ Entry.CODEino.getBlocks = function() {
             class: 'CODEino_default_buzzer_mode',
             isNotFor: ['CODEino'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 12;
 
                 if (!script.isStart) {
                     let note = script.getValue('NOTE', script);
-                    if (!Entry.Utils.isNumber(note)) {
-                        note = Entry.CODEino.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note)) {
+                        note = RoCode.CODEino.toneTable[note];
                     }
 
                     if (note < 0) {
@@ -2060,15 +2060,15 @@ Entry.CODEino.getBlocks = function() {
                         sq.SET = {};
                     }
 
-                    if (Entry.CODEino.LAST_ORDER_PORT === port) {
-                        Entry.hw.update();
+                    if (RoCode.CODEino.LAST_ORDER_PORT === port) {
+                        RoCode.hw.update();
                     } else {
-                        Entry.CODEino.LAST_ORDER_PORT = port;
+                        RoCode.CODEino.LAST_ORDER_PORT = port;
                     }
 
                     if (duration === 0) {
                         sq.SET[port] = {
-                            type: Entry.CODEino.sensorTypes.DEFAULT_BUZZER,
+                            type: RoCode.CODEino.sensorTypes.DEFAULT_BUZZER,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -2085,7 +2085,7 @@ Entry.CODEino.getBlocks = function() {
                     let value = 0;
 
                     if (note != 0) {
-                        value = Entry.CODEino.toneMap[note][octave];
+                        value = RoCode.CODEino.toneMap[note][octave];
                     }
 
                     duration = duration * 1000;
@@ -2093,7 +2093,7 @@ Entry.CODEino.getBlocks = function() {
                     script.timeFlag = 1;
 
                     sq.SET[port] = {
-                        type: Entry.CODEino.sensorTypes.DEFAULT_BUZZER,
+                        type: RoCode.CODEino.sensorTypes.DEFAULT_BUZZER,
                         data: {
                             value,
                             duration,
@@ -2111,18 +2111,18 @@ Entry.CODEino.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
                     sq.SET[port] = {
-                        type: Entry.CODEino.sensorTypes.DEFAULT_BUZZER,
+                        type: RoCode.CODEino.sensorTypes.DEFAULT_BUZZER,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         CODEino_custom_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2144,8 +2144,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: '12',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2194,13 +2194,13 @@ Entry.CODEino.getBlocks = function() {
             class: 'CODEino_custom_buzzer_mode',
             isNotFor: ['CODEino'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = script.getNumberValue('PORT');
 
                 if (!script.isStart) {
                     let note = script.getValue('NOTE', script);
-                    if (!Entry.Utils.isNumber(note)) {
-                        note = Entry.CODEino.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note)) {
+                        note = RoCode.CODEino.toneTable[note];
                     }
 
                     if (note < 0) {
@@ -2219,15 +2219,15 @@ Entry.CODEino.getBlocks = function() {
                         sq.SET = {};
                     }
 
-                    if (Entry.CODEino.LAST_ORDER_PORT === port) {
-                        Entry.hw.update();
+                    if (RoCode.CODEino.LAST_ORDER_PORT === port) {
+                        RoCode.hw.update();
                     } else {
-                        Entry.CODEino.LAST_ORDER_PORT = port;
+                        RoCode.CODEino.LAST_ORDER_PORT = port;
                     }
 
                     if (duration === 0) {
                         sq.SET[port] = {
-                            type: Entry.CODEino.sensorTypes.CUSTOM_BUZZER,
+                            type: RoCode.CODEino.sensorTypes.CUSTOM_BUZZER,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -2244,7 +2244,7 @@ Entry.CODEino.getBlocks = function() {
                     let value = 0;
 
                     if (note != 0) {
-                        value = Entry.CODEino.toneMap[note][octave];
+                        value = RoCode.CODEino.toneMap[note][octave];
                     }
 
                     duration = duration * 1000;
@@ -2252,7 +2252,7 @@ Entry.CODEino.getBlocks = function() {
                     script.timeFlag = 1;
 
                     sq.SET[port] = {
-                        type: Entry.CODEino.sensorTypes.CUSTOM_BUZZER,
+                        type: RoCode.CODEino.sensorTypes.CUSTOM_BUZZER,
                         data: {
                             value,
                             duration,
@@ -2270,18 +2270,18 @@ Entry.CODEino.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
                     sq.SET[port] = {
-                        type: Entry.CODEino.sensorTypes.CUSTOM_BUZZER,
+                        type: RoCode.CODEino.sensorTypes.CUSTOM_BUZZER,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         CODEino_tone_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -2305,8 +2305,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2321,8 +2321,8 @@ Entry.CODEino.getBlocks = function() {
             },
         },
         CODEino_octave_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -2339,8 +2339,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2355,8 +2355,8 @@ Entry.CODEino.getBlocks = function() {
             },
         },
         CODEino_custom_neopixel_on: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2378,8 +2378,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: '10',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2398,7 +2398,7 @@ Entry.CODEino.getBlocks = function() {
             class: 'CODEino_custom_neopixel_mode',
             isNotFor: ['CODEino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT');
 
                 if (!sq.SET) {
@@ -2406,13 +2406,13 @@ Entry.CODEino.getBlocks = function() {
                 }
 
                 sq.SET[port] = {
-                    type: Entry.CODEino.sensorTypes.CUSTOM_NEOPIXEL_POWER,
+                    type: RoCode.CODEino.sensorTypes.CUSTOM_NEOPIXEL_POWER,
                     data: {
                         isOn: 1,
                         brightness: 22,
                     },
-                    time: Entry.CODEino.getSensorTime(
-                        Entry.CODEino.sensorTypes.CUSTOM_NEOPIXEL_POWER
+                    time: RoCode.CODEino.getSensorTime(
+                        RoCode.CODEino.sensorTypes.CUSTOM_NEOPIXEL_POWER
                     ),
                 };
 
@@ -2420,8 +2420,8 @@ Entry.CODEino.getBlocks = function() {
             },
         },
         CODEino_custom_neopixel_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2439,19 +2439,19 @@ Entry.CODEino.getBlocks = function() {
             class: 'CODEino_custom_neopixel_mode',
             isNotFor: ['CODEino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 if (!sq.SET) {
                     sq.SET = {};
                 }
-                var port = Entry.CODEino.customNeoPixelPin + 9;
+                var port = RoCode.CODEino.customNeoPixelPin + 9;
                 sq.SET[port] = {
-                    type: Entry.CODEino.sensorTypes.CUSTOM_NEOPIXEL_POWER,
+                    type: RoCode.CODEino.sensorTypes.CUSTOM_NEOPIXEL_POWER,
                     data: {
                         isOn: 0,
-                        brightness: Entry.CODEino.CUSTOM_NEOPIXEL_BRIGHTNESS_VALUE,
+                        brightness: RoCode.CODEino.CUSTOM_NEOPIXEL_BRIGHTNESS_VALUE,
                     },
-                    time: Entry.CODEino.getSensorTime(
-                        Entry.CODEino.sensorTypes.CUSTOM_NEOPIXEL_POWER
+                    time: RoCode.CODEino.getSensorTime(
+                        RoCode.CODEino.sensorTypes.CUSTOM_NEOPIXEL_POWER
                     ),
                 };
 
@@ -2459,8 +2459,8 @@ Entry.CODEino.getBlocks = function() {
             },
         },
         CODEino_custom_neopixel_setBrightness: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2492,20 +2492,20 @@ Entry.CODEino.getBlocks = function() {
             isNotFor: ['CODEino'],
             func: function(sprite, script) {
                 var value = script.getNumberValue('VALUE', script);
-                var sq = Entry.hw.sendQueue;
-                var port = Entry.CODEino.customNeoPixelPin + 10;
+                var sq = RoCode.hw.sendQueue;
+                var port = RoCode.CODEino.customNeoPixelPin + 10;
                 if (!sq.SET) {
                     sq.SET = {};
                 }
-                Entry.CODEino.CUSTOM_NEOPIXEL_BRIGHTNESS_VALUE = value;
+                RoCode.CODEino.CUSTOM_NEOPIXEL_BRIGHTNESS_VALUE = value;
                 sq.SET[port] = {
-                    type: Entry.CODEino.sensorTypes.CUSTOM_NEOPIXEL_POWER,
+                    type: RoCode.CODEino.sensorTypes.CUSTOM_NEOPIXEL_POWER,
                     data: {
                         isOn: 2,
-                        brightness: Entry.CODEino.CUSTOM_NEOPIXEL_BRIGHTNESS_VALUE,
+                        brightness: RoCode.CODEino.CUSTOM_NEOPIXEL_BRIGHTNESS_VALUE,
                     },
-                    time: Entry.CODEino.getSensorTime(
-                        Entry.CODEino.sensorTypes.CUSTOM_NEOPIXEL_POWER
+                    time: RoCode.CODEino.getSensorTime(
+                        RoCode.CODEino.sensorTypes.CUSTOM_NEOPIXEL_POWER
                     ),
                 };
 
@@ -2513,8 +2513,8 @@ Entry.CODEino.getBlocks = function() {
             },
         },
         CODEino_custom_neopixel_set_led_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2545,8 +2545,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Color',
@@ -2572,8 +2572,8 @@ Entry.CODEino.getBlocks = function() {
                 let led = script.getNumberValue('LED', script);
 
                 var value = script.getStringField('COLOR');
-                var sq = Entry.hw.sendQueue;
-                var port = Entry.CODEino.customNeoPixelPin + led;
+                var sq = RoCode.hw.sendQueue;
+                var port = RoCode.CODEino.customNeoPixelPin + led;
 
                 let red = parseInt(value.substr(1, 2), 16);
                 let green = parseInt(value.substr(3, 2), 16);
@@ -2582,22 +2582,22 @@ Entry.CODEino.getBlocks = function() {
                     sq.SET = {};
                 }
                 sq.SET[port] = {
-                    type: Entry.CODEino.sensorTypes.CUSTOM_NEOPIXEL_LED_HANDLE,
+                    type: RoCode.CODEino.sensorTypes.CUSTOM_NEOPIXEL_LED_HANDLE,
                     data: {
                         r: red,
                         g: green,
                         b: blue,
                     },
-                    time: Entry.CODEino.getSensorTime(
-                        Entry.CODEino.sensorTypes.CUSTOM_NEOPIXEL_LED_HANDLE
+                    time: RoCode.CODEino.getSensorTime(
+                        RoCode.CODEino.sensorTypes.CUSTOM_NEOPIXEL_LED_HANDLE
                     ),
                 };
                 return script.callReturn();
             },
         },
         CODEino_custom_neopixel_set_led_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2616,8 +2616,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2638,30 +2638,30 @@ Entry.CODEino.getBlocks = function() {
             func: function(sprite, script) {
                 let led = script.getNumberValue('LED', script);
 
-                var sq = Entry.hw.sendQueue;
-                var port = Entry.CODEino.customNeoPixelPin + led;
+                var sq = RoCode.hw.sendQueue;
+                var port = RoCode.CODEino.customNeoPixelPin + led;
 
                 if (!sq.SET) {
                     sq.SET = {};
                 }
 
                 sq.SET[port] = {
-                    type: Entry.CODEino.sensorTypes.CUSTOM_NEOPIXEL_LED_HANDLE,
+                    type: RoCode.CODEino.sensorTypes.CUSTOM_NEOPIXEL_LED_HANDLE,
                     data: {
                         r: 0,
                         g: 0,
                         b: 0,
                     },
-                    time: Entry.CODEino.getSensorTime(
-                        Entry.CODEino.sensorTypes.CUSTOM_NEOPIXEL_LED_HANDLE
+                    time: RoCode.CODEino.getSensorTime(
+                        RoCode.CODEino.sensorTypes.CUSTOM_NEOPIXEL_LED_HANDLE
                     ),
                 };
                 return script.callReturn();
             },
         },
         CODEino_set_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2683,8 +2683,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: '7',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2709,7 +2709,7 @@ Entry.CODEino.getBlocks = function() {
             class: 'CODEino_servo',
             isNotFor: ['CODEino'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = script.getNumberValue('PORT', script);
                 let value = script.getNumberValue('VALUE', script);
                 value = Math.min(180, value);
@@ -2718,25 +2718,25 @@ Entry.CODEino.getBlocks = function() {
                     sq.SET = {};
                 }
 
-                if (Entry.CODEino.LAST_ORDER_PORT === port) {
-                    Entry.hw.update();
-                    delete Entry.hw.sendQueue['SET'][port];
+                if (RoCode.CODEino.LAST_ORDER_PORT === port) {
+                    RoCode.hw.update();
+                    delete RoCode.hw.sendQueue['SET'][port];
                 } else {
-                    Entry.CODEino.LAST_ORDER_PORT = port;
+                    RoCode.CODEino.LAST_ORDER_PORT = port;
                 }
                 sq.SET[port] = {
-                    type: Entry.CODEino.sensorTypes.SERVO_PIN,
+                    type: RoCode.CODEino.sensorTypes.SERVO_PIN,
                     data: value,
-                    time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.SERVO_PIN),
+                    time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.SERVO_PIN),
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
         },
 
         CODEino_get_ultrasonic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -2759,8 +2759,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 10,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     accept: 'string',
@@ -2780,8 +2780,8 @@ Entry.CODEino.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 10,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2799,18 +2799,18 @@ Entry.CODEino.getBlocks = function() {
                 const port1 = script.getNumberValue('PORT1', script);
                 const port2 = script.getNumberValue('PORT2', script);
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port1] = {
-                    type: Entry.CODEino.sensorTypes.ULTRASONIC,
+                RoCode.hw.sendQueue.SET[port1] = {
+                    type: RoCode.CODEino.sensorTypes.ULTRASONIC,
                     data: port2,
-                    time: Entry.CODEino.getSensorTime(Entry.CODEino.sensorTypes.ULTRASONIC),
+                    time: RoCode.CODEino.getSensorTime(RoCode.CODEino.sensorTypes.ULTRASONIC),
                 };
-                return Entry.hw.portData.ULTRASONIC || 0;
+                return RoCode.hw.portData.ULTRASONIC || 0;
             },
         },
     };
 };
 
-module.exports = Entry.CODEino;
+module.exports = RoCode.CODEino;

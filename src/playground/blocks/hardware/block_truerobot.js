@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.trueRobot = {
+RoCode.trueRobot = {
     id: '19.1',
     name: 'trueRobot',
     url: 'http://www.i-screammedia.co.kr',
@@ -28,55 +28,55 @@ Entry.trueRobot = {
         linePort: 0xf0,
     },
     setZero: function() {
-        Entry.hw.sendQueue['SET'] = {};
+        RoCode.hw.sendQueue['SET'] = {};
 
-        Entry.hw.sendQueue.leftValue = 0;
-        Entry.hw.sendQueue.rightValue = 0;
-        Entry.hw.sendQueue['SET'][Entry.trueRobot.PORT_MAP.dualmotor] = {
-            port: Entry.trueRobot.PORT_MAP.dualPort,
+        RoCode.hw.sendQueue.leftValue = 0;
+        RoCode.hw.sendQueue.rightValue = 0;
+        RoCode.hw.sendQueue['SET'][RoCode.trueRobot.PORT_MAP.dualmotor] = {
+            port: RoCode.trueRobot.PORT_MAP.dualPort,
             dataA: 0,
             dataB: 0,
             dataC: 1,
         };
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        Entry.hw.sendQueue['SET'][Entry.trueRobot.PORT_MAP.colorled] = {
-            port: Entry.trueRobot.PORT_MAP.colorled,
+        RoCode.hw.sendQueue['SET'][RoCode.trueRobot.PORT_MAP.colorled] = {
+            port: RoCode.trueRobot.PORT_MAP.colorled,
             dataA: 0,
             dataB: 0,
             dataC: 255,
         };
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        Entry.hw.sendQueue['SET'] = {};
-        Entry.hw.sendQueue['SET'][Entry.trueRobot.PORT_MAP.linetracer] = {
-            port: Entry.trueRobot.PORT_MAP.led_line,
+        RoCode.hw.sendQueue['SET'] = {};
+        RoCode.hw.sendQueue['SET'][RoCode.trueRobot.PORT_MAP.linetracer] = {
+            port: RoCode.trueRobot.PORT_MAP.led_line,
             dataA: 0,
             dataB: 0x07,
             dataC: 0x07,
         };
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
         var portArray = new Array(4, 9, 10);
 
-        Entry.hw.sendQueue['SET'] = {};
+        RoCode.hw.sendQueue['SET'] = {};
 
         var settimer = 100;
         for (var port in portArray) {
             var tempport = 0;
 
             setTimeout(function() {
-                Entry.hw.sendQueue['SET'][Entry.trueRobot.PORT_MAP.leds] = {
+                RoCode.hw.sendQueue['SET'][RoCode.trueRobot.PORT_MAP.leds] = {
                     port: portArray[tempport],
                     dataA: 1,
                     dataB: 0x07,
                     dataC: 0x07,
                 };
 
-                Entry.hw.update();
+                RoCode.hw.update();
                 tempport++;
                 settimer = settimer + 30;
             }, settimer);
@@ -185,7 +185,7 @@ Entry.trueRobot = {
     },
 };
 
-Entry.trueRobot.blockMenuBlocks = [
+RoCode.trueRobot.blockMenuBlocks = [
     //truetrue
     'truetrue_get_linesensor',
     'truetrue_get_proxisensor',
@@ -208,12 +208,12 @@ Entry.trueRobot.blockMenuBlocks = [
     'truetrue_set_grid_rotate',
 ];
 
-Entry.trueRobot.getBlocks = function() {
+RoCode.trueRobot.getBlocks = function() {
     return {
         //region TrueTrueRobot 뚜루뚜루로봇
         truetrue_get_linesensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -228,8 +228,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 'Left_Out',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -243,7 +243,7 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_sensor',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('position');
                 return pd[dev];
             },
@@ -263,9 +263,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 'Left_Out',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -273,8 +273,8 @@ Entry.trueRobot.getBlocks = function() {
             },
         },
         truetrue_get_proxisensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -287,8 +287,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 'Left',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -302,10 +302,10 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_sensor',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('position');
 
-                Entry.trueRobot.monitorTemplate.listPorts.temperature = pd[dev];
+                RoCode.trueRobot.monitorTemplate.listPorts.temperature = pd[dev];
 
                 return pd[dev];
             },
@@ -323,9 +323,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 'Left',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -333,8 +333,8 @@ Entry.trueRobot.getBlocks = function() {
             },
         },
         truetrue_get_accsensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -349,8 +349,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 'X-axis',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -364,7 +364,7 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_sensor',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('position');
 
                 return pd[dev];
@@ -385,9 +385,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 'X-axis',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -395,8 +395,8 @@ Entry.trueRobot.getBlocks = function() {
             },
         },
         truetrue_get_bottomcolorsensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -411,8 +411,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 'Red',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -426,7 +426,7 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_sensor',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('position');
 
                 return pd[dev];
@@ -447,9 +447,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 'Red',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -457,8 +457,8 @@ Entry.trueRobot.getBlocks = function() {
             },
         },
         truetrue_get_frontcolorsensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -471,8 +471,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 'Left',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -486,7 +486,7 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_sensor',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('position');
 
                 return pd[dev];
@@ -505,9 +505,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 'Left',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -515,8 +515,8 @@ Entry.trueRobot.getBlocks = function() {
             },
         },
         truetrue_set_singlemotor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -529,8 +529,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 'Left',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -554,7 +554,7 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_control',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var device = Entry.trueRobot.PORT_MAP.singlemotor;
+                var device = RoCode.trueRobot.PORT_MAP.singlemotor;
                 var value = script.getNumberValue('VALUE');
                 value = Math.round(value);
                 value = Math.max(value, -100);
@@ -570,8 +570,8 @@ Entry.trueRobot.getBlocks = function() {
                     direction = 0;
                 }
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 if (!script.isStart) {
@@ -579,15 +579,15 @@ Entry.trueRobot.getBlocks = function() {
                     script.timeFlag = 1;
 
                     if (script.getNumberField('PORT') == 11) {
-                        device = Entry.trueRobot.PORT_MAP.dualmotor;
-                        Entry.hw.sendQueue['SET'][device] = {
+                        device = RoCode.trueRobot.PORT_MAP.dualmotor;
+                        RoCode.hw.sendQueue['SET'][device] = {
                             port: script.getNumberField('PORT'),
                             dataA: value,
                             dataB: value,
                             dataC: 1,
                         };
                     } else {
-                        Entry.hw.sendQueue['SET'][device] = {
+                        RoCode.hw.sendQueue['SET'][device] = {
                             port: script.getNumberField('PORT'),
                             dataA: speed,
                             dataB: direction,
@@ -596,7 +596,7 @@ Entry.trueRobot.getBlocks = function() {
                     }
                     var myTimer = setTimeout(function() {
                         script.timeFlag = 2;
-                    }, Entry.trueRobot.delayTime);
+                    }, RoCode.trueRobot.delayTime);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
@@ -604,7 +604,7 @@ Entry.trueRobot.getBlocks = function() {
                     clearTimeout(myTimer);
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -623,9 +623,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 'Left',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             {
                                 type: 'Block',
@@ -637,8 +637,8 @@ Entry.trueRobot.getBlocks = function() {
             },
         },
         truetrue_set_dualmotor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -673,10 +673,10 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_control',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var device = Entry.trueRobot.PORT_MAP.dualmotor;
+                var device = RoCode.trueRobot.PORT_MAP.dualmotor;
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 if (!script.isStart) {
@@ -698,10 +698,10 @@ Entry.trueRobot.getBlocks = function() {
                     delayValue = Math.max(delayValue, -100);
                     delayValue = Math.min(delayValue, 100);
 
-                    Entry.hw.sendQueue.leftValue = leftValue;
-                    Entry.hw.sendQueue.rightValue = rightValue;
-                    Entry.hw.sendQueue['SET'][device] = {
-                        port: Entry.trueRobot.PORT_MAP.dualPort,
+                    RoCode.hw.sendQueue.leftValue = leftValue;
+                    RoCode.hw.sendQueue.rightValue = rightValue;
+                    RoCode.hw.sendQueue['SET'][device] = {
+                        port: RoCode.trueRobot.PORT_MAP.dualPort,
                         dataA: leftValue,
                         dataB: rightValue,
                         dataC: delayValue,
@@ -712,14 +712,14 @@ Entry.trueRobot.getBlocks = function() {
                     if (timeValue == 0) {
                         var myTimer = setTimeout(function() {
                             script.timeFlag = 2;
-                        }, Entry.trueRobot.delayTime);
+                        }, RoCode.trueRobot.delayTime);
                         return script;
                     }
 
                     timeValue = Math.round(timeValue);
                     timeValue = Math.max(timeValue, -100);
                     timeValue = Math.min(timeValue, 100);
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     timeValue = (60 / fps) * timeValue * 1000;
                     var myTimer = setTimeout(function() {
                         script.timeFlag = 0;
@@ -731,21 +731,21 @@ Entry.trueRobot.getBlocks = function() {
                     clearTimeout(myTimer);
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 } else {
-                    Entry.engine.isContinue = false;
-                    Entry.hw.sendQueue.leftValue = 0;
-                    Entry.hw.sendQueue.rightValue = 0;
-                    Entry.hw.sendQueue['SET'][device] = {
-                        port: Entry.trueRobot.PORT_MAP.dualPort,
+                    RoCode.engine.isContinue = false;
+                    RoCode.hw.sendQueue.leftValue = 0;
+                    RoCode.hw.sendQueue.rightValue = 0;
+                    RoCode.hw.sendQueue['SET'][device] = {
+                        port: RoCode.trueRobot.PORT_MAP.dualPort,
                         dataA: 0,
                         dataB: 0,
                         dataC: 0,
                     };
                     var myTimer = setTimeout(function() {
                         script.timeFlag = 2;
-                    }, Entry.trueRobot.delayTime);
+                    }, RoCode.trueRobot.delayTime);
                     return script;
                 }
             },
@@ -773,8 +773,8 @@ Entry.trueRobot.getBlocks = function() {
             },
         },
         truetrue_set_colorled: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -809,7 +809,7 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_control',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var device = Entry.trueRobot.PORT_MAP.colorled;
+                var device = RoCode.trueRobot.PORT_MAP.colorled;
 
                 var redColor = script.getNumberValue('redColor');
                 redColor = Math.round(redColor);
@@ -826,16 +826,16 @@ Entry.trueRobot.getBlocks = function() {
                 blueColor = Math.max(blueColor, 0);
                 blueColor = Math.min(blueColor, 255);
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][device] = {
-                        port: Entry.trueRobot.PORT_MAP.colorled,
+                    RoCode.hw.sendQueue['SET'][device] = {
+                        port: RoCode.trueRobot.PORT_MAP.colorled,
                         dataA: redColor,
                         dataB: greenColor,
                         dataC: blueColor,
@@ -843,7 +843,7 @@ Entry.trueRobot.getBlocks = function() {
 
                     var myTimer = setTimeout(function() {
                         script.timeFlag = 2;
-                    }, Entry.trueRobot.delayTime);
+                    }, RoCode.trueRobot.delayTime);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
@@ -851,7 +851,7 @@ Entry.trueRobot.getBlocks = function() {
                     clearTimeout(myTimer);
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -879,8 +879,8 @@ Entry.trueRobot.getBlocks = function() {
             },
         },
         truetrue_set_led_proxi: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -892,8 +892,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 9,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -903,8 +903,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -924,20 +924,20 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_control',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var device = Entry.trueRobot.PORT_MAP.leds;
+                var device = RoCode.trueRobot.PORT_MAP.leds;
 
                 var onoff = script.getField('ONOFF');
                 var value = onoff == 'on' ? 1 : 0;
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][device] = {
+                    RoCode.hw.sendQueue['SET'][device] = {
                         port: script.getNumberField('PORT'),
                         dataA: value,
                         dataB: 0x07,
@@ -945,7 +945,7 @@ Entry.trueRobot.getBlocks = function() {
                     };
                     var myTimer = setTimeout(function() {
                         script.timeFlag = 2;
-                    }, Entry.trueRobot.delayTime);
+                    }, RoCode.trueRobot.delayTime);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
@@ -953,7 +953,7 @@ Entry.trueRobot.getBlocks = function() {
                     clearTimeout(myTimer);
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -971,9 +971,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 9,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -983,9 +983,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 'on',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -993,8 +993,8 @@ Entry.trueRobot.getBlocks = function() {
             },
         },
         truetrue_set_led_colorsensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1006,8 +1006,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 3,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1017,8 +1017,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1038,20 +1038,20 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_control',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var device = Entry.trueRobot.PORT_MAP.leds;
+                var device = RoCode.trueRobot.PORT_MAP.leds;
 
                 var onoff = script.getField('ONOFF');
                 var value = onoff == 'on' ? 1 : 0;
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][device] = {
+                    RoCode.hw.sendQueue['SET'][device] = {
                         port: script.getNumberField('PORT'),
                         dataA: value,
                         dataB: 0x07,
@@ -1060,7 +1060,7 @@ Entry.trueRobot.getBlocks = function() {
 
                     var myTimer = setTimeout(function() {
                         script.timeFlag = 2;
-                    }, Entry.trueRobot.delayTime);
+                    }, RoCode.trueRobot.delayTime);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
@@ -1068,7 +1068,7 @@ Entry.trueRobot.getBlocks = function() {
                     clearTimeout(myTimer);
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1086,9 +1086,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 3,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -1098,9 +1098,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 'on',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1108,8 +1108,8 @@ Entry.trueRobot.getBlocks = function() {
             },
         },
         truetrue_set_led_linesensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1121,8 +1121,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1141,28 +1141,28 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_control',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var device = Entry.trueRobot.PORT_MAP.leds;
+                var device = RoCode.trueRobot.PORT_MAP.leds;
 
                 var onoff = script.getField('ONOFF');
                 var value = onoff == 'on' ? 1 : 0;
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][device] = {
-                        port: Entry.trueRobot.PORT_MAP.led_line,
+                    RoCode.hw.sendQueue['SET'][device] = {
+                        port: RoCode.trueRobot.PORT_MAP.led_line,
                         dataA: value,
                         dataB: 0x07,
                         dataC: 0x07,
                     };
                     var myTimer = setTimeout(function() {
                         script.timeFlag = 2;
-                    }, Entry.trueRobot.delayTime);
+                    }, RoCode.trueRobot.delayTime);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
@@ -1170,7 +1170,7 @@ Entry.trueRobot.getBlocks = function() {
                     clearTimeout(myTimer);
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1188,9 +1188,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 'on',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1198,8 +1198,8 @@ Entry.trueRobot.getBlocks = function() {
             },
         },
         truetrue_set_linetracer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1211,8 +1211,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1231,21 +1231,21 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_control',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var device = Entry.trueRobot.PORT_MAP.linetracer;
+                var device = RoCode.trueRobot.PORT_MAP.linetracer;
 
                 var onoff = script.getField('ONOFF');
                 var value = onoff == 'on' ? 1 : 0;
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][device] = {
-                        port: Entry.trueRobot.PORT_MAP.led_line,
+                    RoCode.hw.sendQueue['SET'][device] = {
+                        port: RoCode.trueRobot.PORT_MAP.led_line,
                         dataA: value,
                         dataB: 0x07,
                         dataC: 0x07,
@@ -1253,7 +1253,7 @@ Entry.trueRobot.getBlocks = function() {
 
                     var myTimer = setTimeout(function() {
                         script.timeFlag = 2;
-                    }, Entry.trueRobot.delayTime);
+                    }, RoCode.trueRobot.delayTime);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
@@ -1261,7 +1261,7 @@ Entry.trueRobot.getBlocks = function() {
                     clearTimeout(myTimer);
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1279,9 +1279,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 'on',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1289,8 +1289,8 @@ Entry.trueRobot.getBlocks = function() {
             },
         },
         truetrue_set_head_colorled: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1308,8 +1308,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 101,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1328,7 +1328,7 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_control',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var device = Entry.trueRobot.PORT_MAP.colorled;
+                var device = RoCode.trueRobot.PORT_MAP.colorled;
 
                 var headColor = script.getField('headColor');
 
@@ -1370,16 +1370,16 @@ Entry.trueRobot.getBlocks = function() {
                     blueColor = 0;
                 }
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][device] = {
-                        port: Entry.trueRobot.PORT_MAP.colorled,
+                    RoCode.hw.sendQueue['SET'][device] = {
+                        port: RoCode.trueRobot.PORT_MAP.colorled,
                         dataA: redColor,
                         dataB: greenColor,
                         dataC: blueColor,
@@ -1387,7 +1387,7 @@ Entry.trueRobot.getBlocks = function() {
 
                     var myTimer = setTimeout(function() {
                         script.timeFlag = 2;
-                    }, Entry.trueRobot.delayTime);
+                    }, RoCode.trueRobot.delayTime);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
@@ -1395,7 +1395,7 @@ Entry.trueRobot.getBlocks = function() {
                     clearTimeout(myTimer);
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1419,9 +1419,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 101,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -1429,8 +1429,8 @@ Entry.trueRobot.getBlocks = function() {
             },
         },
         truetrue_set_move: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1442,8 +1442,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 101,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1462,10 +1462,10 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_control',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var device = Entry.trueRobot.PORT_MAP.dualmotor;
+                var device = RoCode.trueRobot.PORT_MAP.dualmotor;
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 if (!script.isStart) {
@@ -1487,10 +1487,10 @@ Entry.trueRobot.getBlocks = function() {
                         delayValue = 0;
                     }
 
-                    Entry.hw.sendQueue.leftValue = leftValue;
-                    Entry.hw.sendQueue.rightValue = rightValue;
-                    Entry.hw.sendQueue['SET'][device] = {
-                        port: Entry.trueRobot.PORT_MAP.dualPort,
+                    RoCode.hw.sendQueue.leftValue = leftValue;
+                    RoCode.hw.sendQueue.rightValue = rightValue;
+                    RoCode.hw.sendQueue['SET'][device] = {
+                        port: RoCode.trueRobot.PORT_MAP.dualPort,
                         dataA: leftValue,
                         dataB: rightValue,
                         dataC: delayValue,
@@ -1498,7 +1498,7 @@ Entry.trueRobot.getBlocks = function() {
 
                     var myTimer = setTimeout(function() {
                         script.timeFlag = 2;
-                    }, Entry.trueRobot.delayTime);
+                    }, RoCode.trueRobot.delayTime);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
@@ -1506,7 +1506,7 @@ Entry.trueRobot.getBlocks = function() {
                     clearTimeout(myTimer);
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1524,9 +1524,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 101,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -1534,8 +1534,8 @@ Entry.trueRobot.getBlocks = function() {
             },
         },
         truetrue_set_sec_move: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1547,8 +1547,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 101,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1572,10 +1572,10 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_control',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var device = Entry.trueRobot.PORT_MAP.dualmotor;
+                var device = RoCode.trueRobot.PORT_MAP.dualmotor;
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 var timeValue = script.getNumberValue('delayValue');
@@ -1604,10 +1604,10 @@ Entry.trueRobot.getBlocks = function() {
                         leftValue = -100;
                         rightValue = -100;
                     }
-                    Entry.hw.sendQueue.leftValue = leftValue;
-                    Entry.hw.sendQueue.rightValue = rightValue;
-                    Entry.hw.sendQueue['SET'][device] = {
-                        port: Entry.trueRobot.PORT_MAP.dualPort,
+                    RoCode.hw.sendQueue.leftValue = leftValue;
+                    RoCode.hw.sendQueue.rightValue = rightValue;
+                    RoCode.hw.sendQueue['SET'][device] = {
+                        port: RoCode.trueRobot.PORT_MAP.dualPort,
                         dataA: leftValue,
                         dataB: rightValue,
                         dataC: delayValue,
@@ -1616,14 +1616,14 @@ Entry.trueRobot.getBlocks = function() {
                     if (timeValue == 0) {
                         var myTimer = setTimeout(function() {
                             script.timeFlag = 2;
-                        }, Entry.trueRobot.delayTime);
+                        }, RoCode.trueRobot.delayTime);
                         return script;
                     }
 
                     timeValue = Math.round(timeValue);
                     timeValue = Math.max(timeValue, -100);
                     timeValue = Math.min(timeValue, 100);
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     timeValue = (60 / fps) * timeValue * 1000;
                     var myTimer = setTimeout(function() {
                         script.timeFlag = 0;
@@ -1635,21 +1635,21 @@ Entry.trueRobot.getBlocks = function() {
                     clearTimeout(myTimer);
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 } else {
-                    Entry.engine.isContinue = false;
-                    Entry.hw.sendQueue.leftValue = 0;
-                    Entry.hw.sendQueue.rightValue = 0;
-                    Entry.hw.sendQueue['SET'][device] = {
-                        port: Entry.trueRobot.PORT_MAP.dualPort,
+                    RoCode.engine.isContinue = false;
+                    RoCode.hw.sendQueue.leftValue = 0;
+                    RoCode.hw.sendQueue.rightValue = 0;
+                    RoCode.hw.sendQueue['SET'][device] = {
+                        port: RoCode.trueRobot.PORT_MAP.dualPort,
                         dataA: 0,
                         dataB: 0,
                         dataC: 0,
                     };
                     var myTimer = setTimeout(function() {
                         script.timeFlag = 2;
-                    }, Entry.trueRobot.delayTime);
+                    }, RoCode.trueRobot.delayTime);
                     return script;
                 }
             },
@@ -1667,9 +1667,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 101,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -1677,8 +1677,8 @@ Entry.trueRobot.getBlocks = function() {
             },
         },
         truetrue_set_rotate: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1690,8 +1690,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 101,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1710,10 +1710,10 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_control',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var device = Entry.trueRobot.PORT_MAP.dualmotor;
+                var device = RoCode.trueRobot.PORT_MAP.dualmotor;
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 if (!script.isStart) {
@@ -1734,10 +1734,10 @@ Entry.trueRobot.getBlocks = function() {
                         rightValue = 100;
                         delayValue = 0;
                     }
-                    Entry.hw.sendQueue.leftValue = leftValue;
-                    Entry.hw.sendQueue.rightValue = rightValue;
-                    Entry.hw.sendQueue['SET'][device] = {
-                        port: Entry.trueRobot.PORT_MAP.dualPort,
+                    RoCode.hw.sendQueue.leftValue = leftValue;
+                    RoCode.hw.sendQueue.rightValue = rightValue;
+                    RoCode.hw.sendQueue['SET'][device] = {
+                        port: RoCode.trueRobot.PORT_MAP.dualPort,
                         dataA: leftValue,
                         dataB: rightValue,
                         dataC: delayValue,
@@ -1745,7 +1745,7 @@ Entry.trueRobot.getBlocks = function() {
 
                     var myTimer = setTimeout(function() {
                         script.timeFlag = 2;
-                    }, Entry.trueRobot.delayTime);
+                    }, RoCode.trueRobot.delayTime);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
@@ -1753,7 +1753,7 @@ Entry.trueRobot.getBlocks = function() {
                     clearTimeout(myTimer);
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1771,9 +1771,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 101,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -1781,8 +1781,8 @@ Entry.trueRobot.getBlocks = function() {
             },
         },
         truetrue_set_sec_rotate: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1794,8 +1794,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 101,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1819,10 +1819,10 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_control',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var device = Entry.trueRobot.PORT_MAP.dualmotor;
+                var device = RoCode.trueRobot.PORT_MAP.dualmotor;
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 var timeValue = script.getNumberValue('delayValue');
@@ -1851,10 +1851,10 @@ Entry.trueRobot.getBlocks = function() {
                         leftValue = -20;
                         rightValue = 50;
                     }
-                    Entry.hw.sendQueue.leftValue = leftValue;
-                    Entry.hw.sendQueue.rightValue = rightValue;
-                    Entry.hw.sendQueue['SET'][device] = {
-                        port: Entry.trueRobot.PORT_MAP.dualPort,
+                    RoCode.hw.sendQueue.leftValue = leftValue;
+                    RoCode.hw.sendQueue.rightValue = rightValue;
+                    RoCode.hw.sendQueue['SET'][device] = {
+                        port: RoCode.trueRobot.PORT_MAP.dualPort,
                         dataA: leftValue,
                         dataB: rightValue,
                         dataC: delayValue,
@@ -1863,14 +1863,14 @@ Entry.trueRobot.getBlocks = function() {
                     if (timeValue == 0) {
                         var myTimer = setTimeout(function() {
                             script.timeFlag = 2;
-                        }, Entry.trueRobot.delayTime);
+                        }, RoCode.trueRobot.delayTime);
                         return script;
                     }
 
                     timeValue = Math.round(timeValue);
                     timeValue = Math.max(timeValue, -100);
                     timeValue = Math.min(timeValue, 100);
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     timeValue = (60 / fps) * timeValue * 1000;
                     var myTimer = setTimeout(function() {
                         script.timeFlag = 0;
@@ -1882,21 +1882,21 @@ Entry.trueRobot.getBlocks = function() {
                     clearTimeout(myTimer);
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 } else {
-                    Entry.engine.isContinue = false;
-                    Entry.hw.sendQueue.leftValue = 0;
-                    Entry.hw.sendQueue.rightValue = 0;
-                    Entry.hw.sendQueue['SET'][device] = {
-                        port: Entry.trueRobot.PORT_MAP.dualPort,
+                    RoCode.engine.isContinue = false;
+                    RoCode.hw.sendQueue.leftValue = 0;
+                    RoCode.hw.sendQueue.rightValue = 0;
+                    RoCode.hw.sendQueue['SET'][device] = {
+                        port: RoCode.trueRobot.PORT_MAP.dualPort,
                         dataA: 0,
                         dataB: 0,
                         dataC: 0,
                     };
                     var myTimer = setTimeout(function() {
                         script.timeFlag = 2;
-                    }, Entry.trueRobot.delayTime);
+                    }, RoCode.trueRobot.delayTime);
                     return script;
                 }
             },
@@ -1914,9 +1914,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 101,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -1925,8 +1925,8 @@ Entry.trueRobot.getBlocks = function() {
         },
 
         truetrue_set_grid_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1951,8 +1951,8 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_control',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var device = Entry.trueRobot.PORT_MAP.dualmotor;
-                var pd = Entry.hw.portData;
+                var device = RoCode.trueRobot.PORT_MAP.dualmotor;
+                var pd = RoCode.hw.portData;
                 var leftValue;
                 var rightValue;
                 var delayValue = 0;
@@ -2018,10 +2018,10 @@ Entry.trueRobot.getBlocks = function() {
                             script.flag = 0;
 
                             if (script.checkCount < gridValue) {
-                                Entry.hw.sendQueue.leftValue = 0;
-                                Entry.hw.sendQueue.rightValue = 0;
-                                Entry.hw.sendQueue['SET'][device] = {
-                                    port: Entry.trueRobot.PORT_MAP.dualPort,
+                                RoCode.hw.sendQueue.leftValue = 0;
+                                RoCode.hw.sendQueue.rightValue = 0;
+                                RoCode.hw.sendQueue['SET'][device] = {
+                                    port: RoCode.trueRobot.PORT_MAP.dualPort,
                                     dataA: 0,
                                     dataB: 0,
                                     dataC: 1,
@@ -2062,13 +2062,13 @@ Entry.trueRobot.getBlocks = function() {
                         return script;
                     }
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
-                    Entry.hw.sendQueue.leftValue = leftValue;
-                    Entry.hw.sendQueue.rightValue = rightValue;
-                    Entry.hw.sendQueue['SET'][device] = {
-                        port: Entry.trueRobot.PORT_MAP.dualPort,
+                    RoCode.hw.sendQueue.leftValue = leftValue;
+                    RoCode.hw.sendQueue.rightValue = rightValue;
+                    RoCode.hw.sendQueue['SET'][device] = {
+                        port: RoCode.trueRobot.PORT_MAP.dualPort,
                         dataA: leftValue,
                         dataB: rightValue,
                         dataC: delayValue,
@@ -2076,7 +2076,7 @@ Entry.trueRobot.getBlocks = function() {
 
                     var myTimer = setTimeout(function() {
                         script.timeFlag = script.bufferFlag;
-                    }, Entry.trueRobot.delayTime / 2);
+                    }, RoCode.trueRobot.delayTime / 2);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
@@ -2086,10 +2086,10 @@ Entry.trueRobot.getBlocks = function() {
                     return script;
                 } else if (script.timeFlag == 3) {
                     clearTimeout(myTimer);
-                    Entry.hw.sendQueue.leftValue = 0;
-                    Entry.hw.sendQueue.rightValue = 0;
-                    Entry.hw.sendQueue['SET'][device] = {
-                        port: Entry.trueRobot.PORT_MAP.dualPort,
+                    RoCode.hw.sendQueue.leftValue = 0;
+                    RoCode.hw.sendQueue.rightValue = 0;
+                    RoCode.hw.sendQueue['SET'][device] = {
+                        port: RoCode.trueRobot.PORT_MAP.dualPort,
                         dataA: 0,
                         dataB: 0,
                         dataC: 1,
@@ -2117,8 +2117,8 @@ Entry.trueRobot.getBlocks = function() {
         },
 
         truetrue_set_grid_rotate: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2130,8 +2130,8 @@ Entry.trueRobot.getBlocks = function() {
                     ],
                     value: 101,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2155,8 +2155,8 @@ Entry.trueRobot.getBlocks = function() {
             class: 'trueRobot_control',
             isNotFor: ['trueRobot'],
             func: function(sprite, script) {
-                var device = Entry.trueRobot.PORT_MAP.dualmotor;
-                var pd = Entry.hw.portData;
+                var device = RoCode.trueRobot.PORT_MAP.dualmotor;
+                var pd = RoCode.hw.portData;
                 var leftValue;
                 var rightValue;
                 var delayValue;
@@ -2164,8 +2164,8 @@ Entry.trueRobot.getBlocks = function() {
                 var moveValue = script.getField('moveValue');
                 var rotateValue = script.getNumberValue('rotateValue');
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
                 if (!script.isStart) {
@@ -2232,10 +2232,10 @@ Entry.trueRobot.getBlocks = function() {
                         script.flag = 0;
 
                         if (script.flag == 0 && script.checkCount < rotateValue) {
-                            Entry.hw.sendQueue.leftValue = 0;
-                            Entry.hw.sendQueue.rightValue = 0;
-                            Entry.hw.sendQueue['SET'][device] = {
-                                port: Entry.trueRobot.PORT_MAP.dualPort,
+                            RoCode.hw.sendQueue.leftValue = 0;
+                            RoCode.hw.sendQueue.rightValue = 0;
+                            RoCode.hw.sendQueue['SET'][device] = {
+                                port: RoCode.trueRobot.PORT_MAP.dualPort,
                                 dataA: 0,
                                 dataB: 0,
                                 dataC: 1,
@@ -2257,10 +2257,10 @@ Entry.trueRobot.getBlocks = function() {
                         script.flag = 0;
 
                         if (script.flag == 0 && script.checkCount < rotateValue) {
-                            Entry.hw.sendQueue.leftValue = 0;
-                            Entry.hw.sendQueue.rightValue = 0;
-                            Entry.hw.sendQueue['SET'][device] = {
-                                port: Entry.trueRobot.PORT_MAP.dualPort,
+                            RoCode.hw.sendQueue.leftValue = 0;
+                            RoCode.hw.sendQueue.rightValue = 0;
+                            RoCode.hw.sendQueue['SET'][device] = {
+                                port: RoCode.trueRobot.PORT_MAP.dualPort,
                                 dataA: 0,
                                 dataB: 0,
                                 dataC: 1,
@@ -2282,10 +2282,10 @@ Entry.trueRobot.getBlocks = function() {
                         script.timeFlag = 1;
                         script.bufferFlag = 3;
                     }
-                    Entry.hw.sendQueue.leftValue = leftValue;
-                    Entry.hw.sendQueue.rightValue = rightValue;
-                    Entry.hw.sendQueue['SET'][device] = {
-                        port: Entry.trueRobot.PORT_MAP.dualPort,
+                    RoCode.hw.sendQueue.leftValue = leftValue;
+                    RoCode.hw.sendQueue.rightValue = rightValue;
+                    RoCode.hw.sendQueue['SET'][device] = {
+                        port: RoCode.trueRobot.PORT_MAP.dualPort,
                         dataA: leftValue,
                         dataB: rightValue,
                         dataC: delayValue,
@@ -2293,7 +2293,7 @@ Entry.trueRobot.getBlocks = function() {
 
                     var myTimer = setTimeout(function() {
                         script.timeFlag = script.bufferFlag;
-                    }, Entry.trueRobot.delayTime / 5);
+                    }, RoCode.trueRobot.delayTime / 5);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
@@ -2303,10 +2303,10 @@ Entry.trueRobot.getBlocks = function() {
                     return script;
                 } else if (script.timeFlag == 3) {
                     clearTimeout(myTimer);
-                    Entry.hw.sendQueue.leftValue = 0;
-                    Entry.hw.sendQueue.rightValue = 0;
-                    Entry.hw.sendQueue['SET'][device] = {
-                        port: Entry.trueRobot.PORT_MAP.dualPort,
+                    RoCode.hw.sendQueue.leftValue = 0;
+                    RoCode.hw.sendQueue.rightValue = 0;
+                    RoCode.hw.sendQueue['SET'][device] = {
+                        port: RoCode.trueRobot.PORT_MAP.dualPort,
                         dataA: 0,
                         dataB: 0,
                         dataC: 1,
@@ -2331,9 +2331,9 @@ Entry.trueRobot.getBlocks = function() {
                                 ],
                                 value: 101,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             {
                                 type: 'Block',
@@ -2348,7 +2348,7 @@ Entry.trueRobot.getBlocks = function() {
 };
 
 // 언어 적용
-Entry.trueRobot.setLanguage = function() {
+RoCode.trueRobot.setLanguage = function() {
     return {
         ko: {
             // ko.js에 작성하던 내용
@@ -2654,4 +2654,4 @@ Entry.trueRobot.setLanguage = function() {
     };
 };
 
-module.exports = Entry.trueRobot;
+module.exports = RoCode.trueRobot;

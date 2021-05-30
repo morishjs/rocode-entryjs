@@ -1,11 +1,11 @@
 // 'use strict';
 
 /*
- * Entry Model object generator.
+ * RoCode Model object generator.
  * @param {object} obj
  */
-Entry.Model = function(obj, isSeal) {
-    const model = Entry.Model;
+RoCode.Model = function(obj, isSeal) {
+    const model = RoCode.Model;
     model.generateSchema(obj);
     model.generateSetter(obj);
     model.generateObserve(obj);
@@ -82,7 +82,7 @@ Entry.Model = function(obj, isSeal) {
      * @param {boolean} isNotify
      */
     m.observe = function(object, funcName, attrs, isNotify) {
-        const observer = new Entry.Observer(this.observers, object, funcName, attrs);
+        const observer = new RoCode.Observer(this.observers, object, funcName, attrs);
         if (isNotify !== false) {
             object[funcName]([]);
         }
@@ -136,4 +136,4 @@ Entry.Model = function(obj, isSeal) {
         }
         return json;
     };
-})(Entry.Model);
+})(RoCode.Model);

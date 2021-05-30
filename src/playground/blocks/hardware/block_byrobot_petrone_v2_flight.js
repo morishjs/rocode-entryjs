@@ -17,7 +17,7 @@
  *  장치 기본 정의
  ***************************************************************************************/
 
-Entry.byrobot_petrone_v2_flight =
+RoCode.byrobot_petrone_v2_flight =
 {
     id: 'F.6',
     name: 'byrobot_petrone_v2_flight',
@@ -33,21 +33,21 @@ Entry.byrobot_petrone_v2_flight =
     setZero: function()
     {
         // 초기화
-        Entry.byrobot_petrone_v2_base.transferBufferClear();
+        RoCode.byrobot_petrone_v2_base.transferBufferClear();
 
         // 한 번에 명령을 전송하면 hw까지 제대로 전달되지 않는 경우가 있어
         // 명령을 각각 분리하여 전송하게 함(2017.01.03)
         for (let i = 0; i < 1; i++)
         {
-            Entry.byrobot_petrone_v2_base.transferCommand(0x30, 0x24, 0);       // 드론, command = 0x24 (Stop)
-            Entry.byrobot_petrone_v2_base.transferVibrator(0, 0, 0, 0);
-            Entry.byrobot_petrone_v2_base.transferBuzzer(0, 0, 0);
-            Entry.byrobot_petrone_v2_base.transferLightManual(0x30, 0xff, 0);   // LED 초기화(모두 꺼짐)
-            Entry.byrobot_petrone_v2_base.transferLightManual(0x31, 0xff, 0);   // LED 초기화(모두 꺼짐)
-            Entry.byrobot_petrone_v2_base.transferLightModeColor(0x30, 0x12, 200, 255, 0, 0); // LED 초기화(눈 빨강)
-            Entry.byrobot_petrone_v2_base.transferLightModeColor(0x30, 0x42, 200, 255, 0, 0); // LED 초기화(팔 빨강)
-            Entry.byrobot_petrone_v2_base.transferMotorSingle(0, 1, 0);         // 1번 모터방향 초기화(시계방향)
-            Entry.byrobot_petrone_v2_base.transferMotorSingle(1, 2, 0);         // 2번 모터방향 초기화(반시계방향)
+            RoCode.byrobot_petrone_v2_base.transferCommand(0x30, 0x24, 0);       // 드론, command = 0x24 (Stop)
+            RoCode.byrobot_petrone_v2_base.transferVibrator(0, 0, 0, 0);
+            RoCode.byrobot_petrone_v2_base.transferBuzzer(0, 0, 0);
+            RoCode.byrobot_petrone_v2_base.transferLightManual(0x30, 0xff, 0);   // LED 초기화(모두 꺼짐)
+            RoCode.byrobot_petrone_v2_base.transferLightManual(0x31, 0xff, 0);   // LED 초기화(모두 꺼짐)
+            RoCode.byrobot_petrone_v2_base.transferLightModeColor(0x30, 0x12, 200, 255, 0, 0); // LED 초기화(눈 빨강)
+            RoCode.byrobot_petrone_v2_base.transferLightModeColor(0x30, 0x42, 200, 255, 0, 0); // LED 초기화(팔 빨강)
+            RoCode.byrobot_petrone_v2_base.transferMotorSingle(0, 1, 0);         // 1번 모터방향 초기화(시계방향)
+            RoCode.byrobot_petrone_v2_base.transferMotorSingle(1, 2, 0);         // 2번 모터방향 초기화(반시계방향)
         }
     },
 };
@@ -57,7 +57,7 @@ Entry.byrobot_petrone_v2_flight =
 /***************************************************************************************
  *  언어 적용
  ***************************************************************************************/
-Entry.byrobot_petrone_v2_flight.setLanguage = function ()
+RoCode.byrobot_petrone_v2_flight.setLanguage = function ()
 {
     return {
         ko: {
@@ -210,7 +210,7 @@ Entry.byrobot_petrone_v2_flight.setLanguage = function ()
                 "byrobot_petrone_v2_drone_vehicle_flight":          "드론(가드 포함)",
                 "byrobot_petrone_v2_drone_vehicle_flight_fpv":      "드론(FPV)",
                 "byrobot_petrone_v2_drone_vehicle_flight_noguard":      "드론(가드 없음)",
-                "byrobot_petrone_v2_entryhw_count_transfer_reserved":   "전송 예약된 데이터 수",
+                "byrobot_petrone_v2_RoCodehw_count_transfer_reserved":   "전송 예약된 데이터 수",
             },
 
             // ko.js에 작성하던 내용
@@ -479,7 +479,7 @@ Entry.byrobot_petrone_v2_flight.setLanguage = function ()
                 "byrobot_petrone_v2_drone_vehicle_flight": "drone(with guard)",
                 "byrobot_petrone_v2_drone_vehicle_flight_fpv": "drone(FPV)",
                 "byrobot_petrone_v2_drone_vehicle_flight_noguard": "drone(without guard)",
-                "byrobot_petrone_v2_entryhw_count_transfer_reserved":           "reserved data blocks",
+                "byrobot_petrone_v2_RoCodehw_count_transfer_reserved":           "reserved data blocks",
             },
 
             // en.js에 작성하던 내용
@@ -548,9 +548,9 @@ Entry.byrobot_petrone_v2_flight.setLanguage = function ()
 };
 
 
-// Entry 좌측 하단 하드웨어 모니터 화면에 표시하는 속성
+// RoCode 좌측 하단 하드웨어 모니터 화면에 표시하는 속성
 // listPorts와 ports 두 곳 동시에 동일한 속성을 표시할 수는 없음
-Entry.byrobot_petrone_v2_flight.monitorTemplate = function()
+RoCode.byrobot_petrone_v2_flight.monitorTemplate = function()
 {
     return {
         /* 센서창 가림 현상을 해결하기 위해서 주석 처리함(2017.11.06)
@@ -590,7 +590,7 @@ Entry.byrobot_petrone_v2_flight.monitorTemplate = function()
             joystick_right_event:           {name: Lang.Blocks.byrobot_petrone_v2_controller_joystick_right_event,      type: 'input',  pos: { x: 0, y: 0 }},
             button_button:                  {name: Lang.Blocks.byrobot_petrone_v2_controller_button_button,             type: 'input',  pos: { x: 0, y: 0 }},
             button_event:                   {name: Lang.Blocks.byrobot_petrone_v2_controller_button_event,              type: 'input',  pos: { x: 0, y: 0 }},
-            entryhw_countTransferReserved:  {name: Lang.Blocks.byrobot_petrone_v2_entryhw_count_transfer_reserved,      type: 'output', pos: { x: 0, y: 0 }},
+            RoCodehw_countTransferReserved:  {name: Lang.Blocks.byrobot_petrone_v2_RoCodehw_count_transfer_reserved,      type: 'output', pos: { x: 0, y: 0 }},
         },
 
         // 모니터 화면 지정 위치와 선으로 연결하여 표시하는 값
@@ -605,7 +605,7 @@ Entry.byrobot_petrone_v2_flight.monitorTemplate = function()
 /***************************************************************************************
  *  엔트리에 등록할 블록들의 이름
  ***************************************************************************************/
-Entry.byrobot_petrone_v2_flight.blockMenuBlocks = [
+RoCode.byrobot_petrone_v2_flight.blockMenuBlocks = [
     'byrobot_petrone_v2_flight_drone_value_attitude',
     'byrobot_petrone_v2_flight_drone_value_imu',
     'byrobot_petrone_v2_flight_drone_value_sensor',
@@ -667,15 +667,15 @@ Entry.byrobot_petrone_v2_flight.blockMenuBlocks = [
 /***************************************************************************************
  *  엔트리 블록 상세
  ***************************************************************************************/
-Entry.byrobot_petrone_v2_flight.getBlocks = function()
+RoCode.byrobot_petrone_v2_flight.getBlocks = function()
 {
     return {
         //region byrobot 바이로봇
         /* BYROBOT PetroneV2 Flight Start */
         byrobot_petrone_v2_flight_drone_value_attitude:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -688,8 +688,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: 'imu_angleRoll', // 초기 선택항목 지정
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -703,15 +703,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             class: 'byrobot_petrone_v2_flight_monitor', // 같은 이름인 객체들이 그룹으로 형성됨
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
-                return Entry.hw.portData[script.getField('DEVICE')];
+                return RoCode.hw.portData[script.getField('DEVICE')];
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_value_imu:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -727,8 +727,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: 'imu_accX', // 초기 선택항목 지정
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -742,15 +742,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             class: 'byrobot_petrone_v2_flight_monitor', // 같은 이름인 객체들이 그룹으로 형성됨
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
-                return Entry.hw.portData[script.getField('DEVICE')];
+                return RoCode.hw.portData[script.getField('DEVICE')];
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_value_sensor:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -765,8 +765,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: 'pressure_temperature', // 초기 선택항목 지정
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -780,15 +780,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             class: 'byrobot_petrone_v2_flight_monitor', // 같은 이름인 객체들이 그룹으로 형성됨
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
-                return Entry.hw.portData[script.getField('DEVICE')];
+                return RoCode.hw.portData[script.getField('DEVICE')];
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_value_etc:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -802,8 +802,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: 'irmessage_irdata', // 초기 선택항목 지정
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -817,15 +817,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             class: 'byrobot_petrone_v2_flight_monitor', // 같은 이름인 객체들이 그룹으로 형성됨
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
-                return Entry.hw.portData[script.getField('DEVICE')];
+                return RoCode.hw.portData[script.getField('DEVICE')];
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_value_button:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -837,8 +837,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: 'button_button', // 초기 선택항목 지정
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -852,15 +852,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             class: 'byrobot_petrone_v2_flight_monitor', // 같은 이름인 객체들이 그룹으로 형성됨
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
-                return Entry.hw.portData[script.getField('DEVICE')];
+                return RoCode.hw.portData[script.getField('DEVICE')];
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_value_joystick:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -878,8 +878,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: 'joystick_left_x', // 초기 선택항목 지정
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -893,15 +893,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             class: 'byrobot_petrone_v2_flight_monitor', // 같은 이름인 객체들이 그룹으로 형성됨
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
-                return Entry.hw.portData[script.getField('DEVICE')];
+                return RoCode.hw.portData[script.getField('DEVICE')];
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_if_button_press:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -924,8 +924,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -939,7 +939,7 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             class: 'byrobot_petrone_v2_flight_boolean_input',
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
-                var read = Entry.hw.portData;
+                var read = RoCode.hw.portData;
                 var button = 'button_button'; // paramsKeyMap에 정의된 이름 사용
                 var buttonevent = 'button_event'; // paramsKeyMap에 정의된 이름 사용
 
@@ -956,8 +956,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
 
         byrobot_petrone_v2_flight_controller_if_joystick_direction:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -970,8 +970,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: 'joystick_left_direction',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -988,8 +988,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '34',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1004,7 +1004,7 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             class: 'byrobot_petrone_v2_flight_boolean_input',
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
-                var read = Entry.hw.portData;
+                var read = RoCode.hw.portData;
 
                 var device = script.getField('DEVICE'); // paramsKeyMap에 정의된 이름 사용
 
@@ -1016,8 +1016,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
 
         byrobot_petrone_v2_flight_controller_light_manual_single_off:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1032,15 +1032,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             class: 'byrobot_petrone_v2_flight_controller_light',
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
-                return Entry.byrobot_petrone_v2_base.setLightManual(script, 0x31, 0xff, 0);
+                return RoCode.byrobot_petrone_v2_base.setLightManual(script, 0x31, 0xff, 0);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_light_color_preset:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1057,8 +1057,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: 'red',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1072,8 +1072,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '220',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
             ],
@@ -1107,15 +1107,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     case 'white':   red = 255;  green = 255;  blue = 255;   break;
                 }
 
-                return Entry.byrobot_petrone_v2_base.setLightModeColor(script, 0x31, mode, interval, red, green, blue);
+                return RoCode.byrobot_petrone_v2_base.setLightModeColor(script, 0x31, mode, interval, red, green, blue);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_light_manual_single_input:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1141,15 +1141,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             func: function(sprite, script) {
                 const flags      = parseInt(script.getStringValue('FLAGS'));
                 const brightness = script.getNumberValue('BRIGHTNESS');
-                return Entry.byrobot_petrone_v2_base.setLightManual(script, 0x31, flags, brightness);
+                return RoCode.byrobot_petrone_v2_base.setLightManual(script, 0x31, flags, brightness);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_light_color_input:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1166,8 +1166,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Block', accept: 'string'},
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
@@ -1200,15 +1200,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var red = script.getNumberValue('RED');
                 var green = script.getNumberValue('GREEN');
                 var blue = script.getNumberValue('BLUE');
-                return Entry.byrobot_petrone_v2_base.setLightModeColor(script, 0x31, mode, interval, red, green, blue);
+                return RoCode.byrobot_petrone_v2_base.setLightModeColor(script, 0x31, mode, interval, red, green, blue);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_light_color_select:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1224,8 +1224,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: 'sunset',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1237,8 +1237,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Block', accept: 'string'},
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
@@ -1278,15 +1278,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     case 'lavender':        red = 80;   green = 0;      blue = 200; break;
                 }
 
-                return Entry.byrobot_petrone_v2_base.setLightModeColor(script, 0x31, mode, interval, red, green, blue);
+                return RoCode.byrobot_petrone_v2_base.setLightModeColor(script, 0x31, mode, interval, red, green, blue);
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_light_manual_single_off:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1301,15 +1301,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             class: 'byrobot_petrone_v2_flight_drone_light',
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
-                return Entry.byrobot_petrone_v2_base.setLightManual(script, 0x30, 0xff, 0);
+                return RoCode.byrobot_petrone_v2_base.setLightManual(script, 0x30, 0xff, 0);
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_light_color_preset:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1325,8 +1325,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: 'eye_red',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1340,8 +1340,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '220',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
             ],
@@ -1374,15 +1374,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     case 'arm_blue':    mode = 0x42;    red = 0;    green = 0;    blue = 255;   break;
                 }
 
-                return Entry.byrobot_petrone_v2_base.setLightModeColor(script, 0x30, mode, interval, red, green, blue);
+                return RoCode.byrobot_petrone_v2_base.setLightModeColor(script, 0x30, mode, interval, red, green, blue);
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_light_manual_single_input:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1409,15 +1409,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             func: function(sprite, script) {
                 const flags      = parseInt(script.getStringValue('FLAGS'));
                 const brightness = script.getNumberValue('BRIGHTNESS');
-                return Entry.byrobot_petrone_v2_base.setLightManual(script, 0x30, flags, brightness);
+                return RoCode.byrobot_petrone_v2_base.setLightManual(script, 0x30, flags, brightness);
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_light_color_input:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1429,8 +1429,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '18',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Block', accept: 'string'},
                 {type: 'Block', accept: 'string'},
@@ -1445,8 +1445,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Block', accept: 'string'},
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
@@ -1480,15 +1480,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var green = script.getNumberValue('GREEN');
                 var blue = script.getNumberValue('BLUE');
                 var interval = script.getNumberValue('INTERVAL');
-                return Entry.byrobot_petrone_v2_base.setLightModeColor(script, 0x30, mode, interval, red, green, blue);
+                return RoCode.byrobot_petrone_v2_base.setLightModeColor(script, 0x30, mode, interval, red, green, blue);
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_light_color_select:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1500,8 +1500,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '18',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1515,8 +1515,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: 'sunset',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1528,8 +1528,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Block', accept: 'string'},
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
@@ -1571,15 +1571,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     case 'lavender':        red = 80;   green = 0;      blue = 200; break;
                 }
 
-                return Entry.byrobot_petrone_v2_base.setLightModeColor(script, 0x30, mode, interval, red, green, blue);
+                return RoCode.byrobot_petrone_v2_base.setLightModeColor(script, 0x30, mode, interval, red, green, blue);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_display_clear_all:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1591,8 +1591,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
             ],
@@ -1608,15 +1608,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
                 var pixel = parseInt(script.getField('PIXEL'));
-                return Entry.byrobot_petrone_v2_base.setDisplayClearAll(script, 0x31, pixel);
+                return RoCode.byrobot_petrone_v2_base.setDisplayClearAll(script, 0x31, pixel);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_display_clear:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1632,8 +1632,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
             ],
@@ -1664,15 +1664,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var width = script.getNumberValue('WIDTH');
                 var height = script.getNumberValue('HEIGHT');
                 var pixel = parseInt(script.getField('PIXEL'));
-                return Entry.byrobot_petrone_v2_base.setDisplayClear(script, 0x31, pixel, false, x, y, width, height);
+                return RoCode.byrobot_petrone_v2_base.setDisplayClear(script, 0x31, pixel, false, x, y, width, height);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_display_invert:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1707,15 +1707,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var y = script.getNumberValue('Y');
                 var width = script.getNumberValue('WIDTH');
                 var height = script.getNumberValue('HEIGHT');
-                return Entry.byrobot_petrone_v2_base.setDisplayInvert(script, 0x31, x, y, width, height);
+                return RoCode.byrobot_petrone_v2_base.setDisplayInvert(script, 0x31, x, y, width, height);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_display_draw_point:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1729,8 +1729,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
             ],
@@ -1755,15 +1755,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var x = script.getNumberValue('X');
                 var y = script.getNumberValue('Y');
                 var pixel = parseInt(script.getField('PIXEL'));
-                return Entry.byrobot_petrone_v2_base.setDisplayDrawPoint(script, 0x31, x, y, pixel);
+                return RoCode.byrobot_petrone_v2_base.setDisplayDrawPoint(script, 0x31, x, y, pixel);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_display_draw_line:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1779,8 +1779,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1791,8 +1791,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
             ],
@@ -1826,15 +1826,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var y2 = script.getNumberValue('Y2');
                 var pixel = parseInt(script.getField('PIXEL'));
                 var line = parseInt(script.getField('LINE'));
-                return Entry.byrobot_petrone_v2_base.setDisplayDrawLine(script, 0x31, x1, y1, x2, y2, pixel, line);
+                return RoCode.byrobot_petrone_v2_base.setDisplayDrawLine(script, 0x31, x1, y1, x2, y2, pixel, line);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_display_draw_rect:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1850,8 +1850,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1861,8 +1861,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1873,8 +1873,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
             ],
@@ -1911,15 +1911,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var pixel = parseInt(script.getField('PIXEL'));
                 var flagFill = parseInt(script.getField('FLAGFILL'));
                 var line = parseInt(script.getField('LINE'));
-                return Entry.byrobot_petrone_v2_base.setDisplayDrawRect(script, 0x31, x, y, width, height, pixel, flagFill, line);
+                return RoCode.byrobot_petrone_v2_base.setDisplayDrawRect(script, 0x31, x, y, width, height, pixel, flagFill, line);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_display_draw_circle:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1934,8 +1934,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1945,8 +1945,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
             ],
@@ -1977,15 +1977,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var radius = script.getNumberValue('RADIUS');
                 var pixel = parseInt(script.getField('PIXEL'));
                 var flagFill = parseInt(script.getField('FLAGFILL'));
-                return Entry.byrobot_petrone_v2_base.setDisplayDrawCircle(script, 0x31, x, y, radius, pixel, flagFill);
+                return RoCode.byrobot_petrone_v2_base.setDisplayDrawCircle(script, 0x31, x, y, radius, pixel, flagFill);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_display_draw_string:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1999,8 +1999,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2010,8 +2010,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Block', accept: 'string'},
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
@@ -2043,15 +2043,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var font = parseInt(script.getField('FONT'));
                 var pixel = parseInt(script.getField('PIXEL'));
                 var string = script.getStringValue('STRING');
-                return Entry.byrobot_petrone_v2_base.setDisplayDrawString(script, 0x31, x, y, font, pixel, string);
+                return RoCode.byrobot_petrone_v2_base.setDisplayDrawString(script, 0x31, x, y, font, pixel, string);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_display_draw_string_align:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2067,8 +2067,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2078,8 +2078,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2089,8 +2089,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Block', accept: 'string'},
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
@@ -2128,15 +2128,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var font = parseInt(script.getField('FONT'));
                 var pixel = parseInt(script.getField('PIXEL'));
                 var string = script.getStringValue('STRING');
-                return Entry.byrobot_petrone_v2_base.setDisplayDrawStringAlign(script, 0x31, xStart, xEnd, y, align, font, pixel, string);
+                return RoCode.byrobot_petrone_v2_base.setDisplayDrawStringAlign(script, 0x31, xStart, xEnd, y, align, font, pixel, string);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_buzzer_off:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2151,15 +2151,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             class: 'byrobot_petrone_v2_flight_buzzer',
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
-                return Entry.byrobot_petrone_v2_base.setBuzzerStop(script);
+                return RoCode.byrobot_petrone_v2_base.setBuzzerStop(script);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_buzzer_scale:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2174,8 +2174,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2196,8 +2196,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
             ],
@@ -2217,17 +2217,17 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var scale = parseInt(script.getField('SCALE'));
 
                 if (scale == -1)
-                    return Entry.byrobot_petrone_v2_base.setBuzzerMute(script, 60000, false, true);
+                    return RoCode.byrobot_petrone_v2_base.setBuzzerMute(script, 60000, false, true);
                 else
-                    return Entry.byrobot_petrone_v2_base.setBuzzerScale(script, octave, scale, 60000, false, true);
+                    return RoCode.byrobot_petrone_v2_base.setBuzzerScale(script, octave, scale, 60000, false, true);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_buzzer_scale_delay:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2242,8 +2242,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2264,8 +2264,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Block', accept: 'string'},
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
@@ -2293,17 +2293,17 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var time = parseInt(script.getNumberValue('TIME') * 1000);
 
                 if (scale == -1)
-                    return Entry.byrobot_petrone_v2_base.setBuzzerMute(script, time, true, true);
+                    return RoCode.byrobot_petrone_v2_base.setBuzzerMute(script, time, true, true);
                 else
-                    return Entry.byrobot_petrone_v2_base.setBuzzerScale(script, octave, scale, time, true, true);
+                    return RoCode.byrobot_petrone_v2_base.setBuzzerScale(script, octave, scale, time, true, true);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_buzzer_scale_reserve:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2318,8 +2318,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2340,8 +2340,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Block', accept: 'string'},
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
@@ -2369,17 +2369,17 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var time = parseInt(script.getNumberValue('TIME') * 1000);
 
                 if (scale == -1)
-                    return Entry.byrobot_petrone_v2_base.setBuzzerMute(script, time, false, false);
+                    return RoCode.byrobot_petrone_v2_base.setBuzzerMute(script, time, false, false);
                 else
-                    return Entry.byrobot_petrone_v2_base.setBuzzerScale(script, octave, scale, time, false, false);
+                    return RoCode.byrobot_petrone_v2_base.setBuzzerScale(script, octave, scale, time, false, false);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_buzzer_hz:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2401,15 +2401,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
                 var hz = parseInt(script.getNumberValue('HZ', script));
-                return Entry.byrobot_petrone_v2_base.setBuzzerHz(script, hz, 60000, false, true);
+                return RoCode.byrobot_petrone_v2_base.setBuzzerHz(script, hz, 60000, false, true);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_buzzer_hz_delay:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2435,15 +2435,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             func: function(sprite, script) {
                 var hz = parseInt(script.getNumberValue('HZ', script));
                 var time = parseInt(script.getNumberValue('TIME') * 1000);
-                return Entry.byrobot_petrone_v2_base.setBuzzerHz(script, hz, time, true, true);
+                return RoCode.byrobot_petrone_v2_base.setBuzzerHz(script, hz, time, true, true);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_buzzer_hz_reserve:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2469,15 +2469,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             func: function(sprite, script) {
                 var hz = parseInt(script.getNumberValue('HZ', script));
                 var time = parseInt(script.getNumberValue('TIME') * 1000);
-                return Entry.byrobot_petrone_v2_base.setBuzzerHz(script, hz, time, false, false);
+                return RoCode.byrobot_petrone_v2_base.setBuzzerHz(script, hz, time, false, false);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_vibrator_off:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2492,15 +2492,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             class: 'byrobot_petrone_v2_flight_vibrator',
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
-                return Entry.byrobot_petrone_v2_base.setVibratorStop(script);
+                return RoCode.byrobot_petrone_v2_base.setVibratorStop(script);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_vibrator_on_delay:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2522,15 +2522,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
                 var timeOn = parseInt(script.getNumberValue('TIMEON') * 1000);
-                return Entry.byrobot_petrone_v2_base.setVibrator(script, timeOn, 0, timeOn, true, true);
+                return RoCode.byrobot_petrone_v2_base.setVibrator(script, timeOn, 0, timeOn, true, true);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_vibrator_on_reserve:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2552,15 +2552,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
                 var timeOn = parseInt(script.getNumberValue('TIMEON') * 1000);
-                return Entry.byrobot_petrone_v2_base.setVibrator(script, timeOn, 0, timeOn, false, false);
+                return RoCode.byrobot_petrone_v2_base.setVibrator(script, timeOn, 0, timeOn, false, false);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_vibrator_delay:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2590,15 +2590,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var timeOn = parseInt(script.getNumberValue('TIMEON') * 1000);
                 var timeOff = parseInt(script.getNumberValue('TIMEOFF') * 1000);
                 var timeRun = parseInt(script.getNumberValue('TIMERUN') * 1000);
-                return Entry.byrobot_petrone_v2_base.setVibrator(script, timeOn, timeOff, timeRun, true, true);
+                return RoCode.byrobot_petrone_v2_base.setVibrator(script, timeOn, timeOff, timeRun, true, true);
             },
         },
 
 
         byrobot_petrone_v2_flight_controller_vibrator_reserve:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2628,15 +2628,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var timeOn = parseInt(script.getNumberValue('TIMEON') * 1000);
                 var timeOff = parseInt(script.getNumberValue('TIMEOFF') * 1000);
                 var timeRun = parseInt(script.getNumberValue('TIMERUN') * 1000);
-                return Entry.byrobot_petrone_v2_base.setVibrator(script, timeOn, timeOff, timeRun, false, false);
+                return RoCode.byrobot_petrone_v2_base.setVibrator(script, timeOn, timeOff, timeRun, false, false);
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_irmessage:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2659,15 +2659,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             func: function(sprite, script) {
                 var irdirection = 0;
                 var irmessage = script.getNumberValue('IRMESSAGE', script);
-                return Entry.byrobot_petrone_v2_base.sendIrMessage(script, irdirection, irmessage);
+                return RoCode.byrobot_petrone_v2_base.sendIrMessage(script, irdirection, irmessage);
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_motor_stop:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2682,15 +2682,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             class: 'byrobot_petrone_v2_flight_motor',
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
-                return Entry.byrobot_petrone_v2_base.sendStop(script);
+                return RoCode.byrobot_petrone_v2_base.sendStop(script);
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_motorsingle:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2699,8 +2699,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     options: [['1', '0'], ['2', '1'], ['3', '2'], ['4', '3']],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Block', accept: 'string'},
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
@@ -2727,15 +2727,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     script.getNumberValue('MOTORSPEED', script)
                 );
 
-                return Entry.byrobot_petrone_v2_base.setMotorSingle(script, motorIndex, motorRotation, motorSpeed);
+                return RoCode.byrobot_petrone_v2_base.setMotorSingle(script, motorIndex, motorRotation, motorSpeed);
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_motorsingle_input:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2766,15 +2766,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     script.getNumberValue('MOTORSPEED', script)
                 );
 
-                return Entry.byrobot_petrone_v2_base.setMotorSingle(script, motorIndex, motorRotation, motorSpeed);
+                return RoCode.byrobot_petrone_v2_base.setMotorSingle(script, motorIndex, motorRotation, motorSpeed);
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_motorsingle_rotation:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2783,8 +2783,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     options: [['1', '0'], ['2', '1']],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2794,8 +2794,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Block', accept: 'string'},
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
@@ -2824,15 +2824,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     script.getNumberValue('MOTORSPEED', script)
                 );
 
-                return Entry.byrobot_petrone_v2_base.setMotorSingle(script, motorIndex, motorRotation, motorSpeed);
+                return RoCode.byrobot_petrone_v2_base.setMotorSingle(script, motorIndex, motorRotation, motorSpeed);
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_command_mode_vehicle_drone:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2845,8 +2845,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '16',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
             ],
@@ -2862,15 +2862,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
                 var vehicle = script.getField('VEHICLE');
-                return Entry.byrobot_petrone_v2_base.setModeVehicle(script, vehicle);
+                return RoCode.byrobot_petrone_v2_base.setModeVehicle(script, vehicle);
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_control_drone_takeoff:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2885,15 +2885,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             class: 'byrobot_petrone_v2_flight_control_flight',
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
-                return Entry.byrobot_petrone_v2_base.setEventFlight(script, 0x11, 200); // 0x11 : FlightEvent::TakeOff
+                return RoCode.byrobot_petrone_v2_base.setEventFlight(script, 0x11, 200); // 0x11 : FlightEvent::TakeOff
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_control_drone_landing:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2908,15 +2908,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             class: 'byrobot_petrone_v2_flight_control_flight',
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
-                return Entry.byrobot_petrone_v2_base.setEventFlight(script, 0x12, 200); // 0x12 : FlightEvent::Landing
+                return RoCode.byrobot_petrone_v2_base.setEventFlight(script, 0x12, 200); // 0x12 : FlightEvent::Landing
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_control_drone_stop:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2931,15 +2931,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             class: 'byrobot_petrone_v2_flight_control_flight',
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
-                return Entry.byrobot_petrone_v2_base.sendStop(script);
+                return RoCode.byrobot_petrone_v2_base.sendStop(script);
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_control_coordinate:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2951,8 +2951,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
             ],
@@ -2968,15 +2968,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
                 var coordinate = script.getField('COORDINATE');
-                return Entry.byrobot_petrone_v2_base.sendCommand(script, 0x30, 0x20, coordinate);
+                return RoCode.byrobot_petrone_v2_base.sendCommand(script, 0x30, 0x20, coordinate);
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_control_drone_reset_heading:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2991,15 +2991,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
             class: 'byrobot_petrone_v2_flight_control_flight',
             isNotFor: ['byrobot_petrone_v2_flight'],
             func: function(sprite, script) {
-                return Entry.byrobot_petrone_v2_base.sendCommand(script, 0x30, 0x22, 0xa0); // 0x22 : CommandType::FlightEvent  // 0xA0 : FlightEvent::ResetHeading
+                return RoCode.byrobot_petrone_v2_base.sendCommand(script, 0x30, 0x22, 0xa0); // 0x22 : CommandType::FlightEvent  // 0xA0 : FlightEvent::ResetHeading
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_control_quad_one:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3013,8 +3013,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: 'control_throttle',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Block', accept: 'string'},
                 {type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12},
@@ -3038,15 +3038,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var controlTarget = script.getField('CONTROLTARGET');
                 var value = parseInt(script.getNumberValue('VALUE', script));
 
-                return Entry.byrobot_petrone_v2_base.sendControlQuadSingle(script, controlTarget, value, 0, false);
+                return RoCode.byrobot_petrone_v2_base.sendControlQuadSingle(script, controlTarget, value, 0, false);
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_control_quad_one_delay:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3060,8 +3060,8 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                     ],
                     value: 'control_throttle',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {type: 'Block', accept: 'string'},
                 {type: 'Block', accept: 'string'},
@@ -3089,15 +3089,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var value = parseInt(script.getNumberValue('VALUE', script));
                 var time = parseInt(script.getNumberValue('TIME', script) * 1000);
 
-                return Entry.byrobot_petrone_v2_base.sendControlQuadSingle(script, controlTarget, value, time, true);
+                return RoCode.byrobot_petrone_v2_base.sendControlQuadSingle(script, controlTarget, value, time, true);
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_control_quad:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3132,15 +3132,15 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var yaw = parseInt(script.getNumberValue('YAW', script));
                 var throttle = parseInt(script.getNumberValue('THROTTLE', script));
 
-                return Entry.byrobot_petrone_v2_base.sendControlQuad(script, roll, pitch, yaw, throttle, 0, false);
+                return RoCode.byrobot_petrone_v2_base.sendControlQuad(script, roll, pitch, yaw, throttle, 0, false);
             },
         },
 
 
         byrobot_petrone_v2_flight_drone_control_quad_delay:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3179,7 +3179,7 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
                 var throttle = parseInt(script.getNumberValue('THROTTLE', script));
                 var time = parseInt(script.getNumberValue('TIME', script) * 1000);
 
-                return Entry.byrobot_petrone_v2_base.sendControlQuad(script, roll, pitch, yaw, throttle, time, true);
+                return RoCode.byrobot_petrone_v2_base.sendControlQuad(script, roll, pitch, yaw, throttle, time, true);
             },
         },
         /* BYROBOT PetroneV2 Flight End */
@@ -3187,5 +3187,5 @@ Entry.byrobot_petrone_v2_flight.getBlocks = function()
     };
 };
 
-module.exports = Entry.byrobot_petrone_v2_flight;
+module.exports = RoCode.byrobot_petrone_v2_flight;
 

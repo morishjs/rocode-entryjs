@@ -3,13 +3,13 @@ module.exports = {
         return {
             functionAddButton: {
                 skeleton: 'basic_button',
-                color: EntryStatic.colorSet.common.BUTTON_BACKGROUND,
+                color: RoCodeStatic.colorSet.common.BUTTON_BACKGROUND,
                 isNotFor: ['functionInit'],
                 params: [
                     {
                         type: 'Text',
                         text: Lang.Workspace.function_create,
-                        color: EntryStatic.colorSet.common.BUTTON,
+                        color: RoCodeStatic.colorSet.common.BUTTON,
                         align: 'center',
                     },
                 ],
@@ -19,7 +19,7 @@ module.exports = {
                 events: {
                     mousedown: [
                         function() {
-                            Entry.do('funcEditStart', Entry.generateHash());
+                            RoCode.do('funcEditStart', RoCode.generateHash());
                         },
                     ],
                 },

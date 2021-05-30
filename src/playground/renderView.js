@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.RenderView = class RenderView {
+RoCode.RenderView = class RenderView {
     schema = {
         code: null,
         dragBlock: null,
@@ -37,8 +37,8 @@ Entry.RenderView = class RenderView {
         this._minBlockOffsetX = 0;
         this._setSize();
 
-        this.svg = Entry.SVG(this._svgId, this.svgDom[0]);
-        Entry.Utils.addFilters(this.svg, this.suffix, true);
+        this.svg = RoCode.SVG(this._svgId, this.svgDom[0]);
+        RoCode.Utils.addFilters(this.svg, this.suffix, true);
 
         if (this.svg) {
             this.svgGroup = this.svg.elem('g');
@@ -57,12 +57,12 @@ Entry.RenderView = class RenderView {
     _generateView() {
         const parent = this.view;
 
-        this.renderViewContainer = Entry.Dom('div', {
+        this.renderViewContainer = RoCode.Dom('div', {
             class: 'renderViewContainer',
             parent,
         });
 
-        this.svgDom = Entry.Dom(
+        this.svgDom = RoCode.Dom(
             $(
                 `<svg id="${
                     this._svgId
@@ -73,13 +73,13 @@ Entry.RenderView = class RenderView {
     }
 
     changeCode(code, resizeImmediately) {
-        if (!(code instanceof Entry.Code)) {
+        if (!(code instanceof RoCode.Code)) {
             return console.error('You must inject code instance');
         }
         this.code = code;
 
         if (!this.svg) {
-            this.svg = Entry.SVG(this._svgId, this.svgDom[0]);
+            this.svg = RoCode.SVG(this._svgId, this.svgDom[0]);
             this.svgGroup = this.svg.elem('g');
 
             this.svgThreadGroup = this.svgGroup.elem('g');
@@ -133,11 +133,11 @@ Entry.RenderView = class RenderView {
     }
 
     hide() {
-        this.view.addClass('entryRemove');
+        this.view.addClass('RoCodeRemove');
     }
 
     show() {
-        this.view.removeClass('entryRemove');
+        this.view.removeClass('RoCodeRemove');
     }
 
     _setSize() {
@@ -240,7 +240,7 @@ Entry.RenderView = class RenderView {
         let syntax = null;
         if (renderMode === 2) {
             if (!this._parser) {
-                this._parser = new Entry.Parser(null, null);
+                this._parser = new RoCode.Parser(null, null);
             }
             this._parser.setParser(1, this._parserType);
             if (this._parser._execParser) {

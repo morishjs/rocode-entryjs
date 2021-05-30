@@ -3059,7 +3059,7 @@
     // Parse the next token as an identifier. If `liberal` is true (used
     // when parsing properties), it will also convert keywords into
     // identifiers.
-    // `isString` is use for Entry Python start block
+    // `isString` is use for RoCode Python start block
 
     // TODO: liberal?
 

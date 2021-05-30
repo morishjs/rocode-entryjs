@@ -1,26 +1,26 @@
 'use strict';
 
-Entry.Roboid = {
+RoCode.Roboid = {
     setZero() {
-        Entry.Robomation.setZero();
+        RoCode.Robomation.setZero();
     },
     afterReceive(pd) {
-        Entry.Robomation.afterReceive(pd, true);
+        RoCode.Robomation.afterReceive(pd, true);
     },
     afterSend(sq) {
-        Entry.Robomation.afterSend(sq);
+        RoCode.Robomation.afterSend(sq);
     },
     getHamster(index) {
-        return Entry.Robomation.getRobot('hamster', index);
+        return RoCode.Robomation.getRobot('hamster', index);
     },
     getHamsterS(index) {
-        return Entry.Robomation.getRobot('hamster', index);
+        return RoCode.Robomation.getRobot('hamster', index);
     },
     getTurtle(index) {
-        return Entry.Robomation.getRobot('turtle', index);
+        return RoCode.Robomation.getRobot('turtle', index);
     },
     getCheese(index) {
-        return Entry.Robomation.getRobot('cheese', index);
+        return RoCode.Robomation.getRobot('cheese', index);
     },
     id: '2.FF',
     name: 'roboid',
@@ -179,7 +179,7 @@ Entry.Roboid = {
     }),
 };
 
-Entry.Roboid.setLanguage = () => ({
+RoCode.Roboid.setLanguage = () => ({
     ko: {
         template: {
             roboid_hamster_beep: '햄스터 %1: 삐 소리내기 %2',
@@ -3812,7 +3812,7 @@ Entry.Roboid.setLanguage = () => ({
     },
 });
 
-Entry.Roboid.blockMenuBlocks = [
+RoCode.Roboid.blockMenuBlocks = [
     'roboid_hamster_hand_found',
     'roboid_hamster_boolean',
     'roboid_hamster_value',
@@ -4026,11 +4026,11 @@ Entry.Roboid.blockMenuBlocks = [
     'roboid_cheese_hat010_set_brightness_to',
 ];
 
-Entry.Roboid.getBlocks = function() {
+RoCode.Roboid.getBlocks = function() {
     return {
         roboid_hamster_hand_found: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -4057,7 +4057,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.checkHandFound(script) : false;
             },
             syntax: {
@@ -4077,8 +4077,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_boolean: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -4102,8 +4102,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'TILT_FORWARD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -4125,7 +4125,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.checkBoolean(script) : false;
             },
             syntax: {
@@ -4154,9 +4154,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'TILT_FORWARD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -4164,8 +4164,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -4192,8 +4192,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'leftProximity',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -4215,7 +4215,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 if (robot) {
                     return robot.getValue(script);
                 }
@@ -4249,9 +4249,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'leftProximity',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -4259,8 +4259,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_move_forward_once: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4292,7 +4292,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.boardForward(script) : script;
             },
             syntax: {
@@ -4311,8 +4311,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_turn_once: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4328,8 +4328,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -4357,7 +4357,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.boardTurn(script) : script;
             },
             syntax: {
@@ -4378,9 +4378,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -4388,8 +4388,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_move_forward_for_secs: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4430,7 +4430,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.moveForwardSecs(script) : script;
             },
             syntax: {
@@ -4453,8 +4453,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_move_backward_for_secs: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4495,7 +4495,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.moveBackwardSecs(script) : script;
             },
             syntax: {
@@ -4518,8 +4518,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_turn_for_secs: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4535,8 +4535,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -4573,7 +4573,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.turnSecs(script) : script;
             },
             syntax: {
@@ -4594,9 +4594,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -4608,8 +4608,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_change_both_wheels_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4659,7 +4659,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.changeWheels(script) : script;
             },
             syntax: {
@@ -4686,8 +4686,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_set_both_wheels_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4737,7 +4737,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.setWheels(script) : script;
             },
             syntax: {
@@ -4764,8 +4764,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_change_wheel_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4782,8 +4782,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -4820,7 +4820,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.changeWheel(script) : script;
             },
             syntax: {
@@ -4842,9 +4842,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -4856,8 +4856,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_set_wheel_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4874,8 +4874,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -4912,7 +4912,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.setWheel(script) : script;
             },
             syntax: {
@@ -4934,9 +4934,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -4948,8 +4948,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_follow_line_using: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4965,8 +4965,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'BLACK',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -4977,8 +4977,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -5008,7 +5008,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.followLine(script) : script;
             },
             syntax: {
@@ -5029,9 +5029,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'BLACK',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -5042,9 +5042,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -5052,8 +5052,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_follow_line_until: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5069,8 +5069,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'BLACK',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -5082,8 +5082,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'FRONT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -5113,7 +5113,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.followLineUntil(script) : script;
             },
             syntax: {
@@ -5134,9 +5134,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'BLACK',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -5148,9 +5148,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'FRONT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -5158,8 +5158,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_set_following_speed_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5181,8 +5181,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -5210,7 +5210,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.setLineTracerSpeed(script) : script;
             },
             syntax: {
@@ -5237,9 +5237,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -5247,8 +5247,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5280,7 +5280,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.stop(script) : script;
             },
             syntax: {
@@ -5299,8 +5299,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_set_led_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5317,8 +5317,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -5333,8 +5333,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -5364,7 +5364,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.setLed(script) : script;
             },
             syntax: {
@@ -5383,9 +5383,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -5400,9 +5400,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, null, '4'],
@@ -5420,9 +5420,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -5437,9 +5437,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, null, '6'],
@@ -5457,9 +5457,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -5474,9 +5474,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, null, '2'],
@@ -5494,9 +5494,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -5511,9 +5511,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, null, '3'],
@@ -5531,9 +5531,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -5548,9 +5548,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, null, '1'],
@@ -5568,9 +5568,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -5585,9 +5585,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, null, '5'],
@@ -5605,9 +5605,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -5622,9 +5622,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, null, '7'],
@@ -5633,8 +5633,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_clear_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5651,8 +5651,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -5680,7 +5680,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.clearLed(script) : script;
             },
             syntax: {
@@ -5702,9 +5702,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -5712,8 +5712,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_beep: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5745,7 +5745,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.beep(script) : script;
             },
             syntax: {
@@ -5764,8 +5764,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_change_buzzer_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5806,7 +5806,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.changeBuzzer(script) : script;
             },
             syntax: {
@@ -5829,8 +5829,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_set_buzzer_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5871,7 +5871,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.setBuzzer(script) : script;
             },
             syntax: {
@@ -5894,8 +5894,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_clear_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5927,7 +5927,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.clearBuzzer(script) : script;
             },
             syntax: {
@@ -5946,8 +5946,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_play_note: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5973,8 +5973,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -5989,8 +5989,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -6020,7 +6020,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.playNote(script) : script;
             },
             syntax: {
@@ -6048,9 +6048,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6065,9 +6065,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '4'],
@@ -6094,9 +6094,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6111,9 +6111,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '5'],
@@ -6140,9 +6140,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6157,9 +6157,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '6'],
@@ -6186,9 +6186,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6203,9 +6203,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '7'],
@@ -6232,9 +6232,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6249,9 +6249,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '8'],
@@ -6278,9 +6278,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6295,9 +6295,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '9'],
@@ -6324,9 +6324,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6341,9 +6341,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '10'],
@@ -6370,9 +6370,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6387,9 +6387,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '11'],
@@ -6416,9 +6416,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6433,9 +6433,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '12'],
@@ -6462,9 +6462,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6479,9 +6479,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '13'],
@@ -6508,9 +6508,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6525,9 +6525,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '14'],
@@ -6554,9 +6554,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6571,9 +6571,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '15'],
@@ -6582,8 +6582,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_play_note_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -6609,8 +6609,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -6625,8 +6625,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -6665,7 +6665,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.playNoteBeat(script) : script;
             },
             syntax: {
@@ -6693,9 +6693,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6710,9 +6710,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -6740,9 +6740,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6757,9 +6757,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -6787,9 +6787,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6804,9 +6804,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -6834,9 +6834,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6851,9 +6851,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -6881,9 +6881,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6898,9 +6898,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -6928,9 +6928,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6945,9 +6945,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -6975,9 +6975,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -6992,9 +6992,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -7022,9 +7022,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -7039,9 +7039,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -7069,9 +7069,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -7086,9 +7086,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -7116,9 +7116,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -7133,9 +7133,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -7163,9 +7163,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -7180,9 +7180,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -7210,9 +7210,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -7227,9 +7227,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -7239,8 +7239,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_rest_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -7281,7 +7281,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.restBeat(script) : script;
             },
             syntax: {
@@ -7304,8 +7304,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_change_tempo_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -7346,7 +7346,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.changeTempo(script) : script;
             },
             syntax: {
@@ -7369,8 +7369,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_set_tempo_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -7411,7 +7411,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.setTempo(script) : script;
             },
             syntax: {
@@ -7434,8 +7434,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_set_port_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -7452,8 +7452,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -7466,8 +7466,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -7497,7 +7497,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.setIoMode(script) : script;
             },
             syntax: {
@@ -7516,9 +7516,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -7531,9 +7531,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, null, '0'],
@@ -7551,9 +7551,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -7566,9 +7566,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, null, '1'],
@@ -7586,9 +7586,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -7601,9 +7601,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, null, '8'],
@@ -7621,9 +7621,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -7636,9 +7636,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, null, '9'],
@@ -7656,9 +7656,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -7671,9 +7671,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, null, '10'],
@@ -7682,8 +7682,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_change_output_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -7700,8 +7700,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -7738,7 +7738,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.changeOutput(script) : script;
             },
             syntax: {
@@ -7760,9 +7760,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -7774,8 +7774,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_set_output_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -7792,8 +7792,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -7830,7 +7830,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.setOutput(script) : script;
             },
             syntax: {
@@ -7852,9 +7852,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -7866,8 +7866,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_gripper: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -7883,8 +7883,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'OPEN',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -7912,7 +7912,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.gripper(script) : script;
             },
             syntax: {
@@ -7933,9 +7933,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'OPEN',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -7943,8 +7943,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_release_gripper: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -7976,7 +7976,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamster(index);
+                const robot = RoCode.Roboid.getHamster(index);
                 return robot ? robot.releaseGripper(script) : script;
             },
             syntax: {
@@ -7995,8 +7995,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_hand_found: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -8023,7 +8023,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.checkHandFound(script) : false;
             },
             syntax: {
@@ -8043,8 +8043,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_boolean: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -8070,8 +8070,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'TILT_FORWARD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -8093,7 +8093,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.checkBoolean(script) : false;
             },
             syntax: {
@@ -8124,9 +8124,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'TILT_FORWARD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -8134,8 +8134,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -8163,8 +8163,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT_PROXIMITY',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -8186,7 +8186,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 if (robot) {
                     return robot.getValue(script);
                 }
@@ -8227,9 +8227,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT_PROXIMITY',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -8237,8 +8237,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_move_forward_once: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -8270,7 +8270,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.boardForward(script) : script;
             },
             syntax: {
@@ -8289,8 +8289,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_turn_once: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -8306,8 +8306,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -8335,7 +8335,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.boardTurn(script) : script;
             },
             syntax: {
@@ -8356,9 +8356,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -8366,8 +8366,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_move_forward_unit: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -8388,8 +8388,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'CM',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -8422,7 +8422,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.moveForwardUnit(script) : script;
             },
             syntax: {
@@ -8448,9 +8448,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'CM',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -8458,8 +8458,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_move_backward_unit: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -8480,8 +8480,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'CM',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -8514,7 +8514,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.moveBackwardUnit(script) : script;
             },
             syntax: {
@@ -8540,9 +8540,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'CM',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -8550,8 +8550,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_turn_unit_in_place: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -8567,8 +8567,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -8583,8 +8583,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'DEG',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -8619,7 +8619,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.turnUnit(script) : script;
             },
             syntax: {
@@ -8640,9 +8640,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -8657,9 +8657,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'DEG',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -8667,8 +8667,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_pivot_around_unit_in_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -8686,8 +8686,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT_PEN',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -8702,8 +8702,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'DEG',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -8713,8 +8713,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'FORWARD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -8751,7 +8751,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.pivotUnit(script) : script;
             },
             syntax: {
@@ -8774,9 +8774,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT_PEN',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -8791,9 +8791,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'DEG',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -8803,9 +8803,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'FORWARD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -8813,8 +8813,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_turn_unit_with_radius_in_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -8831,8 +8831,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT_PEN',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -8842,8 +8842,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -8858,8 +8858,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'DEG',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -8873,8 +8873,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'FORWARD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -8918,7 +8918,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.swingUnit(script) : script;
             },
             syntax: {
@@ -8940,9 +8940,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT_PEN',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -8952,9 +8952,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -8969,9 +8969,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'DEG',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -8985,9 +8985,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'FORWARD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -8995,8 +8995,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_change_both_wheels_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9046,7 +9046,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.changeWheels(script) : script;
             },
             syntax: {
@@ -9073,8 +9073,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_set_both_wheels_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9124,7 +9124,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.setWheels(script) : script;
             },
             syntax: {
@@ -9151,8 +9151,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_change_wheel_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9169,8 +9169,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -9207,7 +9207,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.changeWheel(script) : script;
             },
             syntax: {
@@ -9229,9 +9229,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -9243,8 +9243,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_set_wheel_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9261,8 +9261,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -9299,7 +9299,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.setWheel(script) : script;
             },
             syntax: {
@@ -9321,9 +9321,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -9335,8 +9335,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_follow_line_using: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9352,8 +9352,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'BLACK',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -9364,8 +9364,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -9395,7 +9395,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.followLine(script) : script;
             },
             syntax: {
@@ -9416,9 +9416,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'BLACK',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -9429,9 +9429,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -9439,8 +9439,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_follow_line_until: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9456,8 +9456,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'BLACK',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -9469,8 +9469,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'FRONT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -9500,7 +9500,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.followLineUntil(script) : script;
             },
             syntax: {
@@ -9521,9 +9521,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'BLACK',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -9535,9 +9535,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'FRONT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -9545,8 +9545,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_set_following_speed_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9568,8 +9568,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -9597,7 +9597,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.setLineTracerSpeed(script) : script;
             },
             syntax: {
@@ -9624,9 +9624,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -9634,8 +9634,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_set_following_gain_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9658,8 +9658,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'DEFAULT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -9687,7 +9687,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.setLineTracerGain(script) : script;
             },
             syntax: {
@@ -9715,9 +9715,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'DEFAULT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -9725,8 +9725,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9758,7 +9758,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.stop(script) : script;
             },
             syntax: {
@@ -9777,8 +9777,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_set_led_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9795,8 +9795,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -9813,8 +9813,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -9844,7 +9844,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.setLed(script) : script;
             },
             syntax: {
@@ -9866,9 +9866,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -9885,9 +9885,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -9895,8 +9895,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_pick_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9913,8 +9913,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Color',
@@ -9947,7 +9947,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.pickLed(script) : script;
             },
             syntax: {
@@ -9969,13 +9969,13 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Color',
-                                converter: Entry.block.converters.returnStringValue,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -9983,8 +9983,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_change_led_by_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -10001,8 +10001,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -10057,7 +10057,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.changeRgb(script) : script;
             },
             syntax: {
@@ -10079,9 +10079,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -10101,8 +10101,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_set_led_to_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -10119,8 +10119,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -10175,7 +10175,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.setRgb(script) : script;
             },
             syntax: {
@@ -10197,9 +10197,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -10219,8 +10219,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_clear_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -10237,8 +10237,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -10266,7 +10266,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.clearLed(script) : script;
             },
             syntax: {
@@ -10288,9 +10288,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -10298,8 +10298,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_play_sound_times: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -10328,8 +10328,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'BEEP',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -10366,7 +10366,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.playSound(script) : script;
             },
             syntax: {
@@ -10400,9 +10400,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'BEEP',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -10414,8 +10414,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_play_sound_times_until_done: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -10444,8 +10444,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'BEEP',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -10482,7 +10482,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.playSoundUntil(script) : script;
             },
             syntax: {
@@ -10516,9 +10516,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'BEEP',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -10530,8 +10530,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_change_buzzer_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -10572,7 +10572,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.changeBuzzer(script) : script;
             },
             syntax: {
@@ -10595,8 +10595,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_set_buzzer_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -10637,7 +10637,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.setBuzzer(script) : script;
             },
             syntax: {
@@ -10660,8 +10660,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_clear_sound: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -10693,7 +10693,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.clearSound(script) : script;
             },
             syntax: {
@@ -10712,8 +10712,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_play_note: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -10739,8 +10739,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -10755,8 +10755,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -10786,7 +10786,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.playNote(script) : script;
             },
             syntax: {
@@ -10817,9 +10817,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'C',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -10834,9 +10834,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -10844,8 +10844,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_play_note_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -10871,8 +10871,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -10887,8 +10887,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -10927,7 +10927,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.playNoteBeat(script) : script;
             },
             syntax: {
@@ -10958,9 +10958,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'C',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -10975,9 +10975,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             {
                                 type: 'Block',
@@ -10989,8 +10989,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_rest_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -11031,7 +11031,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.restBeat(script) : script;
             },
             syntax: {
@@ -11054,8 +11054,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_change_tempo_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -11096,7 +11096,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.changeTempo(script) : script;
             },
             syntax: {
@@ -11119,8 +11119,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_set_tempo_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -11161,7 +11161,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.setTempo(script) : script;
             },
             syntax: {
@@ -11184,8 +11184,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_set_port_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -11202,8 +11202,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -11219,8 +11219,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'ANALOG_INPUT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -11250,7 +11250,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.setIoMode(script) : script;
             },
             syntax: {
@@ -11272,9 +11272,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -11296,9 +11296,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'ANALOG_INPUT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -11306,8 +11306,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_change_output_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -11324,8 +11324,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -11362,7 +11362,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.changeOutput(script) : script;
             },
             syntax: {
@@ -11384,9 +11384,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -11398,8 +11398,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_set_output_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -11416,8 +11416,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -11454,7 +11454,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.setOutput(script) : script;
             },
             syntax: {
@@ -11476,9 +11476,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -11490,8 +11490,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_gripper: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -11507,8 +11507,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'OPEN',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -11536,7 +11536,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.gripper(script) : script;
             },
             syntax: {
@@ -11557,9 +11557,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'OPEN',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -11567,8 +11567,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_release_gripper: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -11600,7 +11600,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.releaseGripper(script) : script;
             },
             syntax: {
@@ -11619,8 +11619,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_write_serial: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -11636,8 +11636,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'STRING',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -11674,7 +11674,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.writeSerial(script) : script;
             },
             syntax: {
@@ -11695,9 +11695,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'STRING',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -11709,8 +11709,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_read_serial_until: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -11730,8 +11730,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'ALL',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -11759,7 +11759,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.readSerialUntil(script) : script;
             },
             syntax: {
@@ -11784,9 +11784,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'ALL',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -11794,8 +11794,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_hamster_s_set_serial_rate_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -11817,8 +11817,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '9600',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -11846,7 +11846,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getHamsterS(index);
+                const robot = RoCode.Roboid.getHamsterS(index);
                 return robot ? robot.setSerialRate(script) : script;
             },
             syntax: {
@@ -11873,9 +11873,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '9600',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -11883,8 +11883,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_touching_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -11908,8 +11908,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -11931,7 +11931,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.checkTouchingColor(script) : false;
             },
             syntax: {
@@ -11957,9 +11957,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '2',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '2'],
@@ -11984,9 +11984,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '2',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '3'],
@@ -12011,9 +12011,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '2',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '4'],
@@ -12038,9 +12038,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '2',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '5'],
@@ -12065,9 +12065,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '2',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '6'],
@@ -12092,9 +12092,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '2',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '7'],
@@ -12119,9 +12119,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '2',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '8'],
@@ -12146,9 +12146,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '2',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '1'],
@@ -12173,9 +12173,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '2',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '9'],
@@ -12184,8 +12184,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_is_color_pattern: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -12206,8 +12206,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -12221,8 +12221,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -12246,7 +12246,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.checkColorPattern(script) : false;
             },
             syntax: {
@@ -12269,9 +12269,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12285,9 +12285,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '1', '1'],
@@ -12309,9 +12309,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12325,9 +12325,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '1', '3'],
@@ -12349,9 +12349,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12365,9 +12365,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '1', '4'],
@@ -12389,9 +12389,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12405,9 +12405,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '1', '5'],
@@ -12429,9 +12429,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12445,9 +12445,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '1', '6'],
@@ -12469,9 +12469,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12485,9 +12485,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '1', '7'],
@@ -12509,9 +12509,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12525,9 +12525,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '3', '1'],
@@ -12549,9 +12549,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12565,9 +12565,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '3', '3'],
@@ -12589,9 +12589,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12605,9 +12605,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '3', '4'],
@@ -12629,9 +12629,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12645,9 +12645,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '3', '5'],
@@ -12669,9 +12669,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12685,9 +12685,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '3', '6'],
@@ -12709,9 +12709,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12725,9 +12725,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '3', '7'],
@@ -12749,9 +12749,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12765,9 +12765,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '4', '1'],
@@ -12789,9 +12789,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12805,9 +12805,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '4', '3'],
@@ -12829,9 +12829,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12845,9 +12845,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '4', '4'],
@@ -12869,9 +12869,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12885,9 +12885,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '4', '5'],
@@ -12909,9 +12909,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12925,9 +12925,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '4', '6'],
@@ -12949,9 +12949,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -12965,9 +12965,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '4', '7'],
@@ -12989,9 +12989,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13005,9 +13005,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '5', '1'],
@@ -13029,9 +13029,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13045,9 +13045,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '5', '3'],
@@ -13069,9 +13069,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13085,9 +13085,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '5', '4'],
@@ -13109,9 +13109,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13125,9 +13125,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '5', '5'],
@@ -13149,9 +13149,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13165,9 +13165,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '5', '6'],
@@ -13189,9 +13189,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13205,9 +13205,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '5', '7'],
@@ -13229,9 +13229,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13245,9 +13245,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '6', '1'],
@@ -13269,9 +13269,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13285,9 +13285,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '6', '3'],
@@ -13309,9 +13309,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13325,9 +13325,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '6', '4'],
@@ -13349,9 +13349,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13365,9 +13365,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '6', '5'],
@@ -13389,9 +13389,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13405,9 +13405,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '6', '6'],
@@ -13429,9 +13429,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13445,9 +13445,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '6', '7'],
@@ -13469,9 +13469,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13485,9 +13485,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '7', '1'],
@@ -13509,9 +13509,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13525,9 +13525,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '7', '3'],
@@ -13549,9 +13549,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13565,9 +13565,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '7', '4'],
@@ -13589,9 +13589,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13605,9 +13605,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '7', '5'],
@@ -13629,9 +13629,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13645,9 +13645,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '7', '6'],
@@ -13669,9 +13669,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -13685,9 +13685,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '7', '7'],
@@ -13696,8 +13696,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_button_state: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -13715,8 +13715,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'clicked',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -13738,7 +13738,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.checkButtonState(script) : false;
             },
             syntax: {
@@ -13761,9 +13761,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'clicked',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -13771,8 +13771,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_boolean: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -13796,8 +13796,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'TILT_FORWARD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -13818,7 +13818,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.checkBoolean(script) : false;
             },
             syntax: {
@@ -13847,9 +13847,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'TILT_FORWARD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -13857,8 +13857,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -13880,8 +13880,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'colorNumber',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -13903,7 +13903,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 if (robot) {
                     return robot.getValue(script);
                 }
@@ -13932,9 +13932,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'colorNumber',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -13942,8 +13942,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_move_forward_unit: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -13964,8 +13964,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'CM',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -13998,7 +13998,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.moveForwardUnit(script) : script;
             },
             syntax: {
@@ -14024,9 +14024,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'CM',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -14034,8 +14034,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_move_backward_unit: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -14056,8 +14056,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'CM',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -14090,7 +14090,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.moveBackwardUnit(script) : script;
             },
             syntax: {
@@ -14116,9 +14116,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'CM',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -14126,8 +14126,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_turn_unit_in_place: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -14143,8 +14143,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -14159,8 +14159,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'DEG',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -14195,7 +14195,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.turnUnit(script) : script;
             },
             syntax: {
@@ -14216,9 +14216,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -14233,9 +14233,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'DEG',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -14243,8 +14243,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_turn_unit_with_radius_in_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -14260,8 +14260,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -14276,8 +14276,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'DEG',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -14291,8 +14291,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'HEAD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -14334,7 +14334,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.swingUnit(script) : script;
             },
             syntax: {
@@ -14355,9 +14355,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -14372,9 +14372,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'DEG',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -14388,9 +14388,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'HEAD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -14398,8 +14398,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_pivot_around_wheel_unit_in_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -14415,8 +14415,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -14431,8 +14431,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'DEG',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -14442,8 +14442,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'HEAD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -14480,7 +14480,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.pivotUnit(script) : script;
             },
             syntax: {
@@ -14501,9 +14501,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -14518,9 +14518,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'DEG',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -14530,9 +14530,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'HEAD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -14540,8 +14540,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_change_wheels_by_left_right: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -14591,7 +14591,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.changeWheels(script) : script;
             },
             syntax: {
@@ -14618,8 +14618,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_set_wheels_to_left_right: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -14669,7 +14669,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.setWheels(script) : script;
             },
             syntax: {
@@ -14696,8 +14696,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_change_wheel_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -14714,8 +14714,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -14752,7 +14752,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.changeWheel(script) : script;
             },
             syntax: {
@@ -14774,9 +14774,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -14788,8 +14788,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_set_wheel_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -14806,8 +14806,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -14844,7 +14844,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.setWheel(script) : script;
             },
             syntax: {
@@ -14866,9 +14866,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -14880,8 +14880,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_follow_line: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -14900,8 +14900,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '10',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -14929,7 +14929,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.followLine(script) : script;
             },
             syntax: {
@@ -14950,9 +14950,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '10',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '10'],
@@ -14972,9 +14972,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '10',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '11'],
@@ -14994,9 +14994,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '10',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '13'],
@@ -15016,9 +15016,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '10',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '15'],
@@ -15038,9 +15038,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '10',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '17'],
@@ -15049,8 +15049,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_follow_line_until: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -15071,8 +15071,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '61',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -15100,7 +15100,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.followLineUntil(script) : script;
             },
             syntax: {
@@ -15123,9 +15123,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '61',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '61'],
@@ -15147,9 +15147,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '61',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '62'],
@@ -15171,9 +15171,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '61',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '63'],
@@ -15195,9 +15195,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '61',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '64'],
@@ -15219,9 +15219,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '61',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '65'],
@@ -15243,9 +15243,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '61',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '66'],
@@ -15267,9 +15267,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '61',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '67'],
@@ -15278,8 +15278,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_follow_line_until_black: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -15297,8 +15297,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '71',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -15326,7 +15326,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.followLineUntilBlack(script) : script;
             },
             syntax: {
@@ -15346,9 +15346,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '71',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '71'],
@@ -15367,9 +15367,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '71',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '73'],
@@ -15388,9 +15388,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '71',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '75'],
@@ -15409,9 +15409,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '71',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '77'],
@@ -15420,8 +15420,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_cross_intersection: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -15453,7 +15453,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.crossIntersection(script) : script;
             },
             syntax: {
@@ -15472,8 +15472,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_turn_at_intersection: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -15490,8 +15490,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '20',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -15519,7 +15519,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.turnAtIntersection(script) : script;
             },
             syntax: {
@@ -15541,9 +15541,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '20',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '20'],
@@ -15564,9 +15564,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '20',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '30'],
@@ -15587,9 +15587,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '20',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '50'],
@@ -15598,8 +15598,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_set_following_speed_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -15621,8 +15621,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -15650,7 +15650,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.setLineTracerSpeed(script) : script;
             },
             syntax: {
@@ -15677,9 +15677,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -15687,8 +15687,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -15720,7 +15720,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.stop(script) : script;
             },
             syntax: {
@@ -15739,8 +15739,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_set_head_led_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -15763,8 +15763,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -15792,7 +15792,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.setHeadColor(script) : script;
             },
             syntax: {
@@ -15820,9 +15820,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -15830,8 +15830,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_pick_head_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -15868,7 +15868,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.pickHeadColor(script) : script;
             },
             syntax: {
@@ -15883,7 +15883,7 @@ Entry.Roboid.getBlocks = function() {
                             },
                             {
                                 type: 'Color',
-                                converter: Entry.block.converters.returnStringValue,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -15891,8 +15891,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_change_head_led_by_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -15951,7 +15951,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.changeHeadRgb(script) : script;
             },
             syntax: {
@@ -15982,8 +15982,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_set_head_led_to_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -16042,7 +16042,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.setHeadRgb(script) : script;
             },
             syntax: {
@@ -16073,8 +16073,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_clear_head_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -16106,7 +16106,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.clearHead(script) : script;
             },
             syntax: {
@@ -16125,8 +16125,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_play_sound_times: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -16149,8 +16149,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -16187,7 +16187,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.playSound(script) : script;
             },
             syntax: {
@@ -16212,9 +16212,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16239,9 +16239,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16266,9 +16266,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16293,9 +16293,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16320,9 +16320,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16347,9 +16347,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16374,9 +16374,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16401,9 +16401,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16428,9 +16428,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16440,8 +16440,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_play_sound_times_until_done: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -16464,8 +16464,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -16502,7 +16502,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.playSoundUntil(script) : script;
             },
             syntax: {
@@ -16527,9 +16527,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16554,9 +16554,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16581,9 +16581,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16608,9 +16608,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16635,9 +16635,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16662,9 +16662,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16689,9 +16689,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16716,9 +16716,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16743,9 +16743,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -16755,8 +16755,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_change_buzzer_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -16797,7 +16797,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.changeBuzzer(script) : script;
             },
             syntax: {
@@ -16820,8 +16820,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_set_buzzer_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -16862,7 +16862,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.setBuzzer(script) : script;
             },
             syntax: {
@@ -16885,8 +16885,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_clear_sound: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -16918,7 +16918,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.clearSound(script) : script;
             },
             syntax: {
@@ -16938,8 +16938,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_play_note: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -16965,8 +16965,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -16981,8 +16981,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -17012,7 +17012,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.playNote(script) : script;
             },
             syntax: {
@@ -17040,9 +17040,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17057,9 +17057,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '4'],
@@ -17086,9 +17086,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17103,9 +17103,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '5'],
@@ -17132,9 +17132,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17149,9 +17149,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '6'],
@@ -17178,9 +17178,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17195,9 +17195,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '7'],
@@ -17224,9 +17224,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17241,9 +17241,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '8'],
@@ -17270,9 +17270,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17287,9 +17287,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '9'],
@@ -17316,9 +17316,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17333,9 +17333,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '10'],
@@ -17362,9 +17362,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17379,9 +17379,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '11'],
@@ -17408,9 +17408,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17425,9 +17425,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '12'],
@@ -17454,9 +17454,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17471,9 +17471,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '13'],
@@ -17500,9 +17500,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17517,9 +17517,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '14'],
@@ -17546,9 +17546,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17563,9 +17563,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: [null, '15'],
@@ -17574,8 +17574,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_play_note_for_beats: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -17601,8 +17601,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -17617,8 +17617,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -17657,7 +17657,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.playNoteBeat(script) : script;
             },
             syntax: {
@@ -17685,9 +17685,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17702,9 +17702,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -17732,9 +17732,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17749,9 +17749,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -17779,9 +17779,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17796,9 +17796,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -17826,9 +17826,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17843,9 +17843,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -17873,9 +17873,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17890,9 +17890,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -17920,9 +17920,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17937,9 +17937,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -17967,9 +17967,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -17984,9 +17984,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -18014,9 +18014,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -18031,9 +18031,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -18061,9 +18061,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -18078,9 +18078,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -18108,9 +18108,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -18125,9 +18125,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -18155,9 +18155,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -18172,9 +18172,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -18202,9 +18202,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -18219,9 +18219,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -18231,8 +18231,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_rest_for_beats: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -18273,7 +18273,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.restBeat(script) : script;
             },
             syntax: {
@@ -18296,8 +18296,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_change_tempo_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -18338,7 +18338,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.changeTempo(script) : script;
             },
             syntax: {
@@ -18361,8 +18361,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_turtle_set_tempo_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -18403,7 +18403,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getTurtle(index);
+                const robot = RoCode.Roboid.getTurtle(index);
                 return robot ? robot.setTempo(script) : script;
             },
             syntax: {
@@ -18426,8 +18426,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -18446,8 +18446,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'ACCELERATION_X',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -18469,7 +18469,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 if (robot) {
                     return robot.getValue(script);
                 }
@@ -18498,9 +18498,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'ACCELERATION_X',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -18508,8 +18508,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_boolean: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -18535,8 +18535,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'TILT_NOT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -18558,7 +18558,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.checkBoolean(script) : false;
             },
             syntax: {
@@ -18589,9 +18589,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'TILT_NOT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -18599,8 +18599,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_play_sound_times: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -18629,8 +18629,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'BEEP',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -18667,7 +18667,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.playSound(script) : script;
             },
             syntax: {
@@ -18701,9 +18701,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'BEEP',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -18712,8 +18712,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_play_sound_times_until_done: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -18742,8 +18742,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'BEEP',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -18780,7 +18780,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.playSoundUntil(script) : script;
             },
             syntax: {
@@ -18814,9 +18814,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'BEEP',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -18825,8 +18825,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_change_buzzer_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -18867,7 +18867,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.changeBuzzer(script) : script;
             },
             syntax: {
@@ -18880,8 +18880,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_set_buzzer_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -18922,7 +18922,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setBuzzer(script) : script;
             },
             syntax: {
@@ -18935,8 +18935,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_clear_sound: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -18968,7 +18968,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.clearSound(script) : script;
             },
             syntax: {
@@ -18981,8 +18981,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_play_note: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -19008,8 +19008,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -19024,8 +19024,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -19055,7 +19055,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.playNote(script) : script;
             },
             syntax: {
@@ -19086,9 +19086,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'C',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -19103,9 +19103,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -19113,8 +19113,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_play_note_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -19140,8 +19140,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -19156,8 +19156,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -19196,7 +19196,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.playNoteBeat(script) : script;
             },
             syntax: {
@@ -19227,9 +19227,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'C',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -19244,9 +19244,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -19255,8 +19255,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_rest_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -19297,7 +19297,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.restBeat(script) : script;
             },
             syntax: {
@@ -19320,8 +19320,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_change_tempo_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -19362,7 +19362,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.changeTempo(script) : script;
             },
             syntax: {
@@ -19385,8 +19385,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_set_tempo_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -19427,7 +19427,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setTempo(script) : script;
             },
             syntax: {
@@ -19450,8 +19450,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_set_sound_port_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -19467,8 +19467,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'INTERNAL',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -19496,7 +19496,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setSoundPort(script) : script;
             },
             syntax: {
@@ -19517,9 +19517,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'INTERNAL',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -19527,8 +19527,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_set_input_mode_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -19548,8 +19548,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -19563,8 +19563,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'MAKEY',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -19594,7 +19594,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setInputModeTo(script) : script;
             },
             syntax: {
@@ -19619,9 +19619,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -19638,9 +19638,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'MAKEY',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -19648,8 +19648,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_set_input_range_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -19669,8 +19669,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -19696,8 +19696,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'INTEGER',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -19747,7 +19747,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setInputRangeTo(script) : script;
             },
             syntax: {
@@ -19772,9 +19772,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -19800,8 +19800,8 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'INTEGER',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                     },
@@ -19809,8 +19809,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_set_three_input_ranges_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -19830,8 +19830,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -19865,8 +19865,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'INTEGER',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -19926,7 +19926,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setThreeInputRangesTo(script) : script;
             },
             syntax: {
@@ -19952,9 +19952,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -19988,8 +19988,8 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'INTEGER',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                     },
@@ -19997,8 +19997,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_analog_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -20019,8 +20019,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -20042,7 +20042,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 if (robot) {
                     return robot.getAnalogInput(script);
                 }
@@ -20070,9 +20070,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -20080,8 +20080,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_digital_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -20102,8 +20102,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -20113,8 +20113,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -20138,7 +20138,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.checkDigitalInput(script) : false;
             },
             syntax: {
@@ -20164,9 +20164,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -20176,9 +20176,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -20186,8 +20186,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_button_state: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -20208,8 +20208,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -20219,8 +20219,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'CLICKED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -20244,7 +20244,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.checkButtonState(script) : false;
             },
             syntax: {
@@ -20270,9 +20270,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -20282,9 +20282,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'CLICKED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -20292,8 +20292,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_set_pulse_mode_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -20309,8 +20309,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'SC',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -20321,8 +20321,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'PULSE',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -20352,7 +20352,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setInputModeTo(script) : script;
             },
             syntax: {
@@ -20373,9 +20373,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'SC',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -20386,9 +20386,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'PULSE',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -20396,8 +20396,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_pulse_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -20414,8 +20414,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'SC',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -20437,7 +20437,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.checkPulseInput(script) : false;
             },
             syntax: {
@@ -20459,9 +20459,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'SC',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -20469,8 +20469,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_set_digital_output_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -20492,8 +20492,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -20503,8 +20503,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -20534,7 +20534,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setDigitalOutput(script) : script;
             },
             syntax: {
@@ -20561,9 +20561,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -20573,9 +20573,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -20583,8 +20583,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_change_pwm_output_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -20604,8 +20604,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -20642,7 +20642,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.changePwmOutput(script) : script;
             },
             syntax: {
@@ -20667,9 +20667,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -20681,8 +20681,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_set_pwm_output_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -20702,8 +20702,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -20740,7 +20740,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setPwmOutput(script) : script;
             },
             syntax: {
@@ -20765,9 +20765,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -20779,8 +20779,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_change_servo_motor_angle_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -20803,8 +20803,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -20841,7 +20841,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.changeServoMotorAngle(script) : script;
             },
             syntax: {
@@ -20869,9 +20869,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -20883,8 +20883,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_set_servo_motor_angle_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -20907,8 +20907,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -20945,7 +20945,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setServoMotorAngle(script) : script;
             },
             syntax: {
@@ -20973,9 +20973,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -20987,8 +20987,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_turn_off_servo_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -21011,8 +21011,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -21040,7 +21040,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.turnOffServoMotor(script) : script;
             },
             syntax: {
@@ -21068,9 +21068,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -21078,8 +21078,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_change_dc_motor_velocity_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -21095,8 +21095,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'MAB',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -21133,7 +21133,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.changeDcMotorVelocity(script) : script;
             },
             syntax: {
@@ -21154,9 +21154,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'MAB',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -21168,8 +21168,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_set_dc_motor_velocity_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -21185,8 +21185,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'MAB',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -21223,7 +21223,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setDcMotorVelocity(script) : script;
             },
             syntax: {
@@ -21244,9 +21244,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'MAB',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -21258,8 +21258,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_stop_dc_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -21275,8 +21275,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'MAB',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -21304,7 +21304,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.stopDcMotor(script) : script;
             },
             syntax: {
@@ -21325,9 +21325,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'MAB',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -21335,8 +21335,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_rotate_step_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -21386,7 +21386,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.rotateStepMotor(script) : script;
             },
             syntax: {
@@ -21413,8 +21413,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_change_step_motor_velocity_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -21455,7 +21455,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.changeStepMotorVelocity(script) : script;
             },
             syntax: {
@@ -21478,8 +21478,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_set_step_motor_velocity_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -21520,7 +21520,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setStepMotorVelocity(script) : script;
             },
             syntax: {
@@ -21543,8 +21543,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_stop_off_step_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -21560,8 +21560,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'STOP',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -21589,7 +21589,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.stopOffStepMotor(script) : script;
             },
             syntax: {
@@ -21610,9 +21610,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'STOP',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -21620,8 +21620,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_set_step_motor_mode_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -21637,8 +21637,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'NORMAL',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -21666,7 +21666,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setStepMotorMode(script) : script;
             },
             syntax: {
@@ -21687,9 +21687,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'NORMAL',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -21697,8 +21697,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_step_count: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -21726,7 +21726,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 if (robot) {
                     return robot.getStepCount(script);
                 }
@@ -21742,8 +21742,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_set_led_to_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -21759,8 +21759,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'L',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -21771,8 +21771,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'NORMAL',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -21789,8 +21789,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -21822,7 +21822,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setLedColor(script) : script;
             },
             syntax: {
@@ -21843,9 +21843,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'L',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -21856,9 +21856,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'NORMAL',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -21875,9 +21875,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -21885,8 +21885,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_pick_led_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -21902,8 +21902,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'L',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Color',
@@ -21936,7 +21936,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setLedRgbArray(script) : script;
             },
             syntax: {
@@ -21957,13 +21957,13 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'L',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Color',
-                                converter: Entry.block.converters.returnStringValue,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -21971,8 +21971,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_change_led_by_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -21988,8 +21988,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'L',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -22044,7 +22044,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.changeLedRgb(script) : script;
             },
             syntax: {
@@ -22065,9 +22065,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'L',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -22087,8 +22087,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_setLed_to_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -22104,8 +22104,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'L',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -22160,7 +22160,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setLedRgb(script) : script;
             },
             syntax: {
@@ -22181,9 +22181,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'L',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -22203,8 +22203,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_clear_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -22220,8 +22220,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'L',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -22249,7 +22249,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.clearLed(script) : script;
             },
             syntax: {
@@ -22270,9 +22270,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'L',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -22280,8 +22280,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_set_led_type_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -22297,8 +22297,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'L',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -22319,8 +22319,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'DEFAULT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -22350,7 +22350,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setLedType(script) : script;
             },
             syntax: {
@@ -22371,9 +22371,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'L',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -22394,9 +22394,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'DEFAULT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -22404,8 +22404,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_set_number_and_type_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -22425,8 +22425,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'GRB',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -22459,7 +22459,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelSetNumberAndType(script) : script;
             },
             syntax: {
@@ -22484,9 +22484,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'GRB',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -22494,8 +22494,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_set_all_leds_to_pattern: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -22532,8 +22532,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'FILL_3_COLORS',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -22561,7 +22561,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelSetAllPattern(script) : script;
             },
             syntax: {
@@ -22621,9 +22621,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'FILL_3_COLORS',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -22631,8 +22631,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_set_all_leds_to_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -22655,8 +22655,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -22684,7 +22684,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelSetAllColor(script) : script;
             },
             syntax: {
@@ -22712,9 +22712,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -22722,8 +22722,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_pick_all_leds_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -22760,7 +22760,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelSetAllRgbArray(script) : script;
             },
             syntax: {
@@ -22775,7 +22775,7 @@ Entry.Roboid.getBlocks = function() {
                             },
                             {
                                 type: 'Color',
-                                converter: Entry.block.converters.returnStringValue,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -22783,8 +22783,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_change_all_leds_by_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -22843,7 +22843,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelChangeAllRgb(script) : script;
             },
             syntax: {
@@ -22874,8 +22874,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_set_all_leds_to_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -22934,7 +22934,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelSetAllRgb(script) : script;
             },
             syntax: {
@@ -22965,8 +22965,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_clear_all_leds: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -22998,7 +22998,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelClearAll(script) : script;
             },
             syntax: {
@@ -23011,8 +23011,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_set_led_to_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -23039,8 +23039,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -23073,7 +23073,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelSetLedColor(script) : script;
             },
             syntax: {
@@ -23105,9 +23105,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -23115,8 +23115,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_pick_led_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -23162,7 +23162,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelSetLedRgbArray(script) : script;
             },
             syntax: {
@@ -23181,7 +23181,7 @@ Entry.Roboid.getBlocks = function() {
                             },
                             {
                                 type: 'Color',
-                                converter: Entry.block.converters.returnStringValue,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -23189,8 +23189,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_change_led_by_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -23258,7 +23258,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelChangeLedRgb(script) : script;
             },
             syntax: {
@@ -23293,8 +23293,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_set_led_to_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -23362,7 +23362,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelSetLedRgb(script) : script;
             },
             syntax: {
@@ -23397,8 +23397,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_clear_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -23439,7 +23439,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelClearLed(script) : script;
             },
             syntax: {
@@ -23462,8 +23462,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_set_led_range_to_pattern: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -23508,8 +23508,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'FILL_3_COLORS',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -23547,7 +23547,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelSetRangePattern(script) : script;
             },
             syntax: {
@@ -23615,9 +23615,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'FILL_3_COLORS',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -23625,8 +23625,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_set_led_range_to_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -23661,8 +23661,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -23705,7 +23705,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelSetRangeColor(script) : script;
             },
             syntax: {
@@ -23745,9 +23745,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -23755,8 +23755,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_pick_led_range_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -23820,7 +23820,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelSetRangeRgbArray(script) : script;
             },
             syntax: {
@@ -23847,7 +23847,7 @@ Entry.Roboid.getBlocks = function() {
                             },
                             {
                                 type: 'Color',
-                                converter: Entry.block.converters.returnStringValue,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -23855,8 +23855,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_change_led_range_by_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -23942,7 +23942,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelChangeRangeRgb(script) : script;
             },
             syntax: {
@@ -23985,8 +23985,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_set_led_range_to_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -24072,7 +24072,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelSetRangeRgb(script) : script;
             },
             syntax: {
@@ -24115,8 +24115,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_clear_led_range: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -24175,7 +24175,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelClearRange(script) : script;
             },
             syntax: {
@@ -24206,8 +24206,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_shift: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -24248,7 +24248,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelShift(script) : script;
             },
             syntax: {
@@ -24271,8 +24271,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_rotate: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -24313,7 +24313,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelRotate(script) : script;
             },
             syntax: {
@@ -24336,8 +24336,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_change_brightness_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -24378,7 +24378,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelChangeBrightness(script) : script;
             },
             syntax: {
@@ -24401,8 +24401,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_neopixel_set_brightness_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -24443,7 +24443,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.neopixelSetBrightness(script) : script;
             },
             syntax: {
@@ -24466,8 +24466,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_write_serial: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -24483,8 +24483,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'STRING',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -24521,7 +24521,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.writeSerial(script) : script;
             },
             syntax: {
@@ -24542,9 +24542,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'STRING',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -24556,8 +24556,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_read_serial_until: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -24577,8 +24577,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'ALL',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -24606,7 +24606,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.readSerialUntil(script) : script;
             },
             syntax: {
@@ -24631,9 +24631,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'ALL',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -24641,8 +24641,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_set_serial_port_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -24660,8 +24660,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'WRITE_READ',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -24689,7 +24689,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setSerialPort(script) : script;
             },
             syntax: {
@@ -24712,9 +24712,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'WRITE_READ',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -24722,8 +24722,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_set_serial_rate_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -24745,8 +24745,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '9600',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -24774,7 +24774,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.setSerialRate(script) : script;
             },
             syntax: {
@@ -24801,9 +24801,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '9600',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -24811,8 +24811,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_serial_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -24839,7 +24839,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 if (robot) {
                     return robot.getSerialInput(script);
                 }
@@ -24855,8 +24855,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_pid_start: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -24879,8 +24879,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '10',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -24908,7 +24908,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.pidStart(script) : script;
             },
             syntax: {
@@ -24936,9 +24936,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '10',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -24946,8 +24946,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_pid_set_range_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -24965,8 +24965,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'X1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -24992,8 +24992,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'INTEGER',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -25043,7 +25043,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.pidSetRangeTo(script) : script;
             },
             syntax: {
@@ -25066,9 +25066,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'X1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -25094,8 +25094,8 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'INTEGER',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                     },
@@ -25103,8 +25103,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_pid_set_three_ranges_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -25122,8 +25122,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'X1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -25157,8 +25157,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'INTEGER',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -25218,7 +25218,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.pidSetThreeRangesTo(script) : script;
             },
             syntax: {
@@ -25242,9 +25242,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'X1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -25278,8 +25278,8 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'INTEGER',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                     },
@@ -25287,8 +25287,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_pid_reset_encoder: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -25320,7 +25320,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.pidResetEncoder(script) : script;
             },
             syntax: {
@@ -25333,8 +25333,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_pid_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -25359,8 +25359,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'DISTANCE',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -25382,7 +25382,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 if (robot) {
                     return robot.pidGetInput(script);
                 }
@@ -25414,9 +25414,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'DISTANCE',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -25424,8 +25424,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_pid_button_state: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -25442,8 +25442,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -25453,8 +25453,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'CLICKED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -25478,7 +25478,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.pidCheckButtonState(script) : false;
             },
             syntax: {
@@ -25500,9 +25500,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -25512,9 +25512,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'CLICKED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -25522,8 +25522,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_start: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -25555,7 +25555,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010Start(script) : script;
             },
             syntax: {
@@ -25568,8 +25568,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -25586,8 +25586,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -25609,7 +25609,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 if (robot) {
                     return robot.hat010GetButton(script);
                 }
@@ -25633,9 +25633,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -25643,8 +25643,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_button_state: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -25661,8 +25661,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -25672,8 +25672,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'CLICKED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -25697,7 +25697,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010CheckButtonState(script) : false;
             },
             syntax: {
@@ -25719,9 +25719,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -25732,9 +25732,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'CLICKED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -25742,8 +25742,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_background_turn_on_xy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -25774,8 +25774,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -25813,7 +25813,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010BackgroundTurnOnXY(script) : script;
             },
             syntax: {
@@ -25849,9 +25849,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -25859,8 +25859,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_background_turn_off_xy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -25910,7 +25910,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010BackgroundTurnOffXY(script) : script;
             },
             syntax: {
@@ -25937,8 +25937,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_background_draw_shape_at_xy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -25961,8 +25961,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -25993,8 +25993,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'SQUARE',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -26042,7 +26042,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010BackgroundDrawShapeAtXY(script) : script;
             },
             syntax: {
@@ -26070,9 +26070,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -26103,9 +26103,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'SQUARE',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -26121,8 +26121,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_background_draw_string_at_xy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -26145,8 +26145,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -26201,7 +26201,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010BackgroundDrawStringAtXY(script) : script;
             },
             syntax: {
@@ -26229,9 +26229,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -26251,8 +26251,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_background_draw_pattern_at_xy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -26275,8 +26275,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -26331,7 +26331,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010BackgroundDrawPatternAtXY(script) : script;
             },
             syntax: {
@@ -26359,9 +26359,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -26381,8 +26381,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_clear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -26398,8 +26398,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'BACKGROUND',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -26427,7 +26427,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010Clear(script) : script;
             },
             syntax: {
@@ -26448,9 +26448,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'BACKGROUND',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -26458,8 +26458,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_scroll_by_xy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -26475,8 +26475,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'BACKGROUND',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -26522,7 +26522,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010ScrollByXY(script) : script;
             },
             syntax: {
@@ -26543,9 +26543,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'BACKGROUND',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -26561,8 +26561,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_sprite_set_to_shape: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -26589,8 +26589,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -26621,8 +26621,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'SQUARE',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -26657,7 +26657,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010SpriteSetToShape(script) : script;
             },
             syntax: {
@@ -26689,9 +26689,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -26722,9 +26722,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'SQUARE',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -26732,8 +26732,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_sprite_set_to_string: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -26760,8 +26760,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -26803,7 +26803,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010SpriteSetToString(script) : script;
             },
             syntax: {
@@ -26835,9 +26835,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -26849,8 +26849,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_sprite_set_to_pattern: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -26877,8 +26877,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -26920,7 +26920,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010SpriteSetToPattern(script) : script;
             },
             syntax: {
@@ -26952,9 +26952,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -26966,8 +26966,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_sprite_clear_show_hide: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -26988,8 +26988,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'CLEAR',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -27022,7 +27022,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010SpriteClearShowHide(script) : script;
             },
             syntax: {
@@ -27048,9 +27048,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'CLEAR',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -27058,8 +27058,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_sprite_change_positions_by_xy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -27118,7 +27118,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010SpriteChangePositionsByXY(script) : script;
             },
             syntax: {
@@ -27149,8 +27149,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_sprite_set_positions_to_xy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -27209,7 +27209,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010SpriteSetPositionsToXY(script) : script;
             },
             syntax: {
@@ -27240,8 +27240,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_sprite_change_position_by_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -27261,8 +27261,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'X',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -27304,7 +27304,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010SpriteChangePositionByValue(script) : script;
             },
             syntax: {
@@ -27329,9 +27329,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'X',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -27343,8 +27343,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_sprite_set_position_to_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -27364,8 +27364,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'X',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -27407,7 +27407,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010SpriteSetPositionToValue(script) : script;
             },
             syntax: {
@@ -27432,9 +27432,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'X',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -27446,8 +27446,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_sprite_rotate: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -27467,8 +27467,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'CLOCKWISE',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -27501,7 +27501,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010SpriteRotate(script) : script;
             },
             syntax: {
@@ -27526,9 +27526,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'CLOCKWISE',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -27536,8 +27536,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_sprite_flip_in_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -27557,8 +27557,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'LEFT_RIGHT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -27591,7 +27591,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010SpriteFlipInDirection(script) : script;
             },
             syntax: {
@@ -27616,9 +27616,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'LEFT_RIGHT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -27626,8 +27626,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_sprite_stamp_to_background: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -27668,7 +27668,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010SpriteStampToBackground(script) : script;
             },
             syntax: {
@@ -27691,8 +27691,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_sprite_position: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -27713,8 +27713,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'X',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -27741,7 +27741,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 if (robot) {
                     return robot.hat010GetSpritePosition(script);
                 }
@@ -27769,9 +27769,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'X',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -27779,8 +27779,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_sprite_touching_sprite: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -27825,7 +27825,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010CheckCheckSpriteSpriteTouched(script) : false;
             },
             syntax: {
@@ -27853,8 +27853,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_sprite_touching: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -27880,8 +27880,8 @@ Entry.Roboid.getBlocks = function() {
                     ],
                     value: 'BACKGROUND',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -27908,7 +27908,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010CheckCheckSpriteTouched(script) : false;
             },
             syntax: {
@@ -27939,9 +27939,9 @@ Entry.Roboid.getBlocks = function() {
                                 ],
                                 value: 'BACKGROUND',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -27949,8 +27949,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_change_brightness_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -27991,7 +27991,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010ChangeBrightnessBy(script) : script;
             },
             syntax: {
@@ -28014,8 +28014,8 @@ Entry.Roboid.getBlocks = function() {
             },
         },
         roboid_cheese_hat010_set_brightness_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -28056,7 +28056,7 @@ Entry.Roboid.getBlocks = function() {
             isNotFor: ['roboid'],
             func(sprite, script) {
                 const index = script.getNumberValue('INDEX');
-                const robot = Entry.Roboid.getCheese(index);
+                const robot = RoCode.Roboid.getCheese(index);
                 return robot ? robot.hat010SetBrightnessTo(script) : script;
             },
             syntax: {
@@ -28081,4 +28081,4 @@ Entry.Roboid.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Roboid;
+module.exports = RoCode.Roboid;

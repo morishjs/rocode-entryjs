@@ -27,9 +27,9 @@ function scriptCheck(script) {
     return true;
 }
 
-Entry.isDefaultProject = function(project) {
+RoCode.isDefaultProject = function(project) {
     try {
-        if (Entry.stateManager.undoStack_.length) {
+        if (RoCode.stateManager.undoStack_.length) {
             return false;
         }
 
@@ -67,13 +67,13 @@ Entry.isDefaultProject = function(project) {
             'aiUtilizeBlocks',
             'speed',
         ]);
-        return isMatch(Entry.getStartProject(), pickData);
+        return isMatch(RoCode.getStartProject(), pickData);
     } catch (e) {
         return false;
     }
 };
 
-Entry.getStartProject = function(mediaFilePath) {
+RoCode.getStartProject = function(mediaFilePath) {
     return {
         category: Lang.Menus.other,
         scenes: [
@@ -111,10 +111,10 @@ Entry.getStartProject = function(mediaFilePath) {
         objects: [
             {
                 id: '7y0y',
-                name: Lang.Blocks.entry_bot_name,
+                name: Lang.Blocks.RoCode_bot_name,
                 label: {
                     ko: '엔트리봇',
-                    en: 'Entrybot',
+                    en: 'RoCodebot',
                 },
                 script: [
                     [
@@ -150,8 +150,8 @@ Entry.getStartProject = function(mediaFilePath) {
                     pictures: [
                         {
                             id: 'vx80',
-                            fileurl: `${mediaFilePath}media/entrybot1.png`,
-                            name: `${Lang.Blocks.walking_entryBot}1`,
+                            fileurl: `${mediaFilePath}media/RoCodebot1.png`,
+                            name: `${Lang.Blocks.walking_RoCodeBot}1`,
                             scale: 100,
                             dimension: {
                                 width: 284,
@@ -160,8 +160,8 @@ Entry.getStartProject = function(mediaFilePath) {
                         },
                         {
                             id: '4t48',
-                            fileurl: `${mediaFilePath}media/entrybot2.png`,
-                            name: `${Lang.Blocks.walking_entryBot}2`,
+                            fileurl: `${mediaFilePath}media/RoCodebot2.png`,
+                            name: `${Lang.Blocks.walking_RoCodeBot}2`,
                             scale: 100,
                             dimension: {
                                 width: 284,

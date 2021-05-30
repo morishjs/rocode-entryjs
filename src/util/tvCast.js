@@ -1,4 +1,4 @@
-Entry.TvCast = class TvCast {
+RoCode.TvCast = class TvCast {
     constructor(tvCast) {
         this.generateView(tvCast);
     }
@@ -7,11 +7,11 @@ Entry.TvCast = class TvCast {
     }
 
     generateView(tvCastHash) {
-        const movieContainer = Entry.createElement('div');
-        movieContainer.addClass('entryContainerMovieWorkspace');
-        movieContainer.addClass('entryRemove');
+        const movieContainer = RoCode.createElement('div');
+        movieContainer.addClass('RoCodeContainerMovieWorkspace');
+        movieContainer.addClass('RoCodeRemove');
 
-        const iframe = Entry.createElement('iframe');
+        const iframe = RoCode.createElement('iframe');
         iframe.setAttribute('id', 'tvCastIframe');
         iframe.setAttribute('allowfullscreen', '');
         iframe.setAttribute('frameborder', 0);

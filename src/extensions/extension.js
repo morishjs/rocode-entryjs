@@ -8,8 +8,8 @@ export default class Extension {
 
     renderView() {
         if (!this.#view) {
-            this.#view = Entry.Dom('div', {
-                class: 'entryExtension',
+            this.#view = RoCode.Dom('div', {
+                class: 'RoCodeExtension',
                 parent: $('body'),
             });
         }

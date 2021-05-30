@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.jikko = {
+RoCode.jikko = {
     id: '47.1',
     name: 'jikko',
     url: 'http://www.makeitall.co.kr',
@@ -15,24 +15,24 @@ Entry.jikko = {
 
     //정지시 초기화 함수
     setZero: function() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            var keySet = Object.keys(Entry.hw.sendQueue.SET);
+            var keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach((key) => {
-                if (Entry.hw.sendQueue.SET[key].type == Entry.jikko.sensorTypes.SERVO) {
-                    Entry.hw.sendQueue.SET[key].data = 200;
-                    Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                if (RoCode.hw.sendQueue.SET[key].type == RoCode.jikko.sensorTypes.SERVO) {
+                    RoCode.hw.sendQueue.SET[key].data = 200;
+                    RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
                 } else {
-                    Entry.hw.sendQueue.SET[key].data = 0;
-                    Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                    RoCode.hw.sendQueue.SET[key].data = 0;
+                    RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
                 }
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     sensorTypes: {
         ALIVE: 0,
@@ -132,7 +132,7 @@ Entry.jikko = {
     lowList: ['low', '0', 'off'],
     BlockState: {},
 };
-Entry.jikko.setLanguage = function() {
+RoCode.jikko.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -290,7 +290,7 @@ Entry.jikko.setLanguage = function() {
         },
     };
 };
-Entry.jikko.blockMenuBlocks = [
+RoCode.jikko.blockMenuBlocks = [
     'jikko_set_digital_toggle',
     'jikko_get_analog_value',
     'jikko_get_digital',
@@ -359,7 +359,7 @@ Entry.jikko.blockMenuBlocks = [
     // 'jikko_get_digital_bluetooth',
     // 'jikko_module_digital_bluetooth',
 ];
-Entry.jikko.getBlocks = function() {
+RoCode.jikko.getBlocks = function() {
     var tx;
     var din;
     // var clk;
@@ -377,8 +377,8 @@ Entry.jikko.getBlocks = function() {
 
     return {
         jikko_list_analog_basic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -395,8 +395,8 @@ Entry.jikko.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -411,8 +411,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_list_digital_basic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -437,8 +437,8 @@ Entry.jikko.getBlocks = function() {
                     ],
                     value: '10',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -453,8 +453,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_list_digital_octave: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -473,8 +473,8 @@ Entry.jikko.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -489,8 +489,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_list_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -507,8 +507,8 @@ Entry.jikko.getBlocks = function() {
                     ],
                     value: '11',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -523,8 +523,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_list_digital_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -537,8 +537,8 @@ Entry.jikko.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -553,8 +553,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_list_digital_toggle_en: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -567,8 +567,8 @@ Entry.jikko.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -583,8 +583,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_list_digital_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -608,8 +608,8 @@ Entry.jikko.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -624,8 +624,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_set_neopixel_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -670,16 +670,16 @@ Entry.jikko.getBlocks = function() {
                 var port = script.getNumberValue('PORT');
                 var value = script.getNumberValue('NUM');
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.jikko.sensorTypes.NEOPIXELINIT,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.jikko.sensorTypes.NEOPIXELINIT,
                         data: value,
                         time: new Date().getTime(),
                     };
@@ -692,7 +692,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -702,8 +702,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_set_neopixel_bright: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -753,16 +753,16 @@ Entry.jikko.getBlocks = function() {
                 value = Math.max(value, 0);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.jikko.sensorTypes.NEOPIXELBRIGHT,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.jikko.sensorTypes.NEOPIXELBRIGHT,
                         data: value,
                         time: new Date().getTime(),
                     };
@@ -776,7 +776,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -786,8 +786,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_set_neopixel: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -834,7 +834,7 @@ Entry.jikko.getBlocks = function() {
             class: 'neo',
             isNotFor: ['jikko'],
             func: function(sprite, script) {
-                //var sq = Entry.hw.sendQueue;
+                //var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
                 var num = script.getNumberValue('NUM', script);
                 var value = script.getStringField('COLOR', script);
@@ -846,7 +846,7 @@ Entry.jikko.getBlocks = function() {
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
                     r = Math.round(r);
@@ -861,11 +861,11 @@ Entry.jikko.getBlocks = function() {
                     b = Math.min(b, 255);
                     b = Math.max(b, 0);
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.jikko.sensorTypes.NEOPIXEL,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.jikko.sensorTypes.NEOPIXEL,
                         data: {
                             num: num,
                             r: r,
@@ -883,7 +883,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -893,8 +893,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_set_neopixel_all: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -941,7 +941,7 @@ Entry.jikko.getBlocks = function() {
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
                     r = Math.round(r);
                     r = Math.min(r, 255);
@@ -955,11 +955,11 @@ Entry.jikko.getBlocks = function() {
                     b = Math.min(b, 255);
                     b = Math.max(b, 0);
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.jikko.sensorTypes.NEOPIXELALL,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.jikko.sensorTypes.NEOPIXELALL,
                         data: {
                             r: r,
                             g: g,
@@ -976,7 +976,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -987,8 +987,8 @@ Entry.jikko.getBlocks = function() {
         },
 
         jikko_set_neopixel_clear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1022,16 +1022,16 @@ Entry.jikko.getBlocks = function() {
             func: function(sprite, script) {
                 var port = script.getNumberValue('PORT');
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.jikko.sensorTypes.NEOPIXELCLEAR,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.jikko.sensorTypes.NEOPIXELCLEAR,
                         time: new Date().getTime(),
                     };
 
@@ -1044,7 +1044,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1054,8 +1054,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_lcd_list_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1068,8 +1068,8 @@ Entry.jikko.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1084,8 +1084,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_set_dotmatrix_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1146,16 +1146,16 @@ Entry.jikko.getBlocks = function() {
                 // cs = port3;
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][port1] = {
-                        type: Entry.jikko.sensorTypes.DOTMATRIXINIT,
+                    RoCode.hw.sendQueue['SET'][port1] = {
+                        type: RoCode.jikko.sensorTypes.DOTMATRIXINIT,
                         data: {
                             port1: port1,
                             port2: port2,
@@ -1173,7 +1173,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1183,8 +1183,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_set_dotmatrix_bright: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1223,16 +1223,16 @@ Entry.jikko.getBlocks = function() {
                 num = Math.max(num, 0);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][din] = {
-                        type: Entry.jikko.sensorTypes.DOTMATRIXBRIGHT,
+                    RoCode.hw.sendQueue['SET'][din] = {
+                        type: RoCode.jikko.sensorTypes.DOTMATRIXBRIGHT,
                         data: num,
                         time: new Date().getTime(),
                     };
@@ -1246,7 +1246,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1256,8 +1256,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_set_dotmatrix_clear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1276,17 +1276,17 @@ Entry.jikko.getBlocks = function() {
             isNotFor: ['jikko'],
             func(sprite, script) {
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (1 + 0.5) * 0.1; //0.15
                     timeValue = (60 / fps) * timeValue * 100;
 
-                    Entry.hw.sendQueue['SET'][din] = {
-                        type: Entry.jikko.sensorTypes.DOTMATRIXCLEAR,
+                    RoCode.hw.sendQueue['SET'][din] = {
+                        type: RoCode.jikko.sensorTypes.DOTMATRIXCLEAR,
                         data: 0,
                         time: new Date().getTime(),
                     };
@@ -1300,7 +1300,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1310,8 +1310,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_set_dotmatrix: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1343,17 +1343,17 @@ Entry.jikko.getBlocks = function() {
             func: function(sprite, script) {
                 var text = script.getValue('STRING');
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][din] = {
-                        type: Entry.jikko.sensorTypes.DOTMATRIX,
+                    RoCode.hw.sendQueue['SET'][din] = {
+                        type: RoCode.jikko.sensorTypes.DOTMATRIX,
                         data: {
                             text: text,
                         },
@@ -1369,7 +1369,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1379,8 +1379,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_dotmatrix_emoji_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1401,8 +1401,8 @@ Entry.jikko.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1417,8 +1417,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_set_dotmatrix_emoji: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1451,17 +1451,17 @@ Entry.jikko.getBlocks = function() {
             func: function(sprite, script) {
                 var value = script.getNumberValue('LIST');
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][din] = {
-                        type: Entry.jikko.sensorTypes.DOTMATRIXEMOJI,
+                    RoCode.hw.sendQueue['SET'][din] = {
+                        type: RoCode.jikko.sensorTypes.DOTMATRIXEMOJI,
                         data: value,
                         time: new Date().getTime(),
                     };
@@ -1475,7 +1475,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1485,8 +1485,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_list_digital_lcd: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1499,8 +1499,8 @@ Entry.jikko.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1515,8 +1515,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_get_lcd_row: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -1528,8 +1528,8 @@ Entry.jikko.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1556,8 +1556,8 @@ Entry.jikko.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'jikko_get_lcd_row',
@@ -1567,8 +1567,8 @@ Entry.jikko.getBlocks = function() {
         },
 
         jikko_get_lcd_col: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -1594,8 +1594,8 @@ Entry.jikko.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1636,8 +1636,8 @@ Entry.jikko.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'jikko_get_lcd_col',
@@ -1646,8 +1646,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.jikko_get_analog_value,
@@ -1674,7 +1674,7 @@ Entry.jikko.getBlocks = function() {
             isNotFor: ['jikko'],
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
 
                 if (port[0] === 'A') port = port.substring(1);
 
@@ -1683,8 +1683,8 @@ Entry.jikko.getBlocks = function() {
             syntax: { js: [], py: ['jikko.get_analog_value(%1)'] },
         },
         jikko_get_light_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1710,7 +1710,7 @@ Entry.jikko.getBlocks = function() {
             isNotFor: ['jikko'],
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
 
                 if (port[0] === 'A') port = port.substring(1);
 
@@ -1719,8 +1719,8 @@ Entry.jikko.getBlocks = function() {
             syntax: { js: [], py: ['jikko.get_analog_value(%1)'] },
         },
         jikko_get_moisture_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             //template: Lang.template.jikko_get_analog_value,
@@ -1748,7 +1748,7 @@ Entry.jikko.getBlocks = function() {
             isNotFor: ['jikko'],
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
 
                 if (port[0] === 'A') port = port.substring(1);
 
@@ -1758,8 +1758,8 @@ Entry.jikko.getBlocks = function() {
         },
 
         jikko_set_digital_dcmotor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1805,19 +1805,19 @@ Entry.jikko.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.jikko.highList.indexOf(value) > -1) {
+                if (RoCode.jikko.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.jikko.lowList.indexOf(value) > -1) {
+                } else if (RoCode.jikko.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.jikko.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.jikko.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1827,8 +1827,8 @@ Entry.jikko.getBlocks = function() {
             syntax: { js: [], py: ['jikko.set_digital_dcmotor(%1, %2, %3, %4)'] },
         },
         jikko_set_analog_dcmotor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1875,11 +1875,11 @@ Entry.jikko.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.min(value, 255);
                 value = Math.max(value, 0);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.jikko.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.jikko.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1889,8 +1889,8 @@ Entry.jikko.getBlocks = function() {
             syntax: { js: [], py: ['jikko.set_digital_dcmotor(%1, %2, %3, %4)'] },
         },
         jikko_get_sound_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1916,7 +1916,7 @@ Entry.jikko.getBlocks = function() {
             isNotFor: ['jikko'],
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
 
                 if (port[0] === 'A') port = port.substring(1);
 
@@ -1925,8 +1925,8 @@ Entry.jikko.getBlocks = function() {
             syntax: { js: [], py: ['jikko.get_analog_value(%1)'] },
         },
         jikko_get_infrared_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1952,7 +1952,7 @@ Entry.jikko.getBlocks = function() {
             isNotFor: ['jikko'],
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
 
                 if (port[0] === 'A') port = port.substring(1);
 
@@ -1961,8 +1961,8 @@ Entry.jikko.getBlocks = function() {
             syntax: { js: [], py: ['jikko.get_analog_value(%1)'] },
         },
         jikko_get_pullup: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -1988,13 +1988,13 @@ Entry.jikko.getBlocks = function() {
             isNotFor: ['jikko'],
             func: function(sprite, script) {
                 var port = script.getNumberValue('PORT');
-                var DIGITAL = Entry.hw.portData.DIGITAL;
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
 
-                Entry.hw.sendQueue['GET'][Entry.jikko.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue['GET'][RoCode.jikko.sensorTypes.DIGITAL] = {
                     port: port,
                     data: 2,
                     time: new Date().getTime(),
@@ -2006,8 +2006,8 @@ Entry.jikko.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         jikko_get_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -2033,13 +2033,13 @@ Entry.jikko.getBlocks = function() {
             isNotFor: ['jikko'],
             func: function(sprite, script) {
                 var port = script.getNumberValue('PORT', script);
-                var DIGITAL = Entry.hw.portData.DIGITAL;
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
 
-                Entry.hw.sendQueue['GET'][Entry.jikko.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue['GET'][RoCode.jikko.sensorTypes.DIGITAL] = {
                     port: port,
                     data: 2,
                     time: new Date().getTime(),
@@ -2051,8 +2051,8 @@ Entry.jikko.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         jikko_get_analog_mapping: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.jikko_get_analog_mapping,
@@ -2116,7 +2116,7 @@ Entry.jikko.getBlocks = function() {
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
                 var result = 0;
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var value2 = script.getNumberValue('VALUE2', script);
                 var value3 = script.getNumberValue('VALUE3', script);
                 var value4 = script.getNumberValue('VALUE4', script);
@@ -2150,8 +2150,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_mapping1: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -2217,8 +2217,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_mapping2: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -2325,8 +2325,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_get_digital_ultrasonic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.jikko_get_digital_ultrasonic,
@@ -2365,23 +2365,23 @@ Entry.jikko.getBlocks = function() {
                 var port1 = script.getNumberValue('PORT1');
                 var port2 = script.getNumberValue('PORT2');
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][port1];
-                delete Entry.hw.sendQueue['SET'][port2];
+                delete RoCode.hw.sendQueue['SET'][port1];
+                delete RoCode.hw.sendQueue['SET'][port2];
 
-                Entry.Utils.sleep(700);
+                RoCode.Utils.sleep(700);
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.jikko.sensorTypes.ULTRASONIC] = {
+                RoCode.hw.sendQueue['GET'][RoCode.jikko.sensorTypes.ULTRASONIC] = {
                     port: [port1, port2],
                     time: new Date().getTime(),
                 };
 
-                return Entry.hw.portData.ULTRASONIC[port2] || 0;
+                return RoCode.hw.portData.ULTRASONIC[port2] || 0;
             },
             syntax: {
                 js: [],
@@ -2389,8 +2389,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_get_dust: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -2428,20 +2428,20 @@ Entry.jikko.getBlocks = function() {
                 var port1 = script.getNumberValue('PORT1');
                 var port2 = script.getNumberValue('PORT2');
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][port1];
-                delete Entry.hw.sendQueue['SET'][port2];
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                delete RoCode.hw.sendQueue['SET'][port1];
+                delete RoCode.hw.sendQueue['SET'][port2];
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.jikko.sensorTypes.DUST] = {
+                RoCode.hw.sendQueue['GET'][RoCode.jikko.sensorTypes.DUST] = {
                     port: [port1, port2],
                     time: new Date().getTime(),
                 };
 
-                return Entry.hw.portData.DUST || 0;
+                return RoCode.hw.portData.DUST || 0;
             },
             syntax: {
                 js: [],
@@ -2449,8 +2449,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -2478,15 +2478,15 @@ Entry.jikko.getBlocks = function() {
             isNotFor: ['jikko'],
             func: function(sprite, script) {
                 var port = script.getNumberValue('PORT');
-                var DIGITAL = Entry.hw.portData.DIGITAL;
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                if (Entry.hw.sendQueue.SET[port]) {
-                    return Entry.hw.sendQueue.SET[port].data;
+                if (RoCode.hw.sendQueue.SET[port]) {
+                    return RoCode.hw.sendQueue.SET[port].data;
                 } else {
-                    Entry.hw.sendQueue['GET'][Entry.jikko.sensorTypes.DIGITAL] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.jikko.sensorTypes.DIGITAL] = {
                         port: port,
                         time: new Date().getTime(),
                     };
@@ -2497,8 +2497,8 @@ Entry.jikko.getBlocks = function() {
             syntax: { js: [], py: ['jikko.get_digital(%1)'] },
         },
         jikko_get_digital_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -2525,12 +2525,12 @@ Entry.jikko.getBlocks = function() {
             isNotFor: ['jikko'],
             func: function(sprite, script) {
                 var port = script.getNumberValue('PORT');
-                var DIGITAL = Entry.hw.portData.DIGITAL;
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.jikko.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue['GET'][RoCode.jikko.sensorTypes.DIGITAL] = {
                     port: port,
                     time: new Date().getTime(),
                 };
@@ -2540,8 +2540,8 @@ Entry.jikko.getBlocks = function() {
             syntax: { js: [], py: ['jikko.get_digital_toggle(%1)'] },
         },
         jikko_get_digital_pir: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -2568,12 +2568,12 @@ Entry.jikko.getBlocks = function() {
             isNotFor: ['jikko'],
             func: function(sprite, script) {
                 var port = script.getNumberValue('PORT');
-                var DIGITAL = Entry.hw.portData.DIGITAL;
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.jikko.sensorTypes.PIR] = {
+                RoCode.hw.sendQueue['GET'][RoCode.jikko.sensorTypes.PIR] = {
                     port: port,
                     time: new Date().getTime(),
                 };
@@ -2583,8 +2583,8 @@ Entry.jikko.getBlocks = function() {
             syntax: { js: [], py: ['jikko.get_digital_pir(%1)'] },
         },
         jikko_set_digital_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -2630,18 +2630,18 @@ Entry.jikko.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.jikko.highList.indexOf(value) > -1) {
+                if (RoCode.jikko.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.jikko.lowList.indexOf(value) > -1) {
+                } else if (RoCode.jikko.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.jikko.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.jikko.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -2651,8 +2651,8 @@ Entry.jikko.getBlocks = function() {
             syntax: { js: [], py: ['jikko.set_digital_toggle(%1, %2)'] },
         },
         jikko_set_led_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -2698,18 +2698,18 @@ Entry.jikko.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.jikko.highList.indexOf(value) > -1) {
+                if (RoCode.jikko.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.jikko.lowList.indexOf(value) > -1) {
+                } else if (RoCode.jikko.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.jikko.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.jikko.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -2719,8 +2719,8 @@ Entry.jikko.getBlocks = function() {
             syntax: { js: [], py: ['jikko.set_digital_toggle(%1, %2)'] },
         },
         jikko_set_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -2768,11 +2768,11 @@ Entry.jikko.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.min(value, 255);
                 value = Math.max(value, 0);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.jikko.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.jikko.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -2782,8 +2782,8 @@ Entry.jikko.getBlocks = function() {
             syntax: { js: [], py: ['jikko.set_digital_pwm(%1, %2)'] },
         },
         jikko_set_digital_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -2830,11 +2830,11 @@ Entry.jikko.getBlocks = function() {
                 value = Math.min(value, 180);
                 value = Math.max(value, 0);
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.jikko.sensorTypes.SERVO,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.jikko.sensorTypes.SERVO,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -2844,8 +2844,8 @@ Entry.jikko.getBlocks = function() {
             syntax: { js: [], py: ['jikko.set_digital_servo(%1, %2)'] },
         },
         jikko_set_digital_buzzer_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -2892,18 +2892,18 @@ Entry.jikko.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.jikko.highList.indexOf(value) > -1) {
+                if (RoCode.jikko.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.jikko.lowList.indexOf(value) > -1) {
+                } else if (RoCode.jikko.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.jikko.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.jikko.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -2916,8 +2916,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_set_digital_buzzer_volume: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -2964,11 +2964,11 @@ Entry.jikko.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.min(value, 255);
                 value = Math.max(value, 0);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.jikko.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.jikko.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -2981,8 +2981,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_set_digital_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -3047,8 +3047,8 @@ Entry.jikko.getBlocks = function() {
 
                 if (!script.isStart) {
                     var note = script.getValue('NOTE');
-                    if (!Entry.Utils.isNumber(note)) {
-                        note = Entry.jikko.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note)) {
+                        note = RoCode.jikko.toneTable[note];
                     }
                     if (note < 0) {
                         note = 0;
@@ -3058,12 +3058,12 @@ Entry.jikko.getBlocks = function() {
                     if (duration < 0) {
                         duration = 0;
                     }
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     if (duration === 0) {
-                        Entry.hw.sendQueue['SET'][port] = {
-                            type: Entry.jikko.sensorTypes.TONE,
+                        RoCode.hw.sendQueue['SET'][port] = {
+                            type: RoCode.jikko.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -3075,14 +3075,14 @@ Entry.jikko.getBlocks = function() {
                         octave = 8;
                     }
                     if (note != 0) {
-                        value = Entry.jikko.toneMap[note][octave];
+                        value = RoCode.jikko.toneMap[note][octave];
                     }
 
                     duration = duration * 1000;
                     script.isStart = true;
                     script.timeFlag = 1;
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.jikko.sensorTypes.TONE,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.jikko.sensorTypes.TONE,
                         data: {
                             value: value,
                             duration: duration,
@@ -3099,12 +3099,12 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.jikko.sensorTypes.TONE,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.jikko.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -3114,8 +3114,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_lcd_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -3170,17 +3170,17 @@ Entry.jikko.getBlocks = function() {
                 var line = script.getValue('LINE');
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 0.1 * 1000;
 
-                    Entry.hw.sendQueue['SET'][1] = {
-                        type: Entry.jikko.sensorTypes.LCDINIT,
+                    RoCode.hw.sendQueue['SET'][1] = {
+                        type: RoCode.jikko.sensorTypes.LCDINIT,
                         data: {
                             list: list,
                             col: col,
@@ -3198,15 +3198,15 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: ['jikko.module_digital_lcd(%1, %2)'] },
         },
         jikko_module_digital_lcd: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -3263,17 +3263,17 @@ Entry.jikko.getBlocks = function() {
                 var text = script.getValue('STRING');
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 100;
 
-                    Entry.hw.sendQueue['SET'][1] = {
-                        type: Entry.jikko.sensorTypes.LCD,
+                    RoCode.hw.sendQueue['SET'][1] = {
+                        type: RoCode.jikko.sensorTypes.LCD,
                         data: {
                             line: row,
                             column: col,
@@ -3291,15 +3291,15 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: ['jikko.module_digital_lcd(%1, %2)'] },
         },
         jikko_lcd_clear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3318,17 +3318,17 @@ Entry.jikko.getBlocks = function() {
             isNotFor: ['jikko'],
             func(sprite, script) {
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][1] = {
-                        type: Entry.jikko.sensorTypes.LCDCLEAR,
+                    RoCode.hw.sendQueue['SET'][1] = {
+                        type: RoCode.jikko.sensorTypes.LCDCLEAR,
                         data: 0,
                         time: new Date().getTime(),
                     };
@@ -3342,7 +3342,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -3353,8 +3353,8 @@ Entry.jikko.getBlocks = function() {
         },
 
         jikko_get_dht_temp_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -3382,20 +3382,20 @@ Entry.jikko.getBlocks = function() {
             func: function(sprite, script) {
                 var port = script.getNumberValue('PORT');
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][port];
+                delete RoCode.hw.sendQueue['SET'][port];
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
 
-                Entry.hw.sendQueue['GET'][Entry.jikko.sensorTypes.DHTTEMP] = {
+                RoCode.hw.sendQueue['GET'][RoCode.jikko.sensorTypes.DHTTEMP] = {
                     port: port,
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.DHTTEMP || 0;
+                return RoCode.hw.portData.DHTTEMP || 0;
             },
             syntax: {
                 js: [],
@@ -3404,8 +3404,8 @@ Entry.jikko.getBlocks = function() {
         },
 
         jikko_get_dht_humi_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -3433,20 +3433,20 @@ Entry.jikko.getBlocks = function() {
             func: function(sprite, script) {
                 var port = script.getNumberValue('PORT');
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][port];
+                delete RoCode.hw.sendQueue['SET'][port];
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
 
-                Entry.hw.sendQueue['GET'][Entry.jikko.sensorTypes.DHTHUMI] = {
+                RoCode.hw.sendQueue['GET'][RoCode.jikko.sensorTypes.DHTHUMI] = {
                     port: port,
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.DHTHUMI || 0;
+                return RoCode.hw.portData.DHTHUMI || 0;
             },
             syntax: {
                 js: [],
@@ -3455,8 +3455,8 @@ Entry.jikko.getBlocks = function() {
         },
 
         jikko_set_mp3_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3502,16 +3502,16 @@ Entry.jikko.getBlocks = function() {
                 var rx = script.getNumberValue('PORT2');
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][tx] = {
-                        type: Entry.jikko.sensorTypes.MP3INIT,
+                    RoCode.hw.sendQueue['SET'][tx] = {
+                        type: RoCode.jikko.sensorTypes.MP3INIT,
                         data: {
                             tx: tx,
                             rx: rx,
@@ -3528,7 +3528,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -3539,8 +3539,8 @@ Entry.jikko.getBlocks = function() {
         },
 
         jikko_set_mp3_play: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3574,16 +3574,16 @@ Entry.jikko.getBlocks = function() {
             func: function(sprite, script) {
                 var num = script.getNumberValue('NUM');
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
                 script.isStart = true;
                 script.timeFlag = 1;
-                var fps = Entry.FPS || 60;
+                var fps = RoCode.FPS || 60;
                 var timeValue = (60 / fps) * 50;
 
-                Entry.hw.sendQueue['SET'][tx] = {
-                    type: Entry.jikko.sensorTypes.MP3PLAY1,
+                RoCode.hw.sendQueue['SET'][tx] = {
+                    type: RoCode.jikko.sensorTypes.MP3PLAY1,
                     data: {
                         tx: tx,
                         num: num,
@@ -3600,8 +3600,8 @@ Entry.jikko.getBlocks = function() {
         },
 
         jikko_set_mp3_play2: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3647,16 +3647,16 @@ Entry.jikko.getBlocks = function() {
                 var time_value = script.getNumberValue('TIME');
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     time_value = (60 / fps) * time_value * 1000;
 
-                    Entry.hw.sendQueue['SET'][tx] = {
-                        type: Entry.jikko.sensorTypes.MP3PLAY1,
+                    RoCode.hw.sendQueue['SET'][tx] = {
+                        type: RoCode.jikko.sensorTypes.MP3PLAY1,
                         data: {
                             tx: tx,
                             num: num,
@@ -3675,12 +3675,12 @@ Entry.jikko.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.hw.sendQueue['SET'][tx] = {
-                        type: Entry.jikko.sensorTypes.MP3PLAY1,
+                    RoCode.hw.sendQueue['SET'][tx] = {
+                        type: RoCode.jikko.sensorTypes.MP3PLAY1,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
 
                     return script.callReturn();
                 }
@@ -3692,8 +3692,8 @@ Entry.jikko.getBlocks = function() {
         },
 
         jikko_set_mp3_vol: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3732,16 +3732,16 @@ Entry.jikko.getBlocks = function() {
                 vol = Math.max(vol, 0);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][tx] = {
-                        type: Entry.jikko.sensorTypes.MP3VOL,
+                    RoCode.hw.sendQueue['SET'][tx] = {
+                        type: RoCode.jikko.sensorTypes.MP3VOL,
                         data: {
                             tx: tx,
                             vol: vol,
@@ -3758,7 +3758,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -3769,8 +3769,8 @@ Entry.jikko.getBlocks = function() {
         },
 
         jikko_load_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3819,16 +3819,16 @@ Entry.jikko.getBlocks = function() {
                 sck = port2;
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][sck] = {
-                        type: Entry.jikko.sensorTypes.LOADINIT,
+                    RoCode.hw.sendQueue['SET'][sck] = {
+                        type: RoCode.jikko.sensorTypes.LOADINIT,
                         data: {
                             port1: port1,
                             port2: port2,
@@ -3845,7 +3845,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -3856,8 +3856,8 @@ Entry.jikko.getBlocks = function() {
         },
 
         jikko_load_scale: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3892,16 +3892,16 @@ Entry.jikko.getBlocks = function() {
                 var num = script.getNumberValue('NUM', script);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][sck] = {
-                        type: Entry.jikko.sensorTypes.LOADSCALE,
+                    RoCode.hw.sendQueue['SET'][sck] = {
+                        type: RoCode.jikko.sensorTypes.LOADSCALE,
                         data: {
                             num: num,
                         },
@@ -3917,7 +3917,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -3928,8 +3928,8 @@ Entry.jikko.getBlocks = function() {
         },
 
         jikko_load_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -3942,20 +3942,20 @@ Entry.jikko.getBlocks = function() {
             class: 'load',
             isNotFor: ['jikko'],
             func: function(sprite, script) {
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][sck];
+                delete RoCode.hw.sendQueue['SET'][sck];
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.jikko.sensorTypes.LOADVALUE] = {
+                RoCode.hw.sendQueue['GET'][RoCode.jikko.sensorTypes.LOADVALUE] = {
                     port: sck,
                     time: new Date().getTime(),
                 };
 
-                return Entry.hw.portData.LOADVALUE || 0;
+                return RoCode.hw.portData.LOADVALUE || 0;
             },
             syntax: {
                 js: [],
@@ -3963,8 +3963,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_list_joy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -3977,8 +3977,8 @@ Entry.jikko.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -3993,8 +3993,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_joy_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4072,17 +4072,17 @@ Entry.jikko.getBlocks = function() {
                 }
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
                     if (num == 1) {
-                        Entry.hw.sendQueue['SET'][joyx] = {
-                            type: Entry.jikko.sensorTypes.JOYINIT,
+                        RoCode.hw.sendQueue['SET'][joyx] = {
+                            type: RoCode.jikko.sensorTypes.JOYINIT,
                             data: {
                                 num: num,
                                 port1: port1,
@@ -4092,8 +4092,8 @@ Entry.jikko.getBlocks = function() {
                             time: new Date().getTime(),
                         };
                     } else if (num == 2) {
-                        Entry.hw.sendQueue['SET'][joyx2] = {
-                            type: Entry.jikko.sensorTypes.JOYINIT,
+                        RoCode.hw.sendQueue['SET'][joyx2] = {
+                            type: RoCode.jikko.sensorTypes.JOYINIT,
                             data: {
                                 num: num,
                                 port1: port1,
@@ -4112,7 +4112,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -4123,8 +4123,8 @@ Entry.jikko.getBlocks = function() {
         },
 
         jikko_get_joy_x: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -4151,7 +4151,7 @@ Entry.jikko.getBlocks = function() {
             class: 'joy',
             isNotFor: ['jikko'],
             func: function(sprite, script) {
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var num = script.getNumberValue('NUM', script);
                 if (num == 1) {
                     return ANALOG ? ANALOG[joyx] || 0 : 0;
@@ -4166,8 +4166,8 @@ Entry.jikko.getBlocks = function() {
         },
 
         jikko_get_joy_y: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -4194,7 +4194,7 @@ Entry.jikko.getBlocks = function() {
             class: 'joy',
             isNotFor: ['jikko'],
             func: function(sprite, script) {
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var num = script.getNumberValue('NUM', script);
                 if (num == 1) {
                     return ANALOG ? ANALOG[joyy] || 0 : 0;
@@ -4209,8 +4209,8 @@ Entry.jikko.getBlocks = function() {
         },
 
         jikko_get_joy_z: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -4237,15 +4237,15 @@ Entry.jikko.getBlocks = function() {
             class: 'joy',
             isNotFor: ['jikko'],
             func: function(sprite, script) {
-                var DIGITAL = Entry.hw.portData.DIGITAL;
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
                 var num = script.getNumberValue('NUM', script);
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
 
                 if (num == 1) {
-                    Entry.hw.sendQueue['GET'][Entry.jikko.sensorTypes.DIGITAL] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.jikko.sensorTypes.DIGITAL] = {
                         port: joyz,
                         data: 2,
                         time: new Date().getTime(),
@@ -4254,7 +4254,7 @@ Entry.jikko.getBlocks = function() {
                     var value = DIGITAL ? DIGITAL[joyz] || 0 : 0;
                     return !value;
                 } else if (num == 2) {
-                    Entry.hw.sendQueue['GET'][Entry.jikko.sensorTypes.DIGITAL] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.jikko.sensorTypes.DIGITAL] = {
                         port: joyz2,
                         data: 2,
                         time: new Date().getTime(),
@@ -4267,8 +4267,8 @@ Entry.jikko.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         jikko_list_joy_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -4288,8 +4288,8 @@ Entry.jikko.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -4304,8 +4304,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_get_joy_move: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -4341,7 +4341,7 @@ Entry.jikko.getBlocks = function() {
             isNotFor: ['jikko'],
             func(sprite, script) {
                 var direction = script.getNumberValue('DIR');
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 num = script.getNumberValue('NUM', script);
 
                 const getValue = function(w) {
@@ -4358,55 +4358,55 @@ Entry.jikko.getBlocks = function() {
                     ypin = joyy2;
                 }
                 if (
-                    direction == Entry.jikko.direction.CENTER &&
+                    direction == RoCode.jikko.direction.CENTER &&
                     getValue(xpin) == 1 &&
                     getValue(ypin) == 1
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.jikko.direction.DOWN &&
+                    direction == RoCode.jikko.direction.DOWN &&
                     getValue(xpin) == 1 &&
                     getValue(ypin) == 2
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.jikko.direction.LEFT &&
+                    direction == RoCode.jikko.direction.LEFT &&
                     getValue(xpin) == 0 &&
                     getValue(ypin) == 1
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.jikko.direction.LEFT_DOWN &&
+                    direction == RoCode.jikko.direction.LEFT_DOWN &&
                     getValue(xpin) == 0 &&
                     getValue(ypin) == 2
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.jikko.direction.LEFT_UP &&
+                    direction == RoCode.jikko.direction.LEFT_UP &&
                     getValue(xpin) == 0 &&
                     getValue(ypin) == 0
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.jikko.direction.RIGHT &&
+                    direction == RoCode.jikko.direction.RIGHT &&
                     getValue(xpin) == 2 &&
                     getValue(ypin) == 1
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.jikko.direction.RIGHT_DOWN &&
+                    direction == RoCode.jikko.direction.RIGHT_DOWN &&
                     getValue(xpin) == 2 &&
                     getValue(ypin) == 2
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.jikko.direction.RIGHT_UP &&
+                    direction == RoCode.jikko.direction.RIGHT_UP &&
                     getValue(xpin) == 2 &&
                     getValue(ypin) == 0
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.jikko.direction.UP &&
+                    direction == RoCode.jikko.direction.UP &&
                     getValue(xpin) == 1 &&
                     getValue(ypin) == 0
                 ) {
@@ -4421,8 +4421,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_list_step: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -4436,8 +4436,8 @@ Entry.jikko.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -4452,8 +4452,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_step_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4540,12 +4540,12 @@ Entry.jikko.getBlocks = function() {
                 }
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
                     if (num == 1) {
@@ -4556,8 +4556,8 @@ Entry.jikko.getBlocks = function() {
                         console.log(port3);
                         console.log(port4);
 
-                        Entry.hw.sendQueue['SET'][portpin1] = {
-                            type: Entry.jikko.sensorTypes.STEPINIT,
+                        RoCode.hw.sendQueue['SET'][portpin1] = {
+                            type: RoCode.jikko.sensorTypes.STEPINIT,
                             data: {
                                 num: num,
                                 port1: port1,
@@ -4574,8 +4574,8 @@ Entry.jikko.getBlocks = function() {
                         console.log(port2);
                         console.log(port3);
                         console.log(port4);
-                        Entry.hw.sendQueue['SET'][portpin2] = {
-                            type: Entry.jikko.sensorTypes.STEPINIT,
+                        RoCode.hw.sendQueue['SET'][portpin2] = {
+                            type: RoCode.jikko.sensorTypes.STEPINIT,
                             data: {
                                 num: num,
                                 port1: port1,
@@ -4592,8 +4592,8 @@ Entry.jikko.getBlocks = function() {
                         console.log(port2);
                         console.log(port3);
                         console.log(port4);
-                        Entry.hw.sendQueue['SET'][portpin3] = {
-                            type: Entry.jikko.sensorTypes.STEPINIT,
+                        RoCode.hw.sendQueue['SET'][portpin3] = {
+                            type: RoCode.jikko.sensorTypes.STEPINIT,
                             data: {
                                 num: num,
                                 port1: port1,
@@ -4614,7 +4614,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -4624,8 +4624,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_step_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4683,17 +4683,17 @@ Entry.jikko.getBlocks = function() {
                 }
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
                     if (num == 1) {
-                        Entry.hw.sendQueue['SET'][portpin1] = {
-                            type: Entry.jikko.sensorTypes.STEPSPEED,
+                        RoCode.hw.sendQueue['SET'][portpin1] = {
+                            type: RoCode.jikko.sensorTypes.STEPSPEED,
                             data: {
                                 num: num,
                                 speed: speed1,
@@ -4701,8 +4701,8 @@ Entry.jikko.getBlocks = function() {
                             time: new Date().getTime(),
                         };
                     } else if (num == 2) {
-                        Entry.hw.sendQueue['SET'][portpin2] = {
-                            type: Entry.jikko.sensorTypes.STEPSPEED,
+                        RoCode.hw.sendQueue['SET'][portpin2] = {
+                            type: RoCode.jikko.sensorTypes.STEPSPEED,
                             data: {
                                 num: num,
                                 speed: speed2,
@@ -4710,8 +4710,8 @@ Entry.jikko.getBlocks = function() {
                             time: new Date().getTime(),
                         };
                     } else if (num == 3) {
-                        Entry.hw.sendQueue['SET'][portpin3] = {
-                            type: Entry.jikko.sensorTypes.STEPSPEED,
+                        RoCode.hw.sendQueue['SET'][portpin3] = {
+                            type: RoCode.jikko.sensorTypes.STEPSPEED,
                             data: {
                                 num: num,
                                 speed: speed3,
@@ -4729,7 +4729,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -4739,8 +4739,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_list_step_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -4753,8 +4753,8 @@ Entry.jikko.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -4769,8 +4769,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_step_rotate: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4827,8 +4827,8 @@ Entry.jikko.getBlocks = function() {
                 var val = script.getNumberValue('VALUE', script);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
@@ -4837,8 +4837,8 @@ Entry.jikko.getBlocks = function() {
                     if (num == 1) {
                         timeValue = (60 / speed1) * val * 1000 + 32;
                         console.log(timeValue);
-                        Entry.hw.sendQueue['SET'][portpin1] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE,
+                        RoCode.hw.sendQueue['SET'][portpin1] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE,
                             data: {
                                 num: num,
                                 dir: dir,
@@ -4848,8 +4848,8 @@ Entry.jikko.getBlocks = function() {
                         };
                     } else if (num == 2) {
                         timeValue = (60 / speed2) * val * 1000 + 32;
-                        Entry.hw.sendQueue['SET'][portpin2] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE,
+                        RoCode.hw.sendQueue['SET'][portpin2] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE,
                             data: {
                                 num: num,
                                 dir: dir,
@@ -4859,8 +4859,8 @@ Entry.jikko.getBlocks = function() {
                         };
                     } else if (num == 3) {
                         timeValue = (60 / speed3) * val * 1000 + 32;
-                        Entry.hw.sendQueue['SET'][portpin3] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE,
+                        RoCode.hw.sendQueue['SET'][portpin3] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE,
                             data: {
                                 num: num,
                                 dir: dir,
@@ -4880,25 +4880,25 @@ Entry.jikko.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
                     if (num == 1) {
-                        Entry.hw.sendQueue['SET'][portpin1] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE,
+                        RoCode.hw.sendQueue['SET'][portpin1] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE,
                             data: 0,
                             time: new Date().getTime(),
                         };
                     } else if (num == 2) {
-                        Entry.hw.sendQueue['SET'][portpin2] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE,
+                        RoCode.hw.sendQueue['SET'][portpin2] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE,
                             data: 0,
                             time: new Date().getTime(),
                         };
                     } else if (num == 3) {
-                        Entry.hw.sendQueue['SET'][portpin3] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE,
+                        RoCode.hw.sendQueue['SET'][portpin3] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE,
                             data: 0,
                             time: new Date().getTime(),
                         };
                     }
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -4908,8 +4908,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_step_rotate2: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4966,8 +4966,8 @@ Entry.jikko.getBlocks = function() {
                 var val = script.getNumberValue('VALUE', script);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
@@ -4977,8 +4977,8 @@ Entry.jikko.getBlocks = function() {
                     if (num == 1) {
                         timeValue = (60 / (speed1 * 360)) * val * 1000 + 32;
                         console.log(timeValue);
-                        Entry.hw.sendQueue['SET'][portpin1] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE2,
+                        RoCode.hw.sendQueue['SET'][portpin1] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE2,
                             data: {
                                 num: num,
                                 dir: dir,
@@ -4988,8 +4988,8 @@ Entry.jikko.getBlocks = function() {
                         };
                     } else if (num == 2) {
                         timeValue = (60 / (speed2 * 360)) * val * 1000 + 32;
-                        Entry.hw.sendQueue['SET'][portpin2] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE2,
+                        RoCode.hw.sendQueue['SET'][portpin2] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE2,
                             data: {
                                 num: num,
                                 dir: dir,
@@ -4999,8 +4999,8 @@ Entry.jikko.getBlocks = function() {
                         };
                     } else if (num == 3) {
                         timeValue = (60 / (speed3 * 360)) * val * 1000 + 32;
-                        Entry.hw.sendQueue['SET'][portpin3] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE2,
+                        RoCode.hw.sendQueue['SET'][portpin3] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE2,
                             data: {
                                 num: num,
                                 dir: dir,
@@ -5020,25 +5020,25 @@ Entry.jikko.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
                     if (num == 1) {
-                        Entry.hw.sendQueue['SET'][portpin1] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE2,
+                        RoCode.hw.sendQueue['SET'][portpin1] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE2,
                             data: 0,
                             time: new Date().getTime(),
                         };
                     } else if (num == 2) {
-                        Entry.hw.sendQueue['SET'][portpin2] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE2,
+                        RoCode.hw.sendQueue['SET'][portpin2] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE2,
                             data: 0,
                             time: new Date().getTime(),
                         };
                     } else if (num == 3) {
-                        Entry.hw.sendQueue['SET'][portpin3] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE2,
+                        RoCode.hw.sendQueue['SET'][portpin3] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE2,
                             data: 0,
                             time: new Date().getTime(),
                         };
                     }
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -5048,8 +5048,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_step_rotate3: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5106,15 +5106,15 @@ Entry.jikko.getBlocks = function() {
                 var sec = script.getNumberValue('SEC');
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
 
                     if (num == 1) {
-                        Entry.hw.sendQueue['SET'][portpin1] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE3,
+                        RoCode.hw.sendQueue['SET'][portpin1] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE3,
                             data: {
                                 num: num,
                                 dir: dir,
@@ -5123,8 +5123,8 @@ Entry.jikko.getBlocks = function() {
                             time: new Date().getTime(),
                         };
                     } else if (num == 2) {
-                        Entry.hw.sendQueue['SET'][portpin2] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE3,
+                        RoCode.hw.sendQueue['SET'][portpin2] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE3,
                             data: {
                                 num: num,
                                 dir: dir,
@@ -5133,8 +5133,8 @@ Entry.jikko.getBlocks = function() {
                             time: new Date().getTime(),
                         };
                     } else if (num == 3) {
-                        Entry.hw.sendQueue['SET'][portpin3] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE3,
+                        RoCode.hw.sendQueue['SET'][portpin3] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE3,
                             data: {
                                 num: num,
                                 dir: dir,
@@ -5154,25 +5154,25 @@ Entry.jikko.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
                     if (num == 1) {
-                        Entry.hw.sendQueue['SET'][portpin1] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE3,
+                        RoCode.hw.sendQueue['SET'][portpin1] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE3,
                             data: 0,
                             time: new Date().getTime(),
                         };
                     } else if (num == 2) {
-                        Entry.hw.sendQueue['SET'][portpin2] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE3,
+                        RoCode.hw.sendQueue['SET'][portpin2] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE3,
                             data: 0,
                             time: new Date().getTime(),
                         };
                     } else if (num == 3) {
-                        Entry.hw.sendQueue['SET'][portpin3] = {
-                            type: Entry.jikko.sensorTypes.STEPROTATE3,
+                        RoCode.hw.sendQueue['SET'][portpin3] = {
+                            type: RoCode.jikko.sensorTypes.STEPROTATE3,
                             data: 0,
                             time: new Date().getTime(),
                         };
                     }
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -5182,8 +5182,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_module_digital_oled: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -5220,7 +5220,7 @@ Entry.jikko.getBlocks = function() {
                     },
                     {
                         type: 'text',
-                        params: ['My Entry!!'],
+                        params: ['My RoCode!!'],
                     },
                     null,
                 ],
@@ -5251,13 +5251,13 @@ Entry.jikko.getBlocks = function() {
                     } else {
                         text[0] = string;
                     }
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
                     coodinate_x = Math.min(coodinate_x, 127);
@@ -5265,8 +5265,8 @@ Entry.jikko.getBlocks = function() {
                     coodinate_y = Math.min(coodinate_y, 63);
                     coodinate_y = Math.max(coodinate_y, 0);
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.jikko.sensorTypes.OLED,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.jikko.sensorTypes.OLED,
                         data: {
                             value0: coodinate_x,
                             value1: coodinate_y,
@@ -5299,7 +5299,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -5307,8 +5307,8 @@ Entry.jikko.getBlocks = function() {
         },
 
         jikko_rfid_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5356,16 +5356,16 @@ Entry.jikko.getBlocks = function() {
                 ss = port1;
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][ss] = {
-                        type: Entry.jikko.sensorTypes.RFIDINIT,
+                    RoCode.hw.sendQueue['SET'][ss] = {
+                        type: RoCode.jikko.sensorTypes.RFIDINIT,
                         data: {
                             port1: port1,
                             port2: port2,
@@ -5382,7 +5382,7 @@ Entry.jikko.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -5392,8 +5392,8 @@ Entry.jikko.getBlocks = function() {
             },
         },
         jikko_is_rfid_tapped: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -5407,23 +5407,23 @@ Entry.jikko.getBlocks = function() {
             class: 'rfid',
             isNotFor: ['jikko'],
             func: function(sprite, script) {
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
 
-                Entry.hw.sendQueue['GET'][Entry.jikko.sensorTypes.RFIDTAP] = {
+                RoCode.hw.sendQueue['GET'][RoCode.jikko.sensorTypes.RFIDTAP] = {
                     port: ss,
                     time: new Date().getTime(),
                 };
 
-                var value = Entry.hw.portData.RFIDTAP || 0;
+                var value = RoCode.hw.portData.RFIDTAP || 0;
                 return value;
             },
             syntax: { js: [], py: [] },
         },
         jikko_get_rfid_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -5436,20 +5436,20 @@ Entry.jikko.getBlocks = function() {
             class: 'rfid',
             isNotFor: ['jikko'],
             func: function(sprite, script) {
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][ss];
+                delete RoCode.hw.sendQueue['SET'][ss];
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.jikko.sensorTypes.RFIDVALUE] = {
+                RoCode.hw.sendQueue['GET'][RoCode.jikko.sensorTypes.RFIDVALUE] = {
                     port: ss,
                     time: new Date().getTime(),
                 };
 
-                return Entry.hw.portData.RFIDVALUE || 0;
+                return RoCode.hw.portData.RFIDVALUE || 0;
             },
             syntax: {
                 js: [],
@@ -5459,4 +5459,4 @@ Entry.jikko.getBlocks = function() {
     };
 };
 
-module.exports = Entry.jikko;
+module.exports = RoCode.jikko;

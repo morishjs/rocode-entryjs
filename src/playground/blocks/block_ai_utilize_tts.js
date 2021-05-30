@@ -3,7 +3,7 @@
 const { toQueryString } = require('../../util/common');
 const _trim = require('lodash/trim');
 
-Entry.AI_UTILIZE_BLOCK.tts = {
+RoCode.AI_UTILIZE_BLOCK.tts = {
     name: 'tts',
     imageName: 'tts.png',
     sponserText: 'Powered by NAVER Clova',
@@ -24,7 +24,7 @@ Entry.AI_UTILIZE_BLOCK.tts = {
     loadQueue: [],
 };
 
-Entry.AI_UTILIZE_BLOCK.tts.getBlocks = function() {
+RoCode.AI_UTILIZE_BLOCK.tts.getBlocks = function() {
     const params = {
         getSpeaker(isPython = false) {
             const param = {
@@ -40,11 +40,11 @@ Entry.AI_UTILIZE_BLOCK.tts.getBlocks = function() {
                 ],
                 value: 'kyuri',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
@@ -60,11 +60,11 @@ Entry.AI_UTILIZE_BLOCK.tts.getBlocks = function() {
                 ],
                 value: '0',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
@@ -80,11 +80,11 @@ Entry.AI_UTILIZE_BLOCK.tts.getBlocks = function() {
                 ],
                 value: '0',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
@@ -128,14 +128,14 @@ Entry.AI_UTILIZE_BLOCK.tts.getBlocks = function() {
     const read = function(args) {
         return new Promise((resolve, reject) => {
             const { message, hash, prop } = args;
-            const tts = Entry.AI_UTILIZE_BLOCK.tts;
+            const tts = RoCode.AI_UTILIZE_BLOCK.tts;
             const id = `tts-${hash}-${JSON.stringify(prop)}`;
             const type = createjs.LoadQueue.SOUND;
 
             const soundQueue = new createjs.LoadQueue(true);
             soundQueue.installPlugin(createjs.Sound);
             soundQueue.maintainScriptOrder = true;
-            const src = `${Entry.baseUrl}${Entry.AI_UTILIZE_BLOCK.tts.api}.mp3?${toQueryString({
+            const src = `${RoCode.baseUrl}${RoCode.AI_UTILIZE_BLOCK.tts.api}.mp3?${toQueryString({
                 text: message,
                 ...prop,
             })}`;
@@ -144,9 +144,9 @@ Entry.AI_UTILIZE_BLOCK.tts.getBlocks = function() {
                 tts.loadQueue = tts.loadQueue.filter((id) => {
                     const filtered = items.find((item) => item.id === id);
                     if (filtered) {
-                        const instance = Entry.Utils.playSound(id, filtered.prop);
+                        const instance = RoCode.Utils.playSound(id, filtered.prop);
                         instance.soundType = 'tts';
-                        Entry.Utils.addSoundInstances(instance);
+                        RoCode.Utils.addSoundInstances(instance);
                         const duration =
                             instance.duration > 0 ? instance.duration : filtered.duration * 300;
                         setTimeout(() => {
@@ -177,12 +177,12 @@ Entry.AI_UTILIZE_BLOCK.tts.getBlocks = function() {
     return {
         tts_title: {
             skeleton: 'basic_text',
-            color: EntryStatic.colorSet.common.TRANSPARENT,
+            color: RoCodeStatic.colorSet.common.TRANSPARENT,
             params: [
                 {
                     type: 'Text',
                     text: Lang.template.tts_title_text,
-                    color: EntryStatic.colorSet.common.TEXT,
+                    color: RoCodeStatic.colorSet.common.TEXT,
                     align: 'center',
                 },
             ],
@@ -194,8 +194,8 @@ Entry.AI_UTILIZE_BLOCK.tts.getBlocks = function() {
             events: {},
         },
         read_text: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -214,7 +214,7 @@ Entry.AI_UTILIZE_BLOCK.tts.getBlocks = function() {
                 params: [
                     {
                         type: 'text',
-                        params: [Lang.Blocks.entry],
+                        params: [Lang.Blocks.RoCode],
                     },
                     null,
                 ],
@@ -258,8 +258,8 @@ Entry.AI_UTILIZE_BLOCK.tts.getBlocks = function() {
             },
         },
         read_text_wait_with_block: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -278,7 +278,7 @@ Entry.AI_UTILIZE_BLOCK.tts.getBlocks = function() {
                 params: [
                     {
                         type: 'text',
-                        params: [Lang.Blocks.entry],
+                        params: [Lang.Blocks.RoCode],
                     },
                     null,
                 ],
@@ -316,8 +316,8 @@ Entry.AI_UTILIZE_BLOCK.tts.getBlocks = function() {
             },
         },
         set_tts_property: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic',
             statements: [],
             params: [

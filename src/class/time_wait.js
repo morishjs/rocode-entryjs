@@ -1,19 +1,19 @@
 'use strict';
 
-Entry.TimeWaitManager = {
+RoCode.TimeWaitManager = {
     add(id, cb, ms) {
-        if (!Entry.timerInstances) {
-            Entry.timerInstances = [];
+        if (!RoCode.timerInstances) {
+            RoCode.timerInstances = [];
         }
 
-        const instance = new Entry.TimeWait(id, cb, ms);
-        Entry.timerInstances.push(instance);
+        const instance = new RoCode.TimeWait(id, cb, ms);
+        RoCode.timerInstances.push(instance);
     },
     remove(id) {
-        if (!Entry.timerInstances || Entry.timerInstances.length == 0) {
+        if (!RoCode.timerInstances || RoCode.timerInstances.length == 0) {
             return;
         }
-        Entry.timerInstances = Entry.timerInstances.filter((instance) => {
+        RoCode.timerInstances = RoCode.timerInstances.filter((instance) => {
             if (instance.id === id) {
                 return false;
             } else {
@@ -23,7 +23,7 @@ Entry.TimeWaitManager = {
     },
 };
 
-Entry.TimeWait = class TimeWait {
+RoCode.TimeWait = class TimeWait {
     constructor(id, cb, ms) {
         this.id = id;
         this.cb = cb;
@@ -56,6 +56,6 @@ Entry.TimeWait = class TimeWait {
         delete this.cb;
         delete this.ms;
         delete this.startTime;
-        Entry.TimeWaitManager.remove(this.id);
+        RoCode.TimeWaitManager.remove(this.id);
     }
 };

@@ -3,7 +3,7 @@
  */
 'use strict';
 
-Entry.skinContainer = {
+RoCode.skinContainer = {
     _skins: {},
 };
 
@@ -19,7 +19,7 @@ Entry.skinContainer = {
 
     p.addSkin = function(skin) {
         var blockSkin = function() {};
-        var blockPrototype = Entry.block[skin.type];
+        var blockPrototype = RoCode.block[skin.type];
         blockSkin.prototype = blockPrototype;
         blockSkin = new blockSkin();
 
@@ -50,6 +50,6 @@ Entry.skinContainer = {
             }
         }
 
-        return Entry.block[block.type];
+        return RoCode.block[block.type];
     };
-})(Entry.skinContainer);
+})(RoCode.skinContainer);

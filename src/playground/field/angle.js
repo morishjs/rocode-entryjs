@@ -2,9 +2,9 @@
  */
 'use strict';
 
-import { Angle } from '@entrylabs/tool';
+import { Angle } from '@RoCodelabs/tool';
 
-Entry.FieldAngle = class FieldAngle extends Entry.Field {
+RoCode.FieldAngle = class FieldAngle extends RoCode.Field {
     constructor(content, blockView, index) {
         super(content, blockView, index);
 
@@ -13,7 +13,7 @@ Entry.FieldAngle = class FieldAngle extends Entry.Field {
 
         this._block = blockView.block;
         this._blockView = blockView;
-        this.box = new Entry.BoxModel();
+        this.box = new RoCode.BoxModel();
         this.svgGroup = null;
         this.position = content.position;
         this._contents = content;
@@ -32,14 +32,14 @@ Entry.FieldAngle = class FieldAngle extends Entry.Field {
         }
 
         this.svgGroup = this._blockView.contentSvgGroup.elem('g', {
-            class: 'entry-input-field',
+            class: 'RoCode-input-field',
         });
 
         this.textElement = this.svgGroup.elem('text', {
             x: this.X_PADDING / 2,
             y: this.TEXT_Y_PADDING,
             'font-size': '11px',
-            'font-family': EntryStatic.fontFamily || 'NanumGothic',
+            'font-family': RoCodeStatic.fontFamily || 'NanumGothic',
         });
 
         this._setTextValue();
@@ -71,8 +71,8 @@ Entry.FieldAngle = class FieldAngle extends Entry.Field {
     }
 
     renderOptions() {
-        this.optionGroup = Entry.Dom('div', {
-            class: 'entry-widget-angle',
+        this.optionGroup = RoCode.Dom('div', {
+            class: 'RoCode-widget-angle',
             parent: $('body'),
         });
 
@@ -176,7 +176,7 @@ Entry.FieldAngle = class FieldAngle extends Entry.Field {
 
     _applyValue(value) {
         let rangedValue = value;
-        if (Entry.Utils.isNumber(value) && value.lastIndexOf('.') !== value.length - 1) {
+        if (RoCode.Utils.isNumber(value) && value.lastIndexOf('.') !== value.length - 1) {
             rangedValue = String(rangedValue % 360);
         }
 
@@ -253,6 +253,6 @@ Entry.FieldAngle = class FieldAngle extends Entry.Field {
     }
 
     static _isValidInputValue(value) {
-        return Entry.Utils.isNumber(value) || value === '-' || value === '.';
+        return RoCode.Utils.isNumber(value) || value === '-' || value === '.';
     }
 };

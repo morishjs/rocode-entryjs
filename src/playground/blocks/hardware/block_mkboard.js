@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.mkboard = {
+RoCode.mkboard = {
     id: '6.1',
     name: 'mkboard',
     url: 'http://www.jkelec.co.kr',
@@ -10,19 +10,19 @@ Entry.mkboard = {
         ko: '메이크브릭',
     },
     setZero: function() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            var keySet = Object.keys(Entry.hw.sendQueue.SET);
+            var keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach(function(key) {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     toByte: function(data) {
         switch (data) {
@@ -393,7 +393,7 @@ Entry.mkboard = {
     BlockState: {},
 };
 
-Entry.mkboard.setLanguage = function() {
+RoCode.mkboard.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -501,7 +501,7 @@ Entry.mkboard.setLanguage = function() {
     };
 };
 
-Entry.mkboard.blockMenuBlocks = [
+RoCode.mkboard.blockMenuBlocks = [
     // mkboard Added 2017-07-04
     'mkboard_get_analog_value',
     'mkboard_get_analog_value_map',
@@ -558,12 +558,12 @@ Entry.mkboard.blockMenuBlocks = [
 
     // mkboard Added 2017-07-04
 ];
-Entry.mkboard.getBlocks = function() {
+RoCode.mkboard.getBlocks = function() {
     return {
         //region mkboard 몽키보드
         mkboard_analog_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -582,8 +582,8 @@ Entry.mkboard.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -599,8 +599,8 @@ Entry.mkboard.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         mkboard_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -626,15 +626,15 @@ Entry.mkboard.getBlocks = function() {
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 if (port[0] === 'A') port = port.substring(1);
                 return ANALOG ? ANALOG[port] || 0 : 0;
             },
             syntax: { js: [], py: [] },
         },
         mkboard_get_analog_value_map: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -701,7 +701,7 @@ Entry.mkboard.getBlocks = function() {
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
                 var result = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var value2 = script.getNumberValue('VALUE2', script);
                 var value3 = script.getNumberValue('VALUE3', script);
                 var value4 = script.getNumberValue('VALUE4', script);
@@ -728,8 +728,8 @@ Entry.mkboard.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         mkboard_get_ultrasonic_1_use: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_get_ultrasonic_1_use,
@@ -770,21 +770,21 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardUltrasound',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var trig = script.getNumberValue('TRIG', script);
                 var echo = script.getNumberValue('ECHO', script);
                 //console.log("ULTRASONIC_1_USE");
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_500ms;
+                    var duration = RoCode.mkboard.duration.TIME_500ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
                     sq['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.ULTRASONIC_1_USE,
+                        type: RoCode.mkboard.sensorTypes.ULTRASONIC_1_USE,
                         data: {
                             trig: trig,
                             echo: echo,
@@ -802,15 +802,15 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         mkboard_get_ultrasonic_1_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             // template: Lang.template.mkboard_get_ultrasonic_1_value,
@@ -838,28 +838,28 @@ Entry.mkboard.getBlocks = function() {
                 //var port2 = script.getNumberValue('PORT2', script);
 
                 /*
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][0];
-                delete Entry.hw.sendQueue['SET'][0];
+                delete RoCode.hw.sendQueue['SET'][0];
+                delete RoCode.hw.sendQueue['SET'][0];
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.mkboard.sensorTypes.ULTRASONIC_1] = {
+                RoCode.hw.sendQueue['GET'][RoCode.mkboard.sensorTypes.ULTRASONIC_1] = {
                     port: [0, 0],
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.ULTRASONIC_1 || 0;
+                return RoCode.hw.portData.ULTRASONIC_1 || 0;
                 */
-                return Entry.hw.portData.ULTRASONIC_1 || 0;
+                return RoCode.hw.portData.ULTRASONIC_1 || 0;
             },
             syntax: { js: [], py: [] },
         },
         mkboard_get_ultrasonic_2_use: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_get_ultrasonic_2_use,
@@ -900,21 +900,21 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardUltrasound',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var trig = script.getNumberValue('TRIG', script);
                 var echo = script.getNumberValue('ECHO', script);
                 //console.log("ULTRASONIC_2_USE");
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_500ms;
+                    var duration = RoCode.mkboard.duration.TIME_500ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
                     sq['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.ULTRASONIC_2_USE,
+                        type: RoCode.mkboard.sensorTypes.ULTRASONIC_2_USE,
                         data: {
                             trig: trig,
                             echo: echo,
@@ -932,15 +932,15 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         mkboard_get_ultrasonic_2_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             // template: Lang.template.mkboard_get_ultrasonic_2_value,
@@ -968,28 +968,28 @@ Entry.mkboard.getBlocks = function() {
                 //var port2 = script.getNumberValue('PORT2', script);
 
                 /*
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][0];
-                delete Entry.hw.sendQueue['SET'][0];
+                delete RoCode.hw.sendQueue['SET'][0];
+                delete RoCode.hw.sendQueue['SET'][0];
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.mkboard.sensorTypes.ULTRASONIC_2] = {
+                RoCode.hw.sendQueue['GET'][RoCode.mkboard.sensorTypes.ULTRASONIC_2] = {
                     port: [0, 0],
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.ULTRASONIC_2 || 0;
+                return RoCode.hw.portData.ULTRASONIC_2 || 0;
                 */
-                return Entry.hw.portData.ULTRASONIC_2 || 0;
+                return RoCode.hw.portData.ULTRASONIC_2 || 0;
             },
             syntax: { js: [], py: [] },
         },
         mkboard_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -1014,11 +1014,11 @@ Entry.mkboard.getBlocks = function() {
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
                 var port = script.getNumberValue('PORT', script);
-                var DIGITAL = Entry.hw.portData.DIGITAL;
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.mkboard.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue['GET'][RoCode.mkboard.sensorTypes.DIGITAL] = {
                     port: port,
                     time: new Date().getTime(),
                 };
@@ -1027,8 +1027,8 @@ Entry.mkboard.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         mkboard_toggle_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1073,18 +1073,18 @@ Entry.mkboard.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.mkboard.highList.indexOf(value) > -1) {
+                if (RoCode.mkboard.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.mkboard.lowList.indexOf(value) > -1) {
+                } else if (RoCode.mkboard.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.mkboard.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.mkboard.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1093,8 +1093,8 @@ Entry.mkboard.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         mkboard_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1138,11 +1138,11 @@ Entry.mkboard.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.mkboard.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.mkboard.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1151,8 +1151,8 @@ Entry.mkboard.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         mkboard_tone_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1176,8 +1176,8 @@ Entry.mkboard.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1193,8 +1193,8 @@ Entry.mkboard.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         mkboard_tone_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1222,8 +1222,8 @@ Entry.mkboard.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         mkboard_octave_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1240,8 +1240,8 @@ Entry.mkboard.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1257,8 +1257,8 @@ Entry.mkboard.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         mkboard_set_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1315,12 +1315,12 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboard',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
 
                 if (!script.isStart) {
                     var note = script.getValue('NOTE', script);
-                    if (!Entry.Utils.isNumber(note)) note = Entry.mkboard.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note)) note = RoCode.mkboard.toneTable[note];
 
                     if (note < 0) {
                         note = 0;
@@ -1340,7 +1340,7 @@ Entry.mkboard.getBlocks = function() {
 
                     if (duration === 0) {
                         sq['SET'][port] = {
-                            type: Entry.mkboard.sensorTypes.TONE,
+                            type: RoCode.mkboard.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -1357,7 +1357,7 @@ Entry.mkboard.getBlocks = function() {
                     var value = 0;
 
                     if (note != 0) {
-                        value = Entry.mkboard.toneMap[note][octave];
+                        value = RoCode.mkboard.toneMap[note][octave];
                     }
 
                     duration = duration * 1000;
@@ -1365,7 +1365,7 @@ Entry.mkboard.getBlocks = function() {
                     script.timeFlag = 1;
 
                     sq['SET'][port] = {
-                        type: Entry.mkboard.sensorTypes.TONE,
+                        type: RoCode.mkboard.sensorTypes.TONE,
                         data: {
                             value: value,
                             duration: duration,
@@ -1383,19 +1383,19 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
                     sq['SET'][port] = {
-                        type: Entry.mkboard.sensorTypes.TONE,
+                        type: RoCode.mkboard.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         mkboard_set_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1431,7 +1431,7 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboard',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
                 var value = script.getNumberValue('VALUE', script);
                 value = Math.min(360, value);
@@ -1441,7 +1441,7 @@ Entry.mkboard.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.mkboard.sensorTypes.SERVO_PIN,
+                    type: RoCode.mkboard.sensorTypes.SERVO_PIN,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1451,8 +1451,8 @@ Entry.mkboard.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         mkboard_list_digital_lcd_line: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1465,8 +1465,8 @@ Entry.mkboard.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1481,8 +1481,8 @@ Entry.mkboard.getBlocks = function() {
             },
         },
         mkboard_list_digital_lcd_column: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1509,8 +1509,8 @@ Entry.mkboard.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1526,8 +1526,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_list_lcd_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1541,8 +1541,8 @@ Entry.mkboard.getBlocks = function() {
                     ],
                     value: '0x27',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1558,8 +1558,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_list_lcd_command: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1575,8 +1575,8 @@ Entry.mkboard.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1592,8 +1592,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_lcd_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             // template: Lang.template.mkboard_lcd_init,
             //"template": "%1 %2",
@@ -1626,23 +1626,23 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardLcd',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var value = script.getNumberValue('LCD_INIT', script);
                 //var value = script.getValue('LCD_INIT', script);
 
                 //console.log("LCD_INIT=");
                 //console.log(value);
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_500ms;
+                    var duration = RoCode.mkboard.duration.TIME_500ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
                     sq['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.LCD,
+                        type: RoCode.mkboard.sensorTypes.LCD,
                         data: {
                             cmd: 0,
                             value: value,
@@ -1660,7 +1660,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1668,8 +1668,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_lcd_command: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             // template: Lang.template.mkboard_lcd_command,
             //"template": "%1 %2",
@@ -1701,20 +1701,20 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardLcd',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var value = script.getNumberValue('LCD_COMMAND', script);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_100ms;
+                    var duration = RoCode.mkboard.duration.TIME_100ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
                     sq['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.LCD,
+                        type: RoCode.mkboard.sensorTypes.LCD,
                         data: {
                             cmd: 1,
                             value: value,
@@ -1732,7 +1732,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1740,8 +1740,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_lcd_print: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_lcd_print,
@@ -1800,14 +1800,14 @@ Entry.mkboard.getBlocks = function() {
                 if (!script.isStart) {
                     if (typeof string === 'string') {
                         for (var i = 0; i < string.length; i++) {
-                            text[i] = Entry.mkboard.toByte(string[i]);
+                            text[i] = RoCode.mkboard.toByte(string[i]);
                         }
                     } else if (typeof string === 'number') {
                         //console.log("string");
                         //console.log(string);
                         var num_to_string = string.toString();
                         for (var i = 0; i < num_to_string.length; i++) {
-                            text[i] = Entry.mkboard.toByte(num_to_string[i]);
+                            text[i] = RoCode.mkboard.toByte(num_to_string[i]);
                         }
                         //console.log("num_to_string");
                         //console.log(num_to_string);
@@ -1817,18 +1817,18 @@ Entry.mkboard.getBlocks = function() {
                         text[0] = string;
                     }
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    //var fps = Entry.FPS || 60;
+                    //var fps = RoCode.FPS || 60;
                     //var timeValue = 60 / fps * 50;
-                    var duration = Entry.mkboard.duration.TIME_100ms;
+                    var duration = RoCode.mkboard.duration.TIME_100ms;
 
-                    Entry.hw.sendQueue['SET'][1] = {
-                        type: Entry.mkboard.sensorTypes.LCD,
+                    RoCode.hw.sendQueue['SET'][1] = {
+                        type: RoCode.mkboard.sensorTypes.LCD,
                         data: {
                             cmd: 2,
                             line: line,
@@ -1862,7 +1862,7 @@ Entry.mkboard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1870,8 +1870,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_list_segment_bright: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1887,8 +1887,8 @@ Entry.mkboard.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1904,8 +1904,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_list_segment_comma: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1920,8 +1920,8 @@ Entry.mkboard.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1937,8 +1937,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_segment_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_segment_init,
@@ -1980,22 +1980,22 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardSegment',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var port_clk = script.getNumberValue('PORT_CLK', script);
                 var port_dio = script.getNumberValue('PORT_DIO', script);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_500ms;
+                    var duration = RoCode.mkboard.duration.TIME_500ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.SEGMENT,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.SEGMENT,
                         data: {
                             cmd: 0, // 포트설정
                             port_clk: port_clk,
@@ -2013,7 +2013,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2021,8 +2021,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_segment_bright: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_segment_bright,
@@ -2058,16 +2058,16 @@ Entry.mkboard.getBlocks = function() {
                 var bright = script.getNumberValue('BRIGHT', script);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.SEGMENT,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.SEGMENT,
                         data: {
                             cmd: 1, // 밝기설정
                             bright: bright,
@@ -2084,7 +2084,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2092,8 +2092,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_segment_clear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_segment_clear,
@@ -2117,19 +2117,19 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardSegment',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.SEGMENT,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.SEGMENT,
                         data: {
                             cmd: 3, // Segment Clear
                         },
@@ -2145,7 +2145,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2153,8 +2153,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_segment_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_segment_value,
@@ -2216,25 +2216,25 @@ Entry.mkboard.getBlocks = function() {
                 if (typeof on_off === 'string') {
                     on_off = on_off.toLowerCase();
                 }
-                if (Entry.mkboard.highList.indexOf(on_off) > -1) {
+                if (RoCode.mkboard.highList.indexOf(on_off) > -1) {
                     on_off = 1;
-                } else if (Entry.mkboard.lowList.indexOf(on_off) > -1) {
+                } else if (RoCode.mkboard.lowList.indexOf(on_off) > -1) {
                     on_off = 0;
                 } else {
                     throw new Error();
                 }
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_100ms;
+                    var duration = RoCode.mkboard.duration.TIME_100ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.SEGMENT,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.SEGMENT,
                         data: {
                             cmd: 2, // 데이터출력
                             number: number,
@@ -2254,7 +2254,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2262,8 +2262,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_list_oled_comma: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -2277,8 +2277,8 @@ Entry.mkboard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2294,8 +2294,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_oled_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             // template: Lang.template.mkboard_oled_init,
             //"template": "%1 %2",
@@ -2331,16 +2331,16 @@ Entry.mkboard.getBlocks = function() {
                 var oled_init = script.getNumberValue('OLED_INIT', script);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_500ms;
+                    var duration = RoCode.mkboard.duration.TIME_500ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.OLED,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.OLED,
                         data: {
                             cmd: 0, // OLED Initialize
                             oled_init: oled_init,
@@ -2357,7 +2357,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2365,8 +2365,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_oled_clear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_oled_clear,
@@ -2390,19 +2390,19 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardOled',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.OLED,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.OLED,
                         data: {
                             cmd: 3, // OLED Clear
                         },
@@ -2418,7 +2418,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2426,8 +2426,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_oled_print: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_oled_print,
@@ -2478,7 +2478,7 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardOled',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var line = script.getNumberValue('LINE', script);
                 var column = script.getNumberValue('COLUMN', script);
@@ -2494,14 +2494,14 @@ Entry.mkboard.getBlocks = function() {
 
                     if (typeof string === 'string') {
                         for (var i = 0; i < string.length; i++) {
-                            text[i] = Entry.mkboard.toByte(string[i]);
+                            text[i] = RoCode.mkboard.toByte(string[i]);
                         }
                     } else if (typeof string === 'number') {
                         //console.log("string");
                         //console.log(string);
                         var num_to_string = string.toString();
                         for (var i = 0; i < num_to_string.length; i++) {
-                            text[i] = Entry.mkboard.toByte(num_to_string[i]);
+                            text[i] = RoCode.mkboard.toByte(num_to_string[i]);
                         }
                         //console.log("num_to_string");
                         //console.log(num_to_string);
@@ -2511,16 +2511,16 @@ Entry.mkboard.getBlocks = function() {
                         text[0] = string;
                     }
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.OLED,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.OLED,
                         data: {
                             cmd: 1,
                             line: line,
@@ -2555,7 +2555,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2563,8 +2563,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_oled_print_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_oled_print_number,
@@ -2624,7 +2624,7 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardOled',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var line = script.getNumberValue('LINE', script);
                 var column = script.getNumberValue('COLUMN', script);
@@ -2642,16 +2642,16 @@ Entry.mkboard.getBlocks = function() {
                     number = Math.max(number, 0);
                     number = Math.min(number, 65535);
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.OLED,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.OLED,
                         data: {
                             cmd: 2, // 데이터출력
                             line: line,
@@ -2671,7 +2671,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2679,8 +2679,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_matrix_count_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -2699,8 +2699,8 @@ Entry.mkboard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2717,8 +2717,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_list_matrix_bright: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -2744,8 +2744,8 @@ Entry.mkboard.getBlocks = function() {
                     ],
                     value: '7',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2761,8 +2761,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_matrix_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_matrix_init,
@@ -2822,7 +2822,7 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardMatrix',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var matrix_num = script.getValue('MATRIX_NUM', script);
                 var port_data = script.getValue('PORT_DATA', script);
@@ -2830,16 +2830,16 @@ Entry.mkboard.getBlocks = function() {
                 var port_cs = script.getValue('PORT_CS', script);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.MATRIX,
                         data: {
                             cmd: 0, // 포트설정
                             matrix_num: matrix_num,
@@ -2859,7 +2859,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2867,8 +2867,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_matrix_bright: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_matrix_bright,
@@ -2914,16 +2914,16 @@ Entry.mkboard.getBlocks = function() {
                 var bright = script.getValue('BRIGHT', script);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.MATRIX,
                         data: {
                             cmd: 1, // 밝기설정
                             matrix_num: matrix_num,
@@ -2941,7 +2941,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2949,8 +2949,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_matrix_clear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_matrix_clear,
@@ -2983,20 +2983,20 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardMatrix',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var matrix_num = script.getValue('MATRIX_NUM', script);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.MATRIX,
                         data: {
                             cmd: 2, // Matrix Clear
                             matrix_num: matrix_num,
@@ -3013,7 +3013,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -3021,8 +3021,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_matrix_set: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_matrix_set,
@@ -3082,7 +3082,7 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardMatrix',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var matrix_num = script.getValue('MATRIX_NUM', script);
                 var matrix_row = script.getValue('MATRIX_ROW', script);
@@ -3101,25 +3101,25 @@ Entry.mkboard.getBlocks = function() {
                 if (typeof matrix_on_off === 'string') {
                     matrix_on_off = matrix_on_off.toLowerCase();
                 }
-                if (Entry.mkboard.highList.indexOf(matrix_on_off) > -1) {
+                if (RoCode.mkboard.highList.indexOf(matrix_on_off) > -1) {
                     matrix_on_off = 1;
-                } else if (Entry.mkboard.lowList.indexOf(matrix_on_off) > -1) {
+                } else if (RoCode.mkboard.lowList.indexOf(matrix_on_off) > -1) {
                     matrix_on_off = 0;
                 } else {
                     throw new Error();
                 }
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.MATRIX,
                         data: {
                             cmd: 3, // 포트설정
                             matrix_num: matrix_num,
@@ -3139,7 +3139,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -3147,8 +3147,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_matrix_set_row: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_matrix_set_row,
@@ -3199,7 +3199,7 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardMatrix',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var matrix_num = script.getValue('MATRIX_NUM', script);
                 var matrix_row = script.getValue('MATRIX_ROW', script);
@@ -3212,28 +3212,28 @@ Entry.mkboard.getBlocks = function() {
 
                 if (typeof string === 'string') {
                     for (var i = 0; i < string.length; i++) {
-                        text[i] = Entry.mkboard.toByte(string[i]);
+                        text[i] = RoCode.mkboard.toByte(string[i]);
                     }
                 } else if (typeof string === 'number') {
                     var num_to_string = string.toString();
                     for (var i = 0; i < num_to_string.length; i++) {
-                        text[i] = Entry.mkboard.toByte(num_to_string[i]);
+                        text[i] = RoCode.mkboard.toByte(num_to_string[i]);
                     }
                 } else {
                     text[0] = string;
                 }
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.MATRIX,
                         data: {
                             cmd: 4, // Row
                             matrix_num: matrix_num,
@@ -3259,7 +3259,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -3267,8 +3267,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_matrix_set_col: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_matrix_set_col,
@@ -3319,7 +3319,7 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardMatrix',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var matrix_num = script.getValue('MATRIX_NUM', script);
                 var matrix_col = script.getValue('MATRIX_COL', script);
@@ -3332,28 +3332,28 @@ Entry.mkboard.getBlocks = function() {
 
                 if (typeof string === 'string') {
                     for (var i = 0; i < string.length; i++) {
-                        text[i] = Entry.mkboard.toByte(string[i]);
+                        text[i] = RoCode.mkboard.toByte(string[i]);
                     }
                 } else if (typeof string === 'number') {
                     var num_to_string = string.toString();
                     for (var i = 0; i < num_to_string.length; i++) {
-                        text[i] = Entry.mkboard.toByte(num_to_string[i]);
+                        text[i] = RoCode.mkboard.toByte(num_to_string[i]);
                     }
                 } else {
                     text[0] = string;
                 }
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.MATRIX,
                         data: {
                             cmd: 5, // Col
                             matrix_num: matrix_num,
@@ -3379,7 +3379,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -3387,8 +3387,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_matrix_char: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_matrix_char,
@@ -3430,7 +3430,7 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardMatrix',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var matrix_num = script.getValue('MATRIX_NUM', script);
                 var string = script.getValue('STRING', script);
@@ -3442,28 +3442,28 @@ Entry.mkboard.getBlocks = function() {
 
                 if (typeof string === 'string') {
                     for (var i = 0; i < string.length; i++) {
-                        text[i] = Entry.mkboard.toByte(string[i]);
+                        text[i] = RoCode.mkboard.toByte(string[i]);
                     }
                 } else if (typeof string === 'number') {
                     var num_to_string = string.toString();
                     for (var i = 0; i < num_to_string.length; i++) {
-                        text[i] = Entry.mkboard.toByte(num_to_string[i]);
+                        text[i] = RoCode.mkboard.toByte(num_to_string[i]);
                     }
                 } else {
                     text[0] = string;
                 }
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.MATRIX,
                         data: {
                             cmd: 6, // Char
                             matrix_num: matrix_num,
@@ -3481,7 +3481,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -3489,8 +3489,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_neopixel_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -3503,8 +3503,8 @@ Entry.mkboard.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -3521,8 +3521,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_neopixel_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_neopixel_init,
@@ -3573,7 +3573,7 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardNeopixel',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var port_no = script.getNumberValue('PORT_NO', script);
                 var led_count = script.getNumberValue('LED_COUNT', script);
@@ -3584,16 +3584,16 @@ Entry.mkboard.getBlocks = function() {
                 led_count = Math.min(led_count, 30);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.NEOPIXEL,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.NEOPIXEL,
                         data: {
                             cmd: 0, // 포트설정
                             port_no: port_no,
@@ -3613,7 +3613,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -3621,8 +3621,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_neopixel_set_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_neopixel_set_rgb,
@@ -3682,7 +3682,7 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardNeopixel',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var led_no = script.getNumberValue('LED_NO', script);
                 var r_val = script.getNumberValue('R_VAL', script);
@@ -3706,16 +3706,16 @@ Entry.mkboard.getBlocks = function() {
                 b_val = Math.min(b_val, 255);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.NEOPIXEL,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.NEOPIXEL,
                         data: {
                             cmd: 1, // 포트설정
                             led_no: led_no,
@@ -3735,7 +3735,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -3743,8 +3743,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_neopixel_set_rgbw: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_neopixel_set_rgbw,
@@ -3813,7 +3813,7 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardNeopixel',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var led_no = script.getNumberValue('LED_NO', script);
                 var r_val = script.getNumberValue('R_VAL', script);
@@ -3842,16 +3842,16 @@ Entry.mkboard.getBlocks = function() {
                 w_val = Math.min(w_val, 255);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.NEOPIXEL,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.NEOPIXEL,
                         data: {
                             cmd: 2, // 포트설정
                             led_no: led_no,
@@ -3872,7 +3872,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -3880,8 +3880,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_neopixel_on: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_neopixel_on,
@@ -3914,7 +3914,7 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardNeopixel',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var value = script.getValue('VALUE', script);
 
@@ -3924,9 +3924,9 @@ Entry.mkboard.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.mkboard.highList.indexOf(value) > -1) {
+                if (RoCode.mkboard.highList.indexOf(value) > -1) {
                     value = 1;
-                } else if (Entry.mkboard.lowList.indexOf(value) > -1) {
+                } else if (RoCode.mkboard.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
@@ -3936,16 +3936,16 @@ Entry.mkboard.getBlocks = function() {
                 //console.log(value);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_50ms;
+                    var duration = RoCode.mkboard.duration.TIME_50ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.NEOPIXEL,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.NEOPIXEL,
                         data: {
                             cmd: 3, // 켜기
                             value: value,
@@ -3962,7 +3962,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -3970,8 +3970,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_pm5003_pm_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -3985,8 +3985,8 @@ Entry.mkboard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -4003,8 +4003,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_pms5003_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_pms5003_init,
@@ -4046,22 +4046,22 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardPms5003',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var port_rx = script.getNumberValue('PORT_RX', script);
                 var port_tx = script.getNumberValue('PORT_TX', script);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.PMS5003,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.PMS5003,
                         data: {
                             cmd: 0, // 포트설정
                             port_rx: port_rx,
@@ -4079,7 +4079,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -4087,8 +4087,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_pms5003_measure: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_pms5003_measure,
@@ -4112,19 +4112,19 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardPms5003',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_10ms;
+                    var duration = RoCode.mkboard.duration.TIME_10ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.PMS5003,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.PMS5003,
                         data: {
                             cmd: 1, // 먼지센서 측정
                         },
@@ -4140,7 +4140,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -4148,8 +4148,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_pms5003_read: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             // template: Lang.template.mkboard_pms5003_read,
@@ -4185,19 +4185,19 @@ Entry.mkboard.getBlocks = function() {
                 var pm_kind = script.getNumberValue('PM_KIND', script);
 
                 if (pm_kind === 0) {
-                    return Entry.hw.portData.PMS5003_PM10 || 0;
+                    return RoCode.hw.portData.PMS5003_PM10 || 0;
                 } else if (pm_kind === 1) {
-                    return Entry.hw.portData.PMS5003_PM25 || 0;
+                    return RoCode.hw.portData.PMS5003_PM25 || 0;
                 } else {
-                    return Entry.hw.portData.PMS5003_PM100 || 0;
+                    return RoCode.hw.portData.PMS5003_PM100 || 0;
                 }
             },
             syntax: { js: [], py: ['mkboard.mkboard_pms5003_read(%1)'] },
         },
 
         mkboard_lsm303_axis_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -4211,8 +4211,8 @@ Entry.mkboard.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -4229,8 +4229,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_lsm303_accel_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_lsm303_accel_init,
@@ -4254,19 +4254,19 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardLsm303Accel',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_100ms;
+                    var duration = RoCode.mkboard.duration.TIME_100ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.LSM303_ACCEL,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.LSM303_ACCEL,
                         data: {
                             cmd: 0, // 초기화
                         },
@@ -4282,7 +4282,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -4290,8 +4290,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_lsm303_accel_measure: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_lsm303_accel_measure,
@@ -4315,19 +4315,19 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardLsm303Accel',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_100ms;
+                    var duration = RoCode.mkboard.duration.TIME_100ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.LSM303_ACCEL,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.LSM303_ACCEL,
                         data: {
                             cmd: 1, // 먼지센서 측정
                         },
@@ -4343,7 +4343,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -4351,8 +4351,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_lsm303_accel_read: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             // template: Lang.template.mkboard_lsm303_accel_read,
@@ -4387,16 +4387,16 @@ Entry.mkboard.getBlocks = function() {
             func: function(sprite, script) {
                 var axis = script.getNumberValue('AXIS', script);
 
-                if (axis === 0) return Entry.hw.portData.LSM303_ACCEL_X || 0;
-                else if (axis === 1) return Entry.hw.portData.LSM303_ACCEL_Y || 0;
-                else return Entry.hw.portData.LSM303_ACCEL_Z || 0;
+                if (axis === 0) return RoCode.hw.portData.LSM303_ACCEL_X || 0;
+                else if (axis === 1) return RoCode.hw.portData.LSM303_ACCEL_Y || 0;
+                else return RoCode.hw.portData.LSM303_ACCEL_Z || 0;
             },
             syntax: { js: [], py: ['mkboard.mkboard_lsm303_accel_read(%1)'] },
         },
 
         mkboard_lsm303_compass_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_lsm303_compass_init,
@@ -4420,19 +4420,19 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardLsm303Compass',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.LSM303_COMPASS,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.LSM303_COMPASS,
                         data: {
                             cmd: 0, // 초기화
                         },
@@ -4448,7 +4448,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -4456,8 +4456,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_lsm303_compass_measure: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             // template: Lang.template.mkboard_lsm303_compass_measure,
@@ -4481,19 +4481,19 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardLsm303Compass',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    var duration = Entry.mkboard.duration.TIME_200ms;
+                    var duration = RoCode.mkboard.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][0] = {
-                        type: Entry.mkboard.sensorTypes.LSM303_COMPASS,
+                    RoCode.hw.sendQueue['SET'][0] = {
+                        type: RoCode.mkboard.sensorTypes.LSM303_COMPASS,
                         data: {
                             cmd: 1, // 지자기 센서 측정
                         },
@@ -4509,7 +4509,7 @@ Entry.mkboard.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -4517,8 +4517,8 @@ Entry.mkboard.getBlocks = function() {
         },
 
         mkboard_lsm303_compass_read: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             // template: Lang.template.mkboard_lsm303_compass_read,
@@ -4541,7 +4541,7 @@ Entry.mkboard.getBlocks = function() {
             class: 'mkboardLsm303Compass',
             isNotFor: ['mkboard'],
             func: function(sprite, script) {
-                return Entry.hw.portData.LSM303_COMPASS || 0;
+                return RoCode.hw.portData.LSM303_COMPASS || 0;
             },
             syntax: { js: [], py: ['mkboard.mkboard_lsm303_compass_read()'] },
         },
@@ -4550,4 +4550,4 @@ Entry.mkboard.getBlocks = function() {
     };
 };
 
-module.exports = Entry.mkboard;
+module.exports = RoCode.mkboard;

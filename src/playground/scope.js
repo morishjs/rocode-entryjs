@@ -14,7 +14,7 @@ class Scope {
 
     getParam(index) {
         const fieldBlock = this.block.params[index];
-        const newScope = new Entry.Scope(fieldBlock, this.executor);
+        const newScope = new RoCode.Scope(fieldBlock, this.executor);
         const result = newScope.run(this.entity, true);
         return result;
     }
@@ -22,9 +22,9 @@ class Scope {
     getParams() {
         const that = this;
         return this.block.params.map((param) => {
-            if (param instanceof Entry.Block) {
+            if (param instanceof RoCode.Block) {
                 const fieldBlock = param;
-                const newScope = new Entry.Scope(fieldBlock, that.executor);
+                const newScope = new RoCode.Scope(fieldBlock, that.executor);
                 return newScope.run(this.entity, true);
             } else {
                 return param;
@@ -33,13 +33,13 @@ class Scope {
     }
 
     _setBlockState(fieldBlock, valueState) {
-        const newScope = new Entry.Scope(fieldBlock, this.executor);
-        const result = Entry.block[fieldBlock.type].func.call(newScope, this.entity, newScope);
+        const newScope = new RoCode.Scope(fieldBlock, this.executor);
+        const result = RoCode.block[fieldBlock.type].func.call(newScope, this.entity, newScope);
         const blockId = fieldBlock.data.id;
 
         if (result instanceof Promise) {
             if (valueState[blockId].state === 'pending') {
-                throw new Entry.Utils.AsyncError();
+                throw new RoCode.Utils.AsyncError();
             }
             valueState[blockId].state = 'pending';
             result.then((value) => {
@@ -69,7 +69,7 @@ class Scope {
 
         if (hasPending && valueState[currentBlockId].state === 'wait') {
             valueState[currentBlockId].state = 'pending';
-            throw new Entry.Utils.AsyncError();
+            throw new RoCode.Utils.AsyncError();
         }
     }
 
@@ -94,7 +94,7 @@ class Scope {
             const blockId = block.data.id;
 
             if (executorValueMap[blockId] === 'isPending') {
-                throw new Entry.Utils.AsyncError();
+                throw new RoCode.Utils.AsyncError();
             } else if (
                 executorValueMap[blockId] &&
                 executorValueMap[blockId].name === 'IncompatibleError'
@@ -104,15 +104,15 @@ class Scope {
                 return executorValueMap[blockId];
             }
 
-            const newScope = new Entry.Scope(block, this.executor);
-            const result = Entry.block[block.type].func.call(newScope, this.entity, newScope);
+            const newScope = new RoCode.Scope(block, this.executor);
+            const result = RoCode.block[block.type].func.call(newScope, this.entity, newScope);
 
             if (result instanceof Promise) {
                 executorValueMap[blockId] = 'isPending';
                 result.then((value) => {
                     executorValueMap[blockId] = value;
                 });
-                throw new Entry.Utils.AsyncError();
+                throw new RoCode.Utils.AsyncError();
             } else {
                 executorValueMap[blockId] = result;
             }
@@ -154,21 +154,21 @@ class Scope {
 
     _getParamIndex(key) {
         if (!this._schema) {
-            this._schema = Entry.block[this.type];
+            this._schema = RoCode.block[this.type];
         }
         return this._schema.paramsKeyMap[key];
     }
 
     _getStatementIndex(key) {
         if (!this._schema) {
-            this._schema = Entry.block[this.type];
+            this._schema = RoCode.block[this.type];
         }
         return this._schema.statementsKeyMap[key];
     }
 
     die() {
         this.block = null;
-        return Entry.STATIC.BREAK;
+        return RoCode.STATIC.BREAK;
     }
 
     run(entity, isValue) {
@@ -187,7 +187,7 @@ class Scope {
             return schema.func.call(this, entity, this);
         } else {
             return Promise.all(values).then(async (values) => {
-                if (Entry.engine.state !== 'stop' && this.block) {
+                if (RoCode.engine.state !== 'stop' && this.block) {
                     this.values = values;
                     return await schema.func.call(this, entity, this);
                 }
@@ -196,4 +196,4 @@ class Scope {
     }
 }
 
-Entry.Scope = Scope;
+RoCode.Scope = Scope;

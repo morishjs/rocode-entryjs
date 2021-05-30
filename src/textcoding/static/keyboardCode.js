@@ -3,7 +3,7 @@
  */
 'use strict';
 
-Entry.KeyboardCode = {};
+RoCode.KeyboardCode = {};
 
 (function(kc) {
     kc.map = {
@@ -343,4 +343,4 @@ Entry.KeyboardCode = {};
         ";":186,"=":187,",":188,"-":189,".":190,"/":191,"`":192,"[":219,"\\":220,"]":221,
         "'":222
     };*/
-})(Entry.KeyboardCode);
+})(RoCode.KeyboardCode);

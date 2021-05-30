@@ -26,7 +26,7 @@ export default class PIXITextStyle extends TextStyle {
         }
     }
 
-    /** css wordBreak 의 break-all 속성을 구현하기 위함. entryjs 는 break-all 이 기본이기 때문에 return true 로 해버림. */
+    /** css wordBreak 의 break-all 속성을 구현하기 위함. RoCodejs 는 break-all 이 기본이기 때문에 return true 로 해버림. */
     get wordBreakAll(): boolean {
         return true;
     }

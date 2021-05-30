@@ -48,7 +48,7 @@ const microbitGestures = {
     SHAKE: 11,
 };
 
-Entry.MicrobitExt = new (class MicrobitExt {
+RoCode.MicrobitExt = new (class MicrobitExt {
     constructor() {
         this.id = '22.2';
         this.url = 'http://microbit.org/ko/';
@@ -93,16 +93,16 @@ Entry.MicrobitExt = new (class MicrobitExt {
         this.lastGesture = -1;
         this.commandStatus = {};
         this.isEngineStop = true;
-        delete Entry.hw.portData.sensorData;
+        delete RoCode.hw.portData.sensorData;
     }
 
     requestCommand(type, payload) {
         this.isEngineStop = false;
-        Entry.hw.sendQueue = {
+        RoCode.hw.sendQueue = {
             type,
             payload,
         };
-        Entry.hw.update();
+        RoCode.hw.update();
     }
 
     /**
@@ -115,17 +115,17 @@ Entry.MicrobitExt = new (class MicrobitExt {
         const codeId = `${entityId}-${type}`;
         if (!this.commandStatus[codeId]) {
             // 첫 진입시 무조건 AsyncError
-            Entry.hw.sendQueue = {
+            RoCode.hw.sendQueue = {
                 type,
                 payload,
             };
             this.commandStatus[codeId] = 'pending';
-            Entry.hw.sendQueue.codeId = codeId;
-            Entry.hw.update();
-            throw new Entry.Utils.AsyncError();
+            RoCode.hw.sendQueue.codeId = codeId;
+            RoCode.hw.update();
+            throw new RoCode.Utils.AsyncError();
         } else if (this.commandStatus[codeId] === 'pending') {
             // 두 번째 이상의 진입시도이며 작업이 아직 끝나지 않은 경우
-            throw new Entry.Utils.AsyncError();
+            throw new RoCode.Utils.AsyncError();
         } else if (this.commandStatus[codeId] === 'completed') {
             // 두 번째 이상의 진입시도이며 pending 도 아닌 경우
             // 블록 func 로직에서 다음 데이터를 처리한다.
@@ -491,8 +491,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
     getBlocks() {
         return {
             microbit_ext_led_toggle: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -515,8 +515,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 'on',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -557,8 +557,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
             },
             microbit_ext_get_led: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -601,12 +601,12 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         x,
                         y,
                     });
-                    return _get(Entry.hw.portData, ['payload', 'sensorData', 'led', x, y]);
+                    return _get(RoCode.hw.portData, ['payload', 'sensorData', 'led', x, y]);
                 },
             },
             microbit_ext_show_string: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -649,8 +649,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
             },
             microbit_ext_show_image: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -700,8 +700,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -726,8 +726,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
             },
             microbit_ext_set_led_image: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -755,8 +755,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
             },
             microbit_ext_reset_screen: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -778,8 +778,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
             },
             microbit_ext_set_tone: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -914,8 +914,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 131,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
@@ -929,8 +929,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 4,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -958,8 +958,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
             },
             microbit_ext_set_tempo: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -997,8 +997,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
             },
             microbit_ext_set_relative_tempo: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1037,8 +1037,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
             },
 
             microbit_ext_set_analog: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1054,8 +1054,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -1092,8 +1092,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
             },
             microbit_ext_set_analog_period: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1109,8 +1109,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -1147,8 +1147,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
             },
             microbit_ext_get_analog: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -1165,8 +1165,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1183,12 +1183,12 @@ Entry.MicrobitExt = new (class MicrobitExt {
                     this.requestCommandWithResponse(script.entity.id, functionKeys.GET_ANALOG, [
                         value,
                     ]);
-                    return _get(Entry.hw.portData, ['payload', 'sensorData', 'analog', value], 0);
+                    return _get(RoCode.hw.portData, ['payload', 'sensorData', 'analog', value], 0);
                 },
             },
             microbit_ext_get_analog_map: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -1205,8 +1205,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -1267,7 +1267,7 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         value,
                     ]);
                     let returnData = _get(
-                        Entry.hw.portData,
+                        RoCode.hw.portData,
                         ['payload', 'sensorData', 'analog', value],
                         0
                     );
@@ -1281,8 +1281,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                     let isFloat = false;
 
                     if (
-                        (Entry.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
-                        (Entry.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
+                        (RoCode.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
+                        (RoCode.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
                     ) {
                         isFloat = true;
                     }
@@ -1312,8 +1312,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
             },
             microbit_ext_set_digital: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1342,8 +1342,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
@@ -1353,8 +1353,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -1383,8 +1383,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
             },
             microbit_ext_get_digital: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_boolean_field',
                 statements: [],
@@ -1414,8 +1414,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1432,12 +1432,12 @@ Entry.MicrobitExt = new (class MicrobitExt {
                     this.requestCommandWithResponse(script.entity.id, functionKeys.GET_DIGITAL, [
                         value,
                     ]);
-                    return _get(Entry.hw.portData, ['payload', 'sensorData', 'digital', value], 0);
+                    return _get(RoCode.hw.portData, ['payload', 'sensorData', 'digital', value], 0);
                 },
             },
             microbit_ext_get_button: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_boolean_field',
                 statements: [],
@@ -1451,8 +1451,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 1,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1467,7 +1467,7 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 func: (sprite, script) => {
                     const value = script.getField('VALUE');
                     const buttonState = _get(
-                        Entry.hw.portData,
+                        RoCode.hw.portData,
                         ['payload', 'sensorData', 'button'],
                         -1
                     );
@@ -1478,8 +1478,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
             },
             microbit_ext_get_sensor: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -1493,8 +1493,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 'temperature',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1515,12 +1515,12 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         let commandType = functionKeys.GET_COMPASS_HEADING;
                         this.requestCommandWithResponse(script.entity.id, commandType);
                     }
-                    return _get(Entry.hw.portData, ['payload', 'sensorData', value], -1);
+                    return _get(RoCode.hw.portData, ['payload', 'sensorData', value], -1);
                 },
             },
             microbit_ext_is_tilt: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_boolean_field',
                 statements: [],
@@ -1535,8 +1535,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1569,7 +1569,7 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         }
                     }
 
-                    const value = _get(Entry.hw.portData, sensorDataMap, -1);
+                    const value = _get(RoCode.hw.portData, sensorDataMap, -1);
                     // 기획팀 의도에 따라 30도 이내는 기울지 않았다고 판단
 
                     /*
@@ -1589,8 +1589,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
             },
             microbit_ext_get_tilt: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -1605,8 +1605,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1639,7 +1639,7 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         }
                     }
 
-                    const value = _get(Entry.hw.portData, sensorDataMap, -1);
+                    const value = _get(RoCode.hw.portData, sensorDataMap, -1);
                     /*
                     좌우 = 우측으로 기울일수록 +
                     앞뒤 = 뒤로 기울일수록 +
@@ -1656,8 +1656,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
             },
             microbit_ext_get_accelerometer: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -1672,8 +1672,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1687,7 +1687,7 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
                 func: (sprite, script) => {
                     const value = script.getField('VALUE');
-                    let whole = _get(Entry.hw.portData, 'payload.sensorData.accelerometer', -1);
+                    let whole = _get(RoCode.hw.portData, 'payload.sensorData.accelerometer', -1);
                     if (whole instanceof Object) {
                         switch (value) {
                             case 0:
@@ -1711,8 +1711,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
             },
             microbit_ext_get_gesture: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_boolean_field',
                 statements: [],
@@ -1732,8 +1732,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 11,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1747,7 +1747,7 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
                 func: (sprite, script) => {
                     let value = script.getField('VALUE');
-                    const gesture = _get(Entry.hw.portData, 'payload.sensorData.gesture', -1);
+                    const gesture = _get(RoCode.hw.portData, 'payload.sensorData.gesture', -1);
                     // 밸류 중복으로 인해서 생기는 문제로 인해 +10을 오프셋으로 사용
                     if (value > 11) {
                         value = value - 10;
@@ -1776,8 +1776,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
             },
             microbit_ext_set_servo: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1790,8 +1790,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -1828,8 +1828,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                 },
             },
             microbit_ext_set_servo_period: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1842,8 +1842,8 @@ Entry.MicrobitExt = new (class MicrobitExt {
                         ],
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -1883,4 +1883,4 @@ Entry.MicrobitExt = new (class MicrobitExt {
     }
 })();
 
-module.exports = Entry.MicrobitExt;
+module.exports = RoCode.MicrobitExt;

@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.RichShield = {
+RoCode.RichShield = {
     id: '36.2',
     name: 'RichShield',
     url: 'https://gorillacell.kr/',
@@ -10,24 +10,24 @@ Entry.RichShield = {
         en: 'Arduino RichShield',
     },
     setZero() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 SET: {},
             };
         } else {
-            const keySet = Object.keys(Entry.hw.sendQueue.SET);
+            const keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach((key) => {
-                if (Entry.hw.sendQueue.SET[key].type == Entry.RichShield.sensorTypes.DCMOTOR) {
-                    Entry.hw.sendQueue.SET[key].data.value1 = 0;
-                    Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                if (RoCode.hw.sendQueue.SET[key].type == RoCode.RichShield.sensorTypes.DCMOTOR) {
+                    RoCode.hw.sendQueue.SET[key].data.value1 = 0;
+                    RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
                 } else {
-                    Entry.hw.sendQueue.SET[key].data = 0;
-                    Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                    RoCode.hw.sendQueue.SET[key].data = 0;
+                    RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
                 }
             });
         }
-        Entry.hw.sendQueue.GET = {};
-        Entry.hw.update();
+        RoCode.hw.sendQueue.GET = {};
+        RoCode.hw.update();
     },
     sensorTypes: {
         ALIVE: 0,
@@ -83,7 +83,7 @@ Entry.RichShield = {
     BlockState: {},
 };
 
-Entry.RichShield.setLanguage = function() {
+RoCode.RichShield.setLanguage = function() {
     return {
         ko: {
             Blocks: {
@@ -304,7 +304,7 @@ Entry.RichShield.setLanguage = function() {
     };
 };
 
-Entry.RichShield.blockMenuBlocks = [
+RoCode.RichShield.blockMenuBlocks = [
     'RichShield_get_Analog_value',
     'RichShield_set_digital_toggle',
     'RichShield_get_digital',
@@ -341,11 +341,11 @@ Entry.RichShield.blockMenuBlocks = [
     */
 ];
 
-Entry.RichShield.getBlocks = function() {
+RoCode.RichShield.getBlocks = function() {
     return {
         RichShield_list_digital_basic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -370,8 +370,8 @@ Entry.RichShield.getBlocks = function() {
                     ],
                     value: '10',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -386,8 +386,8 @@ Entry.RichShield.getBlocks = function() {
             },
         },
         RichShield_list_pullup_setting: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -400,8 +400,8 @@ Entry.RichShield.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -416,8 +416,8 @@ Entry.RichShield.getBlocks = function() {
             },
         },
         RichShield_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -456,15 +456,15 @@ Entry.RichShield.getBlocks = function() {
                 const port = script.getNumberValue('PORT');
                 const opr = script.getNumberValue('OPERATOR');
                 //"down = 0" or "up = 2"
-                const DIGITAL = Entry.hw.portData.DIGITAL;
+                const DIGITAL = RoCode.hw.portData.DIGITAL;
 
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
-                if (Entry.hw.sendQueue.SET[port]) {
-                    return Entry.hw.sendQueue.SET[port].data;
+                if (RoCode.hw.sendQueue.SET[port]) {
+                    return RoCode.hw.sendQueue.SET[port].data;
                 } else {
-                    Entry.hw.sendQueue.GET[Entry.RichShield.sensorTypes.DIGITAL] = {
+                    RoCode.hw.sendQueue.GET[RoCode.RichShield.sensorTypes.DIGITAL] = {
                         port,
                         data: opr,
                         time: new Date().getTime(),
@@ -475,8 +475,8 @@ Entry.RichShield.getBlocks = function() {
             syntax: { js: [], py: ['RichShield_get_digital(%1,%2)'] },
         },
         RichShield_get_digital_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -513,15 +513,15 @@ Entry.RichShield.getBlocks = function() {
             func(sprite, script) {
                 const port = script.getNumberValue('PORT');
                 const opr = script.getNumberValue('OPERATOR');
-                const DIGITAL = Entry.hw.portData.DIGITAL;
+                const DIGITAL = RoCode.hw.portData.DIGITAL;
 
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
-                if (Entry.hw.sendQueue.SET[port]) {
-                    return Entry.hw.sendQueue.SET[port].data;
+                if (RoCode.hw.sendQueue.SET[port]) {
+                    return RoCode.hw.sendQueue.SET[port].data;
                 } else {
-                    Entry.hw.sendQueue.GET[Entry.Hasseam.sensorTypes.DIGITAL] = {
+                    RoCode.hw.sendQueue.GET[RoCode.Hasseam.sensorTypes.DIGITAL] = {
                         port,
                         data: opr,
                         time: new Date().getTime(),
@@ -533,8 +533,8 @@ Entry.RichShield.getBlocks = function() {
             syntax: { js: [], py: ['RichShield_get_digital_toggle(%1 %2)'] },
         },
         RichShield_list_analog_basic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -551,8 +551,8 @@ Entry.RichShield.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -567,8 +567,8 @@ Entry.RichShield.getBlocks = function() {
             },
         },
         RichShield_get_Analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.RichShield_get_Analog_value,
@@ -600,16 +600,16 @@ Entry.RichShield.getBlocks = function() {
             isNotFor: ['RichShield'],
             func(sprite, script) {
                 let port = script.getValue('PORT', script);
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
 
                 if (port[0] === 'A') {
                     port = port.substring(1);
                 }
 
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
-                Entry.hw.sendQueue.GET[Entry.RichShield.sensorTypes.ANALOG] = {
+                RoCode.hw.sendQueue.GET[RoCode.RichShield.sensorTypes.ANALOG] = {
                     port,
                     time: new Date().getTime(),
                 };
@@ -619,8 +619,8 @@ Entry.RichShield.getBlocks = function() {
             syntax: { js: [], py: ['RichShield.Get_Light_Value(%1, %2)'] },
         },
         RichShield_list_digital_basic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -645,8 +645,8 @@ Entry.RichShield.getBlocks = function() {
                     ],
                     value: '10',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -661,8 +661,8 @@ Entry.RichShield.getBlocks = function() {
             },
         },
         RichShield_list_digital_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -675,8 +675,8 @@ Entry.RichShield.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -691,8 +691,8 @@ Entry.RichShield.getBlocks = function() {
             },
         },
         RichShield_set_digital_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -738,18 +738,18 @@ Entry.RichShield.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.RichShield.highList.indexOf(value) > -1) {
+                if (RoCode.RichShield.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.RichShield.lowList.indexOf(value) > -1) {
+                } else if (RoCode.RichShield.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port] = {
-                    type: Entry.RichShield.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue.SET[port] = {
+                    type: RoCode.RichShield.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -759,8 +759,8 @@ Entry.RichShield.getBlocks = function() {
             syntax: { js: [], py: ['RichShield.Set_Digital_Toggle(%1, %2)'] },
         },
         RichShield_LCD_event: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_event',
             statements: [],
@@ -777,8 +777,8 @@ Entry.RichShield.getBlocks = function() {
             isNotFor: ['RichShield'],
         },
         RichShield_LCD_Control_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -791,8 +791,8 @@ Entry.RichShield.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -803,8 +803,8 @@ Entry.RichShield.getBlocks = function() {
                     ],
                     value: 32,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [], type: 'RichShield_LCD_Control_init' },
@@ -833,18 +833,18 @@ Entry.RichShield.getBlocks = function() {
                         text[0] = addr_val;
                     }
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    const fps = Entry.FPS || 60;
+                    const fps = RoCode.FPS || 60;
                     const timeValue = (60 / fps) * 50;
 
                     // LCD_Init type data protocol defined
-                    Entry.hw.sendQueue.SET[device] = {
-                        type: Entry.RichShield.sensorTypes.LCD,
+                    RoCode.hw.sendQueue.SET[device] = {
+                        type: RoCode.RichShield.sensorTypes.LCD,
                         data: {
                             text0: text[0],
                             text1: text[1],
@@ -861,15 +861,15 @@ Entry.RichShield.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: ['RichShield_LCD_init(%1, %2)'] },
         },
         RichShield_list_digital_lcd: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -882,8 +882,8 @@ Entry.RichShield.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -899,8 +899,8 @@ Entry.RichShield.getBlocks = function() {
         },
         //LCD Number번 :Number  행 Number 열에 String  출력
         RichShield_LCD_Control_Display: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             template: Lang.template.RichShield_LCD_Control_Display,
@@ -979,13 +979,13 @@ Entry.RichShield.getBlocks = function() {
                         text[0] = string;
                     }
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    const fps = Entry.FPS || 60;
+                    const fps = RoCode.FPS || 60;
                     const timeValue = (60 / fps) * 50;
 
                     console.log(
@@ -993,9 +993,9 @@ Entry.RichShield.getBlocks = function() {
                         `Row : ${Row} / Col : ${Col} / text : ${text}`
                     );
 
-                    //Entry.hw.sendQueue.SET[line] = {
-                    Entry.hw.sendQueue.SET[line] = {
-                        type: Entry.RichShield.sensorTypes.LCD,
+                    //RoCode.hw.sendQueue.SET[line] = {
+                    RoCode.hw.sendQueue.SET[line] = {
+                        type: RoCode.RichShield.sensorTypes.LCD,
                         data: {
                             block_index: 2,
                             displayRow: Row,
@@ -1029,15 +1029,15 @@ Entry.RichShield.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: ['RichShield.LCD_Display(%1, %2, %3, %4)'] },
         },
         RichShield_LCD_Control_Clear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1047,8 +1047,8 @@ Entry.RichShield.getBlocks = function() {
                     options: [['1', 1]],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [], type: 'RichShield_LCD_Control_Clear' },
@@ -1067,13 +1067,13 @@ Entry.RichShield.getBlocks = function() {
                   Date : 2021-03-01
                 */
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
 
                 // LCD_Init type data protocol defined
-                Entry.hw.sendQueue.SET[device] = {
-                    type: Entry.RichShield.sensorTypes.LCD,
+                RoCode.hw.sendQueue.SET[device] = {
+                    type: RoCode.RichShield.sensorTypes.LCD,
                     data: {
                         block_index: 3,
                     },
@@ -1085,8 +1085,8 @@ Entry.RichShield.getBlocks = function() {
             syntax: { js: [], py: ['RichShield_LCD_Control_Clear(%1)'] },
         },
         RichShield_LCD_Control_Scroll: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1096,8 +1096,8 @@ Entry.RichShield.getBlocks = function() {
                     options: [['1', 1]],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1107,8 +1107,8 @@ Entry.RichShield.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [], type: 'RichShield_LCD_Control_Scroll' },
@@ -1131,13 +1131,13 @@ Entry.RichShield.getBlocks = function() {
                   Date : 2021-03-07
                 */
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
 
                 // LCD_Init type data protocol defined
-                Entry.hw.sendQueue.SET[device] = {
-                    type: Entry.RichShield.sensorTypes.LCD,
+                RoCode.hw.sendQueue.SET[device] = {
+                    type: RoCode.RichShield.sensorTypes.LCD,
                     data: {
                         block_index: 4,
                         direction,
@@ -1150,8 +1150,8 @@ Entry.RichShield.getBlocks = function() {
             syntax: { js: [], py: ['RichShield_LCD_Control_Scroll(%1)'] },
         },
         RichShield_FND_event: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_event',
             statements: [],
@@ -1168,8 +1168,8 @@ Entry.RichShield.getBlocks = function() {
             isNotFor: ['RichShield'],
         },
         RichShield_FND_Control_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1179,24 +1179,24 @@ Entry.RichShield.getBlocks = function() {
                     options: [['1', 1]],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [['5', 5]],
                     value: 5,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [['4', 4]],
                     value: 4,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [], type: 'RichShield_FND_Control_init' },
@@ -1212,12 +1212,12 @@ Entry.RichShield.getBlocks = function() {
                 const dio_val = script.getNumberValue('DIO', script);
 
                 // index number patched by Remoted 2020-11-20
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
                 // FND_Init type data protocol defined
-                Entry.hw.sendQueue.SET[device] = {
-                    type: Entry.RichShield.sensorTypes.FND,
+                RoCode.hw.sendQueue.SET[device] = {
+                    type: RoCode.RichShield.sensorTypes.FND,
                     data: {
                         clk_pin: clk_val,
                         dio_pin: dio_val,
@@ -1230,8 +1230,8 @@ Entry.RichShield.getBlocks = function() {
             syntax: { js: [], py: ['RichShield_FND_init(%1, %2)'] },
         },
         RichShield_FND_Control_diplay_brightness: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1241,8 +1241,8 @@ Entry.RichShield.getBlocks = function() {
                     options: [['1', 1]],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1257,8 +1257,8 @@ Entry.RichShield.getBlocks = function() {
                     ],
                     value: 3,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [], type: 'RichShield_FND_Control_diplay_brightness' },
@@ -1273,12 +1273,12 @@ Entry.RichShield.getBlocks = function() {
                 const level_val = script.getNumberValue('level', script);
 
                 // index number patched by Remoted 2020-11-20
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
                 // FND_Init type data protocol defined
-                Entry.hw.sendQueue.SET[device] = {
-                    type: Entry.RichShield.sensorTypes.FND,
+                RoCode.hw.sendQueue.SET[device] = {
+                    type: RoCode.RichShield.sensorTypes.FND,
                     data: {
                         level_val,
                         block_index: 1,
@@ -1290,8 +1290,8 @@ Entry.RichShield.getBlocks = function() {
             syntax: { js: [], py: ['RichShield_FND_Control_diplay_brightness(%1, %2)'] },
         },
         RichShield_FND_Control_display_onoff: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1301,8 +1301,8 @@ Entry.RichShield.getBlocks = function() {
                     options: [['1', 1]],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1312,8 +1312,8 @@ Entry.RichShield.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [], type: 'RichShield_FND_Control_display_onoff' },
@@ -1328,12 +1328,12 @@ Entry.RichShield.getBlocks = function() {
                 const onoff = script.getNumberValue('onoff', script);
 
                 // index number patched by Remoted 2020-11-20
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
                 // FND_Init type data protocol defined
-                Entry.hw.sendQueue.SET[device] = {
-                    type: Entry.RichShield.sensorTypes.FND,
+                RoCode.hw.sendQueue.SET[device] = {
+                    type: RoCode.RichShield.sensorTypes.FND,
                     data: {
                         onoff,
                         block_index: 2,
@@ -1345,8 +1345,8 @@ Entry.RichShield.getBlocks = function() {
             syntax: { js: [], py: ['RichShield_FND_Control_display_onoff(%1, %2)'] },
         },
         RichShield_FND_Control_diplay_char: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1356,8 +1356,8 @@ Entry.RichShield.getBlocks = function() {
                     options: [['1', 1]],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1371,8 +1371,8 @@ Entry.RichShield.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1407,8 +1407,8 @@ Entry.RichShield.getBlocks = function() {
                 const splited_array = [];
                 let display_str_converted = 0;
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
 
                 display_str_converted = display_str.toString();
@@ -1420,8 +1420,8 @@ Entry.RichShield.getBlocks = function() {
                 console.log(`splited_array :${splited_array}`);
 
                 // FND_Init type data protocol defined
-                Entry.hw.sendQueue.SET[device] = {
-                    type: Entry.RichShield.sensorTypes.FND,
+                RoCode.hw.sendQueue.SET[device] = {
+                    type: RoCode.RichShield.sensorTypes.FND,
                     data: {
                         display_str,
                         onoff,
@@ -1441,8 +1441,8 @@ Entry.RichShield.getBlocks = function() {
             syntax: { js: [], py: ['RichShield_FND_Control_diplay_char(%1, %2, %3, %4)'] },
         },
         RichShield_DHT_event: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_event',
             statements: [],
@@ -1459,8 +1459,8 @@ Entry.RichShield.getBlocks = function() {
             isNotFor: ['RichShield'],
         },
         RichShield_DHT_Control_Init_Process: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1469,24 +1469,24 @@ Entry.RichShield.getBlocks = function() {
                     type: 'Block',
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [['12', 12]],
                     value: 12,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [['DHT11', 1]],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [], type: 'RichShield_DHT_Control_Init_Process' },
@@ -1504,12 +1504,12 @@ Entry.RichShield.getBlocks = function() {
                 const ver_val = script.getNumberValue('ver', script);
 
                 // index number patched by Remoted 2020-11-20
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
                 // DHT_Init type data protocol defined
-                Entry.hw.sendQueue.SET[device] = {
-                    type: Entry.RichShield.sensorTypes.DHT,
+                RoCode.hw.sendQueue.SET[device] = {
+                    type: RoCode.RichShield.sensorTypes.DHT,
                     data: {
                         dht_pin: dht_val,
                         ver_info: ver_val,
@@ -1523,8 +1523,8 @@ Entry.RichShield.getBlocks = function() {
             syntax: { js: [], py: ['RichShield_DHT_Control_Init_Process(%1, %2, %3)'] },
         },
         RichShield_DHT_Control_Set_Temper: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1533,8 +1533,8 @@ Entry.RichShield.getBlocks = function() {
                     type: 'Block',
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1544,8 +1544,8 @@ Entry.RichShield.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [], type: 'RichShield_DHT_Control_Set_Temper' },
@@ -1562,13 +1562,13 @@ Entry.RichShield.getBlocks = function() {
 
                 // index number patched by Remoted 2020-11-20
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
 
                 // DHT Temp-Reader type data protocol defined
-                Entry.hw.sendQueue.SET[device] = {
-                    type: Entry.RichShield.sensorTypes.DHT,
+                RoCode.hw.sendQueue.SET[device] = {
+                    type: RoCode.RichShield.sensorTypes.DHT,
                     data: {
                         tempMode: tempType,
                         dht_block_index: 1,
@@ -1582,8 +1582,8 @@ Entry.RichShield.getBlocks = function() {
             syntax: { js: [], py: ['RichShield_DHT_Control_Set_Temper(%1, %2)'] },
         },
         RichShield_DHT_Control_Get_Temper: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1592,8 +1592,8 @@ Entry.RichShield.getBlocks = function() {
                     type: 'Block',
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [], type: 'RichShield_DHT_Control_Get_Temper' },
@@ -1607,25 +1607,25 @@ Entry.RichShield.getBlocks = function() {
                 const device = script.getNumberValue('dht_device', script);
                 const port = 12;
 
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
 
                 // DHT Temp-Reader type data protocol defined
-                Entry.hw.sendQueue.GET[Entry.RichShield.sensorTypes.DHT] = {
+                RoCode.hw.sendQueue.GET[RoCode.RichShield.sensorTypes.DHT] = {
                     port,
                     time: new Date().getTime(),
                 };
 
-                console.log((Entry.hw.portData.DHT || 0).toFixed(1));
+                console.log((RoCode.hw.portData.DHT || 0).toFixed(1));
 
-                return (Entry.hw.portData.DHT || 0).toFixed(0);
+                return (RoCode.hw.portData.DHT || 0).toFixed(0);
             },
             syntax: { js: [], py: ['RichShield_DHT_Control_Get_Temper(%1, %2)'] },
         },
         RichShield_DHT_Control_Set_Humid: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1634,8 +1634,8 @@ Entry.RichShield.getBlocks = function() {
                     type: 'Block',
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [], type: 'RichShield_DHT_Control_Set_Humid' },
@@ -1651,13 +1651,13 @@ Entry.RichShield.getBlocks = function() {
 
                 // index number patched by Remoted 2020-11-20
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
 
                 // DHT Temp-Reader type data protocol defined
-                Entry.hw.sendQueue.SET[device] = {
-                    type: Entry.RichShield.sensorTypes.DHT,
+                RoCode.hw.sendQueue.SET[device] = {
+                    type: RoCode.RichShield.sensorTypes.DHT,
                     data: {
                         dht_block_index: 2,
                     },
@@ -1669,8 +1669,8 @@ Entry.RichShield.getBlocks = function() {
             syntax: { js: [], py: ['RichShield_DHT_Control_Set_Humid(%1)'] },
         },
         RichShield_DHT_Control_Get_Humid: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1679,8 +1679,8 @@ Entry.RichShield.getBlocks = function() {
                     type: 'Block',
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [], type: 'RichShield_DHT_Control_Get_Humid' },
@@ -1694,25 +1694,25 @@ Entry.RichShield.getBlocks = function() {
                 const device = script.getNumberValue('dht_device', script);
                 const port = 12;
 
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
 
                 // DHT Temp-Reader type data protocol defined
-                Entry.hw.sendQueue.GET[Entry.RichShield.sensorTypes.DHT] = {
+                RoCode.hw.sendQueue.GET[RoCode.RichShield.sensorTypes.DHT] = {
                     port,
                     time: new Date().getTime(),
                 };
 
-                //console.log((Entry.hw.portData.DHT || 0).toFixed(1));
+                //console.log((RoCode.hw.portData.DHT || 0).toFixed(1));
 
-                return (Entry.hw.portData.DHT || 0).toFixed(0);
+                return (RoCode.hw.portData.DHT || 0).toFixed(0);
             },
             syntax: { js: [], py: ['RichShield_DHT_Control_Get_Humid(%1)'] },
         },
         RichShield_OLED_event: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_event',
             statements: [],
@@ -1729,8 +1729,8 @@ Entry.RichShield.getBlocks = function() {
             isNotFor: ['RichShield'],
         },
         RichShield_OLED_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1749,13 +1749,13 @@ Entry.RichShield.getBlocks = function() {
             func(sprite, script) {
                 const device = 1;
                 // OLED Block Added By Remoted 2021-03-16
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
 
                 // DHT Temp-Reader type data protocol defined
-                Entry.hw.sendQueue.SET[device] = {
-                    type: Entry.RichShield.sensorTypes.OLED,
+                RoCode.hw.sendQueue.SET[device] = {
+                    type: RoCode.RichShield.sensorTypes.OLED,
                     data: {
                         oled_block_index: 0,
                     },
@@ -1765,8 +1765,8 @@ Entry.RichShield.getBlocks = function() {
             syntax: { js: [], py: ['RichShield_OLED_init(0x3C)'] },
         },
         RichShield_OLED_Display_String: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1829,13 +1829,13 @@ Entry.RichShield.getBlocks = function() {
                         text[0] = string;
                     }
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    const fps = Entry.FPS || 60;
+                    const fps = RoCode.FPS || 60;
                     const timeValue = (60 / fps) * 50;
 
                     console.log(
@@ -1843,9 +1843,9 @@ Entry.RichShield.getBlocks = function() {
                         `Row : ${Row} / Col : ${Col} / text : ${text}`
                     );
 
-                    //Entry.hw.sendQueue.SET[line] = {
-                    Entry.hw.sendQueue.SET[device] = {
-                        type: Entry.RichShield.sensorTypes.OLED,
+                    //RoCode.hw.sendQueue.SET[line] = {
+                    RoCode.hw.sendQueue.SET[device] = {
+                        type: RoCode.RichShield.sensorTypes.OLED,
                         data: {
                             oled_block_index: 1,
                             displayRow: Row,
@@ -1879,7 +1879,7 @@ Entry.RichShield.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1887,4 +1887,4 @@ Entry.RichShield.getBlocks = function() {
         },
     };
 };
-module.exports = Entry.RichShield;
+module.exports = RoCode.RichShield;

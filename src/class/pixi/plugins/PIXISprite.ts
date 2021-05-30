@@ -7,16 +7,16 @@
  * 그래서 setFilterAndCache() 로 비슷하게 구현.
  */
 import { Texture, Sprite, RenderTexture, Matrix, Renderer } from 'pixi.js';
-import { EntryTextureBase } from '../atlas/texture/EntryTextureBase';
+import { RoCodeTextureBase } from '../atlas/texture/RoCodeTextureBase';
 
 class FilterData {
-    private _orgTex: EntryTextureBase | RenderTexture;
+    private _orgTex: RoCodeTextureBase | RenderTexture;
     private _renderTex: RenderTexture;
 
     filters: any[];
     invalidate: boolean;
 
-    setOrgTex(orgTex: EntryTextureBase) {
+    setOrgTex(orgTex: RoCodeTextureBase) {
         this._orgTex = orgTex;
     }
 
@@ -24,7 +24,7 @@ class FilterData {
         return tex == this._renderTex;
     }
 
-    get orgTex(): EntryTextureBase | RenderTexture {
+    get orgTex(): RoCodeTextureBase | RenderTexture {
         return this._orgTex;
     }
 
@@ -78,9 +78,9 @@ export class PIXISprite extends Sprite {
         } else {
             if (!this._filterData) {
                 this._filterData = new FilterData();
-                this._filterData.setOrgTex(this.texture as EntryTextureBase);
+                this._filterData.setOrgTex(this.texture as RoCodeTextureBase);
             } else if (!this._filterData.isSameRenderTex(this.texture)) {
-                this._filterData.setOrgTex(this.texture as EntryTextureBase);
+                this._filterData.setOrgTex(this.texture as RoCodeTextureBase);
             }
             this._filterData.filters = filters;
             this._filterData.invalidate = true;
@@ -127,7 +127,7 @@ export class PIXISprite extends Sprite {
         if (!renderTex) {
             return;
         }
-        if (fd.orgTex instanceof EntryTextureBase) {
+        if (fd.orgTex instanceof RoCodeTextureBase) {
             // filter 된 sprite 를 도장찍기 하면 sprite.texture 의 type 는 RenderTexture 가 된다.
             fd.orgTex.assignTextureScaleFactor(renderTex);
         }

@@ -1,11 +1,11 @@
-__webpack_public_path__ = global.PUBLIC_PATH_FOR_ENTRYJS || 'dist/';
+__webpack_public_path__ = global.PUBLIC_PATH_FOR_RoCodeJS || 'dist/';
 import showConsoleBanner from './util/functions/showConsoleBanner';
 import 'simplebar/dist/simplebar.css';
 
-const Entry = {};
+const RoCode = {};
 
-module.exports = Entry;
-global.Entry = Entry;
+module.exports = RoCode;
+global.RoCode = RoCode;
 
 require('./core/collection');
 require('./core/db');
@@ -16,7 +16,7 @@ require('./core/observer');
 require('./core/svg');
 require('core-js/stable/object/values');
 require('./graphicEngine/FakePIXI');
-require('./css/entry.less');
+require('./css/RoCode.less');
 require('./class/time_wait');
 require('./class/container');
 require('./class/dialog');
@@ -35,7 +35,7 @@ require('./class/popup');
 require('./class/popup_helper');
 require('./class/popup_list');
 require('./class/hw');
-require('./class/entryModuleLoader');
+require('./class/RoCodeModuleLoader');
 require('./class/project');
 require('./class/property_panel');
 require('./class/reporter');
@@ -63,7 +63,7 @@ require('./parser-no/block');
 require('./parser-no/js');
 require('./parser-no/parser');
 require('./playground/block');
-require('./playground/block_entry');
+require('./playground/block_RoCode');
 require('./playground/block_menu');
 require('./playground/block_menu_scroll');
 require('./playground/block_view');
@@ -148,5 +148,5 @@ require('./textcoding/static/keyboardCode');
 require('./textcoding/util/console');
 require('./textcoding/util/textCodingUtil');
 
-window.Entry = Entry;
+window.RoCode = RoCode;
 showConsoleBanner();

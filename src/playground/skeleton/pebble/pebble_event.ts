@@ -1,4 +1,4 @@
-Entry.skeleton.pebble_event = {
+RoCode.skeleton.pebble_event = {
     executable: true,
     path() {
         return 'm 0,0 a 25,25 0 0,1 9,48.3 a 9,9 0 0,1 -18,0 a 25,25 0 0,1 9,-48.3 z';

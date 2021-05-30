@@ -6,7 +6,7 @@
 /**
  * @constructor
  */
-Entry.State = function(type, caller, func, param) {
+RoCode.State = function(type, caller, func, param) {
     /**
      * function's caller.
      * @type {!object}
@@ -32,16 +32,16 @@ Entry.State = function(type, caller, func, param) {
      * born time
      * @type {Number}
      * */
-    this.time = Entry.getUpTime();
+    this.time = RoCode.getUpTime();
 
-    this.isPass = Entry.Command[type] ? Entry.Command[type].isPass : false;
+    this.isPass = RoCode.Command[type] ? RoCode.Command[type].isPass : false;
 
-    this.id = Entry.generateHash();
+    this.id = RoCode.generateHash();
 };
 
 /**
  * generate message for interface.
  */
-Entry.State.prototype.generateMessage = function() {
+RoCode.State.prototype.generateMessage = function() {
 
 };

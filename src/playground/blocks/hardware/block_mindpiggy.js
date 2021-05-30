@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Mindpiggy = {
+RoCode.Mindpiggy = {
     id: '29.1',
     name: 'Mindpiggy',
     url: 'http://inuscoop.com',
@@ -10,15 +10,15 @@ Entry.Mindpiggy = {
         "ko": '마인드피기'
     },
     setZero: function () {
-        Entry.hw.sendQueue = {
+        RoCode.hw.sendQueue = {
             GET: {},
             SET: {},
         };
-        // var keySet = Object.keys(Entry.hw.sendQueue.SET);
+        // var keySet = Object.keys(RoCode.hw.sendQueue.SET);
         // keySet.forEach(function(key) {
-        //     Entry.hw.sendQueue.SET[key].data = 0;
+        //     RoCode.hw.sendQueue.SET[key].data = 0;
         // });
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     sensorTypes: {
         DIGITAL:0,
@@ -60,7 +60,7 @@ Entry.Mindpiggy = {
 };
 
 // 언어 적용
-Entry.Mindpiggy.setLanguage = function () {
+RoCode.Mindpiggy.setLanguage = function () {
     return {
         ko: {
             // ko.js에 작성하던 내용
@@ -107,7 +107,7 @@ Entry.Mindpiggy.setLanguage = function () {
 };
 
 // 엔트리에 등록할 블록들의 블록명 작성
-Entry.Mindpiggy.blockMenuBlocks = [
+RoCode.Mindpiggy.blockMenuBlocks = [
     "mindpiggy_get_analog_value",
     "mindpiggy_get_analog_value_map",
     "mindpiggy_toggle_led",
@@ -127,11 +127,11 @@ Entry.Mindpiggy.blockMenuBlocks = [
     "mindpiggy_get_photo",
 */
 // 블록 생성
-Entry.Mindpiggy.getBlocks = function () {
+RoCode.Mindpiggy.getBlocks = function () {
     return {
         mindpiggy_analog_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -148,8 +148,8 @@ Entry.Mindpiggy.getBlocks = function () {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -165,8 +165,8 @@ Entry.Mindpiggy.getBlocks = function () {
             syntax: {js: [],py: []},
         },
         mindpiggy_get_port_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -191,8 +191,8 @@ Entry.Mindpiggy.getBlocks = function () {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -208,8 +208,8 @@ Entry.Mindpiggy.getBlocks = function () {
             syntax: { js: [],py: []},
         },
         mindpiggy_digital_pwm_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -226,8 +226,8 @@ Entry.Mindpiggy.getBlocks = function () {
                     ],
                     value: '11',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -242,8 +242,8 @@ Entry.Mindpiggy.getBlocks = function () {
             },
         },
         mindpiggy_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -271,14 +271,14 @@ Entry.Mindpiggy.getBlocks = function () {
             func: function(sprite, script) {
                 var port = script.getStringValue('PORT', script);
                 port = String(Number(port)+14);
-                var ANALOG = Entry.hw.portData[port];
+                var ANALOG = RoCode.hw.portData[port];
                 return ANALOG ? ANALOG['data'] || 0 : 0;
             },
             syntax: {js: [], py: ['mindpiggy.analogRead(%1)']},
         },
         mindpiggy_get_analog_value_map: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -359,8 +359,8 @@ Entry.Mindpiggy.getBlocks = function () {
                 var isFloat = false;
 
                 if (
-                    (Entry.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
-                    (Entry.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
+                    (RoCode.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
+                    (RoCode.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
                 ) {
                     isFloat = true;
                 }
@@ -392,8 +392,8 @@ Entry.Mindpiggy.getBlocks = function () {
             syntax: {js:[], py:['mindpiggy.map(%1, %2, %3, %4, %5)']},
         },
         mindpiggy_get_bool_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -419,10 +419,10 @@ Entry.Mindpiggy.getBlocks = function () {
             isNotFor: ['Mindpiggy'],
             func: function(sprite, script) {
                 var port = script.getStringValue('PORT', script);
-                var val = Entry.hw.portData[port];
-                if (!Entry.hw.sendQueue['GET'])Entry.hw.sendQueue['GET'] = {};
-                Entry.hw.sendQueue['GET'][port]={
-                    type: Entry.Mindpiggy.sensorTypes.DIGITAL,
+                var val = RoCode.hw.portData[port];
+                if (!RoCode.hw.sendQueue['GET'])RoCode.hw.sendQueue['GET'] = {};
+                RoCode.hw.sendQueue['GET'][port]={
+                    type: RoCode.Mindpiggy.sensorTypes.DIGITAL,
                     time: new Date().getTime(),
                 };
                 return val? val['data'] : 0;
@@ -431,8 +431,8 @@ Entry.Mindpiggy.getBlocks = function () {
             syntax: {js: [], py: ['mindpiggy.digitalRead(%1)'] },
         },
         mindpiggy_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             params: [
@@ -458,10 +458,10 @@ Entry.Mindpiggy.getBlocks = function () {
             isNotFor: ['Mindpiggy'],
             func: function(sprite, script) {
                 var port = script.getStringValue('PORT', script);
-                var val = Entry.hw.portData[port];
-                if (!Entry.hw.sendQueue['GET'])Entry.hw.sendQueue['GET'] = {};
-                Entry.hw.sendQueue['GET'][port]={
-                    type: Entry.Mindpiggy.sensorTypes.DIGITAL,
+                var val = RoCode.hw.portData[port];
+                if (!RoCode.hw.sendQueue['GET'])RoCode.hw.sendQueue['GET'] = {};
+                RoCode.hw.sendQueue['GET'][port]={
+                    type: RoCode.Mindpiggy.sensorTypes.DIGITAL,
                     time: new Date().getTime(),
                 };
                 return val? val['data'] : 0;
@@ -470,8 +470,8 @@ Entry.Mindpiggy.getBlocks = function () {
             syntax: {js: [], py: ['mindpiggy.digitalRead(%1)'] },
         },
         mindpiggy_get_digital_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template:'%1',
@@ -481,8 +481,8 @@ Entry.Mindpiggy.getBlocks = function () {
                     options: [[Lang.Blocks.ARDUINO_on, 'on'], [Lang.Blocks.ARDUINO_off, 'off']],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -498,8 +498,8 @@ Entry.Mindpiggy.getBlocks = function () {
             syntax: { js: [],  py: []},
         },
         mindpiggy_toggle_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -545,9 +545,9 @@ Entry.Mindpiggy.getBlocks = function () {
                 value = value.toLowerCase();
                 if(value=='on')value=255;
                 else if(value=='off')value=0;
-                if (!Entry.hw.sendQueue['SET'])Entry.hw.sendQueue['SET'] = {};
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.Mindpiggy.sensorTypes.DIGITAL,
+                if (!RoCode.hw.sendQueue['SET'])RoCode.hw.sendQueue['SET'] = {};
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.Mindpiggy.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -555,8 +555,8 @@ Entry.Mindpiggy.getBlocks = function () {
             syntax: { js: [],  py: ['mindpiggy.digitalWrite(%1, %2)'] },
         },
         mindpiggy_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -602,9 +602,9 @@ Entry.Mindpiggy.getBlocks = function () {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                if (!Entry.hw.sendQueue['SET'])Entry.hw.sendQueue['SET'] = {};
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.Mindpiggy.sensorTypes.DIGITAL,
+                if (!RoCode.hw.sendQueue['SET'])RoCode.hw.sendQueue['SET'] = {};
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.Mindpiggy.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -612,8 +612,8 @@ Entry.Mindpiggy.getBlocks = function () {
             syntax: { js: [], py: ['mindpiggy.analogWrite(%1, %2)' ] },
         },
         mindpiggy_rgb:{
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template:'R %1 G %2 B %3',
@@ -671,8 +671,8 @@ Entry.Mindpiggy.getBlocks = function () {
             syntax: { js: [], py: []},
         },
         mindpiggy_neopixel_on_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -715,9 +715,9 @@ Entry.Mindpiggy.getBlocks = function () {
                 if (!script.isStart){
                     var Port = script.getStringValue('PORT');
                     var rgbValue = script.getValue('RGB');
-                    if(!Entry.hw.sendQueue.SET)Entry.hw.sendQueue.SET={};
-                    Entry.hw.sendQueue['SET'][Port]={
-                        type : Entry.Mindpiggy.sensorTypes.NEOPIXEL,
+                    if(!RoCode.hw.sendQueue.SET)RoCode.hw.sendQueue.SET={};
+                    RoCode.hw.sendQueue['SET'][Port]={
+                        type : RoCode.Mindpiggy.sensorTypes.NEOPIXEL,
                         data : [0,255,rgbValue[0],rgbValue[1],rgbValue[2]],
                         time: new Date().getTime(),
                     };
@@ -737,8 +737,8 @@ Entry.Mindpiggy.getBlocks = function () {
             syntax: { js: [], py: ['mindpiggy.neopixel_mood_on_value(%1, %2, %3)'] },
         },
         mindpiggy_neopixel_pixel_on_value :{
-            color : EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color : RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton : 'basic',
             statements : [],
             params : [
@@ -791,9 +791,9 @@ Entry.Mindpiggy.getBlocks = function () {
                     var Port = script.getStringValue('PORT');
                     var Pixel = script.getNumberValue('PIXEL');
                     var rgb = script.getValue('RGB');
-                    if(!Entry.hw.sendQueue.SET)Entry.hw.sendQueue.SET={};
-                    Entry.hw.sendQueue['SET'][Port]={
-                        type : Entry.Mindpiggy.sensorTypes.NEOPIXEL,
+                    if(!RoCode.hw.sendQueue.SET)RoCode.hw.sendQueue.SET={};
+                    RoCode.hw.sendQueue['SET'][Port]={
+                        type : RoCode.Mindpiggy.sensorTypes.NEOPIXEL,
                         data : [Pixel,Pixel,rgb[0],rgb[1],rgb[2]],
                         time: new Date().getTime(),
                     };
@@ -813,8 +813,8 @@ Entry.Mindpiggy.getBlocks = function () {
             syntax: { js: [], py: ['mindpiggy.neopixel_mood_pixel_on_value(1%, 2%, 3%, 4%)'] },
         },
         mindpiggy_neopixel_off_value : {
-            color : EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color : RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton : 'basic',
             statements : [],
             params : [
@@ -847,9 +847,9 @@ Entry.Mindpiggy.getBlocks = function () {
             func:function(sprite,script){
                 if (!script.isStart){
                     var Port = script.getStringValue('PORT');
-                    if(!Entry.hw.sendQueue.SET)Entry.hw.sendQueue.SET={};
-                    Entry.hw.sendQueue['SET'][Port]={
-                    type : Entry.Mindpiggy.sensorTypes.NEOPIXEL,
+                    if(!RoCode.hw.sendQueue.SET)RoCode.hw.sendQueue.SET={};
+                    RoCode.hw.sendQueue['SET'][Port]={
+                    type : RoCode.Mindpiggy.sensorTypes.NEOPIXEL,
                     data : [0,255,0,0,0],
                     time: new Date().getTime(),
                 };
@@ -871,8 +871,8 @@ Entry.Mindpiggy.getBlocks = function () {
             syntax: { js: [], py: ['mindpiggy.neopixel_mood_off_value()'] },
         },
         mindpiggy_get_vibration: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             params: [
                 {
@@ -882,8 +882,8 @@ Entry.Mindpiggy.getBlocks = function () {
                     ],
                     value : '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -897,10 +897,10 @@ Entry.Mindpiggy.getBlocks = function () {
             class: 'MindpiggyBlock',
             isNotFor: ['Mindpiggy'],
             func:function(sprite,script){
-                var getdata = Entry.hw.portData['3'];
-                if(!Entry.hw.sendQueue.GET)Entry.hw.sendQueue.GET={};
-                Entry.hw.sendQueue.GET['3']={
-                    type : Entry.Mindpiggy.sensorTypes.DIGITAL,
+                var getdata = RoCode.hw.portData['3'];
+                if(!RoCode.hw.sendQueue.GET)RoCode.hw.sendQueue.GET={};
+                RoCode.hw.sendQueue.GET['3']={
+                    type : RoCode.Mindpiggy.sensorTypes.DIGITAL,
                     time: new Date().getTime(),
                 };
                 return getdata ? getdata.data : 0;
@@ -909,8 +909,8 @@ Entry.Mindpiggy.getBlocks = function () {
         },
 
         mindpiggy_get_soundsensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             params: [],
             events: {},
@@ -922,10 +922,10 @@ Entry.Mindpiggy.getBlocks = function () {
             class: 'MindpiggyBlock',
             isNotFor: ['Mindpiggy'],
             func:function(sprite,script){
-                var getdata = Entry.hw.portData['15'];
-                if(!Entry.hw.sendQueue.GET)Entry.hw.sendQueue.GET={};
-                Entry.hw.sendQueue.GET['15']={
-                    type : Entry.Mindpiggy.sensorTypes.ANALOG,
+                var getdata = RoCode.hw.portData['15'];
+                if(!RoCode.hw.sendQueue.GET)RoCode.hw.sendQueue.GET={};
+                RoCode.hw.sendQueue.GET['15']={
+                    type : RoCode.Mindpiggy.sensorTypes.ANALOG,
                     time: new Date().getTime(),
                 };
                 return getdata ? getdata.data : 0;
@@ -933,8 +933,8 @@ Entry.Mindpiggy.getBlocks = function () {
             syntax: { js: [], py: ['mindpiggy.get_soundsensor()'] },
         },
         mindpiggy_get_photo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             params: [
                 {
@@ -945,8 +945,8 @@ Entry.Mindpiggy.getBlocks = function () {
                     ],
                     value : '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -963,9 +963,9 @@ Entry.Mindpiggy.getBlocks = function () {
                 var pinNum = script.getField('PINNUM');
                 var isSense;
                 if(pinNum === '0'){
-                    isSense = Entry.hw.portData.isPhotoInterrupt&2;
+                    isSense = RoCode.hw.portData.isPhotoInterrupt&2;
                 }else if(pinNum === '1'){
-                    isSense = Entry.hw.portData.isPhotoInterrupt&1;
+                    isSense = RoCode.hw.portData.isPhotoInterrupt&1;
                 }
                 if(isSense == 0)return false;
                 else return true;
@@ -973,8 +973,8 @@ Entry.Mindpiggy.getBlocks = function () {
             syntax: { js: [], py: ['mindpiggy.get_photo(%1)'] },
         },
         mindpiggy_octave_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -991,8 +991,8 @@ Entry.Mindpiggy.getBlocks = function () {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1008,8 +1008,8 @@ Entry.Mindpiggy.getBlocks = function () {
             syntax: { js: [], py: [] },
         },
         mindpiggy_tone_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1033,8 +1033,8 @@ Entry.Mindpiggy.getBlocks = function () {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1050,8 +1050,8 @@ Entry.Mindpiggy.getBlocks = function () {
             syntax: { js: [], py: [] },
         },
         mindpiggy_set_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1110,8 +1110,8 @@ Entry.Mindpiggy.getBlocks = function () {
                 Port = String(Number(Port)+14);
                 if (!script.isStart) {
                     var note = script.getValue('NOTE', script);
-                    if (!Entry.Utils.isNumber(note))
-                        note = Entry.Mindpiggy.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note))
+                        note = RoCode.Mindpiggy.toneTable[note];
 
                     if (note < 0) {
                         note = 0;
@@ -1127,9 +1127,9 @@ Entry.Mindpiggy.getBlocks = function () {
 
                     if (duration === 0) {
                         // sned
-                        if(!Entry.hw.sendQueue.SET)Entry.hw.sendQueue.SET={};
-                        Entry.hw.sendQueue['SET'][Port]={
-                            type:Entry.Mindpiggy.sensorTypes.SPEAKER,
+                        if(!RoCode.hw.sendQueue.SET)RoCode.hw.sendQueue.SET={};
+                        RoCode.hw.sendQueue['SET'][Port]={
+                            type:RoCode.Mindpiggy.sensorTypes.SPEAKER,
                             data:[0,0],
                             time: new Date().getTime(),
                         };
@@ -1146,7 +1146,7 @@ Entry.Mindpiggy.getBlocks = function () {
                     var frequency = 0;
 
                     if (note != 0) {
-                        frequency = Entry.Mindpiggy.toneMap[note][octave];
+                        frequency = RoCode.Mindpiggy.toneMap[note][octave];
                     }
 
                     duration = duration * 1000;
@@ -1155,9 +1155,9 @@ Entry.Mindpiggy.getBlocks = function () {
 
                     //send
 
-                    if(!Entry.hw.sendQueue.SET)Entry.hw.sendQueue.SET={};
-                    Entry.hw.sendQueue['SET'][Port]={
-                        type:Entry.Mindpiggy.sensorTypes.SPEAKER,
+                    if(!RoCode.hw.sendQueue.SET)RoCode.hw.sendQueue.SET={};
+                    RoCode.hw.sendQueue['SET'][Port]={
+                        type:RoCode.Mindpiggy.sensorTypes.SPEAKER,
                         data:[frequency,duration],
                         time: new Date().getTime(),
                     };
@@ -1172,22 +1172,22 @@ Entry.Mindpiggy.getBlocks = function () {
                     delete script.timeFlag;
                     delete script.isStart;
                     // send
-                    if(!Entry.hw.sendQueue.SET)Entry.hw.sendQueue.SET={};
-                    Entry.hw.sendQueue['SET'][Port]={
-                        type:Entry.Mindpiggy.sensorTypes.SPEAKER,
+                    if(!RoCode.hw.sendQueue.SET)RoCode.hw.sendQueue.SET={};
+                    RoCode.hw.sendQueue['SET'][Port]={
+                        type:RoCode.Mindpiggy.sensorTypes.SPEAKER,
                         data:[0,0],
                         time: new Date().getTime(),
                     };
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: ['mindpiggy.set_tone(%1, %2, %3)'] },
         },
         mindpiggy_dcmotor_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1200,8 +1200,8 @@ Entry.Mindpiggy.getBlocks = function () {
                     ],
                     value: 'forward',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1216,8 +1216,8 @@ Entry.Mindpiggy.getBlocks = function () {
             },
         },
         mindpiggy_set_dcmotor:{
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params:[
@@ -1285,14 +1285,14 @@ Entry.Mindpiggy.getBlocks = function () {
                 speedValue = Math.round(speedValue);
                 speedValue = Math.max(speedValue, 0);
                 speedValue = Math.min(speedValue, 255);
-                if(!Entry.hw.sendQueue.SET)Entry.hw.sendQueue.SET={};
-                Entry.hw.sendQueue['SET'][directionPort]={
-                    type:Entry.Mindpiggy.sensorTypes.DCMOTOR,
+                if(!RoCode.hw.sendQueue.SET)RoCode.hw.sendQueue.SET={};
+                RoCode.hw.sendQueue['SET'][directionPort]={
+                    type:RoCode.Mindpiggy.sensorTypes.DCMOTOR,
                     data:[directionValue,1],
                     time: new Date().getTime(),
                 };
-                Entry.hw.sendQueue['SET'][speedPort]={
-                    type:Entry.Mindpiggy.sensorTypes.DCMOTOR,
+                RoCode.hw.sendQueue['SET'][speedPort]={
+                    type:RoCode.Mindpiggy.sensorTypes.DCMOTOR,
                     data:[speedValue,0],
                     time: new Date().getTime(),
                 };
@@ -1300,8 +1300,8 @@ Entry.Mindpiggy.getBlocks = function () {
             syntax: { js: [], py: [] },
         },
         mindpiggy_module_digital_remote:{
-            color:EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine:EntryStatic.colorSet.block.darken.HARDWARE,
+            color:RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine:RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor:'#fff',
             skeleton:'basic_string_field',
             statements:[],
@@ -1313,8 +1313,8 @@ Entry.Mindpiggy.getBlocks = function () {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1330,10 +1330,10 @@ Entry.Mindpiggy.getBlocks = function () {
             func: function(sprite, script) {
                 // var port = script.getStringValue('PORT', script);
                 // port = String(Number(port)+14);
-                var REMOTE = Entry.hw.portData['A0'];
-                if (!Entry.hw.sendQueue['GET'])Entry.hw.sendQueue['GET'] = {};
-                Entry.hw.sendQueue['GET']['14']={
-                    type: Entry.Mindpiggy.sensorTypes.REMOTE,
+                var REMOTE = RoCode.hw.portData['A0'];
+                if (!RoCode.hw.sendQueue['GET'])RoCode.hw.sendQueue['GET'] = {};
+                RoCode.hw.sendQueue['GET']['14']={
+                    type: RoCode.Mindpiggy.sensorTypes.REMOTE,
                     time: new Date().getTime(),
                 };
                 if(REMOTE && (REMOTE['data']!=255))return REMOTE['data'];
@@ -1345,4 +1345,4 @@ Entry.Mindpiggy.getBlocks = function () {
 };
 
 // 엔트리에서 하드웨어 블록 클래스를 인식할 수 있도록 내보내기
-module.exports = Entry.Mindpiggy;
+module.exports = RoCode.Mindpiggy;

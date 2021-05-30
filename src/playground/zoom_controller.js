@@ -1,13 +1,13 @@
 import Toast from './toast';
 
-Entry.ZoomController = class ZoomController {
+RoCode.ZoomController = class ZoomController {
     constructor(board) {
         this.boardMap = new Map();
         if (board) {
             this.setBoard(board);
         }
-        if (Entry.windowResized) {
-            Entry.windowResized.attach(this, this.setPosition);
+        if (RoCode.windowResized) {
+            RoCode.windowResized.attach(this, this.setPosition);
         }
     }
 
@@ -49,13 +49,13 @@ Entry.ZoomController = class ZoomController {
 
     renderStart(zoomGroup) {
         const {
-            btn_zoom_bg = `${Entry.mediaFilePath}btn_zoom_bg.svg`,
-            btn_zoom_out = `${Entry.mediaFilePath}btn_zoom_out.svg`,
-            btn_zoom_reset = `${Entry.mediaFilePath}btn_zoom_reset.svg`,
-            btn_zoom_in = `${Entry.mediaFilePath}btn_zoom_in.svg`,
-        } = EntryStatic.images || {};
-        const isSafari = Entry.getBrowserType().indexOf('Safari') >= 0;
-        const shadowFilter = isSafari ? 'none' : 'url(#entryButtonShadowFilter)';
+            btn_zoom_bg = `${RoCode.mediaFilePath}btn_zoom_bg.svg`,
+            btn_zoom_out = `${RoCode.mediaFilePath}btn_zoom_out.svg`,
+            btn_zoom_reset = `${RoCode.mediaFilePath}btn_zoom_reset.svg`,
+            btn_zoom_in = `${RoCode.mediaFilePath}btn_zoom_in.svg`,
+        } = RoCodeStatic.images || {};
+        const isSafari = RoCode.getBrowserType().indexOf('Safari') >= 0;
+        const shadowFilter = isSafari ? 'none' : 'url(#RoCodeButtonShadowFilter)';
         zoomGroup.svgZoom.elem('image', {
             href: btn_zoom_bg,
             width: this.CONTROLLER_WIDTH,

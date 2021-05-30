@@ -172,7 +172,7 @@
     "MATH_ONLIST_OPERATOR_STD_DEV": "dropdown - This finds the [https://en.wikipedia.org/wiki/Standard_deviation standard deviation] of the numeric values in a list.",
     "MATH_ONLIST_TOOLTIP_STD_DEV": "tooltip - See [https://en.wikipedia.org/wiki/Standard_deviation https://en.wikipedia.org/wiki/Standard_deviation] for more information.",
     "MATH_ONLIST_OPERATOR_RANDOM": "dropdown - This choose an element at random from a list.  Each element is chosen with equal probability.",
-    "MATH_ONLIST_TOOLTIP_RANDOM": "tooltip - Please use same term for 'random' as in previous entry.",
+    "MATH_ONLIST_TOOLTIP_RANDOM": "tooltip - Please use same term for 'random' as in previous RoCode.",
     "MATH_MODULO_HELPURL": "url - information about the modulo (remainder) operation.",
     "MATH_MODULO_TITLE": "block text - Title of block providing the remainder when dividing the first numerical input by the second.  For example, the remainder of 10 divided by 3 is 1.\n\nParameters:\n* %1 - the dividend (10, in our example)\n* %2 - the divisor (3 in our example).",
     "MATH_MODULO_TOOLTIP": "tooltip - For example, the remainder of 10 divided by 3 is 1.",

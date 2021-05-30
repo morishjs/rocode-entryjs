@@ -3,7 +3,7 @@
 import { Destroyer } from './destroyer/Destroyer';
 import { GEHelper } from '../graphicEngine/GEHelper';
 import Expansion from '../class/Expansion';
-import EntryBlockHelper from '../class/helper';
+import RoCodeBlockHelper from '../class/helper';
 import AIUtilize from '../class/AIUtilize';
 import AILearning from '../class/AILearning';
 import Extension from '../extensions/extension';
@@ -13,19 +13,19 @@ import './utils';
 
 /**
  * Initialize method with options.
- * @param {HTMLElement} container for entry workspace or others.
+ * @param {HTMLElement} container for RoCode workspace or others.
  * @param {Object} options for initialize.
  */
-Entry.init = function(container, options) {
-    Entry.assert(typeof options === 'object', 'Init option is not object');
-    Entry.assert(!!container, 'root container must be provided');
+RoCode.init = function(container, options) {
+    RoCode.assert(typeof options === 'object', 'Init option is not object');
+    RoCode.assert(!!container, 'root container must be provided');
 
     this.events_ = {};
     this.interfaceState = {
         menuWidth: 264,
     };
 
-    Entry.Utils.bindGlobalEvent([
+    RoCode.Utils.bindGlobalEvent([
         'resize',
         'mousedown',
         'mousemove',
@@ -46,16 +46,16 @@ Entry.init = function(container, options) {
     this.initSoundQueue_();
     /** @type {!Element} */
     this.view_ = container;
-    $(this.view_).addClass('entry');
+    $(this.view_).addClass('RoCode');
     if (this.type === 'minimize') {
         $(this.view_).addClass(this.type);
     }
     // if (this.device === 'tablet') $(this.view_).addClass('tablet');
 
-    Entry.initFonts(options.fonts);
+    RoCode.initFonts(options.fonts);
     setDefaultTheme(options);
 
-    Entry.paintMode = options.paintMode || 'literallycanvas';
+    RoCode.paintMode = options.paintMode || 'literallycanvas';
     container && this.createDom(container, this.type);
     this.loadInterfaceState();
     this.overridePrototype();
@@ -64,25 +64,25 @@ Entry.init = function(container, options) {
     this.startTime = new Date().getTime();
 
     document.onkeydown = function(e) {
-        Entry.dispatchEvent('keyPressed', e);
+        RoCode.dispatchEvent('keyPressed', e);
     };
     document.onkeyup = function(e) {
-        Entry.dispatchEvent('keyUpped', e);
+        RoCode.dispatchEvent('keyUpped', e);
     };
     window.onresize = function(e) {
-        Entry.dispatchEvent('windowResized', e);
+        RoCode.dispatchEvent('windowResized', e);
     };
     window.onbeforeunload = this.beforeUnload;
 
-    Entry.addEventListener('saveWorkspace', () => {
-        Entry.addActivity('save');
+    RoCode.addEventListener('saveWorkspace', () => {
+        RoCode.addActivity('save');
     });
 
-    Entry.addEventListener('showBlockHelper', () => {
-        Entry.propertyPanel.select('helper');
+    RoCode.addEventListener('showBlockHelper', () => {
+        RoCode.propertyPanel.select('helper');
     });
 
-    // if (Entry.getBrowserType().substr(0, 2) === 'IE' && !window.flashaudio) {
+    // if (RoCode.getBrowserType().substr(0, 2) === 'IE' && !window.flashaudio) {
     //     createjs.FlashAudioPlugin.swfPath = `${this.mediaFilePath}media/`;
     //     createjs.Sound.registerPlugins([createjs.FlashAudioPlugin]);
     //     window.flashaudio = true;
@@ -91,21 +91,21 @@ Entry.init = function(container, options) {
     // }
     createjs.Sound.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin]);
 
-    Entry.loadAudio_(
+    RoCode.loadAudio_(
         [
-            `${Entry.mediaFilePath}sounds/click.mp3`,
-            `${Entry.mediaFilePath}sounds/click.wav`,
-            `${Entry.mediaFilePath}sounds/click.ogg`,
+            `${RoCode.mediaFilePath}sounds/click.mp3`,
+            `${RoCode.mediaFilePath}sounds/click.wav`,
+            `${RoCode.mediaFilePath}sounds/click.ogg`,
         ],
-        'entryMagneting'
+        'RoCodeMagneting'
     );
-    Entry.loadAudio_(
+    RoCode.loadAudio_(
         [
-            `${Entry.mediaFilePath}sounds/delete.mp3`,
-            `${Entry.mediaFilePath}sounds/delete.ogg`,
-            `${Entry.mediaFilePath}sounds/delete.wav`,
+            `${RoCode.mediaFilePath}sounds/delete.mp3`,
+            `${RoCode.mediaFilePath}sounds/delete.ogg`,
+            `${RoCode.mediaFilePath}sounds/delete.wav`,
         ],
-        'entryDelete'
+        'RoCodeDelete'
     );
 
     createjs.Sound.stop();
@@ -118,36 +118,36 @@ const setDefaultPathsFromOptions = function(options) {
         defaultDir = '',
         soundDir = '',
         blockInjectDir = '',
-        baseUrl = location.origin || 'https://playentry.org',
+        baseUrl = location.origin || 'https://playRoCode.org',
     } = options;
 
-    Entry.mediaFilePath = `${libDir}/entry-js/images/`;
-    Entry.painterBaseUrl = `${libDir}/literallycanvas-mobile/lib/img`;
-    Entry.defaultPath = defaultDir;
-    Entry.soundPath = soundDir;
-    Entry.blockInjectPath = blockInjectDir;
+    RoCode.mediaFilePath = `${libDir}/RoCode-js/images/`;
+    RoCode.painterBaseUrl = `${libDir}/literallycanvas-mobile/lib/img`;
+    RoCode.defaultPath = defaultDir;
+    RoCode.soundPath = soundDir;
+    RoCode.blockInjectPath = blockInjectDir;
 
-    Entry.baseUrl = baseUrl.replace(/\/$/, '');
-    Entry.moduleBaseUrl = `${Entry.baseUrl}/modules/`;
+    RoCode.baseUrl = baseUrl.replace(/\/$/, '');
+    RoCode.moduleBaseUrl = `${RoCode.baseUrl}/modules/`;
 };
 
 const setDefaultTheme = function(options) {
     const { theme = 'default' } = options;
     if (theme !== 'default') {
         try {
-            EntryStatic.colorSet = require(`../theme/${theme}`);
-            require('../playground/block_entry').assignBlocks();
+            RoCodeStatic.colorSet = require(`../theme/${theme}`);
+            require('../playground/block_RoCode').assignBlocks();
         } catch (e) {
             console.log('not exist theme!', e);
         }
     }
 };
 
-Entry.changeContainer = function(container) {
+RoCode.changeContainer = function(container) {
     container.appendChild(this.view_);
 };
 
-Entry.loadAudio_ = function(filenames, name) {
+RoCode.loadAudio_ = function(filenames, name) {
     if (!window.Audio || !filenames.length) {
         // No browser support for Audio.
         return;
@@ -155,7 +155,7 @@ Entry.loadAudio_ = function(filenames, name) {
 
     for (let i = 0; i < filenames.length; i++) {
         const filename = filenames[i];
-        Entry.soundQueue.loadFile({
+        RoCode.soundQueue.loadFile({
             id: name,
             src: filename,
             type: createjs.LoadQueue.SOUND,
@@ -165,48 +165,48 @@ Entry.loadAudio_ = function(filenames, name) {
 };
 
 /**
- * Initialize function for Entry.
+ * Initialize function for RoCode.
  * @private
  */
-Entry.initialize_ = function() {
+RoCode.initialize_ = function() {
     /** @type {Destroyer} */
     this._destroyer = this._destroyer || new Destroyer();
     this._destroyer.destroy();
 
     GEHelper.INIT(this.options.useWebGL);
-    this.stage = new Entry.Stage();
+    this.stage = new RoCode.Stage();
     this._destroyer.add(this.stage);
 
-    if (Entry.engine && Entry.engine.projectTimer) {
-        Entry.engine.clearTimer();
+    if (RoCode.engine && RoCode.engine.projectTimer) {
+        RoCode.engine.clearTimer();
     }
 
-    this.engine = new Entry.Engine();
+    this.engine = new RoCode.Engine();
     this._destroyer.add(this.engine);
 
     if (this.type !== 'minimize') {
-        this.propertyPanel = new Entry.PropertyPanel();
+        this.propertyPanel = new RoCode.PropertyPanel();
     }
 
-    this.container = new Entry.Container();
+    this.container = new RoCode.Container();
     this._destroyer.add(this.container);
 
-    this.helper = new EntryBlockHelper();
-    this.youtube = new Entry.Youtube();
-    // this.tvCast = new Entry.TvCast();
-    // this.doneProject = new Entry.DoneProject();
+    this.helper = new RoCodeBlockHelper();
+    this.youtube = new RoCode.Youtube();
+    // this.tvCast = new RoCode.TvCast();
+    // this.doneProject = new RoCode.DoneProject();
 
-    this.variableContainer = new Entry.VariableContainer();
+    this.variableContainer = new RoCode.VariableContainer();
 
     if (this.type === 'workspace' || this.type === 'phone' || this.type === 'playground') {
-        this.stateManager = new Entry.StateManager();
+        this.stateManager = new RoCode.StateManager();
     }
-    this.commander = new Entry.Commander(this.type, this.doNotSkipAny);
+    this.commander = new RoCode.Commander(this.type, this.doNotSkipAny);
 
-    this.scene = new Entry.Scene();
+    this.scene = new RoCode.Scene();
     this._destroyer.add(this.scene);
 
-    this.playground = new Entry.Playground();
+    this.playground = new RoCode.Playground();
     this._destroyer.add(this.playground);
 
     this.expansion = new Expansion(this.playground);
@@ -218,109 +218,109 @@ Entry.initialize_ = function() {
     this.aiLearning = new AILearning(this.playground, this.aiLearningEnable);
     this._destroyer.add(this.aiLearning);
 
-    this.intro = new Entry.Intro();
+    this.intro = new RoCode.Intro();
 
-    this.toast = new Entry.Toast();
+    this.toast = new RoCode.Toast();
 
     if (this.hw) {
         this.hw.closeConnection();
     }
-    this.hw = new Entry.HW();
+    this.hw = new RoCode.HW();
 
-    if (Entry.enableActivityLogging) {
-        this.reporter = new Entry.Reporter(false);
+    if (RoCode.enableActivityLogging) {
+        this.reporter = new RoCode.Reporter(false);
     } else if (this.type === 'workspace' || this.type === 'phone') {
-        this.reporter = new Entry.Reporter(true);
+        this.reporter = new RoCode.Reporter(true);
     }
 };
 
-Entry.disposeContainer = function() {
+RoCode.disposeContainer = function() {
     while (this.view_.firstChild) {
         this.view_.removeChild(this.view_.firstChild);
     }
 };
 
-Entry.initSoundQueue_ = function() {
-    Entry.soundQueue = new createjs.LoadQueue();
-    Entry.soundQueue.installPlugin(createjs.Sound);
-    Entry.soundInstances = [];
-    Entry.soundQueue.urls = new Set();
-    Entry.soundQueue.total = 0;
-    Entry.soundQueue.loadCallback = (src) => {
-        if (!Entry.soundQueue.urls.has(src)) {
+RoCode.initSoundQueue_ = function() {
+    RoCode.soundQueue = new createjs.LoadQueue();
+    RoCode.soundQueue.installPlugin(createjs.Sound);
+    RoCode.soundInstances = [];
+    RoCode.soundQueue.urls = new Set();
+    RoCode.soundQueue.total = 0;
+    RoCode.soundQueue.loadCallback = (src) => {
+        if (!RoCode.soundQueue.urls.has(src)) {
             return;
         }
-        Entry.soundQueue.total = Math.max(Entry.soundQueue.total, Entry.soundQueue.urls.size);
-        Entry.soundQueue.urls.delete(src);
-        const now = Entry.soundQueue.urls.size;
-        if (!Entry.soundQueue.loadComplete && now < 1) {
-            Entry.soundQueue.loadComplete = true;
-            Entry.dispatchEvent('soundLoaded');
+        RoCode.soundQueue.total = Math.max(RoCode.soundQueue.total, RoCode.soundQueue.urls.size);
+        RoCode.soundQueue.urls.delete(src);
+        const now = RoCode.soundQueue.urls.size;
+        if (!RoCode.soundQueue.loadComplete && now < 1) {
+            RoCode.soundQueue.loadComplete = true;
+            RoCode.dispatchEvent('soundLoaded');
         }
     };
-    Entry.soundQueue.on('fileload', (event) => {
-        Entry.soundQueue.loadCallback(event.item.src);
+    RoCode.soundQueue.on('fileload', (event) => {
+        RoCode.soundQueue.loadCallback(event.item.src);
     });
-    Entry.soundQueue.on('error', (event) => {
+    RoCode.soundQueue.on('error', (event) => {
         console.error('load sound, error', event);
-        Entry.soundQueue.loadCallback(event.data.src);
+        RoCode.soundQueue.loadCallback(event.data.src);
     });
 };
 /**
- * Initialize html DOM view for entry.
+ * Initialize html DOM view for RoCode.
  * This work differently with initialize option.
- * @param {HTMLElement} container for entry workspace or others.
+ * @param {HTMLElement} container for RoCode workspace or others.
  * @param {string} type for create dom by type.
  */
-Entry.createDom = function(container, type) {
-    const textCanvasContainer = Entry.createElement('div', 'textCanvasContainer');
+RoCode.createDom = function(container, type) {
+    const textCanvasContainer = RoCode.createElement('div', 'textCanvasContainer');
     textCanvasContainer.style.display = 'none';
     container.appendChild(textCanvasContainer);
 
     switch (type) {
         case 'minimize': {
-            const canvas = _createCanvasElement(['entryCanvasWorkspace', 'minimize']);
-            const canvasWrapper = Entry.createElement('div', 'entryCanvasWrapper');
+            const canvas = _createCanvasElement(['RoCodeCanvasWorkspace', 'minimize']);
+            const canvasWrapper = RoCode.createElement('div', 'RoCodeCanvasWrapper');
             canvasWrapper.appendChild(canvas);
             container.appendChild(canvasWrapper);
 
             this.canvas_ = canvas;
             this.stage.initStage(this.canvas_);
 
-            const engineView = Entry.createElement('div');
+            const engineView = RoCode.createElement('div');
             container.appendChild(engineView);
             this.engineView = engineView;
             this.engine.generateView(this.engineView, type);
             break;
         }
         case 'phone': {
-            this.stateManagerView = Entry.createElement('div');
+            this.stateManagerView = RoCode.createElement('div');
             this.stateManager.generateView(this.stateManagerView, type);
 
-            const engineView = Entry.createElement('div');
+            const engineView = RoCode.createElement('div');
             container.appendChild(engineView);
             this.engineView = engineView;
             this.engine.generateView(this.engineView, type);
 
-            const canvas = _createCanvasElement('entryCanvasPhone');
+            const canvas = _createCanvasElement('RoCodeCanvasPhone');
 
             engineView.insertBefore(canvas, this.engine.footerView_);
             this.canvas_ = canvas;
             this.stage.initStage(this.canvas_);
 
-            const containerView = Entry.createElement('div');
+            const containerView = RoCode.createElement('div');
             container.appendChild(containerView);
             this.containerView = containerView;
             this.container.generateView(this.containerView);
 
-            const playgroundView = Entry.createElement('div');
+            const playgroundView = RoCode.createElement('div');
             container.appendChild(playgroundView);
             this.playgroundView = playgroundView;
             this.playground.generateView(this.playgroundView, type);
             break;
         }
         case 'playground': {
-            const playgroundView = Entry.createElement('div');
+            const playgroundView = RoCode.createElement('div');
             container.appendChild(playgroundView);
             this.playgroundView = playgroundView;
             this.playground.generateView(this.playgroundView, type);
@@ -332,33 +332,33 @@ Entry.createDom = function(container, type) {
         }
         case 'workspace':
         default: {
-            Entry.documentMousedown.attach(this, this.cancelObjectEdit);
+            RoCode.documentMousedown.attach(this, this.cancelObjectEdit);
 
-            const sceneView = Entry.createElement('div');
+            const sceneView = RoCode.createElement('div');
             container.appendChild(sceneView);
             this.sceneView = sceneView;
             this.scene.generateView(this.sceneView, type);
 
-            const stateManagerView = Entry.createElement('div');
+            const stateManagerView = RoCode.createElement('div');
             this.sceneView.appendChild(stateManagerView);
             this.stateManagerView = stateManagerView;
             this.stateManager.generateView(this.stateManagerView, type);
 
-            const engineContainer = Entry.createElement('div');
+            const engineContainer = RoCode.createElement('div');
             engineContainer.classList.add('engineContainer');
             container.appendChild(engineContainer);
-            const engineView = Entry.createElement('div');
+            const engineView = RoCode.createElement('div');
             engineContainer.appendChild(engineView);
             this.engineContainer = engineContainer;
             this.engineView = engineView;
             this.engine.generateView(this.engineView, type);
 
-            const canvas = _createCanvasElement('entryCanvasWorkspace');
+            const canvas = _createCanvasElement('RoCodeCanvasWorkspace');
             engineView.insertBefore(canvas, this.engine.buttonWrapper);
 
             canvas.addEventListener('mousewheel', (evt) => {
-                const mousePosition = Entry.stage.mouseCoordinate;
-                const tempList = Entry.variableContainer.getListById(mousePosition);
+                const mousePosition = RoCode.stage.mouseCoordinate;
+                const tempList = RoCode.variableContainer.getListById(mousePosition);
                 const wheelDirection = evt.wheelDelta > 0;
 
                 for (let i = 0; i < tempList.length; i++) {
@@ -380,7 +380,7 @@ Entry.createDom = function(container, type) {
             this.extension = new Extension();
             this.stage.initStage(this.canvas_);
 
-            const containerView = Entry.createElement('div');
+            const containerView = RoCode.createElement('div');
             this.propertyPanel.generateView(engineContainer, type);
             this.containerView = containerView;
             this.container.generateView(this.containerView);
@@ -389,12 +389,12 @@ Entry.createDom = function(container, type) {
             this.helper.generateView(this.containerView, type);
             this.propertyPanel.addMode('helper', this.helper);
 
-            const introView = Entry.createElement('div');
+            const introView = RoCode.createElement('div');
             container.appendChild(introView);
             this.introView = introView;
             this.intro.generateView(this.introView, type);
 
-            const playgroundView = Entry.createElement('div');
+            const playgroundView = RoCode.createElement('div');
             container.appendChild(playgroundView);
             this.playgroundView = playgroundView;
             this.playground.generateView(this.playgroundView, type);
@@ -410,8 +410,8 @@ Entry.createDom = function(container, type) {
  * @private
  */
 const _createCanvasElement = (className) => {
-    const canvas = Entry.createElement('canvas');
-    canvas.id = 'entryCanvas';
+    const canvas = RoCode.createElement('canvas');
+    canvas.id = 'RoCodeCanvas';
     canvas.width = 640;
     canvas.height = 360;
 
@@ -424,31 +424,31 @@ const _createCanvasElement = (className) => {
     return canvas;
 };
 
-Entry.start = function() {
-    if (Entry.type === 'invisible') {
+RoCode.start = function() {
+    if (RoCode.type === 'invisible') {
         return;
     }
     /** @type {number} */
     if (!this.FPS) {
         this.FPS = 60;
     }
-    Entry.assert(typeof this.FPS === 'number', 'FPS must be number');
-    Entry.engine.start(this.FPS);
+    RoCode.assert(typeof this.FPS === 'number', 'FPS must be number');
+    RoCode.engine.start(this.FPS);
 };
 
-Entry.stop = function() {
-    if (Entry.type === 'invisible') {
+RoCode.stop = function() {
+    if (RoCode.type === 'invisible') {
         return;
     }
     this.FPS = null;
-    Entry?.engine?.stop();
+    RoCode?.engine?.stop();
 };
 
 /**
  * Parse init options
  * @param {!object} options for parse
  */
-Entry.parseOptions = function(options) {
+RoCode.parseOptions = function(options) {
     /** @type {string} */
     this.type = options.type || this.type;
 
@@ -553,14 +553,14 @@ Entry.parseOptions = function(options) {
     }
 };
 
-Entry.initFonts = function(fonts) {
+RoCode.initFonts = function(fonts) {
     this.fonts = fonts;
     if (!fonts) {
         this.fonts = [];
     }
 };
 
-Entry.reloadOption = function(options) {
+RoCode.reloadOption = function(options) {
     this.options = options;
     this.parseOptions(options);
     this.playground.applyTabOption();
@@ -569,9 +569,9 @@ Entry.reloadOption = function(options) {
     this.commander.applyOption();
 };
 
-Entry.Utils.initEntryEvent_ = function() {
-    if (!Entry.events_) {
-        Entry.events_ = [];
+RoCode.Utils.initRoCodeEvent_ = function() {
+    if (!RoCode.events_) {
+        RoCode.events_ = [];
     }
 };
 
@@ -579,23 +579,23 @@ Entry.Utils.initEntryEvent_ = function() {
  * initialize sound
  * @param {object} sound
  */
-Entry.initSound = function(sound) {
+RoCode.initSound = function(sound) {
     if (!sound || !sound.duration || sound.duration == 0) {
         return;
     }
     sound.path =
         sound.fileurl ||
-        `${Entry.defaultPath}/uploads/${sound.filename.substring(0, 2)}/${sound.filename.substring(
+        `${RoCode.defaultPath}/uploads/${sound.filename.substring(0, 2)}/${sound.filename.substring(
             2,
             4
-        )}/${Entry.soundPath}${sound.filename}${sound.ext || '.mp3'}`;
-    Entry.soundQueue.urls.add(sound.path);
-    Entry.soundQueue.loadFile({
+        )}/${RoCode.soundPath}${sound.filename}${sound.ext || '.mp3'}`;
+    RoCode.soundQueue.urls.add(sound.path);
+    RoCode.soundQueue.loadFile({
         id: sound.id,
         src: sound.path,
         type: createjs.LoadQueue.SOUND,
     });
     setTimeout(() => {
-        Entry.soundQueue.loadCallback(sound.path);
+        RoCode.soundQueue.loadCallback(sound.path);
     }, 3000);
 };

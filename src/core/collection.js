@@ -1,10 +1,10 @@
 'use strict';
 
 /*
- * Entry Collection object constructor.
+ * RoCode Collection object constructor.
  */
 
-Entry.Collection = class Collection {
+RoCode.Collection = class Collection {
     constructor(data) {
         this.length = 0;
 

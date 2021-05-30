@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.exMars_Cube = {
+RoCode.exMars_Cube = {
     id: '43.1',
     name: 'exMars_Cube',
     url: 'http://www.exmarscube.com',
@@ -31,14 +31,14 @@ Entry.exMars_Cube = {
         this.timeouts = [];
     },
     getIndex: function() {
-        Entry.exMars_Cube.index = Entry.exMars_Cube.index + 1;
-        if (Entry.exMars_Cube.index > 2000) {
-            Entry.exMars_Cube.index = 1;
+        RoCode.exMars_Cube.index = RoCode.exMars_Cube.index + 1;
+        if (RoCode.exMars_Cube.index > 2000) {
+            RoCode.exMars_Cube.index = 1;
         }
     }
 };
 
-Entry.exMars_Cube.setLanguage = function() {
+RoCode.exMars_Cube.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -187,7 +187,7 @@ Entry.exMars_Cube.setLanguage = function() {
     };
 };
 
-Entry.exMars_Cube.blockMenuBlocks = [
+RoCode.exMars_Cube.blockMenuBlocks = [
     'GetBlock_CellLedColor',
     'GetBlock_FaceLedColor',
     'GetBlock_FaceDir',
@@ -198,7 +198,7 @@ Entry.exMars_Cube.blockMenuBlocks = [
     'SetBlock_PlayMode',
     'SetBlock_UserMode',
     'SetBlock_NonBrake',
-    'SetBlock_ResetAllFace',    
+    'SetBlock_ResetAllFace',
     'SetBlock_CenterColorChange',
     'SetBlock_CellColorChange',
     'SetBlock_PosDirTorChange',
@@ -212,15 +212,15 @@ Entry.exMars_Cube.blockMenuBlocks = [
     'SetBlock_AutoSolve'
 ];
 
-Entry.exMars_Cube.getBlocks = function() {
+RoCode.exMars_Cube.getBlocks = function() {
     return {
         //region exMars cube
         // ===================================================================================== //
         // DropDown Blocks
         // ===================================================================================== //
         DropDownBlock_FaceName_W: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -237,8 +237,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -253,8 +253,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         DropDownBlock_FaceName_Y: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -271,8 +271,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -287,8 +287,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         DropDownBlock_FaceName_G: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -305,8 +305,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -319,10 +319,10 @@ Entry.exMars_Cube.getBlocks = function() {
             func: function(sprite, script) {
                 return script.getField('FACE');
             }
-        },        
+        },
         DropDownBlock_FaceName_B: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -339,8 +339,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -353,10 +353,10 @@ Entry.exMars_Cube.getBlocks = function() {
             func: function(sprite, script) {
                 return script.getField('FACE');
             }
-        },        
+        },
         DropDownBlock_CellName: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -376,8 +376,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -392,8 +392,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         DropDownBlock_Brake: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -406,8 +406,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -422,8 +422,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         DropDownBlock_ModeMainNumber: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -450,8 +450,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -466,8 +466,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         DropDownBlock_ModeSubNumber: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -489,8 +489,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -505,8 +505,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         DropDownBlock_ColorName: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -525,8 +525,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '7',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -541,8 +541,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         DropDownBlock_ColorNameMini: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -557,8 +557,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -573,8 +573,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         DropDownBlock_Direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -589,8 +589,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -603,10 +603,10 @@ Entry.exMars_Cube.getBlocks = function() {
             func: function(sprite, script) {
                 return script.getField('DIRECTION');
             }
-        },        
+        },
         DropDownBlock_DirectionMini: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -619,8 +619,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -635,8 +635,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         DropDownBlock_Torque: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -655,8 +655,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -671,8 +671,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         DropDownBlock_Angle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -690,8 +690,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -706,8 +706,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         DropDownBlock_MovingFace: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -730,8 +730,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -746,22 +746,22 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         DropDownBlock_PlayMode: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
             params: [
                 {
                     type: 'Dropdown',
-                    options: [                        
+                    options: [
                         [Lang.template.Scale6, '0'],
                         [Lang.template.Scale12, '1'],
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -776,22 +776,22 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         DropDownBlock_UserMode: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
             params: [
                 {
                     type: 'Dropdown',
-                    options: [                        
+                    options: [
                         [Lang.template.User2, '2'],
                         [Lang.template.User3, '3'],
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -806,15 +806,15 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         DropDownBlock_Note: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
             params: [
                 {
                     type: 'Dropdown',
-                    options: [                        
+                    options: [
                         [Lang.template.NoteC, '0'],
                         [Lang.template.NoteCS, '1'],
                         [Lang.template.NoteD, '2'],
@@ -831,8 +831,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -847,8 +847,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         DropDownBlock_RecordIndex: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -867,8 +867,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -883,15 +883,15 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         DropDownBlock_RecordTime: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
             params: [
                 {
                     type: 'Dropdown',
-                    options: [                        
+                    options: [
                         [Lang.template.RecordTime1, '0'],
                         [Lang.template.RecordTime2, '1'],
                         [Lang.template.RecordTime3, '2'],
@@ -901,8 +901,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -917,8 +917,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         DropDownBlock_RecordDice: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -930,8 +930,8 @@ Entry.exMars_Cube.getBlocks = function() {
                     ],
                     value: '5',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE
                 }
             ],
             def: {
@@ -949,8 +949,8 @@ Entry.exMars_Cube.getBlocks = function() {
         // Get Value Blocks
         // ===================================================================================== //
         GetBlock_CellLedColor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             template: Lang.template.CellLedColor,
@@ -967,7 +967,7 @@ Entry.exMars_Cube.getBlocks = function() {
                 }
             ],
             def: {
-                params: [ 
+                params: [
                     {
                         type: 'DropDownBlock_FaceName_W'
                     },
@@ -987,14 +987,14 @@ Entry.exMars_Cube.getBlocks = function() {
             func: function(sprite, script) {
                 var face = script.getNumberValue('FACE');
                 var cell = script.getNumberValue('CELL');
-                var hwData = Entry.hw.portData;
+                var hwData = RoCode.hw.portData;
 
                 return hwData[face][cell];
             }
         },
         GetBlock_FaceLedColor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             template: Lang.template.FaceLedColor,
@@ -1006,7 +1006,7 @@ Entry.exMars_Cube.getBlocks = function() {
                 }
             ],
             def: {
-                params: [ 
+                params: [
                     {
                         type: 'DropDownBlock_FaceName_W'
                     }
@@ -1021,14 +1021,14 @@ Entry.exMars_Cube.getBlocks = function() {
             isNotFor: ['exMars_Cube'],
             func: function(sprite, script) {
                 var face = script.getNumberValue('FACE');
-                var hwData = Entry.hw.portData;
+                var hwData = RoCode.hw.portData;
 
                 return hwData[face];
             }
-        },        
+        },
         GetBlock_FaceDir: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             template: Lang.template.FaceDir,
@@ -1040,7 +1040,7 @@ Entry.exMars_Cube.getBlocks = function() {
                 }
             ],
             def: {
-                params: [ 
+                params: [
                     {
                         type: 'DropDownBlock_FaceName_W'
                     }
@@ -1056,7 +1056,7 @@ Entry.exMars_Cube.getBlocks = function() {
             func: function(sprite, script) {
                 var face = script.getNumberValue('FACE');
                 var dir = '';
-                var hwData = Entry.hw.portData;
+                var hwData = RoCode.hw.portData;
 
                 if (hwData[6][face] == 3) {
                     dir = 'CW';
@@ -1071,8 +1071,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         GetBlock_Record: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             template: Lang.template.Record,
@@ -1089,7 +1089,7 @@ Entry.exMars_Cube.getBlocks = function() {
                 }
             ],
             def: {
-                params: [ 
+                params: [
                     {
                         type: 'DropDownBlock_RecordIndex'
                     },
@@ -1109,15 +1109,15 @@ Entry.exMars_Cube.getBlocks = function() {
             func: function(sprite, script) {
                 var index = script.getNumberValue('INDEX');
                 var time = script.getNumberValue('TIME');
-                var hwData = Entry.hw.portData;
+                var hwData = RoCode.hw.portData;
                 var s = Math.floor(hwData[index + 7][time] / 10) / 100;
 
                 return s;
             }
         },
         GetBlock_RecordDice: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             template: Lang.template.RecodeDice,
@@ -1145,7 +1145,7 @@ Entry.exMars_Cube.getBlocks = function() {
             func: function(sprite, script) {
                 var index = 7;
                 var time = script.getNumberValue('TIME');
-                var hwData = Entry.hw.portData;
+                var hwData = RoCode.hw.portData;
                 var s = Math.floor(hwData[index + 7][time] / 10) / 100;
 
                 return s;
@@ -1155,8 +1155,8 @@ Entry.exMars_Cube.getBlocks = function() {
         // Set Value Blocks
         // ===================================================================================== //
         SetBlock_MenuInit: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1184,27 +1184,27 @@ Entry.exMars_Cube.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.exMars_Cube.removeTimeout(timer);
-                    }, Entry.exMars_Cube.delayTime);
-                    Entry.exMars_Cube.timeouts.push(timer);
+                        RoCode.exMars_Cube.removeTimeout(timer);
+                    }, RoCode.exMars_Cube.delayTime);
+                    RoCode.exMars_Cube.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1) {
                     return script;
                 }
                 else {
-                    Entry.exMars_Cube.getIndex();
-                    Entry.hw.sendQueue['SetBlock'] = {
+                    RoCode.exMars_Cube.getIndex();
+                    RoCode.hw.sendQueue['SetBlock'] = {
                         name: 'MenuInit',
-                        index: Entry.exMars_Cube.index
+                        index: RoCode.exMars_Cube.index
                     };
                     return script.callReturn();
                 }
             }
         },
         SetBlock_NonBrake: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1243,19 +1243,19 @@ Entry.exMars_Cube.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.exMars_Cube.removeTimeout(timer);
-                    }, Entry.exMars_Cube.delayTime);
-                    Entry.exMars_Cube.timeouts.push(timer);
+                        RoCode.exMars_Cube.removeTimeout(timer);
+                    }, RoCode.exMars_Cube.delayTime);
+                    RoCode.exMars_Cube.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1) {
                     return script;
                 }
                 else {
-                    Entry.exMars_Cube.getIndex();
-                    Entry.hw.sendQueue['SetBlock'] = {
+                    RoCode.exMars_Cube.getIndex();
+                    RoCode.hw.sendQueue['SetBlock'] = {
                         name: 'NonBrake',
-                        index: Entry.exMars_Cube.index,
+                        index: RoCode.exMars_Cube.index,
                         data0: brake
                     };
                     return script.callReturn();
@@ -1263,8 +1263,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         SetBlock_ModeSetting: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1314,19 +1314,19 @@ Entry.exMars_Cube.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.exMars_Cube.removeTimeout(timer);
-                    }, Entry.exMars_Cube.delayTime);
-                    Entry.exMars_Cube.timeouts.push(timer);
+                        RoCode.exMars_Cube.removeTimeout(timer);
+                    }, RoCode.exMars_Cube.delayTime);
+                    RoCode.exMars_Cube.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1) {
                     return script;
                 }
                 else {
-                    Entry.exMars_Cube.getIndex();
-                    Entry.hw.sendQueue['SetBlock'] = {
+                    RoCode.exMars_Cube.getIndex();
+                    RoCode.hw.sendQueue['SetBlock'] = {
                         name: 'ModeSetting',
-                        index: Entry.exMars_Cube.index,
+                        index: RoCode.exMars_Cube.index,
                         data0: main,
                         data1: sub
                     };
@@ -1335,8 +1335,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         SetBlock_CenterColorChange: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1365,7 +1365,7 @@ Entry.exMars_Cube.getBlocks = function() {
                     },
                     {
                         type: 'DropDownBlock_ColorName'
-                    },                    
+                    },
                     null
                 ],
                 type: 'SetBlock_CenterColorChange'
@@ -1385,19 +1385,19 @@ Entry.exMars_Cube.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.exMars_Cube.removeTimeout(timer);
-                    }, Entry.exMars_Cube.delayTime);
-                    Entry.exMars_Cube.timeouts.push(timer);
+                        RoCode.exMars_Cube.removeTimeout(timer);
+                    }, RoCode.exMars_Cube.delayTime);
+                    RoCode.exMars_Cube.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1) {
                     return script;
                 }
                 else {
-                    Entry.exMars_Cube.getIndex();
-                    Entry.hw.sendQueue['SetBlock'] = {
+                    RoCode.exMars_Cube.getIndex();
+                    RoCode.hw.sendQueue['SetBlock'] = {
                         name: 'CenterColorChange',
-                        index: Entry.exMars_Cube.index,
+                        index: RoCode.exMars_Cube.index,
                         data0: face,
                         data1: cell
                     };
@@ -1406,8 +1406,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         SetBlock_CellColorChange: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1527,19 +1527,19 @@ Entry.exMars_Cube.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.exMars_Cube.removeTimeout(timer);
-                    }, Entry.exMars_Cube.delayTime);
-                    Entry.exMars_Cube.timeouts.push(timer);
+                        RoCode.exMars_Cube.removeTimeout(timer);
+                    }, RoCode.exMars_Cube.delayTime);
+                    RoCode.exMars_Cube.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1) {
                     return script;
                 }
                 else {
-                    Entry.exMars_Cube.getIndex();
-                    Entry.hw.sendQueue['SetBlock'] = {
+                    RoCode.exMars_Cube.getIndex();
+                    RoCode.hw.sendQueue['SetBlock'] = {
                         name: 'CellColorChange',
-                        index: Entry.exMars_Cube.index,
+                        index: RoCode.exMars_Cube.index,
                         data0: face,
                         data1: cell1,
                         data2: cell2,
@@ -1555,8 +1555,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         SetBlock_PosDirTorChange: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1627,19 +1627,19 @@ Entry.exMars_Cube.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.exMars_Cube.removeTimeout(timer);
-                    }, Entry.exMars_Cube.delayTime);
-                    Entry.exMars_Cube.timeouts.push(timer);
+                        RoCode.exMars_Cube.removeTimeout(timer);
+                    }, RoCode.exMars_Cube.delayTime);
+                    RoCode.exMars_Cube.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1) {
                     return script;
                 }
                 else {
-                    Entry.exMars_Cube.getIndex();
-                    Entry.hw.sendQueue['SetBlock'] = {
+                    RoCode.exMars_Cube.getIndex();
+                    RoCode.hw.sendQueue['SetBlock'] = {
                         name: 'PosDirTorChange',
-                        index: Entry.exMars_Cube.index,
+                        index: RoCode.exMars_Cube.index,
                         data0: face,
                         data1: position,
                         data2: direction,
@@ -1650,8 +1650,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         SetBlock_FaceRotationOnlyColor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1711,19 +1711,19 @@ Entry.exMars_Cube.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.exMars_Cube.removeTimeout(timer);
-                    }, Entry.exMars_Cube.delayTime);
-                    Entry.exMars_Cube.timeouts.push(timer);
+                        RoCode.exMars_Cube.removeTimeout(timer);
+                    }, RoCode.exMars_Cube.delayTime);
+                    RoCode.exMars_Cube.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1) {
                     return script;
                 }
                 else {
-                    Entry.exMars_Cube.getIndex();
-                    Entry.hw.sendQueue['SetBlock'] = {
+                    RoCode.exMars_Cube.getIndex();
+                    RoCode.hw.sendQueue['SetBlock'] = {
                         name: 'FaceRotationOnlyColor',
-                        index: Entry.exMars_Cube.index,
+                        index: RoCode.exMars_Cube.index,
                         data0: face,
                         data1: direction,
                         data2: angle
@@ -1733,8 +1733,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         SetBlock_FaceRotation: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1794,19 +1794,19 @@ Entry.exMars_Cube.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.exMars_Cube.removeTimeout(timer);
-                    }, Entry.exMars_Cube.delayTime);
-                    Entry.exMars_Cube.timeouts.push(timer);
+                        RoCode.exMars_Cube.removeTimeout(timer);
+                    }, RoCode.exMars_Cube.delayTime);
+                    RoCode.exMars_Cube.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1) {
                     return script;
                 }
                 else {
-                    Entry.exMars_Cube.getIndex();
-                    Entry.hw.sendQueue['SetBlock'] = {
+                    RoCode.exMars_Cube.getIndex();
+                    RoCode.hw.sendQueue['SetBlock'] = {
                         name: 'FaceRotation',
-                        index: Entry.exMars_Cube.index,
+                        index: RoCode.exMars_Cube.index,
                         data0: face,
                         data1: direction,
                         data2: angle
@@ -1816,8 +1816,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         SetBlock_FacesRotation: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1908,19 +1908,19 @@ Entry.exMars_Cube.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.exMars_Cube.removeTimeout(timer);
-                    }, Entry.exMars_Cube.delayTime);
-                    Entry.exMars_Cube.timeouts.push(timer);
+                        RoCode.exMars_Cube.removeTimeout(timer);
+                    }, RoCode.exMars_Cube.delayTime);
+                    RoCode.exMars_Cube.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1) {
                     return script;
                 }
                 else {
-                    Entry.exMars_Cube.getIndex();
-                    Entry.hw.sendQueue['SetBlock'] = {
+                    RoCode.exMars_Cube.getIndex();
+                    RoCode.hw.sendQueue['SetBlock'] = {
                         name: 'FacesRotation',
-                        index: Entry.exMars_Cube.index,
+                        index: RoCode.exMars_Cube.index,
                         data0: face1,
                         data1: direction1,
                         data2: angle1,
@@ -1933,8 +1933,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         SetBlock_SolveCube: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1991,20 +1991,20 @@ Entry.exMars_Cube.getBlocks = function() {
                 var movingFace = script.getNumberValue('MOVINGFACE');
                 var time = script.getNumberValue('TIME');
                 if(!script.isStart) {
-                    Entry.exMars_Cube.getIndex();
-                    Entry.hw.sendQueue['SetBlock'] = {
+                    RoCode.exMars_Cube.getIndex();
+                    RoCode.hw.sendQueue['SetBlock'] = {
                         name: 'SolveCube',
-                        index: Entry.exMars_Cube.index,
+                        index: RoCode.exMars_Cube.index,
                         data0: color,
                         data1: movingFace
                     };
                     script.isStart = true;
                     script.timeFlag = 1;
-                    const fps = Entry.FPS || 60;
+                    const fps = RoCode.FPS || 60;
                     time = 60 / fps * time * 1000;
 
                     const blockId = script.block.id;
-                    Entry.TimeWaitManager.add(
+                    RoCode.TimeWaitManager.add(
                         blockId,
                         function() {
                             script.timeFlag = 0;
@@ -2019,14 +2019,14 @@ Entry.exMars_Cube.getBlocks = function() {
                 else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             }
-        },        
+        },
         SetBlock_ResetAllFace: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -2054,27 +2054,27 @@ Entry.exMars_Cube.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.exMars_Cube.removeTimeout(timer);
-                    }, Entry.exMars_Cube.delayTime);
-                    Entry.exMars_Cube.timeouts.push(timer);
+                        RoCode.exMars_Cube.removeTimeout(timer);
+                    }, RoCode.exMars_Cube.delayTime);
+                    RoCode.exMars_Cube.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1) {
                     return script;
                 }
                 else {
-                    Entry.exMars_Cube.getIndex();
-                    Entry.hw.sendQueue['SetBlock'] = {
+                    RoCode.exMars_Cube.getIndex();
+                    RoCode.hw.sendQueue['SetBlock'] = {
                         name: 'ResetAllFace',
-                        index: Entry.exMars_Cube.index
+                        index: RoCode.exMars_Cube.index
                     };
                     return script.callReturn();
                 }
             }
         },
         SetBlock_PlayMode: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -2114,19 +2114,19 @@ Entry.exMars_Cube.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.exMars_Cube.removeTimeout(timer);
-                    }, Entry.exMars_Cube.delayTime);
-                    Entry.exMars_Cube.timeouts.push(timer);
+                        RoCode.exMars_Cube.removeTimeout(timer);
+                    }, RoCode.exMars_Cube.delayTime);
+                    RoCode.exMars_Cube.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1) {
                     return script;
                 }
                 else {
-                    Entry.exMars_Cube.getIndex();
-                    Entry.hw.sendQueue['SetBlock'] = {
+                    RoCode.exMars_Cube.getIndex();
+                    RoCode.hw.sendQueue['SetBlock'] = {
                         name: 'PlayMode',
-                        index: Entry.exMars_Cube.index,
+                        index: RoCode.exMars_Cube.index,
                         data0: mode
                     };
                     return script.callReturn();
@@ -2134,8 +2134,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         SetBlock_UserMode: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -2175,19 +2175,19 @@ Entry.exMars_Cube.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.exMars_Cube.removeTimeout(timer);
-                    }, Entry.exMars_Cube.delayTime);
-                    Entry.exMars_Cube.timeouts.push(timer);
+                        RoCode.exMars_Cube.removeTimeout(timer);
+                    }, RoCode.exMars_Cube.delayTime);
+                    RoCode.exMars_Cube.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1) {
                     return script;
                 }
                 else {
-                    Entry.exMars_Cube.getIndex();
-                    Entry.hw.sendQueue['SetBlock'] = {
+                    RoCode.exMars_Cube.getIndex();
+                    RoCode.hw.sendQueue['SetBlock'] = {
                         name: 'UserMode',
-                        index: Entry.exMars_Cube.index,
+                        index: RoCode.exMars_Cube.index,
                         data0: mode
                     };
                     return script.callReturn();
@@ -2195,8 +2195,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         SetBlock_PlayNote: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -2241,22 +2241,22 @@ Entry.exMars_Cube.getBlocks = function() {
             isNotFor: ['exMars_Cube'],
             func: function(sprite, script) {
                 var note = script.getNumberValue('NOTE');
-                var time = script.getNumberValue('TIME');                
-                
+                var time = script.getNumberValue('TIME');
+
                 if(!script.isStart) {
-                    Entry.exMars_Cube.getIndex();
-                    Entry.hw.sendQueue['SetBlock'] = {
+                    RoCode.exMars_Cube.getIndex();
+                    RoCode.hw.sendQueue['SetBlock'] = {
                         name: 'PlayNote',
-                        index: Entry.exMars_Cube.index,
+                        index: RoCode.exMars_Cube.index,
                         data0: note
                     };
                     script.isStart = true;
                     script.timeFlag = 1;
-                    const fps = Entry.FPS || 60;
+                    const fps = RoCode.FPS || 60;
                     time = 60 / fps * time * 1000;
 
                     const blockId = script.block.id;
-                    Entry.TimeWaitManager.add(
+                    RoCode.TimeWaitManager.add(
                         blockId,
                         function() {
                             script.timeFlag = 0;
@@ -2271,14 +2271,14 @@ Entry.exMars_Cube.getBlocks = function() {
                 else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             }
         },
         SetBlock_GetRecord: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -2318,19 +2318,19 @@ Entry.exMars_Cube.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.exMars_Cube.removeTimeout(timer);
-                    }, Entry.exMars_Cube.delayTime);
-                    Entry.exMars_Cube.timeouts.push(timer);
+                        RoCode.exMars_Cube.removeTimeout(timer);
+                    }, RoCode.exMars_Cube.delayTime);
+                    RoCode.exMars_Cube.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1) {
                     return script;
                 }
                 else {
-                    Entry.exMars_Cube.getIndex();
-                    Entry.hw.sendQueue['SetBlock'] = {
+                    RoCode.exMars_Cube.getIndex();
+                    RoCode.hw.sendQueue['SetBlock'] = {
                         name: 'GetRecord',
-                        index: Entry.exMars_Cube.index,
+                        index: RoCode.exMars_Cube.index,
                         data0: index
                     };
                     return script.callReturn();
@@ -2338,8 +2338,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         SetBlock_GetRecordDice: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -2369,19 +2369,19 @@ Entry.exMars_Cube.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.exMars_Cube.removeTimeout(timer);
-                    }, Entry.exMars_Cube.delayTime);
-                    Entry.exMars_Cube.timeouts.push(timer);
+                        RoCode.exMars_Cube.removeTimeout(timer);
+                    }, RoCode.exMars_Cube.delayTime);
+                    RoCode.exMars_Cube.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1) {
                     return script;
                 }
                 else {
-                    Entry.exMars_Cube.getIndex();
-                    Entry.hw.sendQueue['SetBlock'] = {
+                    RoCode.exMars_Cube.getIndex();
+                    RoCode.hw.sendQueue['SetBlock'] = {
                         name: 'GetRecord',
-                        index: Entry.exMars_Cube.index,
+                        index: RoCode.exMars_Cube.index,
                         data0: index
                     };
                     return script.callReturn();
@@ -2389,8 +2389,8 @@ Entry.exMars_Cube.getBlocks = function() {
             }
         },
         SetBlock_AutoSolve: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -2420,19 +2420,19 @@ Entry.exMars_Cube.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.exMars_Cube.removeTimeout(timer);
-                    }, Entry.exMars_Cube.delayTime);
-                    Entry.exMars_Cube.timeouts.push(timer);
+                        RoCode.exMars_Cube.removeTimeout(timer);
+                    }, RoCode.exMars_Cube.delayTime);
+                    RoCode.exMars_Cube.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1) {
                     return script;
                 }
                 else {
-                    Entry.exMars_Cube.getIndex();
-                    Entry.hw.sendQueue['SetBlock'] = {
+                    RoCode.exMars_Cube.getIndex();
+                    RoCode.hw.sendQueue['SetBlock'] = {
                         name: 'GetRecord',
-                        index: Entry.exMars_Cube.index,
+                        index: RoCode.exMars_Cube.index,
                         data0: index
                     };
                     return script.callReturn();
@@ -2443,4 +2443,4 @@ Entry.exMars_Cube.getBlocks = function() {
     };
 };
 
-module.exports = Entry.exMars_Cube;
+module.exports = RoCode.exMars_Cube;

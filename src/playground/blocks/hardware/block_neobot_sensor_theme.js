@@ -1,4 +1,4 @@
-Entry.NeobotSensorTheme = {
+RoCode.NeobotSensorTheme = {
     id: '5.2',
     name: 'neobot_sensor_theme',
     url: 'http://www.neobot.co.kr',
@@ -25,10 +25,10 @@ Entry.NeobotSensorTheme = {
         'OPT'
     ],
     setZero: function () {
-        for(var port in Entry.NeobotSensorTheme.REMOTE_MAP) {
-            Entry.hw.sendQueue[Entry.NeobotSensorTheme.REMOTE_MAP[port]] = 0;
+        for(var port in RoCode.NeobotSensorTheme.REMOTE_MAP) {
+            RoCode.hw.sendQueue[RoCode.NeobotSensorTheme.REMOTE_MAP[port]] = 0;
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     monitorTemplate: {
         imgPath: 'hw/neobot_sensor_theme.png',
@@ -46,19 +46,19 @@ Entry.NeobotSensorTheme = {
     }
 };
 
- Entry.NeobotSensorTheme.setLanguage = function() {
+ RoCode.NeobotSensorTheme.setLanguage = function() {
     return {
         ko: {
             template: {
-                neobot_st_sensor_value: '%1 값', 
-                neobot_st_sensor_connect_external: '%1 에 연결한 %2 값', 
+                neobot_st_sensor_value: '%1 값',
+                neobot_st_sensor_connect_external: '%1 에 연결한 %2 값',
                 neobot_st_sensor_convert_scale: '%1 센서값 %2 ~ %3 를 %4 ~ %5 (으)로 바꾼 값',
 
                 neobot_st_compare_symbol: '%1',
                 neobot_st_decision_sensor_is_over: '%1 의 센서값이 %2 %3',
                 neobot_st_decision_equal_with_sensor: '%1 에 연결한 컬러센서가 %2 을 감지함',
 
-                neobot_st_output_led_on: '%1 에 연결한 LED 켜기 %2', 
+                neobot_st_output_led_on: '%1 에 연결한 LED 켜기 %2',
                 neobot_st_output_led_off: '%1 에 연결한 LED 끄기 %2',
                 neobot_st_set_output: '%1 에 %2 값만큼 출력 %3',
             },
@@ -88,9 +88,9 @@ Entry.NeobotSensorTheme = {
                 neobot_st_sensor_value: '%1 value',
                 neobot_st_sensor_connect_external: 'the %2 value connected %1',
                 neobot_st_sensor_convert_scale: "the value that is changed %1 sensor value %2 ~%3 to %4 ~ %5",
-                
+
                 neobot_st_compare_symbol: '%1',
-                neobot_st_decision_sensor_is_over: "%1 sensor value %2 %3", 
+                neobot_st_decision_sensor_is_over: "%1 sensor value %2 %3",
                 neobot_st_decision_equal_with_sensor: "being detected %2 by %1 color sensor",
                 neobot_st_remote_button : 'pressing button %1 of remote controller',
 
@@ -122,7 +122,7 @@ Entry.NeobotSensorTheme = {
     };
 };
 
-Entry.NeobotSensorTheme.blockMenuBlocks = [
+RoCode.NeobotSensorTheme.blockMenuBlocks = [
     // class sensor
     'neobot_st_sensor_value',
     'neobot_st_sensor_connect_external',
@@ -136,13 +136,13 @@ Entry.NeobotSensorTheme.blockMenuBlocks = [
     'neobot_st_set_output',
 ];
 
-Entry.NeobotSensorTheme.getBlocks = function() {
+RoCode.NeobotSensorTheme.getBlocks = function() {
     return { // region neobot sensor theme
 
         // class sensor
         neobot_st_sensor_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -157,8 +157,8 @@ Entry.NeobotSensorTheme.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -173,13 +173,13 @@ Entry.NeobotSensorTheme.getBlocks = function() {
             isNotFor: ['neobot_sensor_theme'],
             func: function(sprite, script) {
                 var port = script.getStringField('PORT');
-                return Entry.hw.portData[port];
+                return RoCode.hw.portData[port];
             },
         },
 
         neobot_st_sensor_connect_external: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -195,8 +195,8 @@ Entry.NeobotSensorTheme.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -207,8 +207,8 @@ Entry.NeobotSensorTheme.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -223,13 +223,13 @@ Entry.NeobotSensorTheme.getBlocks = function() {
             isNotFor: ['neobot_sensor_theme'],
             func: function(sprite, script) {
                 var port = script.getStringField('PORT');
-                return Entry.hw.portData[port];
+                return RoCode.hw.portData[port];
             },
         },
 
         neobot_st_sensor_convert_scale: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -244,8 +244,8 @@ Entry.NeobotSensorTheme.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -298,7 +298,7 @@ Entry.NeobotSensorTheme.getBlocks = function() {
             isNotFor: ['neobot_sensor_theme'],
             func: function(sprite, script) {
                 var port = script.getStringField('PORT');
-                var value = Entry.hw.portData[port];
+                var value = RoCode.hw.portData[port];
                 var omin = script.getNumberValue('OMIN', script);
                 var omax = script.getNumberValue('OMAX', script);
                 var min = script.getNumberValue('MIN', script);
@@ -329,8 +329,8 @@ Entry.NeobotSensorTheme.getBlocks = function() {
         // class decision
         // un-used. use if required pluggable block.
         neobot_st_compare_symbol :{
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -346,8 +346,8 @@ Entry.NeobotSensorTheme.getBlocks = function() {
                     ],
                     value: '>',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -366,8 +366,8 @@ Entry.NeobotSensorTheme.getBlocks = function() {
         },
 
         neobot_st_decision_sensor_is_over: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -382,8 +382,8 @@ Entry.NeobotSensorTheme.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -396,8 +396,8 @@ Entry.NeobotSensorTheme.getBlocks = function() {
                     ],
                     value: '>',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -418,9 +418,9 @@ Entry.NeobotSensorTheme.getBlocks = function() {
             isNotFor: ['neobot_sensor_theme'],
             func: function(sprite, script) {
                 var sensorTemp = script.getStringField('SENSOR');
-                var sensor = Entry.hw.portData[sensorTemp];
+                var sensor = RoCode.hw.portData[sensorTemp];
                 var symbol = script.getStringField('SYMBOL');
-                var value = Entry.parseNumber(script.getStringValue('VALUE'));
+                var value = RoCode.parseNumber(script.getStringValue('VALUE'));
 
                 if (symbol == '=') {
                     if(sensor == value) return true;
@@ -443,8 +443,8 @@ Entry.NeobotSensorTheme.getBlocks = function() {
         },
 
         neobot_st_decision_equal_with_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -459,8 +459,8 @@ Entry.NeobotSensorTheme.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -473,8 +473,8 @@ Entry.NeobotSensorTheme.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -490,7 +490,7 @@ Entry.NeobotSensorTheme.getBlocks = function() {
             isNotFor: ['neobot_sensor_theme'],
             func: function(sprite, script) {
                 var sensorTemp = script.getStringField('SENSOR');
-                var sensor = Entry.hw.portData[sensorTemp];
+                var sensor = RoCode.hw.portData[sensorTemp];
                 var color = script.getNumberField('COLOR');
 
                 if (sensor >= 10 && sensor <= 50) {
@@ -515,8 +515,8 @@ Entry.NeobotSensorTheme.getBlocks = function() {
 
         // class output
         neobot_st_output_led_on : {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -530,8 +530,8 @@ Entry.NeobotSensorTheme.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -555,14 +555,14 @@ Entry.NeobotSensorTheme.getBlocks = function() {
                 if (option === 3) {
                     option = 4;
                 }
-                Entry.hw.sendQueue[port] = 255;
-                Entry.hw.sendQueue['OPT'] = Entry.hw.sendQueue['OPT'] & ~option;
+                RoCode.hw.sendQueue[port] = 255;
+                RoCode.hw.sendQueue['OPT'] = RoCode.hw.sendQueue['OPT'] & ~option;
                 return script.callReturn();
             },
         },
         neobot_st_output_led_off : {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -576,8 +576,8 @@ Entry.NeobotSensorTheme.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -601,14 +601,14 @@ Entry.NeobotSensorTheme.getBlocks = function() {
                 if (option === 3) {
                     option = 4;
                 }
-                Entry.hw.sendQueue[port] = 0;
-                Entry.hw.sendQueue['OPT'] = Entry.hw.sendQueue['OPT'] & ~option;
+                RoCode.hw.sendQueue[port] = 0;
+                RoCode.hw.sendQueue['OPT'] = RoCode.hw.sendQueue['OPT'] & ~option;
                 return script.callReturn();
             },
         },
         neobot_st_set_output: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -622,8 +622,8 @@ Entry.NeobotSensorTheme.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -666,11 +666,11 @@ Entry.NeobotSensorTheme.getBlocks = function() {
                 if (option === 3) {
                     option = 4;
                 }
-                Entry.hw.sendQueue[port] = value;
-                Entry.hw.sendQueue['OPT'] = Entry.hw.sendQueue['OPT'] & ~option;
+                RoCode.hw.sendQueue[port] = value;
+                RoCode.hw.sendQueue['OPT'] = RoCode.hw.sendQueue['OPT'] & ~option;
                 return script.callReturn();
             },
         },
     }; // end region neobot sensor theme
-}; 
-module.exports = Entry.NeobotSensorTheme;
+};
+module.exports = RoCode.NeobotSensorTheme;

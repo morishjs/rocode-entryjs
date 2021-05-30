@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Altino = {
+RoCode.Altino = {
     PORT_MAP: {
         rightWheel: 0,
         leftWheel: 0,
@@ -19,13 +19,13 @@ Entry.Altino = {
         dot8: 0,
     },
     setZero: function() {
-        var portMap = Entry.Altino.PORT_MAP;
-        var sq = Entry.hw.sendQueue;
+        var portMap = RoCode.Altino.PORT_MAP;
+        var sq = RoCode.hw.sendQueue;
         for (var port in portMap) {
             sq[port] = portMap[port];
         }
-        Entry.hw.update();
-        var Altino = Entry.Altino;
+        RoCode.hw.update();
+        var Altino = RoCode.Altino;
         Altino.removeAllTimeouts();
     },
     timeouts: [],
@@ -54,7 +54,7 @@ Entry.Altino = {
     },
 };
 
-Entry.Altino.blockMenuBlocks = [
+RoCode.Altino.blockMenuBlocks = [
     'altino_analogValue',
     'altino_stopAll',
     'altino_rear_wheel',
@@ -71,7 +71,7 @@ Entry.Altino.blockMenuBlocks = [
     'altino_dot_display_matrix_off',
 ];
 
-Entry.Altino.setLanguage = function() {
+RoCode.Altino.setLanguage = function() {
     return {
         ko: {
             // ko.js에 작성하던 내용
@@ -268,12 +268,12 @@ Entry.Altino.setLanguage = function() {
     };
 };
 
-Entry.Altino.getBlocks = function() {
+RoCode.Altino.getBlocks = function() {
     return {
         //region Altino 알티노
         altino_analogValue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -307,8 +307,8 @@ Entry.Altino.getBlocks = function() {
                     ],
                     value: 'cds',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -322,15 +322,15 @@ Entry.Altino.getBlocks = function() {
             class: 'altino_sensor',
             isNotFor: ['altino'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 return pd[dev];
             },
             syntax: { js: [], py: ['Altino.analog_value(%1)'] },
         },
         altino_stopAll: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -346,8 +346,8 @@ Entry.Altino.getBlocks = function() {
                     ],
                     value: 'All',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -366,7 +366,7 @@ Entry.Altino.getBlocks = function() {
             class: 'altino_output',
             isNotFor: ['altino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var direction = script.getField('DIRECTION', script);
 
                 if (direction == 'All') {
@@ -419,8 +419,8 @@ Entry.Altino.getBlocks = function() {
             syntax: { js: [],  py: ['Altino.stop(%1)']},
         },
         altino_steering: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -439,8 +439,8 @@ Entry.Altino.getBlocks = function() {
                     ],
                     value: 'Center',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -459,7 +459,7 @@ Entry.Altino.getBlocks = function() {
             class: 'altino_output',
             isNotFor: ['altino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var direction = script.getField('DIRECTION', script);
 
                 if (direction == 'Center') {
@@ -486,8 +486,8 @@ Entry.Altino.getBlocks = function() {
             syntax: { js: [], py: ['Altino.steering(%1)'] },
         },
         altino_steering_hex: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -518,7 +518,7 @@ Entry.Altino.getBlocks = function() {
             class: 'altino_expert',
             isNotFor: ['altino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 console.log(parseInt(Number(script.getStringValue('steerVal')), 10));
                 sq.steering = parseInt(Number(script.getStringValue('steerVal')), 10);
                 return script.callReturn();
@@ -526,8 +526,8 @@ Entry.Altino.getBlocks = function() {
             syntax: { js: [], py: ['Altino.steering_hex(%1)'] },
         },
         altino_sound_hex: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -558,15 +558,15 @@ Entry.Altino.getBlocks = function() {
             class: 'altino_expert',
             isNotFor: ['altino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 sq.note = parseInt(Number(script.getStringValue('soundVal')), 10);
                 return script.callReturn();
             },
             syntax: { js: [], py: ['Altino.sound_hex(%1)'] },
         },
         altino_rear_wheel: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -606,7 +606,7 @@ Entry.Altino.getBlocks = function() {
             class: 'altino_output',
             isNotFor: ['altino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 sq.rightWheel = script.getNumberValue('rightWheel');
                 sq.leftWheel = script.getNumberValue('leftWheel');
@@ -615,8 +615,8 @@ Entry.Altino.getBlocks = function() {
             syntax: { js: [], py: ['Altino.rear_wheel(%1, %2)'] },
         },
         altino_sound: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -634,8 +634,8 @@ Entry.Altino.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -656,8 +656,8 @@ Entry.Altino.getBlocks = function() {
                     ],
                     value: 'NOT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -677,7 +677,7 @@ Entry.Altino.getBlocks = function() {
             class: 'altino_output',
             isNotFor: ['altino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var octave = script.getStringField('OCTAVE', script);
                 var note = script.getStringField('NOTE', script);
                 var octave_int = octave + note;
@@ -784,8 +784,8 @@ Entry.Altino.getBlocks = function() {
             syntax: { js: [], py: ['Altino.sound(%1, %2)'] },
         },
         altino_light: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -800,8 +800,8 @@ Entry.Altino.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -811,8 +811,8 @@ Entry.Altino.getBlocks = function() {
                     ],
                     value: '255',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -832,7 +832,7 @@ Entry.Altino.getBlocks = function() {
             class: 'altino_output',
             isNotFor: ['altino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var select = script.getStringField('SELECT', script);
                 var onoff = script.getStringField('ONOFF', script);
 
@@ -872,8 +872,8 @@ Entry.Altino.getBlocks = function() {
             syntax: { js: [], py: ['Altino.light(%1, %2)'] },
         },
         altino_dot_display_matrix_on: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -913,7 +913,7 @@ Entry.Altino.getBlocks = function() {
             class: 'altino_expert',
             isNotFor: ['altino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var nx = script.getNumberValue('VALUE1');
                 var ny = script.getNumberValue('VALUE2');
                 var mask = 1;
@@ -945,8 +945,8 @@ Entry.Altino.getBlocks = function() {
             syntax: { js: [], py: ['Altino.dot_display_matrix_on(%1, %2)'] },
         },
         altino_dot_display_matrix_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -986,7 +986,7 @@ Entry.Altino.getBlocks = function() {
             class: 'altino_expert',
             isNotFor: ['altino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var nx = script.getNumberValue('VALUE1');
                 var ny = script.getNumberValue('VALUE2');
                 var mask = 1;
@@ -1017,8 +1017,8 @@ Entry.Altino.getBlocks = function() {
             syntax: { js: [], py: ['Altino.dot_display_matrix_off(%1, %2)'] },
         },
         altino_light_hex: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1058,7 +1058,7 @@ Entry.Altino.getBlocks = function() {
             class: 'altino_expert',
             isNotFor: ['altino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var msb = parseInt(Number(script.getStringValue('MSB')), 10);
                 var lsb = parseInt(Number(script.getStringValue('LSB')), 10);
 
@@ -1070,8 +1070,8 @@ Entry.Altino.getBlocks = function() {
             syntax: { js: [], py: ['Altino.light_hex(%1, %2)'] },
         },
         altino_dot_display: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1102,7 +1102,7 @@ Entry.Altino.getBlocks = function() {
             class: 'altino_output',
             isNotFor: ['altino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var str = script.getStringValue('VALUE');
                 var code = str.charCodeAt(0) | 0x80;
                 sq.ascii = code;
@@ -1125,8 +1125,8 @@ Entry.Altino.getBlocks = function() {
             },
         },
         altino_dot_display_line: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1144,8 +1144,8 @@ Entry.Altino.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1155,8 +1155,8 @@ Entry.Altino.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1166,8 +1166,8 @@ Entry.Altino.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1177,8 +1177,8 @@ Entry.Altino.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1188,8 +1188,8 @@ Entry.Altino.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1199,8 +1199,8 @@ Entry.Altino.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1210,8 +1210,8 @@ Entry.Altino.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1221,8 +1221,8 @@ Entry.Altino.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1232,8 +1232,8 @@ Entry.Altino.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1260,7 +1260,7 @@ Entry.Altino.getBlocks = function() {
             class: 'altino_output',
             isNotFor: ['altino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var line = script.getStringField('LINE', script);
                 var dots = [
                     script.getStringField('SW1', script),
@@ -1347,8 +1347,8 @@ Entry.Altino.getBlocks = function() {
             syntax: { js: [], py: ['Altino.dot_display_line(%1, %2, %3, %4, %5, %6, %7, %8)'] },
         },
         altino_dot_display_hex: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1442,7 +1442,7 @@ Entry.Altino.getBlocks = function() {
             class: 'altino_expert',
             isNotFor: ['altino'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 sq.ascii = 0;
                 sq.dot1 = parseInt(Number(script.getStringValue('VALUE8')), 10);
                 sq.dot2 = parseInt(Number(script.getStringValue('VALUE7')), 10);
@@ -1461,4 +1461,4 @@ Entry.Altino.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Altino;
+module.exports = RoCode.Altino;

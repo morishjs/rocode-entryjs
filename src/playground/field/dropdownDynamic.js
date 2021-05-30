@@ -1,18 +1,18 @@
 /*
  */
 'use strict';
-import { Dropdown } from '@entrylabs/tool';
+import { Dropdown } from '@RoCodelabs/tool';
 import _cloneDeep from 'lodash/cloneDeep';
 /*
  *
  */
-Entry.FieldDropdownDynamic = class FieldDropdownDynamic extends Entry.FieldDropdown {
+RoCode.FieldDropdownDynamic = class FieldDropdownDynamic extends RoCode.FieldDropdown {
     constructor(content, blockView, index) {
         super(content, blockView, index, null, null, true);
         this._block = blockView.block;
         this._blockView = blockView;
 
-        const box = new Entry.BoxModel();
+        const box = new RoCode.BoxModel();
         this.box = box;
 
         this.svgGroup = null;
@@ -27,7 +27,7 @@ Entry.FieldDropdownDynamic = class FieldDropdownDynamic extends Entry.FieldDropd
 
         let { bgColor, textColor, arrowColor } = content;
         if (
-            this._block.deletable === Entry.Block.DELETABLE_FALSE_LIGHTEN ||
+            this._block.deletable === RoCode.Block.DELETABLE_FALSE_LIGHTEN ||
             this._block.emphasized
         ) {
             arrowColor = blockView._fillColor;
@@ -72,7 +72,7 @@ Entry.FieldDropdownDynamic = class FieldDropdownDynamic extends Entry.FieldDropd
 
     _isBlockInBoardWhenFunctionEdit() {
         const view = this._block.getView() || { _board: {} };
-        return view._board.suffix === 'board' && Entry.Func.isEdit;
+        return view._board.suffix === 'board' && RoCode.Func.isEdit;
     }
 
     getTextByValue(value) {
@@ -86,9 +86,9 @@ Entry.FieldDropdownDynamic = class FieldDropdownDynamic extends Entry.FieldDropd
     async _updateValue(reDraw) {
         const object = this._block.getCode().object;
         let options = [];
-        if (Entry.container) {
+        if (RoCode.container) {
             if (this._menuName) {
-                options = await Entry.container.getDropdownList(this._menuName, object);
+                options = await RoCode.container.getDropdownList(this._menuName, object);
             } else {
                 options = await this._menuGenerator();
             }
@@ -132,8 +132,8 @@ Entry.FieldDropdownDynamic = class FieldDropdownDynamic extends Entry.FieldDropd
     }
 
     renderOptions() {
-        this.optionGroup = Entry.Dom('div', {
-            class: 'entry-widget-dropdown',
+        this.optionGroup = RoCode.Dom('div', {
+            class: 'RoCode-widget-dropdown',
             parent: $('body'),
         });
         const { options = [] } = this._contents;

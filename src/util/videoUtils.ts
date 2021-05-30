@@ -192,7 +192,7 @@ class VideoUtils implements MediaUtilsInterface {
         try {
             /*
                 NT11576  #11683
-                파이어폭스는 기본적으로 4:3비율로만 비디오를 가져오게 되어있어서, 사이즈를 조절해야함. 
+                파이어폭스는 기본적으로 4:3비율로만 비디오를 가져오게 되어있어서, 사이즈를 조절해야함.
                 이로인해 다른 브라우저에 비해서 잘려보임
             */
             if (this.isFirefox) {
@@ -210,7 +210,7 @@ class VideoUtils implements MediaUtilsInterface {
 
             this.motionWorker.onmessage = (e: { data: { type: String; message: any } }) => {
                 const { type, message } = e.data;
-                if (Entry.engine.state !== 'run' && type !== 'init') {
+                if (RoCode.engine.state !== 'run' && type !== 'init') {
                     return;
                 }
                 this.totalMotions = {
@@ -224,8 +224,8 @@ class VideoUtils implements MediaUtilsInterface {
                 }
             };
 
-            Entry.addEventListener('beforeStop', this.reset.bind(this));
-            Entry.addEventListener('run', this.initialSetup.bind(this));
+            RoCode.addEventListener('beforeStop', this.reset.bind(this));
+            RoCode.addEventListener('run', this.initialSetup.bind(this));
             this.motionWorker.postMessage({
                 type: 'init',
                 width: this.CANVAS_WIDTH,
@@ -236,7 +236,7 @@ class VideoUtils implements MediaUtilsInterface {
                 this.worker = new VideoWorker();
                 this.worker.onmessage = (e: { data: { type: String; message: any } }) => {
                     const { type, message } = e.data;
-                    if (Entry.engine.state !== 'run' && type !== 'init') {
+                    if (RoCode.engine.state !== 'run' && type !== 'init') {
                         return;
                     }
                     const name: 'pose' | 'face' | 'object' | 'warmup' = message;
@@ -245,15 +245,15 @@ class VideoUtils implements MediaUtilsInterface {
                     switch (type) {
                         case 'init':
                             if (message === 'warmup') {
-                                Entry.toast.success(
+                                RoCode.toast.success(
                                     Lang.Msgs.video_model_load_success,
                                     Lang.Msgs.video_model_load_completed,
                                     true
                                 );
-                                Entry.dispatchEvent('hideLoadingScreen');
+                                RoCode.dispatchEvent('hideLoadingScreen');
                                 console.timeEnd('test');
                             } else {
-                                Entry.toast.success(
+                                RoCode.toast.success(
                                     Lang.Msgs.video_model_load_success,
                                     `${modelLang} ${Lang.Msgs.video_model_load_success}`,
                                     false
@@ -277,10 +277,10 @@ class VideoUtils implements MediaUtilsInterface {
                     width: this.CANVAS_WIDTH,
                     height: this.CANVAS_HEIGHT,
                 });
-                Entry.dispatchEvent('showVideoLoadingScreen');
+                RoCode.dispatchEvent('showVideoLoadingScreen');
             } else {
-                const weightsUrl = `${window.location.origin}/lib/entry-js/weights`;
-                Entry.dispatchEvent('showVideoLoadingScreen');
+                const weightsUrl = `${window.location.origin}/lib/RoCode-js/weights`;
+                RoCode.dispatchEvent('showVideoLoadingScreen');
                 Promise.all([
                     Promise.all([
                         faceapi.nets.tinyFaceDetector.loadFromUri(weightsUrl),
@@ -288,7 +288,7 @@ class VideoUtils implements MediaUtilsInterface {
                         faceapi.nets.ageGenderNet.loadFromUri(weightsUrl),
                         faceapi.nets.faceExpressionNet.loadFromUri(weightsUrl),
                     ]).then(() => {
-                        Entry.toast.success(
+                        RoCode.toast.success(
                             Lang.Msgs.video_model_load_success,
                             `${Lang.Blocks.video_face_model} ${Lang.Msgs.video_model_load_success}`,
                             false
@@ -300,7 +300,7 @@ class VideoUtils implements MediaUtilsInterface {
                         })
                         .then((cocoLoaded: any) => {
                             this.coco = cocoLoaded;
-                            Entry.toast.success(
+                            RoCode.toast.success(
                                 Lang.Msgs.video_model_load_success,
                                 // eslint-disable-next-line
                                 `${Lang.Blocks.video_object_model} ${Lang.Msgs.video_model_load_success}`,
@@ -320,7 +320,7 @@ class VideoUtils implements MediaUtilsInterface {
                         })
                         .then((mobileNetLoaded: any) => {
                             this.mobileNet = mobileNetLoaded;
-                            Entry.toast.success(
+                            RoCode.toast.success(
                                 Lang.Msgs.video_model_load_success,
                                 // eslint-disable-next-line
                                 `${Lang.Blocks.video_pose_model} ${Lang.Msgs.video_model_load_success}`,
@@ -328,12 +328,12 @@ class VideoUtils implements MediaUtilsInterface {
                             );
                         }),
                 ]).then(() => {
-                    Entry.toast.success(
+                    RoCode.toast.success(
                         Lang.Msgs.video_model_load_success,
                         Lang.Msgs.video_model_load_completed,
                         true
                     );
-                    Entry.dispatchEvent('hideLoadingScreen');
+                    RoCode.dispatchEvent('hideLoadingScreen');
                 });
             }
 
@@ -514,7 +514,7 @@ class VideoUtils implements MediaUtilsInterface {
     }
     /**
      * MOTION DETECT CALCULATION BASED ON COMPUTER VISION
-     * @param sprite Entry Entity Object
+     * @param sprite RoCode Entity Object
      */
     motionDetect(sprite: any) {
         if (!this.inMemoryCanvas) {
@@ -822,12 +822,12 @@ class VideoUtils implements MediaUtilsInterface {
 
     async compatabilityChecker() {
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-            throw new Entry.Utils.IncompatibleError('IncompatibleError', [
+            throw new RoCode.Utils.IncompatibleError('IncompatibleError', [
                 Lang.Workspace.check_browser_error_video,
             ]);
         }
         if (!this.stream && this.videoInputList.length == 0) {
-            throw new Entry.Utils.IncompatibleError('IncompatibleError', [
+            throw new RoCode.Utils.IncompatibleError('IncompatibleError', [
                 Lang.Workspace.check_webcam_error,
             ]);
         }

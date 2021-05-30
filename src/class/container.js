@@ -1,10 +1,10 @@
 /**
- * @fileoverview Container handle all object in entry.
+ * @fileoverview Container handle all object in RoCode.
  */
 
 'use strict';
 
-import { Draggable } from '@entrylabs/tool';
+import { Draggable } from '@RoCodelabs/tool';
 import { GEHelper } from '../graphicEngine/GEHelper';
 import DataTable from './DataTable';
 import { getInputList } from '../util/videoUtils';
@@ -13,11 +13,11 @@ import { getInputList } from '../util/videoUtils';
  * This have view for objects.
  * @constructor
  */
-Entry.Container = class Container {
+RoCode.Container = class Container {
     constructor() {
         /**
-         * Array for entry objects
-         * @type {Array.<Entry.EntryObject>}
+         * Array for RoCode objects
+         * @type {Array.<RoCode.RoCodeObject>}
          */
         this.objects_ = [];
 
@@ -48,47 +48,47 @@ Entry.Container = class Container {
          */
         this.currentObjects_ = null;
         this._extensionObjects = [];
-        Entry.addEventListener('workspaceChangeMode', () => {
-            const ws = Entry.getMainWS();
-            if (ws && ws.getMode() === Entry.Workspace.MODE_VIMBOARD) {
+        RoCode.addEventListener('workspaceChangeMode', () => {
+            const ws = RoCode.getMainWS();
+            if (ws && ws.getMode() === RoCode.Workspace.MODE_VIMBOARD) {
                 this.objects_.forEach(({ script }) => {
                     script && script.destroyView();
                 });
             }
         });
 
-        Entry.addEventListener('run', this.disableSort.bind(this));
-        Entry.addEventListener('stop', this.enableSort.bind(this));
+        RoCode.addEventListener('run', this.disableSort.bind(this));
+        RoCode.addEventListener('stop', this.enableSort.bind(this));
     }
 
     /**
      * Control bar view generator.
-     * @param {!Element} containerView containerView from Entry.
+     * @param {!Element} containerView containerView from RoCode.
      */
     generateView(containerView) {
         this._view = containerView;
-        this._view.addClass('entryContainer');
-        this._view.addClass('entryContainerWorkspace');
-        this._view.setAttribute('id', 'entryContainerWorkspaceId');
+        this._view.addClass('RoCodeContainer');
+        this._view.addClass('RoCodeContainerWorkspace');
+        this._view.setAttribute('id', 'RoCodeContainerWorkspaceId');
 
-        const addButton = Entry.createElement('div')
-            .addClass('entryAddObjectWorkspace')
+        const addButton = RoCode.createElement('div')
+            .addClass('RoCodeAddObjectWorkspace')
             .bindOnClick(() => {
-                Entry.dispatchEvent('openSpriteManager');
+                RoCode.dispatchEvent('openSpriteManager');
             });
         addButton.innerHTML = Lang.Workspace.add_object;
 
-        const ulWrapper = Entry.createElement('div');
+        const ulWrapper = RoCode.createElement('div');
         this._view.appendChild(ulWrapper);
 
         // const scroll = new Simplebar(ulWrapper, { autoHide: false });
         const scrollWrapper = ulWrapper;
-        let baseClass = 'entryContainerListWorkspaceWrapper';
-        if (Entry.isForLecture) {
+        let baseClass = 'RoCodeContainerListWorkspaceWrapper';
+        if (RoCode.isForLecture) {
             baseClass += ' lecture';
         }
         scrollWrapper.addClass(baseClass);
-        Entry.Utils.disableContextmenu(scrollWrapper);
+        RoCode.Utils.disableContextmenu(scrollWrapper);
 
         const longPressEvent = (e) => {
             let longPressTimer = null;
@@ -101,12 +101,12 @@ Entry.Container = class Container {
                 }
             }, 1000);
 
-            const event = Entry.Utils.convertMouseEvent(e);
+            const event = RoCode.Utils.convertMouseEvent(e);
             const mouseDownCoordinate = { x: event.clientX, y: event.clientY };
 
             // 움직임 포착된 경우 타이머 종료
             doc.bind('mousemove.container touchmove.container', (e) => {
-                const event = Entry.Utils.convertMouseEvent(e);
+                const event = RoCode.Utils.convertMouseEvent(e);
                 const moveThreshold = 5;
                 if (!mouseDownCoordinate) {
                     return;
@@ -135,12 +135,12 @@ Entry.Container = class Container {
          * 오른쪽 버튼 클릭 시 컨텍스트메뉴 발생
          */
         scrollWrapper.addEventListener('mousedown', (e) => {
-            if (Entry.Utils.isRightButton(e)) {
+            if (RoCode.Utils.isRightButton(e)) {
                 e.stopPropagation();
                 this._rightClick(e);
             }
 
-            if (Entry.isMobile()) {
+            if (RoCode.isMobile()) {
                 e.stopPropagation();
                 longPressEvent(e);
             }
@@ -151,20 +151,20 @@ Entry.Container = class Container {
          * 현재위치에서 일정 범위 이상 벗어난 경우취소
          */
         scrollWrapper.addEventListener('touchstart', (e) => {
-            if (e.eventFromEntryObject) {
+            if (e.eventFromRoCodeObject) {
                 return;
             }
 
             longPressEvent(e);
         });
 
-        const extensionListView = Entry.createElement('ul');
+        const extensionListView = RoCode.createElement('ul');
         scrollWrapper.appendChild(extensionListView);
-        this._extensionListView = Entry.Dom(extensionListView, {
-            class: 'entryContainerExtensions',
+        this._extensionListView = RoCode.Dom(extensionListView, {
+            class: 'RoCodeContainerExtensions',
         });
 
-        const listView = Entry.createElement('ul').addClass('entryContainerListWorkspace');
+        const listView = RoCode.createElement('ul').addClass('RoCodeContainerListWorkspace');
         scrollWrapper.appendChild(listView);
         this.listView_ = listView;
 
@@ -178,7 +178,7 @@ Entry.Container = class Container {
             });
         } else {
             const draggableOption = {};
-            if (Entry.isMobile()) {
+            if (RoCode.isMobile()) {
                 draggableOption.lockAxis = 'y';
                 draggableOption.distance = 50;
             }
@@ -186,7 +186,7 @@ Entry.Container = class Container {
                 data: {
                     ...draggableOption,
                     canSortable: true,
-                    sortableTarget: ['entryObjectThumbnailWorkspace'],
+                    sortableTarget: ['RoCodeObjectThumbnailWorkspace'],
                     items: this._getSortableObjectList(),
                     itemShadowStyle: {
                         position: 'absolute',
@@ -201,13 +201,13 @@ Entry.Container = class Container {
                         } else {
                             this.selectedObject.resetObjectFold();
                         }
-                        Entry.playground.setBackpackPointEvent(isDragging);
+                        RoCode.playground.setBackpackPointEvent(isDragging);
                         this.dragObjectKey = key;
                         this.isObjectDragging = isDragging;
                     },
                     onChangeList: (newIndex, oldIndex) => {
                         if (newIndex !== oldIndex) {
-                            Entry.do('objectReorder', newIndex, oldIndex);
+                            RoCode.do('objectReorder', newIndex, oldIndex);
                         }
                     },
                 },
@@ -270,7 +270,7 @@ Entry.Container = class Container {
             !obj.view_ && obj.generateView();
         });
 
-        Entry.stage.sortZorder();
+        RoCode.stage.sortZorder();
         this.updateSortableObjectList(objs);
         return true;
     }
@@ -278,14 +278,14 @@ Entry.Container = class Container {
     setObjects(objectModels) {
         objectModels.forEach((model) => {
             if (model) {
-                const object = new Entry.EntryObject(model);
+                const object = new RoCode.RoCodeObject(model);
                 this.objects_.push(object);
             }
         });
         this.updateObjectsOrder();
         this.updateListView();
-        Entry.variableContainer.updateViews();
-        const type = Entry.type;
+        RoCode.variableContainer.updateViews();
+        const type = RoCode.type;
         if (type === 'workspace' || type === 'phone' || type === 'playground') {
             const target = this.getCurrentObjects()[0];
             target && this.selectObject(target.id);
@@ -344,7 +344,7 @@ Entry.Container = class Container {
      * Add object
      * @param {!object model} objectModel
      * @param {?number} index exist when user add object
-     * @return {Entry.EntryObject}
+     * @return {RoCode.RoCodeObject}
      */
     addObject(objectModel, ...rest) {
         let target;
@@ -356,15 +356,15 @@ Entry.Container = class Container {
                 target.name = 'untitled';
             }
         }
-        target.name = Entry.getOrderedName(target.name, this.objects_);
-        objectModel.id = objectModel.id || Entry.generateHash();
-        return Entry.do('addObject', objectModel, ...rest);
+        target.name = RoCode.getOrderedName(target.name, this.objects_);
+        objectModel.id = objectModel.id || RoCode.generateHash();
+        return RoCode.do('addObject', objectModel, ...rest);
     }
 
     addObjectFunc(objectModel, index, isNotRender) {
         delete objectModel.scene;
-        const object = new Entry.EntryObject(objectModel);
-        object.scene = Entry.scene.selectedScene;
+        const object = new RoCode.RoCodeObject(objectModel);
+        object.scene = RoCode.scene.selectedScene;
 
         let isBackground = objectModel.sprite.category || {};
         isBackground = isBackground.main === 'background';
@@ -387,8 +387,8 @@ Entry.Container = class Container {
             this.selectObject(object.id);
             this.updateObjectsOrder();
             this.updateListView();
-            Entry.variableContainer.updateViews();
-            Entry.variableContainer.updateList();
+            RoCode.variableContainer.updateViews();
+            RoCode.variableContainer.updateList();
         }
     }
 
@@ -396,7 +396,7 @@ Entry.Container = class Container {
         object.generateView();
         this.setCurrentObjects();
         this.selectObject(object.id);
-        Entry.variableContainer.updateViews();
+        RoCode.variableContainer.updateViews();
     }
 
     addExtension(obj) {
@@ -423,7 +423,7 @@ Entry.Container = class Container {
 
     /**
      * Add Clone object
-     * @param {!Entry.EntryObject} object
+     * @param {!RoCode.RoCodeObject} object
      */
     addCloneObject(object, scene, isNotRender) {
         const json = object.toJSON(true);
@@ -431,12 +431,12 @@ Entry.Container = class Container {
         json.script = change('sounds', object, json);
         json.script = change('pictures', object, json);
 
-        Entry.variableContainer.addCloneLocalVariables({
+        RoCode.variableContainer.addCloneLocalVariables({
             objectId: object.id,
             newObjectId: json.id,
             json,
         });
-        json.scene = scene || Entry.scene.selectedScene;
+        json.scene = scene || RoCode.scene.selectedScene;
         this.addObject(json, null, isNotRender);
 
         return this.getObject(json.id);
@@ -459,25 +459,25 @@ Entry.Container = class Container {
 
         object.destroy();
         objects.splice(index, 1);
-        Entry.variableContainer.removeLocalVariables(object.id);
-        Entry.engine.hideProjectTimer();
+        RoCode.variableContainer.removeLocalVariables(object.id);
+        RoCode.engine.hideProjectTimer();
 
         if (isPass === true) {
             return;
         }
 
         this.setCurrentObjects();
-        Entry.stage.sortZorder();
+        RoCode.stage.sortZorder();
         const [first] = this.getCurrentObjects();
         if (first) {
             this.selectObject(first.id);
         } else {
-            Entry.stage.selectObject(null);
-            Entry.playground.flushPlayground();
+            RoCode.stage.selectObject(null);
+            RoCode.playground.flushPlayground();
         }
 
         this.updateListView();
-        Entry.playground.reloadPlayground();
+        RoCode.playground.reloadPlayground();
         GEHelper.resManager.imageRemoved('container::removeObject');
     }
 
@@ -490,10 +490,10 @@ Entry.Container = class Container {
             return;
         }
         const object = this.getObject(objectId);
-        const workspace = Entry.getMainWS();
+        const workspace = RoCode.getMainWS();
         const isSelected = object && object.isSelected();
         if (changeScene && object) {
-            Entry.scene.selectScene(object.scene);
+            RoCode.scene.selectScene(object.scene);
         }
 
         const className = 'selectedObject';
@@ -514,13 +514,13 @@ Entry.Container = class Container {
         });
 
         if (object) {
-            if (workspace && workspace.vimBoard && Entry.isTextMode) {
+            if (workspace && workspace.vimBoard && RoCode.isTextMode) {
                 const sObject = workspace.vimBoard._currentObject;
                 const parser = workspace.vimBoard._parser;
                 if (sObject && !this.getObject(sObject.id)) {
                 } else if (parser && parser._onError) {
                     if (sObject && object.id != sObject.id) {
-                        if (!Entry.scene.isSceneCloning) {
+                        if (!RoCode.scene.isSceneCloning) {
                             try {
                                 workspace._syncTextCode();
                             } catch (e) {}
@@ -538,7 +538,7 @@ Entry.Container = class Container {
                     }
                 } else {
                     if (sObject && object.id != sObject.id) {
-                        if (!Entry.scene.isSceneCloning) {
+                        if (!RoCode.scene.isSceneCloning) {
                             try {
                                 workspace._syncTextCode();
                             } catch (e) {}
@@ -557,11 +557,11 @@ Entry.Container = class Container {
             workspace && workspace.vimBoard && workspace.vimBoard.clearText();
         }
 
-        if (Entry.playground) {
-            object ? Entry.playground.injectObject(object) : Entry.playground.injectEmptyObject();
+        if (RoCode.playground) {
+            object ? RoCode.playground.injectObject(object) : RoCode.playground.injectEmptyObject();
         }
-        if (Entry.type !== 'minimize' && Entry.engine.isState('stop')) {
-            Entry.stage.selectObject(object);
+        if (RoCode.type !== 'minimize' && RoCode.engine.isState('stop')) {
+            RoCode.stage.selectObject(object);
         }
         this.selectedObject = object;
         !isSelected && object && object.updateCoordinateView();
@@ -577,13 +577,13 @@ Entry.Container = class Container {
     /**
      * Object Getter
      * @param {string} objectId
-     * @return {Entry.EntryObject}
+     * @return {RoCode.RoCodeObject}
      */
     getObject(objectId) {
-        const playground = Entry.playground;
+        const playground = RoCode.playground;
         if (!objectId && playground && playground.object) {
             objectId = playground.object.id;
-        } else if (objectId instanceof Entry.EntryObject) {
+        } else if (objectId instanceof RoCode.RoCodeObject) {
             return objectId;
         }
 
@@ -593,12 +593,12 @@ Entry.Container = class Container {
     /**
      * Entity Getter
      * @param {string} objectId
-     * @return {Entry.EntityObject}
+     * @return {RoCode.EntityObject}
      */
     getEntity(objectId) {
         const object = this.getObject(objectId);
         if (!object) {
-            return Entry.toast.alert(
+            return RoCode.toast.alert(
                 Lang.Msgs.runtime_error,
                 Lang.Workspace.object_not_found,
                 true
@@ -609,7 +609,7 @@ Entry.Container = class Container {
 
     /**
      * get variable on canvas
-     * @return {Entry.Variable}
+     * @return {RoCode.Variable}
      */
     getVariable(variableId) {
         for (let i = 0; i < this.variables_.length; i++) {
@@ -629,7 +629,7 @@ Entry.Container = class Container {
      * @param {number!} start
      * @param {number!} end
      * @param {boolean?} isCallFromState
-     * @return {Entry.State}
+     * @return {RoCode.State}
      */
     moveElement(end, start) {
         const objs = this.getCurrentObjects();
@@ -638,7 +638,7 @@ Entry.Container = class Container {
         this.objects_.splice(endIndex, 0, this.objects_.splice(startIndex, 1)[0]);
         this.setCurrentObjects();
         this.updateListView();
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -691,7 +691,7 @@ Entry.Container = class Container {
                 ];
                 break;
             case 'pictures': {
-                const object = Entry.playground.object || obj;
+                const object = RoCode.playground.object || obj;
                 if (!object) {
                     break;
                 }
@@ -699,18 +699,18 @@ Entry.Container = class Container {
                 break;
             }
             case 'messages':
-                result = Entry.variableContainer.messages_.map(({ name, id }) => [name, id]);
+                result = RoCode.variableContainer.messages_.map(({ name, id }) => [name, id]);
                 break;
             case 'variables': {
-                const object = Entry.playground.object || obj;
+                const object = RoCode.playground.object || obj;
                 if (!object) {
                     break;
                 }
-                Entry.variableContainer.variables_.forEach((variable) => {
+                RoCode.variableContainer.variables_.forEach((variable) => {
                     if (
                         variable.object_ &&
                         object &&
-                        (variable.object_ != object.id || Entry.Func.isEdit)
+                        (variable.object_ != object.id || RoCode.Func.isEdit)
                     ) {
                         return;
                     }
@@ -723,15 +723,15 @@ Entry.Container = class Container {
                 break;
             }
             case 'lists': {
-                const object = Entry.playground.object || obj;
+                const object = RoCode.playground.object || obj;
                 if (!object) {
                     break;
                 }
-                Entry.variableContainer.lists_.forEach((list) => {
+                RoCode.variableContainer.lists_.forEach((list) => {
                     if (
                         list.object_ &&
                         object &&
-                        (list.object_ != object.id || Entry.Func.isEdit)
+                        (list.object_ != object.id || RoCode.Func.isEdit)
                     ) {
                         return;
                     }
@@ -752,10 +752,10 @@ Entry.Container = class Container {
                 break;
             }
             case 'scenes':
-                result = Entry.scene.getScenes().map(({ name, id }) => [name, id]);
+                result = RoCode.scene.getScenes().map(({ name, id }) => [name, id]);
                 break;
             case 'sounds': {
-                const object = Entry.playground.object || obj;
+                const object = RoCode.playground.object || obj;
                 if (!object) {
                     break;
                 }
@@ -774,7 +774,7 @@ Entry.Container = class Container {
                 }
                 break;
             case 'fonts':
-                result = EntryStatic.fonts.map((font) => {
+                result = RoCodeStatic.fonts.map((font) => {
                     return [font.name, font.family];
                 });
                 break;
@@ -806,7 +806,7 @@ Entry.Container = class Container {
 
     clearRunningStateOnScene() {
         this.mapObjectOnScene((object) => {
-            if (object instanceof Entry.TargetChecker) {
+            if (object instanceof RoCode.TargetChecker) {
                 return;
             }
             object.clearExecutor();
@@ -899,7 +899,7 @@ Entry.Container = class Container {
      * @return {?createjs.Image}
      */
     getCachedPicture(pictureId) {
-        Entry.assert(typeof pictureId === 'string', 'pictureId must be string');
+        RoCode.assert(typeof pictureId === 'string', 'pictureId must be string');
         return this.cachedPicture[pictureId];
     }
 
@@ -928,7 +928,7 @@ Entry.Container = class Container {
             pictures = [pictures];
         }
 
-        if (entity.constructor === Entry.EntityObject) {
+        if (entity.constructor === RoCode.EntityObject) {
             entityId = entity.id;
         } else {
             entityId = entity;
@@ -972,7 +972,7 @@ Entry.Container = class Container {
         }
         this.objects_ = arr;
         this.setCurrentObjects();
-        Entry.stage.sortZorder();
+        RoCode.stage.sortZorder();
         this.updateListView();
     }
 
@@ -1001,10 +1001,10 @@ Entry.Container = class Container {
         } else {
             this.inputValue.setValue(inputValue);
         }
-        Entry.stage.hideInputField();
-        Entry.dispatchEvent('answerSubmitted');
-        if (Entry.console) {
-            Entry.console.stopInput(inputValue);
+        RoCode.stage.hideInputField();
+        RoCode.dispatchEvent('answerSubmitted');
+        if (RoCode.console) {
+            RoCode.console.stopInput(inputValue);
         }
         this.inputValue.complete = true;
     }
@@ -1018,7 +1018,7 @@ Entry.Container = class Container {
         } else {
             this.sttValue.setValue(inputValue);
         }
-        Entry.dispatchEvent('sttSubmitted');
+        RoCode.dispatchEvent('sttSubmitted');
 
         this.sttValue.complete = true;
     }
@@ -1028,7 +1028,7 @@ Entry.Container = class Container {
     }
 
     resetSceneDuringRun() {
-        if (!Entry.engine.isState('run')) {
+        if (!RoCode.engine.isState('run')) {
             return;
         }
 
@@ -1036,7 +1036,7 @@ Entry.Container = class Container {
             entity.reset();
         });
         this.clearRunningStateOnScene();
-        Entry.stage.hideInputField();
+        RoCode.stage.hideInputField();
     }
 
     setCopiedObject(object) {
@@ -1044,7 +1044,7 @@ Entry.Container = class Container {
     }
 
     updateObjectsOrder() {
-        this.objects_ = Entry.scene
+        this.objects_ = RoCode.scene
             .getScenes()
             .reduce((objs, scene) => [...objs, ...this.getSceneObjects(scene)], []);
     }
@@ -1055,7 +1055,7 @@ Entry.Container = class Container {
      *  @return {Array<object model>}
      */
     getSceneObjects(scene) {
-        scene = scene || Entry.scene.selectedScene;
+        scene = scene || RoCode.scene.selectedScene;
         if (!scene) {
             return [];
         }
@@ -1070,9 +1070,9 @@ Entry.Container = class Container {
     setCurrentObjects() {
         this.currentObjects_ = this.getSceneObjects();
         if (this.currentObjects_.length) {
-            Entry.playground.hidePictureCurtain();
+            RoCode.playground.hidePictureCurtain();
         } else {
-            Entry.playground.showPictureCurtain();
+            RoCode.playground.showPictureCurtain();
         }
     }
 
@@ -1089,13 +1089,13 @@ Entry.Container = class Container {
     /**
      *  get project jsons in art_view for saving especially for art_viewcontroller
      *  @param {!resource project} project
-     *  @return {entry project} project
+     *  @return {RoCode project} project
      */
     getProjectWithJSON(project) {
         project.objects = this.toJSON();
-        project.variables = Entry.variableContainer.getVariableJSON();
-        project.messages = Entry.variableContainer.getMessageJSON();
-        project.scenes = Entry.scene.toJSON();
+        project.variables = RoCode.variableContainer.getVariableJSON();
+        project.messages = RoCode.variableContainer.getMessageJSON();
+        project.scenes = RoCode.scene.toJSON();
         return project;
     }
 
@@ -1124,7 +1124,7 @@ Entry.Container = class Container {
 
     hideProjectAnswer(removeBlock, notIncludeSelf) {
         const answer = this.inputValue;
-        if (!answer || !answer.isVisible() || Entry.engine.isState('run')) {
+        if (!answer || !answer.isVisible() || RoCode.engine.isState('run')) {
             return;
         }
 
@@ -1153,7 +1153,7 @@ Entry.Container = class Container {
     }
     hideSttAnswer(removeBlock, notIncludeSelf) {
         const answer = this.sttValue;
-        if (!answer || !answer.isVisible() || Entry.engine.isState('run')) {
+        if (!answer || !answer.isVisible() || RoCode.engine.isState('run')) {
             return;
         }
 
@@ -1192,17 +1192,17 @@ Entry.Container = class Container {
 
     _rightClick = (e) => {
         e.stopPropagation();
-        const touchEvent = Entry.Utils.convertMouseEvent(e);
+        const touchEvent = RoCode.Utils.convertMouseEvent(e);
 
         const options = [
             {
                 text: Lang.Blocks.Paste_blocks,
-                enable: !Entry.engine.isState('run') && !!this.copiedObject,
+                enable: !RoCode.engine.isState('run') && !!this.copiedObject,
                 callback: () => {
                     if (this.copiedObject) {
                         this.addCloneObject(this.copiedObject);
                     } else {
-                        Entry.toast.alert(
+                        RoCode.toast.alert(
                             Lang.Workspace.add_object_alert,
                             Lang.Workspace.object_not_found_for_paste
                         );
@@ -1211,7 +1211,7 @@ Entry.Container = class Container {
             },
         ];
 
-        Entry.ContextMenu.show(options, 'workspace-contextmenu', {
+        RoCode.ContextMenu.show(options, 'workspace-contextmenu', {
             x: touchEvent.clientX,
             y: touchEvent.clientY,
         });
@@ -1229,7 +1229,7 @@ Entry.Container = class Container {
         // INFO : clear 시도할때 _extensionObjects 초기화
         this._extensionObjects = [];
         // TODO: clear 때 this._extensionListView 도 비워 줘야 하는지 확인 필요.
-        Entry.playground.clear();
+        RoCode.playground.clear();
     }
 
     selectNeighborObject(option) {
@@ -1238,7 +1238,7 @@ Entry.Container = class Container {
             return;
         }
 
-        let currentIndex = objects.indexOf(Entry.playground.object);
+        let currentIndex = objects.indexOf(RoCode.playground.object);
         const maxLen = objects.length;
         switch (option) {
             case 'prev':

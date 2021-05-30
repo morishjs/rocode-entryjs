@@ -5,7 +5,7 @@ import { AtlasImageLoader, ImageLoaderHandler } from './loader/AtlasImageLoader'
 import { AtlasImageLoadingInfo } from './loader/AtlasImageLoadingInfo';
 import { IRawPicture } from './model/IRawPicture';
 import { PIXIAtlasHelper } from './PIXIAtlasHelper';
-import { EntryTextureOption } from './EntryTextureOption';
+import { RoCodeTextureOption } from './RoCodeTextureOption';
 import { ISceneTextures } from './ISceneTextures';
 import { SceneTextures } from './SceneTextures';
 import { clog } from '../utils/logs';
@@ -19,7 +19,7 @@ export class PIXIAtlasManager implements IGEResManager {
     private _activatedScene: ISceneTextures;
     private _imageLoader: AtlasImageLoader;
     private _viewer: AtlasCanvasViewer;
-    private _option: EntryTextureOption;
+    private _option: RoCodeTextureOption;
 
     /**
      * @private
@@ -29,11 +29,11 @@ export class PIXIAtlasManager implements IGEResManager {
         if (this._imageLoader) {
             throw new Error('do not call twice');
         }
-        this._option = new EntryTextureOption(640, 360);
+        this._option = new RoCodeTextureOption(640, 360);
         this._viewer = new AtlasCanvasViewer();
         this._imageLoader = new AtlasImageLoader(this._onImageLoaded.bind(this));
 
-        Entry.addEventListener('saveCanvasImage', () => {
+        RoCode.addEventListener('saveCanvasImage', () => {
             this.imageRemoved('canvas image saved');
         });
     }

@@ -459,7 +459,7 @@ Blockly.Msg.MATH_ONLIST_OPERATOR_STD_DEV = 'standard deviation of list';
 Blockly.Msg.MATH_ONLIST_TOOLTIP_STD_DEV = 'Return the standard deviation of the list.';
 /// dropdown - This choose an element at random from a list.  Each element is chosen with equal probability.
 Blockly.Msg.MATH_ONLIST_OPERATOR_RANDOM = 'random item of list';
-/// tooltip - Please use same term for 'random' as in previous entry.
+/// tooltip - Please use same term for 'random' as in previous RoCode.
 Blockly.Msg.MATH_ONLIST_TOOLTIP_RANDOM = 'Return a random element from the list.';
 
 /// url - information about the modulo (remainder) operation.

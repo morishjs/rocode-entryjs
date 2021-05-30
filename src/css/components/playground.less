@@ -1,11 +1,11 @@
-.entryPlayground_text_buttons {
+.RoCodePlayground_text_buttons {
     display: inline-block;
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-.entryPlayground_text_buttons > li {
+.RoCodePlayground_text_buttons > li {
     float: left;
     width: 32px;
     height: 32px;
@@ -13,28 +13,28 @@
     cursor: pointer;
 }
 
-.entryPlaygroundTextAlignLeft {
+.RoCodePlaygroundTextAlignLeft {
     .backgroundImage('text_align_left_off.png');
 }
-.entryPlaygroundTextAlignLeft.toggle {
+.RoCodePlaygroundTextAlignLeft.toggle {
     .backgroundImage('text_align_left_on.png');
 }
 
-.entryPlaygroundTextAlignCenter {
+.RoCodePlaygroundTextAlignCenter {
     .backgroundImage('text_align_center_off.png');
 }
-.entryPlaygroundTextAlignCenter.toggle {
+.RoCodePlaygroundTextAlignCenter.toggle {
     .backgroundImage('text_align_center_on.png');
 }
 
-.entryPlaygroundTextAlignRight {
+.RoCodePlaygroundTextAlignRight {
     .backgroundImage('text_align_right_off.png');
 }
-.entryPlaygroundTextAlignRight.toggle {
+.RoCodePlaygroundTextAlignRight.toggle {
     .backgroundImage('text_align_right_on.png');
 }
 
-.entryPlayground_fgColorDiv {
+.RoCodePlayground_fgColorDiv {
     position: absolute;
     width: 15px;
     height: 4px;
@@ -42,26 +42,26 @@
     margin-left: 8px;
 }
 
-.entryPlayground_bgColorDiv {
+.RoCodePlayground_bgColorDiv {
     position: absolute;
     width: 15px;
     height: 4px;
     margin-top: -10px;
     margin-left: 8px;
 }
-.entryPlayground_textBox {
+.RoCodePlayground_textBox {
     margin-top: 5px;
     height: 33px;
     width: 400px;
 }
-.entryPlayground_textArea {
+.RoCodePlayground_textArea {
     margin-top: 5px;
     height: 120px;
     width: 400px;
     resize: none;
 }
 
-.entryPlaygroundFontSizeWrapper {
+.RoCodePlaygroundFontSizeWrapper {
     position: absolute;
     padding-left: 13px;
     padding-top: 10px;
@@ -74,7 +74,7 @@
     top: 0px;
 }
 
-.entryPlaygroundFontSizeLabel {
+.RoCodePlaygroundFontSizeLabel {
     display: inline-block;
     width: 65px;
     height: 15px;
@@ -87,18 +87,18 @@
     color: #2c313d;
 }
 
-#entryTextColourTable {
+#RoCodeTextColourTable {
     margin-top: 12px;
     cursor: pointer;
     border-collapse: collapse;
 }
 
-.entryTd {
+.RoCodeTd {
     width: 22px;
     height: 22px;
 }
 
-.entryTdTransparent {
+.RoCodeTdTransparent {
     width: 20px;
     height: 20px;
     background-color: white;
@@ -111,20 +111,20 @@
     border: 1px solid;
 }
 
-.entryPlaygroundSoundLength {
+.RoCodePlaygroundSoundLength {
     margin-top: 6px;
     font-size: 10px;
     line-height: 11px;
 }
 
-.entryPlaygroundDefaultWorkspace {
+.RoCodePlaygroundDefaultWorkspace {
     height: 100%;
     background-color: white;
     color: white;
 }
 
 @introHeight: 66px;
-.entryPlaygroundIntro.active {
+.RoCodePlaygroundIntro.active {
     position: relative;
     overflow: hidden;
     height: @introHeight;
@@ -132,24 +132,24 @@
     z-index: 1;
 }
 
-.entryPlaygroundWorkspace {
+.RoCodePlaygroundWorkspace {
     position: relative;
     overflow: hidden;
     height: 100%;
     background-color: #fff;
 }
 
-.entryPlaygroundIntro.active + .entryPlaygroundWorkspace {
+.RoCodePlaygroundIntro.active + .RoCodePlaygroundWorkspace {
     height: calc(100% - @introHeight);
 }
 
-.entryPlaygroundPhone {
+.RoCodePlaygroundPhone {
     width: 100%;
     height: 500px;
     background-color: #f5f5f5;
 }
 
-.entryPlaygroundResizeWorkspace {
+.RoCodePlaygroundResizeWorkspace {
     position: absolute;
     top: 50%;
     height: 40px;
@@ -159,29 +159,29 @@
     cursor: ew-resize;
     border-left: none;
     z-index: 1;
-    .backgroundImage('entry_scroll_02.png');
+    .backgroundImage('RoCode_scroll_02.png');
     background-size: 16px auto;
 }
 
-.entryPlaygroundTabWorkspace {
+.RoCodePlaygroundTabWorkspace {
     position: absolute;
     left: 0;
     top: 46px;
     background-color: #fff;
 }
 
-.entryPlaygroundTabWorkspace.entryRemove {
+.RoCodePlaygroundTabWorkspace.RoCodeRemove {
     display: block !important;
 }
 
-.entryPlaygroundTabPhone {
+.RoCodePlaygroundTabPhone {
     width: 100%;
     height: 43px;
     position: relative;
     background-color: #f1f1f1;
 }
 
-.entryPlaygroundBackPackView {
+.RoCodePlaygroundBackPackView {
     height: calc(100% - 47px);
     display: block;
     right: 0;
@@ -223,7 +223,7 @@
         .objectBackPackDesc,
         .blockBackPackDesc {
             pointer-events: none;
-            font-family: EntryFont, NanumGothic;
+            font-family: RoCodeFont, NanumGothic;
             font-size: 12px;
             font-weight: bold;
             letter-spacing: -0.1px;
@@ -234,14 +234,14 @@
     }
 }
 
-.entryPlaygroundButtonTabWorkspace {
+.RoCodePlaygroundButtonTabWorkspace {
     position: absolute;
     right: 0;
     top: 43px;
     height: auto;
     background-color: #fff;
 
-    .entryPlaygroundCommentButtonWorkspace {
+    .RoCodePlaygroundCommentButtonWorkspace {
         float: left;
         .backgroundImage('btn-toggle-comment-off.png');
         background-repeat: no-repeat;
@@ -261,7 +261,7 @@
         }
     }
 
-    .entryPlaygroundBackPackButtonWorkspace {
+    .RoCodePlaygroundBackPackButtonWorkspace {
         &::before {
             content: '';
             display: inline-block;
@@ -281,19 +281,19 @@
         margin: 0 9px;
     }
 
-    &.entryRemove.entryCode {
+    &.RoCodeRemove.RoCodeCode {
         display: block !important;
     }
 }
 
-.entryTabListWorkspace {
+.RoCodeTabListWorkspace {
     overflow: hidden;
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.entryTabListItemWorkspace {
+.RoCodeTabListItemWorkspace {
     float: left;
     min-width: 58px;
     margin: 4px 0 0 2px;
@@ -309,11 +309,11 @@
     line-height: 14px;
     vertical-align: bottom;
 }
-.entryTabListItemWorkspace:first-child {
+.RoCodeTabListItemWorkspace:first-child {
     margin-left: 0;
 }
 
-.entryTabSelected {
+.RoCodeTabSelected {
     margin-top: 0;
     padding: 9px 0 8px;
     color: #fff;
@@ -322,20 +322,20 @@
     line-height: 15px;
 }
 
-.entryTabListItemWorkspace:hover {
+.RoCodeTabListItemWorkspace:hover {
 }
 
-#entrySoundTab {
+#RoCodeSoundTab {
     .animation-delay(0.1s);
 }
-#entryPictureTab.hideTab,
-#entryTextTab.hideTab {
+#RoCodePictureTab.hideTab,
+#RoCodeTextTab.hideTab {
     .animation-delay(0.2s);
 }
-#entrySoundTab.hideTab {
+#RoCodeSoundTab.hideTab {
     .animation-delay(0.1s);
 }
-#entryVariableTab.showTab {
+#RoCodeVariableTab.showTab {
     .animation-delay(0.2s);
 }
 
@@ -390,7 +390,7 @@
     }
 }
 
-.entryPlaygroundCurtainWorkspace {
+.RoCodePlaygroundCurtainWorkspace {
     position: absolute;
     background-color: black;
     color: white;
@@ -406,7 +406,7 @@
     cursor: pointer;
 }
 
-.entryPlaygroundCurtainPhone {
+.RoCodePlaygroundCurtainPhone {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
@@ -420,7 +420,7 @@
     cursor: pointer;
 }
 
-.entryPlaygroundPictureCurtainWorkspace {
+.RoCodePlaygroundPictureCurtainWorkspace {
     position: absolute;
     background-color: black;
     top: 0;
@@ -432,7 +432,7 @@
     border-radius: 0 0 0 6px;
 }
 
-.entryPlaygroundPictureCurtainWorkspace .entryPlaygroundPictureCurtainWorkspaceText {
+.RoCodePlaygroundPictureCurtainWorkspace .RoCodePlaygroundPictureCurtainWorkspaceText {
     text-align: center;
     height: 100%;
     color: white;
@@ -452,7 +452,7 @@
     align-items: center; /* align vertical */
 }
 
-.entryPlaygroundTableCurtainWorkspace {
+.RoCodePlaygroundTableCurtainWorkspace {
     position: absolute;
     background-color: black;
     top: 0;
@@ -464,7 +464,7 @@
     border-radius: 0 0 0 6px;
 }
 
-.entryPlaygroundTableCurtainWorkspace .entryPlaygroundTableCurtainWorkspaceText {
+.RoCodePlaygroundTableCurtainWorkspace .RoCodePlaygroundTableCurtainWorkspaceText {
     text-align: center;
     height: 100%;
     color: white;
@@ -484,7 +484,7 @@
     align-items: center; /* align vertical */
 }
 
-.entryPlaygroundCodeWorkspace {
+.RoCodePlaygroundCodeWorkspace {
     overflow: unset;
     position: absolute;
     left: 0;
@@ -495,29 +495,29 @@
     border-radius: 0 0 0 6px;
 }
 
-.entryPlaygroundCodeWorkspace.entryRemove {
+.RoCodePlaygroundCodeWorkspace.RoCodeRemove {
     display: block !important;
     visibility: hidden;
 }
 
-.entryPlaygroundCodePhone {
+.RoCodePlaygroundCodePhone {
     position: relative;
     height: 100%;
     background-color: #f5f5f5;
 }
 
-.entryPlaygroundCodePhone.entryRemove {
+.RoCodePlaygroundCodePhone.RoCodeRemove {
     display: block !important;
     visibility: hidden;
 }
 
-.entryPlaygroundPicturePhone {
+.RoCodePlaygroundPicturePhone {
     margin-left: 0;
     height: 100%;
     background-color: #ececec;
 }
 
-.entryPlaygroundPictureWorkspace {
+.RoCodePlaygroundPictureWorkspace {
     position: absolute;
     left: 0;
     right: 0;
@@ -528,14 +528,14 @@
     border-radius: 0 0 0 6px;
 }
 
-.entryPlaygroundAddPicture {
+.RoCodePlaygroundAddPicture {
     width: 254px;
     padding: 8px 0 7px;
     background-color: #ecf8ff;
     border: 1px solid #d6e9f4;
 }
 
-.entryPlaygroundAddPicturePhone {
+.RoCodePlaygroundAddPicturePhone {
     position: relative;
     padding: 0;
     margin: 0;
@@ -544,7 +544,7 @@
     border-bottom: 1pt solid #ebeff1;
 }
 
-.entryPlaygroundAddPictureInner {
+.RoCodePlaygroundAddPictureInner {
     display: block;
     width: 146px;
     height: 40px;
@@ -560,7 +560,7 @@
     cursor: pointer;
 }
 
-.entryPlaygroundAddPictureInnerPhone {
+.RoCodePlaygroundAddPictureInnerPhone {
     display: block;
     height: 50px;
     background-color: #cdcfc9;
@@ -573,7 +573,7 @@
     padding: 8px 10px 12px 10px;
 }
 
-.entryPlaygroundPictureList {
+.RoCodePlaygroundPictureList {
     position: absolute;
     padding: 0px;
     margin: 0px;
@@ -587,7 +587,7 @@
     border-radius: 0 0 0 6px;
 }
 
-.entryPlaygroundPictureListPhone {
+.RoCodePlaygroundPictureListPhone {
     position: absolute;
     padding: 0px;
     margin: 0px;
@@ -600,7 +600,7 @@
     border: 1px solid #d6e9f4;
 }
 
-.entryPlaygroundPictureElement {
+.RoCodePlaygroundPictureElement {
     display: block;
     position: relative;
     background-color: #ecf8ff;
@@ -611,13 +611,13 @@
     cursor: pointer;
 }
 
-.entryPlaygroundPictureElement::selection {
+.RoCodePlaygroundPictureElement::selection {
     cursor: move;
     background-color: #fff;
 }
 
-.entryPlaygroundPictureOrder,
-.entryPlaygroundSoundOrder {
+.RoCodePlaygroundPictureOrder,
+.RoCodePlaygroundSoundOrder {
     overflow: hidden;
     position: absolute;
     left: 19px;
@@ -633,11 +633,11 @@
     z-index: 10;
 }
 
-.entryPictureSelected {
+.RoCodePictureSelected {
     background-color: #fff;
 }
 
-.entryPlaygroundPictureThumbnail {
+.RoCodePlaygroundPictureThumbnail {
     position: absolute;
     height: 44px;
     width: 40px;
@@ -651,7 +651,7 @@
     background-position: 50% 50%;
 }
 
-.entryPlaygroundPictureName {
+.RoCodePlaygroundPictureName {
     width: 100%;
     height: 24px;
     margin-top: 10px;
@@ -668,17 +668,17 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
-.entryPlaygroundPictureName:focus,
-.entryPlaygroundPictureName:active {
+.RoCodePlaygroundPictureName:focus,
+.RoCodePlaygroundPictureName:active {
     border-color: #4f80ff;
 }
 
-.entryPlaygroundPictureSize {
+.RoCodePlaygroundPictureSize {
     margin-top: 6px;
     font-size: 10px;
     line-height: 11px;
 }
-.entryPlayground_del {
+.RoCodePlayground_del {
     position: absolute;
     right: 26px;
     top: 18px;
@@ -749,7 +749,7 @@
     top: 52px;
 }
 
-.entryPlaygroundTextWorkspace {
+.RoCodePlaygroundTextWorkspace {
     position: absolute;
     top: 80px;
     left: 0;
@@ -759,39 +759,39 @@
     border-radius: 0 0 0 6px;
 }
 // 글상자
-.entryPlaygroundTextWorkspace .write_box {
+.RoCodePlaygroundTextWorkspace .write_box {
     height: 568px;
 }
-.entryPlaygroundTextWorkspace .write_box .write_set {
+.RoCodePlaygroundTextWorkspace .write_box .write_set {
     position: relative;
     padding: 8px 18px;
     background-color: #f9f9f9;
     border: 1px solid #e2e2e2;
     z-index: 10;
 }
-.entryPlaygroundTextWorkspace .write_box .write_set:after {
+.RoCodePlaygroundTextWorkspace .write_box .write_set:after {
     display: block;
     clear: both;
     content: '';
 }
-.entryPlaygroundTextWorkspace .write_box .write_set .pop_selectbox {
+.RoCodePlaygroundTextWorkspace .write_box .write_set .pop_selectbox {
     float: left;
     width: 168px;
 }
-.entryPlaygroundTextWorkspace .write_box .write_set .pop_selectbox .tooltip_inner {
+.RoCodePlaygroundTextWorkspace .write_box .write_set .pop_selectbox .tooltip_inner {
     max-height: 282px;
     overflow: visible;
     overflow-y: auto;
 }
 
-.entryPlaygroundTextWorkspace .write_box .write_set .font_style_box {
+.RoCodePlaygroundTextWorkspace .write_box .write_set .font_style_box {
     position: relative;
     float: left;
     padding-left: 24px;
     font-size: 0;
 }
 
-.entryPlaygroundTextWorkspace .write_box .write_set .font_style_box .style_link {
+.RoCodePlaygroundTextWorkspace .write_box .write_set .font_style_box .style_link {
     display: inline-block;
     overflow: hidden;
     width: 40px;
@@ -802,17 +802,17 @@
     border-radius: 4px;
     cursor: pointer;
 }
-.entryPlaygroundTextWorkspace .write_box .write_set .font_style_box .style_link.on {
+.RoCodePlaygroundTextWorkspace .write_box .write_set .font_style_box .style_link.on {
     border: 1px solid #4f80ff;
 }
-.entryPlaygroundTextWorkspace .write_box .input_box .write_type_box {
+.RoCodePlaygroundTextWorkspace .write_box .input_box .write_type_box {
     display: inline-block;
     border-radius: 4px;
     width: 207px;
     height: 40px;
     font-size: 0;
 }
-.entryPlaygroundTextWorkspace .write_box .input_box .write_type_box a {
+.RoCodePlaygroundTextWorkspace .write_box .input_box .write_type_box a {
     display: inline-block;
     position: relative;
     width: 102px;
@@ -828,30 +828,30 @@
     line-height: 36px;
     cursor: pointer;
 }
-.entryPlaygroundTextWorkspace .write_box .input_box .write_type_box a + a {
+.RoCodePlaygroundTextWorkspace .write_box .input_box .write_type_box a + a {
     margin-left: -1px;
     border-radius: 0 4px 4px 0;
 }
-.entryPlaygroundTextWorkspace .write_box .input_box .write_type_box .on {
+.RoCodePlaygroundTextWorkspace .write_box .input_box .write_type_box .on {
     color: #4f80ff;
     border-color: #4f80ff;
     z-index: 10;
 }
-.entryPlaygroundTextWorkspace .write_box .input_box {
+.RoCodePlaygroundTextWorkspace .write_box .input_box {
     margin: 24px 38px 0;
     max-width: 654px;
     position: relative;
 }
-.entryPlaygroundTextWorkspace .write_box .input_box .list {
+.RoCodePlaygroundTextWorkspace .write_box .input_box .list {
     padding: 4px 0px;
     list-style: none;
 }
-.entryPlaygroundTextWorkspace .write_box .input_box .list li {
+.RoCodePlaygroundTextWorkspace .write_box .input_box .list li {
     color: #555;
     margin-top: 4px;
     line-height: 18px;
 }
-.entryPlaygroundTextWorkspace .write_box .input_box .list li:before {
+.RoCodePlaygroundTextWorkspace .write_box .input_box .list li:before {
     display: inline-block;
     width: 3px;
     height: 3px;
@@ -861,7 +861,7 @@
     vertical-align: top;
     content: '';
 }
-.entryPlaygroundTextWorkspace .write_box .input_inner {
+.RoCodePlaygroundTextWorkspace .write_box .input_inner {
     position: relative;
     overflow: hidden;
     height: 40px;
@@ -872,15 +872,15 @@
     margin-top: 24px;
 }
 
-.entryPlaygroundTextWorkspace .write_box .input_inner .bold {
+.RoCodePlaygroundTextWorkspace .write_box .input_inner .bold {
     font-weight: bold;
 }
 
-.entryPlaygroundTextWorkspace .write_box .input_inner .italic {
+.RoCodePlaygroundTextWorkspace .write_box .input_inner .italic {
     font-style: italic;
 }
 
-.entryPlaygroundTextWorkspace .write_box .input_inner input[type='text'] {
+.RoCodePlaygroundTextWorkspace .write_box .input_inner input[type='text'] {
     display: none;
     width: 100%;
     height: 100%;
@@ -892,7 +892,7 @@
     font-size: 14px;
     letter-spacing: -0.3px;
 }
-.entryPlaygroundTextWorkspace .write_box .input_inner textarea {
+.RoCodePlaygroundTextWorkspace .write_box .input_inner textarea {
     width: 100%;
     height: 100%;
     margin: 0;
@@ -903,7 +903,7 @@
     outline: 0;
     letter-spacing: -0.3px;
 }
-.entryPlaygroundTextWorkspace .write_box .input_inner label {
+.RoCodePlaygroundTextWorkspace .write_box .input_inner label {
     position: absolute;
     left: 16px;
     right: 16px;
@@ -1038,24 +1038,24 @@
     background-size: 8px auto;
 }
 
-#entryFontColorToggle {
+#RoCodeFontColorToggle {
     .backgroundImage('text_in_off.png');
 }
 
-#entryFontColorToggle.selected {
+#RoCodeFontColorToggle.selected {
     .backgroundImage('text_in_on.png');
 }
 
-#entryFontBGToggle {
+#RoCodeFontBGToggle {
     margin-left: 6px;
     .backgroundImage('text_out_off.png');
 }
 
-#entryFontBGToggle.selected {
+#RoCodeFontBGToggle.selected {
     .backgroundImage('text_out_on.png');
 }
 
-.entryPlaygroundSoundWorkspace {
+.RoCodePlaygroundSoundWorkspace {
     overflow: hidden;
     position: absolute;
     left: 0;
@@ -1067,7 +1067,7 @@
     margin-left: 0;
 }
 
-.entryPlaygroundSoundEdit {
+.RoCodePlaygroundSoundEdit {
     position: absolute;
     left: 253px;
     top: 0;
@@ -1086,11 +1086,11 @@
     -ms-flex-align: center;
     align-items: center;
 
-    .entryPlaygroundSoundEditWrapper {
+    .RoCodePlaygroundSoundEditWrapper {
         text-align: center;
     }
 
-    .entryPlaygroundSoundEditImage {
+    .RoCodePlaygroundSoundEditImage {
         .backgroundImage('sound_edit.gif');
         width: 160px;
         height: 160px;
@@ -1100,7 +1100,7 @@
         background-size: 160px auto;
     }
 
-    .entryPlaygroundSoundEditText {
+    .RoCodePlaygroundSoundEditText {
         margin: 0 auto;
         font-size: 14px;
         font-weight: bold;
@@ -1117,21 +1117,21 @@
     }
 }
 
-.entryPlaygroundAddSound {
+.RoCodePlaygroundAddSound {
     width: 254px;
     padding: 8px 0;
     background-color: #ecf8ff;
     border: 1px solid #d6e9f4;
 }
 
-.entryPlaygroundAddSoundPhone {
+.RoCodePlaygroundAddSoundPhone {
     position: relative;
     height: 50px;
     cursor: pointer;
     border-bottom: 1pt solid #ebeff1;
 }
 
-.entryPlaygroundAddSoundInner {
+.RoCodePlaygroundAddSoundInner {
     display: block;
     width: 146px;
     height: 40px;
@@ -1147,7 +1147,7 @@
     cursor: pointer;
 }
 
-.entryPlaygroundAddSoundInnerPhone {
+.RoCodePlaygroundAddSoundInnerPhone {
     display: block;
     height: 40px;
     background-color: #cdcfc9;
@@ -1160,7 +1160,7 @@
     width: 220px;
 }
 
-.entryPlaygroundSoundList {
+.RoCodePlaygroundSoundList {
     position: absolute;
     padding: 0;
     margin: 0;
@@ -1173,7 +1173,7 @@
     border: 1px solid #d6e9f4;
 }
 
-.entryPlaygroundSoundListPhone {
+.RoCodePlaygroundSoundListPhone {
     position: absolute;
     padding: 0px;
     margin: 0px;
@@ -1188,7 +1188,7 @@
     border-radius: 0 0 0 6px;
 }
 
-.entryPlaygroundSoundElement {
+.RoCodePlaygroundSoundElement {
     display: block;
     position: relative;
     background-color: #ecf8ff;
@@ -1198,12 +1198,12 @@
     color: #2c313d;
     cursor: pointer;
 
-    &.entrySoundSelected {
+    &.RoCodeSoundSelected {
         background-color: #fff;
     }
 }
 
-.entryPlaygroundSoundThumbnail {
+.RoCodePlaygroundSoundThumbnail {
     position: absolute;
     height: 44px;
     width: 40px;
@@ -1216,16 +1216,16 @@
     background-repeat: no-repeat;
     background-position: 50% 50%;
 
-    &.entryPlaygroundSoundPlay {
+    &.RoCodePlaygroundSoundPlay {
         .backgroundImage('workspace_sound_play.png');
     }
 
-    &.entryPlaygroundSoundStop {
+    &.RoCodePlaygroundSoundStop {
         .backgroundImage('workspace_sound_stop.png');
     }
 }
 
-.entryPlaygroundSoundName {
+.RoCodePlaygroundSoundName {
     width: 100%;
     height: 24px;
     -webkit-box-sizing: border-box;
@@ -1242,19 +1242,19 @@
     border: 1px solid #e2e2e2;
     border-radius: 4px;
 }
-.entryPlaygroundSoundName:focus,
-.entryPlaygroundSoundName:active {
+.RoCodePlaygroundSoundName:focus,
+.RoCodePlaygroundSoundName:active {
     border-color: #4f80ff;
 }
 
-.entryPlayground_text_buttons {
+.RoCodePlayground_text_buttons {
     display: inline-block;
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-.entryPlayground_text_buttons > li {
+.RoCodePlayground_text_buttons > li {
     float: left;
     width: 32px;
     height: 32px;
@@ -1262,28 +1262,28 @@
     cursor: pointer;
 }
 
-.entryPlaygroundTextAlignLeft {
+.RoCodePlaygroundTextAlignLeft {
     .backgroundImage('text_align_left_off.png');
 }
-.entryPlaygroundTextAlignLeft.toggle {
+.RoCodePlaygroundTextAlignLeft.toggle {
     .backgroundImage('text_align_left_on.png');
 }
 
-.entryPlaygroundTextAlignCenter {
+.RoCodePlaygroundTextAlignCenter {
     .backgroundImage('text_align_center_off.png');
 }
-.entryPlaygroundTextAlignCenter.toggle {
+.RoCodePlaygroundTextAlignCenter.toggle {
     .backgroundImage('text_align_center_on.png');
 }
 
-.entryPlaygroundTextAlignRight {
+.RoCodePlaygroundTextAlignRight {
     .backgroundImage('text_align_right_off.png');
 }
-.entryPlaygroundTextAlignRight.toggle {
+.RoCodePlaygroundTextAlignRight.toggle {
     .backgroundImage('text_align_right_on.png');
 }
 
-.entryPlayground_fgColorDiv {
+.RoCodePlayground_fgColorDiv {
     position: absolute;
     width: 15px;
     height: 4px;
@@ -1291,7 +1291,7 @@
     margin-left: 8px;
 }
 
-.entryPlayground_bgColorDiv {
+.RoCodePlayground_bgColorDiv {
     position: absolute;
     width: 15px;
     height: 4px;
@@ -1299,7 +1299,7 @@
     margin-left: 8px;
 }
 
-.entryPlaygroundFontSizeSlider {
+.RoCodePlaygroundFontSizeSlider {
     display: inline-block;
     margin-left: 12px;
     width: 136px;
@@ -1310,14 +1310,14 @@
     background-color: #d8d8d8;
 }
 
-.entryPlaygroundFontSizeIndicator {
+.RoCodePlaygroundFontSizeIndicator {
     height: 100%;
     width: 45%;
     border-radius: 3px;
     background-color: #643cd9;
 }
 
-.entryPlaygroundFontSizeKnob {
+.RoCodePlaygroundFontSizeKnob {
     width: 19px;
     height: 30px;
     -o-object-fit: contain;
@@ -1331,7 +1331,7 @@
     cursor: pointer;
 }
 
-.entryPlaygroundTextColoursWrapper {
+.RoCodePlaygroundTextColoursWrapper {
     width: 260px;
     height: 226px;
     z-index: 10;
@@ -1342,7 +1342,7 @@
     background-repeat: no-repeat;
     background-size: 260px 226px;
 }
-.entryPlaygroundTextBackgroundsWrapper {
+.RoCodePlaygroundTextBackgroundsWrapper {
     width: 260px;
     height: 226px;
     z-index: 10;
@@ -1354,12 +1354,12 @@
     background-size: 260px 226px;
 }
 
-.entryPlaygroundLinebreakWrapper {
+.RoCodePlaygroundLinebreakWrapper {
     position: fixed;
     top: 351px;
 }
 
-.entryPlaygroundLinebreakButtons {
+.RoCodePlaygroundLinebreakButtons {
     display: inline;
     font-size: 0;
     img {
@@ -1367,7 +1367,7 @@
     }
 }
 
-.entryPlaygroundLinebreakHorizontal {
+.RoCodePlaygroundLinebreakHorizontal {
     display: block;
     border-top: 1px solid #808080;
     margin: 0 0 12px 0;
@@ -1375,7 +1375,7 @@
     width: 260px;
 }
 
-.entryPlaygroundLinebreakDescription {
+.RoCodePlaygroundLinebreakDescription {
     margin-top: 12px;
     p {
         color: #8888;
@@ -1393,15 +1393,15 @@
 }
 
 .tablet {
-    .entryPlaygroundResizeWorkspace {
-        .backgroundImage('entry_scroll_02_big_2.png');
+    .RoCodePlaygroundResizeWorkspace {
+        .backgroundImage('RoCode_scroll_02_big_2.png');
         width: 15px;
         height: 42px;
         border-top: none;
     }
 }
 
-.entrySceneListWorkspace {
+.RoCodeSceneListWorkspace {
     .rcs-inner-container {
         > div > div > div {
             display: table;
@@ -1431,7 +1431,7 @@
     }
 }
 
-.entryPlaygroundTableWorkspace {
+.RoCodePlaygroundTableWorkspace {
     overflow: hidden;
     position: absolute;
     left: 0;
@@ -1443,7 +1443,7 @@
     margin-left: 0;
 }
 
-.entryPlaygroundTableEdit {
+.RoCodePlaygroundTableEdit {
     position: absolute;
     left: 253px;
     top: 0;
@@ -1462,11 +1462,11 @@
     -ms-flex-align: center;
     align-items: center;
 
-    .entryPlaygroundTableEditWrapper {
+    .RoCodePlaygroundTableEditWrapper {
         text-align: center;
     }
 
-    .entryPlaygroundTableEditImage {
+    .RoCodePlaygroundTableEditImage {
         .backgroundImage('sound_edit.gif');
         width: 160px;
         height: 160px;
@@ -1476,7 +1476,7 @@
         background-size: 160px auto;
     }
 
-    .entryPlaygroundTableEditText {
+    .RoCodePlaygroundTableEditText {
         margin: 0 auto;
         font-size: 14px;
         font-weight: bold;
@@ -1493,21 +1493,21 @@
     }
 }
 
-.entryPlaygroundAddTable {
+.RoCodePlaygroundAddTable {
     width: 254px;
     padding: 8px 0;
     background-color: #ecf8ff;
     border: 1px solid #d6e9f4;
 }
 
-.entryPlaygroundAddTablePhone {
+.RoCodePlaygroundAddTablePhone {
     position: relative;
     height: 50px;
     cursor: pointer;
     border-bottom: 1pt solid #ebeff1;
 }
 
-.entryPlaygroundAddTableInner {
+.RoCodePlaygroundAddTableInner {
     display: block;
     width: 146px;
     height: 40px;
@@ -1523,7 +1523,7 @@
     cursor: pointer;
 }
 
-.entryPlaygroundAddTableInnerPhone {
+.RoCodePlaygroundAddTableInnerPhone {
     display: block;
     height: 40px;
     background-color: #cdcfc9;
@@ -1536,7 +1536,7 @@
     width: 220px;
 }
 
-.entryPlaygroundTableList {
+.RoCodePlaygroundTableList {
     position: absolute;
     padding: 0;
     margin: 0;
@@ -1549,7 +1549,7 @@
     border: 1px solid #d6e9f4;
 }
 
-.entryPlaygroundTableListPhone {
+.RoCodePlaygroundTableListPhone {
     position: absolute;
     padding: 0px;
     margin: 0px;
@@ -1564,7 +1564,7 @@
     border-radius: 0 0 0 6px;
 }
 
-.entryPlaygroundTableList {
+.RoCodePlaygroundTableList {
     position: absolute;
     padding: 0px;
     margin: 0px;
@@ -1578,7 +1578,7 @@
     border-radius: 0 0 0 6px;
 }
 
-.entryPlaygroundTableElement {
+.RoCodePlaygroundTableElement {
     display: block;
     position: relative;
     background-color: #ecf8ff;
@@ -1588,11 +1588,11 @@
     color: #2c313d;
     cursor: pointer;
 
-    &.entryTableSelected {
+    &.RoCodeTableSelected {
         background-color: #fff;
     }
 
-    .entryPlaygroundTableThumbnail {
+    .RoCodePlaygroundTableThumbnail {
         position: absolute;
         height: 22px;
         width: 22px;
@@ -1603,7 +1603,7 @@
         background-position: 50% 50%;
     }
 
-    .entryPlaygroundTableName {
+    .RoCodePlaygroundTableName {
         width: 100%;
         height: 24px;
         -webkit-box-sizing: border-box;
@@ -1620,12 +1620,12 @@
         border: 1px solid #e2e2e2;
         border-radius: 4px;
     }
-    .entryPlaygroundTableName:focus,
-    .entryPlaygroundTableName:active {
+    .RoCodePlaygroundTableName:focus,
+    .RoCodePlaygroundTableName:active {
         border-color: #4f80ff;
     }
 
-    .entryPlaygroundTableRemove {
+    .RoCodePlaygroundTableRemove {
         position: absolute;
         right: 26px;
         top: 12px;

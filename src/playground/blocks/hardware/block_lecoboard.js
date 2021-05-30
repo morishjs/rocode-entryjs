@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Lecoboard = {
+RoCode.Lecoboard = {
     id: '3C.1',
     name: 'lecoboard',
     url: 'http://www.arduino.cc/',
@@ -10,30 +10,30 @@ Entry.Lecoboard = {
         en: 'LECOBOARD',
     },
     setZero() {
-        Entry.hw.sendQueue.readablePorts = [];
+        RoCode.hw.sendQueue.readablePorts = [];
         for (var port = 0; port < 34; port++) {
             if (port == 13 || port == 14 || port == 15 || port == 16 || port == 33) {
-                Entry.hw.sendQueue[port] = 1;
+                RoCode.hw.sendQueue[port] = 1;
             } else if (port == 17) {
-                Entry.hw.sendQueue[port] = 0;
+                RoCode.hw.sendQueue[port] = 0;
             } else {
-                Entry.hw.sendQueue[port] = 0;
-                Entry.hw.sendQueue.readablePorts.push(port);
+                RoCode.hw.sendQueue[port] = 0;
+                RoCode.hw.sendQueue.readablePorts.push(port);
             }
         }
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            const keySet = Object.keys(Entry.hw.sendQueue.SET);
+            const keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach((key) => {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     sensorTypes: {
         ALIVE: 0,
@@ -170,7 +170,7 @@ Entry.Lecoboard = {
     },
 };
 
-Entry.Lecoboard.setLanguage = function() {
+RoCode.Lecoboard.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -241,7 +241,7 @@ Entry.Lecoboard.setLanguage = function() {
     };
 };
 
-Entry.Lecoboard.blockMenuBlocks = [
+RoCode.Lecoboard.blockMenuBlocks = [
     'lecoboard_led_rgb_toggle',
     'lecoboard_dual_led_color_toggle',
     'lecoboard_dual_led_toggle',
@@ -272,11 +272,11 @@ Entry.Lecoboard.blockMenuBlocks = [
     'lecoboard_get_bluetooth',
 ];
 
-Entry.Lecoboard.getBlocks = function() {
+RoCode.Lecoboard.getBlocks = function() {
     return {
         lecoboard_port_highlow_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -289,8 +289,8 @@ Entry.Lecoboard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -305,8 +305,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_digital_write: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -359,23 +359,23 @@ Entry.Lecoboard.getBlocks = function() {
                 if (value == 1) value = 255;
                 else value = 0;
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port] = {
-                    type: Entry.ArduinoExt.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue.SET[port] = {
+                    type: RoCode.ArduinoExt.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
                 */
 
                 if (typeof value === 'string') value = value.toLowerCase();
-                if (Entry.Lecoboard.highList.indexOf(value) > -1) value = 255;
-                else if (Entry.Lecoboard.lowList.indexOf(value) > -1) value = 0;
+                if (RoCode.Lecoboard.highList.indexOf(value) > -1) value = 255;
+                else if (RoCode.Lecoboard.lowList.indexOf(value) > -1) value = 0;
                 else throw new Error();
-                if (!Entry.hw.sendQueue.SET) Entry.hw.sendQueue.SET = {};
-                Entry.hw.sendQueue.SET[port] = {
-                    type: Entry.Lecoboard.sensorTypes.DIGITAL,
+                if (!RoCode.hw.sendQueue.SET) RoCode.hw.sendQueue.SET = {};
+                RoCode.hw.sendQueue.SET[port] = {
+                    type: RoCode.Lecoboard.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -402,8 +402,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -458,11 +458,11 @@ Entry.Lecoboard.getBlocks = function() {
                 value = Math.max(value, 0);
                 value = Math.min(value, 100);
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port] = {
-                    type: Entry.ArduinoExt.sensorTypes.PWM,
+                RoCode.hw.sendQueue.SET[port] = {
+                    type: RoCode.ArduinoExt.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -488,8 +488,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_analog_input_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -504,8 +504,8 @@ Entry.Lecoboard.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -535,8 +535,8 @@ Entry.Lecoboard.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'lecoboard_analog_input_list',
@@ -545,8 +545,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_button_read_bool: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -566,11 +566,11 @@ Entry.Lecoboard.getBlocks = function() {
             isNotFor: ['lecoboard'],
             func(sprite, script) {
                 const port = 4;
-                const DIGITAL = Entry.hw.portData.DIGITAL;
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                const DIGITAL = RoCode.hw.portData.DIGITAL;
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
-                Entry.hw.sendQueue.GET[Entry.Lecoboard.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue.GET[RoCode.Lecoboard.sensorTypes.DIGITAL] = {
                     port,
                     time: new Date().getTime(),
                 };
@@ -581,8 +581,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_button_read: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             params: [
@@ -602,11 +602,11 @@ Entry.Lecoboard.getBlocks = function() {
             isNotFor: ['lecoboard'],
             func(sprite, script) {
                 const port = 4;
-                const DIGITAL = Entry.hw.portData.DIGITAL;
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                const DIGITAL = RoCode.hw.portData.DIGITAL;
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
-                Entry.hw.sendQueue.GET[Entry.Lecoboard.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue.GET[RoCode.Lecoboard.sensorTypes.DIGITAL] = {
                     port,
                     time: new Date().getTime(),
                 };
@@ -618,8 +618,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_ultrasonic_read: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -659,20 +659,20 @@ Entry.Lecoboard.getBlocks = function() {
                 const port1 = script.getNumberValue('PORT1', script);
                 const port2 = script.getNumberValue('PORT2', script);
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                delete Entry.hw.sendQueue.SET[port1];
-                delete Entry.hw.sendQueue.SET[port2];
+                delete RoCode.hw.sendQueue.SET[port1];
+                delete RoCode.hw.sendQueue.SET[port2];
 
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
-                Entry.hw.sendQueue.GET[Entry.ArduinoExt.sensorTypes.ULTRASONIC] = {
+                RoCode.hw.sendQueue.GET[RoCode.ArduinoExt.sensorTypes.ULTRASONIC] = {
                     port: [port1, port2],
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.ULTRASONIC || 0;
+                return RoCode.hw.portData.ULTRASONIC || 0;
             },
             syntax: {
                 js: [],
@@ -695,8 +695,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_analog_read: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -724,7 +724,7 @@ Entry.Lecoboard.getBlocks = function() {
             isNotFor: ['lecoboard'],
             func(sprite, script) {
                 let port = script.getValue('PORT', script);
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[port] || 0 : 0;
             },
             syntax: {
@@ -744,8 +744,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_cds_read: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -762,13 +762,13 @@ Entry.Lecoboard.getBlocks = function() {
             isNotFor: ['lecoboard'],
             func(sprite, script) {
                 let port = 0;
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[port] || 0 : 0;
             },
         },
         lecoboard_var_read: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -785,13 +785,13 @@ Entry.Lecoboard.getBlocks = function() {
             isNotFor: ['lecoboard'],
             func(sprite, script) {
                 let port = 1;
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[port] || 0 : 0;
             },
         },
         lecoboard_ir_read: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -807,21 +807,21 @@ Entry.Lecoboard.getBlocks = function() {
             class: 'LecoboardAnalogRead',
             isNotFor: ['lecoboard'],
             func(sprite, script) {
-                if (!Entry.hw.sendQueue.SET) Entry.hw.sendQueue.SET = {};
-                Entry.hw.sendQueue.SET[7] = {
-                    type: Entry.Lecoboard.sensorTypes.DIGITAL,
+                if (!RoCode.hw.sendQueue.SET) RoCode.hw.sendQueue.SET = {};
+                RoCode.hw.sendQueue.SET[7] = {
+                    type: RoCode.Lecoboard.sensorTypes.DIGITAL,
                     data: 1,
                     time: new Date().getTime(),
                 };
 
                 let port = 2;
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[port] || 0 : 0;
             },
         },
         lecoboard_temp_read: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -838,13 +838,13 @@ Entry.Lecoboard.getBlocks = function() {
             isNotFor: ['lecoboard'],
             func(sprite, script) {
                 let port = 7;
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[port] || 0 : 0;
             },
         },
         lecoboard_digital_port_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -859,8 +859,8 @@ Entry.Lecoboard.getBlocks = function() {
                     ],
                     value: '28',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -875,8 +875,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_digital_read: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             params: [
@@ -902,16 +902,16 @@ Entry.Lecoboard.getBlocks = function() {
             class: 'LecoboardAnalogRead',
             isNotFor: ['lecoboard'],
             func(sprite, script) {
-                const { hwModule = {} } = Entry.hw;
+                const { hwModule = {} } = RoCode.hw;
                 const { name } = hwModule;
 
                 const port = script.getNumberValue('PORT', script);
-                const DIGITAL = Entry.hw.portData.DIGITAL;
+                const DIGITAL = RoCode.hw.portData.DIGITAL;
 
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
-                Entry.hw.sendQueue.GET[Entry.Lecoboard.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue.GET[RoCode.Lecoboard.sensorTypes.DIGITAL] = {
                     port,
                     time: new Date().getTime(),
                 };
@@ -922,8 +922,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_convert_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -985,8 +985,8 @@ Entry.Lecoboard.getBlocks = function() {
                 var isFloat = false;
 
                 if (
-                    (Entry.Utils.isNumber(stringValue2) && stringValue2.indexOf('.') > -1) ||
-                    (Entry.Utils.isNumber(stringValue3) && stringValue3.indexOf('.') > -1)
+                    (RoCode.Utils.isNumber(stringValue2) && stringValue2.indexOf('.') > -1) ||
+                    (RoCode.Utils.isNumber(stringValue3) && stringValue3.indexOf('.') > -1)
                 ) {
                     isFloat = true;
                 }
@@ -1035,8 +1035,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_dual_color_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1050,8 +1050,8 @@ Entry.Lecoboard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1067,8 +1067,8 @@ Entry.Lecoboard.getBlocks = function() {
         },
 
         lecoboard_dual_led_color_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1116,15 +1116,15 @@ Entry.Lecoboard.getBlocks = function() {
                     value2 = 255;
                 }
 
-                if (!Entry.hw.sendQueue.SET) Entry.hw.sendQueue.SET = {};
-                Entry.hw.sendQueue.SET[port1] = {
-                    type: Entry.Lecoboard.sensorTypes.DIGITAL,
+                if (!RoCode.hw.sendQueue.SET) RoCode.hw.sendQueue.SET = {};
+                RoCode.hw.sendQueue.SET[port1] = {
+                    type: RoCode.Lecoboard.sensorTypes.DIGITAL,
                     data: value1,
                     time: new Date().getTime(),
                 };
-                if (!Entry.hw.sendQueue.SET) Entry.hw.sendQueue.SET = {};
-                Entry.hw.sendQueue.SET[port2] = {
-                    type: Entry.Lecoboard.sensorTypes.DIGITAL,
+                if (!RoCode.hw.sendQueue.SET) RoCode.hw.sendQueue.SET = {};
+                RoCode.hw.sendQueue.SET[port2] = {
+                    type: RoCode.Lecoboard.sensorTypes.DIGITAL,
                     data: value2,
                     time: new Date().getTime(),
                 };
@@ -1147,8 +1147,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_dual_led_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1194,22 +1194,22 @@ Entry.Lecoboard.getBlocks = function() {
                 let value2 = script.getValue('VALUE2');
 
                 if (typeof value1 === 'string') value1 = value1.toLowerCase();
-                if (Entry.Lecoboard.highList.indexOf(value1) > -1) value1 = 255;
-                else if (Entry.Lecoboard.lowList.indexOf(value1) > -1) value1 = 0;
+                if (RoCode.Lecoboard.highList.indexOf(value1) > -1) value1 = 255;
+                else if (RoCode.Lecoboard.lowList.indexOf(value1) > -1) value1 = 0;
                 else throw new Error();
-                if (!Entry.hw.sendQueue.SET) Entry.hw.sendQueue.SET = {};
-                Entry.hw.sendQueue.SET[port1] = {
-                    type: Entry.Lecoboard.sensorTypes.DIGITAL,
+                if (!RoCode.hw.sendQueue.SET) RoCode.hw.sendQueue.SET = {};
+                RoCode.hw.sendQueue.SET[port1] = {
+                    type: RoCode.Lecoboard.sensorTypes.DIGITAL,
                     data: value1,
                     time: new Date().getTime(),
                 };
                 if (typeof value2 === 'string') value2 = value2.toLowerCase();
-                if (Entry.Lecoboard.highList.indexOf(value2) > -1) value2 = 255;
-                else if (Entry.Lecoboard.lowList.indexOf(value2) > -1) value2 = 0;
+                if (RoCode.Lecoboard.highList.indexOf(value2) > -1) value2 = 255;
+                else if (RoCode.Lecoboard.lowList.indexOf(value2) > -1) value2 = 0;
                 else throw new Error();
-                if (!Entry.hw.sendQueue.SET) Entry.hw.sendQueue.SET = {};
-                Entry.hw.sendQueue.SET[port2] = {
-                    type: Entry.Lecoboard.sensorTypes.DIGITAL,
+                if (!RoCode.hw.sendQueue.SET) RoCode.hw.sendQueue.SET = {};
+                RoCode.hw.sendQueue.SET[port2] = {
+                    type: RoCode.Lecoboard.sensorTypes.DIGITAL,
                     data: value2,
                     time: new Date().getTime(),
                 };
@@ -1236,8 +1236,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_led_rgb_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1294,32 +1294,32 @@ Entry.Lecoboard.getBlocks = function() {
                 let value3 = script.getValue('VALUE3');
 
                 if (typeof value1 === 'string') value1 = value1.toLowerCase();
-                if (Entry.Lecoboard.highList.indexOf(value1) > -1) value1 = 255;
-                else if (Entry.Lecoboard.lowList.indexOf(value1) > -1) value1 = 0;
+                if (RoCode.Lecoboard.highList.indexOf(value1) > -1) value1 = 255;
+                else if (RoCode.Lecoboard.lowList.indexOf(value1) > -1) value1 = 0;
                 else throw new Error();
-                if (!Entry.hw.sendQueue.SET) Entry.hw.sendQueue.SET = {};
-                Entry.hw.sendQueue.SET[port1] = {
-                    type: Entry.Lecoboard.sensorTypes.DIGITAL,
+                if (!RoCode.hw.sendQueue.SET) RoCode.hw.sendQueue.SET = {};
+                RoCode.hw.sendQueue.SET[port1] = {
+                    type: RoCode.Lecoboard.sensorTypes.DIGITAL,
                     data: value1,
                     time: new Date().getTime(),
                 };
                 if (typeof value2 === 'string') value2 = value2.toLowerCase();
-                if (Entry.Lecoboard.highList.indexOf(value2) > -1) value2 = 255;
-                else if (Entry.Lecoboard.lowList.indexOf(value2) > -1) value2 = 0;
+                if (RoCode.Lecoboard.highList.indexOf(value2) > -1) value2 = 255;
+                else if (RoCode.Lecoboard.lowList.indexOf(value2) > -1) value2 = 0;
                 else throw new Error();
-                if (!Entry.hw.sendQueue.SET) Entry.hw.sendQueue.SET = {};
-                Entry.hw.sendQueue.SET[port2] = {
-                    type: Entry.Lecoboard.sensorTypes.DIGITAL,
+                if (!RoCode.hw.sendQueue.SET) RoCode.hw.sendQueue.SET = {};
+                RoCode.hw.sendQueue.SET[port2] = {
+                    type: RoCode.Lecoboard.sensorTypes.DIGITAL,
                     data: value2,
                     time: new Date().getTime(),
                 };
                 if (typeof value3 === 'string') value3 = value3.toLowerCase();
-                if (Entry.Lecoboard.highList.indexOf(value3) > -1) value3 = 255;
-                else if (Entry.Lecoboard.lowList.indexOf(value3) > -1) value3 = 0;
+                if (RoCode.Lecoboard.highList.indexOf(value3) > -1) value3 = 255;
+                else if (RoCode.Lecoboard.lowList.indexOf(value3) > -1) value3 = 0;
                 else throw new Error();
-                if (!Entry.hw.sendQueue.SET) Entry.hw.sendQueue.SET = {};
-                Entry.hw.sendQueue.SET[port3] = {
-                    type: Entry.Lecoboard.sensorTypes.DIGITAL,
+                if (!RoCode.hw.sendQueue.SET) RoCode.hw.sendQueue.SET = {};
+                RoCode.hw.sendQueue.SET[port3] = {
+                    type: RoCode.Lecoboard.sensorTypes.DIGITAL,
                     data: value3,
                     time: new Date().getTime(),
                 };
@@ -1328,8 +1328,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_led_strip_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1397,42 +1397,42 @@ Entry.Lecoboard.getBlocks = function() {
                 let value4 = script.getValue('VALUE4');
 
                 if (typeof value1 === 'string') value1 = value1.toLowerCase();
-                if (Entry.Lecoboard.highList.indexOf(value1) > -1) value1 = 255;
-                else if (Entry.Lecoboard.lowList.indexOf(value1) > -1) value1 = 0;
+                if (RoCode.Lecoboard.highList.indexOf(value1) > -1) value1 = 255;
+                else if (RoCode.Lecoboard.lowList.indexOf(value1) > -1) value1 = 0;
                 else throw new Error();
-                if (!Entry.hw.sendQueue.SET) Entry.hw.sendQueue.SET = {};
-                Entry.hw.sendQueue.SET[port1] = {
-                    type: Entry.Lecoboard.sensorTypes.DIGITAL,
+                if (!RoCode.hw.sendQueue.SET) RoCode.hw.sendQueue.SET = {};
+                RoCode.hw.sendQueue.SET[port1] = {
+                    type: RoCode.Lecoboard.sensorTypes.DIGITAL,
                     data: value1,
                     time: new Date().getTime(),
                 };
                 if (typeof value2 === 'string') value2 = value2.toLowerCase();
-                if (Entry.Lecoboard.highList.indexOf(value2) > -1) value2 = 255;
-                else if (Entry.Lecoboard.lowList.indexOf(value2) > -1) value2 = 0;
+                if (RoCode.Lecoboard.highList.indexOf(value2) > -1) value2 = 255;
+                else if (RoCode.Lecoboard.lowList.indexOf(value2) > -1) value2 = 0;
                 else throw new Error();
-                if (!Entry.hw.sendQueue.SET) Entry.hw.sendQueue.SET = {};
-                Entry.hw.sendQueue.SET[port2] = {
-                    type: Entry.Lecoboard.sensorTypes.DIGITAL,
+                if (!RoCode.hw.sendQueue.SET) RoCode.hw.sendQueue.SET = {};
+                RoCode.hw.sendQueue.SET[port2] = {
+                    type: RoCode.Lecoboard.sensorTypes.DIGITAL,
                     data: value2,
                     time: new Date().getTime(),
                 };
                 if (typeof value3 === 'string') value3 = value3.toLowerCase();
-                if (Entry.Lecoboard.highList.indexOf(value3) > -1) value3 = 255;
-                else if (Entry.Lecoboard.lowList.indexOf(value3) > -1) value3 = 0;
+                if (RoCode.Lecoboard.highList.indexOf(value3) > -1) value3 = 255;
+                else if (RoCode.Lecoboard.lowList.indexOf(value3) > -1) value3 = 0;
                 else throw new Error();
-                if (!Entry.hw.sendQueue.SET) Entry.hw.sendQueue.SET = {};
-                Entry.hw.sendQueue.SET[port3] = {
-                    type: Entry.Lecoboard.sensorTypes.DIGITAL,
+                if (!RoCode.hw.sendQueue.SET) RoCode.hw.sendQueue.SET = {};
+                RoCode.hw.sendQueue.SET[port3] = {
+                    type: RoCode.Lecoboard.sensorTypes.DIGITAL,
                     data: value3,
                     time: new Date().getTime(),
                 };
                 if (typeof value4 === 'string') value4 = value4.toLowerCase();
-                if (Entry.Lecoboard.highList.indexOf(value4) > -1) value4 = 255;
-                else if (Entry.Lecoboard.lowList.indexOf(value4) > -1) value4 = 0;
+                if (RoCode.Lecoboard.highList.indexOf(value4) > -1) value4 = 255;
+                else if (RoCode.Lecoboard.lowList.indexOf(value4) > -1) value4 = 0;
                 else throw new Error();
-                if (!Entry.hw.sendQueue.SET) Entry.hw.sendQueue.SET = {};
-                Entry.hw.sendQueue.SET[port4] = {
-                    type: Entry.Lecoboard.sensorTypes.DIGITAL,
+                if (!RoCode.hw.sendQueue.SET) RoCode.hw.sendQueue.SET = {};
+                RoCode.hw.sendQueue.SET[port4] = {
+                    type: RoCode.Lecoboard.sensorTypes.DIGITAL,
                     data: value4,
                     time: new Date().getTime(),
                 };
@@ -1441,8 +1441,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_tone_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1467,8 +1467,8 @@ Entry.Lecoboard.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1507,9 +1507,9 @@ Entry.Lecoboard.getBlocks = function() {
                                 ],
                                 value: 'C',
                                 fontSize: 11,
-                                converter: Entry.block.converters.returnStringValueUpperCase,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValueUpperCase,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'lecoboard_tone_list',
@@ -1518,8 +1518,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         arduino_ext_tone_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1555,8 +1555,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         arduino_ext_octave_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1573,8 +1573,8 @@ Entry.Lecoboard.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1598,8 +1598,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_buzzer_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1631,8 +1631,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_set_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1672,12 +1672,12 @@ Entry.Lecoboard.getBlocks = function() {
             class: 'lecoboard_buzzer',
             isNotFor: ['lecoboard'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 12; //script.getNumberValue('PORT', script);
 
                 let note = script.getValue('NOTE', script);
-                if (!Entry.Utils.isNumber(note)) {
-                    note = Entry.Lecoboard.toneTable[note];
+                if (!RoCode.Utils.isNumber(note)) {
+                    note = RoCode.Lecoboard.toneTable[note];
                 }
 
                 if (note < 0) {
@@ -1698,7 +1698,7 @@ Entry.Lecoboard.getBlocks = function() {
 
                 if (duration === 0) {
                     sq.SET[port] = {
-                        type: Entry.Lecoboard.sensorTypes.TONE,
+                        type: RoCode.Lecoboard.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
@@ -1708,7 +1708,7 @@ Entry.Lecoboard.getBlocks = function() {
                 let value = 0;
 
                 if (note != 0) {
-                    value = Entry.Lecoboard.toneMap[note][octave];
+                    value = RoCode.Lecoboard.toneMap[note][octave];
                 }
 
                 duration = duration * 1000;
@@ -1716,7 +1716,7 @@ Entry.Lecoboard.getBlocks = function() {
                 script.timeFlag = 1;
 
                 sq.SET[port] = {
-                    type: Entry.Lecoboard.sensorTypes.TONE,
+                    type: RoCode.Lecoboard.sensorTypes.TONE,
                     data: {
                         value,
                         duration,
@@ -1746,8 +1746,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_set_freq_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1799,7 +1799,7 @@ Entry.Lecoboard.getBlocks = function() {
             class: 'lecoboard_buzzer',
             isNotFor: ['lecoboard'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = script.getNumberValue('PORT', script);
 
                 let freq = script.getNumberValue('NOTE', script);
@@ -1816,7 +1816,7 @@ Entry.Lecoboard.getBlocks = function() {
 
                 if (duration === 0) {
                     sq.SET[port] = {
-                        type: Entry.Lecoboard.sensorTypes.TONE,
+                        type: RoCode.Lecoboard.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
@@ -1828,7 +1828,7 @@ Entry.Lecoboard.getBlocks = function() {
                 script.timeFlag = 1;
 
                 sq.SET[port] = {
-                    type: Entry.Lecoboard.sensorTypes.TONE,
+                    type: RoCode.Lecoboard.sensorTypes.TONE,
                     data: {
                         value,
                         duration,
@@ -1862,8 +1862,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_set_tone_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1899,19 +1899,19 @@ Entry.Lecoboard.getBlocks = function() {
             class: 'lecoboard_buzzer',
             isNotFor: ['lecoboard'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 12; //script.getNumberValue('PORT', script);
 
                 if (!script.isStart) {
                     let note = 0;
                     let duration = 0;
                     sq.SET[port] = {
-                        type: Entry.Lecoboard.sensorTypes.TONE,
+                        type: RoCode.Lecoboard.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1931,8 +1931,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_set_tone_long: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1961,12 +1961,12 @@ Entry.Lecoboard.getBlocks = function() {
             class: 'lecoboard_buzzer',
             isNotFor: ['lecoboard'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 12; //script.getNumberValue('PORT', script);
 
                 let note = script.getValue('NOTE', script);
-                if (!Entry.Utils.isNumber(note)) {
-                    note = Entry.Lecoboard.toneTable[note];
+                if (!RoCode.Utils.isNumber(note)) {
+                    note = RoCode.Lecoboard.toneTable[note];
                 }
 
                 if (note < 0) {
@@ -1985,7 +1985,7 @@ Entry.Lecoboard.getBlocks = function() {
                 let value = 0;
 
                 if (note != 0) {
-                    value = Entry.Lecoboard.toneMap[note][octave];
+                    value = RoCode.Lecoboard.toneMap[note][octave];
                 }
 
                 duration = duration * 1000;
@@ -1993,7 +1993,7 @@ Entry.Lecoboard.getBlocks = function() {
                 script.timeFlag = 1;
 
                 sq.SET[port] = {
-                    type: Entry.Lecoboard.sensorTypes.TONE,
+                    type: RoCode.Lecoboard.sensorTypes.TONE,
                     data: {
                         value,
                         duration,
@@ -2019,8 +2019,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_set_tone_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2041,19 +2041,19 @@ Entry.Lecoboard.getBlocks = function() {
             class: 'lecoboard_buzzer',
             isNotFor: ['lecoboard'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 12; //script.getNumberValue('PORT', script);
 
                 if (!script.isStart) {
                     let note = 0;
                     let duration = 0;
                     sq.SET[port] = {
-                        type: Entry.Lecoboard.sensorTypes.TONE,
+                        type: RoCode.Lecoboard.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2073,8 +2073,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_servomotor_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -2089,8 +2089,8 @@ Entry.Lecoboard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2105,8 +2105,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecobaord_set_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2147,7 +2147,7 @@ Entry.Lecoboard.getBlocks = function() {
             class: 'lecoboard_servo',
             isNotFor: ['lecoboard'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 let port = script.getNumberValue('PORT', script);
 
                 if (port == 1) port = 28;
@@ -2164,7 +2164,7 @@ Entry.Lecoboard.getBlocks = function() {
                     sq.SET = {};
                 }
                 sq.SET[port] = {
-                    type: Entry.Lecoboard.sensorTypes.SERVO_PIN,
+                    type: RoCode.Lecoboard.sensorTypes.SERVO_PIN,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -2191,8 +2191,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_dc_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2204,8 +2204,8 @@ Entry.Lecoboard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2215,8 +2215,8 @@ Entry.Lecoboard.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2284,19 +2284,19 @@ Entry.Lecoboard.getBlocks = function() {
                     value2 = value;
                 }
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port1] = {
-                    type: Entry.Lecoboard.sensorTypes.PWM,
+                RoCode.hw.sendQueue.SET[port1] = {
+                    type: RoCode.Lecoboard.sensorTypes.PWM,
                     data: value1,
                     time: new Date().getTime(),
                 };
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port2] = {
-                    type: Entry.Lecoboard.sensorTypes.PWM,
+                RoCode.hw.sendQueue.SET[port2] = {
+                    type: RoCode.Lecoboard.sensorTypes.PWM,
                     data: value2,
                     time: new Date().getTime(),
                 };
@@ -2306,8 +2306,8 @@ Entry.Lecoboard.getBlocks = function() {
             syntax: { js: [], py: ['lecoboard.dc_motor(%1, %2, %3, %4)'] },
         },
         lecoboard_dc_motor_for_sec: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2319,8 +2319,8 @@ Entry.Lecoboard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2330,8 +2330,8 @@ Entry.Lecoboard.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2411,19 +2411,19 @@ Entry.Lecoboard.getBlocks = function() {
                         value2 = value;
                     }
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
-                    Entry.hw.sendQueue.SET[port1] = {
-                        type: Entry.Lecoboard.sensorTypes.PWM,
+                    RoCode.hw.sendQueue.SET[port1] = {
+                        type: RoCode.Lecoboard.sensorTypes.PWM,
                         data: value1,
                         time: new Date().getTime(),
                     };
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
-                    Entry.hw.sendQueue.SET[port2] = {
-                        type: Entry.Lecoboard.sensorTypes.PWM,
+                    RoCode.hw.sendQueue.SET[port2] = {
+                        type: RoCode.Lecoboard.sensorTypes.PWM,
                         data: value2,
                         time: new Date().getTime(),
                     };
@@ -2441,17 +2441,17 @@ Entry.Lecoboard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.hw.sendQueue.SET[port1] = {
-                        type: Entry.Lecoboard.sensorTypes.PWM,
+                    RoCode.hw.sendQueue.SET[port1] = {
+                        type: RoCode.Lecoboard.sensorTypes.PWM,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.hw.sendQueue.SET[port2] = {
-                        type: Entry.Lecoboard.sensorTypes.PWM,
+                    RoCode.hw.sendQueue.SET[port2] = {
+                        type: RoCode.Lecoboard.sensorTypes.PWM,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
 
                     return script.callReturn();
                 }
@@ -2459,8 +2459,8 @@ Entry.Lecoboard.getBlocks = function() {
             syntax: { js: [], py: ['lecoboard.dc_motor(%1, %2, %3, %4, %5)'] },
         },
         lecoboard_dc_motor_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2472,8 +2472,8 @@ Entry.Lecoboard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2499,29 +2499,29 @@ Entry.Lecoboard.getBlocks = function() {
 
                 var value = 0;
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port1] = {
-                    type: Entry.Lecoboard.sensorTypes.PWM,
+                RoCode.hw.sendQueue.SET[port1] = {
+                    type: RoCode.Lecoboard.sensorTypes.PWM,
                     data: 0,
                     time: new Date().getTime(),
                 };
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port2] = {
-                    type: Entry.Lecoboard.sensorTypes.PWM,
+                RoCode.hw.sendQueue.SET[port2] = {
+                    type: RoCode.Lecoboard.sensorTypes.PWM,
                     data: 0,
                     time: new Date().getTime(),
                 };
-                Entry.hw.sendQueue.SET[port3] = {
-                    type: Entry.Lecoboard.sensorTypes.PWM,
+                RoCode.hw.sendQueue.SET[port3] = {
+                    type: RoCode.Lecoboard.sensorTypes.PWM,
                     data: 0,
                     time: new Date().getTime(),
                 };
-                Entry.hw.sendQueue.SET[port4] = {
-                    type: Entry.Lecoboard.sensorTypes.PWM,
+                RoCode.hw.sendQueue.SET[port4] = {
+                    type: RoCode.Lecoboard.sensorTypes.PWM,
                     data: 0,
                     time: new Date().getTime(),
                 };
@@ -2532,8 +2532,8 @@ Entry.Lecoboard.getBlocks = function() {
         },
 
         lecoboard_list_digital_lcd_line: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -2546,8 +2546,8 @@ Entry.Lecoboard.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2562,8 +2562,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_list_digital_lcd_column: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -2590,8 +2590,8 @@ Entry.Lecoboard.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2606,8 +2606,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_set_lcd: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             //template: Lang.template.lecoboard_set_lcd,
@@ -2656,7 +2656,7 @@ Entry.Lecoboard.getBlocks = function() {
             class: 'lecoboardLcd',
             isNotFor: ['lecoboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var line = script.getValue('LINE', script);
                 var column = script.getValue('COLUMN', script);
@@ -2679,7 +2679,7 @@ Entry.Lecoboard.getBlocks = function() {
                     }
 
                     sq.SET[1] = {
-                        type: Entry.Lecoboard.sensorTypes.LCD,
+                        type: RoCode.Lecoboard.sensorTypes.LCD,
                         data: {
                             line: line,
                             column: column,
@@ -2708,8 +2708,8 @@ Entry.Lecoboard.getBlocks = function() {
             syntax: { js: [], py: ['lecoboard_set_lcd(%1, %2, %3)'] },
         },
         lecoboard_list_lcd_command: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -2724,8 +2724,8 @@ Entry.Lecoboard.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2740,8 +2740,8 @@ Entry.Lecoboard.getBlocks = function() {
             },
         },
         lecoboard_lcd_command: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             //template: Lang.template.lecoboard_lcd_command,
             //"template": "%1 %2",
@@ -2773,7 +2773,7 @@ Entry.Lecoboard.getBlocks = function() {
             class: 'lecoboardLcd',
             isNotFor: ['lecoboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var value = script.getNumberValue('COMMAND', script);
                 var command = script.getNumberValue('COMMAND', script);
 
@@ -2782,7 +2782,7 @@ Entry.Lecoboard.getBlocks = function() {
                 }
 
                 sq.SET[0] = {
-                    type: Entry.Lecoboard.sensorTypes.LCD_COMMAND,
+                    type: RoCode.Lecoboard.sensorTypes.LCD_COMMAND,
                     data: {
                         value: value,
                         command: command,
@@ -2795,8 +2795,8 @@ Entry.Lecoboard.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         lecoboard_send_ble: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             //template: Lang.template.lecoboard_set_lcd,
@@ -2829,7 +2829,7 @@ Entry.Lecoboard.getBlocks = function() {
             class: 'lecoboardble',
             isNotFor: ['lecoboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var string = script.getValue('STRING', script);
                 var text = [];
@@ -2850,7 +2850,7 @@ Entry.Lecoboard.getBlocks = function() {
                     }
 
                     sq.SET[1] = {
-                        type: Entry.Lecoboard.sensorTypes.BLE_WRITE,
+                        type: RoCode.Lecoboard.sensorTypes.BLE_WRITE,
                         data: {
                             text0: text[0],
                             text1: text[1],
@@ -2877,8 +2877,8 @@ Entry.Lecoboard.getBlocks = function() {
             syntax: { js: [], py: ['lecoboard_send_ble(%1)'] },
         },
         lecoboard_get_bluetooth: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             //template: Lang.template.lecoboard_get_digital_bluetooth,
@@ -2894,12 +2894,12 @@ Entry.Lecoboard.getBlocks = function() {
             isNotFor: ['lecoboard'],
             func: function(sprite, script) {
                 var port = 2;
-                var getString = Entry.hw.portData.BLE_READ;
+                var getString = RoCode.hw.portData.BLE_READ;
 
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
-                Entry.hw.sendQueue.GET[Entry.Lecoboard.sensorTypes.BLE_READ] = {
+                RoCode.hw.sendQueue.GET[RoCode.Lecoboard.sensorTypes.BLE_READ] = {
                     port,
                     time: new Date().getTime(),
                 };
@@ -2912,4 +2912,4 @@ Entry.Lecoboard.getBlocks = function() {
 };
 //endregion arduinoExt 아두이노 확장모드
 
-module.exports = Entry.Lecoboard;
+module.exports = RoCode.Lecoboard;

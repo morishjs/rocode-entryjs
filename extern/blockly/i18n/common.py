@@ -211,9 +211,9 @@ def write_files(author, lang, output_dir, units, write_key_file):
     qqq_file = _create_qqq_file(output_dir)
     if write_key_file:
       key_file = _create_key_file(output_dir)
-    first_entry = True
+    first_RoCode = True
     for unit in units:
-        if not first_entry:
+        if not first_RoCode:
             lang_file.write(',\n')
             if write_key_file:
               key_file.write(',\n')
@@ -227,7 +227,7 @@ def write_files(author, lang, output_dir, units, write_key_file):
             unit['meaning'],
             unit['description'].replace('"', "'").replace(
                 '{lb}', '{').replace('{rb}', '}')))
-        first_entry = False
+        first_RoCode = False
     _close_lang_file(lang_file)
     if write_key_file:
       _close_key_file(key_file)

@@ -2,8 +2,8 @@ module.exports = {
     getBlocks() {
         return {
             wait_second: {
-                color: EntryStatic.colorSet.block.default.FLOW,
-                outerLine: EntryStatic.colorSet.block.darken.FLOW,
+                color: RoCodeStatic.colorSet.block.default.FLOW,
+                outerLine: RoCodeStatic.colorSet.block.darken.FLOW,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -49,11 +49,11 @@ module.exports = {
                         script.isStart = true;
                         script.timeFlag = 1;
                         let timeValue = script.getNumberValue('SECOND', script);
-                        const fps = Entry.FPS || 60;
+                        const fps = RoCode.FPS || 60;
                         timeValue = (60 / fps) * timeValue * 1000;
 
                         const blockId = script.block.id;
-                        Entry.TimeWaitManager.add(
+                        RoCode.TimeWaitManager.add(
                             blockId,
                             () => {
                                 script.timeFlag = 0;
@@ -67,7 +67,7 @@ module.exports = {
                     } else {
                         delete script.timeFlag;
                         delete script.isStart;
-                        Entry.engine.isContinue = false;
+                        RoCode.engine.isContinue = false;
                         return script.callReturn();
                     }
                 },
@@ -75,14 +75,14 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.wait_for_sec(%1)',
+                            syntax: 'RoCode.wait_for_sec(%1)',
                         },
                     ],
                 },
             },
             repeat_basic: {
-                color: EntryStatic.colorSet.block.default.FLOW,
-                outerLine: EntryStatic.colorSet.block.darken.FLOW,
+                color: RoCodeStatic.colorSet.block.default.FLOW,
+                outerLine: RoCodeStatic.colorSet.block.darken.FLOW,
                 skeleton: 'basic_loop',
                 statements: [
                     {
@@ -160,8 +160,8 @@ module.exports = {
                 },
             },
             repeat_inf: {
-                color: EntryStatic.colorSet.block.default.FLOW,
-                outerLine: EntryStatic.colorSet.block.darken.FLOW,
+                color: RoCodeStatic.colorSet.block.default.FLOW,
+                outerLine: RoCodeStatic.colorSet.block.darken.FLOW,
                 skeleton: 'basic_loop',
                 statements: [
                     {
@@ -221,8 +221,8 @@ module.exports = {
                 },
             },
             repeat_while_true: {
-                color: EntryStatic.colorSet.block.default.FLOW,
-                outerLine: EntryStatic.colorSet.block.darken.FLOW,
+                color: RoCodeStatic.colorSet.block.default.FLOW,
+                outerLine: RoCodeStatic.colorSet.block.darken.FLOW,
                 skeleton: 'basic_loop',
                 statements: [
                     {
@@ -242,8 +242,8 @@ module.exports = {
                         ],
                         value: 'until',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.FLOW,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.FLOW,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -303,8 +303,8 @@ module.exports = {
                 },
             },
             stop_repeat: {
-                color: EntryStatic.colorSet.block.default.FLOW,
-                outerLine: EntryStatic.colorSet.block.darken.FLOW,
+                color: RoCodeStatic.colorSet.block.default.FLOW,
+                outerLine: RoCodeStatic.colorSet.block.darken.FLOW,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -327,8 +327,8 @@ module.exports = {
                 syntax: { js: [], py: ['break'] },
             },
             _if: {
-                color: EntryStatic.colorSet.block.default.FLOW,
-                outerLine: EntryStatic.colorSet.block.darken.FLOW,
+                color: RoCodeStatic.colorSet.block.default.FLOW,
+                outerLine: RoCodeStatic.colorSet.block.darken.FLOW,
                 skeleton: 'basic_loop',
                 statements: [
                     {
@@ -393,8 +393,8 @@ module.exports = {
                 },
             },
             if_else: {
-                color: EntryStatic.colorSet.block.default.FLOW,
-                outerLine: EntryStatic.colorSet.block.darken.FLOW,
+                color: RoCodeStatic.colorSet.block.default.FLOW,
+                outerLine: RoCodeStatic.colorSet.block.darken.FLOW,
                 skeleton: 'basic_double_loop',
                 statements: [
                     {
@@ -481,8 +481,8 @@ module.exports = {
                 },
             },
             wait_until_true: {
-                color: EntryStatic.colorSet.block.default.FLOW,
-                outerLine: EntryStatic.colorSet.block.darken.FLOW,
+                color: RoCodeStatic.colorSet.block.default.FLOW,
+                outerLine: RoCodeStatic.colorSet.block.darken.FLOW,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -529,11 +529,11 @@ module.exports = {
                         return script;
                     }
                 },
-                syntax: { js: [], py: ['Entry.wait_until(%1)'] },
+                syntax: { js: [], py: ['RoCode.wait_until(%1)'] },
             },
             stop_object: {
-                color: EntryStatic.colorSet.block.default.FLOW,
-                outerLine: EntryStatic.colorSet.block.darken.FLOW,
+                color: RoCodeStatic.colorSet.block.default.FLOW,
+                outerLine: RoCodeStatic.colorSet.block.darken.FLOW,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -548,8 +548,8 @@ module.exports = {
                         ],
                         value: 'all',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.FLOW,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.FLOW,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -576,7 +576,7 @@ module.exports = {
 
                     switch (script.getField('TARGET', script)) {
                         case 'all':
-                            Entry.container.mapObject(function(obj) {
+                            RoCode.container.mapObject(function(obj) {
                                 if (!obj.objectType) {
                                     return;
                                 }
@@ -610,7 +610,7 @@ module.exports = {
                             return script.callReturn();
                         }
                         case 'other_objects':
-                            Entry.container.mapObject(function(obj) {
+                            RoCode.container.mapObject(function(obj) {
                                 if (!obj.objectType || obj === object) {
                                     return;
                                 }
@@ -624,7 +624,7 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.stop_code(%1)',
+                            syntax: 'RoCode.stop_code(%1)',
                             textParams: [
                                 {
                                     type: 'Dropdown',
@@ -640,9 +640,9 @@ module.exports = {
                                     ],
                                     value: 'all',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.FLOW,
-                                    converter: Entry.block.converters.returnStringValue,
-                                    codeMap: 'Entry.CodeMap.Entry.stop_object[0]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.FLOW,
+                                    converter: RoCode.block.converters.returnStringValue,
+                                    codeMap: 'RoCode.CodeMap.RoCode.stop_object[0]',
                                 },
                             ],
                         },
@@ -650,8 +650,8 @@ module.exports = {
                 },
             },
             restart_project: {
-                color: EntryStatic.colorSet.block.default.FLOW,
-                outerLine: EntryStatic.colorSet.block.darken.FLOW,
+                color: RoCodeStatic.colorSet.block.default.FLOW,
+                outerLine: RoCodeStatic.colorSet.block.darken.FLOW,
                 skeleton: 'basic_without_next',
                 statements: [],
                 params: [
@@ -669,15 +669,15 @@ module.exports = {
                 class: 'terminate',
                 isNotFor: [],
                 func(sprite, script) {
-                    Entry.engine.toggleStop().then(() => {
-                        Entry.engine.toggleRun();
+                    RoCode.engine.toggleStop().then(() => {
+                        RoCode.engine.toggleRun();
                     });
                 },
-                syntax: { js: [], py: ['Entry.start_again()'] },
+                syntax: { js: [], py: ['RoCode.start_again()'] },
             },
             when_clone_start: {
-                color: EntryStatic.colorSet.block.default.FLOW,
-                outerLine: EntryStatic.colorSet.block.darken.FLOW,
+                color: RoCodeStatic.colorSet.block.default.FLOW,
+                outerLine: RoCodeStatic.colorSet.block.darken.FLOW,
                 skeleton: 'basic_event',
                 statements: [],
                 params: [
@@ -713,8 +713,8 @@ module.exports = {
                 },
             },
             create_clone: {
-                color: EntryStatic.colorSet.block.default.FLOW,
-                outerLine: EntryStatic.colorSet.block.darken.FLOW,
+                color: RoCodeStatic.colorSet.block.default.FLOW,
+                outerLine: RoCodeStatic.colorSet.block.darken.FLOW,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -724,8 +724,8 @@ module.exports = {
                         menuName: 'clone',
                         fontSize: 10,
                         textColor: '#fff',
-                        bgColor: EntryStatic.colorSet.block.darken.FLOW,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.FLOW,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -753,7 +753,7 @@ module.exports = {
                     if (targetSpriteId === 'self') {
                         sprite.parent.addCloneEntity(sprite.parent, sprite, null);
                     } else {
-                        const object = Entry.container.getObject(targetSpriteId);
+                        const object = RoCode.container.getObject(targetSpriteId);
                         object.addCloneEntity(sprite.parent, null, null);
                     }
                     return returnBlock;
@@ -762,16 +762,16 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.make_clone_of(%1)',
+                            syntax: 'RoCode.make_clone_of(%1)',
                             textParams: [
                                 {
                                     type: 'DropdownDynamic',
                                     value: null,
                                     menuName: 'clone',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.FLOW,
-                                    converter: Entry.block.converters.returnStringKey,
-                                    codeMap: 'Entry.CodeMap.Entry.create_clone[0]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.FLOW,
+                                    converter: RoCode.block.converters.returnStringKey,
+                                    codeMap: 'RoCode.CodeMap.RoCode.create_clone[0]',
                                 },
                             ],
                         },
@@ -779,8 +779,8 @@ module.exports = {
                 },
             },
             delete_clone: {
-                color: EntryStatic.colorSet.block.default.FLOW,
-                outerLine: EntryStatic.colorSet.block.darken.FLOW,
+                color: RoCodeStatic.colorSet.block.default.FLOW,
+                outerLine: RoCodeStatic.colorSet.block.darken.FLOW,
                 skeleton: 'basic_without_next',
                 statements: [],
                 params: [
@@ -804,11 +804,11 @@ module.exports = {
                     sprite.removeClone();
                     return this.die();
                 },
-                syntax: { js: [], py: ['Entry.remove_this_clone()'] },
+                syntax: { js: [], py: ['RoCode.remove_this_clone()'] },
             },
             remove_all_clones: {
-                color: EntryStatic.colorSet.block.default.FLOW,
-                outerLine: EntryStatic.colorSet.block.darken.FLOW,
+                color: RoCodeStatic.colorSet.block.default.FLOW,
+                outerLine: RoCodeStatic.colorSet.block.darken.FLOW,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -834,7 +834,7 @@ module.exports = {
 
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.remove_all_clone()'] },
+                syntax: { js: [], py: ['RoCode.remove_all_clone()'] },
             },
         };
     },

@@ -3,7 +3,7 @@
 class LittleBits {
     id = '1.F';
     name = 'littlebits';
-    url = 'https://playentry.org';
+    url = 'https://playRoCode.org';
     imageName = 'littlebits.png';
     title = {
         ko: '리틀비츠',
@@ -19,12 +19,12 @@ class LittleBits {
     ];
 
     setZero() {
-        Entry.hw.sendQueue.readablePorts = [];
+        RoCode.hw.sendQueue.readablePorts = [];
         for (let port = 0; port < 20; port++) {
-            Entry.hw.sendQueue[port] = 0;
-            Entry.hw.sendQueue.readablePorts.push(port);
+            RoCode.hw.sendQueue[port] = 0;
+            RoCode.hw.sendQueue.readablePorts.push(port);
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     }
 
     setLanguage() {
@@ -95,7 +95,7 @@ class LittleBits {
                                 {
                                     type: 'TextInput',
                                     value: 10,
-                                    converter: Entry.block.converters.returnStringOrNumberByValue,
+                                    converter: RoCode.block.converters.returnStringOrNumberByValue,
                                 },
                             ],
                             keyOption: 'littlebits_text',
@@ -104,8 +104,8 @@ class LittleBits {
                 },
             },
             littlebits_get_sensor_number: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -121,8 +121,8 @@ class LittleBits {
                         ],
                         value: 'A0',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -154,9 +154,9 @@ class LittleBits {
                                     ],
                                     value: 'A0',
                                     fontSize: 11,
-                                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                    converter: Entry.block.converters.returnStringValue,
+                                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                    converter: RoCode.block.converters.returnStringValue,
                                 },
                             ],
                             keyOption: 'littlebits_get_sensor_number',
@@ -165,8 +165,8 @@ class LittleBits {
                 },
             },
             littlebits_get_port_number: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -190,8 +190,8 @@ class LittleBits {
                         ],
                         value: '0',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -230,8 +230,8 @@ class LittleBits {
                                     ],
                                     value: '0',
                                     fontSize: 11,
-                                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                                 },
                             ],
                             keyOption: 'littlebits_get_port_number',
@@ -240,8 +240,8 @@ class LittleBits {
                 },
             },
             littlebits_get_pwm_port_number: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -257,8 +257,8 @@ class LittleBits {
                         ],
                         value: '3',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -289,9 +289,9 @@ class LittleBits {
                                     ],
                                     value: '3',
                                     fontSize: 11,
-                                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                    converter: Entry.block.converters.returnStringOrNumberByValue,
+                                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                    converter: RoCode.block.converters.returnStringOrNumberByValue,
                                 },
                             ],
                             keyOption: 'littlebits_get_pwm_port_number',
@@ -300,8 +300,8 @@ class LittleBits {
                 },
             },
             littlebits_get_number_sensor_value: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#fff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -328,7 +328,7 @@ class LittleBits {
                 isNotFor: ['littlebits'],
                 func(sprite, script) {
                     const signal = script.getValue('VALUE', script);
-                    return Entry.hw.getAnalogPortValue(signal[1]);
+                    return RoCode.hw.getAnalogPortValue(signal[1]);
                 },
                 syntax: {
                     js: [],
@@ -347,8 +347,8 @@ class LittleBits {
                 },
             },
             littlebits_get_digital_value: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#fff',
                 skeleton: 'basic_boolean_field',
                 statements: [],
@@ -374,13 +374,13 @@ class LittleBits {
                 class: 'littlebits_value',
                 isNotFor: ['littlebits'],
                 func(sprite, script) {
-                    const { hwModule = {} } = Entry.hw;
+                    const { hwModule = {} } = RoCode.hw;
                     const { name } = hwModule;
                     if (name === 'ArduinoExt') {
-                        return Entry.block.littlebits_ext_get_digital.func(sprite, script);
+                        return RoCode.block.littlebits_ext_get_digital.func(sprite, script);
                     } else {
                         const signal = script.getNumberValue('PORT', script);
-                        return Entry.hw.getDigitalPortValue(signal);
+                        return RoCode.hw.getDigitalPortValue(signal);
                     }
                 },
                 syntax: {
@@ -401,8 +401,8 @@ class LittleBits {
                 },
             },
             littlebits_toggle_led: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -419,8 +419,8 @@ class LittleBits {
                         ],
                         value: 'on',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -449,7 +449,7 @@ class LittleBits {
                     const port = script.getNumberValue('VALUE');
                     const operator = script.getField('OPERATOR');
                     const value = operator == 'on' ? 255 : 0;
-                    Entry.hw.setDigitalPortValue(port, value);
+                    RoCode.hw.setDigitalPortValue(port, value);
                     return script.callReturn();
                 },
                 syntax: {
@@ -470,9 +470,9 @@ class LittleBits {
                                     ],
                                     value: 'on',
                                     fontSize: 11,
-                                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                    converter: Entry.block.converters.returnStringValue,
+                                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                    converter: RoCode.block.converters.returnStringValue,
                                 },
                             ],
                         },
@@ -480,8 +480,8 @@ class LittleBits {
                 },
             },
             littlebits_toggle_pwm: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -527,7 +527,7 @@ class LittleBits {
                     value = Math.round(value);
                     value = Math.max(value, 0);
                     value = Math.min(value, 255);
-                    Entry.hw.setDigitalPortValue(port, value);
+                    RoCode.hw.setDigitalPortValue(port, value);
                     return script.callReturn();
                 },
                 syntax: {
@@ -550,8 +550,8 @@ class LittleBits {
                 },
             },
             littlebits_convert_scale: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#fff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -634,8 +634,8 @@ class LittleBits {
                     let isFloat = false;
 
                     if (
-                        (Entry.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
-                        (Entry.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
+                        (RoCode.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
+                        (RoCode.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
                     ) {
                         isFloat = true;
                     }

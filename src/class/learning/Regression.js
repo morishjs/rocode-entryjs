@@ -38,7 +38,7 @@ class Regression {
         this.#view = new LearningView({ name: params.name || '', status: 0 });
         // 정지시 data 초기화.
         // 정지시 data 초기화.
-        Entry.addEventListener('stop', () => {
+        RoCode.addEventListener('stop', () => {
             this.init({ ...params });
         });
         this.init({ ...params });
@@ -75,12 +75,12 @@ class Regression {
     setTable() {
         const tableSource = DataTable.getSource(this.#table.id);
         if (this.#table.fieldsInfo.length !== tableSource.fields.length) {
-            Entry.toast.alert(Lang.Msgs.warn, Lang.AiLearning.train_param_error);
+            RoCode.toast.alert(Lang.Msgs.warn, Lang.AiLearning.train_param_error);
             throw Error(Lang.AiLearning.train_param_error);
         }
         this.#table.data = tableSource.rows;
     }
-    
+
     destroy() {
         this.#view.destroy();
         if (this.#chart) {
@@ -174,7 +174,7 @@ class Regression {
                     }
                 })
             }
-            
+
             this.#result = {
                 graphData: (graphData.originalPoints || []).slice(0, 1000),
                 accuracy,
@@ -193,7 +193,7 @@ class Regression {
         } catch(e) {
             console.log('train error', e);
         }
-        
+
     }
 
     async load(url) {

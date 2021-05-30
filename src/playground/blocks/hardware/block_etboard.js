@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.etboard = {
+RoCode.etboard = {
     id: ['2F.1'],
     name: 'etboard',
     url: 'http://et.ketri.re.kr',
@@ -10,19 +10,19 @@ Entry.etboard = {
         en: 'ET-BOARD(USB)',
     },
     setZero: function() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            const keySet = Object.keys(Entry.hw.sendQueue.SET);
+            const keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach((key) => {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     sensorTypes: {
       ALIVE: 0,
@@ -42,7 +42,7 @@ Entry.etboard = {
     BlockState: {},
 };
 
-Entry.etboard.setLanguage = function() {
+RoCode.etboard.setLanguage = function() {
     return {
         ko: {
             Blocks: {
@@ -106,7 +106,7 @@ Entry.etboard.setLanguage = function() {
     };
 };
 
-Entry.etboard.blockMenuBlocks = [
+RoCode.etboard.blockMenuBlocks = [
     'etboard_serial_set',
     'etboard_ble_set',
     'etboard_get_analog_value',
@@ -119,11 +119,11 @@ Entry.etboard.blockMenuBlocks = [
     'etboard_oled_set',
 ];
 
-Entry.etboard.getBlocks = function() {
+RoCode.etboard.getBlocks = function() {
     return {
         etboard_serial_set: {
-          color: EntryStatic.colorSet.block.default.HARDWARE,
-          outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+          color: RoCodeStatic.colorSet.block.default.HARDWARE,
+          outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
           skeleton: 'basic',
           statements: [],
           params : [
@@ -143,8 +143,8 @@ Entry.etboard.getBlocks = function() {
                   ],
                   value:'10',
                   fontSize:11,
-                  bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                  arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                  bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                  arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
               },
           ],
           events: {},
@@ -161,10 +161,10 @@ Entry.etboard.getBlocks = function() {
           func: function (sprite, script) {
               var data = script.getField('NOTE');
 
-              if(!Entry.hw.sendQueue['SET']) {
-                  Entry.hw.sendQueue['SET'] = {};
+              if(!RoCode.hw.sendQueue['SET']) {
+                  RoCode.hw.sendQueue['SET'] = {};
               }
-              Entry.hw.sendQueue['SET'][0] = {
+              RoCode.hw.sendQueue['SET'][0] = {
                   type: 242,
                   data: data,
                   time: new Date().getTime()
@@ -173,8 +173,8 @@ Entry.etboard.getBlocks = function() {
           },
         },
         etboard_ble_set: {
-              color: EntryStatic.colorSet.block.default.HARDWARE,
-              outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+              color: RoCodeStatic.colorSet.block.default.HARDWARE,
+              outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
               skeleton: 'basic',
               statements: [],
               params: [
@@ -187,8 +187,8 @@ Entry.etboard.getBlocks = function() {
                       ],
                       "value":"3",
                       "fontSize":11,
-                      bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                      arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                      bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                      arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                   },
               ],
               events: {},
@@ -206,10 +206,10 @@ Entry.etboard.getBlocks = function() {
               func: function (sprite, script) {
                   var data = script.getField("VALUE1");
 
-                  if(!Entry.hw.sendQueue['SET']) {
-                      Entry.hw.sendQueue['SET'] = {};
+                  if(!RoCode.hw.sendQueue['SET']) {
+                      RoCode.hw.sendQueue['SET'] = {};
                   }
-                  Entry.hw.sendQueue['SET'][1] = {
+                  RoCode.hw.sendQueue['SET'][1] = {
                       type: 242,
                       data: data,
                       time: new Date().getTime()
@@ -219,8 +219,8 @@ Entry.etboard.getBlocks = function() {
               },
           },
           etboard_get_analog_value: {
-              color: EntryStatic.colorSet.block.default.HARDWARE,
-              outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+              color: RoCodeStatic.colorSet.block.default.HARDWARE,
+              outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
               skeleton: 'basic_string_field',
               statements: [],
               events: {},
@@ -237,8 +237,8 @@ Entry.etboard.getBlocks = function() {
                         ],
                         "value": "0",
                         "fontSize": 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
               def: {
@@ -252,15 +252,15 @@ Entry.etboard.getBlocks = function() {
               },
               func: function (sprite, script) {
                 var port = script.getValue("PORT", script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 if (port[0] === "A")
                     port = port.substring(1)
                 return ANALOG ? ANALOG[port] || 0 : 0;
               },
           },
           etboard_get_port_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
               skeleton: "basic_string_field",
               statements: [],
               params: [
@@ -278,8 +278,8 @@ Entry.etboard.getBlocks = function() {
                       ],
                       "value": "2",
                       "fontSize": 11,
-                      bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                      arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                      bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                      arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                   }
               ],
               events: {},
@@ -294,8 +294,8 @@ Entry.etboard.getBlocks = function() {
               },
           },
           etboard_get_ultrasonic_port_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
               skeleton: "basic_string_field",
               statements: [],
               params: [
@@ -309,8 +309,8 @@ Entry.etboard.getBlocks = function() {
                       ],
                       "value": "2",
                       "fontSize": 11,
-                      bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                      arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                      bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                      arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                   }
               ],
               events: {},
@@ -325,8 +325,8 @@ Entry.etboard.getBlocks = function() {
               },
           },
           etboard_port_number: {
-              color: EntryStatic.colorSet.block.default.HARDWARE,
-              outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+              color: RoCodeStatic.colorSet.block.default.HARDWARE,
+              outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
               skeleton: "basic_string_field",
               statements: [],
               params: [
@@ -340,8 +340,8 @@ Entry.etboard.getBlocks = function() {
                     ],
                       value: "6",
                       fontSize: 11,
-                      bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                      arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                      bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                      arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                   }
               ],
               events: {},
@@ -356,8 +356,8 @@ Entry.etboard.getBlocks = function() {
               },
           },
           etboard_toggle_pin: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -397,18 +397,18 @@ Entry.etboard.getBlocks = function() {
                   if(typeof value === 'string') {
                       value = value.toLowerCase();
                   }
-                  if(Entry.ArduinoExt.highList.indexOf(value) > -1) {
+                  if(RoCode.ArduinoExt.highList.indexOf(value) > -1) {
                       value = 255;
-                  } else if(Entry.ArduinoExt.lowList.indexOf(value) > -1) {
+                  } else if(RoCode.ArduinoExt.lowList.indexOf(value) > -1) {
                       value = 0;
                   } else {
                       throw new Error();
                   }
-                  if(!Entry.hw.sendQueue['SET']) {
-                      Entry.hw.sendQueue['SET'] = {};
+                  if(!RoCode.hw.sendQueue['SET']) {
+                      RoCode.hw.sendQueue['SET'] = {};
                   }
-                  Entry.hw.sendQueue['SET'][port] = {
-                      type: Entry.etboard.sensorTypes.DIGITAL,
+                  RoCode.hw.sendQueue['SET'][port] = {
+                      type: RoCode.etboard.sensorTypes.DIGITAL,
                       data: value,
                       time: new Date().getTime()
                   };
@@ -416,8 +416,8 @@ Entry.etboard.getBlocks = function() {
               },
           },
           etboard_ultrasonic_get_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: "basic_string_field",
             params: [
                 {
@@ -447,27 +447,27 @@ Entry.etboard.getBlocks = function() {
                 var port1 = script.getNumberValue("PORT1", script);
                 var port2 = script.getNumberValue("PORT2", script);
 
-                if(!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if(!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][port1];
-                delete Entry.hw.sendQueue['SET'][port2];
+                delete RoCode.hw.sendQueue['SET'][port1];
+                delete RoCode.hw.sendQueue['SET'][port2];
 
-                if(!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if(!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.etboard.sensorTypes.ULTRASONIC] = {
+                RoCode.hw.sendQueue['GET'][RoCode.etboard.sensorTypes.ULTRASONIC] = {
                     port: [port1, port2],
                     time: new Date().getTime()
                 };
-                return Entry.hw.portData.ULTRASONIC || 0;
+                return RoCode.hw.portData.ULTRASONIC || 0;
             },
             isNotFor: [ "etboard" ],
             class: "SENSOR",
         },
         etboard_get_digital_button: {
-          color: EntryStatic.colorSet.block.default.HARDWARE,
-          outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+          color: RoCodeStatic.colorSet.block.default.HARDWARE,
+          outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: "basic_boolean_field",
             params: [{
                 "type": "Block",
@@ -489,11 +489,11 @@ Entry.etboard.getBlocks = function() {
             isNotFor: [ "etboard" ],
             func: function (sprite, script) {
                 var port = script.getNumberValue("PORT", script);
-                var DIGITAL = Entry.hw.portData.DIGITAL;
-                if(!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
+                if(!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.etboard.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue['GET'][RoCode.etboard.sensorTypes.DIGITAL] = {
                     port: port,
                     time: new Date().getTime()
                 };
@@ -501,8 +501,8 @@ Entry.etboard.getBlocks = function() {
             },
         },
         etboard_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: "basic_boolean_field",
             params: [{
                 "type": "Block",
@@ -523,11 +523,11 @@ Entry.etboard.getBlocks = function() {
             class: "digital",
             func: function (sprite, script) {
                 var port = script.getNumberValue("PORT", script);
-                var DIGITAL = Entry.hw.portData.DIGITAL;
-                if(!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
+                if(!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.etboard.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue['GET'][RoCode.etboard.sensorTypes.DIGITAL] = {
                     port: port,
                     time: new Date().getTime()
                 };
@@ -535,8 +535,8 @@ Entry.etboard.getBlocks = function() {
             },
         },
         etboard_get_port_number1: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: "basic_string_field",
             statements: [],
             params: [
@@ -550,8 +550,8 @@ Entry.etboard.getBlocks = function() {
                     ],
                     "value": "2",
                     "fontSize": 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 }
             ],
             "events": {},
@@ -567,8 +567,8 @@ Entry.etboard.getBlocks = function() {
             "class": "ArduinoExt"
         },
         etboard_toggle_led: {
-          color: EntryStatic.colorSet.block.default.HARDWARE,
-          outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+          color: RoCodeStatic.colorSet.block.default.HARDWARE,
+          outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
           skeleton: 'basic',
           params: [
               {
@@ -605,18 +605,18 @@ Entry.etboard.getBlocks = function() {
                 if(typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if(Entry.ArduinoExt.highList.indexOf(value) > -1) {
+                if(RoCode.ArduinoExt.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if(Entry.ArduinoExt.lowList.indexOf(value) > -1) {
+                } else if(RoCode.ArduinoExt.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if(!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if(!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.etboard.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.etboard.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime()
                 };
@@ -624,8 +624,8 @@ Entry.etboard.getBlocks = function() {
             },
         },
         etboard_pw_get_port_number: {
-              color: EntryStatic.colorSet.block.default.HARDWARE,
-              outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+              color: RoCodeStatic.colorSet.block.default.HARDWARE,
+              outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
               skeleton: "basic_string_field",
               statements: [],
               params: [
@@ -636,8 +636,8 @@ Entry.etboard.getBlocks = function() {
                       ],
                       "value": "5",
                       "fontSize": 11,
-                      bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                      arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                      bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                      arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                   }
               ],
               events: {},
@@ -652,8 +652,8 @@ Entry.etboard.getBlocks = function() {
               },
           },
         etboard_set_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: "basic",
             statements: [],
             params: [
@@ -692,10 +692,10 @@ Entry.etboard.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 180);
-                if(!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if(!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
+                RoCode.hw.sendQueue['SET'][port] = {
                     type: 4,
                     data: value,
                     time: new Date().getTime()
@@ -705,8 +705,8 @@ Entry.etboard.getBlocks = function() {
             "syntax": {}
         },
         etboard_oled_set: {
-          color: EntryStatic.colorSet.block.default.HARDWARE,
-          outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+          color: RoCodeStatic.colorSet.block.default.HARDWARE,
+          outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
           skeleton: "basic",
           statements: [],
           params: [
@@ -719,8 +719,8 @@ Entry.etboard.getBlocks = function() {
                   ],
                   "value":"1",
                   "fontSize":11,
-                  bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                  arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                  bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                  arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
               },
       		    {
                   "type": "Block",
@@ -748,10 +748,10 @@ Entry.etboard.getBlocks = function() {
               var line = script.getField("VALUE1");
               var text = script.getValue("VALUE2");
 
-              if(!Entry.hw.sendQueue['SET']) {
-                  Entry.hw.sendQueue['SET'] = {};
+              if(!RoCode.hw.sendQueue['SET']) {
+                  RoCode.hw.sendQueue['SET'] = {};
               }
-              Entry.hw.sendQueue['SET'][line] = {
+              RoCode.hw.sendQueue['SET'][line] = {
                   type: 241,
                   data: text,
                   time: new Date().getTime()
@@ -764,4 +764,4 @@ Entry.etboard.getBlocks = function() {
     }   //return
 };  //function
 
-module.exports = Entry.etboard;
+module.exports = RoCode.etboard;

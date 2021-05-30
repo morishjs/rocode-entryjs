@@ -6,8 +6,8 @@ const autoprefixer = require('autoprefixer');
 
 module.exports = {
     mode: 'development',
-    entry: {
-        entry: './src/entry.js',
+    RoCode: {
+        RoCode: './src/RoCode.js',
     },
     output: {
         path: path.resolve('./dist'),
@@ -75,7 +75,7 @@ module.exports = {
     },
     plugins: [
         new ExtractTextPlugin({
-            filename: 'entry.css',
+            filename: 'RoCode.css',
         }),
     ],
 };

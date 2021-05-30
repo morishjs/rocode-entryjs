@@ -7,12 +7,12 @@
  * Constructor of popup
  * @constructor
  */
-Entry.Popup = class Popup {
+RoCode.Popup = class Popup {
     constructor(className) {
-        Entry.assert(!window.popup, 'Popup exist');
+        RoCode.assert(!window.popup, 'Popup exist');
 
-        this.body_ = Entry.createElement('div');
-        this.body_.addClass('entryPopup');
+        this.body_ = RoCode.createElement('div');
+        this.body_.addClass('RoCodePopup');
         if (className) {
             this.body_.addClass(className);
         }
@@ -23,14 +23,14 @@ Entry.Popup = class Popup {
         });
         this.body_.popup = this;
         document.body.appendChild(this.body_);
-        this.window_ = Entry.createElement('div');
-        this.window_.addClass('entryPopupWindow');
-        if (Entry.targetChecker && !Entry.targetChecker.statusViewDisabled) {
+        this.window_ = RoCode.createElement('div');
+        this.window_.addClass('RoCodePopupWindow');
+        if (RoCode.targetChecker && !RoCode.targetChecker.statusViewDisabled) {
             this.window_.addClass('targetCheckerPopup');
         }
-        // if (Entry.device === 'tablet') this.window_.addClass('tablet');
+        // if (RoCode.device === 'tablet') this.window_.addClass('tablet');
         this.window_.bindOnClick(() => {});
-        Entry.addEventListener('windowResized', this.resize);
+        RoCode.addEventListener('windowResized', this.resize);
         window.popup = this;
         this.resize();
         this.body_.appendChild(this.window_);
@@ -40,33 +40,33 @@ Entry.Popup = class Popup {
      */
     remove() {
         while (this.window_.hasChildNodes()) {
-            if (Entry.type == 'workspace') {
-                Entry.engineContainer.insertBefore(
+            if (RoCode.type == 'workspace') {
+                RoCode.engineContainer.insertBefore(
                     this.window_.firstChild,
-                    Entry.engineContainer.firstChild
+                    RoCode.engineContainer.firstChild
                 );
-            } else if (Entry.type == 'minimize') {
-                const wrapper = Entry.view_.querySelector('#entryCanvasWrapper');
+            } else if (RoCode.type == 'minimize') {
+                const wrapper = RoCode.view_.querySelector('#RoCodeCanvasWrapper');
                 wrapper.insertBefore(this.window_.lastChild, wrapper.firstChild);
             } else {
-                Entry.engineContainer.insertBefore(
+                RoCode.engineContainer.insertBefore(
                     this.window_.lastChild,
-                    Entry.engineContainer.firstChild
+                    RoCode.engineContainer.firstChild
                 );
             }
         }
         $('body').css('overflow', 'auto');
-        Entry.removeElement(this.body_);
+        RoCode.removeElement(this.body_);
         window.popup = null;
-        Entry.removeEventListener('windowResized', this.resize);
-        Entry.engine.popup = null;
-        Entry.windowResized.notify();
+        RoCode.removeEventListener('windowResized', this.resize);
+        RoCode.engine.popup = null;
+        RoCode.windowResized.notify();
         if (
-            Entry.type === 'workspace' &&
-            Entry.targetChecker &&
-            !Entry.targetChecker.statusViewDisabled
+            RoCode.type === 'workspace' &&
+            RoCode.targetChecker &&
+            !RoCode.targetChecker.statusViewDisabled
         ) {
-            Entry.targetChecker.getStatusView().remove();
+            RoCode.targetChecker.getStatusView().remove();
         }
     }
 
@@ -78,7 +78,7 @@ Entry.Popup = class Popup {
         const popup = window.popup;
         const popupWindow = popup.window_;
         const bottomOffset =
-            Entry.targetChecker && !Entry.targetChecker.statusViewDisabled ? 91 + 48 : 48;
+            RoCode.targetChecker && !RoCode.targetChecker.statusViewDisabled ? 91 + 48 : 48;
         let maxWidth = window.innerWidth * 0.9;
         let maxHeight = window.innerHeight * 0.9 - bottomOffset;
         if (maxWidth * 9 <= maxHeight * 16) {
@@ -93,7 +93,7 @@ Entry.Popup = class Popup {
             popupWindow.style.height = `${String(maxHeight)}px`;
         }
 
-        Entry.stage && Entry.stage.updateBoundRect();
+        RoCode.stage && RoCode.stage.updateBoundRect();
     }
 
     removeMouseDispose(e) {

@@ -4,8 +4,8 @@ module.exports = {
     getBlocks() {
         return {
             when_run_button_click: {
-                color: EntryStatic.colorSet.block.default.START,
-                outerLine: EntryStatic.colorSet.block.darken.START,
+                color: RoCodeStatic.colorSet.block.default.START,
+                outerLine: RoCodeStatic.colorSet.block.darken.START,
                 skeleton: 'basic_event',
                 statements: [],
                 params: [
@@ -41,8 +41,8 @@ module.exports = {
                 },
             },
             when_some_key_pressed: {
-                color: EntryStatic.colorSet.block.default.START,
-                outerLine: EntryStatic.colorSet.block.darken.START,
+                color: RoCodeStatic.colorSet.block.default.START,
+                outerLine: RoCodeStatic.colorSet.block.darken.START,
                 skeleton: 'basic_event',
                 statements: [],
                 params: [
@@ -60,8 +60,8 @@ module.exports = {
                         options: keyInputList,
                         value: 'q',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.START,
-                        arrowColor: EntryStatic.colorSet.arrow.default.START,
+                        bgColor: RoCodeStatic.colorSet.block.darken.START,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.START,
                     },
                 ],
                 events: {},
@@ -95,8 +95,8 @@ module.exports = {
                                     type: 'Dropdown',
                                     value: 'q',
                                     options: keyInputList,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.START,
-                                    converter: Entry.block.converters.keyboardCode,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.START,
+                                    converter: RoCode.block.converters.keyboardCode,
                                 },
                             ],
                         },
@@ -104,8 +104,8 @@ module.exports = {
                 },
             },
             mouse_clicked: {
-                color: EntryStatic.colorSet.block.default.START,
-                outerLine: EntryStatic.colorSet.block.darken.START,
+                color: RoCodeStatic.colorSet.block.default.START,
+                outerLine: RoCodeStatic.colorSet.block.darken.START,
                 skeleton: 'basic_event',
                 statements: [],
                 params: [
@@ -141,8 +141,8 @@ module.exports = {
                 },
             },
             mouse_click_cancled: {
-                color: EntryStatic.colorSet.block.default.START,
-                outerLine: EntryStatic.colorSet.block.darken.START,
+                color: RoCodeStatic.colorSet.block.default.START,
+                outerLine: RoCodeStatic.colorSet.block.darken.START,
                 skeleton: 'basic_event',
                 statements: [],
                 params: [
@@ -178,8 +178,8 @@ module.exports = {
                 },
             },
             when_object_click: {
-                color: EntryStatic.colorSet.block.default.START,
-                outerLine: EntryStatic.colorSet.block.darken.START,
+                color: RoCodeStatic.colorSet.block.default.START,
+                outerLine: RoCodeStatic.colorSet.block.darken.START,
                 skeleton: 'basic_event',
                 statements: [],
                 params: [
@@ -215,8 +215,8 @@ module.exports = {
                 },
             },
             when_object_click_canceled: {
-                color: EntryStatic.colorSet.block.default.START,
-                outerLine: EntryStatic.colorSet.block.darken.START,
+                color: RoCodeStatic.colorSet.block.default.START,
+                outerLine: RoCodeStatic.colorSet.block.darken.START,
                 skeleton: 'basic_event',
                 statements: [],
                 params: [
@@ -252,8 +252,8 @@ module.exports = {
                 },
             },
             when_message_cast: {
-                color: EntryStatic.colorSet.block.default.START,
-                outerLine: EntryStatic.colorSet.block.darken.START,
+                color: RoCodeStatic.colorSet.block.default.START,
+                outerLine: RoCodeStatic.colorSet.block.darken.START,
                 skeleton: 'basic_event',
                 statements: [],
                 params: [
@@ -272,14 +272,14 @@ module.exports = {
                         menuName: 'messages',
                         fontSize: 10,
                         textColor: '#FFFFFF',
-                        bgColor: EntryStatic.colorSet.block.darken.START,
-                        arrowColor: EntryStatic.colorSet.arrow.default.START,
+                        bgColor: RoCodeStatic.colorSet.block.darken.START,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.START,
                     },
                 ],
                 events: {
                     dataAdd: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.addRef('_messageRefs', block);
                             }
@@ -287,7 +287,7 @@ module.exports = {
                     ],
                     viewDestroy: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.removeRef('_messageRefs', block);
                             }
@@ -312,7 +312,7 @@ module.exports = {
                 },
                 event: 'when_message_cast',
 
-                //"syntax": {"js": [], "py": ["def entry_event_signal():\n\tif signal == %2:"]}
+                //"syntax": {"js": [], "py": ["def RoCode_event_signal():\n\tif signal == %2:"]}
                 syntax: {
                     js: [],
                     py: [
@@ -327,8 +327,8 @@ module.exports = {
                                     value: null,
                                     menuName: 'messages',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.START,
-                                    converter: Entry.block.converters.returnStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.START,
+                                    converter: RoCode.block.converters.returnStringKey,
                                 },
                             ],
                         },
@@ -336,8 +336,8 @@ module.exports = {
                 },
             },
             message_cast: {
-                color: EntryStatic.colorSet.block.default.START,
-                outerLine: EntryStatic.colorSet.block.darken.START,
+                color: RoCodeStatic.colorSet.block.default.START,
+                outerLine: RoCodeStatic.colorSet.block.darken.START,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -347,8 +347,8 @@ module.exports = {
                         menuName: 'messages',
                         fontSize: 10,
                         textColor: '#fff',
-                        bgColor: EntryStatic.colorSet.block.darken.START,
-                        arrowColor: EntryStatic.colorSet.arrow.default.START,
+                        bgColor: RoCodeStatic.colorSet.block.darken.START,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.START,
                     },
                     {
                         type: 'Indicator',
@@ -359,7 +359,7 @@ module.exports = {
                 events: {
                     dataAdd: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.addRef('_messageRefs', block);
                             }
@@ -367,7 +367,7 @@ module.exports = {
                     ],
                     viewDestroy: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.removeRef('_messageRefs', block);
                             }
@@ -390,30 +390,30 @@ module.exports = {
                 func(sprite, script) {
                     const value = script.getField('VALUE', script);
 
-                    const arr = Entry.variableContainer.messages_;
-                    const isExist = Entry.isExist(value, 'id', arr);
+                    const arr = RoCode.variableContainer.messages_;
+                    const isExist = RoCode.isExist(value, 'id', arr);
 
                     if (value == 'null' || !isExist) {
                         throw new Error('value can not be null or undefined');
                     }
 
                     setTimeout(() => {
-                        Entry.engine.raiseMessage(value);
+                        RoCode.engine.raiseMessage(value);
                     });
                 },
                 syntax: {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.send_signal(%1)',
+                            syntax: 'RoCode.send_signal(%1)',
                             textParams: [
                                 {
                                     type: 'DropdownDynamic',
                                     value: null,
                                     menuName: 'messages',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.START,
-                                    converter: Entry.block.converters.returnStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.START,
+                                    converter: RoCode.block.converters.returnStringKey,
                                     paramType: 'signal',
                                 },
                                 undefined,
@@ -423,8 +423,8 @@ module.exports = {
                 },
             },
             message_cast_wait: {
-                color: EntryStatic.colorSet.block.default.START,
-                outerLine: EntryStatic.colorSet.block.darken.START,
+                color: RoCodeStatic.colorSet.block.default.START,
+                outerLine: RoCodeStatic.colorSet.block.darken.START,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -434,8 +434,8 @@ module.exports = {
                         menuName: 'messages',
                         fontSize: 10,
                         textColor: '#fff',
-                        bgColor: EntryStatic.colorSet.block.darken.START,
-                        arrowColor: EntryStatic.colorSet.arrow.default.START,
+                        bgColor: RoCodeStatic.colorSet.block.darken.START,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.START,
                     },
                     {
                         type: 'Indicator',
@@ -446,7 +446,7 @@ module.exports = {
                 events: {
                     dataAdd: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.addRef('_messageRefs', block);
                             }
@@ -454,7 +454,7 @@ module.exports = {
                     ],
                     dataDestroy: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.removeRef('_messageRefs', block);
                             }
@@ -491,12 +491,12 @@ module.exports = {
                         }
                     } else {
                         const value = script.getField('VALUE', script);
-                        const arr = Entry.variableContainer.messages_;
-                        const isExist = Entry.isExist(value, 'id', arr);
+                        const arr = RoCode.variableContainer.messages_;
+                        const isExist = RoCode.isExist(value, 'id', arr);
                         if (value == 'null' || !isExist) {
                             throw new Error('value can not be null or undefined');
                         }
-                        const data = Entry.engine.raiseMessage(value);
+                        const data = RoCode.engine.raiseMessage(value);
                         let runningScript = [];
                         while (data.length) {
                             const executor = data.shift();
@@ -513,15 +513,15 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.send_signal_wait(%1)',
+                            syntax: 'RoCode.send_signal_wait(%1)',
                             textParams: [
                                 {
                                     type: 'DropdownDynamic',
                                     value: null,
                                     menuName: 'messages',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.START,
-                                    converter: Entry.block.converters.returnStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.START,
+                                    converter: RoCode.block.converters.returnStringKey,
                                 },
                             ],
                         },
@@ -529,8 +529,8 @@ module.exports = {
                 },
             },
             when_scene_start: {
-                color: EntryStatic.colorSet.block.default.START,
-                outerLine: EntryStatic.colorSet.block.darken.START,
+                color: RoCodeStatic.colorSet.block.default.START,
+                outerLine: RoCodeStatic.colorSet.block.darken.START,
                 skeleton: 'basic_event',
                 statements: [],
                 params: [
@@ -566,8 +566,8 @@ module.exports = {
                 },
             },
             start_scene: {
-                color: EntryStatic.colorSet.block.default.START,
-                outerLine: EntryStatic.colorSet.block.darken.START,
+                color: RoCodeStatic.colorSet.block.default.START,
+                outerLine: RoCodeStatic.colorSet.block.darken.START,
                 skeleton: 'basic_without_next',
                 statements: [],
                 params: [
@@ -577,8 +577,8 @@ module.exports = {
                         menuName: 'scenes',
                         fontSize: 10,
                         textColor: '#fff',
-                        bgColor: EntryStatic.colorSet.block.darken.START,
-                        arrowColor: EntryStatic.colorSet.arrow.default.START,
+                        bgColor: RoCodeStatic.colorSet.block.darken.START,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.START,
                     },
                     {
                         type: 'Indicator',
@@ -602,10 +602,10 @@ module.exports = {
                 isNotFor: ['scene'],
                 func(sprite, script) {
                     const value = script.getField('VALUE', script);
-                    const scene = Entry.scene.getSceneById(value);
+                    const scene = RoCode.scene.getSceneById(value);
                     if (scene) {
-                        Entry.scene.selectScene(scene);
-                        Entry.engine.fireEvent('when_scene_start');
+                        RoCode.scene.selectScene(scene);
+                        RoCode.engine.fireEvent('when_scene_start');
                     }
                     return null;
                 },
@@ -613,7 +613,7 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.start_scene(%1)',
+                            syntax: 'RoCode.start_scene(%1)',
                             blockType: 'last',
                             textParams: [
                                 {
@@ -621,8 +621,8 @@ module.exports = {
                                     value: null,
                                     menuName: 'scenes',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.START,
-                                    converter: Entry.block.converters.returnStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.START,
+                                    converter: RoCode.block.converters.returnStringKey,
                                 },
                             ],
                         },
@@ -630,8 +630,8 @@ module.exports = {
                 },
             },
             start_neighbor_scene: {
-                color: EntryStatic.colorSet.block.default.START,
-                outerLine: EntryStatic.colorSet.block.darken.START,
+                color: RoCodeStatic.colorSet.block.default.START,
+                outerLine: RoCodeStatic.colorSet.block.darken.START,
                 skeleton: 'basic_without_next',
                 statements: [],
                 params: [
@@ -644,8 +644,8 @@ module.exports = {
                         value: 'next',
                         fontSize: 10,
                         textColor: '#fff',
-                        bgColor: EntryStatic.colorSet.block.darken.START,
-                        arrowColor: EntryStatic.colorSet.arrow.default.START,
+                        bgColor: RoCodeStatic.colorSet.block.darken.START,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.START,
                     },
                     {
                         type: 'Indicator',
@@ -668,24 +668,24 @@ module.exports = {
                 class: 'scene',
                 isNotFor: ['scene'],
                 func(sprite, script) {
-                    const currentScene = Entry.scene.selectedScene;
-                    const scenes = Entry.scene.getScenes();
+                    const currentScene = RoCode.scene.selectedScene;
+                    const scenes = RoCode.scene.getScenes();
                     const index = scenes.indexOf(currentScene);
                     const o = script.getField('OPERATOR', script);
                     if (o == 'next') {
                         if (index + 1 < scenes.length) {
-                            const nextScene = Entry.scene.getSceneById(scenes[index + 1].id);
+                            const nextScene = RoCode.scene.getSceneById(scenes[index + 1].id);
                             if (nextScene) {
-                                Entry.scene.selectScene(nextScene);
-                                Entry.engine.fireEvent('when_scene_start');
+                                RoCode.scene.selectScene(nextScene);
+                                RoCode.engine.fireEvent('when_scene_start');
                             }
                         }
                     } else {
                         if (index > 0) {
-                            const nextScene = Entry.scene.getSceneById(scenes[index - 1].id);
+                            const nextScene = RoCode.scene.getSceneById(scenes[index - 1].id);
                             if (nextScene) {
-                                Entry.scene.selectScene(nextScene);
-                                Entry.engine.fireEvent('when_scene_start');
+                                RoCode.scene.selectScene(nextScene);
+                                RoCode.engine.fireEvent('when_scene_start');
                             }
                         }
                     }
@@ -695,7 +695,7 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.start_scene_of(%1)',
+                            syntax: 'RoCode.start_scene_of(%1)',
                             blockType: 'last',
                             textParams: [
                                 {
@@ -706,9 +706,9 @@ module.exports = {
                                     ],
                                     value: 'next',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.START,
-                                    converter: Entry.block.converters.returnStringValue,
-                                    codeMap: 'Entry.CodeMap.Entry.start_neighbor_scene[0]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.START,
+                                    converter: RoCode.block.converters.returnStringValue,
+                                    codeMap: 'RoCode.CodeMap.RoCode.start_neighbor_scene[0]',
                                 },
                             ],
                         },
@@ -783,7 +783,7 @@ module.exports = {
                 class: 'checker',
                 isNotFor: ['checker'],
                 func(sprite, script) {
-                    const obj = Entry.container.getObject(this.block.params[0]);
+                    const obj = RoCode.container.getObject(this.block.params[0]);
                     const flow = this.block.params[1];
                     let propertyKey = this.block.params[2];
                     const rightValue = this.getParam(4);
@@ -811,7 +811,7 @@ module.exports = {
                     if (returnVal) {
                         return;
                     } else if (flow == 0) {
-                        return Entry.STATIC.BREAK;
+                        return RoCode.STATIC.BREAK;
                     } else {
                         this.die();
                     }
@@ -872,10 +872,10 @@ module.exports = {
                             delete this.entity.listener[id];
                             return;
                         } else {
-                            return Entry.STATIC.BREAK;
+                            return RoCode.STATIC.BREAK;
                         }
                     }
-                    const code = Entry.container.getObject(this.block.params[0]).script;
+                    const code = RoCode.container.getObject(this.block.params[0]).script;
                     const accuracy = this.block.params[1];
                     const statements = this.block.statements[0].getBlocks();
                     let lastBlock = null;
@@ -906,7 +906,7 @@ module.exports = {
                             index = 0;
                         }
                     });
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 },
             },
             switch_scope: {
@@ -938,7 +938,7 @@ module.exports = {
                 class: 'checker',
                 isNotFor: ['checker'],
                 func(sprite, script) {
-                    const obj = Entry.container.getObject(this.block.params[0]);
+                    const obj = RoCode.container.getObject(this.block.params[0]);
                     this.executor.entity = obj.entity;
                 },
             },
@@ -966,18 +966,18 @@ module.exports = {
                 isNotFor: ['checker'],
                 func(sprite, script) {
                     if (this.isSubmitted) {
-                        Entry.removeEventListener('answerSubmitted', checkFunc);
+                        RoCode.removeEventListener('answerSubmitted', checkFunc);
                         return;
                     } else if (this.isSubmitted === false) {
-                        return Entry.STATIC.BREAK;
+                        return RoCode.STATIC.BREAK;
                     }
                     const checkFunc = function() {
                         that.isSubmitted = true;
                     };
                     this.isSubmitted = false;
                     const that = this;
-                    Entry.addEventListener('answerSubmitted', checkFunc);
-                    return Entry.STATIC.BREAK;
+                    RoCode.addEventListener('answerSubmitted', checkFunc);
+                    return RoCode.STATIC.BREAK;
                 },
             },
             check_lecture_goal: {
@@ -1016,7 +1016,7 @@ module.exports = {
                 events: {
                     dataAdd: [
                         function(block) {
-                            Entry.registerAchievement(block);
+                            RoCode.registerAchievement(block);
                         },
                     ],
                 },
@@ -1030,7 +1030,7 @@ module.exports = {
                 class: 'checker',
                 isNotFor: ['checker'],
                 func(sprite, script) {
-                    Entry.targetChecker.achieveCheck(
+                    RoCode.targetChecker.achieveCheck(
                         this.block.params[1],
                         `${this.block.params[0]}`
                     );
@@ -1059,7 +1059,7 @@ module.exports = {
                 isNotFor: ['checker'],
                 func(sprite, script) {
                     const variableName = `${this.block.params[0]}`;
-                    const variable = Entry.variableContainer.getVariableByName(variableName);
+                    const variable = RoCode.variableContainer.getVariableByName(variableName);
                     if (variable) {
                         return variable.getValue();
                     } else {
@@ -1094,8 +1094,8 @@ module.exports = {
                 class: 'checker',
                 isNotFor: ['checker'],
                 func(sprite, script) {
-                    if (Entry.targetChecker) {
-                        Entry.targetChecker.showStatusMessage(this.block.params[0]);
+                    if (RoCode.targetChecker) {
+                        RoCode.targetChecker.showStatusMessage(this.block.params[0]);
                     }
                 },
             },
@@ -1122,7 +1122,7 @@ module.exports = {
                 isNotFor: ['checker'],
                 func(sprite, script) {
                     const goalName = `${this.block.params[0]}`;
-                    return Entry.targetChecker.checkGoal(goalName);
+                    return RoCode.targetChecker.checkGoal(goalName);
                 },
             },
             positive_number: {
@@ -1233,8 +1233,8 @@ module.exports = {
                 func(sprite, script) {
                     const obj = {};
                     obj[this.block.params[0]] = this.block.params[1];
-                    if (typeof entrylms !== 'undefined') {
-                        entrylms.emit('registerScore', obj);
+                    if (typeof RoCodelms !== 'undefined') {
+                        RoCodelms.emit('registerScore', obj);
                     }
                     return script.callReturn();
                 },

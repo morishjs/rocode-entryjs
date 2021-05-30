@@ -17,7 +17,7 @@
  *  장치 기본 정의
  ***************************************************************************************/
 
-Entry.byrobot_base =
+RoCode.byrobot_base =
 {
     /***************************************************************************************
      *  시간 지연 함수
@@ -33,7 +33,7 @@ Entry.byrobot_base =
             script.isStart = true;
             script.timeFlag = 1;
 
-            const fps = Entry.FPS || 60;
+            const fps = RoCode.FPS || 60;
             const timeValue = (60 / fps) * _ms;
 
             setTimeout(() => {
@@ -50,7 +50,7 @@ Entry.byrobot_base =
         {
             delete script.timeFlag;
             delete script.isStart;
-            Entry.engine.isContinue = false;
+            RoCode.engine.isContinue = false;
             return 'Finish';
         }
     },
@@ -62,9 +62,9 @@ Entry.byrobot_base =
 
     transferBufferClear()
     {
-        Entry.hw.sendQueue.buffer_clear = 0;
-        Entry.hw.update();
-        delete Entry.hw.sendQueue.buffer_clear;
+        RoCode.hw.sendQueue.buffer_clear = 0;
+        RoCode.hw.update();
+        delete RoCode.hw.sendQueue.buffer_clear;
     },
 
 
@@ -75,392 +75,392 @@ Entry.byrobot_base =
 
 
     /***************************************************************************************
-     *  데이터 전송 함수 (Entry -> Hardware)
+     *  데이터 전송 함수 (RoCode -> Hardware)
      ***************************************************************************************/
 
     // 데이터 전송
     transferIrMessage(target, irmessage)
     {
         // 전송
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.battle_ir_message = irmessage;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.battle_ir_message = irmessage;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.battle_ir_message;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.battle_ir_message;
     },
 
 
     transferLightManual(target, flags, brightness)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.light_manual_flags = flags;
-        Entry.hw.sendQueue.light_manual_brightness = brightness;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.light_manual_flags = flags;
+        RoCode.hw.sendQueue.light_manual_brightness = brightness;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.light_manual_flags;
-        delete Entry.hw.sendQueue.light_manual_brightness;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.light_manual_flags;
+        delete RoCode.hw.sendQueue.light_manual_brightness;
     },
 
 
     transferLightMode(target, mode, interval)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.light_mode_mode = mode;
-        Entry.hw.sendQueue.light_mode_interval = interval;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.light_mode_mode = mode;
+        RoCode.hw.sendQueue.light_mode_interval = interval;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.light_mode_mode;
-        delete Entry.hw.sendQueue.light_mode_interval;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.light_mode_mode;
+        delete RoCode.hw.sendQueue.light_mode_interval;
     },
 
 
     transferLightModeColor(target, mode, interval, red, green, blue)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.light_mode_mode = mode;
-        Entry.hw.sendQueue.light_mode_interval = interval;
-        Entry.hw.sendQueue.light_color_r = red;
-        Entry.hw.sendQueue.light_color_g = green;
-        Entry.hw.sendQueue.light_color_b = blue;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.light_mode_mode = mode;
+        RoCode.hw.sendQueue.light_mode_interval = interval;
+        RoCode.hw.sendQueue.light_color_r = red;
+        RoCode.hw.sendQueue.light_color_g = green;
+        RoCode.hw.sendQueue.light_color_b = blue;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.light_mode_mode;
-        delete Entry.hw.sendQueue.light_mode_interval;
-        delete Entry.hw.sendQueue.light_color_r;
-        delete Entry.hw.sendQueue.light_color_g;
-        delete Entry.hw.sendQueue.light_color_b;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.light_mode_mode;
+        delete RoCode.hw.sendQueue.light_mode_interval;
+        delete RoCode.hw.sendQueue.light_color_r;
+        delete RoCode.hw.sendQueue.light_color_g;
+        delete RoCode.hw.sendQueue.light_color_b;
     },
 
 
     transferLightEvent(target, event, interval, repeat)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.light_event_event = event;
-        Entry.hw.sendQueue.light_event_interval = interval;
-        Entry.hw.sendQueue.light_event_repeat = repeat;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.light_event_event = event;
+        RoCode.hw.sendQueue.light_event_interval = interval;
+        RoCode.hw.sendQueue.light_event_repeat = repeat;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.light_event_event;
-        delete Entry.hw.sendQueue.light_event_interval;
-        delete Entry.hw.sendQueue.light_event_repeat;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.light_event_event;
+        delete RoCode.hw.sendQueue.light_event_interval;
+        delete RoCode.hw.sendQueue.light_event_repeat;
     },
 
 
     transferLightEventColor(target, event, interval, repeat, red, green, blue)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.light_event_event = event;
-        Entry.hw.sendQueue.light_event_interval = interval;
-        Entry.hw.sendQueue.light_event_repeat = repeat;
-        Entry.hw.sendQueue.light_color_r = red;
-        Entry.hw.sendQueue.light_color_g = green;
-        Entry.hw.sendQueue.light_color_b = blue;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.light_event_event = event;
+        RoCode.hw.sendQueue.light_event_interval = interval;
+        RoCode.hw.sendQueue.light_event_repeat = repeat;
+        RoCode.hw.sendQueue.light_color_r = red;
+        RoCode.hw.sendQueue.light_color_g = green;
+        RoCode.hw.sendQueue.light_color_b = blue;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.light_event_event;
-        delete Entry.hw.sendQueue.light_event_interval;
-        delete Entry.hw.sendQueue.light_event_repeat;
-        delete Entry.hw.sendQueue.light_color_r;
-        delete Entry.hw.sendQueue.light_color_g;
-        delete Entry.hw.sendQueue.light_color_b;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.light_event_event;
+        delete RoCode.hw.sendQueue.light_event_interval;
+        delete RoCode.hw.sendQueue.light_event_repeat;
+        delete RoCode.hw.sendQueue.light_color_r;
+        delete RoCode.hw.sendQueue.light_color_g;
+        delete RoCode.hw.sendQueue.light_color_b;
     },
 
 
     transferDisplayClearAll(target, pixel)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.display_clear_all_pixel = pixel;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.display_clear_all_pixel = pixel;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.display_clear_all_pixel;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.display_clear_all_pixel;
     },
 
 
     transferDisplayClear(target, pixel, x, y, width, height)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.display_clear_x = x;
-        Entry.hw.sendQueue.display_clear_y = y;
-        Entry.hw.sendQueue.display_clear_width = width;
-        Entry.hw.sendQueue.display_clear_height = height;
-        Entry.hw.sendQueue.display_clear_pixel = pixel;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.display_clear_x = x;
+        RoCode.hw.sendQueue.display_clear_y = y;
+        RoCode.hw.sendQueue.display_clear_width = width;
+        RoCode.hw.sendQueue.display_clear_height = height;
+        RoCode.hw.sendQueue.display_clear_pixel = pixel;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.display_clear_x;
-        delete Entry.hw.sendQueue.display_clear_y;
-        delete Entry.hw.sendQueue.display_clear_width;
-        delete Entry.hw.sendQueue.display_clear_height;
-        delete Entry.hw.sendQueue.display_clear_pixel;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.display_clear_x;
+        delete RoCode.hw.sendQueue.display_clear_y;
+        delete RoCode.hw.sendQueue.display_clear_width;
+        delete RoCode.hw.sendQueue.display_clear_height;
+        delete RoCode.hw.sendQueue.display_clear_pixel;
     },
 
 
     transferDisplayInvert(target, x, y, width, height)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.display_invert_x = x;
-        Entry.hw.sendQueue.display_invert_y = y;
-        Entry.hw.sendQueue.display_invert_width = width;
-        Entry.hw.sendQueue.display_invert_height = height;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.display_invert_x = x;
+        RoCode.hw.sendQueue.display_invert_y = y;
+        RoCode.hw.sendQueue.display_invert_width = width;
+        RoCode.hw.sendQueue.display_invert_height = height;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.display_invert_x;
-        delete Entry.hw.sendQueue.display_invert_y;
-        delete Entry.hw.sendQueue.display_invert_width;
-        delete Entry.hw.sendQueue.display_invert_height;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.display_invert_x;
+        delete RoCode.hw.sendQueue.display_invert_y;
+        delete RoCode.hw.sendQueue.display_invert_width;
+        delete RoCode.hw.sendQueue.display_invert_height;
     },
 
 
     transferDisplayDrawPoint(target, x, y, pixel)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.display_draw_point_x = x;
-        Entry.hw.sendQueue.display_draw_point_y = y;
-        Entry.hw.sendQueue.display_draw_point_pixel = pixel;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.display_draw_point_x = x;
+        RoCode.hw.sendQueue.display_draw_point_y = y;
+        RoCode.hw.sendQueue.display_draw_point_pixel = pixel;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.display_draw_point_x;
-        delete Entry.hw.sendQueue.display_draw_point_y;
-        delete Entry.hw.sendQueue.display_draw_point_pixel;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.display_draw_point_x;
+        delete RoCode.hw.sendQueue.display_draw_point_y;
+        delete RoCode.hw.sendQueue.display_draw_point_pixel;
     },
 
 
     transferDisplayDrawLine(target, x1, y1, x2, y2, pixel, line)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.display_draw_line_x1 = x1;
-        Entry.hw.sendQueue.display_draw_line_y1 = y1;
-        Entry.hw.sendQueue.display_draw_line_x2 = x2;
-        Entry.hw.sendQueue.display_draw_line_y2 = y2;
-        Entry.hw.sendQueue.display_draw_line_pixel = pixel;
-        Entry.hw.sendQueue.display_draw_line_line = line;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.display_draw_line_x1 = x1;
+        RoCode.hw.sendQueue.display_draw_line_y1 = y1;
+        RoCode.hw.sendQueue.display_draw_line_x2 = x2;
+        RoCode.hw.sendQueue.display_draw_line_y2 = y2;
+        RoCode.hw.sendQueue.display_draw_line_pixel = pixel;
+        RoCode.hw.sendQueue.display_draw_line_line = line;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.display_draw_line_x1;
-        delete Entry.hw.sendQueue.display_draw_line_y1;
-        delete Entry.hw.sendQueue.display_draw_line_x2;
-        delete Entry.hw.sendQueue.display_draw_line_y2;
-        delete Entry.hw.sendQueue.display_draw_line_pixel;
-        delete Entry.hw.sendQueue.display_draw_line_line;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.display_draw_line_x1;
+        delete RoCode.hw.sendQueue.display_draw_line_y1;
+        delete RoCode.hw.sendQueue.display_draw_line_x2;
+        delete RoCode.hw.sendQueue.display_draw_line_y2;
+        delete RoCode.hw.sendQueue.display_draw_line_pixel;
+        delete RoCode.hw.sendQueue.display_draw_line_line;
     },
 
 
     transferDisplayDrawRect(target, x, y, width, height, pixel, flagFill, line)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.display_draw_rect_x = x;
-        Entry.hw.sendQueue.display_draw_rect_y = y;
-        Entry.hw.sendQueue.display_draw_rect_width = width;
-        Entry.hw.sendQueue.display_draw_rect_height = height;
-        Entry.hw.sendQueue.display_draw_rect_pixel = pixel;
-        Entry.hw.sendQueue.display_draw_rect_flagfill = flagFill;
-        Entry.hw.sendQueue.display_draw_rect_line = line;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.display_draw_rect_x = x;
+        RoCode.hw.sendQueue.display_draw_rect_y = y;
+        RoCode.hw.sendQueue.display_draw_rect_width = width;
+        RoCode.hw.sendQueue.display_draw_rect_height = height;
+        RoCode.hw.sendQueue.display_draw_rect_pixel = pixel;
+        RoCode.hw.sendQueue.display_draw_rect_flagfill = flagFill;
+        RoCode.hw.sendQueue.display_draw_rect_line = line;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.display_draw_rect_x;
-        delete Entry.hw.sendQueue.display_draw_rect_y;
-        delete Entry.hw.sendQueue.display_draw_rect_width;
-        delete Entry.hw.sendQueue.display_draw_rect_height;
-        delete Entry.hw.sendQueue.display_draw_rect_pixel;
-        delete Entry.hw.sendQueue.display_draw_rect_flagfill;
-        delete Entry.hw.sendQueue.display_draw_rect_line;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.display_draw_rect_x;
+        delete RoCode.hw.sendQueue.display_draw_rect_y;
+        delete RoCode.hw.sendQueue.display_draw_rect_width;
+        delete RoCode.hw.sendQueue.display_draw_rect_height;
+        delete RoCode.hw.sendQueue.display_draw_rect_pixel;
+        delete RoCode.hw.sendQueue.display_draw_rect_flagfill;
+        delete RoCode.hw.sendQueue.display_draw_rect_line;
     },
 
 
     transferDisplayDrawCircle(target, x, y, radius, pixel, flagFill)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.display_draw_circle_x = x;
-        Entry.hw.sendQueue.display_draw_circle_y = y;
-        Entry.hw.sendQueue.display_draw_circle_radius = radius;
-        Entry.hw.sendQueue.display_draw_circle_pixel = pixel;
-        Entry.hw.sendQueue.display_draw_circle_flagfill = flagFill;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.display_draw_circle_x = x;
+        RoCode.hw.sendQueue.display_draw_circle_y = y;
+        RoCode.hw.sendQueue.display_draw_circle_radius = radius;
+        RoCode.hw.sendQueue.display_draw_circle_pixel = pixel;
+        RoCode.hw.sendQueue.display_draw_circle_flagfill = flagFill;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.display_draw_circle_x;
-        delete Entry.hw.sendQueue.display_draw_circle_y;
-        delete Entry.hw.sendQueue.display_draw_circle_radius;
-        delete Entry.hw.sendQueue.display_draw_circle_pixel;
-        delete Entry.hw.sendQueue.display_draw_circle_flagfill;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.display_draw_circle_x;
+        delete RoCode.hw.sendQueue.display_draw_circle_y;
+        delete RoCode.hw.sendQueue.display_draw_circle_radius;
+        delete RoCode.hw.sendQueue.display_draw_circle_pixel;
+        delete RoCode.hw.sendQueue.display_draw_circle_flagfill;
     },
 
     transferDisplayDrawString(target, x, y, font, pixel, string)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.display_draw_string_x = x;
-        Entry.hw.sendQueue.display_draw_string_y = y;
-        Entry.hw.sendQueue.display_draw_string_font = font;
-        Entry.hw.sendQueue.display_draw_string_pixel = pixel;
-        Entry.hw.sendQueue.display_draw_string_string = string;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.display_draw_string_x = x;
+        RoCode.hw.sendQueue.display_draw_string_y = y;
+        RoCode.hw.sendQueue.display_draw_string_font = font;
+        RoCode.hw.sendQueue.display_draw_string_pixel = pixel;
+        RoCode.hw.sendQueue.display_draw_string_string = string;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.display_draw_string_x;
-        delete Entry.hw.sendQueue.display_draw_string_y;
-        delete Entry.hw.sendQueue.display_draw_string_font;
-        delete Entry.hw.sendQueue.display_draw_string_pixel;
-        delete Entry.hw.sendQueue.display_draw_string_string;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.display_draw_string_x;
+        delete RoCode.hw.sendQueue.display_draw_string_y;
+        delete RoCode.hw.sendQueue.display_draw_string_font;
+        delete RoCode.hw.sendQueue.display_draw_string_pixel;
+        delete RoCode.hw.sendQueue.display_draw_string_string;
     },
 
     transferDisplayDrawStringAlign(target, xStart, xEnd, y, align, font, pixel, string)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.display_draw_string_align_x_start = xStart;
-        Entry.hw.sendQueue.display_draw_string_align_x_end = xEnd;
-        Entry.hw.sendQueue.display_draw_string_align_y = y;
-        Entry.hw.sendQueue.display_draw_string_align_align = align;
-        Entry.hw.sendQueue.display_draw_string_align_font = font;
-        Entry.hw.sendQueue.display_draw_string_align_pixel = pixel;
-        Entry.hw.sendQueue.display_draw_string_align_string = string;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.display_draw_string_align_x_start = xStart;
+        RoCode.hw.sendQueue.display_draw_string_align_x_end = xEnd;
+        RoCode.hw.sendQueue.display_draw_string_align_y = y;
+        RoCode.hw.sendQueue.display_draw_string_align_align = align;
+        RoCode.hw.sendQueue.display_draw_string_align_font = font;
+        RoCode.hw.sendQueue.display_draw_string_align_pixel = pixel;
+        RoCode.hw.sendQueue.display_draw_string_align_string = string;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.display_draw_string_align_x_start;
-        delete Entry.hw.sendQueue.display_draw_string_align_x_end;
-        delete Entry.hw.sendQueue.display_draw_string_align_y;
-        delete Entry.hw.sendQueue.display_draw_string_align_align;
-        delete Entry.hw.sendQueue.display_draw_string_align_font;
-        delete Entry.hw.sendQueue.display_draw_string_align_pixel;
-        delete Entry.hw.sendQueue.display_draw_string_align_string;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.display_draw_string_align_x_start;
+        delete RoCode.hw.sendQueue.display_draw_string_align_x_end;
+        delete RoCode.hw.sendQueue.display_draw_string_align_y;
+        delete RoCode.hw.sendQueue.display_draw_string_align_align;
+        delete RoCode.hw.sendQueue.display_draw_string_align_font;
+        delete RoCode.hw.sendQueue.display_draw_string_align_pixel;
+        delete RoCode.hw.sendQueue.display_draw_string_align_string;
     },
 
     transferBuzzer(target, mode, value, time)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.buzzer_mode = mode;
-        Entry.hw.sendQueue.buzzer_value = value;
-        Entry.hw.sendQueue.buzzer_time = time;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.buzzer_mode = mode;
+        RoCode.hw.sendQueue.buzzer_value = value;
+        RoCode.hw.sendQueue.buzzer_time = time;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.buzzer_mode;
-        delete Entry.hw.sendQueue.buzzer_value;
-        delete Entry.hw.sendQueue.buzzer_time;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.buzzer_mode;
+        delete RoCode.hw.sendQueue.buzzer_value;
+        delete RoCode.hw.sendQueue.buzzer_time;
     },
 
     transferVibrator(target, mode, timeOn, timeOff, timeRun)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.vibrator_mode = mode;
-        Entry.hw.sendQueue.vibrator_on = timeOn;
-        Entry.hw.sendQueue.vibrator_off = timeOff;
-        Entry.hw.sendQueue.vibrator_total = timeRun;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.vibrator_mode = mode;
+        RoCode.hw.sendQueue.vibrator_on = timeOn;
+        RoCode.hw.sendQueue.vibrator_off = timeOff;
+        RoCode.hw.sendQueue.vibrator_total = timeRun;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.vibrator_mode;
-        delete Entry.hw.sendQueue.vibrator_on;
-        delete Entry.hw.sendQueue.vibrator_off;
-        delete Entry.hw.sendQueue.vibrator_total;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.vibrator_mode;
+        delete RoCode.hw.sendQueue.vibrator_on;
+        delete RoCode.hw.sendQueue.vibrator_off;
+        delete RoCode.hw.sendQueue.vibrator_total;
     },
 
 
     transferMotorSingleRV(target, motorIndex, motorRotation, motorSpeed)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.motorsingle_target = motorIndex;
-        Entry.hw.sendQueue.motorsingle_rotation = motorRotation;
-        Entry.hw.sendQueue.motorsingle_value = motorSpeed;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.motorsingle_target = motorIndex;
+        RoCode.hw.sendQueue.motorsingle_rotation = motorRotation;
+        RoCode.hw.sendQueue.motorsingle_value = motorSpeed;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.motorsingle_target;
-        delete Entry.hw.sendQueue.motorsingle_rotation;
-        delete Entry.hw.sendQueue.motorsingle_value;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.motorsingle_target;
+        delete RoCode.hw.sendQueue.motorsingle_rotation;
+        delete RoCode.hw.sendQueue.motorsingle_value;
     },
 
     transferMotorSingleV(target, motorIndex, motorSpeed)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.motorsingle_target = motorIndex;
-        Entry.hw.sendQueue.motorsingle_value = motorSpeed;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.motorsingle_target = motorIndex;
+        RoCode.hw.sendQueue.motorsingle_value = motorSpeed;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.motorsingle_target;
-        delete Entry.hw.sendQueue.motorsingle_value;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.motorsingle_target;
+        delete RoCode.hw.sendQueue.motorsingle_value;
     },
 
     transferCommand(target, command, option)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.command_command = command;
-        Entry.hw.sendQueue.command_option = option;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.command_command = command;
+        RoCode.hw.sendQueue.command_option = option;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.command_command;
-        delete Entry.hw.sendQueue.command_option;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.command_command;
+        delete RoCode.hw.sendQueue.command_option;
     },
 
     transferControlQuad(target, roll, pitch, yaw, throttle)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.control_quad8_roll = roll;
-        Entry.hw.sendQueue.control_quad8_pitch = pitch;
-        Entry.hw.sendQueue.control_quad8_yaw = yaw;
-        Entry.hw.sendQueue.control_quad8_throttle = throttle;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.control_quad8_roll = roll;
+        RoCode.hw.sendQueue.control_quad8_pitch = pitch;
+        RoCode.hw.sendQueue.control_quad8_yaw = yaw;
+        RoCode.hw.sendQueue.control_quad8_throttle = throttle;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.control_quad8_roll;
-        delete Entry.hw.sendQueue.control_quad8_pitch;
-        delete Entry.hw.sendQueue.control_quad8_yaw;
-        delete Entry.hw.sendQueue.control_quad8_throttle;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.control_quad8_roll;
+        delete RoCode.hw.sendQueue.control_quad8_pitch;
+        delete RoCode.hw.sendQueue.control_quad8_yaw;
+        delete RoCode.hw.sendQueue.control_quad8_throttle;
     },
 
     transferControlPosition(target, x, y, z, velocity, heading, rotationalVelocity)
     {
-        Entry.hw.sendQueue.target = target;
-        Entry.hw.sendQueue.control_position_x = x;
-        Entry.hw.sendQueue.control_position_y = y;
-        Entry.hw.sendQueue.control_position_z = z;
-        Entry.hw.sendQueue.control_position_velocity = velocity;
-        Entry.hw.sendQueue.control_position_heading = heading;
-        Entry.hw.sendQueue.control_position_rotational_velocity = rotationalVelocity;
+        RoCode.hw.sendQueue.target = target;
+        RoCode.hw.sendQueue.control_position_x = x;
+        RoCode.hw.sendQueue.control_position_y = y;
+        RoCode.hw.sendQueue.control_position_z = z;
+        RoCode.hw.sendQueue.control_position_velocity = velocity;
+        RoCode.hw.sendQueue.control_position_heading = heading;
+        RoCode.hw.sendQueue.control_position_rotational_velocity = rotationalVelocity;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.target;
-        delete Entry.hw.sendQueue.control_position_x;
-        delete Entry.hw.sendQueue.control_position_y;
-        delete Entry.hw.sendQueue.control_position_z;
-        delete Entry.hw.sendQueue.control_position_velocity;
-        delete Entry.hw.sendQueue.control_position_heading;
-        delete Entry.hw.sendQueue.control_position_rotational_velocity;
+        delete RoCode.hw.sendQueue.target;
+        delete RoCode.hw.sendQueue.control_position_x;
+        delete RoCode.hw.sendQueue.control_position_y;
+        delete RoCode.hw.sendQueue.control_position_z;
+        delete RoCode.hw.sendQueue.control_position_velocity;
+        delete RoCode.hw.sendQueue.control_position_heading;
+        delete RoCode.hw.sendQueue.control_position_rotational_velocity;
     },
 
 
@@ -471,7 +471,7 @@ Entry.byrobot_base =
     // 데이터 읽기
     getData(script, device)
     {
-        return Entry.hw.portData[device];
+        return RoCode.hw.portData[device];
     },
 
 
@@ -1179,13 +1179,13 @@ Entry.byrobot_base =
         {
             case 'Start':
                 {
-                    Entry.hw.sendQueue.target = target;
-                    Entry.hw.sendQueue[controlTarget] = value;
+                    RoCode.hw.sendQueue.target = target;
+                    RoCode.hw.sendQueue[controlTarget] = value;
 
-                    Entry.hw.update();
+                    RoCode.hw.update();
 
-                    delete Entry.hw.sendQueue.target;
-                    delete Entry.hw.sendQueue[controlTarget];
+                    delete RoCode.hw.sendQueue.target;
+                    delete RoCode.hw.sendQueue[controlTarget];
                 }
                 return script;
 
@@ -1196,13 +1196,13 @@ Entry.byrobot_base =
                 if (flagDelay)
                 {
                     // 블럭을 빠져나갈 때 변경했던 값을 초기화
-                    Entry.hw.sendQueue.target = target;
-                    Entry.hw.sendQueue[controlTarget] = 0;
+                    RoCode.hw.sendQueue.target = target;
+                    RoCode.hw.sendQueue[controlTarget] = 0;
 
-                    Entry.hw.update();
+                    RoCode.hw.update();
 
-                    delete Entry.hw.sendQueue.target;
-                    delete Entry.hw.sendQueue[controlTarget];
+                    delete RoCode.hw.sendQueue.target;
+                    delete RoCode.hw.sendQueue[controlTarget];
                 }
                 return script.callReturn();
 
@@ -1274,5 +1274,5 @@ Entry.byrobot_base =
 };
 
 
-module.exports = Entry.byrobot_base;
+module.exports = RoCode.byrobot_base;
 

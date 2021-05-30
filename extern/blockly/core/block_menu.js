@@ -309,7 +309,7 @@ Blockly.BlockMenu.prototype.showCategory = function(categoryObject) {
   var margin = 0;
   this.menuView_.style.display = 'block';
 
-  var objectType = Entry.playground.object.objectType;
+  var objectType = RoCode.playground.object.objectType;
 
   // Create the blocks to be shown in this blockMenu.
   var blocks = [];
@@ -317,7 +317,7 @@ Blockly.BlockMenu.prototype.showCategory = function(categoryObject) {
   var gaps = [];
   var blockClass = "";
   for (var i in blockNames) {
-    var blockInfo = EntryStatic.blockInfo[blockNames[i]];
+    var blockInfo = RoCodeStatic.blockInfo[blockNames[i]];
     if (this.checkBanClass(blockInfo))
       continue;
     if (blockClass && blockClass != blockInfo.class) {
@@ -651,8 +651,8 @@ Blockly.BlockMenu.prototype.createBlockFunc_ = function(originBlock) {
     }
 
     // Create the new block by cloning the block in the blockMenu (via XML).
-    if (typeof(Entry) == "object") {
-        Entry.dispatchEvent("entryBlocklyChanged");
+    if (typeof(RoCode) == "object") {
+        RoCode.dispatchEvent("RoCodeBlocklyChanged");
     }
     var xml = Blockly.Xml.blockToDom_(originBlock);
     var block = Blockly.Xml.domToBlock(blockMenu.workspace_, xml);

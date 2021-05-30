@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Event = class Event {
+RoCode.Event = class Event {
     constructor(sender) {
         this._sender = sender;
         this._listeners = [];

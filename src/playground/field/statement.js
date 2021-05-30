@@ -5,8 +5,8 @@
 /*
  *
  */
-Entry.FieldStatement = function(content, blockView, index) {
-    Entry.Model(this, false);
+RoCode.FieldStatement = function(content, blockView, index) {
+    RoCode.Model(this, false);
 
     this._blockView = blockView;
     this.block = blockView.block;
@@ -260,4 +260,4 @@ Entry.FieldStatement = function(content, blockView, index) {
     p.isParamBlockType = function() {
         return false;
     };
-})(Entry.FieldStatement.prototype);
+})(RoCode.FieldStatement.prototype);

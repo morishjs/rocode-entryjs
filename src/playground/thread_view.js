@@ -1,13 +1,13 @@
 'use strict';
 
-Entry.ThreadView = class ThreadView {
+RoCode.ThreadView = class ThreadView {
     schema = {
         height: 0,
         zIndex: 0,
     };
 
     constructor(thread, board) {
-        Entry.Model(this, false);
+        RoCode.Model(this, false);
 
         this.thread = thread;
 
@@ -57,7 +57,7 @@ Entry.ThreadView = class ThreadView {
         };
         const parent = this.parent;
         if (
-            !(parent instanceof Entry.Board || parent instanceof Entry.BlockMenu) &&
+            !(parent instanceof RoCode.Board || parent instanceof RoCode.BlockMenu) &&
             parent.requestAbsoluteCoordinate
         ) {
             pos = parent.requestAbsoluteCoordinate();
@@ -86,7 +86,7 @@ Entry.ThreadView = class ThreadView {
             } else {
                 height += prevBlockView.height;
             }
-            if (prevBlockView.dragMode === Entry.DRAG_MODE_DRAG) {
+            if (prevBlockView.dragMode === RoCode.DRAG_MODE_DRAG) {
                 height = 0;
             }
             block = blocks.pop();
@@ -115,7 +115,7 @@ Entry.ThreadView = class ThreadView {
     }
 
     isGlobal() {
-        return this.parent instanceof Entry.Board;
+        return this.parent instanceof RoCode.Board;
     }
 
     reDraw() {
@@ -140,7 +140,7 @@ Entry.ThreadView = class ThreadView {
     }
 
     getFields() {
-        const BLOCK = Entry.Block;
+        const BLOCK = RoCode.Block;
 
         return this.thread.getBlocks().reduce(function(fields, block) {
             if (!(block instanceof BLOCK)) {

@@ -1,16 +1,16 @@
 'use strict';
 
-Entry.FieldBlock = class FieldBlock extends Entry.Field {
+RoCode.FieldBlock = class FieldBlock extends RoCode.Field {
     constructor(content, blockView, index, mode, contentIndex) {
         super(content, blockView, index, mode, contentIndex);
-        Entry.Model(this, false);
+        RoCode.Model(this, false);
         this._blockView = blockView;
         this._block = blockView.block;
         this._valueBlock = null;
         this._oldPrimitiveValue = null;
 
-        this.box = new Entry.BoxModel();
-        this.changeEvent = new Entry.Event(this);
+        this.box = new RoCode.BoxModel();
+        this.changeEvent = new RoCode.Event(this);
 
         this._index = index;
         this.contentIndex = contentIndex;
@@ -90,7 +90,7 @@ Entry.FieldBlock = class FieldBlock extends Entry.Field {
         const valueBlockView = this._valueBlock.view;
         valueBlockView.renderByMode(this.renderMode, isReDraw);
 
-        if (this.getBoard().constructor !== Entry.Board) {
+        if (this.getBoard().constructor !== RoCode.Board) {
             valueBlockView.removeControl();
         }
 
@@ -224,7 +224,7 @@ Entry.FieldBlock = class FieldBlock extends Entry.Field {
     }
 
     updateValueBlock(block) {
-        if (!(block instanceof Entry.Block)) {
+        if (!(block instanceof RoCode.Block)) {
             block = undefined;
         }
 
@@ -312,7 +312,7 @@ Entry.FieldBlock = class FieldBlock extends Entry.Field {
 
         const valueBlock = this._valueBlock;
 
-        if (Entry.block[valueBlock.type].isPrimitive) {
+        if (RoCode.block[valueBlock.type].isPrimitive) {
             valueBlock.doNotSplice = true;
             this._oldPrimitiveValue = valueBlock.getParam(0);
             valueBlock.destroy();
@@ -324,7 +324,7 @@ Entry.FieldBlock = class FieldBlock extends Entry.Field {
             this._destroyObservers();
             valueBlock.view._toGlobalCoordinate();
 
-            Entry.do('separateBlockByCommand', valueBlock).isPass(true);
+            RoCode.do('separateBlockByCommand', valueBlock).isPass(true);
             const board = this.getBoard();
             const { scale = 1 } = board || {};
             valueBlock.view.bumpAway(30 * scale, 150);
@@ -355,7 +355,7 @@ Entry.FieldBlock = class FieldBlock extends Entry.Field {
             isFromUserAction = !!_.result(selected, 'dragInstance');
         }
 
-        const block = new Entry.Block(
+        const block = new RoCode.Block(
             {
                 type: blockType,
                 defaultType: this.defaultType,
@@ -395,11 +395,11 @@ Entry.FieldBlock = class FieldBlock extends Entry.Field {
     }
 
     pointer(pointer = []) {
-        return this._block.pointer([Entry.PARAM, this._index, ...pointer]);
+        return this._block.pointer([RoCode.PARAM, this._index, ...pointer]);
     }
 
     targetPointer(pointer = []) {
-        const _pointer = this._block.pointer([Entry.PARAM, this._index, ...pointer]);
+        const _pointer = this._block.pointer([RoCode.PARAM, this._index, ...pointer]);
         return _pointer;
     }
 
@@ -413,8 +413,8 @@ Entry.FieldBlock = class FieldBlock extends Entry.Field {
             return;
         }
 
-        if (block.constructor !== Entry.Block) {
-            block = new Entry.Block(block, this._block.thread);
+        if (block.constructor !== RoCode.Block) {
+            block = new RoCode.Block(block, this._block.thread);
         }
 
         //if block schema is not present

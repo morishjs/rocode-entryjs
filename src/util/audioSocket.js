@@ -31,25 +31,25 @@ export function voiceApiConnect(addr = DEFAULT_ADDR, language = 'Kor', cb) {
         });
         client.on('disconnect', () => {
             console.log('closed');
-            Entry.engine.hideAllAudioPanel();
+            RoCode.engine.hideAllAudioPanel();
             audioUtils.isRecording = false;
         });
 
         client.on('connect_error', (error) => {
             console.error('connect_error', error);
-            Entry.engine.hideAllAudioPanel();
+            RoCode.engine.hideAllAudioPanel();
             audioUtils.isRecording = false;
             reject(error);
         });
         client.on('connect_timeout', (timeout) => {
             console.error('connect_timeout', timeout);
-            Entry.engine.hideAllAudioPanel();
+            RoCode.engine.hideAllAudioPanel();
             audioUtils.isRecording = false;
             reject(timeout);
         });
         client.on('error', (error) => {
             console.error('error', error);
-            Entry.engine.hideAllAudioPanel();
+            RoCode.engine.hideAllAudioPanel();
             audioUtils.isRecording = false;
             reject(error);
         });

@@ -4,17 +4,17 @@
 'use strict';
 
 (function(c) {
-    const COMMAND_TYPES = Entry.STATIC.COMMAND_TYPES;
+    const COMMAND_TYPES = RoCode.STATIC.COMMAND_TYPES;
 
     c[COMMAND_TYPES.playgroundChangeViewMode] = {
         do(newType, oldType) {
-            Entry.variableContainer.selected = null;
-            Entry.variableContainer.updateList();
-            Entry.playground.changeViewMode(newType);
-            if (Entry.disposeEvent) {
-                Entry.disposeEvent.notify();
+            RoCode.variableContainer.selected = null;
+            RoCode.variableContainer.updateList();
+            RoCode.playground.changeViewMode(newType);
+            if (RoCode.disposeEvent) {
+                RoCode.disposeEvent.notify();
             }
-            Entry.Utils.forceStopSounds();
+            RoCode.Utils.forceStopSounds();
         },
         state(newType, oldType) {
             return [oldType, newType];
@@ -26,14 +26,14 @@
                 ['oldType', oldType],
             ];
         },
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         undo: 'playgroundChangeViewMode',
         dom: ['playground', 'tabViewElements', '&0'],
     };
 
     c[COMMAND_TYPES.playgroundClickAddPicture] = {
         do() {
-            Entry.dispatchEvent('openPictureManager');
+            RoCode.dispatchEvent('openPictureManager');
         },
         state() {
             return [];
@@ -43,10 +43,10 @@
         },
         validate: false,
         //skipUndoStack: true,
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         restrict(data, domQuery, callback, restrictor) {
-            Entry.dispatchEvent('dismissModal');
-            const tooltip = new Entry.Tooltip(
+            RoCode.dispatchEvent('dismissModal');
+            const tooltip = new RoCode.Tooltip(
                 [
                     {
                         title: data.tooltip.title,
@@ -68,7 +68,7 @@
 
     c[COMMAND_TYPES.playgroundClickAddPictureCancel] = {
         do() {
-            Entry.dispatchEvent('dismissModal');
+            RoCode.dispatchEvent('dismissModal');
         },
         state() {
             return [];
@@ -78,14 +78,14 @@
         },
         validate: false,
         //skipUndoStack: true,
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         undo: '',
         dom: ['playground', 'pictureAddButton'],
     };
 
     c[COMMAND_TYPES.playgroundClickAddSound] = {
         do() {
-            Entry.dispatchEvent('openSoundManager');
+            RoCode.dispatchEvent('openSoundManager');
         },
         state() {
             return [];
@@ -94,10 +94,10 @@
             return [];
         },
         validate: false,
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         restrict(data, domQuery, callback, restrictor) {
-            Entry.dispatchEvent('dismissModal');
-            const tooltip = new Entry.Tooltip(
+            RoCode.dispatchEvent('dismissModal');
+            const tooltip = new RoCode.Tooltip(
                 [
                     {
                         title: data.tooltip.title,
@@ -119,7 +119,7 @@
 
     c[COMMAND_TYPES.playgroundClickAddSoundCancel] = {
         do() {
-            Entry.dispatchEvent('dismissModal');
+            RoCode.dispatchEvent('dismissModal');
         },
         state() {
             return [];
@@ -128,14 +128,14 @@
             return [];
         },
         validate: false,
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         undo: '',
         dom: ['playground', 'soundAddButton'],
     };
 
     c[COMMAND_TYPES.playgroundClickAddTable] = {
         do() {
-            Entry.dispatchEvent('openTableManager');
+            RoCode.dispatchEvent('openTableManager');
         },
         state() {
             return [];
@@ -150,7 +150,7 @@
 
     c[COMMAND_TYPES.playgroundClickAddTableCancel] = {
         do() {
-            Entry.dispatchEvent('dismissModal');
+            RoCode.dispatchEvent('dismissModal');
         },
         state() {
             return [];
@@ -159,14 +159,14 @@
             return [];
         },
         validate: false,
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         undo: '',
         dom: ['playground', 'tableAddButton'],
     };
 
     c[COMMAND_TYPES.playgroundClickAddExpansionBlock] = {
         do() {
-            Entry.dispatchEvent('openExpansionBlockManager');
+            RoCode.dispatchEvent('openExpansionBlockManager');
         },
         state() {
             return [];
@@ -175,10 +175,10 @@
             return [];
         },
         validate: false,
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         restrict(data, domQuery, callback, restrictor) {
-            Entry.dispatchEvent('dismissModal');
-            const tooltip = new Entry.Tooltip(
+            RoCode.dispatchEvent('dismissModal');
+            const tooltip = new RoCode.Tooltip(
                 [
                     {
                         title: data.tooltip.title,
@@ -200,7 +200,7 @@
 
     c[COMMAND_TYPES.playgroundClickAddExpansionBlockCancel] = {
         do() {
-            Entry.dispatchEvent('dismissModal');
+            RoCode.dispatchEvent('dismissModal');
         },
         state() {
             return [];
@@ -209,14 +209,14 @@
             return [];
         },
         validate: false,
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         undo: '',
         dom: ['playground', 'soundAddButton'],
     };
 
     c[COMMAND_TYPES.playgroundClickAddAIUtilizeBlock] = {
         do: function() {
-            Entry.dispatchEvent('openAIUtilizeBlockManager');
+            RoCode.dispatchEvent('openAIUtilizeBlockManager');
         },
         state: function() {
             return [];
@@ -225,10 +225,10 @@
             return [];
         },
         validate: false,
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         restrict: function(data, domQuery, callback, restrictor) {
-            Entry.dispatchEvent('dismissModal');
-            var tooltip = new Entry.Tooltip(
+            RoCode.dispatchEvent('dismissModal');
+            var tooltip = new RoCode.Tooltip(
                 [
                     {
                         title: data.tooltip.title,
@@ -250,7 +250,7 @@
 
     c[COMMAND_TYPES.playgroundClickAddAIUtilizeBlockCancel] = {
         do: function() {
-            Entry.dispatchEvent('dismissModal');
+            RoCode.dispatchEvent('dismissModal');
         },
         state: function() {
             return [];
@@ -259,8 +259,8 @@
             return [];
         },
         validate: false,
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         undo: '',
         dom: ['playground', 'soundAddButton'],
     };
-})(Entry.Command);
+})(RoCode.Command);

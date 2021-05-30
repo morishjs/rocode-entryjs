@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.NeoSpider = {
+RoCode.NeoSpider = {
     id: '41.1',
     name: 'NeoSpider',
     url: 'http://www.neo3ds.com/',
@@ -20,12 +20,12 @@ Entry.NeoSpider = {
         outerRightMotor: 0,
     },
     setZero() {
-        let portMap = Entry.NeoSpider.PORT_MAP;
-        let sq = Entry.hw.sendQueue;
+        let portMap = RoCode.NeoSpider.PORT_MAP;
+        let sq = RoCode.hw.sendQueue;
         for (let port in portMap) {
             sq[port] = portMap[port];
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     toneTable: {
         '0': 0,
@@ -107,7 +107,7 @@ Entry.NeoSpider = {
     BlockState: {},
 };
 
-Entry.NeoSpider.setLanguage = function () {
+RoCode.NeoSpider.setLanguage = function () {
     return {
         ko: {
             template: {
@@ -178,7 +178,7 @@ Entry.NeoSpider.setLanguage = function () {
 };
 
 
-Entry.NeoSpider.blockMenuBlocks = [
+RoCode.NeoSpider.blockMenuBlocks = [
     'neo_spider_get_analog_value',
     'neo_spider_get_analog_value_map',
     'neo_spider_get_ultrasonic_value',
@@ -199,11 +199,11 @@ Entry.NeoSpider.blockMenuBlocks = [
     'neo_spider_outer_motor_pwm',
 ];
 
-Entry.NeoSpider.getBlocks = function () {
+RoCode.NeoSpider.getBlocks = function () {
     return {
         neo_spider_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -219,8 +219,8 @@ Entry.NeoSpider.getBlocks = function () {
                     ],
                     value: 'gas',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -234,7 +234,7 @@ Entry.NeoSpider.getBlocks = function () {
             class: 'NeoSpiderGet',
             isNotFor: ['NeoSpider'],
             func(sprite, script) {
-                const pd = Entry.hw.portData;
+                const pd = RoCode.hw.portData;
                 let port = script.getValue('PORT', script);
                 port = port == 'outer' ? 'gas' : port;
                 return pd[port];
@@ -257,9 +257,9 @@ Entry.NeoSpider.getBlocks = function () {
                                 ],
                                 value: 'gas',
                                 fontSize: 11,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValueLowerCase,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValueLowerCase,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
                             },
                         ],
                     },
@@ -267,8 +267,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_get_analog_value_map: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -284,8 +284,8 @@ Entry.NeoSpider.getBlocks = function () {
                     ],
                     value: 'gas',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -341,7 +341,7 @@ Entry.NeoSpider.getBlocks = function () {
             class: 'NeoSpiderGet',
             isNotFor: ['NeoSpider'],
             func(sprite, script) {
-                const pd = Entry.hw.portData;
+                const pd = RoCode.hw.portData;
                 let port = script.getValue('PORT', script);
                 port = port == 'outer' ? 'gas' : port;
                 let result = pd[port];
@@ -378,9 +378,9 @@ Entry.NeoSpider.getBlocks = function () {
                                 ],
                                 value: 'gas',
                                 fontSize: 11,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValueLowerCase,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValueLowerCase,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
                             },
                             {
                                 type: 'Block',
@@ -404,8 +404,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_get_ultrasonic_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -419,7 +419,7 @@ Entry.NeoSpider.getBlocks = function () {
             class: 'NeoSpiderGet',
             isNotFor: ['NeoSpider'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
 
                 if (!sq.ultrasonic) {
                     sq.ultrasonic = {};
@@ -427,7 +427,7 @@ Entry.NeoSpider.getBlocks = function () {
 
                 sq.ultrasonic = 1;
 
-                return Entry.hw.portData.ultrasonic || 0;
+                return RoCode.hw.portData.ultrasonic || 0;
             },
             syntax: {
                 js: [],
@@ -441,8 +441,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_get_motion_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             params: [],
@@ -455,7 +455,7 @@ Entry.NeoSpider.getBlocks = function () {
             class: 'NeoSpiderGet',
             isNotFor: ['NeoSpider'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
 
                 if (!sq.motion) {
                     sq.motion = {};
@@ -463,7 +463,7 @@ Entry.NeoSpider.getBlocks = function () {
 
                 sq.motion = 1;
 
-                return Entry.hw.portData.motion || 0;
+                return RoCode.hw.portData.motion || 0;
             },
             syntax: {
                 js: [],
@@ -477,8 +477,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_get_infared_value : {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -491,8 +491,8 @@ Entry.NeoSpider.getBlocks = function () {
                     ],
                     value: 'left_infared',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -508,7 +508,7 @@ Entry.NeoSpider.getBlocks = function () {
             func(sprite, script) {
                 let port = script.getValue('PORT', script);
 
-                return Entry.hw.portData[port] || 0;
+                return RoCode.hw.portData[port] || 0;
             },
             syntax: {
                 js: [],
@@ -525,9 +525,9 @@ Entry.NeoSpider.getBlocks = function () {
                                 ],
                                 value: 'left_infared',
                                 fontSize: 11,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValueLowerCase,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValueLowerCase,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
                             },
                         ],
                     },
@@ -535,8 +535,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_tone_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -560,8 +560,8 @@ Entry.NeoSpider.getBlocks = function () {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -599,9 +599,9 @@ Entry.NeoSpider.getBlocks = function () {
                                 ],
                                 value: 'C',
                                 fontSize: 11,
-                                converter: Entry.block.converters.returnStringValueUpperCase,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValueUpperCase,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'neo_spider_tone_list',
@@ -610,8 +610,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_tone_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -647,8 +647,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_octave_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -665,8 +665,8 @@ Entry.NeoSpider.getBlocks = function () {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -690,8 +690,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_set_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -740,12 +740,12 @@ Entry.NeoSpider.getBlocks = function () {
             class: 'NeoSpider',
             isNotFor: ['NeoSpider'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
 
                 if (!script.isStart) {
                     let note = script.getValue('NOTE', script);
-                    if (!Entry.Utils.isNumber(note)) {
-                        note = Entry.NeoSpider.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note)) {
+                        note = RoCode.NeoSpider.toneTable[note];
                     }
 
                     if (note < 0) {
@@ -766,7 +766,7 @@ Entry.NeoSpider.getBlocks = function () {
 
                     if (duration === 0) {
                         sq.tone = {
-                            type: Entry.NeoSpider.PORT_MAP.tone,
+                            type: RoCode.NeoSpider.PORT_MAP.tone,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -783,7 +783,7 @@ Entry.NeoSpider.getBlocks = function () {
                     let value = 0;
 
                     if (note != 0) {
-                        value = Entry.NeoSpider.toneMap[note][octave];
+                        value = RoCode.NeoSpider.toneMap[note][octave];
                     }
 
                     duration = duration * 1000;
@@ -791,7 +791,7 @@ Entry.NeoSpider.getBlocks = function () {
                     script.timeFlag = 1;
 
                     sq.tone = {
-                        type: Entry.NeoSpider.PORT_MAP.tone,
+                        type: RoCode.NeoSpider.PORT_MAP.tone,
                         data: {
                             value,
                             duration,
@@ -809,11 +809,11 @@ Entry.NeoSpider.getBlocks = function () {
                     delete script.timeFlag;
                     delete script.isStart;
                     sq.tone = {
-                        type: Entry.NeoSpider.PORT_MAP.tone,
+                        type: RoCode.NeoSpider.PORT_MAP.tone,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -841,8 +841,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_set_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -870,7 +870,7 @@ Entry.NeoSpider.getBlocks = function () {
             class: 'NeoSpider',
             isNotFor: ['NeoSpider'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 let value = script.getNumberValue('VALUE', script);
                 value = Math.min(130, value);
                 value = Math.max(50, value);
@@ -895,8 +895,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_set_servo_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -909,8 +909,8 @@ Entry.NeoSpider.getBlocks = function () {
                     ],
                     value: '90',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -929,7 +929,7 @@ Entry.NeoSpider.getBlocks = function () {
             class: 'NeoSpider',
             isNotFor: ['NeoSpider'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 let value = script.getNumberValue('VALUE', script);
                 value = Math.min(130, value);
                 value = Math.max(50, value);
@@ -954,8 +954,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_motor_state: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -969,8 +969,8 @@ Entry.NeoSpider.getBlocks = function () {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -991,7 +991,7 @@ Entry.NeoSpider.getBlocks = function () {
             class: 'NeoSpider',
             isNotFor: ['NeoSpider'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 let state = script.getNumberValue('STATE', script);
 
                 if (!sq.motorState) {
@@ -1018,9 +1018,9 @@ Entry.NeoSpider.getBlocks = function () {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValueUpperCase,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValueUpperCase,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
                             },
                         ],
                     },
@@ -1028,8 +1028,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_motor_state_secs: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1043,8 +1043,8 @@ Entry.NeoSpider.getBlocks = function () {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1075,7 +1075,7 @@ Entry.NeoSpider.getBlocks = function () {
             class: 'NeoSpider',
             isNotFor: ['NeoSpider'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
 
                 if (!script.isStart) {
                     let state = script.getNumberValue('STATE', script);
@@ -1107,7 +1107,7 @@ Entry.NeoSpider.getBlocks = function () {
                     delete script.timeFlag;
                     delete script.isStart;
                     sq.motorState = 0;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1127,9 +1127,9 @@ Entry.NeoSpider.getBlocks = function () {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValueUpperCase,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValueUpperCase,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
                             },
                             {
                                 type: 'Block',
@@ -1141,8 +1141,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_motor_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1161,7 +1161,7 @@ Entry.NeoSpider.getBlocks = function () {
             class: 'NeoSpider',
             isNotFor: ['NeoSpider'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 if (!sq.motorState) {
                     sq.motorState = {};
                 }
@@ -1179,8 +1179,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_neopixel: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1242,7 +1242,7 @@ Entry.NeoSpider.getBlocks = function () {
             class: 'NeoSpider',
             isNotFor: ['NeoSpider'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 let num = script.getNumberValue('NUM', script);
                 let numStr = '';
                 switch (num) {
@@ -1290,7 +1290,7 @@ Entry.NeoSpider.getBlocks = function () {
 
                 if (numStr) {
                     sq.neopixel = {
-                        type: Entry.NeoSpider.PORT_MAP.neopixel,
+                        type: RoCode.NeoSpider.PORT_MAP.neopixel,
                         data: {
                             numStr,
                             red,
@@ -1299,8 +1299,8 @@ Entry.NeoSpider.getBlocks = function () {
                         },
                         time: new Date().getTime(),
                     };
-    
-                    Entry.hw.update();
+
+                    RoCode.hw.update();
                 }
 
                 return script.callReturn();
@@ -1333,8 +1333,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_neopixel_color_picker: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1371,7 +1371,7 @@ Entry.NeoSpider.getBlocks = function () {
             class: 'NeoSpider',
             isNotFor: ['NeoSpider'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 let num = script.getNumberValue('NUM', script);
                 let numStr = '';
                 switch (num) {
@@ -1421,7 +1421,7 @@ Entry.NeoSpider.getBlocks = function () {
                     let blue = parseInt(value.substr(5, 2), 16);
 
                     sq.neopixel = {
-                        type: Entry.NeoSpider.PORT_MAP.neopixel,
+                        type: RoCode.NeoSpider.PORT_MAP.neopixel,
                         data: {
                             numStr,
                             red,
@@ -1430,16 +1430,16 @@ Entry.NeoSpider.getBlocks = function () {
                         },
                         time: new Date().getTime(),
                     };
-    
-                    Entry.hw.update();
+
+                    RoCode.hw.update();
                 }
 
                 return script.callReturn();
             },
         },
         neo_spider_neopixel_color_picker_all_on: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1466,7 +1466,7 @@ Entry.NeoSpider.getBlocks = function () {
             class: 'NeoSpider',
             isNotFor: ['NeoSpider'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 let value = script.getStringField('COLOR');
 
                 if (!sq.neopixel) {
@@ -1478,7 +1478,7 @@ Entry.NeoSpider.getBlocks = function () {
                 let blue = parseInt(value.substr(5, 2), 16);
 
                 sq.neopixel = {
-                    type: Entry.NeoSpider.PORT_MAP.neopixel,
+                    type: RoCode.NeoSpider.PORT_MAP.neopixel,
                     data: {
                         red,
                         green,
@@ -1487,13 +1487,13 @@ Entry.NeoSpider.getBlocks = function () {
                     time: new Date().getTime(),
                 };
 
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
         },
         neo_spider_neopixel_all_on: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1545,7 +1545,7 @@ Entry.NeoSpider.getBlocks = function () {
             class: 'NeoSpider',
             isNotFor: ['NeoSpider'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
 
                 let red = script.getNumberValue('RED', script);
                 let green = script.getNumberValue('GREEN', script);
@@ -1556,7 +1556,7 @@ Entry.NeoSpider.getBlocks = function () {
                 }
 
                 sq.neopixel = {
-                    type: Entry.NeoSpider.PORT_MAP.neopixel,
+                    type: RoCode.NeoSpider.PORT_MAP.neopixel,
                     data: {
                         red,
                         green,
@@ -1565,7 +1565,7 @@ Entry.NeoSpider.getBlocks = function () {
                     time: new Date().getTime(),
                 };
 
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: {
@@ -1592,8 +1592,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_neopixel_all_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1612,7 +1612,7 @@ Entry.NeoSpider.getBlocks = function () {
             class: 'NeoSpider',
             isNotFor: ['NeoSpider'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
 
                 if (!sq.neopixel) {
                     sq.neopixel = {};
@@ -1633,8 +1633,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_outer_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1646,8 +1646,8 @@ Entry.NeoSpider.getBlocks = function () {
                     ],
                     value: '5',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1657,8 +1657,8 @@ Entry.NeoSpider.getBlocks = function () {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1681,7 +1681,7 @@ Entry.NeoSpider.getBlocks = function () {
             class: 'NeoSpider',
             isNotFor: ['NeoSpider'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 let port = script.getNumberValue('PORT', script);
                 let state = script.getNumberValue('STATE', script);
                 state = state ? 255 : 0;
@@ -1712,8 +1712,8 @@ Entry.NeoSpider.getBlocks = function () {
                                 ],
                                 value: '5',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                             {
                                 type: 'Dropdown',
@@ -1723,8 +1723,8 @@ Entry.NeoSpider.getBlocks = function () {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                     },
@@ -1732,8 +1732,8 @@ Entry.NeoSpider.getBlocks = function () {
             },
         },
         neo_spider_outer_motor_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1745,8 +1745,8 @@ Entry.NeoSpider.getBlocks = function () {
                     ],
                     value: '5',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1774,13 +1774,13 @@ Entry.NeoSpider.getBlocks = function () {
             class: 'NeoSpider',
             isNotFor: ['NeoSpider'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 let port = script.getNumberValue('PORT', script);
                 let value = script.getNumberValue('VALUE', script);
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                
+
                 if (port == 5) {
                     if (!sq.outerLeftMotor) {
                         sq.outerLeftMotor = {};
@@ -1808,8 +1808,8 @@ Entry.NeoSpider.getBlocks = function () {
                                 ],
                                 value: '5',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                             {
                                 type: 'Block',
@@ -1823,4 +1823,4 @@ Entry.NeoSpider.getBlocks = function () {
     };
 };
 
-module.exports = Entry.NeoSpider;
+module.exports = RoCode.NeoSpider;

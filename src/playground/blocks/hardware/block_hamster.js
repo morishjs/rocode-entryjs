@@ -1,16 +1,16 @@
 'use strict';
 
-Entry.Hamster = {
+RoCode.Hamster = {
     setZero() {
-        Entry.Robomation.setZero();
+        RoCode.Robomation.setZero();
     },
     afterReceive(pd) {
-        Entry.Robomation.afterReceive(pd, false);
+        RoCode.Robomation.afterReceive(pd, false);
     },
     getRobot() {
-        const robot = Entry.Robomation.getRobot('hamster', 0);
+        const robot = RoCode.Robomation.getRobot('hamster', 0);
         if (robot) {
-            robot.setMotoring(Entry.hw.sendQueue);
+            robot.setMotoring(RoCode.hw.sendQueue);
         }
         return robot;
     },
@@ -127,7 +127,7 @@ Entry.Hamster = {
     },
 };
 
-Entry.Hamster.setLanguage = () => ({
+RoCode.Hamster.setLanguage = () => ({
     ko: {
         template: {
             hamster_gripper: '집게 %1 %2',
@@ -656,7 +656,7 @@ Entry.Hamster.setLanguage = () => ({
     },
 });
 
-Entry.Hamster.blockMenuBlocks = [
+RoCode.Hamster.blockMenuBlocks = [
     'hamster_hand_found',
     'hamster_boolean',
     'hamster_value',
@@ -691,11 +691,11 @@ Entry.Hamster.blockMenuBlocks = [
     'hamster_release_gripper',
 ];
 
-Entry.Hamster.getBlocks = function() {
+RoCode.Hamster.getBlocks = function() {
     return {
         hamster_hand_found: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -708,7 +708,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_sensor',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.checkHandFound(script) : false;
             },
             syntax: {
@@ -722,8 +722,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_boolean: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -743,8 +743,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: 'TILT_FORWARD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -758,7 +758,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_sensor',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.checkBoolean(script) : false;
             },
             syntax: {
@@ -783,9 +783,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'TILT_FORWARD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -793,8 +793,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -817,8 +817,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: 'leftProximity',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -832,7 +832,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_sensor',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 if (robot) {
                     return robot.getValue(script);
                 }
@@ -862,9 +862,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'leftProximity',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -872,8 +872,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_move_forward_once: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -891,7 +891,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_board',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.boardForward(script) : script;
             },
             syntax: {
@@ -904,8 +904,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_turn_once: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -917,8 +917,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -937,7 +937,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_board',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.boardTurn(script) : script;
             },
             syntax: {
@@ -954,9 +954,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -964,8 +964,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_move_forward_for_secs: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -996,7 +996,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_wheel',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.moveForwardSecs(script) : script;
             },
             syntax: {
@@ -1015,8 +1015,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_move_backward_for_secs: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1047,7 +1047,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_wheel',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.moveBackwardSecs(script) : script;
             },
             syntax: {
@@ -1066,8 +1066,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_turn_for_secs: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1079,8 +1079,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1111,7 +1111,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_wheel',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.turnSecs(script) : script;
             },
             syntax: {
@@ -1128,9 +1128,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -1142,8 +1142,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_change_both_wheels_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1183,7 +1183,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_wheel',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.changeWheels(script) : script;
             },
             syntax: {
@@ -1206,8 +1206,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_set_both_wheels_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1247,7 +1247,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_wheel',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.setWheels(script) : script;
             },
             syntax: {
@@ -1270,8 +1270,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_change_wheel_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1284,8 +1284,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1316,7 +1316,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_wheel',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.changeWheel(script) : script;
             },
             syntax: {
@@ -1334,9 +1334,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -1348,8 +1348,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_set_wheel_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1362,8 +1362,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1394,7 +1394,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_wheel',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.setWheel(script) : script;
             },
             syntax: {
@@ -1412,9 +1412,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -1426,8 +1426,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_follow_line_using: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1439,8 +1439,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: 'BLACK',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1451,8 +1451,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1472,7 +1472,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_wheel',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.followLine(script) : script;
             },
             syntax: {
@@ -1489,9 +1489,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'BLACK',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -1502,9 +1502,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1512,8 +1512,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_follow_line_until: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1525,8 +1525,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: 'BLACK',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1538,8 +1538,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: 'FRONT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1559,7 +1559,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_wheel',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.followLineUntil(script) : script;
             },
             syntax: {
@@ -1576,9 +1576,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'BLACK',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -1590,9 +1590,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'FRONT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1600,8 +1600,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_set_following_speed_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1619,8 +1619,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1639,7 +1639,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_wheel',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.setLineTracerSpeed(script) : script;
             },
             syntax: {
@@ -1662,9 +1662,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -1672,8 +1672,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1691,7 +1691,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_wheel',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.stop(script) : script;
             },
             syntax: {
@@ -1704,8 +1704,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_set_led_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1718,8 +1718,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1734,8 +1734,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1755,7 +1755,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_led',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.setLed(script) : script;
             },
             syntax: {
@@ -1773,9 +1773,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -1790,9 +1790,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '4'],
@@ -1809,9 +1809,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -1826,9 +1826,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '6'],
@@ -1845,9 +1845,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -1862,9 +1862,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '2'],
@@ -1881,9 +1881,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -1898,9 +1898,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '3'],
@@ -1917,9 +1917,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -1934,9 +1934,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '1'],
@@ -1953,9 +1953,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -1970,9 +1970,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '5'],
@@ -1989,9 +1989,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2006,9 +2006,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '7'],
@@ -2017,8 +2017,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_clear_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2031,8 +2031,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2051,7 +2051,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_led',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.clearLed(script) : script;
             },
             syntax: {
@@ -2069,9 +2069,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2079,8 +2079,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_beep: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2098,7 +2098,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_buzzer',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.beep(script) : script;
             },
             syntax: {
@@ -2111,8 +2111,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_change_buzzer_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2143,7 +2143,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_buzzer',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.changeBuzzer(script) : script;
             },
             syntax: {
@@ -2156,8 +2156,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_set_buzzer_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2188,7 +2188,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_buzzer',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.setBuzzer(script) : script;
             },
             syntax: {
@@ -2201,8 +2201,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_clear_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2220,7 +2220,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_buzzer',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.clearBuzzer(script) : script;
             },
             syntax: {
@@ -2233,8 +2233,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_play_note: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2256,8 +2256,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2272,8 +2272,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2293,7 +2293,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_buzzer',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.playNote(script) : script;
             },
             syntax: {
@@ -2320,9 +2320,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2337,9 +2337,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: ['4'],
@@ -2365,9 +2365,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2382,9 +2382,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: ['5'],
@@ -2410,9 +2410,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2427,9 +2427,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: ['6'],
@@ -2455,9 +2455,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2472,9 +2472,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: ['7'],
@@ -2500,9 +2500,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2517,9 +2517,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: ['8'],
@@ -2545,9 +2545,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2562,9 +2562,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: ['9'],
@@ -2590,9 +2590,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2607,9 +2607,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: ['10'],
@@ -2635,9 +2635,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2652,9 +2652,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: ['11'],
@@ -2680,9 +2680,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2697,9 +2697,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: ['12'],
@@ -2725,9 +2725,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2742,9 +2742,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: ['13'],
@@ -2770,9 +2770,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2787,9 +2787,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: ['14'],
@@ -2815,9 +2815,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2832,9 +2832,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         params: ['15'],
@@ -2843,8 +2843,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_play_note_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2866,8 +2866,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2882,8 +2882,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2916,7 +2916,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_buzzer',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.playNoteBeat(script) : script;
             },
             syntax: {
@@ -2943,9 +2943,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2960,9 +2960,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -2989,9 +2989,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3006,9 +3006,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -3035,9 +3035,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3052,9 +3052,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -3081,9 +3081,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3098,9 +3098,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -3127,9 +3127,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3144,9 +3144,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -3173,9 +3173,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3190,9 +3190,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -3219,9 +3219,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3236,9 +3236,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -3265,9 +3265,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3282,9 +3282,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -3311,9 +3311,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3328,9 +3328,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -3357,9 +3357,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3374,9 +3374,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -3403,9 +3403,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3420,9 +3420,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -3449,9 +3449,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3466,9 +3466,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -3478,8 +3478,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_rest_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3510,7 +3510,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_buzzer',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.restBeat(script) : script;
             },
             syntax: {
@@ -3529,8 +3529,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_change_tempo_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3561,7 +3561,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_buzzer',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.changeTempo(script) : script;
             },
             syntax: {
@@ -3580,8 +3580,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_set_tempo_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3612,7 +3612,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_buzzer',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.setTempo(script) : script;
             },
             syntax: {
@@ -3631,8 +3631,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_set_port_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3645,8 +3645,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -3659,8 +3659,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3680,7 +3680,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_port',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.setIoMode(script) : script;
             },
             syntax: {
@@ -3698,9 +3698,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3713,9 +3713,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '0'],
@@ -3732,9 +3732,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3747,9 +3747,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '1'],
@@ -3766,9 +3766,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3781,9 +3781,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '8'],
@@ -3800,9 +3800,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3815,9 +3815,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '9'],
@@ -3834,9 +3834,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3849,9 +3849,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         params: [null, '10'],
@@ -3860,8 +3860,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_change_output_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3874,8 +3874,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3906,7 +3906,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_port',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.changeOutput(script) : script;
             },
             syntax: {
@@ -3924,9 +3924,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -3938,8 +3938,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_set_output_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3952,8 +3952,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3984,7 +3984,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_port',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.setOutput(script) : script;
             },
             syntax: {
@@ -4002,9 +4002,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -4016,8 +4016,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_gripper: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4029,8 +4029,8 @@ Entry.Hamster.getBlocks = function() {
                     ],
                     value: 'OPEN',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -4049,7 +4049,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_port',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.gripper(script) : script;
             },
             syntax: {
@@ -4066,9 +4066,9 @@ Entry.Hamster.getBlocks = function() {
                                 ],
                                 value: 'OPEN',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -4076,8 +4076,8 @@ Entry.Hamster.getBlocks = function() {
             },
         },
         hamster_release_gripper: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4095,7 +4095,7 @@ Entry.Hamster.getBlocks = function() {
             class: 'hamster_port',
             isNotFor: ['hamster'],
             func(sprite, script) {
-                const robot = Entry.Hamster.getRobot();
+                const robot = RoCode.Hamster.getRobot();
                 return robot ? robot.releaseGripper(script) : script;
             },
             syntax: {
@@ -4110,4 +4110,4 @@ Entry.Hamster.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Hamster;
+module.exports = RoCode.Hamster;

@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.JCBoard = {
+RoCode.JCBoard = {
     Cmd: {
         CMD_GOLDENKEY0: 0,
         CMD_GOLDENKEY1: 1,
@@ -35,7 +35,7 @@ Entry.JCBoard = {
         SENSOR_AIN4: 11,
     },
     setZero() {
-        Entry.hw.sendQueue.CMD = [
+        RoCode.hw.sendQueue.CMD = [
             0x26,
             0xa8,
             0x14,
@@ -57,7 +57,7 @@ Entry.JCBoard = {
             0x00,
             0x00,
         ];
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     id: '1D.4',
     name: 'JCBoard',
@@ -133,7 +133,7 @@ Entry.JCBoard = {
     },
 };
 
-Entry.JCBoard.setLanguage = function() {
+RoCode.JCBoard.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -182,7 +182,7 @@ Entry.JCBoard.setLanguage = function() {
     };
 };
 
-Entry.JCBoard.blockMenuBlocks = [
+RoCode.JCBoard.blockMenuBlocks = [
     'jcboard_sonarport',
     'jcboard_led',
     'jcboard_buzzer',
@@ -193,7 +193,7 @@ Entry.JCBoard.blockMenuBlocks = [
     'jcboard_analog',
 ];
 
-Entry.JCBoard.getBlocks = function() {
+RoCode.JCBoard.getBlocks = function() {
     let noteID = 1;
     const moveID = 1;
     const rotID = 1;
@@ -201,8 +201,8 @@ Entry.JCBoard.getBlocks = function() {
     return {
         //region JCBoard
         jcboard_sonarport: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -217,8 +217,8 @@ Entry.JCBoard.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -238,8 +238,8 @@ Entry.JCBoard.getBlocks = function() {
             isNotFor: ['JCBoard'],
 
             func(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined') {
-                    Entry.hw.sendQueue.CMD = [
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined') {
+                    RoCode.hw.sendQueue.CMD = [
                         0x26,
                         0xa8,
                         0x14,
@@ -262,18 +262,18 @@ Entry.JCBoard.getBlocks = function() {
                         0x00,
                     ];
                 }
-                const cmd = Entry.hw.sendQueue.CMD;
+                const cmd = RoCode.hw.sendQueue.CMD;
                 const port = script.getNumberValue('SONARPORT', script);
-                cmd[Entry.JCBoard.Cmd.CMD_ULTRASONIC] |= 0x01 << port;
-                Entry.hw.update();
+                cmd[RoCode.JCBoard.Cmd.CMD_ULTRASONIC] |= 0x01 << port;
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
 
         jcboard_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -285,8 +285,8 @@ Entry.JCBoard.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -296,8 +296,8 @@ Entry.JCBoard.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -318,8 +318,8 @@ Entry.JCBoard.getBlocks = function() {
             isNotFor: ['JCBoard'],
 
             func(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined') {
-                    Entry.hw.sendQueue.CMD = [
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined') {
+                    RoCode.hw.sendQueue.CMD = [
                         0x26,
                         0xa8,
                         0x14,
@@ -342,23 +342,23 @@ Entry.JCBoard.getBlocks = function() {
                         0x00,
                     ];
                 }
-                const cmd = Entry.hw.sendQueue.CMD;
+                const cmd = RoCode.hw.sendQueue.CMD;
                 const what = script.getNumberValue('LED_PORT', script);
                 const act = script.getNumberValue('LED_ACTION', script);
                 if (act == 0) {
-                    cmd[Entry.JCBoard.Cmd.CMD_LED] |= 0x01 << what;
+                    cmd[RoCode.JCBoard.Cmd.CMD_LED] |= 0x01 << what;
                 } else {
-                    cmd[Entry.JCBoard.Cmd.CMD_LED] &= ~(0x01 << what);
+                    cmd[RoCode.JCBoard.Cmd.CMD_LED] &= ~(0x01 << what);
                 }
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
 
         jcboard_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -375,8 +375,8 @@ Entry.JCBoard.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -391,8 +391,8 @@ Entry.JCBoard.getBlocks = function() {
                     ],
                     value: 10,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -413,8 +413,8 @@ Entry.JCBoard.getBlocks = function() {
             isNotFor: ['JCBoard'],
 
             func(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined') {
-                    Entry.hw.sendQueue.CMD = [
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined') {
+                    RoCode.hw.sendQueue.CMD = [
                         0x26,
                         0xa8,
                         0x14,
@@ -437,28 +437,28 @@ Entry.JCBoard.getBlocks = function() {
                         0x00,
                     ];
                 }
-                const cmd = Entry.hw.sendQueue.CMD;
+                const cmd = RoCode.hw.sendQueue.CMD;
                 const note = script.getNumberValue('BUZZER_NOTE', script);
                 const delay = script.getNumberValue('BUZZER_DUR', script);
 
-                cmd[Entry.JCBoard.Cmd.CMD_BUZZER] = note | (noteID << 4);
-                cmd[Entry.JCBoard.Cmd.CMD_BUZZER_DUR] = delay;
+                cmd[RoCode.JCBoard.Cmd.CMD_BUZZER] = note | (noteID << 4);
+                cmd[RoCode.JCBoard.Cmd.CMD_BUZZER_DUR] = delay;
                 noteID = (noteID + 1) & 0x0f;
                 console.log(
                     '%d %d %d',
-                    cmd[Entry.JCBoard.Cmd.CMD_BUZZER],
-                    cmd[Entry.JCBoard.Cmd.CMD_BUZZER_DUR],
+                    cmd[RoCode.JCBoard.Cmd.CMD_BUZZER],
+                    cmd[RoCode.JCBoard.Cmd.CMD_BUZZER_DUR],
                     noteID
                 );
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
 
         jcboard_dcmotor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -470,8 +470,8 @@ Entry.JCBoard.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -498,8 +498,8 @@ Entry.JCBoard.getBlocks = function() {
             isNotFor: ['JCBoard'],
 
             func(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined') {
-                    Entry.hw.sendQueue.CMD = [
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined') {
+                    RoCode.hw.sendQueue.CMD = [
                         0x26,
                         0xa8,
                         0x14,
@@ -522,7 +522,7 @@ Entry.JCBoard.getBlocks = function() {
                         0x00,
                     ];
                 }
-                const cmd = Entry.hw.sendQueue.CMD;
+                const cmd = RoCode.hw.sendQueue.CMD;
                 const what = script.getNumberValue('MOTOR_WHAT', script);
                 let speed = script.getNumberValue('MOTOR_SPEED', script);
                 if (speed > 100) {
@@ -530,17 +530,17 @@ Entry.JCBoard.getBlocks = function() {
                 } else if (speed < -100) {
                     speed = -100;
                 }
-                cmd[Entry.JCBoard.Cmd.CMD_DC0 + what] = speed;
+                cmd[RoCode.JCBoard.Cmd.CMD_DC0 + what] = speed;
                 //console.log("%d %d", 	what, speed);
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
 
         jcboard_servomotor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -554,8 +554,8 @@ Entry.JCBoard.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -582,8 +582,8 @@ Entry.JCBoard.getBlocks = function() {
             isNotFor: ['JCBoard'],
 
             func(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined') {
-                    Entry.hw.sendQueue.CMD = [
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined') {
+                    RoCode.hw.sendQueue.CMD = [
                         0x26,
                         0xa8,
                         0x14,
@@ -606,7 +606,7 @@ Entry.JCBoard.getBlocks = function() {
                         0x00,
                     ];
                 }
-                const cmd = Entry.hw.sendQueue.CMD;
+                const cmd = RoCode.hw.sendQueue.CMD;
                 const what = script.getNumberValue('SERVO_WHAT', script);
                 let degree = script.getNumberValue('SERVO_DEGREE', script);
                 if (degree < -90) {
@@ -614,17 +614,17 @@ Entry.JCBoard.getBlocks = function() {
                 } else if (degree > 90) {
                     degree = 90;
                 }
-                cmd[Entry.JCBoard.Cmd.CMD_SERVO0 + what] = degree;
+                cmd[RoCode.JCBoard.Cmd.CMD_SERVO0 + what] = degree;
                 console.log('servo what:%d degree:%d', what, degree);
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
 
         jcboard_pin: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -639,8 +639,8 @@ Entry.JCBoard.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -650,8 +650,8 @@ Entry.JCBoard.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -672,8 +672,8 @@ Entry.JCBoard.getBlocks = function() {
             isNotFor: ['JCBoard'],
 
             func(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined') {
-                    Entry.hw.sendQueue.CMD = [
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined') {
+                    RoCode.hw.sendQueue.CMD = [
                         0x26,
                         0xa8,
                         0x14,
@@ -696,24 +696,24 @@ Entry.JCBoard.getBlocks = function() {
                         0x00,
                     ];
                 }
-                const cmd = Entry.hw.sendQueue.CMD;
+                const cmd = RoCode.hw.sendQueue.CMD;
                 const what = script.getNumberValue('PIN_WHAT', script);
                 const state = script.getNumberValue('PIN_STATE', script);
                 if (state == 0) {
-                    cmd[Entry.JCBoard.Cmd.CMD_PIN] |= 0x01 << what;
+                    cmd[RoCode.JCBoard.Cmd.CMD_PIN] |= 0x01 << what;
                 } else {
-                    cmd[Entry.JCBoard.Cmd.CMD_PIN] &= ~(0x01 << what);
+                    cmd[RoCode.JCBoard.Cmd.CMD_PIN] &= ~(0x01 << what);
                 }
                 //console.log("servo what:%d degree:%d", 	what, degree);
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
 
         jcboard_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -726,8 +726,8 @@ Entry.JCBoard.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -741,18 +741,18 @@ Entry.JCBoard.getBlocks = function() {
             class: 'JCBoard_Sensor',
             isNotFor: ['JCBoard'],
             func(sprite, script) {
-                let sensorData = Entry.hw.portData.CMD;
+                let sensorData = RoCode.hw.portData.CMD;
                 const what = script.getNumberValue('BUTTON_WHAT', script);
                 sensorData = sensorData[0] == 0x26 ? sensorData : oldSensorData;
                 oldSensorData = sensorData;
-                return !!(sensorData[Entry.JCBoard.Sensor.SENSOR_BUTTON] & (0x01 << what));
+                return !!(sensorData[RoCode.JCBoard.Sensor.SENSOR_BUTTON] & (0x01 << what));
             },
             syntax: { js: [], py: [] },
         },
 
         jcboard_analog: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -768,8 +768,8 @@ Entry.JCBoard.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -783,15 +783,15 @@ Entry.JCBoard.getBlocks = function() {
             class: 'JCBoard_Sensor',
             isNotFor: ['JCBoard'],
             func(sprite, script) {
-                let sensorData = Entry.hw.portData.CMD;
+                let sensorData = RoCode.hw.portData.CMD;
                 const what = script.getNumberValue('ANALOG_WHAT', script);
                 sensorData = sensorData[0] == 0x26 ? sensorData : oldSensorData;
                 oldSensorData = sensorData;
-                return sensorData[Entry.JCBoard.Sensor.SENSOR_AIN0 + what];
+                return sensorData[RoCode.JCBoard.Sensor.SENSOR_AIN0 + what];
             },
             syntax: { js: [], py: [] },
         },
     };
 };
 
-module.exports = Entry.JCBoard;
+module.exports = RoCode.JCBoard;

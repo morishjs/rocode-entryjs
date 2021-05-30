@@ -4,7 +4,7 @@ const _set = require('lodash/set');
 const _get = require('lodash/get');
 const _merge = require('lodash/merge');
 
-Entry.Microbit = new (class Microbit {
+RoCode.Microbit = new (class Microbit {
     constructor() {
         this.id = '22.1';
         this.url = 'http://microbit.org/ko/';
@@ -26,16 +26,16 @@ Entry.Microbit = new (class Microbit {
         if (key.length === 1) {
             key += ((Math.random() * 16) | 0).toString(16);
         }
-        return Entry.generateHash() + key;
+        return RoCode.generateHash() + key;
     }
 
     setZero() {
-        Entry.hw.sendQueue = {
+        RoCode.hw.sendQueue = {
             [this.getHashKey()]: {
                 type: 'RST',
             },
         };
-        Entry.hw.update();
+        RoCode.hw.update();
         this.blockIds = {};
         this.isExecBlock = false;
         this.execTimeFlag = false;
@@ -73,10 +73,10 @@ Entry.Microbit = new (class Microbit {
             scope.timeFlag = 1;
             this.nowBlockId = blockId;
             this.blockIds[blockId] = false;
-            _merge(Entry.hw.sendQueue, {
+            _merge(RoCode.hw.sendQueue, {
                 [blockId]: data,
             });
-            Entry.hw.update();
+            RoCode.hw.update();
             setTimeout(() => {
                 scope.timeFlag = 0;
             });
@@ -87,7 +87,7 @@ Entry.Microbit = new (class Microbit {
             this.execTimeFlag = 0;
             this.execTimeFlag = undefined;
             this.isExecBlock = false;
-            Entry.engine.isContinue = false;
+            RoCode.engine.isContinue = false;
             return true;
         }
         return false;
@@ -96,7 +96,7 @@ Entry.Microbit = new (class Microbit {
     postCallReturn(args) {
         const { script } = args;
         if (!this.asyncFlowControl(args, script)) {
-            return Entry.STATIC.BREAK;
+            return RoCode.STATIC.BREAK;
         }
     }
 
@@ -109,7 +109,7 @@ Entry.Microbit = new (class Microbit {
         if (value) {
             return value;
         } else if (!this.asyncFlowControl(args, scope)) {
-            throw new Entry.Utils.AsyncError();
+            throw new RoCode.Utils.AsyncError();
         }
     }
 
@@ -122,13 +122,13 @@ Entry.Microbit = new (class Microbit {
     afterReceive({ blockId = '', RADIO }) {
         if (blockId in this.blockIds) {
             this.blockIds[blockId] = true;
-        } else if (RADIO && Entry.engine.isState('run') && RADIO.time > this.radioTime) {
+        } else if (RADIO && RoCode.engine.isState('run') && RADIO.time > this.radioTime) {
             this.radioTime = RADIO.time;
-            Entry.engine.fireEvent('MicrobitRadioReceive');
+            RoCode.engine.fireEvent('MicrobitRadioReceive');
         }
     }
 })();
-Entry.Microbit.blockMenuBlocks = [
+RoCode.Microbit.blockMenuBlocks = [
     //region microbit
     'microbit_led_toggle',
     'microbit_get_led',
@@ -146,11 +146,11 @@ Entry.Microbit.blockMenuBlocks = [
     // "microbit_radio_receive_event",
     //endregion microbit
 ];
-Entry.Microbit.getBlocks = function() {
+RoCode.Microbit.getBlocks = function() {
     return {
         microbit_led_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: 'LED의 X:%1 Y:%2 %3 %4',
@@ -174,8 +174,8 @@ Entry.Microbit.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -220,15 +220,15 @@ Entry.Microbit.getBlocks = function() {
                         value,
                     },
                 };
-                return Entry.Microbit.postCallReturn({
+                return RoCode.Microbit.postCallReturn({
                     script,
                     data,
                 });
             },
         },
         microbit_get_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -279,13 +279,13 @@ Entry.Microbit.getBlocks = function() {
                         y,
                     },
                 };
-                let returnData = Entry.Microbit.checkValue({
+                let returnData = RoCode.Microbit.checkValue({
                     script,
                     data,
                     key: `LED.${x}.${y}`,
                 });
                 if (!returnData) {
-                    returnData = _get(Entry.hw.portData, ['LED']);
+                    returnData = _get(RoCode.hw.portData, ['LED']);
                     const { executor } = script;
                     const { scope } = executor;
                     if (!scope.cacheValue) {
@@ -297,8 +297,8 @@ Entry.Microbit.getBlocks = function() {
             },
         },
         microbit_show_string: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: '%1 출력하기 %2',
@@ -340,15 +340,15 @@ Entry.Microbit.getBlocks = function() {
                         value,
                     },
                 };
-                return Entry.Microbit.postCallReturn({
+                return RoCode.Microbit.postCallReturn({
                     script,
                     data,
                 });
             },
         },
         microbit_show_image: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: '%1 아이콘 출력하기 %2',
@@ -364,8 +364,8 @@ Entry.Microbit.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -390,15 +390,15 @@ Entry.Microbit.getBlocks = function() {
                         value,
                     },
                 };
-                return Entry.Microbit.postCallReturn({
+                return RoCode.Microbit.postCallReturn({
                     script,
                     data,
                 });
             },
         },
         microbit_get_analog: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -413,8 +413,8 @@ Entry.Microbit.getBlocks = function() {
                     ],
                     value: 7,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -434,13 +434,13 @@ Entry.Microbit.getBlocks = function() {
                         value,
                     },
                 };
-                let returnData = Entry.Microbit.checkValue({
+                let returnData = RoCode.Microbit.checkValue({
                     script,
                     data,
                     key: `GET_ANALOG.${value}`,
                 });
                 if (!returnData) {
-                    returnData = _get(Entry.hw.portData, ['GET_ANALOG']);
+                    returnData = _get(RoCode.hw.portData, ['GET_ANALOG']);
                     const { executor } = script;
                     const { scope } = executor;
                     if (!scope.cacheValue) {
@@ -452,8 +452,8 @@ Entry.Microbit.getBlocks = function() {
             },
         },
         microbit_get_analog_map: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -468,8 +468,8 @@ Entry.Microbit.getBlocks = function() {
                     ],
                     value: 7,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -532,13 +532,13 @@ Entry.Microbit.getBlocks = function() {
                         value,
                     },
                 };
-                let returnData = Entry.Microbit.checkValue({
+                let returnData = RoCode.Microbit.checkValue({
                     script,
                     data,
                     key: `GET_ANALOG.${value}`,
                 });
                 if (!returnData) {
-                    returnData = _get(Entry.hw.portData, ['GET_ANALOG']);
+                    returnData = _get(RoCode.hw.portData, ['GET_ANALOG']);
                     const { executor } = script;
                     const { scope } = executor;
                     if (!scope.cacheValue) {
@@ -556,8 +556,8 @@ Entry.Microbit.getBlocks = function() {
                 let isFloat = false;
 
                 if (
-                    (Entry.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
-                    (Entry.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
+                    (RoCode.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
+                    (RoCode.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
                 ) {
                     isFloat = true;
                 }
@@ -587,8 +587,8 @@ Entry.Microbit.getBlocks = function() {
             },
         },
         microbit_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -603,8 +603,8 @@ Entry.Microbit.getBlocks = function() {
                     ],
                     value: 7,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -624,13 +624,13 @@ Entry.Microbit.getBlocks = function() {
                         value,
                     },
                 };
-                let returnData = Entry.Microbit.checkValue({
+                let returnData = RoCode.Microbit.checkValue({
                     script,
                     data,
                     key: `GET_DIGITAL.${value}`,
                 });
                 if (!returnData) {
-                    returnData = _get(Entry.hw.portData, ['GET_DIGITAL']);
+                    returnData = _get(RoCode.hw.portData, ['GET_DIGITAL']);
                     const { executor } = script;
                     const { scope } = executor;
                     if (!scope.cacheValue) {
@@ -642,8 +642,8 @@ Entry.Microbit.getBlocks = function() {
             },
         },
         microbit_get_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -657,8 +657,8 @@ Entry.Microbit.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -678,13 +678,13 @@ Entry.Microbit.getBlocks = function() {
                         value,
                     },
                 };
-                let returnData = Entry.Microbit.checkValue({
+                let returnData = RoCode.Microbit.checkValue({
                     script,
                     data,
                     key: `GET_BUTTON.${value}`,
                 });
                 if (!returnData) {
-                    returnData = _get(Entry.hw.portData, ['GET_BUTTON']);
+                    returnData = _get(RoCode.hw.portData, ['GET_BUTTON']);
                     const { executor } = script;
                     const { scope } = executor;
                     if (!scope.cacheValue) {
@@ -696,8 +696,8 @@ Entry.Microbit.getBlocks = function() {
             },
         },
         microbit_get_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -712,8 +712,8 @@ Entry.Microbit.getBlocks = function() {
                     ],
                     value: 'temperature',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -733,13 +733,13 @@ Entry.Microbit.getBlocks = function() {
                         value,
                     },
                 };
-                let returnData = Entry.Microbit.checkValue({
+                let returnData = RoCode.Microbit.checkValue({
                     script,
                     data,
                     key: `GET_SENSOR.${value}`,
                 });
                 if (!returnData) {
-                    returnData = _get(Entry.hw.portData, ['GET_SENSOR']);
+                    returnData = _get(RoCode.hw.portData, ['GET_SENSOR']);
                     const { executor } = script;
                     const { scope } = executor;
                     if (!scope.cacheValue) {
@@ -751,8 +751,8 @@ Entry.Microbit.getBlocks = function() {
             },
         },
         microbit_get_accelerometer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -768,8 +768,8 @@ Entry.Microbit.getBlocks = function() {
                     ],
                     value: 'x',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -789,13 +789,13 @@ Entry.Microbit.getBlocks = function() {
                         value,
                     },
                 };
-                let returnData = Entry.Microbit.checkValue({
+                let returnData = RoCode.Microbit.checkValue({
                     script,
                     data,
                     key: `GET_ACCELEROMETER.${value}`,
                 });
                 if (!returnData) {
-                    returnData = _get(Entry.hw.portData, ['GET_ACCELEROMETER']);
+                    returnData = _get(RoCode.hw.portData, ['GET_ACCELEROMETER']);
                     const { executor } = script;
                     const { scope } = executor;
                     if (!scope.cacheValue) {
@@ -807,8 +807,8 @@ Entry.Microbit.getBlocks = function() {
             },
         },
         microbit_play_note: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             statements: [],
@@ -856,8 +856,8 @@ Entry.Microbit.getBlocks = function() {
                     ],
                     value: 262,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -872,8 +872,8 @@ Entry.Microbit.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -901,15 +901,15 @@ Entry.Microbit.getBlocks = function() {
                         beat,
                     },
                 };
-                return Entry.Microbit.postCallReturn({
+                return RoCode.Microbit.postCallReturn({
                     script,
                     data,
                 });
             },
         },
         microbit_change_bpm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             statements: [],
@@ -949,15 +949,15 @@ Entry.Microbit.getBlocks = function() {
                         value,
                     },
                 };
-                return Entry.Microbit.postCallReturn({
+                return RoCode.Microbit.postCallReturn({
                     script,
                     data,
                 });
             },
         },
         microbit_set_bpm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             statements: [],
@@ -997,15 +997,15 @@ Entry.Microbit.getBlocks = function() {
                         value,
                     },
                 };
-                return Entry.Microbit.postCallReturn({
+                return RoCode.Microbit.postCallReturn({
                     script,
                     data,
                 });
             },
         },
         microbit_radio_receive_event: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_event',
             statements: [],
@@ -1031,4 +1031,4 @@ Entry.Microbit.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Microbit;
+module.exports = RoCode.Microbit;

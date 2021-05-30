@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Robotis_DREAM = {
+RoCode.Robotis_DREAM = {
     MODULE_VALUE:{
         DEFAULT: 0,
         PASSIVE: 1,
@@ -42,7 +42,7 @@ Entry.Robotis_DREAM = {
         AUX_SERVO_MODE: [128, 1, 129, 1],
         AUX_SERVO_SPEED: [136, 2, 138, 2],
         AUX_SERVO_POSITION: [156, 2, 158, 2],
-        AUX_MOTOR_SPEED: [152, 2, 154, 2],        
+        AUX_MOTOR_SPEED: [152, 2, 154, 2],
     },
     IRS_MODULEWRITE: {
         PORT3: false,
@@ -70,39 +70,39 @@ Entry.Robotis_DREAM = {
     },
     setZero: function () {
         // instruction / address / length / value / default length
-        Entry.hw.sendQueue['setZero'] = [1];
+        RoCode.hw.sendQueue['setZero'] = [1];
         this.update();
         this.setRobotisData(null);
-        Entry.hw.sendQueue['setZero'] = null;
+        RoCode.hw.sendQueue['setZero'] = null;
         this.update();
         this.setRobotisData([
-            [Entry.Robotis_DREAM.INSTRUCTION.WRITE, 86, 1, 0],
-            [Entry.Robotis_DREAM.INSTRUCTION.WRITE, 136, 4, 0],
-            [Entry.Robotis_DREAM.INSTRUCTION.WRITE, 152, 4, 0],
-            [Entry.Robotis_DREAM.INSTRUCTION.WRITE, Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0], 2, 0],
-            //[Entry.Robotis_DREAM.INSTRUCTION.WRITE, 154, 2, 0],
+            [RoCode.Robotis_DREAM.INSTRUCTION.WRITE, 86, 1, 0],
+            [RoCode.Robotis_DREAM.INSTRUCTION.WRITE, 136, 4, 0],
+            [RoCode.Robotis_DREAM.INSTRUCTION.WRITE, 152, 4, 0],
+            [RoCode.Robotis_DREAM.INSTRUCTION.WRITE, RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0], 2, 0],
+            //[RoCode.Robotis_DREAM.INSTRUCTION.WRITE, 154, 2, 0],
         ]);
 
         this.update();
 
 
-        Entry.Robotis_DREAM.IRS_MODULEWRITE.PORT3 = false;
-        Entry.Robotis_DREAM.IRS_MODULEWRITE.PORT4 = false;
+        RoCode.Robotis_DREAM.IRS_MODULEWRITE.PORT3 = false;
+        RoCode.Robotis_DREAM.IRS_MODULEWRITE.PORT4 = false;
 
-        Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 = false;
-        Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 = false;
+        RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 = false;
+        RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 = false;
 
-        Entry.Robotis_DREAM.SERVO_WHEELWRITE.PORT3 = false;
-        Entry.Robotis_DREAM.SERVO_WHEELWRITE.PORT4 = false;
+        RoCode.Robotis_DREAM.SERVO_WHEELWRITE.PORT3 = false;
+        RoCode.Robotis_DREAM.SERVO_WHEELWRITE.PORT4 = false;
 
-        Entry.Robotis_DREAM.SERVO_POSITIONWRITE.PORT3 = false;
-        Entry.Robotis_DREAM.SERVO_POSITIONWRITE.PORT4 = false;
+        RoCode.Robotis_DREAM.SERVO_POSITIONWRITE.PORT3 = false;
+        RoCode.Robotis_DREAM.SERVO_POSITIONWRITE.PORT4 = false;
 
-        Entry.Robotis_DREAM.COLOR_MODULEWRITE.PORT3 = false;
-        Entry.Robotis_DREAM.COLOR_MODULEWRITE.PORT4 = false;
+        RoCode.Robotis_DREAM.COLOR_MODULEWRITE.PORT3 = false;
+        RoCode.Robotis_DREAM.COLOR_MODULEWRITE.PORT4 = false;
 
-        Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 = false;
-        Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 = false;
+        RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 = false;
+        RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 = false;
 
     },
     id: '7.4',
@@ -141,13 +141,13 @@ Entry.Robotis_DREAM = {
         } else {
             delete script.timeFlag;
             delete script.isStart;
-            Entry.engine.isContinue = false;
+            RoCode.engine.isContinue = false;
             this.update();
             return script.callReturn();
         }
     },
     wait: function (sq, ms) {
-        Entry.hw.socket.send(JSON.stringify(sq));
+        RoCode.hw.socket.send(JSON.stringify(sq));
 
         var start = new Date().getTime();
         var end = start;
@@ -157,8 +157,8 @@ Entry.Robotis_DREAM = {
         }
     },
     update: function () {
-        Entry.hw.update();
-        var ROBOTIS_DATA = Entry.hw.sendQueue['ROBOTIS_DATA'];
+        RoCode.hw.update();
+        var ROBOTIS_DATA = RoCode.hw.sendQueue['ROBOTIS_DATA'];
         if (ROBOTIS_DATA) {
             ROBOTIS_DATA.forEach(function (data) {
                 data['send'] = true;
@@ -167,7 +167,7 @@ Entry.Robotis_DREAM = {
         this.setRobotisData(null);
     },
     filterSendData: function () {
-        var ROBOTIS_DATA = Entry.hw.sendQueue['ROBOTIS_DATA'];
+        var ROBOTIS_DATA = RoCode.hw.sendQueue['ROBOTIS_DATA'];
         if (ROBOTIS_DATA) {
             return ROBOTIS_DATA.filter(function (data) {
                 return data.send !== true;
@@ -179,15 +179,15 @@ Entry.Robotis_DREAM = {
     setRobotisData: function (data) {
         var filterData = this.filterSendData();
         if (data == null) {
-            Entry.hw.sendQueue['ROBOTIS_DATA'] = filterData;
+            RoCode.hw.sendQueue['ROBOTIS_DATA'] = filterData;
         } else {
-            Entry.hw.sendQueue['ROBOTIS_DATA'] = filterData
+            RoCode.hw.sendQueue['ROBOTIS_DATA'] = filterData
                 ? filterData.concat(data)
                 : data;
         }
     },
 };
-module.exports = Entry.Robotis_DREAM;
+module.exports = RoCode.Robotis_DREAM;
 
 
 

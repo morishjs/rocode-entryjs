@@ -1,9 +1,9 @@
 'use strict';
 
-import { ContextMenu } from '@entrylabs/tool';
+import { ContextMenu } from '@RoCodelabs/tool';
 import DomUtils from './domUtils';
 
-Entry.ContextMenu = {};
+RoCode.ContextMenu = {};
 
 (function(ctx) {
     const ATTR_KEY = 'data-option-index';
@@ -12,8 +12,8 @@ Entry.ContextMenu = {};
     ctx._hideEvent = null;
 
     ctx.createDom = function() {
-        this.dom = Entry.Dom('div', {
-            id: 'entry-contextmenu',
+        this.dom = RoCode.Dom('div', {
+            id: 'RoCode-contextmenu',
             parent: $('body'),
         });
 
@@ -38,8 +38,8 @@ Entry.ContextMenu = {};
             this.dom.addClass(className);
         }
 
-        this._hideEvent = Entry.documentMousedown.attach(this, this.hide);
-        this.mouseCoordinate = coordinate || Entry.mouseCoordinate;
+        this._hideEvent = RoCode.documentMousedown.attach(this, this.hide);
+        this.mouseCoordinate = coordinate || RoCode.mouseCoordinate;
         this.contextMenu = new ContextMenu({
             type: 'contextMenu',
             data: {
@@ -84,7 +84,7 @@ Entry.ContextMenu = {};
     ctx.hide = function() {
         this.visible = false;
         const dom = this.dom;
-        dom.addClass('entryRemove');
+        dom.addClass('RoCodeRemove');
 
         if (this._className) {
             dom.removeClass(this._className);
@@ -103,7 +103,7 @@ Entry.ContextMenu = {};
 
     ctx.onContextmenu = function(target, callback) {
         const longPressEvent = (e) => {
-            const startEvent = Entry.Utils.convertMouseEvent(e);
+            const startEvent = RoCode.Utils.convertMouseEvent(e);
             this.coordi = {
                 x: startEvent.clientX,
                 y: startEvent.clientY,
@@ -131,7 +131,7 @@ Entry.ContextMenu = {};
                     }
                     case 'mousemove':
                     case 'touchmove': {
-                        const startEvent = Entry.Utils.convertMouseEvent(e);
+                        const startEvent = RoCode.Utils.convertMouseEvent(e);
                         if (!this.coordi) {
                             return;
                         }
@@ -155,7 +155,7 @@ Entry.ContextMenu = {};
                         }
                         break;
                     case 'mousedown':
-                        if (Entry.Utils.isRightButton(e)) {
+                        if (RoCode.Utils.isRightButton(e)) {
                             e.stopPropagation();
 
                             this.coordi = {
@@ -168,7 +168,7 @@ Entry.ContextMenu = {};
                             callback(this.coordi);
                         }
 
-                        if (Entry.isMobile()) {
+                        if (RoCode.isMobile()) {
                             longPressEvent(e);
                         }
                         break;
@@ -201,6 +201,6 @@ Entry.ContextMenu = {};
             }
         });
 
-        Entry.Utils.disableContextmenu(this.dom);
+        RoCode.Utils.disableContextmenu(this.dom);
     }
-})(Entry.ContextMenu);
+})(RoCode.ContextMenu);

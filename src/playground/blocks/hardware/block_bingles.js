@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.BINGLES = {
+RoCode.BINGLES = {
     id: '1.D',
     name: 'BINGLES',
     url: 'http://www.xbot.co.kr/',
@@ -28,13 +28,13 @@ Entry.BINGLES = {
         OLEDImage: 0,
     },
     setZero: function() {
-        var portMap = Entry.BINGLES.PORT_MAP;
-        var sq = Entry.hw.sendQueue;
+        var portMap = RoCode.BINGLES.PORT_MAP;
+        var sq = RoCode.hw.sendQueue;
         for (var port in portMap) {
             sq[port] = portMap[port];
         }
-        Entry.hw.update();
-        var BINGLES = Entry.BINGLES;
+        RoCode.hw.update();
+        var BINGLES = RoCode.BINGLES;
         BINGLES.removeAllTimeouts();
     },
     timeouts: [],
@@ -55,7 +55,7 @@ Entry.BINGLES = {
     },
 };
 
-Entry.BINGLES.setLanguage = function() {
+RoCode.BINGLES.setLanguage = function() {
     return {
         ko: {
             Blocks: {
@@ -128,7 +128,7 @@ Entry.BINGLES.setLanguage = function() {
     };
 };
 
-Entry.BINGLES.blockMenuBlocks = [
+RoCode.BINGLES.blockMenuBlocks = [
     'bingles_analogValue',
     'bingles_digitalOutput',
     'bingles_rgb',
@@ -142,12 +142,12 @@ Entry.BINGLES.blockMenuBlocks = [
     'bingles_motorgo',
 ];
 
-Entry.BINGLES.getBlocks = function() {
+RoCode.BINGLES.getBlocks = function() {
     return {
         //region xbot 엑스봇
         bingles_analogValue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -163,8 +163,8 @@ Entry.BINGLES.getBlocks = function() {
                     ],
                     value: 'light',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -178,7 +178,7 @@ Entry.BINGLES.getBlocks = function() {
             class: 'bingles_sensor',
             isNotFor: ['BINGLES'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 return pd[dev];
             },
@@ -186,8 +186,8 @@ Entry.BINGLES.getBlocks = function() {
         },
 
         bingles_remotecontrol: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             fontColor: '#ffffff',
@@ -210,7 +210,7 @@ Entry.BINGLES.getBlocks = function() {
             class: 'bingles_sensor',
             isNotFor: ['BINGLES'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 return pd[dev];
             },
@@ -218,8 +218,8 @@ Entry.BINGLES.getBlocks = function() {
         },
 
         bingles_digitalOutput: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -228,8 +228,8 @@ Entry.BINGLES.getBlocks = function() {
                     options: [['LED', 'HEAD_LED']],
                     value: 'HEAD_LED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -239,8 +239,8 @@ Entry.BINGLES.getBlocks = function() {
                     ],
                     value: 'HIGH',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -260,7 +260,7 @@ Entry.BINGLES.getBlocks = function() {
             class: 'bingles_sensor',
             isNotFor: ['BINGLES'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var dev = script.getStringField('DEVICE', script);
                 var value = script.getStringField('VALUE', script);
 
@@ -276,8 +276,8 @@ Entry.BINGLES.getBlocks = function() {
         },
 
         bingles_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -290,8 +290,8 @@ Entry.BINGLES.getBlocks = function() {
                     ],
                     value: 'head',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -322,7 +322,7 @@ Entry.BINGLES.getBlocks = function() {
             class: 'bingles_motor',
             isNotFor: ['BINGLES'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var mtype = script.getStringField('DEVICE', script);
                 var angle = script.getNumberValue('VALUE', script);
 
@@ -339,8 +339,8 @@ Entry.BINGLES.getBlocks = function() {
         },
 
         bingles_lcd: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -352,8 +352,8 @@ Entry.BINGLES.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -384,7 +384,7 @@ Entry.BINGLES.getBlocks = function() {
             class: 'bingles_sensor',
             isNotFor: ['BINGLES'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var line = script.getNumberField('LINE', script);
                 var str = script.getStringValue('VALUE', script);
 
@@ -396,8 +396,8 @@ Entry.BINGLES.getBlocks = function() {
         },
 
         bingles_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -414,8 +414,8 @@ Entry.BINGLES.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -429,8 +429,8 @@ Entry.BINGLES.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -463,7 +463,7 @@ Entry.BINGLES.getBlocks = function() {
             class: 'bingles_sensor',
             isNotFor: ['BINGLES'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 if (!script.isStart) {
                     var note = script.getStringField('NOTE', script);
@@ -483,16 +483,16 @@ Entry.BINGLES.getBlocks = function() {
                     console.log('timeValue' + timeValue);
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.BINGLES.removeTimeout(timer);
+                        RoCode.BINGLES.removeTimeout(timer);
                     }, timeValue);
-                    Entry.BINGLES.timeouts.push(timer);
+                    RoCode.BINGLES.timeouts.push(timer);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
                 } else {
                     delete script.isStart;
                     delete script.timeFlag;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     sq.duration = 0;
 
                     return script.callReturn();
@@ -502,8 +502,8 @@ Entry.BINGLES.getBlocks = function() {
         },
 
         bingles_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -552,7 +552,7 @@ Entry.BINGLES.getBlocks = function() {
             class: 'bingles_rgb',
             isNotFor: ['BINGLES'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 sq.ledR = script.getNumberValue('ledR');
                 sq.ledG = script.getNumberValue('ledG');
@@ -565,8 +565,8 @@ Entry.BINGLES.getBlocks = function() {
         },
 
         bingles_rgb_picker: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -591,7 +591,7 @@ Entry.BINGLES.getBlocks = function() {
             isNotFor: ['BINGLES'],
             func: function(sprite, script) {
                 var port = script.getStringField('VALUE');
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 sq.ledR = parseInt(parseInt(port.substr(1, 2), 16) * 0.3);
                 sq.ledG = parseInt(parseInt(port.substr(3, 2), 16) * 0.3);
@@ -603,8 +603,8 @@ Entry.BINGLES.getBlocks = function() {
         },
 
         bingles_twoWheel: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -645,7 +645,7 @@ Entry.BINGLES.getBlocks = function() {
             isNotFor: ['BINGLES'],
             func: function(sprite, script) {
                 //console.log('xbot_move_forward_for_secs');
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 sq.RIGHT_WHEEL = script.getNumberValue('rightWheel');
                 sq.LEFT_WHEEL = script.getNumberValue('leftWheel');
@@ -656,8 +656,8 @@ Entry.BINGLES.getBlocks = function() {
         },
 
         bingles_motorgo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -671,8 +671,8 @@ Entry.BINGLES.getBlocks = function() {
                     ],
                     value: 'Forward',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -702,7 +702,7 @@ Entry.BINGLES.getBlocks = function() {
             class: 'bingles_motor',
             isNotFor: ['BINGLES'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var motorDir = script.getStringField('DEVICE', script);
                 var motorDur = script.getNumberValue('VALUE', script);
@@ -716,8 +716,8 @@ Entry.BINGLES.getBlocks = function() {
         },
 
         bingles_oled: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -757,8 +757,8 @@ Entry.BINGLES.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -784,7 +784,7 @@ Entry.BINGLES.getBlocks = function() {
             class: 'bingles_sensor',
             isNotFor: ['BINGLES'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var OLEDImage = script.getNumberField('oledImage', script);
 
                 sq.OLEDImage = OLEDImage;
@@ -796,4 +796,4 @@ Entry.BINGLES.getBlocks = function() {
     };
 };
 
-module.exports = Entry.BINGLES;
+module.exports = RoCode.BINGLES;

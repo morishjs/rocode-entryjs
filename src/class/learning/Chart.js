@@ -1,4 +1,4 @@
-import { BillBoard } from '@entrylabs/tool';
+import { BillBoard } from '@RoCodelabs/tool';
 
 export default class LearningChart {
     constructor(modalData) {
@@ -22,10 +22,10 @@ export default class LearningChart {
     load(data) {
         this.modal.setData(data);
     }
-    
+
     createChart({ title = '', description = '', source }) {
-        const container = Entry.Dom('div', {
-            class: 'entry-learning-chart',
+        const container = RoCode.Dom('div', {
+            class: 'RoCode-learning-chart',
             parent: $('body'),
         })[0];
 
@@ -34,8 +34,8 @@ export default class LearningChart {
                 source,
                 title,
                 description,
-                togglePause: () => Entry.engine.togglePause(),
-                stop: () => Entry.engine.toggleStop(),
+                togglePause: () => RoCode.engine.togglePause(),
+                stop: () => RoCode.engine.toggleStop(),
                 isIframe: self !== top,
             },
             container,

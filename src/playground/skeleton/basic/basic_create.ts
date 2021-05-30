@@ -1,4 +1,4 @@
-Entry.skeleton.basic_create = {
+RoCode.skeleton.basic_create = {
     executable: true,
     path(blockView) {
         let width = blockView.contentWidth;

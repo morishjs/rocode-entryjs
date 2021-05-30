@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.nemoino = {
+RoCode.nemoino = {
     id: '1.6',
     name: 'nemoino',
     imageName: 'nemoino.png',
@@ -9,16 +9,16 @@ Entry.nemoino = {
         en: 'NEMOino',
     },
     setZero: function() {
-        Entry.hw.sendQueue.readablePorts = [];
+        RoCode.hw.sendQueue.readablePorts = [];
         for (var port = 0; port < 20; port++) {
-            Entry.hw.sendQueue[port] = 0;
-            Entry.hw.sendQueue.readablePorts.push(port);
+            RoCode.hw.sendQueue[port] = 0;
+            RoCode.hw.sendQueue.readablePorts.push(port);
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
 };
 
-Entry.nemoino.blockMenuBlocks = [
+RoCode.nemoino.blockMenuBlocks = [
     //nemoino
     'nemoino_get_named_sensor_value',
     'nemoino_get_sound_status',
@@ -32,7 +32,7 @@ Entry.nemoino.blockMenuBlocks = [
     'nemoino_convert_scale',
 ];
 
-Entry.nemoino.setLanguage = function() {
+RoCode.nemoino.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -55,12 +55,12 @@ Entry.nemoino.setLanguage = function() {
     };
 };
 
-Entry.nemoino.getBlocks = function() {
+RoCode.nemoino.getBlocks = function() {
     return {
         //region nemoino 네모이노
         nemoino_get_named_sensor_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -79,8 +79,8 @@ Entry.nemoino.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -94,12 +94,12 @@ Entry.nemoino.getBlocks = function() {
             class: 'nemoino',
             isNotFor: ['nemoino'],
             func: function(sprite, script) {
-                return Entry.hw.getAnalogPortValue(script.getField('PORT', script));
+                return RoCode.hw.getAnalogPortValue(script.getField('PORT', script));
             },
         },
         nemoino_get_sound_status: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -113,8 +113,8 @@ Entry.nemoino.getBlocks = function() {
                     ],
                     value: 'GREAT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -130,13 +130,13 @@ Entry.nemoino.getBlocks = function() {
             func: function(sprite, script) {
                 var value1 = script.getField('STATUS', script);
                 var value2 = 0;
-                if (value1 == 'GREAT') return Entry.hw.getAnalogPortValue(value2) > 600 ? 1 : 0;
-                else return Entry.hw.getAnalogPortValue(value2) < 600 ? 1 : 0;
+                if (value1 == 'GREAT') return RoCode.hw.getAnalogPortValue(value2) > 600 ? 1 : 0;
+                else return RoCode.hw.getAnalogPortValue(value2) < 600 ? 1 : 0;
             },
         },
         nemoino_is_button_pressed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -153,8 +153,8 @@ Entry.nemoino.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -171,13 +171,13 @@ Entry.nemoino.getBlocks = function() {
                 var value = script.getNumberField('PORT', script);
                 if (value > 14) {
                     value = value - 14;
-                    return !Entry.hw.getAnalogPortValue(value);
-                } else return !Entry.hw.getDigitalPortValue(value);
+                    return !RoCode.hw.getAnalogPortValue(value);
+                } else return !RoCode.hw.getDigitalPortValue(value);
             },
         },
         nemoino_get_accelerometer_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -194,8 +194,8 @@ Entry.nemoino.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -214,7 +214,7 @@ Entry.nemoino.getBlocks = function() {
                 if (value1 == 'LEFT' || value1 == 'RIGHT') value2 = 3;
                 else if (value1 == 'FRONT' || value1 == 'REAR') value2 = 4;
                 else if (value1 == 'REVERSE') value2 = 5;
-                var value3 = Entry.hw.getAnalogPortValue(value2);
+                var value3 = RoCode.hw.getAnalogPortValue(value2);
                 var value4 = 265;
                 var value5 = 402;
                 var value6 = -90;
@@ -232,8 +232,8 @@ Entry.nemoino.getBlocks = function() {
             },
         },
         nemoino_get_accelerometer_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -248,8 +248,8 @@ Entry.nemoino.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -263,7 +263,7 @@ Entry.nemoino.getBlocks = function() {
             class: 'nemoino',
             isNotFor: ['nemoino'],
             func: function(sprite, script) {
-                var value1 = Entry.hw.getAnalogPortValue(script.getField('PORT', script));
+                var value1 = RoCode.hw.getAnalogPortValue(script.getField('PORT', script));
                 var value2 = 265;
                 var value3 = 402;
                 var value4 = -90;
@@ -394,4 +394,4 @@ Entry.nemoino.getBlocks = function() {
     };
 };
 
-module.exports = Entry.nemoino;
+module.exports = RoCode.nemoino;

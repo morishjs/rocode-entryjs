@@ -20,8 +20,8 @@ module.exports = {
 
         return {
             move_direction: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -87,11 +87,11 @@ module.exports = {
                     }
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.move_to_direction(%1)'] },
+                syntax: { js: [], py: ['RoCode.move_to_direction(%1)'] },
             },
             bounce_wall: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -119,17 +119,17 @@ module.exports = {
                         angle = sprite.getDirection();
                     }
 
-                    let skip = Entry.Utils.COLLISION.NONE;
+                    let skip = RoCode.Utils.COLLISION.NONE;
                     if ((angle < 90 && angle >= 0) || (angle < 360 && angle >= 270)) {
-                        skip = sprite.collision == Entry.Utils.COLLISION.UP;
+                        skip = sprite.collision == RoCode.Utils.COLLISION.UP;
                         let up = ndgmr.checkPixelCollision(
-                            Entry.stage.wall.up,
+                            RoCode.stage.wall.up,
                             sprite.object,
                             threshold,
                             false
                         );
                         if (!up && skip) {
-                            sprite.collision = Entry.Utils.COLLISION.NONE;
+                            sprite.collision = RoCode.Utils.COLLISION.NONE;
                         }
 
                         if (up && skip) {
@@ -145,17 +145,17 @@ module.exports = {
                                 sprite.setDirection(-sprite.getDirection() + 180);
                             }
 
-                            sprite.collision = Entry.Utils.COLLISION.UP;
+                            sprite.collision = RoCode.Utils.COLLISION.UP;
                         } else {
-                            skip = sprite.collision == Entry.Utils.COLLISION.DOWN;
+                            skip = sprite.collision == RoCode.Utils.COLLISION.DOWN;
                             let down = ndgmr.checkPixelCollision(
-                                Entry.stage.wall.down,
+                                RoCode.stage.wall.down,
                                 sprite.object,
                                 threshold,
                                 false
                             );
                             if (!down && skip) {
-                                sprite.collision = Entry.Utils.COLLISION.NONE;
+                                sprite.collision = RoCode.Utils.COLLISION.NONE;
                             }
 
                             if (down && skip) {
@@ -171,19 +171,19 @@ module.exports = {
                                     sprite.setDirection(-sprite.getDirection() + 180);
                                 }
 
-                                sprite.collision = Entry.Utils.COLLISION.DOWN;
+                                sprite.collision = RoCode.Utils.COLLISION.DOWN;
                             }
                         }
                     } else if (angle < 270 && angle >= 90) {
-                        skip = sprite.collision == Entry.Utils.COLLISION.DOWN;
+                        skip = sprite.collision == RoCode.Utils.COLLISION.DOWN;
                         let down = ndgmr.checkPixelCollision(
-                            Entry.stage.wall.down,
+                            RoCode.stage.wall.down,
                             sprite.object,
                             threshold,
                             false
                         );
                         if (!down && skip) {
-                            sprite.collision = Entry.Utils.COLLISION.NONE;
+                            sprite.collision = RoCode.Utils.COLLISION.NONE;
                         }
 
                         if (down && skip) {
@@ -199,18 +199,18 @@ module.exports = {
                                 sprite.setDirection(-sprite.getDirection() + 180);
                             }
 
-                            sprite.collision = Entry.Utils.COLLISION.DOWN;
+                            sprite.collision = RoCode.Utils.COLLISION.DOWN;
                             //sprite.setY(-135 + bound.height/2 + 1);
                         } else {
-                            skip = sprite.collision == Entry.Utils.COLLISION.UP;
+                            skip = sprite.collision == RoCode.Utils.COLLISION.UP;
                             let up = ndgmr.checkPixelCollision(
-                                Entry.stage.wall.up,
+                                RoCode.stage.wall.up,
                                 sprite.object,
                                 threshold,
                                 false
                             );
                             if (!up && skip) {
-                                sprite.collision = Entry.Utils.COLLISION.NONE;
+                                sprite.collision = RoCode.Utils.COLLISION.NONE;
                             }
 
                             if (up && skip) {
@@ -226,21 +226,21 @@ module.exports = {
                                     sprite.setDirection(-sprite.getDirection() + 180);
                                 }
 
-                                sprite.collision = Entry.Utils.COLLISION.UP;
+                                sprite.collision = RoCode.Utils.COLLISION.UP;
                                 //sprite.setY(135 - bound.height/2 - 1);
                             }
                         }
                     }
                     if (angle < 360 && angle >= 180) {
-                        skip = sprite.collision == Entry.Utils.COLLISION.LEFT;
+                        skip = sprite.collision == RoCode.Utils.COLLISION.LEFT;
                         let left = ndgmr.checkPixelCollision(
-                            Entry.stage.wall.left,
+                            RoCode.stage.wall.left,
                             sprite.object,
                             threshold,
                             false
                         );
                         if (!left && skip) {
-                            sprite.collision = Entry.Utils.COLLISION.NONE;
+                            sprite.collision = RoCode.Utils.COLLISION.NONE;
                         }
 
                         if (left && skip) {
@@ -256,17 +256,17 @@ module.exports = {
                                 sprite.setDirection(-sprite.getDirection() + 360);
                             }
 
-                            sprite.collision = Entry.Utils.COLLISION.LEFT;
+                            sprite.collision = RoCode.Utils.COLLISION.LEFT;
                         } else {
-                            skip = sprite.collision == Entry.Utils.COLLISION.RIGHT;
+                            skip = sprite.collision == RoCode.Utils.COLLISION.RIGHT;
                             let right = ndgmr.checkPixelCollision(
-                                Entry.stage.wall.right,
+                                RoCode.stage.wall.right,
                                 sprite.object,
                                 threshold,
                                 false
                             );
                             if (!right && skip) {
-                                sprite.collision = Entry.Utils.COLLISION.NONE;
+                                sprite.collision = RoCode.Utils.COLLISION.NONE;
                             }
 
                             if (right && skip) {
@@ -282,19 +282,19 @@ module.exports = {
                                     sprite.setDirection(-sprite.getDirection() + 360);
                                 }
 
-                                sprite.collision = Entry.Utils.COLLISION.RIGHT;
+                                sprite.collision = RoCode.Utils.COLLISION.RIGHT;
                             }
                         }
                     } else if (angle < 180 && angle >= 0) {
-                        skip = sprite.collision == Entry.Utils.COLLISION.RIGHT;
+                        skip = sprite.collision == RoCode.Utils.COLLISION.RIGHT;
                         let right = ndgmr.checkPixelCollision(
-                            Entry.stage.wall.right,
+                            RoCode.stage.wall.right,
                             sprite.object,
                             threshold,
                             false
                         );
                         if (!right && skip) {
-                            sprite.collision = Entry.Utils.COLLISION.NONE;
+                            sprite.collision = RoCode.Utils.COLLISION.NONE;
                         }
 
                         if (right && skip) {
@@ -310,17 +310,17 @@ module.exports = {
                                 sprite.setDirection(-sprite.getDirection() + 360);
                             }
 
-                            sprite.collision = Entry.Utils.COLLISION.RIGHT;
+                            sprite.collision = RoCode.Utils.COLLISION.RIGHT;
                         } else {
-                            skip = sprite.collision == Entry.Utils.COLLISION.LEFT;
+                            skip = sprite.collision == RoCode.Utils.COLLISION.LEFT;
                             let left = ndgmr.checkPixelCollision(
-                                Entry.stage.wall.left,
+                                RoCode.stage.wall.left,
                                 sprite.object,
                                 threshold,
                                 false
                             );
                             if (!left && skip) {
-                                sprite.collision = Entry.Utils.COLLISION.NONE;
+                                sprite.collision = RoCode.Utils.COLLISION.NONE;
                             }
 
                             if (left && skip) {
@@ -336,17 +336,17 @@ module.exports = {
                                     sprite.setDirection(-sprite.getDirection() + 360);
                                 }
 
-                                sprite.collision = Entry.Utils.COLLISION.LEFT;
+                                sprite.collision = RoCode.Utils.COLLISION.LEFT;
                             }
                         }
                     }
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.bounce_on_edge()'] },
+                syntax: { js: [], py: ['RoCode.bounce_on_edge()'] },
             },
             move_x: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -395,11 +395,11 @@ module.exports = {
                     }
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.add_x(%1)'] },
+                syntax: { js: [], py: ['RoCode.add_x(%1)'] },
             },
             move_y: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -448,11 +448,11 @@ module.exports = {
                     }
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.add_y(%1)'] },
+                syntax: { js: [], py: ['RoCode.add_y(%1)'] },
             },
             move_xy_time: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -532,7 +532,7 @@ module.exports = {
                         yValue = Number(yValue);
 
                         script.isStart = true;
-                        script.frameCount = Math.max(Math.floor(timeValue * Entry.FPS), 1);
+                        script.frameCount = Math.max(Math.floor(timeValue * RoCode.FPS), 1);
                         script.dX = xValue / script.frameCount;
                         script.dY = yValue / script.frameCount;
 
@@ -559,11 +559,11 @@ module.exports = {
                         }
                     }
                 },
-                syntax: { js: [], py: ['Entry.add_xy_for_sec(%2, %3, %1)'] },
+                syntax: { js: [], py: ['RoCode.add_xy_for_sec(%2, %3, %1)'] },
             },
             locate_x: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -612,11 +612,11 @@ module.exports = {
                     }
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.set_x(%1)'] },
+                syntax: { js: [], py: ['RoCode.set_x(%1)'] },
             },
             locate_y: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -665,11 +665,11 @@ module.exports = {
                     }
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.set_y(%1)'] },
+                syntax: { js: [], py: ['RoCode.set_y(%1)'] },
             },
             locate_xy: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -735,11 +735,11 @@ module.exports = {
                     }
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.set_xy(%1, %2)'] },
+                syntax: { js: [], py: ['RoCode.set_xy(%1, %2)'] },
             },
             locate_xy_time: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -821,7 +821,7 @@ module.exports = {
                         script.x = xValue;
                         script.y = yValue;
                         script.isStart = true;
-                        script.frameCount = Math.max(Math.floor(timeValue * Entry.FPS), 1);
+                        script.frameCount = Math.max(Math.floor(timeValue * RoCode.FPS), 1);
                         if (script.frameCount == 1) {
                             action();
                         }
@@ -849,11 +849,11 @@ module.exports = {
                         }
                     }
                 },
-                syntax: { js: [], py: ['Entry.set_xy_for_sec(%2, %3, %1)'] },
+                syntax: { js: [], py: ['RoCode.set_xy_for_sec(%2, %3, %1)'] },
             },
             locate: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -862,8 +862,8 @@ module.exports = {
                         value: null,
                         menuName: 'spritesWithMouse',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.MOVING,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.MOVING,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -890,10 +890,10 @@ module.exports = {
                     let x;
                     let y;
                     if (targetId === 'mouse') {
-                        x = Entry.stage.mouseCoordinate.x;
-                        y = Entry.stage.mouseCoordinate.y;
+                        x = RoCode.stage.mouseCoordinate.x;
+                        y = RoCode.stage.mouseCoordinate.y;
                     } else {
-                        const targetEntity = Entry.container.getEntity(targetId);
+                        const targetEntity = RoCode.container.getEntity(targetId);
                         x = targetEntity.getX();
                         y = targetEntity.getY();
                     }
@@ -908,16 +908,16 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.move_to(%1)',
+                            syntax: 'RoCode.move_to(%1)',
                             textParams: [
                                 {
                                     type: 'DropdownDynamic',
                                     value: null,
                                     menuName: 'spritesWithMouse',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.MOVING,
-                                    converter: Entry.block.converters.returnStringKey,
-                                    codeMap: 'Entry.CodeMap.Entry.locate[0]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.MOVING,
+                                    converter: RoCode.block.converters.returnStringKey,
+                                    codeMap: 'RoCode.CodeMap.RoCode.locate[0]',
                                 },
                             ],
                         },
@@ -925,8 +925,8 @@ module.exports = {
                 },
             },
             locate_object_time: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -940,8 +940,8 @@ module.exports = {
                         value: null,
                         menuName: 'spritesWithMouse',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.MOVING,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.MOVING,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -983,15 +983,15 @@ module.exports = {
                         let yValue;
                         const targetId = script.getField('TARGET', script);
                         const timeValue = script.getNumberValue('VALUE', script);
-                        const frameCount = Math.floor(timeValue * Entry.FPS);
-                        const mouseCoordi = Entry.stage.mouseCoordinate;
+                        const frameCount = Math.floor(timeValue * RoCode.FPS);
+                        const mouseCoordi = RoCode.stage.mouseCoordinate;
 
                         if (frameCount != 0) {
                             if (targetId === 'mouse') {
                                 xValue = mouseCoordi.x - sprite.getX();
                                 yValue = mouseCoordi.y - sprite.getY();
                             } else {
-                                const targetEntity = Entry.container.getEntity(targetId);
+                                const targetEntity = RoCode.container.getEntity(targetId);
                                 xValue = targetEntity.getX() - sprite.getX();
                                 yValue = targetEntity.getY() - sprite.getY();
                             }
@@ -1005,7 +1005,7 @@ module.exports = {
                                 xValue = Number(mouseCoordi.x);
                                 yValue = Number(mouseCoordi.y);
                             } else {
-                                const targetEntity = Entry.container.getEntity(targetId);
+                                const targetEntity = RoCode.container.getEntity(targetId);
                                 xValue = targetEntity.getX();
                                 yValue = targetEntity.getY();
                             }
@@ -1035,7 +1035,7 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.move_to_for_sec(%2, %1)',
+                            syntax: 'RoCode.move_to_for_sec(%2, %1)',
                             textParams: [
                                 {
                                     type: 'Block',
@@ -1046,9 +1046,9 @@ module.exports = {
                                     value: null,
                                     menuName: 'spritesWithMouse',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.MOVING,
-                                    converter: Entry.block.converters.returnStringKey,
-                                    codeMap: 'Entry.CodeMap.Entry.locate_object_time[1]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.MOVING,
+                                    converter: RoCode.block.converters.returnStringKey,
+                                    codeMap: 'RoCode.CodeMap.RoCode.locate_object_time[1]',
                                 },
                             ],
                         },
@@ -1056,8 +1056,8 @@ module.exports = {
                 },
             },
             rotate_relative: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1102,11 +1102,11 @@ module.exports = {
                     entity.setRotation(value + entity.getRotation());
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.add_rotation(%1)'] },
+                syntax: { js: [], py: ['RoCode.add_rotation(%1)'] },
             },
             direction_relative: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1152,11 +1152,11 @@ module.exports = {
                     entity.setDirection(value + entity.getDirection());
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.add_direction(%1)'] },
+                syntax: { js: [], py: ['RoCode.add_direction(%1)'] },
             },
             rotate_by_time: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1218,7 +1218,7 @@ module.exports = {
                         angleValue = Number(angleValue);
 
                         script.isStart = true;
-                        script.frameCount = Math.max(Math.floor(timeValue * Entry.FPS), 1);
+                        script.frameCount = Math.max(Math.floor(timeValue * RoCode.FPS), 1);
                         script.dAngle = angleValue / script.frameCount;
 
                         if (script.frameCount == 1) {
@@ -1239,11 +1239,11 @@ module.exports = {
                         script.frameCount--;
                     }
                 },
-                syntax: { js: [], py: ['Entry.add_rotation_for_sec(%2, %1)'] },
+                syntax: { js: [], py: ['RoCode.add_rotation_for_sec(%2, %1)'] },
             },
             direction_relative_duration: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1308,7 +1308,7 @@ module.exports = {
                         directionValue = Number(directionValue);
 
                         script.isStart = true;
-                        script.frameCount = Math.max(Math.floor(timeValue * Entry.FPS), 1);
+                        script.frameCount = Math.max(Math.floor(timeValue * RoCode.FPS), 1);
                         script.dDirection = directionValue / script.frameCount;
 
                         if (script.frameCount == 1) {
@@ -1330,11 +1330,11 @@ module.exports = {
                         script.frameCount--;
                     }
                 },
-                syntax: { js: [], py: ['Entry.add_direction_for_sec(%2, %1)'] },
+                syntax: { js: [], py: ['RoCode.add_direction_for_sec(%2, %1)'] },
             },
             rotate_absolute: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1380,11 +1380,11 @@ module.exports = {
                     entity.setRotation(value);
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.set_rotation(%1)'] },
+                syntax: { js: [], py: ['RoCode.set_rotation(%1)'] },
             },
             direction_absolute: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1430,11 +1430,11 @@ module.exports = {
                     entity.setDirection(value);
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.set_direction(%1)'] },
+                syntax: { js: [], py: ['RoCode.set_direction(%1)'] },
             },
             see_angle_object: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1443,8 +1443,8 @@ module.exports = {
                         value: null,
                         menuName: 'spritesWithMouse',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.MOVING,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.MOVING,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -1479,13 +1479,13 @@ module.exports = {
                     }
 
                     if (targetId === 'mouse') {
-                        const mX = Entry.stage.mouseCoordinate.x;
-                        const mY = Entry.stage.mouseCoordinate.y;
+                        const mX = RoCode.stage.mouseCoordinate.x;
+                        const mY = RoCode.stage.mouseCoordinate.y;
 
                         deltaX = mX - spriteX;
                         deltaY = mY - spriteY;
                     } else {
-                        const targetEntity = Entry.container.getEntity(targetId);
+                        const targetEntity = RoCode.container.getEntity(targetId);
                         deltaX = targetEntity.getX() - spriteX;
                         deltaY = targetEntity.getY() - spriteY;
                     }
@@ -1509,16 +1509,16 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.look_at(%1)',
+                            syntax: 'RoCode.look_at(%1)',
                             textParams: [
                                 {
                                     type: 'DropdownDynamic',
                                     value: null,
                                     menuName: 'spritesWithMouse',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.MOVING,
-                                    converter: Entry.block.converters.returnStringKey,
-                                    codeMap: 'Entry.CodeMap.Entry.see_angle_object[0]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.MOVING,
+                                    converter: RoCode.block.converters.returnStringKey,
+                                    codeMap: 'RoCode.CodeMap.RoCode.see_angle_object[0]',
                                 },
                             ],
                         },
@@ -1526,8 +1526,8 @@ module.exports = {
                 },
             },
             move_to_angle: {
-                color: EntryStatic.colorSet.block.default.MOVING,
-                outerLine: EntryStatic.colorSet.block.darken.MOVING,
+                color: RoCodeStatic.colorSet.block.default.MOVING,
+                outerLine: RoCodeStatic.colorSet.block.darken.MOVING,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1594,7 +1594,7 @@ module.exports = {
                     }
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.move_to_degree(%2, %1)'] },
+                syntax: { js: [], py: ['RoCode.move_to_degree(%2, %1)'] },
             },
         };
     },

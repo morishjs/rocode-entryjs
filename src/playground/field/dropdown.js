@@ -1,8 +1,8 @@
 'use strict';
 
-import { Dropdown } from '@entrylabs/tool';
+import { Dropdown } from '@RoCodelabs/tool';
 
-Entry.FieldDropdown = class FieldDropdown extends Entry.Field {
+RoCode.FieldDropdown = class FieldDropdown extends RoCode.Field {
     constructor(content, blockView, index, renderMode, i, isDynamic) {
         super();
         if (isDynamic) {
@@ -11,7 +11,7 @@ Entry.FieldDropdown = class FieldDropdown extends Entry.Field {
         this._block = blockView.block;
         this._blockView = blockView;
 
-        this.box = new Entry.BoxModel();
+        this.box = new RoCode.BoxModel();
 
         this.svgGroup = null;
 
@@ -22,7 +22,7 @@ Entry.FieldDropdown = class FieldDropdown extends Entry.Field {
         let { arrowColor } = content;
         const { deletable, emphasized } = this._block;
 
-        if (deletable === Entry.Block.DELETABLE_FALSE_LIGHTEN || emphasized) {
+        if (deletable === RoCode.Block.DELETABLE_FALSE_LIGHTEN || emphasized) {
             arrowColor = blockView._fillColor;
         }
 
@@ -49,7 +49,7 @@ Entry.FieldDropdown = class FieldDropdown extends Entry.Field {
 
         if (!this.svgGroup) {
             this.svgGroup = blockView.contentSvgGroup.elem('g', {
-                class: 'entry-field-dropdown',
+                class: 'RoCode-field-dropdown',
             });
         }
 
@@ -78,7 +78,7 @@ Entry.FieldDropdown = class FieldDropdown extends Entry.Field {
                 fill: this._textColor,
                 'font-size': `${+that._font_size}px`,
                 'font-weight': 'bold',
-                'font-family': EntryStatic.fontFamily || 'NanumGothic',
+                'font-family': RoCodeStatic.fontFamily || 'NanumGothic',
             });
         }
 
@@ -98,7 +98,7 @@ Entry.FieldDropdown = class FieldDropdown extends Entry.Field {
             });
         }
         let promise;
-        if (this instanceof Entry.FieldDropdownDynamic) {
+        if (this instanceof RoCode.FieldDropdownDynamic) {
             promise = this._updateValue();
             if (promise instanceof Promise) {
                 promise.then(() => {
@@ -141,12 +141,12 @@ Entry.FieldDropdown = class FieldDropdown extends Entry.Field {
                 this._selectBlockView();
             };
         }
-        this.disposeEvent = Entry.disposeEvent.attach(this, action);
+        this.disposeEvent = RoCode.disposeEvent.attach(this, action);
     }
 
     renderOptions() {
-        this.optionGroup = Entry.Dom('div', {
-            class: 'entry-widget-dropdown',
+        this.optionGroup = RoCode.Dom('div', {
+            class: 'RoCode-widget-dropdown',
             parent: $('body'),
         });
         const { options = [] } = this._contents;

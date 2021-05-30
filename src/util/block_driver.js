@@ -1,10 +1,10 @@
 'use strict';
 
-Entry.BlockDriver = class BlockDriver {
+RoCode.BlockDriver = class BlockDriver {
     convert() {
         const time = new Date();
-        for (const blockType in Entry.block) {
-            if (typeof Entry.block[blockType] === 'function') {
+        for (const blockType in RoCode.block) {
+            if (typeof RoCode.block[blockType] === 'function') {
                 this._convertBlock(blockType);
             }
         }
@@ -13,7 +13,7 @@ Entry.BlockDriver = class BlockDriver {
 
     _convertBlock(blockType) {
         const blocklyInfo = Blockly.Blocks[blockType];
-        const blockInfo = EntryStatic.blockInfo[blockType];
+        const blockInfo = RoCodeStatic.blockInfo[blockType];
         let className;
         let isNotFor;
         if (blockInfo) {
@@ -28,7 +28,7 @@ Entry.BlockDriver = class BlockDriver {
                 var def = generateBlockDef(child);
             }
         }
-        const mockup = new Entry.BlockMockup(blocklyInfo, def, blockType);
+        const mockup = new RoCode.BlockMockup(blocklyInfo, def, blockType);
 
         const blockObject = mockup.toJSON();
         blockObject.class = className;
@@ -41,7 +41,7 @@ Entry.BlockDriver = class BlockDriver {
             delete blockObject.statementsKeyMap;
         }
 
-        blockObject.func = Entry.block[blockType];
+        blockObject.func = RoCode.block[blockType];
 
         const PRIMITIVES = [
             'NUMBER',
@@ -56,7 +56,7 @@ Entry.BlockDriver = class BlockDriver {
         if (PRIMITIVES.indexOf(blockType.toUpperCase()) > -1) {
             blockObject.isPrimitive = true;
         }
-        Entry.block[blockType] = blockObject;
+        RoCode.block[blockType] = blockObject;
 
         function generateBlockDef(block) {
             const def = {
@@ -94,7 +94,7 @@ Entry.BlockDriver = class BlockDriver {
     }
 };
 
-Entry.BlockMockup = class BlockMockup {
+RoCode.BlockMockup = class BlockMockup {
     constructor(blocklyInfo, def, blockType) {
         this.templates = [];
         this.params = [];
@@ -396,13 +396,13 @@ Entry.BlockMockup = class BlockMockup {
     }
 
     _addToParamsKeyMap(key) {
-        key = key ? key : `dummy_${Entry.Utils.generateId()}`;
+        key = key ? key : `dummy_${RoCode.Utils.generateId()}`;
         const map = this.paramsKeyMap;
         map[key] = Object.keys(map).length;
     }
 
     _addToStatementsKeyMap(key) {
-        key = key ? key : `dummy_${Entry.Utils.generateId()}`;
+        key = key ? key : `dummy_${RoCode.Utils.generateId()}`;
         const map = this.statementsKeyMap;
         map[key] = Object.keys(map).length;
     }

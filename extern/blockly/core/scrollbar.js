@@ -556,7 +556,7 @@ Blockly.ScrollbarSvg.prototype.uiEffectInc_ = function(e) {
 Blockly.ScrollbarSvg.prototype.uiEffectDec_ = function(e) {
     return;
     var pElement = this.workspace_.svgGroup_.parentElement;
-    var result = Entry.isChild(pElement, e.toElement);
+    var result = RoCode.isChild(pElement, e.toElement);
     var scrollbar = this.svgGroup_;
     if ( !(result || e.toElement == pElement)) {
         scrollbar.setAttribute('opacity', '0');

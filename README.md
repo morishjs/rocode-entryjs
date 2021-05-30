@@ -1,10 +1,10 @@
-# entryjs 
-entryjs는 엔트리에서 개발한 HTML5 기반의 블록코딩 라이브러리 입니다.
-[엔트리](https://playentry.org) 사이트에 접속하시면 entryjs를 사용한 블록코딩 환경을 확인해 볼 수 있습니다.
+# RoCodejs 
+RoCodejs는 엔트리에서 개발한 HTML5 기반의 블록코딩 라이브러리 입니다.
+[엔트리](https://playRoCode.org) 사이트에 접속하시면 RoCodejs를 사용한 블록코딩 환경을 확인해 볼 수 있습니다.
 
 ## 시작하기
-entryjs는 HTML Canvas와 오디오, 벡터 이미지등을 다루기 위해 몇가지 오픈소스 라이브러리들을 사용합니다.
-이 라이브러리들이 웹프로젝트에 먼저 로딩된 후에 entryjs를 로딩하여야 합니다.
+RoCodejs는 HTML Canvas와 오디오, 벡터 이미지등을 다루기 위해 몇가지 오픈소스 라이브러리들을 사용합니다.
+이 라이브러리들이 웹프로젝트에 먼저 로딩된 후에 RoCodejs를 로딩하여야 합니다.
 
 ### 써드파티 라이브러리
  * [jQuery](http://jquery.com/download/) - 1.9.1
@@ -18,8 +18,8 @@ entryjs는 HTML Canvas와 오디오, 벡터 이미지등을 다루기 위해 몇
  * [Velocity](https://github.com/julianshapiro/velocity) - ~1.2.3
  * [CodeMirror](https://codemirror.net) - 5.12.0
  * [Fuzzy](https://github.com/mattyork/fuzzy) - ~0.1.1
- * [Literallycanvas](https://github.com/entrylabs/literallycanvas) - entry version
- * [EntryTool](https://github.com/entrylabs/entry-tool) - entry version
+ * [Literallycanvas](https://github.com/RoCodelabs/literallycanvas) - RoCode version
+ * [RoCodeTool](https://github.com/RoCodelabs/RoCode-tool) - RoCode version
  위 라이브러리들은 모두 오픈소스로 배포되며, 직접 다운로드 받거나 [npm](http://npmjs.org), [bower](http://bower.io)등을 이용해 설치할 수 있습니다.
 
 ### 자바스크립트 라이브러리
@@ -44,38 +44,38 @@ entryjs는 HTML Canvas와 오디오, 벡터 이미지등을 다루기 위해 몇
 <script type="text/javascript" src="${LIBDIR}/socket.io-client/socket.io.js"></script>
 <script type="text/javascript" src="${LIBDIR}/react/react.js"></script>
 <script type="text/javascript" src="${LIBDIR}/react/react-dom.js"></script>
-<script type="text/javascript" src="${LIBDIR}/entry-lms/dist/assets/app.js"></script>
+<script type="text/javascript" src="${LIBDIR}/RoCode-lms/dist/assets/app.js"></script>
 <script type="text/javascript" src="${LIBDIR}/literallycanvas-mobile/lib/js/literallycanvas.js"></script>
-<script type="text/javascript" src="${LIBDIR}/entry-tool/dist/entry-tool.js"></script>
+<script type="text/javascript" src="${LIBDIR}/RoCode-tool/dist/RoCode-tool.js"></script>
 
-<!-- playentry 서버에 포함된 코드 -->
-<script type="text/javascript" src="https://playentry.org/js/jshint.js"></script>
-<script type="text/javascript" src="https://playentry.org/js/textmode/python/python.js"></script>
+<!-- playRoCode 서버에 포함된 코드 -->
+<script type="text/javascript" src="https://playRoCode.org/js/jshint.js"></script>
+<script type="text/javascript" src="https://playRoCode.org/js/textmode/python/python.js"></script>
 
-<!-- entryjs 및 entryjs 에 포함된 라이브러리들 -->
-<script type="text/javascript" src="${LIBDIR}/entryjs/extern/util/filbert.js"></script>
-<script type="text/javascript" src="${LIBDIR}/entryjs/extern/util/CanvasInput.js"></script>
-<script type="text/javascript" src="${LIBDIR}/entryjs/extern/util/ndgmr.Collision.js"></script>
-<script type="text/javascript" src="${LIBDIR}/entryjs/extern/util/handle.js"></script>
-<script type="text/javascript" src="${LIBDIR}/entryjs/extern/util/bignumber.min.js"></script>
+<!-- RoCodejs 및 RoCodejs 에 포함된 라이브러리들 -->
+<script type="text/javascript" src="${LIBDIR}/RoCodejs/extern/util/filbert.js"></script>
+<script type="text/javascript" src="${LIBDIR}/RoCodejs/extern/util/CanvasInput.js"></script>
+<script type="text/javascript" src="${LIBDIR}/RoCodejs/extern/util/ndgmr.Collision.js"></script>
+<script type="text/javascript" src="${LIBDIR}/RoCodejs/extern/util/handle.js"></script>
+<script type="text/javascript" src="${LIBDIR}/RoCodejs/extern/util/bignumber.min.js"></script>
 
-<!-- entryjs core / 언어 및 글로벌 설정이 포함되어있습니다. -->
-<script type='text/javascript' src='${LIBDIR}/entryjs/extern/lang/ko.js'></script>
-<script type='text/javascript' src='${LIBDIR}/entryjs/extern/util/static.js'></script>
-<script type='text/javascript' src='${LIBDIR}/entryjs/dist/entry.min.js'></script>
+<!-- RoCodejs core / 언어 및 글로벌 설정이 포함되어있습니다. -->
+<script type='text/javascript' src='${LIBDIR}/RoCodejs/extern/lang/ko.js'></script>
+<script type='text/javascript' src='${LIBDIR}/RoCodejs/extern/util/static.js'></script>
+<script type='text/javascript' src='${LIBDIR}/RoCodejs/dist/RoCode.min.js'></script>
 ```
 
-### entryjs 스타일시트
+### RoCodejs 스타일시트
 블록 디자인과 관련된 기본적인 스타일들이 정의되어 있습니다.
 ```html
-<link rel='stylesheet'  href='${LIBDIR}/entryjs/dist/entry.css'>
+<link rel='stylesheet'  href='${LIBDIR}/RoCodejs/dist/RoCode.css'>
 ```
 
 ### 엔트리 초기화 (Inject Options)
 
-필요한 라이브러리와 entryjs를 로딩하였으면 현재 DOM의 특정 위치에 Javascript를 이용해 entryjs workspace를 주입할 수 있습니다.
+필요한 라이브러리와 RoCodejs를 로딩하였으면 현재 DOM의 특정 위치에 Javascript를 이용해 RoCodejs workspace를 주입할 수 있습니다.
 
- * Entry.init(domElement, initOptions);
+ * RoCode.init(domElement, initOptions);
     ```html
        <div id="workspace"></div>
     ```
@@ -91,17 +91,17 @@ entryjs는 HTML Canvas와 오디오, 벡터 이미지등을 다루기 위해 몇
           url: '/css/nanumgothic.css'
         }]
        };
-       Entry.init(workspace, initOptions);
+       RoCode.init(workspace, initOptions);
     ```
- * domElement : Entry가 Inject될 DOM 노드.
- * initOptions : entryjs workspace의 옵션값.
+ * domElement : RoCode가 Inject될 DOM 노드.
+ * initOptions : RoCodejs workspace의 옵션값.
    
 ### initOptions
  Workspace 타입과 폰트정보를 제외한 모든 옵션은 선택사항이며 Boolean 타입입니다.
    
  * 필수항목
    - type: 워크스페이스 타입. (workspace: 만들기 환경, minimize: 구경하기 환경)
-   - libDir: 써드파티 라이브러리 저장소. entryjs를 포함한 Library 위치. (기본값: '/lib')
+   - libDir: 써드파티 라이브러리 저장소. RoCodejs를 포함한 Library 위치. (기본값: '/lib')
    - fonts: 웹폰트 정보
    
  * 선택항목
@@ -145,23 +145,23 @@ entryjs는 HTML Canvas와 오디오, 벡터 이미지등을 다루기 위해 몇
     ```
     무료 한글 웹폰트는 https://www.google.com/fonts/earlyaccess 에서 다운로드 하실 수 있습니다.
 
-### Entry.playground.setBlockMenu();
+### RoCode.playground.setBlockMenu();
  블록메뉴 초기화
     
-### Entry.loadProject(project);
+### RoCode.loadProject(project);
  프로젝트 불러오기. project 인자를 생략할 경우 기본 프로젝트를 리턴합니다.
 
 ### 이벤트. (Event description)
  * event listening
  ```javascript
- Entry.addEventListener(eventName, function);
+ RoCode.addEventListener(eventName, function);
  ```
   - eventName: 캐치하고 싶은  커스텀 이벤트의 이름
   - function: 해당 커스텀 이벤트가 발생했을 경우 실행 될 함수
 
  * event dispatch
  ```javascript
- Entry.dispatchEvent(eventName,params);
+ RoCode.dispatchEvent(eventName,params);
  ```
   - eventName: 발생 시키고 싶은 이벤트의 이름
   - params: 이벤트를 리스닝 하고 있는 콜백함수에 넘겨줄 파라미터
@@ -183,29 +183,29 @@ entryjs는 HTML Canvas와 오디오, 벡터 이미지등을 다루기 위해 몇
  * 화면
   - windowResized
 
-### Entry.Toast
+### RoCode.Toast
 * 워크스페이스 하단에 알림 메시지 표시
- - Entry.Toast.warning(title, message, auto-dospose); // 주의
- - Entry.Toast.success(title, message, auto-dospose); // 성공
- - Entry.Toast.alert(title, message, auto-dospose); // 경고
+ - RoCode.Toast.warning(title, message, auto-dospose); // 주의
+ - RoCode.Toast.success(title, message, auto-dospose); // 성공
+ - RoCode.Toast.alert(title, message, auto-dospose); // 경고
 
 ### 블록 모양 정의와 실행 스크립트.
 ```
-${entryjs}/src/blocks/**/*
+${RoCodejs}/src/blocks/**/*
 ```
 
 ### 블록 모양 정의
 
-[EntryDocs - 블록 명세 작성](https://entrylabs.github.io/docs/guide/entryjs/2016-05-22-add_new_blocks.html) 을 참고해주세요.
+[RoCodeDocs - 블록 명세 작성](https://RoCodelabs.github.io/docs/guide/RoCodejs/2016-05-22-add_new_blocks.html) 을 참고해주세요.
 
 ### 프로젝트 (Project Schema)
 
 ### 저장
-   : 아래의 Entry 함수를 이용해 필수정보들을 JSON형태로 저장할 수 있습니다.
-    저장된 프로젝트는 Entry.loadProject(project) 를 이용해 다시 로드할 수 있습니다.
+   : 아래의 RoCode 함수를 이용해 필수정보들을 JSON형태로 저장할 수 있습니다.
+    저장된 프로젝트는 RoCode.loadProject(project) 를 이용해 다시 로드할 수 있습니다.
     
 ```javascript
-    var project = Entry.exportProject();
+    var project = RoCode.exportProject();
 ```
 
 ### 상세 스키마
@@ -386,7 +386,7 @@ var ProjectSchema = new Schema({
 
 ## Copyright and License
 
-EntryJS Copyright (c) 2015 Entry Labs.
+RoCodeJS Copyright (c) 2015 RoCode Labs.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.  You may obtain a copy of the License at
 

@@ -3,12 +3,12 @@
 import * as PIXI from 'pixi.js';
 import { GEHelper } from '../graphicEngine/GEHelper';
 
-type EntryObjectEntity = any;
+type RoCodeObjectEntity = any;
 
 type NotchType = 'ne' | 'nw' | 'se' | 'sw';
 
-class EntryDialog {
-    private parent: EntryObjectEntity;
+class RoCodeDialog {
+    private parent: RoCodeObjectEntity;
     private padding = 10;
     private border = 2;
     private width: number;
@@ -20,7 +20,7 @@ class EntryDialog {
     public object: any;
 
     constructor(
-        entity: EntryObjectEntity,
+        entity: RoCodeObjectEntity,
         message: string | number,
         mode: 'speak' | 'ask',
         isStamp: boolean
@@ -35,8 +35,8 @@ class EntryDialog {
         this.parent = entity;
 
         let messageString = typeof message == 'number' ? String(message) : message;
-        if (Entry.console) {
-            Entry.console.print(message, mode);
+        if (RoCode.console) {
+            RoCode.console.print(message, mode);
         }
         messageString = messageString.match(/.{1,15}/g).join('\n');
         this.message_ = messageString;
@@ -45,7 +45,7 @@ class EntryDialog {
             this.generateSpeak();
         }
         if (!isStamp) {
-            Entry.stage.loadDialog(this);
+            RoCode.stage.loadDialog(this);
         }
     }
 
@@ -103,19 +103,19 @@ class EntryDialog {
         }
 
         this._isNoContentTried && this.parent.setText('');
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     remove() {
-        Entry.stage.unloadDialog(this);
+        RoCode.stage.unloadDialog(this);
         this.parent.dialog = null;
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     private createSpeakNotch(type: NotchType) {
         const notch = GEHelper.newGraphic();
         notch.type = type;
-        const colorSet = EntryStatic.colorSet.canvas || {};
+        const colorSet = RoCodeStatic.colorSet.canvas || {};
         const height = this.height + this.padding;
         const padding = this.padding;
         const width = this.width;
@@ -173,7 +173,7 @@ class EntryDialog {
 
     private generateSpeak() {
         this.object = GEHelper.newContainer('[dialog] container');
-        const fontFamily = EntryStatic.fontFamily || 'NanumGothic';
+        const fontFamily = RoCodeStatic.fontFamily || 'NanumGothic';
         const text = GEHelper.textHelper.newText(
             this.message_,
             `15px ${fontFamily}`,
@@ -192,7 +192,7 @@ class EntryDialog {
         const height = bound.height;
         const width = bound.width >= 10 ? bound.width : 17;
         const rect = GEHelper.newGraphic();
-        const colorSet = EntryStatic.colorSet.canvas || {};
+        const colorSet = RoCodeStatic.colorSet.canvas || {};
         rect.graphics
             .f(colorSet.dialogBG || '#ffffff')
             .ss(2, 'round')
@@ -213,9 +213,9 @@ class EntryDialog {
         this.update();
         this.object.addChild(this.notch);
         this.object.addChild(text);
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 }
 
-export default EntryDialog;
-Entry.Dialog = EntryDialog;
+export default RoCodeDialog;
+RoCode.Dialog = RoCodeDialog;

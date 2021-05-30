@@ -1,25 +1,25 @@
 'use strict';
 
-Entry.SensorBoard = {
+RoCode.SensorBoard = {
     id: '1.2',
     name: 'sensorBoard',
     url: 'http://www.neweducation.co.kr/',
-    imageName: 'entrybt.png',
+    imageName: 'RoCodebt.png',
     title: {
         ko: 'E-센서보드',
         en: 'E-Sensorboard',
     },
     setZero: function() {
-        Entry.hw.sendQueue.readablePorts = [];
+        RoCode.hw.sendQueue.readablePorts = [];
         for (var port = 0; port < 20; port++) {
-            Entry.hw.sendQueue[port] = 0;
-            Entry.hw.sendQueue.readablePorts.push(port);
+            RoCode.hw.sendQueue[port] = 0;
+            RoCode.hw.sendQueue.readablePorts.push(port);
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
 };
 
-Entry.SensorBoard.setLanguage = function() {
+RoCode.SensorBoard.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -48,7 +48,7 @@ Entry.SensorBoard.setLanguage = function() {
     };
 };
 
-Entry.SensorBoard.blockMenuBlocks = [
+RoCode.SensorBoard.blockMenuBlocks = [
     //sensorBoard
     'sensorBoard_get_named_sensor_value',
     'sensorBoard_is_button_pressed',
@@ -60,12 +60,12 @@ Entry.SensorBoard.blockMenuBlocks = [
     'sensorBoard_convert_scale',
 ];
 
-Entry.SensorBoard.getBlocks = function() {
+RoCode.SensorBoard.getBlocks = function() {
     return {
         //region sensorBoard e센서보드
         sensorBoard_get_named_sensor_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -80,8 +80,8 @@ Entry.SensorBoard.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -95,13 +95,13 @@ Entry.SensorBoard.getBlocks = function() {
             class: 'sensorBoard',
             isNotFor: ['sensorBoard'],
             func: function(sprite, script) {
-                return Entry.hw.getAnalogPortValue(script.getField('PORT', script));
+                return RoCode.hw.getAnalogPortValue(script.getField('PORT', script));
             },
             syntax: { js: [], py: ['Sensorboard.sensor_value(%1)'] },
         },
         sensorBoard_is_button_pressed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -116,8 +116,8 @@ Entry.SensorBoard.getBlocks = function() {
                     ],
                     value: '8',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -131,13 +131,13 @@ Entry.SensorBoard.getBlocks = function() {
             class: 'sensorBoard',
             isNotFor: ['sensorBoard'],
             func: function(sprite, script) {
-                return Entry.hw.getDigitalPortValue(script.getNumberField('PORT', script));
+                return RoCode.hw.getDigitalPortValue(script.getNumberField('PORT', script));
             },
             syntax: { js: [], py: ['Sensorboard.is_button_pressed(%1)'] },
         },
         sensorBoard_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -151,8 +151,8 @@ Entry.SensorBoard.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -162,8 +162,8 @@ Entry.SensorBoard.getBlocks = function() {
                     ],
                     value: '255',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -183,7 +183,7 @@ Entry.SensorBoard.getBlocks = function() {
             class: 'sensorBoard',
             isNotFor: ['sensorBoard'],
             func: function(sprite, script) {
-                Entry.hw.setDigitalPortValue(
+                RoCode.hw.setDigitalPortValue(
                     script.getField('PORT'),
                     script.getNumberField('OPERATOR')
                 );
@@ -299,4 +299,4 @@ Entry.SensorBoard.getBlocks = function() {
     };
 };
 
-module.exports = Entry.SensorBoard;
+module.exports = RoCode.SensorBoard;

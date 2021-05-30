@@ -9,8 +9,8 @@ cp -r dist build/
 cp -r extern build/
 cp -r images build/
 cp -r weights build/
-rsync -R src/playground/block_entry.js build
-rsync -R src/playground/block_entry_mini.js build
+rsync -R src/playground/block_RoCode.js build
+rsync -R src/playground/block_RoCode_mini.js build
 rsync -r -R src/playground/blocks/ build
 ls -al
 ls -al build

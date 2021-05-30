@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Curtain = {};
+RoCode.Curtain = {};
 
 (function() {
     this._visible = false;
@@ -15,27 +15,27 @@ Entry.Curtain = {};
         var $body = $('body');
         var option = {
             parent: $body,
-            class: 'entryCurtainElem entryRemove',
+            class: 'RoCodeCurtainElem RoCodeRemove',
         };
 
         this._doms = {
-            top: Entry.Dom('div', option),
-            right: Entry.Dom('div', option),
-            bottom: Entry.Dom('div', option),
-            left: Entry.Dom('div', option),
+            top: RoCode.Dom('div', option),
+            right: RoCode.Dom('div', option),
+            bottom: RoCode.Dom('div', option),
+            left: RoCode.Dom('div', option),
         };
 
         if (isCloseable) {
-            this._closeBtn = Entry.Dom('button', {
+            this._closeBtn = RoCode.Dom('button', {
                 parent: $body,
-                class: 'entryCurtainCloseBtn entryRemove',
+                class: 'RoCodeCurtainCloseBtn RoCodeRemove',
             });
 
             this._closeBtn.on(
                 'click',
                 function() {
                     this._closeBtn.off('click');
-                    entrylms.emit('ExitStudy');
+                    RoCodelms.emit('ExitStudy');
                 }.bind(this)
             );
         }
@@ -45,7 +45,7 @@ Entry.Curtain = {};
             dom.addClass(key);
             dom.bind('mousedown', function(e) {
                 e.stopPropagation();
-                Entry.disposeEvent.notify(undefined, true);
+                RoCode.disposeEvent.notify(undefined, true);
             });
         }
     };
@@ -53,15 +53,15 @@ Entry.Curtain = {};
     this.show = function(datum) {
         !this._doms && this._createDom();
 
-        if (datum instanceof Array) datum = Entry.getDom(datum);
+        if (datum instanceof Array) datum = RoCode.getDom(datum);
 
         datum = $(datum);
         this._targetDom = datum;
 
         this.align();
 
-        for (var key in this._doms) this._doms[key].removeClass('entryRemove');
-        this._closeBtn && this._closeBtn.removeClass('entryRemove');
+        for (var key in this._doms) this._doms[key].removeClass('RoCodeRemove');
+        this._closeBtn && this._closeBtn.removeClass('RoCodeRemove');
         this._visible = true;
     };
 
@@ -114,8 +114,8 @@ Entry.Curtain = {};
     this.hide = function() {
         if (!this._doms) return;
 
-        for (var key in this._doms) this._doms[key].addClass('entryRemove');
-        this._closeBtn && this._closeBtn.addClass('entryRemove');
+        for (var key in this._doms) this._doms[key].addClass('RoCodeRemove');
+        this._closeBtn && this._closeBtn.addClass('RoCodeRemove');
         this._visible = false;
         this._targetDom = null;
     };
@@ -127,4 +127,4 @@ Entry.Curtain = {};
     this.setVisible = function(value) {
         this._visible = value;
     };
-}.bind(Entry.Curtain)());
+}.bind(RoCode.Curtain)());

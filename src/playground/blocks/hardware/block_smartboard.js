@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.SmartBoard = {
+RoCode.SmartBoard = {
     id: 'A.1',
     name: 'smartBoard',
     url: 'http://www.sciencebox.co.kr',
@@ -12,9 +12,9 @@ Entry.SmartBoard = {
     },
     setZero: function() {
         for (var port = 2; port < 9; port++) {
-            Entry.hw.sendQueue[port] = 0;
+            RoCode.hw.sendQueue[port] = 0;
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     monitorTemplate: {
         listPorts: {
@@ -133,7 +133,7 @@ Entry.SmartBoard = {
     },
 };
 
-Entry.SmartBoard.setLanguage = function() {
+RoCode.SmartBoard.setLanguage = function() {
     return {
         en: {
             Blocks: {
@@ -277,7 +277,7 @@ Entry.SmartBoard.setLanguage = function() {
     };
 };
 
-Entry.SmartBoard.blockMenuBlocks = [
+RoCode.SmartBoard.blockMenuBlocks = [
     //jeil science smartBoard. 2016-11-03
     //smartBoard
     'smartBoard_get_named_sensor_value',
@@ -292,12 +292,12 @@ Entry.SmartBoard.blockMenuBlocks = [
     'smartBoard_set_gs1_pwm',
 ];
 
-Entry.SmartBoard.getBlocks = function() {
+RoCode.SmartBoard.getBlocks = function() {
     return {
         //region smartBoard 스마트보드
         smartBoard_get_named_sensor_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -316,8 +316,8 @@ Entry.SmartBoard.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -331,12 +331,12 @@ Entry.SmartBoard.getBlocks = function() {
             class: 'smartBoard_sensor',
             isNotFor: ['smartBoard'],
             func: function(sprite, script) {
-                return Entry.hw.getAnalogPortValue(script.getField('PORT', script));
+                return RoCode.hw.getAnalogPortValue(script.getField('PORT', script));
             },
         },
         smartBoard_convert_scale: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -426,8 +426,8 @@ Entry.SmartBoard.getBlocks = function() {
             },
         },
         smartBoard_is_button_pressed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -442,8 +442,8 @@ Entry.SmartBoard.getBlocks = function() {
                     ],
                     value: '12',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -457,12 +457,12 @@ Entry.SmartBoard.getBlocks = function() {
             class: 'smartBoard_button',
             isNotFor: ['smartBoard'],
             func: function(sprite, script) {
-                return Entry.hw.getDigitalPortValue(script.getNumberField('PORT', script));
+                return RoCode.hw.getDigitalPortValue(script.getNumberField('PORT', script));
             },
         },
         smartBoard_set_dc_motor_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -474,8 +474,8 @@ Entry.SmartBoard.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -485,8 +485,8 @@ Entry.SmartBoard.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -506,7 +506,7 @@ Entry.SmartBoard.getBlocks = function() {
             class: 'dc_motor',
             isNotFor: ['smartBoard'],
             func: function(sprite, script) {
-                Entry.hw.setDigitalPortValue(
+                RoCode.hw.setDigitalPortValue(
                     script.getField('PORT'),
                     script.getNumberField('OPERATOR')
                 );
@@ -514,8 +514,8 @@ Entry.SmartBoard.getBlocks = function() {
             },
         },
         smartBoard_set_dc_motor_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -527,8 +527,8 @@ Entry.SmartBoard.getBlocks = function() {
                     ],
                     value: '5',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -542,8 +542,8 @@ Entry.SmartBoard.getBlocks = function() {
                     ],
                     value: '160',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -563,7 +563,7 @@ Entry.SmartBoard.getBlocks = function() {
             class: 'dc_motor',
             isNotFor: ['smartBoard'],
             func: function(sprite, script) {
-                Entry.hw.setDigitalPortValue(
+                RoCode.hw.setDigitalPortValue(
                     script.getField('PORT'),
                     script.getNumberField('OPERATOR')
                 );
@@ -571,8 +571,8 @@ Entry.SmartBoard.getBlocks = function() {
             },
         },
         smartBoard_set_dc_motor_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -584,8 +584,8 @@ Entry.SmartBoard.getBlocks = function() {
                     ],
                     value: '5',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -621,13 +621,13 @@ Entry.SmartBoard.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                Entry.hw.setDigitalPortValue(port, value);
+                RoCode.hw.setDigitalPortValue(port, value);
                 return script.callReturn();
             },
         },
         smartBoard_set_servo_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -640,8 +640,8 @@ Entry.SmartBoard.getBlocks = function() {
                     ],
                     value: '9',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -652,8 +652,8 @@ Entry.SmartBoard.getBlocks = function() {
                     ],
                     value: '193',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -673,7 +673,7 @@ Entry.SmartBoard.getBlocks = function() {
             class: 'smartBoard_servo_motor',
             isNotFor: ['smartBoard'],
             func: function(sprite, script) {
-                Entry.hw.setDigitalPortValue(
+                RoCode.hw.setDigitalPortValue(
                     script.getField('PORT'),
                     script.getNumberField('OPERATOR')
                 );
@@ -694,8 +694,8 @@ Entry.SmartBoard.getBlocks = function() {
             },
         },
         smartBoard_set_servo_angle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -708,8 +708,8 @@ Entry.SmartBoard.getBlocks = function() {
                     ],
                     value: '9',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -745,13 +745,13 @@ Entry.SmartBoard.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 1);
                 value = Math.min(value, 180);
-                Entry.hw.setDigitalPortValue(port, value);
+                RoCode.hw.setDigitalPortValue(port, value);
                 return script.callReturn();
             },
         },
         smartBoard_set_number_eight_pin: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -764,8 +764,8 @@ Entry.SmartBoard.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -775,8 +775,8 @@ Entry.SmartBoard.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -796,7 +796,7 @@ Entry.SmartBoard.getBlocks = function() {
             class: 'ext',
             isNotFor: ['smartBoard'],
             func: function(sprite, script) {
-                Entry.hw.setDigitalPortValue(
+                RoCode.hw.setDigitalPortValue(
                     script.getField('PORT'),
                     script.getNumberField('OPERATOR')
                 );
@@ -804,8 +804,8 @@ Entry.SmartBoard.getBlocks = function() {
             },
         },
         smartBoard_set_gs1_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -840,7 +840,7 @@ Entry.SmartBoard.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                Entry.hw.setDigitalPortValue(port, value);
+                RoCode.hw.setDigitalPortValue(port, value);
                 return script.callReturn();
             },
         },
@@ -848,4 +848,4 @@ Entry.SmartBoard.getBlocks = function() {
     };
 };
 
-module.exports = Entry.SmartBoard;
+module.exports = RoCode.SmartBoard;

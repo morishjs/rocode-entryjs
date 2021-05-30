@@ -2,8 +2,8 @@ module.exports = {
     getBlocks() {
         return {
             sound_something_with_block: {
-                color: EntryStatic.colorSet.block.default.SOUND,
-                outerLine: EntryStatic.colorSet.block.darken.SOUND,
+                color: RoCodeStatic.colorSet.block.default.SOUND,
+                outerLine: RoCodeStatic.colorSet.block.darken.SOUND,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -47,7 +47,7 @@ module.exports = {
                     const sound = sprite.parent.getSound(soundId);
 
                     if (sound) {
-                        Entry.Utils.addSoundInstances(Entry.Utils.playSound(sound.id));
+                        RoCode.Utils.addSoundInstances(RoCode.Utils.playSound(sound.id));
                     }
 
                     return script.callReturn();
@@ -57,14 +57,14 @@ module.exports = {
                     py: [
                         {
                             passTest: true,
-                            syntax: 'Entry.play_sound(%1)',
+                            syntax: 'RoCode.play_sound(%1)',
                         },
                     ],
                 },
             },
             sound_something_second_with_block: {
-                color: EntryStatic.colorSet.block.default.SOUND,
-                outerLine: EntryStatic.colorSet.block.darken.SOUND,
+                color: RoCodeStatic.colorSet.block.default.SOUND,
+                outerLine: RoCodeStatic.colorSet.block.darken.SOUND,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -125,8 +125,8 @@ module.exports = {
 
                     const sound = sprite.parent.getSound(soundId);
                     if (sound) {
-                        Entry.Utils.addSoundInstances(
-                            Entry.Utils.playSound(sound.id, {
+                        RoCode.Utils.addSoundInstances(
+                            RoCode.Utils.playSound(sound.id, {
                                 startTime: 0,
                                 duration: timeValue * 1000,
                             })
@@ -139,14 +139,14 @@ module.exports = {
                     py: [
                         {
                             passTest: true,
-                            syntax: 'Entry.play_sound_for_sec(%1, %2)',
+                            syntax: 'RoCode.play_sound_for_sec(%1, %2)',
                         },
                     ],
                 },
             },
             sound_from_to: {
-                color: EntryStatic.colorSet.block.default.SOUND,
-                outerLine: EntryStatic.colorSet.block.darken.SOUND,
+                color: RoCodeStatic.colorSet.block.default.SOUND,
+                outerLine: RoCodeStatic.colorSet.block.darken.SOUND,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -221,11 +221,11 @@ module.exports = {
                         let [start, end] = script.getValues(['START', 'END'], script);
                         start = Number(start) * 1000;
                         end = Number(end) * 1000;
-                        const instance = Entry.Utils.playSound(sound.id, {
+                        const instance = RoCode.Utils.playSound(sound.id, {
                             startTime: Math.min(start, end),
                             duration: Math.max(start, end) - Math.min(start, end),
                         });
-                        Entry.Utils.addSoundInstances(instance);
+                        RoCode.Utils.addSoundInstances(instance);
 
                     }
                     return script.callReturn();
@@ -235,14 +235,14 @@ module.exports = {
                     py: [
                         {
                             passTest: true,
-                            syntax: 'Entry.play_sound_from_to(%1, %2, %3)',
+                            syntax: 'RoCode.play_sound_from_to(%1, %2, %3)',
                         },
                     ],
                 },
             },
             sound_something_wait_with_block: {
-                color: EntryStatic.colorSet.block.default.SOUND,
-                outerLine: EntryStatic.colorSet.block.darken.SOUND,
+                color: RoCodeStatic.colorSet.block.default.SOUND,
+                outerLine: RoCodeStatic.colorSet.block.darken.SOUND,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -288,8 +288,8 @@ module.exports = {
                         const sound = sprite.parent.getSound(soundId);
                         if (sound) {
                             script.playState = 1;
-                            const instance = Entry.Utils.playSound(sound.id);
-                            Entry.Utils.addSoundInstances(instance);
+                            const instance = RoCode.Utils.playSound(sound.id);
+                            RoCode.Utils.addSoundInstances(instance);
                             setTimeout(function() {
                                 script.playState = 0;
                             }, sound.duration * 1000);
@@ -308,14 +308,14 @@ module.exports = {
                     py: [
                         {
                             passTest: true,
-                            syntax: 'Entry.play_sound_and_wait(%1)',
+                            syntax: 'RoCode.play_sound_and_wait(%1)',
                         },
                     ],
                 },
             },
             sound_something_second_wait_with_block: {
-                color: EntryStatic.colorSet.block.default.SOUND,
-                outerLine: EntryStatic.colorSet.block.darken.SOUND,
+                color: RoCodeStatic.colorSet.block.default.SOUND,
+                outerLine: RoCodeStatic.colorSet.block.darken.SOUND,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -375,8 +375,8 @@ module.exports = {
                         const sound = sprite.parent.getSound(soundId);
                         if (sound) {
                             script.playState = 1;
-                            const instance = Entry.Utils.playSound(sound.id);
-                            Entry.Utils.addSoundInstances(instance);
+                            const instance = RoCode.Utils.playSound(sound.id);
+                            RoCode.Utils.addSoundInstances(instance);
                             const timeValue = script.getNumberValue('SECOND', script);
                             setTimeout(function() {
                                 instance.stop();
@@ -398,14 +398,14 @@ module.exports = {
                     py: [
                         {
                             passTest: true,
-                            syntax: 'Entry.play_sound_for_sec_and_wait(%1, %2)',
+                            syntax: 'RoCode.play_sound_for_sec_and_wait(%1, %2)',
                         },
                     ],
                 },
             },
             sound_from_to_and_wait: {
-                color: EntryStatic.colorSet.block.default.SOUND,
-                outerLine: EntryStatic.colorSet.block.darken.SOUND,
+                color: RoCodeStatic.colorSet.block.default.SOUND,
+                outerLine: RoCodeStatic.colorSet.block.darken.SOUND,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -486,11 +486,11 @@ module.exports = {
                             const startValue = Math.min(start, end);
                             const endValue = Math.max(start, end);
                             const duration = endValue - startValue;
-                            const instance = Entry.Utils.playSound(sound.id, {
+                            const instance = RoCode.Utils.playSound(sound.id, {
                                 startTime: startValue,
                                 duration,
                             });
-                            Entry.Utils.addSoundInstances(instance);
+                            RoCode.Utils.addSoundInstances(instance);
 
 
                             setTimeout(function() {
@@ -508,12 +508,12 @@ module.exports = {
                 },
                 syntax: {
                     js: [],
-                    py: ['Entry.play_sound_from_to_and_wait(%1, %2, %3)'],
+                    py: ['RoCode.play_sound_from_to_and_wait(%1, %2, %3)'],
                 },
             },
             sound_volume_change: {
-                color: EntryStatic.colorSet.block.default.SOUND,
-                outerLine: EntryStatic.colorSet.block.darken.SOUND,
+                color: RoCodeStatic.colorSet.block.default.SOUND,
+                outerLine: RoCodeStatic.colorSet.block.darken.SOUND,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -556,21 +556,21 @@ module.exports = {
                 isNotFor: [],
                 func(sprite, script) {
                     let value = script.getNumberValue('VALUE', script) / 100;
-                    value = value + Entry.Utils.getVolume();
+                    value = value + RoCode.Utils.getVolume();
                     if (value > 1) {
                         value = 1;
                     }
                     if (value < 0) {
                         value = 0;
                     }
-                    Entry.Utils.setVolume(value);
+                    RoCode.Utils.setVolume(value);
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.add_sound_volume(%1)'] },
+                syntax: { js: [], py: ['RoCode.add_sound_volume(%1)'] },
             },
             sound_volume_set: {
-                color: EntryStatic.colorSet.block.default.SOUND,
-                outerLine: EntryStatic.colorSet.block.darken.SOUND,
+                color: RoCodeStatic.colorSet.block.default.SOUND,
+                outerLine: RoCodeStatic.colorSet.block.darken.SOUND,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -619,14 +619,14 @@ module.exports = {
                     if (value < 0) {
                         value = 0;
                     }
-                    Entry.Utils.setVolume(value);
+                    RoCode.Utils.setVolume(value);
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.set_sound_volume(%1)'] },
+                syntax: { js: [], py: ['RoCode.set_sound_volume(%1)'] },
             },
             sound_silent_all: {
-                color: EntryStatic.colorSet.block.default.SOUND,
-                outerLine: EntryStatic.colorSet.block.darken.SOUND,
+                color: RoCodeStatic.colorSet.block.default.SOUND,
+                outerLine: RoCodeStatic.colorSet.block.darken.SOUND,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -647,7 +647,7 @@ module.exports = {
                     createjs.Sound.stop();
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.stop_sound()'] },
+                syntax: { js: [], py: ['RoCode.stop_sound()'] },
             },
         };
     },

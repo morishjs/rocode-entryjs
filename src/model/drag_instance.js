@@ -1,9 +1,9 @@
 'use strict';
 
-Entry.DragInstance = class DragInstance {
+RoCode.DragInstance = class DragInstance {
     constructor(model) {
         this.schema = {
-            type: Entry.STATIC.DRAG_INSTANCE,
+            type: RoCode.STATIC.DRAG_INSTANCE,
             startX: 0,
             startY: 0,
             offsetX: 0,
@@ -16,7 +16,7 @@ Entry.DragInstance = class DragInstance {
             isNew: false,
         };
 
-        Entry.Model(this);
+        RoCode.Model(this);
 
         this.set(model);
     }

@@ -13,7 +13,7 @@ const TIME_OUT_DELAY: number = 1000;
 type LoadingInfoMap = { [key: string]: AtlasImageLoadingInfo };
 
 export type ImageLoaderHandler = (info: AtlasImageLoadingInfo) => void;
-declare let Entry: any;
+declare let RoCode: any;
 
 export class AtlasImageLoader {
     private _path_info_map: LoadingInfoMap = {};
@@ -48,9 +48,9 @@ export class AtlasImageLoader {
     /**
      * 엔트리오브젝트에서 사용중인 이미지 리스트와 싱크를 맞춰 사용하지 않는 이미지 정보를 삭제함.
      */
-    private _syncWithEntryObjects() {
+    private _syncWithRoCodeObjects() {
         this._syncRequested = false;
-        const arrObj: any[] = Entry.container.getAllObjects();
+        const arrObj: any[] = RoCode.container.getAllObjects();
         const allPathSet: PrimitiveSet = new PrimitiveSet();
 
         const LEN = arrObj.length;
@@ -102,7 +102,7 @@ export class AtlasImageLoader {
         this._syncRequested = true;
 
         this._timer.timeout(TIME_OUT_DELAY, () => {
-            this._syncWithEntryObjects();
+            this._syncWithRoCodeObjects();
         });
     }
 }

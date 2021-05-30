@@ -1,11 +1,11 @@
-Entry.FieldLineBreak = class FieldLineBreak extends Entry.Field {
+RoCode.FieldLineBreak = class FieldLineBreak extends RoCode.Field {
     constructor(content, blockView, index) {
         super();
         this._block = blockView.block;
         this._blockView = blockView;
         this._index = index;
 
-        const box = new Entry.BoxModel();
+        const box = new RoCode.BoxModel();
         this.box = box;
 
         this.setValue(null);

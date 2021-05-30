@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.freelinker = {
+RoCode.freelinker = {
     id: '25.2',
     name: 'freelinker2',
     url: 'http://www.koreadigital.com/kr/main.asp',
@@ -11,14 +11,14 @@ Entry.freelinker = {
     },
     /*setZero: function() {
 
-        Entry.hw.sendQueue['data'] = 0;
+        RoCode.hw.sendQueue['data'] = 0;
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
 
     },*/
 };
-Entry.freelinker.setLanguage = () => {
+RoCode.freelinker.setLanguage = () => {
     return {
         ko: {
             template: {
@@ -39,7 +39,7 @@ Entry.freelinker.setLanguage = () => {
     };
 };
 
-Entry.freelinker.blockMenuBlocks = [
+RoCode.freelinker.blockMenuBlocks = [
     //sciencecube start
     'A_channel',
     'B_channel',
@@ -48,11 +48,11 @@ Entry.freelinker.blockMenuBlocks = [
     //sciencecube end
 ];
 
-Entry.freelinker.getBlocks = () => {
+RoCode.freelinker.getBlocks = () => {
     return {
         A_channel: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -71,9 +71,9 @@ Entry.freelinker.getBlocks = () => {
             class: 'FreeLinker2',
             isNotFor: ['freelinker2'],
             func: function(sprite, script) {
-                Entry.hw.update();
-                Entry.hw.sendQueue['data'] = 'A';
-                var result = Entry.hw.portData['A'];
+                RoCode.hw.update();
+                RoCode.hw.sendQueue['data'] = 'A';
+                var result = RoCode.hw.portData['A'];
 
                 result /= 10000;
 
@@ -85,8 +85,8 @@ Entry.freelinker.getBlocks = () => {
             },
         },
         B_channel: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -105,9 +105,9 @@ Entry.freelinker.getBlocks = () => {
             class: 'FreeLinker2',
             isNotFor: ['freelinker2'],
             func: function(sprite, script) {
-                Entry.hw.update();
-                Entry.hw.sendQueue['data'] = 'B';
-                var result = Entry.hw.portData['B'];
+                RoCode.hw.update();
+                RoCode.hw.sendQueue['data'] = 'B';
+                var result = RoCode.hw.portData['B'];
 
                 result /= 10000;
 
@@ -119,8 +119,8 @@ Entry.freelinker.getBlocks = () => {
             },
         },
         C_channel: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -139,9 +139,9 @@ Entry.freelinker.getBlocks = () => {
             class: 'FreeLinker2',
             isNotFor: ['freelinker2'],
             func: function(sprite, script) {
-                Entry.hw.update();
-                Entry.hw.sendQueue['data'] = 'C';
-                var result = Entry.hw.portData['C'];
+                RoCode.hw.update();
+                RoCode.hw.sendQueue['data'] = 'C';
+                var result = RoCode.hw.portData['C'];
 
                 result /= 10000;
 
@@ -153,8 +153,8 @@ Entry.freelinker.getBlocks = () => {
             },
         },
         D_channel: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -173,9 +173,9 @@ Entry.freelinker.getBlocks = () => {
             class: 'FreeLinker2',
             isNotFor: ['freelinker2'],
             func: function(sprite, script) {
-                Entry.hw.update();
-                Entry.hw.sendQueue['data'] = 'D';
-                var result = Entry.hw.portData['D'];
+                RoCode.hw.update();
+                RoCode.hw.sendQueue['data'] = 'D';
+                var result = RoCode.hw.portData['D'];
 
                 result /= 10000;
 
@@ -189,4 +189,4 @@ Entry.freelinker.getBlocks = () => {
     };
 };
 
-module.exports = Entry.freelinker;
+module.exports = RoCode.freelinker;

@@ -3,7 +3,7 @@
  */
 'use strict';
 
-Entry.Queue = function() {
+RoCode.Queue = function() {
     this.head = null;
     this.tail = null;
 };
@@ -49,4 +49,4 @@ function Node(data) {
 
         return items.toString();
     };
-})(Entry.Queue.prototype);
+})(RoCode.Queue.prototype);

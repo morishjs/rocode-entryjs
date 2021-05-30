@@ -1,29 +1,29 @@
 'use strict';
 
-Entry.STATEMENT = 0;
-Entry.PARAM = -1;
-Entry.Code = class Code {
+RoCode.STATEMENT = 0;
+RoCode.PARAM = -1;
+RoCode.Code = class Code {
     schema = {
         view: null,
         board: null,
     };
 
     constructor(code, object) {
-        Entry.Model(this, false);
-        this.id = Entry.generateHash();
+        RoCode.Model(this, false);
+        this.id = RoCode.generateHash();
         if (object) {
             this.object = object;
         }
 
-        this._data = new Entry.Collection();
+        this._data = new RoCode.Collection();
 
         this._eventMap = {};
         this._blockMap = {};
 
         this.executors = [];
-        this.watchEvent = new Entry.Event(this);
-        this.executeEndEvent = new Entry.Event(this);
-        this.changeEvent = new Entry.Event(this);
+        this.watchEvent = new RoCode.Event(this);
+        this.executeEndEvent = new RoCode.Event(this);
+        this.changeEvent = new RoCode.Event(this);
         this.changeEvent.attach(this, this._handleChange);
 
         this._maxZIndex = 0;
@@ -32,7 +32,7 @@ Entry.Code = class Code {
     }
 
     load(code) {
-        if (Entry.engine && Entry.engine.isState('run')) {
+        if (RoCode.engine && RoCode.engine.isState('run')) {
             return;
         }
 
@@ -40,7 +40,7 @@ Entry.Code = class Code {
 
         const parseCode = Array.isArray(code) ? code : JSON.parse(code);
         parseCode.forEach((t) => {
-            const thread = new Entry.Thread(t, this);
+            const thread = new RoCode.Thread(t, this);
             if (thread.hasData()) {
                 this._data.push(thread);
             }
@@ -60,7 +60,7 @@ Entry.Code = class Code {
     createView(board) {
         if (this.view === null) {
             this.set({
-                view: new Entry.CodeView(this, board),
+                view: new RoCode.CodeView(this, board),
                 board,
             });
         } else {
@@ -83,7 +83,7 @@ Entry.Code = class Code {
         }
         this.destroyView();
         this.set({
-            view: new Entry.CodeView(this, this.board),
+            view: new RoCode.CodeView(this, this.board),
             board: this.board,
         });
     }
@@ -125,7 +125,7 @@ Entry.Code = class Code {
                 continue;
             }
             if (value === undefined || block.params.indexOf(value) > -1) {
-                const executor = new Entry.Executor(blocks[i], entity, this);
+                const executor = new RoCode.Executor(blocks[i], entity, this);
                 this.executors.push(executor);
                 executors.push(executor);
             }
@@ -142,7 +142,7 @@ Entry.Code = class Code {
     }
 
     tick() {
-        if (Entry.isTurbo && !this.isUpdateTime) {
+        if (RoCode.isTurbo && !this.isUpdateTime) {
             this.isUpdateTime = performance.now();
         }
         const executors = this.executors;
@@ -152,8 +152,8 @@ Entry.Code = class Code {
         let executedBlocks = [];
         const loopExecutor = [];
 
-        const _executeEvent = _.partial(Entry.dispatchEvent, 'blockExecute');
-        const _executeEndEvent = _.partial(Entry.dispatchEvent, 'blockExecuteEnd');
+        const _executeEvent = _.partial(RoCode.dispatchEvent, 'blockExecute');
+        const _executeEndEvent = _.partial(RoCode.dispatchEvent, 'blockExecuteEnd');
 
         for (let i = 0; i < executors.length; i++) {
             const executor = executors[i];
@@ -179,7 +179,7 @@ Entry.Code = class Code {
             }
         }
 
-        if (Entry.isTurbo) {
+        if (RoCode.isTurbo) {
             for (let i = 0; i < loopExecutor.length; i++) {
                 const executor = loopExecutor[i];
                 if (executor.isPause()) {
@@ -202,7 +202,7 @@ Entry.Code = class Code {
 
                 if (
                     i === loopExecutor.length - 1 &&
-                    Entry.tickTime > performance.now() - this.isUpdateTime
+                    RoCode.tickTime > performance.now() - this.isUpdateTime
                 ) {
                     i = -1;
                 }
@@ -212,7 +212,7 @@ Entry.Code = class Code {
         this.isUpdateTime = 0;
         shouldNotifyWatch && watchEvent.notify(executedBlocks);
         if (result && result.promises) {
-            Entry.engine.addPromiseExecutor(result.promises);
+            RoCode.engine.addPromiseExecutor(result.promises);
         }
     }
 
@@ -227,7 +227,7 @@ Entry.Code = class Code {
         this.executors.forEach((e) => {
             return e.end();
         });
-        Entry.dispatchEvent('blockExecuteEnd');
+        RoCode.dispatchEvent('blockExecuteEnd');
         this.executors = [];
     }
 
@@ -248,7 +248,7 @@ Entry.Code = class Code {
             return console.error('blocks must be array');
         }
 
-        const thread = new Entry.Thread(blocks, this);
+        const thread = new RoCode.Thread(blocks, this);
         if (index === undefined || index === null) {
             this._data.push(thread);
         } else {
@@ -328,7 +328,7 @@ Entry.Code = class Code {
             }
         });
         const { board } = this;
-        if (board instanceof Entry.BlockMenu) {
+        if (board instanceof RoCode.BlockMenu) {
             board.updateSplitters(y);
         }
     }
@@ -351,8 +351,8 @@ Entry.Code = class Code {
 
     _handleChange() {
         const board = _.result(this.view, 'board');
-        const event = Entry.creationChangedEvent;
-        if (board && event && board.constructor !== Entry.BlockMenu) {
+        const event = RoCode.creationChangedEvent;
+        if (board && event && board.constructor !== RoCode.BlockMenu) {
             event.notify();
         }
     }
@@ -379,7 +379,7 @@ Entry.Code = class Code {
         const thread = this._data[pointer.shift()];
         let block = thread.getBlock(pointer.shift());
         while (pointer.length) {
-            if (!(block instanceof Entry.Block)) {
+            if (!(block instanceof RoCode.Block)) {
                 if (!block || !block.getValueBlock) {
                     console.error("can't get valueBlock", block);
                     return block;
@@ -411,7 +411,7 @@ Entry.Code = class Code {
         } else {
             block = thread.getBlock(pointer.shift());
             while (pointer.length) {
-                if (!(block instanceof Entry.Block)) {
+                if (!(block instanceof RoCode.Block)) {
                     block = block.getValueBlock();
                 }
                 const type = pointer.shift();

@@ -3,7 +3,7 @@
  */
 'use strict';
 
-Entry.Map = function() {
+RoCode.Map = function() {
     var map = {};
     map.repo = {};
     this._map = map;
@@ -50,4 +50,4 @@ Entry.Map = function() {
     p.toString = function() {
         return this._map.repo;
     };
-})(Entry.Map.prototype);
+})(RoCode.Map.prototype);

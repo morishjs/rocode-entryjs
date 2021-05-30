@@ -2,7 +2,7 @@ import intersection from 'lodash/intersection';
 
 export default abstract class ModelClass<T extends { [key: string]: any }> {
     public data: Partial<T>;
-    public observers: any[] = []; // new Entry.Observer
+    public observers: any[] = []; // new RoCode.Observer
     protected schema: T;
 
     protected constructor(schema: T, isSeal?: boolean) {
@@ -60,7 +60,7 @@ export default abstract class ModelClass<T extends { [key: string]: any }> {
 
     public observe(object: any, funcName: string, attrs: any, isNotify?: boolean) {
         // @ts-ignore
-        const observer = new Entry.Observer(this.observers, object, funcName, attrs);
+        const observer = new RoCode.Observer(this.observers, object, funcName, attrs);
         if (isNotify !== false) {
             object[funcName]([]);
         }

@@ -3,10 +3,10 @@
  */
 'use strict';
 
-Entry.JsAstGenerator = function() {};
+RoCode.JsAstGenerator = function() {};
 
 (function(p) {
     p.generate = function(code) {
         return arcon.parse(code);
     };
-})(Entry.JsAstGenerator.prototype);
+})(RoCode.JsAstGenerator.prototype);

@@ -51,7 +51,7 @@ const miniBlock = {
                 ],
                 value: '15',
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -83,7 +83,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -113,12 +113,12 @@ const miniBlock = {
             } else if (degree > 180) {
                 degree = 180;
             }
-            Entry.hw.sendQueue[`OUT${port}`] = degree;
+            RoCode.hw.sendQueue[`OUT${port}`] = degree;
             let option = port;
             if (option === 3) {
                 option = 4;
             }
-            Entry.hw.sendQueue.OPT = Entry.hw.sendQueue.OPT | option;
+            RoCode.hw.sendQueue.OPT = RoCode.hw.sendQueue.OPT | option;
             return script.callReturn();
         },
     },
@@ -141,7 +141,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -152,7 +152,7 @@ const miniBlock = {
                 value: '16',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -200,18 +200,18 @@ const miniBlock = {
                 const value = speed + direction;
                 switch (wheel) {
                     case 1: {
-                        Entry.hw.sendQueue.DCL = value;
-                        Entry.hw.sendQueue.DCR = value;
+                        RoCode.hw.sendQueue.DCL = value;
+                        RoCode.hw.sendQueue.DCR = value;
                         break;
                     }
 
                     case 2: {
-                        Entry.hw.sendQueue.DCR = value;
+                        RoCode.hw.sendQueue.DCR = value;
                         break;
                     }
 
                     case 3: {
-                        Entry.hw.sendQueue.DCL = value;
+                        RoCode.hw.sendQueue.DCL = value;
                         break;
                     }
                 }
@@ -228,25 +228,25 @@ const miniBlock = {
             } else {
                 switch (script.wheelMode) {
                     case 1: {
-                        Entry.hw.sendQueue.DCL = 0;
-                        Entry.hw.sendQueue.DCR = 0;
+                        RoCode.hw.sendQueue.DCL = 0;
+                        RoCode.hw.sendQueue.DCR = 0;
                         break;
                     }
 
                     case 2: {
-                        Entry.hw.sendQueue.DCR = 0;
+                        RoCode.hw.sendQueue.DCR = 0;
                         break;
                     }
 
                     case 3: {
-                        Entry.hw.sendQueue.DCL = 0;
+                        RoCode.hw.sendQueue.DCL = 0;
                         break;
                     }
                 }
                 delete script.timeFlag;
                 delete script.isStart;
                 delete script.wheelMode;
-                Entry.engine.isContinue = false;
+                RoCode.engine.isContinue = false;
                 return script.callReturn();
             }
         },
@@ -269,7 +269,7 @@ const miniBlock = {
                 value: '16',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -284,7 +284,7 @@ const miniBlock = {
                 value: '16',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -338,8 +338,8 @@ const miniBlock = {
                 const value1 = speed1 + direction1;
                 const value2 = speed2 + direction2;
 
-                Entry.hw.sendQueue.DCL = value1;
-                Entry.hw.sendQueue.DCR = value2;
+                RoCode.hw.sendQueue.DCL = value1;
+                RoCode.hw.sendQueue.DCR = value2;
 
                 script.isStart = true;
                 script.timeFlag = 1;
@@ -350,13 +350,13 @@ const miniBlock = {
             } else if (script.timeFlag == 1) {
                 return script;
             } else {
-                Entry.hw.sendQueue.DCL = 0;
-                Entry.hw.sendQueue.DCR = 0;
+                RoCode.hw.sendQueue.DCL = 0;
+                RoCode.hw.sendQueue.DCR = 0;
 
                 delete script.timeFlag;
                 delete script.isStart;
                 delete script.wheelMode;
-                Entry.engine.isContinue = false;
+                RoCode.engine.isContinue = false;
                 return script.callReturn();
             }
         },
@@ -380,7 +380,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -391,7 +391,7 @@ const miniBlock = {
                 value: '16',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -430,18 +430,18 @@ const miniBlock = {
 
             switch (wheel) {
                 case 1: {
-                    Entry.hw.sendQueue.DCL = value;
-                    Entry.hw.sendQueue.DCR = value;
+                    RoCode.hw.sendQueue.DCL = value;
+                    RoCode.hw.sendQueue.DCR = value;
                     break;
                 }
 
                 case 2: {
-                    Entry.hw.sendQueue.DCR = value;
+                    RoCode.hw.sendQueue.DCR = value;
                     break;
                 }
 
                 case 3: {
-                    Entry.hw.sendQueue.DCL = value;
+                    RoCode.hw.sendQueue.DCL = value;
                     break;
                 }
             }
@@ -467,7 +467,7 @@ const miniBlock = {
                 value: '16',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -482,7 +482,7 @@ const miniBlock = {
                 value: '16',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -525,8 +525,8 @@ const miniBlock = {
             const value1 = speed1 + direction1;
             const value2 = speed2 + direction2;
 
-            Entry.hw.sendQueue.DCL = value1;
-            Entry.hw.sendQueue.DCR = value2;
+            RoCode.hw.sendQueue.DCL = value1;
+            RoCode.hw.sendQueue.DCR = value2;
 
             return script.callReturn();
         },
@@ -550,7 +550,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -570,12 +570,12 @@ const miniBlock = {
         func(sprite, script) {
             const wheel = script.getNumberField('WHEEL');
             if (wheel == 2) {
-                Entry.hw.sendQueue.DCR = 0;
+                RoCode.hw.sendQueue.DCR = 0;
             } else if (wheel == 3) {
-                Entry.hw.sendQueue.DCL = 0;
+                RoCode.hw.sendQueue.DCL = 0;
             } else {
-                Entry.hw.sendQueue.DCR = 0;
-                Entry.hw.sendQueue.DCL = 0;
+                RoCode.hw.sendQueue.DCR = 0;
+                RoCode.hw.sendQueue.DCL = 0;
             }
             return script.callReturn();
         },
@@ -599,7 +599,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -613,7 +613,7 @@ const miniBlock = {
         class: 'practical_course_touch',
         func(sprite, script) {
             const port = script.getStringField('PORT');
-            const value = Entry.hw.portData[`IN${port}`] > 125 ? 1 : 0;
+            const value = RoCode.hw.portData[`IN${port}`] > 125 ? 1 : 0;
             return value;
         },
     },
@@ -635,7 +635,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -646,7 +646,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         def: {
@@ -661,7 +661,7 @@ const miniBlock = {
         func(sprite, script) {
             const port = script.getStringField('PORT');
             const touch = script.getNumberField('TOUCH', script);
-            const value = Entry.hw.portData[`IN${port}`];
+            const value = RoCode.hw.portData[`IN${port}`];
             const isTouch = !((value > 125) ^ touch);
 
             return isTouch;
@@ -686,7 +686,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -700,7 +700,7 @@ const miniBlock = {
         class: 'practical_course_light',
         func(sprite, script) {
             const port = script.getStringField('PORT');
-            return Entry.hw.portData[`IN${port}`];
+            return RoCode.hw.portData[`IN${port}`];
         },
     },
     practical_course_light_value_boolean: {
@@ -721,7 +721,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -735,7 +735,7 @@ const miniBlock = {
                 value: 'LESS',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 noaRrow: true,
             },
             {
@@ -764,7 +764,7 @@ const miniBlock = {
             const port = script.getNumberField('PORT', script);
             const operator = script.getField('OPERATOR', script);
             const rightValue = script.getNumberValue('RIGHTVALUE', script);
-            const leftValue = Entry.hw.portData[`IN${port}`];
+            const leftValue = RoCode.hw.portData[`IN${port}`];
             let isCheck = false;
 
             switch (operator) {
@@ -807,7 +807,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#00b36a',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -821,7 +821,7 @@ const miniBlock = {
         class: 'practical_course_sound',
         func(sprite, script) {
             const port = script.getStringField('PORT');
-            return Entry.hw.portData[`IN${port}`];
+            return RoCode.hw.portData[`IN${port}`];
         },
     },
     practical_course_sound_value_boolean: {
@@ -842,7 +842,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#00b36a',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -856,7 +856,7 @@ const miniBlock = {
                 value: 'LESS',
                 fontSize: 11,
                 bgColor: '#00b36a',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 noaRrow: true,
             },
             {
@@ -885,7 +885,7 @@ const miniBlock = {
             const port = script.getNumberField('PORT', script);
             const operator = script.getField('OPERATOR', script);
             const rightValue = script.getNumberValue('RIGHTVALUE', script);
-            const leftValue = Entry.hw.portData[`IN${port}`];
+            const leftValue = RoCode.hw.portData[`IN${port}`];
             let isCheck = false;
 
             switch (operator) {
@@ -928,7 +928,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -943,7 +943,7 @@ const miniBlock = {
         //'isNotFor': ['mini'],
         func(sprite, script) {
             const port = script.getStringField('PORT');
-            return Entry.hw.portData[`IN${port}`];
+            return RoCode.hw.portData[`IN${port}`];
         },
     },
     practical_course_irs_value_boolean: {
@@ -964,7 +964,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -978,7 +978,7 @@ const miniBlock = {
                 value: 'LESS',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 noaRrow: true,
             },
             {
@@ -1008,7 +1008,7 @@ const miniBlock = {
             const port = script.getNumberField('PORT', script);
             const operator = script.getField('OPERATOR', script);
             const rightValue = script.getNumberValue('RIGHTVALUE', script);
-            const leftValue = Entry.hw.portData[`IN${port}`];
+            const leftValue = RoCode.hw.portData[`IN${port}`];
             let isCheck = false;
 
             switch (operator) {
@@ -1051,7 +1051,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -1066,7 +1066,7 @@ const miniBlock = {
                 value: '255',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -1113,8 +1113,8 @@ const miniBlock = {
                 script.timeFlag = 1;
                 script.outPort = port;
                 script.outOption = option;
-                Entry.hw.sendQueue[`OUT${port}`] = value;
-                Entry.hw.sendQueue.OPT = Entry.hw.sendQueue.OPT & ~option;
+                RoCode.hw.sendQueue[`OUT${port}`] = value;
+                RoCode.hw.sendQueue.OPT = RoCode.hw.sendQueue.OPT & ~option;
 
                 setTimeout(() => {
                     script.timeFlag = 0;
@@ -1123,13 +1123,13 @@ const miniBlock = {
             } else if (script.timeFlag == 1) {
                 return script;
             } else {
-                Entry.hw.sendQueue[`OUT${script.outPort}`] = 0;
-                Entry.hw.sendQueue.OPT = Entry.hw.sendQueue.OPT & ~script.outOption;
+                RoCode.hw.sendQueue[`OUT${script.outPort}`] = 0;
+                RoCode.hw.sendQueue.OPT = RoCode.hw.sendQueue.OPT & ~script.outOption;
                 delete script.timeFlag;
                 delete script.isStart;
                 delete script.outPort;
                 delete script.outOption;
-                Entry.engine.isContinue = false;
+                RoCode.engine.isContinue = false;
                 return script.callReturn();
             }
         },
@@ -1153,7 +1153,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -1164,7 +1164,7 @@ const miniBlock = {
                 value: '255',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -1198,8 +1198,8 @@ const miniBlock = {
                 option = 4;
             }
 
-            Entry.hw.sendQueue[`OUT${port}`] = value;
-            Entry.hw.sendQueue.OPT = Entry.hw.sendQueue.OPT & ~option;
+            RoCode.hw.sendQueue[`OUT${port}`] = value;
+            RoCode.hw.sendQueue.OPT = RoCode.hw.sendQueue.OPT & ~option;
 
             return script.callReturn();
         },
@@ -1223,7 +1223,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -1235,7 +1235,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -1281,7 +1281,7 @@ const miniBlock = {
             const oMax = script.getNumberValue('MAX');
             const nMin = 0;
             const nMax = 255;
-            const x = Entry.hw.portData[`IN${inputPort}`];
+            const x = RoCode.hw.portData[`IN${inputPort}`];
             const percent = (x - oMin) / (oMax - oMin);
             let result = percent * (nMax - nMin) + nMin;
             if (result > nMax) {
@@ -1291,8 +1291,8 @@ const miniBlock = {
                 result = nMin;
             }
 
-            Entry.hw.sendQueue[`OUT${outputPort}`] = result;
-            Entry.hw.sendQueue.OPT = Entry.hw.sendQueue.OPT & ~option;
+            RoCode.hw.sendQueue[`OUT${outputPort}`] = result;
+            RoCode.hw.sendQueue.OPT = RoCode.hw.sendQueue.OPT & ~option;
 
             return script.callReturn();
         },
@@ -1315,7 +1315,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -1357,8 +1357,8 @@ const miniBlock = {
             if (option === 3) {
                 option = 4;
             }
-            Entry.hw.sendQueue[`OUT${port}`] = value;
-            Entry.hw.sendQueue.OPT = Entry.hw.sendQueue.OPT & ~option;
+            RoCode.hw.sendQueue[`OUT${port}`] = value;
+            RoCode.hw.sendQueue.OPT = RoCode.hw.sendQueue.OPT & ~option;
             return script.callReturn();
         },
     },
@@ -1381,7 +1381,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -1395,7 +1395,7 @@ const miniBlock = {
         class: 'practical_course_diode',
         func(sprite, script) {
             const port = script.getStringField('PORT');
-            return Entry.hw.portData[`IN${port}`];
+            return RoCode.hw.portData[`IN${port}`];
         },
     },
     practical_course_melody_note_for: {
@@ -1425,7 +1425,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#ce105e',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -1440,7 +1440,7 @@ const miniBlock = {
                 value: '2',
                 fontSize: 11,
                 bgColor: '#ce105e',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -1454,7 +1454,7 @@ const miniBlock = {
                 value: '4',
                 fontSize: 11,
                 bgColor: '#ce105e',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -1475,7 +1475,7 @@ const miniBlock = {
         class: 'practical_course_melody',
         //'isNotFor': ['mini'],
         func(sprite, script) {
-            const sq = Entry.hw.sendQueue;
+            const sq = RoCode.hw.sendQueue;
 
             if (!script.isStart) {
                 const note = script.getNumberField('NOTE', script);
@@ -1499,13 +1499,13 @@ const miniBlock = {
             } else if (script.timeFlag == 1) {
                 return script;
             } else if (script.soundFlag == 1) {
-                Entry.hw.sendQueue.SND = 0;
+                RoCode.hw.sendQueue.SND = 0;
                 script.soundFlag = 0;
                 return script;
             } else {
                 delete script.timeFlag;
                 delete script.isStart;
-                Entry.engine.isContinue = false;
+                RoCode.engine.isContinue = false;
                 return script.callReturn();
             }
         },
@@ -1542,7 +1542,7 @@ const miniBlock = {
                 value: '255',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -1575,7 +1575,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -1586,7 +1586,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -1633,45 +1633,45 @@ const miniBlock = {
             const direction = script.getNumberField('DIRECTION');
             const duration = script.getNumberValue('DURATION');
 
-            if (!Entry.hw.sendQueue.digitalPinMode) {
-                Entry.hw.sendQueue.digitalPinMode = {};
+            if (!RoCode.hw.sendQueue.digitalPinMode) {
+                RoCode.hw.sendQueue.digitalPinMode = {};
             }
 
             if (!script.isStart) {
                 if (wheel == 1) {
-                    Entry.hw.sendQueue.digitalPinMode[7] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-                    Entry.hw.sendQueue.digitalPinMode[0] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-                    Entry.hw.sendQueue.digitalPinMode[8] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-                    Entry.hw.sendQueue.digitalPinMode[1] = Entry.Roborobo_SchoolKit.pinMode.PWM;
+                    RoCode.hw.sendQueue.digitalPinMode[7] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+                    RoCode.hw.sendQueue.digitalPinMode[0] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+                    RoCode.hw.sendQueue.digitalPinMode[8] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+                    RoCode.hw.sendQueue.digitalPinMode[1] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
 
                     if (direction == 1) {
-                        Entry.hw.sendQueue[motor1] = speed;
-                        Entry.hw.sendQueue[motor2] = speed;
+                        RoCode.hw.sendQueue[motor1] = speed;
+                        RoCode.hw.sendQueue[motor2] = speed;
                     } else if (direction == 2) {
-                        Entry.hw.sendQueue[motor1] = -speed;
-                        Entry.hw.sendQueue[motor2] = -speed;
+                        RoCode.hw.sendQueue[motor1] = -speed;
+                        RoCode.hw.sendQueue[motor2] = -speed;
                     }
                 } else if (wheel == 2) {
-                    Entry.hw.sendQueue.digitalPinMode[8] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-                    Entry.hw.sendQueue.digitalPinMode[1] = Entry.Roborobo_SchoolKit.pinMode.PWM;
+                    RoCode.hw.sendQueue.digitalPinMode[8] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+                    RoCode.hw.sendQueue.digitalPinMode[1] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
 
                     if (direction == 1) {
-                        Entry.hw.sendQueue[motor1] = 0x00;
-                        Entry.hw.sendQueue[motor2] = speed;
+                        RoCode.hw.sendQueue[motor1] = 0x00;
+                        RoCode.hw.sendQueue[motor2] = speed;
                     } else if (direction == 2) {
-                        Entry.hw.sendQueue[motor1] = 0x00;
-                        Entry.hw.sendQueue[motor2] = -speed;
+                        RoCode.hw.sendQueue[motor1] = 0x00;
+                        RoCode.hw.sendQueue[motor2] = -speed;
                     }
                 } else if (wheel == 3) {
-                    Entry.hw.sendQueue.digitalPinMode[7] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-                    Entry.hw.sendQueue.digitalPinMode[0] = Entry.Roborobo_SchoolKit.pinMode.PWM;
+                    RoCode.hw.sendQueue.digitalPinMode[7] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+                    RoCode.hw.sendQueue.digitalPinMode[0] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
 
                     if (direction == 1) {
-                        Entry.hw.sendQueue[motor1] = speed;
-                        Entry.hw.sendQueue[motor2] = 0x00;
+                        RoCode.hw.sendQueue[motor1] = speed;
+                        RoCode.hw.sendQueue[motor2] = 0x00;
                     } else if (direction == 2) {
-                        Entry.hw.sendQueue[motor1] = -speed;
-                        Entry.hw.sendQueue[motor2] = 0x00;
+                        RoCode.hw.sendQueue[motor1] = -speed;
+                        RoCode.hw.sendQueue[motor2] = 0x00;
                     }
                 }
 
@@ -1685,13 +1685,13 @@ const miniBlock = {
             } else if (script.timeFlag == 1) {
                 return script;
             } else {
-                Entry.hw.sendQueue[motor1] = 0x00;
-                Entry.hw.sendQueue[motor2] = 0x00;
+                RoCode.hw.sendQueue[motor1] = 0x00;
+                RoCode.hw.sendQueue[motor2] = 0x00;
 
                 delete script.timeFlag;
                 delete script.isStart;
                 delete script.wheelMode;
-                Entry.engine.isContinue = false;
+                RoCode.engine.isContinue = false;
                 return script.callReturn();
             }
         },
@@ -1715,7 +1715,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -1726,7 +1726,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -1764,44 +1764,44 @@ const miniBlock = {
             const speed = script.getNumberValue('SPEED');
             const direction = script.getNumberField('DIRECTION');
 
-            if (!Entry.hw.sendQueue.digitalPinMode) {
-                Entry.hw.sendQueue.digitalPinMode = {};
+            if (!RoCode.hw.sendQueue.digitalPinMode) {
+                RoCode.hw.sendQueue.digitalPinMode = {};
             }
 
             if (wheel == 1) {
-                Entry.hw.sendQueue.digitalPinMode[7] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-                Entry.hw.sendQueue.digitalPinMode[0] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-                Entry.hw.sendQueue.digitalPinMode[8] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-                Entry.hw.sendQueue.digitalPinMode[1] = Entry.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[7] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[0] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[8] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[1] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
 
                 if (direction == 1) {
-                    Entry.hw.sendQueue[motor1] = speed;
-                    Entry.hw.sendQueue[motor2] = speed;
+                    RoCode.hw.sendQueue[motor1] = speed;
+                    RoCode.hw.sendQueue[motor2] = speed;
                 } else if (direction == 2) {
-                    Entry.hw.sendQueue[motor1] = -speed;
-                    Entry.hw.sendQueue[motor2] = -speed;
+                    RoCode.hw.sendQueue[motor1] = -speed;
+                    RoCode.hw.sendQueue[motor2] = -speed;
                 }
             } else if (wheel == 2) {
-                Entry.hw.sendQueue.digitalPinMode[8] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-                Entry.hw.sendQueue.digitalPinMode[1] = Entry.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[8] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[1] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
 
                 if (direction == 1) {
-                    Entry.hw.sendQueue[motor1] = 0x00;
-                    Entry.hw.sendQueue[motor2] = speed;
+                    RoCode.hw.sendQueue[motor1] = 0x00;
+                    RoCode.hw.sendQueue[motor2] = speed;
                 } else if (direction == 2) {
-                    Entry.hw.sendQueue[motor1] = 0x00;
-                    Entry.hw.sendQueue[motor2] = -speed;
+                    RoCode.hw.sendQueue[motor1] = 0x00;
+                    RoCode.hw.sendQueue[motor2] = -speed;
                 }
             } else if (wheel == 3) {
-                Entry.hw.sendQueue.digitalPinMode[7] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-                Entry.hw.sendQueue.digitalPinMode[0] = Entry.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[7] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[0] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
 
                 if (direction == 1) {
-                    Entry.hw.sendQueue[motor1] = speed;
-                    Entry.hw.sendQueue[motor2] = 0x00;
+                    RoCode.hw.sendQueue[motor1] = speed;
+                    RoCode.hw.sendQueue[motor2] = 0x00;
                 } else if (direction == 2) {
-                    Entry.hw.sendQueue[motor1] = -speed;
-                    //Entry.hw.sendQueue[motor2] = 0x00;
+                    RoCode.hw.sendQueue[motor1] = -speed;
+                    //RoCode.hw.sendQueue[motor2] = 0x00;
                 }
             }
 
@@ -1826,7 +1826,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -1841,7 +1841,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -1881,25 +1881,25 @@ const miniBlock = {
             const leftDir = script.getNumberField('LDIR');
             const leftSpeed = script.getNumberValue('LSPEED');
 
-            if (!Entry.hw.sendQueue.digitalPinMode) {
-                Entry.hw.sendQueue.digitalPinMode = {};
+            if (!RoCode.hw.sendQueue.digitalPinMode) {
+                RoCode.hw.sendQueue.digitalPinMode = {};
             }
 
-            Entry.hw.sendQueue.digitalPinMode[7] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-            Entry.hw.sendQueue.digitalPinMode[0] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-            Entry.hw.sendQueue.digitalPinMode[8] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-            Entry.hw.sendQueue.digitalPinMode[1] = Entry.Roborobo_SchoolKit.pinMode.PWM;
+            RoCode.hw.sendQueue.digitalPinMode[7] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+            RoCode.hw.sendQueue.digitalPinMode[0] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+            RoCode.hw.sendQueue.digitalPinMode[8] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+            RoCode.hw.sendQueue.digitalPinMode[1] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
 
             if (leftDir == 1) {
-                Entry.hw.sendQueue[motor1] = leftSpeed;
+                RoCode.hw.sendQueue[motor1] = leftSpeed;
             } else {
-                Entry.hw.sendQueue[motor1] = -leftSpeed;
+                RoCode.hw.sendQueue[motor1] = -leftSpeed;
             }
 
             if (rightDir == 1) {
-                Entry.hw.sendQueue[motor2] = rightSpeed;
+                RoCode.hw.sendQueue[motor2] = rightSpeed;
             } else {
-                Entry.hw.sendQueue[motor2] = -rightSpeed;
+                RoCode.hw.sendQueue[motor2] = -rightSpeed;
             }
 
             return script.callReturn();
@@ -1924,7 +1924,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -1946,28 +1946,28 @@ const miniBlock = {
             const motor2 = 1;
             const wheel = script.getNumberField('WHEEL');
 
-            if (!Entry.hw.sendQueue.digitalPinMode) {
-                Entry.hw.sendQueue.digitalPinMode = {};
+            if (!RoCode.hw.sendQueue.digitalPinMode) {
+                RoCode.hw.sendQueue.digitalPinMode = {};
             }
 
             if (wheel == 1) {
-                Entry.hw.sendQueue.digitalPinMode[7] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-                Entry.hw.sendQueue.digitalPinMode[0] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-                Entry.hw.sendQueue.digitalPinMode[8] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-                Entry.hw.sendQueue.digitalPinMode[1] = Entry.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[7] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[0] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[8] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[1] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
 
-                Entry.hw.sendQueue[motor1] = 0x00;
-                Entry.hw.sendQueue[motor2] = 0x00;
+                RoCode.hw.sendQueue[motor1] = 0x00;
+                RoCode.hw.sendQueue[motor2] = 0x00;
             } else if (wheel == 2) {
-                Entry.hw.sendQueue.digitalPinMode[8] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-                Entry.hw.sendQueue.digitalPinMode[1] = Entry.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[8] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[1] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
 
-                Entry.hw.sendQueue[motor2] = 0x00;
+                RoCode.hw.sendQueue[motor2] = 0x00;
             } else if (wheel == 3) {
-                Entry.hw.sendQueue.digitalPinMode[7] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-                Entry.hw.sendQueue.digitalPinMode[0] = Entry.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[7] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[0] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
 
-                Entry.hw.sendQueue[motor1] = 0x00;
+                RoCode.hw.sendQueue[motor1] = 0x00;
             }
 
             return script.callReturn();
@@ -1995,10 +1995,10 @@ const miniBlock = {
         paramsKeyMap: {},
         class: 'roborobo_touch',
         func(sprite, script) {
-            const port = Entry.Roborobo_SchoolKit.inputPort.contact;
-            Entry.hw.sendQueue.digitalPinMode[port] = Entry.Roborobo_SchoolKit.pinMode.INPUT;
-            Entry.hw.update();
-            return Entry.hw.portData[port - 7];
+            const port = RoCode.Roborobo_SchoolKit.inputPort.contact;
+            RoCode.hw.sendQueue.digitalPinMode[port] = RoCode.Roborobo_SchoolKit.pinMode.INPUT;
+            RoCode.hw.update();
+            return RoCode.hw.portData[port - 7];
         },
     },
     roborobo_touch_value_boolean: {
@@ -2018,7 +2018,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         def: {
@@ -2030,13 +2030,13 @@ const miniBlock = {
         },
         class: 'roborobo_touch',
         func(sprite, script) {
-            const port = Entry.Roborobo_SchoolKit.inputPort.contact;
+            const port = RoCode.Roborobo_SchoolKit.inputPort.contact;
             const touch = script.getNumberField('TOUCH', script);
 
-            Entry.hw.sendQueue.digitalPinMode[port] = Entry.Roborobo_SchoolKit.pinMode.INPUT;
-            Entry.hw.update();
+            RoCode.hw.sendQueue.digitalPinMode[port] = RoCode.Roborobo_SchoolKit.pinMode.INPUT;
+            RoCode.hw.update();
 
-            const value = Entry.hw.portData[port - 7];
+            const value = RoCode.hw.portData[port - 7];
             const isTouch = touch == value;
 
             return isTouch;
@@ -2064,8 +2064,8 @@ const miniBlock = {
         paramsKeyMap: {},
         class: 'roborobo_light',
         func(sprite, script) {
-            const port = Entry.Roborobo_SchoolKit.inputPort.cds;
-            return Entry.hw.portData[port - 7];
+            const port = RoCode.Roborobo_SchoolKit.inputPort.cds;
+            return RoCode.hw.portData[port - 7];
         },
     },
     roborobo_light_value_boolean: {
@@ -2088,7 +2088,7 @@ const miniBlock = {
                 value: 'LESS',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 noaRrow: true,
             },
             {
@@ -2112,10 +2112,10 @@ const miniBlock = {
         },
         class: 'roborobo_light',
         func(sprite, script) {
-            const port = Entry.Roborobo_SchoolKit.inputPort.cds;
+            const port = RoCode.Roborobo_SchoolKit.inputPort.cds;
             const operator = script.getField('OPERATOR', script);
             let rightValue = script.getNumberValue('RIGHTVALUE', script);
-            const leftValue = Entry.hw.portData[port - 7];
+            const leftValue = RoCode.hw.portData[port - 7];
             let isCheck = false;
 
             if (rightValue < 0) {
@@ -2165,8 +2165,8 @@ const miniBlock = {
         paramsKeyMap: {},
         class: 'roborobo_sound',
         func(sprite, script) {
-            const port = Entry.Roborobo_SchoolKit.inputPort.sound;
-            return Entry.hw.portData[port - 7];
+            const port = RoCode.Roborobo_SchoolKit.inputPort.sound;
+            return RoCode.hw.portData[port - 7];
         },
     },
     roborobo_sound_value_boolean: {
@@ -2189,7 +2189,7 @@ const miniBlock = {
                 value: 'LESS',
                 fontSize: 11,
                 bgColor: '#00b36a',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 noaRrow: true,
             },
             {
@@ -2213,10 +2213,10 @@ const miniBlock = {
         },
         class: 'roborobo_sound',
         func(sprite, script) {
-            const port = Entry.Roborobo_SchoolKit.inputPort.sound;
+            const port = RoCode.Roborobo_SchoolKit.inputPort.sound;
             const operator = script.getField('OPERATOR', script);
             let rightValue = script.getNumberValue('RIGHTVALUE', script);
-            const leftValue = Entry.hw.portData[port - 7];
+            const leftValue = RoCode.hw.portData[port - 7];
             let isCheck = false;
 
             if (rightValue < 0) {
@@ -2269,9 +2269,9 @@ const miniBlock = {
         class: 'roborobo_irs',
         //'isNotFor': ['mini'],
         func(sprite, script) {
-            const port = Entry.Roborobo_SchoolKit.inputPort.ir;
+            const port = RoCode.Roborobo_SchoolKit.inputPort.ir;
             const value =
-                Entry.hw.portData[port - 7] == undefined ? 0 : Entry.hw.portData[port - 7];
+                RoCode.hw.portData[port - 7] == undefined ? 0 : RoCode.hw.portData[port - 7];
             return value;
         },
     },
@@ -2292,7 +2292,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         def: {
@@ -2305,13 +2305,13 @@ const miniBlock = {
         class: 'roborobo_irs',
         //'isNotFor': ['mini'],
         func(sprite, script) {
-            const port = Entry.Roborobo_SchoolKit.inputPort.ir;
+            const port = RoCode.Roborobo_SchoolKit.inputPort.ir;
             const detect = script.getNumberField('DETECT', script);
 
-            Entry.hw.sendQueue.digitalPinMode[port] = Entry.Roborobo_SchoolKit.pinMode.INPUT;
-            Entry.hw.update();
+            RoCode.hw.sendQueue.digitalPinMode[port] = RoCode.Roborobo_SchoolKit.pinMode.INPUT;
+            RoCode.hw.update();
 
-            const value = Entry.hw.portData[port - 7];
+            const value = RoCode.hw.portData[port - 7];
             const isDetect = detect == value;
 
             return isDetect;
@@ -2337,7 +2337,7 @@ const miniBlock = {
                 value: '5',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -2352,7 +2352,7 @@ const miniBlock = {
                 value: '255',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -2383,15 +2383,15 @@ const miniBlock = {
             const port = script.getNumberField('PORT');
             const duration = script.getNumberValue('DURATION');
             const value = script.getNumberField('VALUE');
-            if (!Entry.hw.sendQueue.digitalPinMode) {
-                Entry.hw.sendQueue.digitalPinMode = {};
+            if (!RoCode.hw.sendQueue.digitalPinMode) {
+                RoCode.hw.sendQueue.digitalPinMode = {};
             }
-            Entry.hw.sendQueue.digitalPinMode[port] = Entry.Roborobo_SchoolKit.pinMode.PWM;
+            RoCode.hw.sendQueue.digitalPinMode[port] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
 
             if (!script.isStart) {
                 script.isStart = true;
                 script.timeFlag = 1;
-                Entry.hw.sendQueue[port] = value;
+                RoCode.hw.sendQueue[port] = value;
 
                 setTimeout(() => {
                     script.timeFlag = 0;
@@ -2400,10 +2400,10 @@ const miniBlock = {
             } else if (script.timeFlag == 1) {
                 return script;
             } else {
-                Entry.hw.sendQueue[port] = 0;
+                RoCode.hw.sendQueue[port] = 0;
                 delete script.timeFlag;
                 delete script.isStart;
-                Entry.engine.isContinue = false;
+                RoCode.engine.isContinue = false;
                 return script.callReturn();
             }
         },
@@ -2428,7 +2428,7 @@ const miniBlock = {
                 value: '5',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -2439,7 +2439,7 @@ const miniBlock = {
                 value: '255',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -2462,12 +2462,12 @@ const miniBlock = {
             const port = script.getNumberField('PORT');
             const value = script.getNumberField('VALUE');
 
-            if (!Entry.hw.sendQueue.digitalPinMode) {
-                Entry.hw.sendQueue.digitalPinMode = {};
+            if (!RoCode.hw.sendQueue.digitalPinMode) {
+                RoCode.hw.sendQueue.digitalPinMode = {};
             }
 
-            Entry.hw.sendQueue.digitalPinMode[port] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-            Entry.hw.sendQueue[port] = value;
+            RoCode.hw.sendQueue.digitalPinMode[port] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+            RoCode.hw.sendQueue[port] = value;
 
             return script.callReturn();
         },
@@ -2492,7 +2492,7 @@ const miniBlock = {
                 value: '5',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -2503,7 +2503,7 @@ const miniBlock = {
                 value: '8',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -2546,7 +2546,7 @@ const miniBlock = {
             const oMax = script.getNumberValue('MAX');
             const nMin = 0;
             const nMax = 255;
-            const x = Entry.hw.portData[inputPort - 7] / 4;
+            const x = RoCode.hw.portData[inputPort - 7] / 4;
             const percent = (x - oMin) / (oMax - oMin);
             let result = percent * (nMax - nMin) + nMin;
             if (result > nMax) {
@@ -2556,12 +2556,12 @@ const miniBlock = {
                 result = nMin;
             }
 
-            if (!Entry.hw.sendQueue.digitalPinMode) {
-                Entry.hw.sendQueue.digitalPinMode = {};
+            if (!RoCode.hw.sendQueue.digitalPinMode) {
+                RoCode.hw.sendQueue.digitalPinMode = {};
             }
 
-            Entry.hw.sendQueue.digitalPinMode[outputPort] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-            Entry.hw.sendQueue[outputPort] = result;
+            RoCode.hw.sendQueue.digitalPinMode[outputPort] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+            RoCode.hw.sendQueue[outputPort] = result;
 
             return script.callReturn();
         },
@@ -2585,7 +2585,7 @@ const miniBlock = {
                 value: '5',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -2624,11 +2624,11 @@ const miniBlock = {
             } else if (value > 255) {
                 value = 255;
             }
-            if (!Entry.hw.sendQueue.digitalPinMode) {
-                Entry.hw.sendQueue.digitalPinMode = {};
+            if (!RoCode.hw.sendQueue.digitalPinMode) {
+                RoCode.hw.sendQueue.digitalPinMode = {};
             }
-            Entry.hw.sendQueue.digitalPinMode[port] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-            Entry.hw.sendQueue[port] = value;
+            RoCode.hw.sendQueue.digitalPinMode[port] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+            RoCode.hw.sendQueue[port] = value;
 
             return script.callReturn();
         },
@@ -2653,7 +2653,7 @@ const miniBlock = {
                 value: '8',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -2667,7 +2667,7 @@ const miniBlock = {
         class: 'roborobo_diode',
         func(sprite, script) {
             const port = script.getNumberField('PORT');
-            return Entry.hw.portData[port - 7];
+            return RoCode.hw.portData[port - 7];
         },
     },
     robotis_set_led: {
@@ -2690,7 +2690,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -2703,7 +2703,7 @@ const miniBlock = {
                 value: '0',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -2722,13 +2722,13 @@ const miniBlock = {
         },
         class: 'robotis_led',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
 
             const port = script.getStringField('PORT');
             const value = 0;
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             let data_address = 0;
-            const data_length = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_LED_MODULE[1];
+            const data_length = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_LED_MODULE[1];
             const data_value = script.getNumberField('COLOR');
             switch (port) {
                 case '3':
@@ -2745,12 +2745,12 @@ const miniBlock = {
                     break;
             }
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            //Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            //Entry.Robotis_carCont.update();
-            return Entry.Robotis_carCont.postCallReturn(
+            //RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            //RoCode.Robotis_carCont.update();
+            return RoCode.Robotis_carCont.postCallReturn(
                 script,
                 data_sendqueue,
-                Entry.Robotis_openCM70.delay
+                RoCode.Robotis_openCM70.delay
             );
         },
     },
@@ -2774,7 +2774,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -2787,22 +2787,22 @@ const miniBlock = {
         },
         class: 'robotis_touch',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT');
             let value = 0;
 
             switch (port) {
                 case '3':
-                    value = Entry.hw.portData.TOUCH0;
+                    value = RoCode.hw.portData.TOUCH0;
                     break;
                 case '4':
-                    value = Entry.hw.portData.TOUCH1;
+                    value = RoCode.hw.portData.TOUCH1;
                     break;
                 case '5':
-                    value = Entry.hw.portData.TOUCH2;
+                    value = RoCode.hw.portData.TOUCH2;
                     break;
                 case '6':
-                    value = Entry.hw.portData.TOUCH3;
+                    value = RoCode.hw.portData.TOUCH3;
                     break;
             }
             return value;
@@ -2827,7 +2827,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -2838,7 +2838,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         def: {
@@ -2851,22 +2851,22 @@ const miniBlock = {
         },
         class: 'robotis_touch',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT');
             const touch = script.getNumberField('TOUCH', script);
             let value = 0;
             switch (port) {
                 case '3':
-                    value = Entry.hw.portData.TOUCH0;
+                    value = RoCode.hw.portData.TOUCH0;
                     break;
                 case '4':
-                    value = Entry.hw.portData.TOUCH1;
+                    value = RoCode.hw.portData.TOUCH1;
                     break;
                 case '5':
-                    value = Entry.hw.portData.TOUCH2;
+                    value = RoCode.hw.portData.TOUCH2;
                     break;
                 case '6':
-                    value = Entry.hw.portData.TOUCH3;
+                    value = RoCode.hw.portData.TOUCH3;
                     break;
             }
             const isTouch = !((value == 1) ^ touch);
@@ -2894,7 +2894,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -2908,56 +2908,56 @@ const miniBlock = {
         class: 'robotis_irs',
         //'isNotFor': ['mini'],
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT');
             let value = 0;
             let data_address = 0;
             switch (port) {
                 case '3':
-                    value = Entry.hw.portData.IR0;
+                    value = RoCode.hw.portData.IR0;
                     data_address = 108;
                     break;
                 case '4':
-                    value = Entry.hw.portData.IR1;
+                    value = RoCode.hw.portData.IR1;
                     data_address = 109;
                     break;
                 case '5':
-                    value = Entry.hw.portData.IR2;
+                    value = RoCode.hw.portData.IR2;
                     data_address = 110;
                     break;
                 case '6':
-                    value = Entry.hw.portData.IR3;
+                    value = RoCode.hw.portData.IR3;
                     data_address = 111;
                     break;
             }
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             const data_length = 1;
             const data_value = 2;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            //Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            //Entry.Robotis_carCont.update();
-            if (!Entry.Robotis_openCM70.IRS_MODULEWRITE.PORT3 && port == '3') {
-                Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                Entry.Robotis_carCont.update();
-                Entry.Robotis_openCM70.IRS_MODULEWRITE.PORT3 = true;
+            //RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            //RoCode.Robotis_carCont.update();
+            if (!RoCode.Robotis_openCM70.IRS_MODULEWRITE.PORT3 && port == '3') {
+                RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                RoCode.Robotis_carCont.update();
+                RoCode.Robotis_openCM70.IRS_MODULEWRITE.PORT3 = true;
             }
-            if (!Entry.Robotis_openCM70.IRS_MODULEWRITE.PORT4 && port == '4') {
-                Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                Entry.Robotis_carCont.update();
-                Entry.Robotis_openCM70.IRS_MODULEWRITE.PORT4 = true;
+            if (!RoCode.Robotis_openCM70.IRS_MODULEWRITE.PORT4 && port == '4') {
+                RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                RoCode.Robotis_carCont.update();
+                RoCode.Robotis_openCM70.IRS_MODULEWRITE.PORT4 = true;
             }
-            if (!Entry.Robotis_openCM70.IRS_MODULEWRITE.PORT5 && port == '5') {
-                Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                Entry.Robotis_carCont.update();
-                Entry.Robotis_openCM70.IRS_MODULEWRITE.PORT5 = true;
+            if (!RoCode.Robotis_openCM70.IRS_MODULEWRITE.PORT5 && port == '5') {
+                RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                RoCode.Robotis_carCont.update();
+                RoCode.Robotis_openCM70.IRS_MODULEWRITE.PORT5 = true;
             }
-            if (!Entry.Robotis_openCM70.IRS_MODULEWRITE.PORT6 && port == '6') {
-                Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                Entry.Robotis_carCont.update();
-                Entry.Robotis_openCM70.IRS_MODULEWRITE.PORT6 = true;
+            if (!RoCode.Robotis_openCM70.IRS_MODULEWRITE.PORT6 && port == '6') {
+                RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                RoCode.Robotis_carCont.update();
+                RoCode.Robotis_openCM70.IRS_MODULEWRITE.PORT6 = true;
             }
-            //var value = (Entry.hw.portData['IN' + port] > 125) ? 1 : 0;
+            //var value = (RoCode.hw.portData['IN' + port] > 125) ? 1 : 0;
             return value;
         },
     },
@@ -2980,7 +2980,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -2994,7 +2994,7 @@ const miniBlock = {
                 value: 'LESS',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 noaRrow: true,
             },
             {
@@ -3021,7 +3021,7 @@ const miniBlock = {
         class: 'robotis_irs',
         //'isNotFor': ['mini'],
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT', script);
             const operator = script.getField('OPERATOR', script);
             const rightValue = script.getNumberValue('RIGHTVALUE', script);
@@ -3031,48 +3031,48 @@ const miniBlock = {
 
             switch (port) {
                 case '3':
-                    leftValue = Entry.hw.portData.IR0;
+                    leftValue = RoCode.hw.portData.IR0;
                     data_address = 108;
                     break;
                 case '4':
-                    leftValue = Entry.hw.portData.IR1;
+                    leftValue = RoCode.hw.portData.IR1;
                     data_address = 109;
                     break;
                 case '5':
-                    leftValue = Entry.hw.portData.IR2;
+                    leftValue = RoCode.hw.portData.IR2;
                     data_address = 110;
                     break;
                 case '6':
-                    leftValue = Entry.hw.portData.IR3;
+                    leftValue = RoCode.hw.portData.IR3;
                     data_address = 111;
                     break;
             }
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             const data_length = 1;
             const data_value = 2;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            //Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            //Entry.Robotis_carCont.update();
-            if (!Entry.Robotis_openCM70.IRS_MODULEWRITE.PORT3 && port == '3') {
-                Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                Entry.Robotis_carCont.update();
-                Entry.Robotis_openCM70.IRS_MODULEWRITE.PORT3 = true;
+            //RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            //RoCode.Robotis_carCont.update();
+            if (!RoCode.Robotis_openCM70.IRS_MODULEWRITE.PORT3 && port == '3') {
+                RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                RoCode.Robotis_carCont.update();
+                RoCode.Robotis_openCM70.IRS_MODULEWRITE.PORT3 = true;
             }
-            if (!Entry.Robotis_openCM70.IRS_MODULEWRITE.PORT4 && port == '4') {
-                Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                Entry.Robotis_carCont.update();
-                Entry.Robotis_openCM70.IRS_MODULEWRITE.PORT4 = true;
+            if (!RoCode.Robotis_openCM70.IRS_MODULEWRITE.PORT4 && port == '4') {
+                RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                RoCode.Robotis_carCont.update();
+                RoCode.Robotis_openCM70.IRS_MODULEWRITE.PORT4 = true;
             }
-            if (!Entry.Robotis_openCM70.IRS_MODULEWRITE.PORT5 && port == '5') {
-                Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                Entry.Robotis_carCont.update();
-                Entry.Robotis_openCM70.IRS_MODULEWRITE.PORT5 = true;
+            if (!RoCode.Robotis_openCM70.IRS_MODULEWRITE.PORT5 && port == '5') {
+                RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                RoCode.Robotis_carCont.update();
+                RoCode.Robotis_openCM70.IRS_MODULEWRITE.PORT5 = true;
             }
-            if (!Entry.Robotis_openCM70.IRS_MODULEWRITE.PORT6 && port == '6') {
-                Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                Entry.Robotis_carCont.update();
-                Entry.Robotis_openCM70.IRS_MODULEWRITE.PORT6 = true;
+            if (!RoCode.Robotis_openCM70.IRS_MODULEWRITE.PORT6 && port == '6') {
+                RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                RoCode.Robotis_carCont.update();
+                RoCode.Robotis_openCM70.IRS_MODULEWRITE.PORT6 = true;
             }
 
             switch (operator) {
@@ -3117,7 +3117,7 @@ const miniBlock = {
                 outerLine: '#e37100',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -3130,9 +3130,9 @@ const miniBlock = {
         },
         class: 'robotis_light',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT');
-            return Entry.hw.portData[`LIGHT${port}`];
+            return RoCode.hw.portData[`LIGHT${port}`];
         },
     },
     robotis_light_value_boolean: {
@@ -3154,7 +3154,7 @@ const miniBlock = {
                 value: '0',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -3168,7 +3168,7 @@ const miniBlock = {
                 value: 'LESS',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 noaRrow: true,
             },
             {
@@ -3194,11 +3194,11 @@ const miniBlock = {
         },
         class: 'robotis_light',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getNumberField('PORT', script);
             const operator = script.getField('OPERATOR', script);
             const rightValue = script.getNumberValue('RIGHTVALUE', script);
-            const leftValue = Entry.hw.portData[`LIGHT${port}`];
+            const leftValue = RoCode.hw.portData[`LIGHT${port}`];
             let isCheck = false;
 
             switch (operator) {
@@ -3244,8 +3244,8 @@ const miniBlock = {
         paramsKeyMap: {},
         class: 'robotis_userbutton',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
-            return Entry.hw.portData.USERBUTTONSTATE;
+            RoCode.hw.sendQueue.IS_EDU = true;
+            return RoCode.hw.portData.USERBUTTONSTATE;
         },
     },
     robotis_userbutton_value_boolean: {
@@ -3274,9 +3274,9 @@ const miniBlock = {
         },
         class: 'robotis_userbutton',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT');
-            const value = Entry.hw.portData.USERBUTTONSTATE;
+            const value = RoCode.hw.portData.USERBUTTONSTATE;
             var isTouch = false;
 
             var isTouch = port == value;
@@ -3306,8 +3306,8 @@ const miniBlock = {
         paramsKeyMap: {},
         class: 'robotis_sound',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
-            return Entry.hw.portData.DETECTEDSOUNDE;
+            RoCode.hw.sendQueue.IS_EDU = true;
+            return RoCode.hw.portData.DETECTEDSOUNDE;
         },
     },
     robotis_detectedsound_value_boolean: {
@@ -3330,7 +3330,7 @@ const miniBlock = {
                 value: 'LESS',
                 fontSize: 11,
                 bgColor: '#00b36a',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 noaRrow: true,
             },
             {
@@ -3354,10 +3354,10 @@ const miniBlock = {
         },
         class: 'robotis_sound',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const operator = script.getField('OPERATOR', script);
             const rightValue = script.getNumberValue('RIGHTVALUE', script);
-            const leftValue = Entry.hw.portData.DETECTEDSOUNDE;
+            const leftValue = RoCode.hw.portData.DETECTEDSOUNDE;
             let isCheck = false;
 
             switch (operator) {
@@ -3403,19 +3403,19 @@ const miniBlock = {
         paramsKeyMap: {},
         class: 'robotis_sound',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
-            const data_address = Entry.Robotis_openCM70.CONTROL_TABLE.CM_SOUND_DETECTED[0];
-            const data_length = Entry.Robotis_openCM70.CONTROL_TABLE.CM_SOUND_DETECTED[1];
+            RoCode.hw.sendQueue.IS_EDU = true;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_address = RoCode.Robotis_openCM70.CONTROL_TABLE.CM_SOUND_DETECTED[0];
+            const data_length = RoCode.Robotis_openCM70.CONTROL_TABLE.CM_SOUND_DETECTED[1];
             const data_value = 0;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            //Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            //Entry.Robotis_carCont.update();
-            return Entry.Robotis_carCont.postCallReturn(
+            //RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            //RoCode.Robotis_carCont.update();
+            return RoCode.Robotis_carCont.postCallReturn(
                 script,
                 data_sendqueue,
-                Entry.Robotis_openCM70.delay
+                RoCode.Robotis_openCM70.delay
             );
         },
     },
@@ -3441,8 +3441,8 @@ const miniBlock = {
         paramsKeyMap: {},
         class: 'robotis_sound',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
-            return Entry.hw.portData.DETECTINGSOUNDE1;
+            RoCode.hw.sendQueue.IS_EDU = true;
+            return RoCode.hw.portData.DETECTINGSOUNDE1;
         },
     },
     robotis_detectingsound_value_boolean: {
@@ -3465,7 +3465,7 @@ const miniBlock = {
                 value: 'LESS',
                 fontSize: 11,
                 bgColor: '#00b36a',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 noaRrow: true,
             },
             {
@@ -3489,10 +3489,10 @@ const miniBlock = {
         },
         class: 'robotis_sound',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const operator = script.getField('OPERATOR', script);
             const rightValue = script.getNumberValue('RIGHTVALUE', script);
-            const leftValue = Entry.hw.portData.DETECTINGSOUNDE1;
+            const leftValue = RoCode.hw.portData.DETECTINGSOUNDE1;
             let isCheck = false;
 
             switch (operator) {
@@ -3536,7 +3536,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -3549,35 +3549,35 @@ const miniBlock = {
         },
         class: 'robotis_color',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT');
             let value = 0;
             let data_address = 0;
             switch (port) {
                 case '3':
-                    value = Entry.hw.portData.COLOR0;
+                    value = RoCode.hw.portData.COLOR0;
                     data_address = 108;
                     break;
                 case '4':
-                    value = Entry.hw.portData.COLOR1;
+                    value = RoCode.hw.portData.COLOR1;
                     data_address = 109;
                     break;
                 case '5':
-                    value = Entry.hw.portData.COLOR2;
+                    value = RoCode.hw.portData.COLOR2;
                     data_address = 110;
                     break;
                 case '6':
-                    value = Entry.hw.portData.COLOR3;
+                    value = RoCode.hw.portData.COLOR3;
                     data_address = 111;
                     break;
             }
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             const data_length = 1;
             const data_value = 4;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            Entry.Robotis_carCont.update();
+            RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            RoCode.Robotis_carCont.update();
 
             switch (value) {
                 case 0:
@@ -3625,7 +3625,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -3639,7 +3639,7 @@ const miniBlock = {
                 value: 'LESS',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 noaRrow: true,
             },
             {
@@ -3656,7 +3656,7 @@ const miniBlock = {
                 value: '0',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         def: {
@@ -3670,7 +3670,7 @@ const miniBlock = {
         },
         class: 'robotis_color',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getField('PORT', script);
             const operator = script.getField('OPERATOR', script);
             const rightValue = script.getNumberField('RIGHTVALUE', script);
@@ -3680,30 +3680,30 @@ const miniBlock = {
 
             switch (port) {
                 case '3':
-                    leftValue = Entry.hw.portData.COLOR0;
+                    leftValue = RoCode.hw.portData.COLOR0;
                     data_address = 108;
                     break;
                 case '4':
-                    leftValue = Entry.hw.portData.COLOR1;
+                    leftValue = RoCode.hw.portData.COLOR1;
                     data_address = 109;
                     break;
                 case '5':
-                    leftValue = Entry.hw.portData.COLOR2;
+                    leftValue = RoCode.hw.portData.COLOR2;
                     data_address = 110;
                     break;
                 case '6':
-                    leftValue = Entry.hw.portData.COLOR3;
+                    leftValue = RoCode.hw.portData.COLOR3;
                     data_address = 111;
                     break;
             }
 
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             const data_length = 1;
             const data_value = 4;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            Entry.Robotis_carCont.update();
+            RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            RoCode.Robotis_carCont.update();
 
             switch (operator) {
                 case 'EQUAL':
@@ -3746,7 +3746,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -3759,35 +3759,35 @@ const miniBlock = {
         },
         class: 'robotis_humidity',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT');
             let value = 0;
             let data_address = 0;
             switch (port) {
                 case '3':
-                    value = Entry.hw.portData.HUMIDTY0;
+                    value = RoCode.hw.portData.HUMIDTY0;
                     data_address = 108;
                     break;
                 case '4':
-                    value = Entry.hw.portData.HUMIDTY1;
+                    value = RoCode.hw.portData.HUMIDTY1;
                     data_address = 109;
                     break;
                 case '5':
-                    value = Entry.hw.portData.HUMIDTY2;
+                    value = RoCode.hw.portData.HUMIDTY2;
                     data_address = 110;
                     break;
                 case '6':
-                    value = Entry.hw.portData.HUMIDTY3;
+                    value = RoCode.hw.portData.HUMIDTY3;
                     data_address = 111;
                     break;
             }
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             const data_length = 1;
             const data_value = 5;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            Entry.Robotis_carCont.update();
+            RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            RoCode.Robotis_carCont.update();
 
             return value;
         },
@@ -3811,7 +3811,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -3825,7 +3825,7 @@ const miniBlock = {
                 value: 'LESS',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 noaRrow: true,
             },
             {
@@ -3851,7 +3851,7 @@ const miniBlock = {
         },
         class: 'robotis_humidity',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getNumberField('PORT', script);
             const operator = script.getField('OPERATOR', script);
             const rightValue = script.getNumberValue('RIGHTVALUE', script);
@@ -3861,30 +3861,30 @@ const miniBlock = {
 
             switch (port) {
                 case 3:
-                    leftValue = Entry.hw.portData.HUMIDTY0;
+                    leftValue = RoCode.hw.portData.HUMIDTY0;
                     data_address = 108;
                     break;
                 case 4:
-                    leftValue = Entry.hw.portData.HUMIDTY1;
+                    leftValue = RoCode.hw.portData.HUMIDTY1;
                     data_address = 109;
                     break;
                 case 5:
-                    leftValue = Entry.hw.portData.HUMIDTY2;
+                    leftValue = RoCode.hw.portData.HUMIDTY2;
                     data_address = 110;
                     break;
                 case 6:
-                    leftValue = Entry.hw.portData.HUMIDTY3;
+                    leftValue = RoCode.hw.portData.HUMIDTY3;
                     data_address = 111;
                     break;
             }
 
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             const data_length = 1;
             const data_value = 5;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            Entry.Robotis_carCont.update();
+            RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            RoCode.Robotis_carCont.update();
             switch (operator) {
                 case 'EQUAL':
                     isCheck = leftValue == rightValue;
@@ -3925,7 +3925,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -3938,35 +3938,35 @@ const miniBlock = {
         },
         class: 'robotis_temperature',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT');
             let value = 0;
             let data_address = 0;
             switch (port) {
                 case '3':
-                    value = Entry.hw.portData.TEMPERATURE0;
+                    value = RoCode.hw.portData.TEMPERATURE0;
                     data_address = 108;
                     break;
                 case '4':
-                    value = Entry.hw.portData.TEMPERATURE1;
+                    value = RoCode.hw.portData.TEMPERATURE1;
                     data_address = 109;
                     break;
                 case '5':
-                    value = Entry.hw.portData.TEMPERATURE2;
+                    value = RoCode.hw.portData.TEMPERATURE2;
                     data_address = 110;
                     break;
                 case '6':
-                    value = Entry.hw.portData.TEMPERATURE3;
+                    value = RoCode.hw.portData.TEMPERATURE3;
                     data_address = 111;
                     break;
             }
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             const data_length = 1;
             const data_value = 5;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            Entry.Robotis_carCont.update();
+            RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            RoCode.Robotis_carCont.update();
 
             return value;
         },
@@ -3990,7 +3990,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -4004,7 +4004,7 @@ const miniBlock = {
                 value: 'LESS',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 noaRrow: true,
             },
             {
@@ -4030,7 +4030,7 @@ const miniBlock = {
         },
         class: 'robotis_temperature',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getNumberField('PORT', script);
             const operator = script.getField('OPERATOR', script);
             const rightValue = script.getNumberValue('RIGHTVALUE', script);
@@ -4040,30 +4040,30 @@ const miniBlock = {
 
             switch (port) {
                 case 3:
-                    leftValue = Entry.hw.portData.TEMPERATURE0;
+                    leftValue = RoCode.hw.portData.TEMPERATURE0;
                     data_address = 108;
                     break;
                 case 4:
-                    leftValue = Entry.hw.portData.TEMPERATURE1;
+                    leftValue = RoCode.hw.portData.TEMPERATURE1;
                     data_address = 109;
                     break;
                 case 5:
-                    leftValue = Entry.hw.portData.TEMPERATURE2;
+                    leftValue = RoCode.hw.portData.TEMPERATURE2;
                     data_address = 110;
                     break;
                 case 6:
-                    leftValue = Entry.hw.portData.TEMPERATURE3;
+                    leftValue = RoCode.hw.portData.TEMPERATURE3;
                     data_address = 111;
                     break;
             }
 
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             const data_length = 1;
             const data_value = 5;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            Entry.Robotis_carCont.update();
+            RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            RoCode.Robotis_carCont.update();
             switch (operator) {
                 case 'EQUAL':
                     isCheck = leftValue == rightValue;
@@ -4103,7 +4103,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -4114,7 +4114,7 @@ const miniBlock = {
                 value: 'CW',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -4154,24 +4154,24 @@ const miniBlock = {
         },
         class: 'robotis_motor',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const duration = script.getNumberValue('DURATION');
             const wheel = script.getNumberField('WHEEL');
             let value = script.getNumberValue('SPEED');
             const direction = script.getStringField('DIRECTION');
 
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             let data_address = 0;
             let data_length = 0;
             let data_value = 0;
 
-            data_address = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_MOTOR_SPEED[0];
+            data_address = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_MOTOR_SPEED[0];
 
             if (wheel == '3') {
                 data_length = 4;
                 data_address = 136;
             } else {
-                data_length = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_MOTOR_SPEED[1];
+                data_length = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_MOTOR_SPEED[1];
                 data_address = data_address + (wheel - 1) * data_length;
             }
 
@@ -4213,27 +4213,27 @@ const miniBlock = {
                     script.timeFlag = 0;
                 }, duration * 1000);
 
-                Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                Entry.Robotis_carCont.update();
-                //return Entry.Robotis_carCont.postCallReturn(script, data_sendqueue, 2000);
+                RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                RoCode.Robotis_carCont.update();
+                //return RoCode.Robotis_carCont.postCallReturn(script, data_sendqueue, 2000);
                 return script;
             } else if (script.timeFlag == 1) {
                 //data_sendqueue = [[data_instruction, data_address, data_length, 0]];
-                //Entry.Robotis_carCont.setRobotisData(data_sendqueue);
+                //RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
                 return script;
             } else {
                 delete script.timeFlag;
                 delete script.isStart;
                 delete script.wheelMode;
-                Entry.engine.isContinue = false;
+                RoCode.engine.isContinue = false;
 
                 data_sendqueue = [[data_instruction, data_address, data_length, 0]];
-                Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                Entry.engine.isContinue = false;
-                Entry.Robotis_carCont.update();
+                RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                RoCode.engine.isContinue = false;
+                RoCode.Robotis_carCont.update();
                 return script.callReturn();
             }
-            //return Entry.Robotis_carCont.postCallReturn(script, data_sendqueue, 2000);
+            //return RoCode.Robotis_carCont.postCallReturn(script, data_sendqueue, 2000);
         },
     },
     robotis_aux_move_for: {
@@ -4255,7 +4255,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -4266,7 +4266,7 @@ const miniBlock = {
                 value: 'CW',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -4298,22 +4298,22 @@ const miniBlock = {
         class: 'robotis_motor',
         //'isNotFor': ['mini'],
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const wheel = script.getNumberField('WHEEL');
             let value = script.getNumberValue('SPEED');
             const direction = script.getStringField('DIRECTION');
 
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             let data_address = 0;
             let data_length = 0;
             let data_value = 0;
-            data_address = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_MOTOR_SPEED[0];
+            data_address = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_MOTOR_SPEED[0];
 
             if (wheel == '3') {
                 data_length = 4;
                 data_address = 136;
             } else {
-                data_length = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_MOTOR_SPEED[1];
+                data_length = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_MOTOR_SPEED[1];
                 data_address = data_address + (wheel - 1) * data_length;
             }
             value = value * 68;
@@ -4345,10 +4345,10 @@ const miniBlock = {
             data_value = value;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            return Entry.Robotis_carCont.postCallReturn(
+            return RoCode.Robotis_carCont.postCallReturn(
                 script,
                 data_sendqueue,
-                Entry.Robotis_openCM70.delay
+                RoCode.Robotis_openCM70.delay
             );
         },
     },
@@ -4371,7 +4371,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -4389,31 +4389,31 @@ const miniBlock = {
         },
         class: 'robotis_motor',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const wheel = script.getNumberField('WHEEL');
             const value = 0;
 
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             let data_address = 0;
             let data_length = 0;
             let data_value = 0;
 
-            data_address = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_MOTOR_SPEED[0];
+            data_address = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_MOTOR_SPEED[0];
             if (wheel == '3') {
                 data_length = 4;
                 data_address = 136;
             } else {
-                data_length = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_MOTOR_SPEED[1];
+                data_length = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_MOTOR_SPEED[1];
                 data_address = data_address + (wheel - 1) * data_length;
             }
 
             data_value = value;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            return Entry.Robotis_carCont.postCallReturn(
+            return RoCode.Robotis_carCont.postCallReturn(
                 script,
                 data_sendqueue,
-                Entry.Robotis_openCM70.delay
+                RoCode.Robotis_openCM70.delay
             );
         },
     },
@@ -4436,7 +4436,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -4447,7 +4447,7 @@ const miniBlock = {
                 value: 'CW',
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -4471,7 +4471,7 @@ const miniBlock = {
                 value: 7,
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -4491,7 +4491,7 @@ const miniBlock = {
         },
         class: 'robotis_servo_motor',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             // instruction / address / length / value / default length
             const port = script.getField('PORT', script);
             const direction = script.getStringField('DIRECTION');
@@ -4506,7 +4506,7 @@ const miniBlock = {
             const data_length2 = 1;
             const data_value2 = 7;
 
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             let data_address = 0;
             let data_length = 0;
             let data_value = 0;
@@ -4522,34 +4522,34 @@ const miniBlock = {
             switch (port) {
                 case '3':
                     data_address2 = 108;
-                    Entry.Robotis_openCM70.SERVO_MODULEWRITE.PORT3 = true;
+                    RoCode.Robotis_openCM70.SERVO_MODULEWRITE.PORT3 = true;
                     break;
                 case '4':
                     data_address2 = 109;
-                    Entry.Robotis_openCM70.SERVO_MODULEWRITE.PORT4 = true;
+                    RoCode.Robotis_openCM70.SERVO_MODULEWRITE.PORT4 = true;
                     break;
                 case '5':
                     data_address2 = 110;
-                    Entry.Robotis_openCM70.SERVO_MODULEWRITE.PORT5 = true;
+                    RoCode.Robotis_openCM70.SERVO_MODULEWRITE.PORT5 = true;
                     break;
                 case '6':
                     data_address2 = 111;
-                    Entry.Robotis_openCM70.SERVO_MODULEWRITE.PORT6 = true;
+                    RoCode.Robotis_openCM70.SERVO_MODULEWRITE.PORT6 = true;
                     break;
             }
 
-            data_address3 = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_POSITION[0];
-            data_length3 = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_POSITION[1];
+            data_address3 = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_POSITION[0];
+            data_length3 = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_POSITION[1];
 
             data_address3 = data_address3 + (port - 1) * data_length3;
 
-            data_address4 = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_SPEED[0];
-            data_length4 = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_SPEED[1];
+            data_address4 = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_SPEED[0];
+            data_length4 = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_SPEED[1];
 
             data_address4 = data_address4 + (port - 1) * data_length4;
 
-            data_address = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_MODE[0];
-            data_length = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_MODE[1];
+            data_address = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_MODE[0];
+            data_length = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_MODE[1];
 
             data_address = data_address + (port - 1) * data_length;
             data_value = 0;
@@ -4568,20 +4568,20 @@ const miniBlock = {
             data_value3 = direction;
 
             //var data_sendqueue = [[data_instruction, data_address2, data_length2, data_value2], [data_instruction, data_address, data_length, data_value], [data_instruction, data_address4, data_length4, data_value4]];
-            //return Entry.Robotis_carCont.postCallReturn(script, data_sendqueue, Entry.Robotis_openCM70.delay);
+            //return RoCode.Robotis_carCont.postCallReturn(script, data_sendqueue, RoCode.Robotis_openCM70.delay);
             //
             if (!script.isStart) {
                 if (
-                    (!Entry.Robotis_openCM70.SERVO_MODULEWRITE.PORT3 && port == '3') ||
-                    (!Entry.Robotis_openCM70.SERVO_MODULEWRITE.PORT4 && port == '4') ||
-                    (!Entry.Robotis_openCM70.SERVO_MODULEWRITE.PORT5 && port == '5') ||
-                    (!Entry.Robotis_openCM70.SERVO_MODULEWRITE.PORT6 && port == '6')
+                    (!RoCode.Robotis_openCM70.SERVO_MODULEWRITE.PORT3 && port == '3') ||
+                    (!RoCode.Robotis_openCM70.SERVO_MODULEWRITE.PORT4 && port == '4') ||
+                    (!RoCode.Robotis_openCM70.SERVO_MODULEWRITE.PORT5 && port == '5') ||
+                    (!RoCode.Robotis_openCM70.SERVO_MODULEWRITE.PORT6 && port == '6')
                 ) {
                     var data_sendqueue = [
                         [data_instruction, data_address2, data_length2, data_value2],
                     ];
-                    Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                    Entry.Robotis_carCont.update();
+                    RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                    RoCode.Robotis_carCont.update();
                     script.isStart = true;
                     script.timeFlag = 1;
                     setTimeout(() => {
@@ -4594,8 +4594,8 @@ const miniBlock = {
 
                 /*
                     var data_sendqueue = [[data_instruction, data_address2, data_length2, data_value2]];
-                    Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                    Entry.Robotis_carCont.update();
+                    RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                    RoCode.Robotis_carCont.update();
                     script.isStart = true;
                     script.timeFlag = 1;
                     setTimeout(function () {
@@ -4606,21 +4606,21 @@ const miniBlock = {
                 return script;
             } else if (script.timeFlag == 1) {
                 //data_sendqueue = [[data_instruction, data_address, data_length, 0]];
-                //Entry.Robotis_carCont.setRobotisData(data_sendqueue);
+                //RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
                 return script;
             } else {
                 delete script.timeFlag;
                 delete script.isStart;
                 delete script.wheelMode;
-                Entry.engine.isContinue = false;
+                RoCode.engine.isContinue = false;
 
                 data_sendqueue = [
                     [data_instruction, data_address, data_length, data_value],
                     [data_instruction, data_address4, data_length4, data_value4],
                 ];
-                Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                Entry.engine.isContinue = false;
-                Entry.Robotis_carCont.update();
+                RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                RoCode.engine.isContinue = false;
+                RoCode.Robotis_carCont.update();
                 return script.callReturn();
             }
             //
@@ -4645,7 +4645,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -4673,7 +4673,7 @@ const miniBlock = {
                 value: 7,
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -4701,13 +4701,13 @@ const miniBlock = {
         },
         class: 'robotis_servo_motor',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             // instruction / address / length / value / default length
             const port = script.getField('PORT', script);
             let value = script.getNumberValue('VALUE');
             const speed = script.getNumberField('SPEED');
 
-            var data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            var data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             let data_address3 = 0;
             let data_length3 = 0;
             let data_value3 = 0;
@@ -4716,7 +4716,7 @@ const miniBlock = {
             const data_length2 = 1;
             const data_value2 = 7;
 
-            var data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            var data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             let data_address = 0;
             let data_length = 0;
             let data_value = 0;
@@ -4744,18 +4744,18 @@ const miniBlock = {
                     break;
             }
 
-            data_address3 = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_POSITION[0];
-            data_length3 = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_POSITION[1];
+            data_address3 = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_POSITION[0];
+            data_length3 = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_POSITION[1];
 
             data_address3 = data_address3 + (port - 1) * data_length3;
 
-            data_address4 = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_SPEED[0];
-            data_length4 = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_SPEED[1];
+            data_address4 = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_SPEED[0];
+            data_length4 = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_SPEED[1];
 
             data_address4 = data_address4 + (port - 1) * data_length4;
 
-            data_address = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_MODE[0];
-            data_length = Entry.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_MODE[1];
+            data_address = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_MODE[0];
+            data_length = RoCode.Robotis_openCM70.CONTROL_TABLE.AUX_SERVO_MODE[1];
 
             data_address = data_address + (port - 1) * data_length;
             data_value = 1;
@@ -4770,13 +4770,13 @@ const miniBlock = {
 
             if (!script.isStart) {
                 var data_sendqueue = [[data_instruction, data_address2, data_length2, data_value2]];
-                //Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                //Entry.Robotis_carCont.update();
+                //RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                //RoCode.Robotis_carCont.update();
                 if (
-                    (!Entry.Robotis_openCM70.SERVO_MODULEWRITE.PORT3 && port == '3') ||
-                    (!Entry.Robotis_openCM70.SERVO_MODULEWRITE.PORT4 && port == '4') ||
-                    (!Entry.Robotis_openCM70.SERVO_MODULEWRITE.PORT5 && port == '5') ||
-                    (!Entry.Robotis_openCM70.SERVO_MODULEWRITE.PORT6 && port == '6')
+                    (!RoCode.Robotis_openCM70.SERVO_MODULEWRITE.PORT3 && port == '3') ||
+                    (!RoCode.Robotis_openCM70.SERVO_MODULEWRITE.PORT4 && port == '4') ||
+                    (!RoCode.Robotis_openCM70.SERVO_MODULEWRITE.PORT5 && port == '5') ||
+                    (!RoCode.Robotis_openCM70.SERVO_MODULEWRITE.PORT6 && port == '6')
                 ) {
                     script.isStart = true;
                     script.timeFlag = 1;
@@ -4795,7 +4795,7 @@ const miniBlock = {
                 delete script.timeFlag;
                 delete script.isStart;
                 delete script.wheelMode;
-                Entry.engine.isContinue = false;
+                RoCode.engine.isContinue = false;
 
                 setTimeout(() => {
                     script.timeFlag = 0;
@@ -4806,9 +4806,9 @@ const miniBlock = {
                     [data_instruction, data_address4, data_length4, data_value4],
                     [data_instruction, data_address3, data_length3, data_value3],
                 ];
-                Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                Entry.engine.isContinue = false;
-                Entry.Robotis_carCont.update();
+                RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                RoCode.engine.isContinue = false;
+                RoCode.Robotis_carCont.update();
                 return script.callReturn();
             }
             //
@@ -4841,7 +4841,7 @@ const miniBlock = {
                 value: '0',
                 fontSize: 11,
                 bgColor: '#ce105e',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -4856,7 +4856,7 @@ const miniBlock = {
                 value: '2',
                 fontSize: 11,
                 bgColor: '#ce105e',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -4873,7 +4873,7 @@ const miniBlock = {
                 value: '4',
                 fontSize: 11,
                 bgColor: '#ce105e',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -4894,7 +4894,7 @@ const miniBlock = {
         class: 'robotis_melody',
         //'isNotFor': ['mini'],
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const note = script.getNumberField('NOTE', script);
             const octave = script.getNumberField('OCTAVE', script);
             const cmBuzzerTime = script.getNumberField('DURATION', script);
@@ -4907,7 +4907,7 @@ const miniBlock = {
                 cmBuzzerIndex = 0;
             }
 
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             let data_address_1 = 0;
             let data_length_1 = 0;
             let data_value_1 = 0;
@@ -4915,8 +4915,8 @@ const miniBlock = {
             let data_length_2 = 0;
             let data_value_2 = 0;
 
-            data_address_1 = Entry.Robotis_openCM70.CONTROL_TABLE.CM_BUZZER_TIME[0];
-            data_length_1 = Entry.Robotis_openCM70.CONTROL_TABLE.CM_BUZZER_TIME[1];
+            data_address_1 = RoCode.Robotis_openCM70.CONTROL_TABLE.CM_BUZZER_TIME[0];
+            data_length_1 = RoCode.Robotis_openCM70.CONTROL_TABLE.CM_BUZZER_TIME[1];
 
             // TODO 텍스트 입력으로 바꾸고 최대는 5초 : 0.5 초 하려면 5를 입력  - console.log(parseInt(0.59 * 10)); max 는 5초
 
@@ -4925,15 +4925,15 @@ const miniBlock = {
                 data_value_1 = 50;
             }
             //data_value_1
-            data_address_2 = Entry.Robotis_openCM70.CONTROL_TABLE.CM_BUZZER_INDEX[0];
-            data_length_2 = Entry.Robotis_openCM70.CONTROL_TABLE.CM_BUZZER_INDEX[1];
+            data_address_2 = RoCode.Robotis_openCM70.CONTROL_TABLE.CM_BUZZER_INDEX[0];
+            data_length_2 = RoCode.Robotis_openCM70.CONTROL_TABLE.CM_BUZZER_INDEX[1];
             data_value_2 = cmBuzzerIndex;
 
             const data_sendqueue = [
                 [data_instruction, data_address_1, data_length_1, data_value_1],
                 [data_instruction, data_address_2, data_length_2, data_value_2],
             ];
-            return Entry.Robotis_carCont.postCallReturn(
+            return RoCode.Robotis_carCont.postCallReturn(
                 script,
                 data_sendqueue,
                 cmBuzzerTime * 1000
@@ -4959,7 +4959,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -4972,7 +4972,7 @@ const miniBlock = {
                 value: '0',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -4991,31 +4991,31 @@ const miniBlock = {
         },
         class: 'robotis_set_led_dream',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
 
             const port = script.getStringField('PORT');
             const value = 0;
-            const data_instruction = Entry.Robotis_DREAM.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_DREAM.INSTRUCTION.WRITE;
             let data_address = 0;
-            const data_length = Entry.Robotis_DREAM.CONTROL_TABLE.CM_LED[1];
+            const data_length = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_LED[1];
             const data_value = script.getNumberField('COLOR');
             switch (port) {
                 case '3':
                     //data_address = 212;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_LED[0];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_LED[0];
                     break;
                 case '4':
                     // data_address = 213;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_LED[2];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_LED[2];
                     break;
             }
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            //Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            //Entry.Robotis_carCont.update();
-            return Entry.Robotis_DREAM.postCallReturn(
+            //RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            //RoCode.Robotis_carCont.update();
+            return RoCode.Robotis_DREAM.postCallReturn(
                 script,
                 data_sendqueue,
-                Entry.Robotis_openCM70.delay
+                RoCode.Robotis_openCM70.delay
             );
         },
     },
@@ -5037,7 +5037,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -5050,16 +5050,16 @@ const miniBlock = {
         },
         class: 'robotis_touch',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT');
             let value = 0;
 
             switch (port) {
                 case '3':
-                    value = Entry.hw.portData.TOUCH0;
+                    value = RoCode.hw.portData.TOUCH0;
                     break;
                 case '4':
-                    value = Entry.hw.portData.TOUCH1;
+                    value = RoCode.hw.portData.TOUCH1;
                     break;
             }
             return value;
@@ -5082,7 +5082,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -5093,7 +5093,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         def: {
@@ -5106,16 +5106,16 @@ const miniBlock = {
         },
         class: 'robotis_touch',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT');
             const touch = script.getNumberField('TOUCH', script);
             let value = 0;
             switch (port) {
                 case '3':
-                    value = Entry.hw.portData.TOUCH0;
+                    value = RoCode.hw.portData.TOUCH0;
                     break;
                 case '4':
-                    value = Entry.hw.portData.TOUCH1;
+                    value = RoCode.hw.portData.TOUCH1;
                     break;
             }
             const isTouch = !((value == 1) ^ touch);
@@ -5141,7 +5141,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -5155,41 +5155,41 @@ const miniBlock = {
         class: 'robotis_irs',
         //'isNotFor': ['mini'],
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT');
             let value = 0;
             let data_address = 0;
             switch (port) {
                 case '3':
-                    value = Entry.hw.portData.IR0;
+                    value = RoCode.hw.portData.IR0;
                     // data_address = 108;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
                     break;
                 case '4':
-                    value = Entry.hw.portData.IR1;
+                    value = RoCode.hw.portData.IR1;
                     // data_address = 109;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
                     break;
             }
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             const data_length = 1;
             // const data_value = 2;
-            const data_value = Entry.Robotis_DREAM.MODULE_VALUE.IR;
+            const data_value = RoCode.Robotis_DREAM.MODULE_VALUE.IR;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            //Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            //Entry.Robotis_carCont.update();
-            if (!Entry.Robotis_DREAM.IRS_MODULEWRITE.PORT3 && port == '3') {
-                Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                Entry.Robotis_DREAM.update();
-                Entry.Robotis_DREAM.IRS_MODULEWRITE.PORT3 = true;
+            //RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            //RoCode.Robotis_carCont.update();
+            if (!RoCode.Robotis_DREAM.IRS_MODULEWRITE.PORT3 && port == '3') {
+                RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                RoCode.Robotis_DREAM.update();
+                RoCode.Robotis_DREAM.IRS_MODULEWRITE.PORT3 = true;
             }
-            if (!Entry.Robotis_DREAM.IRS_MODULEWRITE.PORT4 && port == '4') {
-                Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                Entry.Robotis_DREAM.update();
-                Entry.Robotis_DREAM.IRS_MODULEWRITE.PORT4 = true;
+            if (!RoCode.Robotis_DREAM.IRS_MODULEWRITE.PORT4 && port == '4') {
+                RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                RoCode.Robotis_DREAM.update();
+                RoCode.Robotis_DREAM.IRS_MODULEWRITE.PORT4 = true;
             }
-            //var value = (Entry.hw.portData['IN' + port] > 125) ? 1 : 0;
+            //var value = (RoCode.hw.portData['IN' + port] > 125) ? 1 : 0;
             return value;
         },
     },
@@ -5210,7 +5210,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -5224,7 +5224,7 @@ const miniBlock = {
                 value: 'LESS',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 noaRrow: true,
             },
             {
@@ -5251,7 +5251,7 @@ const miniBlock = {
         class: 'robotis_irs',
         //'isNotFor': ['mini'],
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT', script);
             const operator = script.getField('OPERATOR', script);
             const rightValue = script.getNumberValue('RIGHTVALUE', script);
@@ -5261,32 +5261,32 @@ const miniBlock = {
 
             switch (port) {
                 case '3':
-                    leftValue = Entry.hw.portData.IR0;
+                    leftValue = RoCode.hw.portData.IR0;
                     // data_address = 108;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
                     break;
                 case '4':
-                    leftValue = Entry.hw.portData.IR1;
+                    leftValue = RoCode.hw.portData.IR1;
                     // data_address = 109;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
                     break;
             }
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             const data_length = 1;
-            const data_value = Entry.Robotis_DREAM.MODULE_VALUE.IR;
+            const data_value = RoCode.Robotis_DREAM.MODULE_VALUE.IR;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            //Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            //Entry.Robotis_carCont.update();
-            if (!Entry.Robotis_DREAM.IRS_MODULEWRITE.PORT3 && port == '3') {
-                Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                Entry.Robotis_DREAM.update();
-                Entry.Robotis_DREAM.IRS_MODULEWRITE.PORT3 = true;
+            //RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            //RoCode.Robotis_carCont.update();
+            if (!RoCode.Robotis_DREAM.IRS_MODULEWRITE.PORT3 && port == '3') {
+                RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                RoCode.Robotis_DREAM.update();
+                RoCode.Robotis_DREAM.IRS_MODULEWRITE.PORT3 = true;
             }
-            if (!Entry.Robotis_DREAM.IRS_MODULEWRITE.PORT4 && port == '4') {
-                Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                Entry.Robotis_DREAM.update();
-                Entry.Robotis_DREAM.IRS_MODULEWRITE.PORT4 = true;
+            if (!RoCode.Robotis_DREAM.IRS_MODULEWRITE.PORT4 && port == '4') {
+                RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                RoCode.Robotis_DREAM.update();
+                RoCode.Robotis_DREAM.IRS_MODULEWRITE.PORT4 = true;
             }
 
             switch (operator) {
@@ -5329,7 +5329,7 @@ const miniBlock = {
                 value: '0',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -5343,22 +5343,22 @@ const miniBlock = {
         class: 'robotis_irs',
         //'isNotFor': ['mini'],
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT');
             let value = 0;
             const data_address = 0;
             switch (port) {
                 case '0':
-                    value = Entry.hw.portData.IRINNER0;
+                    value = RoCode.hw.portData.IRINNER0;
                     break;
                 case '1':
-                    value = Entry.hw.portData.IRINNER1;
+                    value = RoCode.hw.portData.IRINNER1;
                     break;
                 case '2':
-                    value = Entry.hw.portData.IRINNER2;
+                    value = RoCode.hw.portData.IRINNER2;
                     break;
             }
-            //var value = (Entry.hw.portData['IN' + port] > 125) ? 1 : 0;
+            //var value = (RoCode.hw.portData['IN' + port] > 125) ? 1 : 0;
             return value;
         },
     },
@@ -5381,7 +5381,7 @@ const miniBlock = {
                 outerLine: '#e37100',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -5394,9 +5394,9 @@ const miniBlock = {
         },
         class: 'robotis_light',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT');
-            return Entry.hw.portData[`LIGHT${port}`];
+            return RoCode.hw.portData[`LIGHT${port}`];
         },
     },
     robotis_light_value_boolean_dream: {
@@ -5416,7 +5416,7 @@ const miniBlock = {
                 value: '0',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -5430,7 +5430,7 @@ const miniBlock = {
                 value: 'LESS',
                 fontSize: 11,
                 bgColor: '#e37100',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 noaRrow: true,
             },
             {
@@ -5456,11 +5456,11 @@ const miniBlock = {
         },
         class: 'robotis_light',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getNumberField('PORT', script);
             const operator = script.getField('OPERATOR', script);
             const rightValue = script.getNumberValue('RIGHTVALUE', script);
-            const leftValue = Entry.hw.portData[`LIGHT${port}`];
+            const leftValue = RoCode.hw.portData[`LIGHT${port}`];
             let isCheck = false;
 
             switch (operator) {
@@ -5502,7 +5502,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -5515,37 +5515,37 @@ const miniBlock = {
         },
         class: 'robotis_color',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT');
             let value = 0;
             let data_address = 0;
             switch (port) {
                 case '3':
-                    value = Entry.hw.portData.COLOR0;
+                    value = RoCode.hw.portData.COLOR0;
                     // data_address = 108;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
                     break;
                 case '4':
-                    value = Entry.hw.portData.COLOR1;
+                    value = RoCode.hw.portData.COLOR1;
                     // data_address = 109;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
                     break;
             }
-            const data_instruction = Entry.Robotis_DREAM.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_DREAM.INSTRUCTION.WRITE;
             const data_length = 1;
             // const data_value = 4;
-            const data_value = Entry.Robotis_DREAM.MODULE_VALUE.COLOR;
+            const data_value = RoCode.Robotis_DREAM.MODULE_VALUE.COLOR;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
 
-            if (!Entry.Robotis_DREAM.COLOR_MODULEWRITE.PORT3 && port == '3') {
-                Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                Entry.Robotis_carCont.update();
-                Entry.Robotis_DREAM.COLOR_MODULEWRITE.PORT3 = true;
-            } else if (!Entry.Robotis_DREAM.COLOR_MODULEWRITE.PORT4 && port == '4') {
-                Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                Entry.Robotis_carCont.update();
-                Entry.Robotis_DREAM.COLOR_MODULEWRITE.PORT4 = true;
+            if (!RoCode.Robotis_DREAM.COLOR_MODULEWRITE.PORT3 && port == '3') {
+                RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                RoCode.Robotis_carCont.update();
+                RoCode.Robotis_DREAM.COLOR_MODULEWRITE.PORT3 = true;
+            } else if (!RoCode.Robotis_DREAM.COLOR_MODULEWRITE.PORT4 && port == '4') {
+                RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                RoCode.Robotis_carCont.update();
+                RoCode.Robotis_DREAM.COLOR_MODULEWRITE.PORT4 = true;
             }
 
             switch (value) {
@@ -5592,7 +5592,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -5606,7 +5606,7 @@ const miniBlock = {
                 value: 'LESS',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 noaRrow: true,
             },
             {
@@ -5623,7 +5623,7 @@ const miniBlock = {
                 value: '0',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         def: {
@@ -5637,7 +5637,7 @@ const miniBlock = {
         },
         class: 'robotis_color',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getField('PORT', script);
             const operator = script.getField('OPERATOR', script);
             const rightValue = script.getNumberField('RIGHTVALUE', script);
@@ -5647,35 +5647,35 @@ const miniBlock = {
 
             switch (port) {
                 case '3':
-                    leftValue = Entry.hw.portData.COLOR0;
+                    leftValue = RoCode.hw.portData.COLOR0;
                     // data_address = 108;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
                     break;
                 case '4':
-                    leftValue = Entry.hw.portData.COLOR1;
+                    leftValue = RoCode.hw.portData.COLOR1;
                     // data_address = 109;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
                     break;
             }
 
-            const data_instruction = Entry.Robotis_DREAM.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_DREAM.INSTRUCTION.WRITE;
             const data_length = 1;
             // const data_value = 4;
-            const data_value = Entry.Robotis_DREAM.MODULE_VALUE.COLOR;
+            const data_value = RoCode.Robotis_DREAM.MODULE_VALUE.COLOR;
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
 
-            if (!Entry.Robotis_DREAM.COLOR_MODULEWRITE.PORT3 && port == '3') {
-                Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                Entry.Robotis_DREAM.update();
-                Entry.Robotis_DREAM.COLOR_MODULEWRITE.PORT3 = true;
-            } else if (!Entry.Robotis_DREAM.COLOR_MODULEWRITE.PORT4 && port == '4') {
-                Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                Entry.Robotis_DREAM.update();
-                Entry.Robotis_DREAM.COLOR_MODULEWRITE.PORT4 = true;
+            if (!RoCode.Robotis_DREAM.COLOR_MODULEWRITE.PORT3 && port == '3') {
+                RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                RoCode.Robotis_DREAM.update();
+                RoCode.Robotis_DREAM.COLOR_MODULEWRITE.PORT3 = true;
+            } else if (!RoCode.Robotis_DREAM.COLOR_MODULEWRITE.PORT4 && port == '4') {
+                RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                RoCode.Robotis_DREAM.update();
+                RoCode.Robotis_DREAM.COLOR_MODULEWRITE.PORT4 = true;
             }
             // const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            // Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            // Entry.Robotis_carCont.update();
+            // RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            // RoCode.Robotis_carCont.update();
 
             switch (operator) {
                 case 'EQUAL':
@@ -5716,7 +5716,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -5729,41 +5729,41 @@ const miniBlock = {
         },
         class: 'robotis_humidity',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT');
             let value = 0;
             let data_address = 0;
             switch (port) {
                 case '3':
-                    value = Entry.hw.portData.HUMIDTY0;
+                    value = RoCode.hw.portData.HUMIDTY0;
                     // data_address = 108;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
                     break;
                 case '4':
-                    value = Entry.hw.portData.HUMIDTY1;
+                    value = RoCode.hw.portData.HUMIDTY1;
                     // data_address = 109;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
                     break;
             }
-            const data_instruction = Entry.Robotis_DREAM.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_DREAM.INSTRUCTION.WRITE;
             const data_length = 1;
             // const data_value = 5;
-            const data_value = Entry.Robotis_DREAM.MODULE_VALUE.MOISTURE;
+            const data_value = RoCode.Robotis_DREAM.MODULE_VALUE.MOISTURE;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
 
-            if (!Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 && port == '3') {
+            if (!RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 && port == '3') {
                 console.log(`address : ${data_address} value : ${data_value}`);
-                Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                Entry.Robotis_carCont.update();
-                Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 = true;
-            } else if (!Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 && port == '4') {
-                Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                Entry.Robotis_carCont.update();
-                Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 = true;
+                RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                RoCode.Robotis_carCont.update();
+                RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 = true;
+            } else if (!RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 && port == '4') {
+                RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                RoCode.Robotis_carCont.update();
+                RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 = true;
             }
-            // Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            // Entry.Robotis_carCont.update();
+            // RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            // RoCode.Robotis_carCont.update();
 
             return value;
         },
@@ -5785,7 +5785,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -5799,7 +5799,7 @@ const miniBlock = {
                 value: 'LESS',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 noaRrow: true,
             },
             {
@@ -5825,7 +5825,7 @@ const miniBlock = {
         },
         class: 'robotis_humidity',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getNumberField('PORT', script);
             const operator = script.getField('OPERATOR', script);
             const rightValue = script.getNumberValue('RIGHTVALUE', script);
@@ -5835,34 +5835,34 @@ const miniBlock = {
 
             switch (port) {
                 case 3:
-                    leftValue = Entry.hw.portData.HUMIDTY0;
+                    leftValue = RoCode.hw.portData.HUMIDTY0;
                     // data_address = 108;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
                     break;
                 case 4:
-                    leftValue = Entry.hw.portData.HUMIDTY1;
+                    leftValue = RoCode.hw.portData.HUMIDTY1;
                     // data_address = 109;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
                     break;
             }
 
-            const data_instruction = Entry.Robotis_DREAM.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_DREAM.INSTRUCTION.WRITE;
             const data_length = 1;
             // const data_value = 5;
-            const data_value = Entry.Robotis_DREAM.MODULE_VALUE.MOISTURE;
+            const data_value = RoCode.Robotis_DREAM.MODULE_VALUE.MOISTURE;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            if (!Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 && port == '3') {
-                Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                Entry.Robotis_DREAM.update();
-                Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 = true;
-            } else if (!Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 && port == '4') {
-                Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                Entry.Robotis_DREAM.update();
-                Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 = true;
+            if (!RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 && port == '3') {
+                RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                RoCode.Robotis_DREAM.update();
+                RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 = true;
+            } else if (!RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 && port == '4') {
+                RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                RoCode.Robotis_DREAM.update();
+                RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 = true;
             }
-            // Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            // Entry.Robotis_carCont.update();
+            // RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            // RoCode.Robotis_carCont.update();
             switch (operator) {
                 case 'EQUAL':
                     isCheck = leftValue == rightValue;
@@ -5901,7 +5901,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#0e93b1',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
         ],
         events: {},
@@ -5914,41 +5914,41 @@ const miniBlock = {
         },
         class: 'robotis_temperature',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getStringField('PORT');
             let value = 0;
             let data_address = 0;
             switch (port) {
                 case '3':
-                    value = Entry.hw.portData.TEMPERATURE0;
+                    value = RoCode.hw.portData.TEMPERATURE0;
                     // data_address = 108;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
                     break;
                 case '4':
-                    value = Entry.hw.portData.TEMPERATURE1;
+                    value = RoCode.hw.portData.TEMPERATURE1;
                     // data_address = 109;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
                     break;
             }
-            const data_instruction = Entry.Robotis_DREAM.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_DREAM.INSTRUCTION.WRITE;
             const data_length = 1;
             // const data_value = 5;
-            const data_value = Entry.Robotis_DREAM.MODULE_VALUE.MOISTURE;
+            const data_value = RoCode.Robotis_DREAM.MODULE_VALUE.MOISTURE;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            if (!Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 && port == '3') {
-                Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                Entry.Robotis_DREAM.update();
-                Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 = true;
-            } else if (!Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 && port == '4') {
-                Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                Entry.Robotis_DREAM.update();
-                Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 = true;
+            if (!RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 && port == '3') {
+                RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                RoCode.Robotis_DREAM.update();
+                RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 = true;
+            } else if (!RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 && port == '4') {
+                RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                RoCode.Robotis_DREAM.update();
+                RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 = true;
             }
 
             // const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            // Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            // Entry.Robotis_carCont.update();
+            // RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            // RoCode.Robotis_carCont.update();
 
             return value;
         },
@@ -5970,7 +5970,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -5984,7 +5984,7 @@ const miniBlock = {
                 value: 'LESS',
                 fontSize: 11,
                 bgColor: '#9a0045',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 noaRrow: true,
             },
             {
@@ -6010,7 +6010,7 @@ const miniBlock = {
         },
         class: 'robotis_temperature',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getNumberField('PORT', script);
             const operator = script.getField('OPERATOR', script);
             const rightValue = script.getNumberValue('RIGHTVALUE', script);
@@ -6020,36 +6020,36 @@ const miniBlock = {
 
             switch (port) {
                 case 3:
-                    leftValue = Entry.hw.portData.TEMPERATURE0;
+                    leftValue = RoCode.hw.portData.TEMPERATURE0;
                     // data_address = 108;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
                     break;
                 case 4:
-                    leftValue = Entry.hw.portData.TEMPERATURE1;
+                    leftValue = RoCode.hw.portData.TEMPERATURE1;
                     // data_address = 109;
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
                     break;
             }
 
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             const data_length = 1;
             // const data_value = 5;
-            const data_value = Entry.Robotis_DREAM.MODULE_VALUE.MOISTURE;
+            const data_value = RoCode.Robotis_DREAM.MODULE_VALUE.MOISTURE;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            if (!Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 && port == '3') {
-                Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                Entry.Robotis_DREAM.update();
-                Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 = true;
-            } else if (!Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 && port == '4') {
-                Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                Entry.Robotis_DREAM.update();
-                Entry.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 = true;
+            if (!RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 && port == '3') {
+                RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                RoCode.Robotis_DREAM.update();
+                RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT3 = true;
+            } else if (!RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 && port == '4') {
+                RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                RoCode.Robotis_DREAM.update();
+                RoCode.Robotis_DREAM.TEMPER_MOISTURE_MODULEWRITE.PORT4 = true;
             }
 
             // const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            // Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-            // Entry.Robotis_carCont.update();
+            // RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+            // RoCode.Robotis_carCont.update();
             switch (operator) {
                 case 'EQUAL':
                     isCheck = leftValue == rightValue;
@@ -6088,7 +6088,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -6099,7 +6099,7 @@ const miniBlock = {
                 value: 'CW',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -6139,26 +6139,26 @@ const miniBlock = {
         },
         class: 'robotis_motor',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const duration = script.getNumberValue('DURATION');
             const wheel = script.getNumberField('WHEEL');
             let value = script.getNumberValue('SPEED');
             const direction = script.getStringField('DIRECTION');
 
-            const data_instruction = Entry.Robotis_DREAM.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_DREAM.INSTRUCTION.WRITE;
             // let data_address = 0;
             let data_address = (data_address =
-                Entry.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[0]);
+                RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[0]);
             let data_length = 0;
             let data_value = 0;
 
-            //data_address = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[0];
+            //data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[0];
 
             if (wheel == '3') {
                 data_length = 4;
-                // data_address = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[0];
+                // data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[0];
             } else {
-                data_length = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[1];
+                data_length = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[1];
                 data_address = data_address + (wheel - 1) * data_length;
             }
 
@@ -6211,27 +6211,27 @@ const miniBlock = {
                     script.timeFlag = 0;
                 }, duration * 1000);
 
-                Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                Entry.Robotis_DREAM.update();
-                //return Entry.Robotis_carCont.postCallReturn(script, data_sendqueue, 2000);
+                RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                RoCode.Robotis_DREAM.update();
+                //return RoCode.Robotis_carCont.postCallReturn(script, data_sendqueue, 2000);
                 return script;
             } else if (script.timeFlag == 1) {
                 //data_sendqueue = [[data_instruction, data_address, data_length, 0]];
-                //Entry.Robotis_carCont.setRobotisData(data_sendqueue);
+                //RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
                 return script;
             } else {
                 delete script.timeFlag;
                 delete script.isStart;
                 delete script.wheelMode;
-                Entry.engine.isContinue = false;
+                RoCode.engine.isContinue = false;
 
                 data_sendqueue = [[data_instruction, data_address, data_length, 0]];
-                Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                Entry.engine.isContinue = false;
-                Entry.Robotis_DREAM.update();
+                RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                RoCode.engine.isContinue = false;
+                RoCode.Robotis_DREAM.update();
                 return script.callReturn();
             }
-            //return Entry.Robotis_carCont.postCallReturn(script, data_sendqueue, 2000);
+            //return RoCode.Robotis_carCont.postCallReturn(script, data_sendqueue, 2000);
         },
     },
     robotis_aux_move_for_dream: {
@@ -6253,7 +6253,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -6264,7 +6264,7 @@ const miniBlock = {
                 value: 'CW',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -6296,23 +6296,23 @@ const miniBlock = {
         class: 'robotis_motor',
         //'isNotFor': ['mini'],
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const wheel = script.getNumberField('WHEEL');
             let value = script.getNumberValue('SPEED');
             const direction = script.getStringField('DIRECTION');
 
-            const data_instruction = Entry.Robotis_openCM70.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_openCM70.INSTRUCTION.WRITE;
             let data_address = 0;
             let data_length = 0;
             // let data_value = 0;
-            let data_value = Entry.Robotis_DREAM.MODULE_VALUE.DEFAULT;
-            data_address = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[0];
+            let data_value = RoCode.Robotis_DREAM.MODULE_VALUE.DEFAULT;
+            data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[0];
 
             if (wheel == '3') {
                 data_length = 4;
                 // data_address = 136;
             } else {
-                data_length = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[1];
+                data_length = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[1];
                 data_address = data_address + (wheel - 1) * data_length;
             }
             value = value * 68;
@@ -6354,10 +6354,10 @@ const miniBlock = {
             data_value = value;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            return Entry.Robotis_DREAM.postCallReturn(
+            return RoCode.Robotis_DREAM.postCallReturn(
                 script,
                 data_sendqueue,
-                Entry.Robotis_openCM70.delay
+                RoCode.Robotis_openCM70.delay
             );
         },
     },
@@ -6380,7 +6380,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#019101',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -6398,36 +6398,36 @@ const miniBlock = {
         },
         class: 'robotis_motor',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const wheel = script.getNumberField('WHEEL');
             const value = 0;
 
-            const data_instruction = Entry.Robotis_DREAM.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_DREAM.INSTRUCTION.WRITE;
             // let data_address = 0;
             let data_address = (data_address =
-                Entry.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[0]);
+                RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[0]);
             let data_length = 0;
             // let data_value = 0;
-            let data_value = Entry.Robotis_DREAM.MODULE_VALUE.DEFAULT;
+            let data_value = RoCode.Robotis_DREAM.MODULE_VALUE.DEFAULT;
 
-            data_address = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[0];
+            data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[0];
 
             console.log(`wheel ${wheel}`);
             if (wheel == '3') {
                 data_length = 4;
                 // data_address = 136;
             } else {
-                data_length = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[1];
+                data_length = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[1];
                 data_address = data_address + (wheel - 1) * data_length;
             }
 
             data_value = value;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            return Entry.Robotis_carCont.postCallReturn(
+            return RoCode.Robotis_carCont.postCallReturn(
                 script,
                 data_sendqueue,
-                Entry.Robotis_openCM70.delay
+                RoCode.Robotis_openCM70.delay
             );
         },
     },
@@ -6448,7 +6448,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -6459,7 +6459,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -6478,67 +6478,67 @@ const miniBlock = {
         },
         class: 'robotis_servo_motor',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             // instruction / address / length / value / default length
             const port = script.getField('PORT', script);
-            const data_instruction = Entry.Robotis_DREAM.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_DREAM.INSTRUCTION.WRITE;
             let data_address = 0;
             const data_length = 1;
-            const data_value = Entry.Robotis_DREAM.MODULE_VALUE.SERVO;
+            const data_value = RoCode.Robotis_DREAM.MODULE_VALUE.SERVO;
             const data_mode = script.getNumberField('MODE');
             switch (port) {
                 case '3':
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[0];
                     break;
                 case '4':
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.CM_MODULE_CLASS[1];
                     break;
             }
             //
             if (
-                (!Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 && port == '3') ||
-                (!Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 && port == '4')
+                (!RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 && port == '3') ||
+                (!RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 && port == '4')
             ) {
                 let data_sendqueue;
                 if (port == '3') {
-                    Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 = true;
+                    RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 = true;
                     data_sendqueue = [
                         [
                             data_instruction,
-                            Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[0],
-                            Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[1],
+                            RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[0],
+                            RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[1],
                             data_mode,
                         ],
                     ];
                 } else if (port == '4') {
-                    Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 = true;
+                    RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 = true;
                     data_sendqueue = [
                         [
                             data_instruction,
-                            Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[2],
-                            Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[1],
+                            RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[2],
+                            RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[1],
                             data_mode,
                         ],
                     ];
                 }
 
-                return Entry.Robotis_carCont.postCallReturn(
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
-                    Entry.Robotis_openCM70.delay
+                    RoCode.Robotis_openCM70.delay
                 );
             }
             /*
             if (!script.isStart) {
                 if (
-                    (!Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 && port == '3') ||
-                    (!Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 && port == '4')
+                    (!RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 && port == '3') ||
+                    (!RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 && port == '4')
                 ) {
                     var data_sendqueue = [
                         [data_instruction, data_address, data_length, data_value],
                     ];
-                    Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                    Entry.Robotis_DREAM.update();
+                    RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                    RoCode.Robotis_DREAM.update();
                     script.isStart = true;
                     script.timeFlag = 1;
                     setTimeout(() => {
@@ -6556,25 +6556,25 @@ const miniBlock = {
                     delete script.timeFlag;
                     delete script.isStart;
                     delete script.wheelMode;
-                    Entry.engine.isContinue = false;
-                    if(!Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 && port == '3' || !Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 && port == '4')
+                    RoCode.engine.isContinue = false;
+                    if(!RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 && port == '3' || !RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 && port == '4')
                     {
 
                         if(port == '3'){
-                            Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 = true;
+                            RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 = true;
                             data_sendqueue = [
-                                [data_instruction, Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[0], Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[1], data_mode],
+                                [data_instruction, RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[0], RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[1], data_mode],
                             ];
                         }else if (port == '4'){
-                            Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 = true;
+                            RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 = true;
                             data_sendqueue = [
-                                [data_instruction, Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[2], Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[1], data_mode],
+                                [data_instruction, RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[2], RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[1], data_mode],
                             ];
                         }
 
-                        Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                        Entry.engine.isContinue = false;
-                        Entry.Robotis_DREAM.update();
+                        RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                        RoCode.engine.isContinue = false;
+                        RoCode.Robotis_DREAM.update();
                         console.log("datasend mode " + data_sendqueue);
                     }
                     return script.callReturn();
@@ -6599,7 +6599,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -6610,7 +6610,7 @@ const miniBlock = {
                 value: 'CW',
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -6634,7 +6634,7 @@ const miniBlock = {
                 value: 7,
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -6654,10 +6654,10 @@ const miniBlock = {
         },
         class: 'robotis_servo_motor',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             // instruction / address / length / value / default length
             const port = script.getField('PORT', script);
-            const data_instruction = Entry.Robotis_DREAM.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_DREAM.INSTRUCTION.WRITE;
             let data_address = 0;
             let data_length = 0;
             let data_value = script.getNumberField('SPEED');
@@ -6678,27 +6678,27 @@ const miniBlock = {
 
             switch (port) {
                 case '3':
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[0];
-                    data_length = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[1];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[0];
+                    data_length = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[1];
                     break;
                 case '4':
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[2];
-                    data_length = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[1];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[2];
+                    data_length = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[1];
                     break;
             }
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            return Entry.Robotis_DREAM.postCallReturn(script, data_sendqueue, 300);
+            return RoCode.Robotis_DREAM.postCallReturn(script, data_sendqueue, 300);
             /*
-            if(!Entry.Robotis_DREAM.SERVO_WHEELWRITE.PORT3 && port == '3' || !Entry.Robotis_DREAM.SERVO_WHEELWRITE.PORT4 && port == '4')
+            if(!RoCode.Robotis_DREAM.SERVO_WHEELWRITE.PORT3 && port == '3' || !RoCode.Robotis_DREAM.SERVO_WHEELWRITE.PORT4 && port == '4')
             {
                 console.log("datasend " + data_sendqueue);
                 if(port == '3'){
-                    Entry.Robotis_DREAM.SERVO_WHEELWRITE.PORT3 = true;
+                    RoCode.Robotis_DREAM.SERVO_WHEELWRITE.PORT3 = true;
                 }else if (port == '4'){
-                    Entry.Robotis_DREAM.SERVO_WHEELWRITE.PORT4 = true;
+                    RoCode.Robotis_DREAM.SERVO_WHEELWRITE.PORT4 = true;
                 }
 
-                return Entry.Robotis_DREAM.postCallReturn(
+                return RoCode.Robotis_DREAM.postCallReturn(
                     script,
                     data_sendqueue,
                     300
@@ -6723,7 +6723,7 @@ const miniBlock = {
                 value: '1',
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -6741,28 +6741,28 @@ const miniBlock = {
         },
         class: 'robotis_servo_motor',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             const port = script.getField('PORT', script);
             const value = 0;
 
-            const data_instruction = Entry.Robotis_DREAM.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_DREAM.INSTRUCTION.WRITE;
             // let data_address = 0;
             let data_address = (data_address =
-                Entry.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[0]);
+                RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_MOTOR_SPEED[0]);
             let data_length = 0;
             // let data_value = 0;
             let data_value = 0;
 
-            data_address = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[0];
+            data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[0];
 
             switch (port) {
                 case '1':
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[0];
-                    data_length = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[1];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[0];
+                    data_length = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[1];
                     break;
                 case '2':
-                    data_address = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[2];
-                    data_length = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[1];
+                    data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[2];
+                    data_length = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[1];
                     break;
             }
 
@@ -6770,7 +6770,7 @@ const miniBlock = {
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
             console.log(`kjsDebug data_sendqueue : ${data_sendqueue}`);
-            return Entry.Robotis_DREAM.postCallReturn(script, data_sendqueue, 300);
+            return RoCode.Robotis_DREAM.postCallReturn(script, data_sendqueue, 300);
         },
     },
     robotis_set_servo_position_dream: {
@@ -6790,7 +6790,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -6823,13 +6823,13 @@ const miniBlock = {
             const port = script.getField('PORT', script);
             let value = script.getNumberValue('VALUE');
 
-            const data_instruction = Entry.Robotis_DREAM.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_DREAM.INSTRUCTION.WRITE;
             let data_address = 0;
             let data_length = 0;
             let data_value = 0;
 
-            data_address = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_POSITION[0];
-            data_length = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_POSITION[1];
+            data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_POSITION[0];
+            data_length = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_POSITION[1];
 
             data_address = data_address + (port - 3) * data_length;
 
@@ -6842,7 +6842,7 @@ const miniBlock = {
             data_value = value;
 
             const data_sendqueue = [[data_instruction, data_address, data_length, data_value]];
-            return Entry.Robotis_carCont.postCallReturn(script, data_sendqueue, 300);
+            return RoCode.Robotis_carCont.postCallReturn(script, data_sendqueue, 300);
         },
     },
     robotis_set_servo_wheel_dream: {
@@ -6862,7 +6862,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -6873,7 +6873,7 @@ const miniBlock = {
                 value: 'CW',
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Dropdown',
@@ -6897,7 +6897,7 @@ const miniBlock = {
                 value: 7,
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -6917,7 +6917,7 @@ const miniBlock = {
         },
         class: 'robotis_servo_motor',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             // instruction / address / length / value / default length
             const port = script.getField('PORT', script);
             const direction = script.getStringField('DIRECTION');
@@ -6933,7 +6933,7 @@ const miniBlock = {
             const data_length2 = 1;
             const data_value2 = 7;
 
-            const data_instruction = Entry.Robotis_DREAM.INSTRUCTION.WRITE;
+            const data_instruction = RoCode.Robotis_DREAM.INSTRUCTION.WRITE;
             let data_address = 0;
             let data_length = 0;
             let data_value = 0;
@@ -6955,18 +6955,18 @@ const miniBlock = {
                     break;
             }
 
-            // data_address3 = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_POSITION[0];
-            // data_length3 = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_POSITION[1];
+            // data_address3 = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_POSITION[0];
+            // data_length3 = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_POSITION[1];
 
             // data_address3 = data_address3 + (port - 1) * data_length3;
 
-            data_address4 = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[0];
-            data_length4 = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[1];
+            data_address4 = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[0];
+            data_length4 = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[1];
 
             data_address4 = data_address4 + (port - 3) * data_length4;
 
-            data_address = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[0];
-            data_length = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[1];
+            data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[0];
+            data_length = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[1];
 
             data_address = data_address + (port - 3) * data_length;
             data_value = 0;
@@ -6985,19 +6985,19 @@ const miniBlock = {
             data_value3 = direction;
 
             //var data_sendqueue = [[data_instruction, data_address2, data_length2, data_value2], [data_instruction, data_address, data_length, data_value], [data_instruction, data_address4, data_length4, data_value4]];
-            //return Entry.Robotis_carCont.postCallReturn(script, data_sendqueue, Entry.Robotis_openCM70.delay);
+            //return RoCode.Robotis_carCont.postCallReturn(script, data_sendqueue, RoCode.Robotis_openCM70.delay);
             //
             if (!script.isStart) {
                 if (
-                    (!Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 && port == '3') ||
-                    (!Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 && port == '4')
+                    (!RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 && port == '3') ||
+                    (!RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 && port == '4')
                 ) {
                     var data_sendqueue = [
                         [data_instruction, data_address2, data_length2, data_value2],
                     ];
                     console.log(`kjDebug : ${data_sendqueue}`);
-                    Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                    Entry.Robotis_DREAM.update();
+                    RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                    RoCode.Robotis_DREAM.update();
                     script.isStart = true;
                     script.timeFlag = 1;
                     setTimeout(() => {
@@ -7010,8 +7010,8 @@ const miniBlock = {
 
                 /*
                     var data_sendqueue = [[data_instruction, data_address2, data_length2, data_value2]];
-                    Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                    Entry.Robotis_carCont.update();
+                    RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                    RoCode.Robotis_carCont.update();
                     script.isStart = true;
                     script.timeFlag = 1;
                     setTimeout(function () {
@@ -7022,30 +7022,30 @@ const miniBlock = {
                 return script;
             } else if (script.timeFlag == 1) {
                 //data_sendqueue = [[data_instruction, data_address, data_length, 0]];
-                //Entry.Robotis_carCont.setRobotisData(data_sendqueue);
+                //RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
                 return script;
             } else {
                 delete script.timeFlag;
                 delete script.isStart;
                 delete script.wheelMode;
-                Entry.engine.isContinue = false;
+                RoCode.engine.isContinue = false;
                 if (
-                    (!Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 && port == '3') ||
-                    (!Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 && port == '4')
+                    (!RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 && port == '3') ||
+                    (!RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 && port == '4')
                 ) {
                     data_sendqueue = [
                         [data_instruction, data_address, data_length, data_value],
                         [data_instruction, data_address4, data_length4, data_value4],
                     ];
                     console.log(`kjsDebug port :${port} data ${data_sendqueue}`);
-                    Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                    Entry.engine.isContinue = false;
-                    Entry.Robotis_DREAM.update();
+                    RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                    RoCode.engine.isContinue = false;
+                    RoCode.Robotis_DREAM.update();
 
                     if (port == '3') {
-                        Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 = true;
+                        RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT3 = true;
                     } else if (port == '4') {
-                        Entry.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 = true;
+                        RoCode.Robotis_DREAM.SERVO_MODULEWRITE.PORT4 = true;
                     }
                 }
                 // data_sendqueue = [
@@ -7053,9 +7053,9 @@ const miniBlock = {
                 //     [data_instruction, data_address4, data_length4, data_value4],
                 // ];
 
-                // Entry.Robotis_DREAM.setRobotisData(data_sendqueue);
-                // Entry.engine.isContinue = false;
-                // Entry.Robotis_DREAM.update();
+                // RoCode.Robotis_DREAM.setRobotisData(data_sendqueue);
+                // RoCode.engine.isContinue = false;
+                // RoCode.Robotis_DREAM.update();
 
                 return script.callReturn();
             }
@@ -7079,7 +7079,7 @@ const miniBlock = {
                 value: '3',
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Block',
@@ -7107,7 +7107,7 @@ const miniBlock = {
                 value: 7,
                 fontSize: 11,
                 bgColor: '#A2049E',
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             },
             {
                 type: 'Indicator',
@@ -7135,13 +7135,13 @@ const miniBlock = {
         },
         class: 'robotis_servo_motor',
         func(sprite, script) {
-            Entry.hw.sendQueue.IS_EDU = true;
+            RoCode.hw.sendQueue.IS_EDU = true;
             // instruction / address / length / value / default length
             const port = script.getField('PORT', script);
             let value = script.getNumberValue('VALUE');
             const speed = script.getNumberField('SPEED');
 
-            var data_instruction = Entry.Robotis_DREAM.INSTRUCTION.WRITE;
+            var data_instruction = RoCode.Robotis_DREAM.INSTRUCTION.WRITE;
             let data_address3 = 0;
             let data_length3 = 0;
             let data_value3 = 0;
@@ -7150,7 +7150,7 @@ const miniBlock = {
             const data_length2 = 1;
             const data_value2 = 7;
 
-            var data_instruction = Entry.Robotis_DREAM.INSTRUCTION.WRITE;
+            var data_instruction = RoCode.Robotis_DREAM.INSTRUCTION.WRITE;
             let data_address = 0;
             let data_length = 0;
             let data_value = 0;
@@ -7173,18 +7173,18 @@ const miniBlock = {
                     break;
             }
 
-            data_address3 = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_POSITION[0];
-            data_length3 = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_POSITION[1];
+            data_address3 = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_POSITION[0];
+            data_length3 = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_POSITION[1];
 
             data_address3 = data_address3 + (port - 3) * data_length3;
 
-            data_address4 = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[0];
-            data_length4 = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[1];
+            data_address4 = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[0];
+            data_length4 = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_SPEED[1];
 
             data_address4 = data_address4 + (port - 3) * data_length4;
 
-            data_address = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[0];
-            data_length = Entry.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[1];
+            data_address = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[0];
+            data_length = RoCode.Robotis_DREAM.CONTROL_TABLE.AUX_SERVO_MODE[1];
 
             data_address = data_address + (port - 3) * data_length;
             data_value = 1;
@@ -7199,11 +7199,11 @@ const miniBlock = {
 
             if (!script.isStart) {
                 var data_sendqueue = [[data_instruction, data_address2, data_length2, data_value2]];
-                //Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                //Entry.Robotis_carCont.update();
+                //RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                //RoCode.Robotis_carCont.update();
                 if (
-                    (!Entry.Robotis_openCM70.SERVO_MODULEWRITE.PORT3 && port == '3') ||
-                    (!Entry.Robotis_openCM70.SERVO_MODULEWRITE.PORT4 && port == '4')
+                    (!RoCode.Robotis_openCM70.SERVO_MODULEWRITE.PORT3 && port == '3') ||
+                    (!RoCode.Robotis_openCM70.SERVO_MODULEWRITE.PORT4 && port == '4')
                 ) {
                     script.isStart = true;
                     script.timeFlag = 1;
@@ -7222,7 +7222,7 @@ const miniBlock = {
                 delete script.timeFlag;
                 delete script.isStart;
                 delete script.wheelMode;
-                Entry.engine.isContinue = false;
+                RoCode.engine.isContinue = false;
 
                 setTimeout(() => {
                     script.timeFlag = 0;
@@ -7233,9 +7233,9 @@ const miniBlock = {
                     [data_instruction, data_address4, data_length4, data_value4],
                     [data_instruction, data_address3, data_length3, data_value3],
                 ];
-                Entry.Robotis_carCont.setRobotisData(data_sendqueue);
-                Entry.engine.isContinue = false;
-                Entry.Robotis_carCont.update();
+                RoCode.Robotis_carCont.setRobotisData(data_sendqueue);
+                RoCode.engine.isContinue = false;
+                RoCode.Robotis_carCont.update();
                 return script.callReturn();
             }
             //

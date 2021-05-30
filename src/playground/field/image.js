@@ -1,14 +1,14 @@
-Entry.FieldImage = class FieldImage extends Entry.Field {
+RoCode.FieldImage = class FieldImage extends RoCode.Field {
     constructor(content, blockView, index) {
         super(content, blockView, index);
         this._block = blockView.block;
         this._blockView = blockView;
         this._content = content;
 
-        const box = new Entry.BoxModel();
+        const box = new RoCode.BoxModel();
         this.box = box;
 
-        if (Entry.Utils.isNumber(content.size)) {
+        if (RoCode.Utils.isNumber(content.size)) {
             this._width = content.size;
             this._height = content.size;
         } else {
@@ -33,7 +33,7 @@ Entry.FieldImage = class FieldImage extends Entry.Field {
         const img = this._content.img;
 
         this._imgUrl =
-            this._block.deletable === Entry.Block.DELETABLE_FALSE_LIGHTEN
+            this._block.deletable === RoCode.Block.DELETABLE_FALSE_LIGHTEN
                 ? img.replace('.png', '_un.png')
                 : img;
 

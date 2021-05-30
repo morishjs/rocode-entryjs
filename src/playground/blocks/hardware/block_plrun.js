@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.plrun = {
+RoCode.plrun = {
     id: '2A.2',
     name: 'plrun',
     url: 'http://robotron.co.kr',
@@ -10,19 +10,19 @@ Entry.plrun = {
         ko: '코딩 플런',
     },
     setZero() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            const keySet = Object.keys(Entry.hw.sendQueue.SET);
+            const keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach((key) => {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     sensorTypes: {
         ALIVE: 0,
@@ -77,7 +77,7 @@ Entry.plrun = {
         RIGHT: [1.0, 0.5],
     },
 };
-Entry.plrun.blockMenuBlocks = [
+RoCode.plrun.blockMenuBlocks = [
     'get_ultrasonic',
     'get_soil',
     'get_analog_value',
@@ -96,7 +96,7 @@ Entry.plrun.blockMenuBlocks = [
     'stop_audio',
 
     /*
-    'set_servor',    
+    'set_servor',
     'set_digital',
     'set_motor',
     'stop_motor',
@@ -104,11 +104,11 @@ Entry.plrun.blockMenuBlocks = [
     'stop_move',
     */
 ];
-Entry.plrun.getBlocks = function() {
+RoCode.plrun.getBlocks = function() {
     return {
         set_vibrator: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -117,8 +117,8 @@ Entry.plrun.getBlocks = function() {
                     options: [[Lang.Blocks.plrun_set_on, 'on'], [Lang.Blocks.plrun_set_off, 'off']],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -139,12 +139,12 @@ Entry.plrun.getBlocks = function() {
             func(sprite, script) {
                 const operator = script.getField('OPERATOR');
                 const value = operator == 'on' ? 255 : 0;
-                Entry.hw.setDigitalPortValue(2, value);
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                RoCode.hw.setDigitalPortValue(2, value);
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[2] = {
-                    type: Entry.plrun.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue.SET[2] = {
+                    type: RoCode.plrun.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -152,8 +152,8 @@ Entry.plrun.getBlocks = function() {
             },
         },
         set_fan: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -162,8 +162,8 @@ Entry.plrun.getBlocks = function() {
                     options: [[0, 0], [20, 50], [40, 100], [60, 150], [80, 200], [100, 250]],
                     value: 150,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -186,11 +186,11 @@ Entry.plrun.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[3] = {
-                    type: Entry.plrun.sensorTypes.PWM,
+                RoCode.hw.sendQueue.SET[3] = {
+                    type: RoCode.plrun.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -198,8 +198,8 @@ Entry.plrun.getBlocks = function() {
             },
         },
         set_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -211,16 +211,16 @@ Entry.plrun.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [[0, 0], [20, 50], [40, 100], [60, 150], [80, 200], [100, 250]],
                     value: 150,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -230,8 +230,8 @@ Entry.plrun.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -258,16 +258,16 @@ Entry.plrun.getBlocks = function() {
                 const port = which == 0 ? [4, 5] : [7, 6];
                 const value = direction == 0 ? (which == 0 ? 0 : 1) : which == 0 ? 1 : 0;
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port[0]] = {
-                    type: Entry.plrun.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue.SET[port[0]] = {
+                    type: RoCode.plrun.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
-                Entry.hw.sendQueue.SET[port[1]] = {
-                    type: Entry.plrun.sensorTypes.PWM,
+                RoCode.hw.sendQueue.SET[port[1]] = {
+                    type: RoCode.plrun.sensorTypes.PWM,
                     data: speed,
                     time: new Date().getTime(),
                 };
@@ -275,8 +275,8 @@ Entry.plrun.getBlocks = function() {
             },
         },
         stop_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -288,8 +288,8 @@ Entry.plrun.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -311,11 +311,11 @@ Entry.plrun.getBlocks = function() {
                 const which = script.getField('WHICH', script);
                 const port = which == 0 ? [4, 5] : [7, 6];
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port[1]] = {
-                    type: Entry.plrun.sensorTypes.PWM,
+                RoCode.hw.sendQueue.SET[port[1]] = {
+                    type: RoCode.plrun.sensorTypes.PWM,
                     data: 0,
                     time: new Date().getTime(),
                 };
@@ -323,8 +323,8 @@ Entry.plrun.getBlocks = function() {
             },
         },
         set_move: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -333,21 +333,21 @@ Entry.plrun.getBlocks = function() {
                     options: [[0, 0], [20, 50], [40, 100], [60, 150], [80, 200], [100, 250]],
                     value: 150,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [
-                        [Lang.Blocks.plrun_move_forward, Entry.plrun.move.FORWARD],
-                        [Lang.Blocks.plrun_move_backward, Entry.plrun.move.BACKWARD],
-                        [Lang.Blocks.plrun_move_left, Entry.plrun.move.LEFT],
-                        [Lang.Blocks.plrun_move_right, Entry.plrun.move.RIGHT],
+                        [Lang.Blocks.plrun_move_forward, RoCode.plrun.move.FORWARD],
+                        [Lang.Blocks.plrun_move_backward, RoCode.plrun.move.BACKWARD],
+                        [Lang.Blocks.plrun_move_left, RoCode.plrun.move.LEFT],
+                        [Lang.Blocks.plrun_move_right, RoCode.plrun.move.RIGHT],
                     ],
-                    value: Entry.plrun.move.FORWARD,
+                    value: RoCode.plrun.move.FORWARD,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -371,26 +371,26 @@ Entry.plrun.getBlocks = function() {
                 const speed = script.getField('SPEED', script);
                 const value = [direction[0] * speed, direction[1] * speed];
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[4] = {
-                    type: Entry.plrun.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue.SET[4] = {
+                    type: RoCode.plrun.sensorTypes.DIGITAL,
                     data: value[0] > 0 ? 0 : 1,
                     time: new Date().getTime(),
                 };
-                Entry.hw.sendQueue.SET[5] = {
-                    type: Entry.plrun.sensorTypes.PWM,
+                RoCode.hw.sendQueue.SET[5] = {
+                    type: RoCode.plrun.sensorTypes.PWM,
                     data: Math.abs(value[0]),
                     time: new Date().getTime(),
                 };
-                Entry.hw.sendQueue.SET[7] = {
-                    type: Entry.plrun.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue.SET[7] = {
+                    type: RoCode.plrun.sensorTypes.DIGITAL,
                     data: value[1] > 0 ? 1 : 0,
                     time: new Date().getTime(),
                 };
-                Entry.hw.sendQueue.SET[6] = {
-                    type: Entry.plrun.sensorTypes.PWM,
+                RoCode.hw.sendQueue.SET[6] = {
+                    type: RoCode.plrun.sensorTypes.PWM,
                     data: Math.abs(value[1]),
                     time: new Date().getTime(),
                 };
@@ -398,8 +398,8 @@ Entry.plrun.getBlocks = function() {
             },
         },
         stop_move: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -418,16 +418,16 @@ Entry.plrun.getBlocks = function() {
             class: 'plrun',
             isNotFor: ['plrun'],
             func(sprite, script) {
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[5] = {
-                    type: Entry.plrun.sensorTypes.PWM,
+                RoCode.hw.sendQueue.SET[5] = {
+                    type: RoCode.plrun.sensorTypes.PWM,
                     data: 0,
                     time: new Date().getTime(),
                 };
-                Entry.hw.sendQueue.SET[6] = {
-                    type: Entry.plrun.sensorTypes.PWM,
+                RoCode.hw.sendQueue.SET[6] = {
+                    type: RoCode.plrun.sensorTypes.PWM,
                     data: 0,
                     time: new Date().getTime(),
                 };
@@ -435,8 +435,8 @@ Entry.plrun.getBlocks = function() {
             },
         },
         set_servor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -466,14 +466,14 @@ Entry.plrun.getBlocks = function() {
                 value = Math.min(180, value);
                 value = Math.max(0, value);
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue = {
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue = {
                         GET: {},
                         SET: {},
                     };
                 }
-                Entry.hw.sendQueue.SET[11] = {
-                    type: Entry.plrun.sensorTypes.SERVO_PIN,
+                RoCode.hw.sendQueue.SET[11] = {
+                    type: RoCode.plrun.sensorTypes.SERVO_PIN,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -482,8 +482,8 @@ Entry.plrun.getBlocks = function() {
             },
         },
         set_audio_octave: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -505,16 +505,16 @@ Entry.plrun.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7]],
                     value: 4,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -528,8 +528,8 @@ Entry.plrun.getBlocks = function() {
                     ],
                     value: 250,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -554,10 +554,10 @@ Entry.plrun.getBlocks = function() {
                     const note = script.getField('NOTE', script);
                     const octave = script.getField('OCTAVE', script) - 1;
                     const duration = script.getField('DURATION', script);
-                    const value = Entry.plrun.toneMap[note][octave];
+                    const value = RoCode.plrun.toneMap[note][octave];
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue = {
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue = {
                             GET: {},
                             SET: {},
                         };
@@ -566,8 +566,8 @@ Entry.plrun.getBlocks = function() {
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue.SET[8] = {
-                        type: Entry.ArduinoExt.sensorTypes.TONE,
+                    RoCode.hw.sendQueue.SET[8] = {
+                        type: RoCode.ArduinoExt.sensorTypes.TONE,
                         data: {
                             value,
                             duration,
@@ -584,19 +584,19 @@ Entry.plrun.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.hw.sendQueue.SET[8] = {
-                        type: Entry.ArduinoExt.sensorTypes.TONE,
+                    RoCode.hw.sendQueue.SET[8] = {
+                        type: RoCode.ArduinoExt.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         set_audio_freq: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -605,16 +605,16 @@ Entry.plrun.getBlocks = function() {
                     accept: 'string',
                     value: 3000,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
                     accept: 'string',
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -637,14 +637,14 @@ Entry.plrun.getBlocks = function() {
                 const value = script.getNumberValue('HZ', script);
                 const duration = script.getNumberValue('SECOND', script) * 1000;
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue = {
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue = {
                         GET: {},
                         SET: {},
                     };
                 }
-                Entry.hw.sendQueue.SET[8] = {
-                    type: Entry.ArduinoExt.sensorTypes.TONE,
+                RoCode.hw.sendQueue.SET[8] = {
+                    type: RoCode.ArduinoExt.sensorTypes.TONE,
                     data: {
                         value,
                         duration,
@@ -656,8 +656,8 @@ Entry.plrun.getBlocks = function() {
             },
         },
         stop_audio: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -673,8 +673,8 @@ Entry.plrun.getBlocks = function() {
                     ],
                     value: 250,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -696,8 +696,8 @@ Entry.plrun.getBlocks = function() {
                 if (!script.isStart) {
                     const duration = script.getField('DURATION', script);
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue = {
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue = {
                             GET: {},
                             SET: {},
                         };
@@ -706,8 +706,8 @@ Entry.plrun.getBlocks = function() {
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue.SET[8] = {
-                        type: Entry.ArduinoExt.sensorTypes.TONE,
+                    RoCode.hw.sendQueue.SET[8] = {
+                        type: RoCode.ArduinoExt.sensorTypes.TONE,
                         data: {
                             value: 0,
                             duration,
@@ -724,19 +724,19 @@ Entry.plrun.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.hw.sendQueue.SET[8] = {
-                        type: Entry.ArduinoExt.sensorTypes.TONE,
+                    RoCode.hw.sendQueue.SET[8] = {
+                        type: RoCode.ArduinoExt.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         get_ultrasonic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -750,26 +750,26 @@ Entry.plrun.getBlocks = function() {
             class: 'plrun',
             isNotFor: ['plrun'],
             func(sprite, script) {
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                delete Entry.hw.sendQueue.SET[9];
-                delete Entry.hw.sendQueue.SET[10];
+                delete RoCode.hw.sendQueue.SET[9];
+                delete RoCode.hw.sendQueue.SET[10];
 
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
-                Entry.hw.sendQueue.GET[Entry.plrun.sensorTypes.ULTRASONIC] = {
+                RoCode.hw.sendQueue.GET[RoCode.plrun.sensorTypes.ULTRASONIC] = {
                     port: [10, 9],
                     time: new Date().getTime(),
                 };
 
-                return Entry.hw.portData.ULTRASONIC || 0;
+                return RoCode.hw.portData.ULTRASONIC || 0;
             },
         },
         get_joystick: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -777,20 +777,20 @@ Entry.plrun.getBlocks = function() {
                 {
                     type: 'Dropdown',
                     options: [
-                        [Lang.Blocks.plrun_joystick_up, Entry.plrun.direction.UP],
-                        [Lang.Blocks.plrun_joystick_down, Entry.plrun.direction.DOWN],
-                        [Lang.Blocks.plrun_joystick_left, Entry.plrun.direction.LEFT],
-                        [Lang.Blocks.plrun_joystick_right, Entry.plrun.direction.RIGHT],
-                        [Lang.Blocks.plrun_joystick_left_up, Entry.plrun.direction.LEFT_UP],
-                        [Lang.Blocks.plrun_joystick_left_down, Entry.plrun.direction.LEFT_DOWN],
-                        [Lang.Blocks.plrun_joystick_right_up, Entry.plrun.direction.RIGHT_UP],
-                        [Lang.Blocks.plrun_joystick_right_down, Entry.plrun.direction.RIGHT_DOWN],
-                        [Lang.Blocks.plrun_joystick_center, Entry.plrun.direction.CENTER],
+                        [Lang.Blocks.plrun_joystick_up, RoCode.plrun.direction.UP],
+                        [Lang.Blocks.plrun_joystick_down, RoCode.plrun.direction.DOWN],
+                        [Lang.Blocks.plrun_joystick_left, RoCode.plrun.direction.LEFT],
+                        [Lang.Blocks.plrun_joystick_right, RoCode.plrun.direction.RIGHT],
+                        [Lang.Blocks.plrun_joystick_left_up, RoCode.plrun.direction.LEFT_UP],
+                        [Lang.Blocks.plrun_joystick_left_down, RoCode.plrun.direction.LEFT_DOWN],
+                        [Lang.Blocks.plrun_joystick_right_up, RoCode.plrun.direction.RIGHT_UP],
+                        [Lang.Blocks.plrun_joystick_right_down, RoCode.plrun.direction.RIGHT_DOWN],
+                        [Lang.Blocks.plrun_joystick_center, RoCode.plrun.direction.CENTER],
                     ],
-                    value: Entry.plrun.direction.CENTER,
+                    value: RoCode.plrun.direction.CENTER,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -805,62 +805,62 @@ Entry.plrun.getBlocks = function() {
             isNotFor: ['plrun'],
             func(sprite, script) {
                 const direction = script.getField('DIRECTION', script);
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
 
                 const getValue = function(w) {
                     return ANALOG[w] == 0 ? 0 : ANALOG[w] == 1023 ? 2 : 1;
                 };
 
                 if (
-                    direction == Entry.plrun.direction.CENTER &&
+                    direction == RoCode.plrun.direction.CENTER &&
                     getValue(0) == 1 &&
                     getValue(1) == 1
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.plrun.direction.DOWN &&
+                    direction == RoCode.plrun.direction.DOWN &&
                     getValue(0) == 1 &&
                     getValue(1) == 2
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.plrun.direction.LEFT &&
+                    direction == RoCode.plrun.direction.LEFT &&
                     getValue(0) == 0 &&
                     getValue(1) == 1
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.plrun.direction.LEFT_DOWN &&
+                    direction == RoCode.plrun.direction.LEFT_DOWN &&
                     getValue(0) == 0 &&
                     getValue(1) == 2
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.plrun.direction.LEFT_UP &&
+                    direction == RoCode.plrun.direction.LEFT_UP &&
                     getValue(0) == 0 &&
                     getValue(1) == 0
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.plrun.direction.RIGHT &&
+                    direction == RoCode.plrun.direction.RIGHT &&
                     getValue(0) == 2 &&
                     getValue(1) == 1
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.plrun.direction.RIGHT_DOWN &&
+                    direction == RoCode.plrun.direction.RIGHT_DOWN &&
                     getValue(0) == 2 &&
                     getValue(1) == 2
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.plrun.direction.RIGHT_UP &&
+                    direction == RoCode.plrun.direction.RIGHT_UP &&
                     getValue(0) == 2 &&
                     getValue(1) == 0
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.plrun.direction.UP &&
+                    direction == RoCode.plrun.direction.UP &&
                     getValue(0) == 1 &&
                     getValue(1) == 0
                 ) {
@@ -871,8 +871,8 @@ Entry.plrun.getBlocks = function() {
             },
         },
         get_joystick_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [],
@@ -885,13 +885,13 @@ Entry.plrun.getBlocks = function() {
             class: 'plrun',
             isNotFor: ['plrun'],
             func(sprite, script) {
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[1] && ANALOG[2] != 0 : 0;
             },
         },
         get_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
@@ -903,8 +903,8 @@ Entry.plrun.getBlocks = function() {
                     ],
                     value: 6,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -919,13 +919,13 @@ Entry.plrun.getBlocks = function() {
             isNotFor: ['plrun'],
             func(sprite, script) {
                 const which = script.getField('WHICH', script);
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[which] != 0 : 0;
             },
         },
         set_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -934,24 +934,24 @@ Entry.plrun.getBlocks = function() {
                     accept: 'string',
                     value: 100,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
                     accept: 'string',
                     value: 100,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
                     accept: 'string',
                     value: 100,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -981,15 +981,15 @@ Entry.plrun.getBlocks = function() {
                     g = Math.max(Math.min(g, 255), 0);
                     b = Math.max(Math.min(b, 255), 0);
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue = {
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue = {
                             GET: {},
                             SET: {},
                         };
                     }
 
-                    Entry.hw.sendQueue.SET[13] = {
-                        type: Entry.plrun.sensorTypes.LED,
+                    RoCode.hw.sendQueue.SET[13] = {
+                        type: RoCode.plrun.sensorTypes.LED,
                         data: {
                             r,
                             g,
@@ -1010,14 +1010,14 @@ Entry.plrun.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         set_led_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1034,16 +1034,16 @@ Entry.plrun.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
                     accept: 'string',
                     value: 100,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1065,7 +1065,7 @@ Entry.plrun.getBlocks = function() {
             func(sprite, script) {
                 if (!script.isStart) {
                     const color_type = script.getField('COLOR', script);
-                    const color = Entry.plrun.color[color_type];
+                    const color = RoCode.plrun.color[color_type];
                     let brightness = script.getNumberValue('BRIGHTNESS', script);
 
                     brightness = Math.max(Math.min(brightness, 255), 0);
@@ -1077,15 +1077,15 @@ Entry.plrun.getBlocks = function() {
                     g = Math.max(Math.min(g, 255), 0);
                     b = Math.max(Math.min(b, 255), 0);
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue = {
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue = {
                             GET: {},
                             SET: {},
                         };
                     }
 
-                    Entry.hw.sendQueue.SET[13] = {
-                        type: Entry.plrun.sensorTypes.LED,
+                    RoCode.hw.sendQueue.SET[13] = {
+                        type: RoCode.plrun.sensorTypes.LED,
                         data: {
                             r,
                             g,
@@ -1106,14 +1106,14 @@ Entry.plrun.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         stop_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1132,15 +1132,15 @@ Entry.plrun.getBlocks = function() {
             class: 'plrun',
             isNotFor: ['plrun'],
             func(sprite, script) {
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue = {
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue = {
                         GET: {},
                         SET: {},
                     };
                 }
 
-                Entry.hw.sendQueue.SET[13] = {
-                    type: Entry.plrun.sensorTypes.LED,
+                RoCode.hw.sendQueue.SET[13] = {
+                    type: RoCode.plrun.sensorTypes.LED,
                     data: {
                         r: 0,
                         g: 0,
@@ -1153,8 +1153,8 @@ Entry.plrun.getBlocks = function() {
             },
         },
         get_soil: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1168,13 +1168,13 @@ Entry.plrun.getBlocks = function() {
             class: 'plrun',
             isNotFor: ['plrun'],
             func(sprite, script) {
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[3] || 0 : 0;
             },
         },
         get_analog: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1188,13 +1188,13 @@ Entry.plrun.getBlocks = function() {
             class: 'plrun',
             isNotFor: ['plrun'],
             func(sprite, script) {
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[5] || 0 : 0;
             },
         },
         get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
@@ -1203,8 +1203,8 @@ Entry.plrun.getBlocks = function() {
                     options: [[1, 11], [2, 12]],
                     value: 11,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1219,11 +1219,11 @@ Entry.plrun.getBlocks = function() {
             isNotFor: ['plrun'],
             func(sprite, script) {
                 const port = script.getField('PORT', script);
-                const DIGITAL = Entry.hw.portData.DIGITAL;
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                const DIGITAL = RoCode.hw.portData.DIGITAL;
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
-                Entry.hw.sendQueue.GET[Entry.plrun.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue.GET[RoCode.plrun.sensorTypes.DIGITAL] = {
                     port,
                     time: new Date().getTime(),
                 };
@@ -1231,8 +1231,8 @@ Entry.plrun.getBlocks = function() {
             },
         },
         set_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1241,16 +1241,16 @@ Entry.plrun.getBlocks = function() {
                     options: [[11, 11], [12, 12]],
                     value: 11,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [[Lang.Blocks.plrun_set_on, 'on'], [Lang.Blocks.plrun_set_off, 'off']],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1273,12 +1273,12 @@ Entry.plrun.getBlocks = function() {
                 const port = script.getField('PORT', script);
                 const operator = script.getField('OPERATOR');
                 const value = operator == 'on' ? 255 : 0;
-                Entry.hw.setDigitalPortValue(port, value);
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                RoCode.hw.setDigitalPortValue(port, value);
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port] = {
-                    type: Entry.plrun.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue.SET[port] = {
+                    type: RoCode.plrun.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1286,8 +1286,8 @@ Entry.plrun.getBlocks = function() {
             },
         },
         get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1301,14 +1301,14 @@ Entry.plrun.getBlocks = function() {
             class: 'plrun',
             isNotFor: ['plrun'],
             func(sprite, script) {
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[4] || 0 : 0;
             },
         },
         /*
         plrun_set_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1320,8 +1320,8 @@ Entry.plrun.getBlocks = function() {
                     ],
                     value: 'M0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1331,8 +1331,8 @@ Entry.plrun.getBlocks = function() {
                     ],
                     value: 'forward',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1376,30 +1376,30 @@ Entry.plrun.getBlocks = function() {
                     value1 = direction == 'forward' ? 1 : 0;
                 }
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][pin1] = {
-                    type: Entry.plrun.pinTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][pin1] = {
+                    type: RoCode.plrun.pinTypes.DIGITAL,
                     data: value1,
                     time: new Date().getTime(),
                 };
-                Entry.hw.sendQueue['SET'][pin2] = {
-                    type: Entry.plrun.pinTypes.PWM,
+                RoCode.hw.sendQueue['SET'][pin2] = {
+                    type: RoCode.plrun.pinTypes.PWM,
                     data: value2,
                     time: new Date().getTime(),
                 };
                 return script.callReturn();
 
-                if (!Entry.hw.sendQueue.digitalPinMode) {
-                    Entry.hw.sendQueue.digitalPinMode = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
+                if (!RoCode.hw.sendQueue.digitalPinMode) {
+                    RoCode.hw.sendQueue.digitalPinMode = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
                 }
-                Entry.hw.sendQueue.digitalPinMode[pin1] = Entry.plrun.pinTypes.DIGITAL;
-                Entry.hw.sendQueue.digitalPinMode[pin2] = Entry.plrun.pinTypes.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[pin1] = RoCode.plrun.pinTypes.DIGITAL;
+                RoCode.hw.sendQueue.digitalPinMode[pin2] = RoCode.plrun.pinTypes.PWM;
 
-                Entry.hw.setDigitalPortValue(pin1, value1);
-                Entry.hw.setDigitalPortValue(pin2, value2);
-                Entry.hw.update();
+                RoCode.hw.setDigitalPortValue(pin1, value1);
+                RoCode.hw.setDigitalPortValue(pin2, value2);
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
@@ -1407,7 +1407,7 @@ Entry.plrun.getBlocks = function() {
         */
     };
 };
-Entry.plrun.setLanguage = function() {
+RoCode.plrun.setLanguage = function() {
     return {
         ko: {
             Blocks: {
@@ -1536,4 +1536,4 @@ Entry.plrun.setLanguage = function() {
     };
 };
 
-module.exports = Entry.plrun;
+module.exports = RoCode.plrun;

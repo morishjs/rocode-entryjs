@@ -5,7 +5,7 @@
 import isFunction from 'lodash/isFunction';
 
 (function(c) {
-    const COMMAND_TYPES = Entry.STATIC.COMMAND_TYPES;
+    const COMMAND_TYPES = RoCode.STATIC.COMMAND_TYPES;
     let obj;
 
     c[COMMAND_TYPES.addThread] = {
@@ -19,13 +19,13 @@ import isFunction from 'lodash/isFunction';
             return [index];
         },
         log(blocks, index) {
-            if (blocks instanceof Entry.Thread) {
+            if (blocks instanceof RoCode.Thread) {
                 blocks = blocks.toJSON();
             }
             return [['blocks', blocks], ['index', index]];
         },
         undo: 'destroyThread',
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         validate: false,
         dom: ['playground', 'blockMenu', '&0'],
     };
@@ -36,7 +36,7 @@ import isFunction from 'lodash/isFunction';
             return;
         }
         restrictor.fadeOutTooltip();
-        const svgGroup = Entry.getDom(restrictor.processDomQuery(this.dom));
+        const svgGroup = RoCode.getDom(restrictor.processDomQuery(this.dom));
         const nextCmd = restrictor.requestNextData().content;
         const cmdType = nextCmd[0];
         let targetDomQuery;
@@ -46,22 +46,22 @@ import isFunction from 'lodash/isFunction';
             targetDomQuery = ['playground', 'board', '&1', 'magnet', 'next', 0];
         }
 
-        const targetDom = Entry.getDom(restrictor.processDomQuery(targetDomQuery, nextCmd));
+        const targetDom = RoCode.getDom(restrictor.processDomQuery(targetDomQuery, nextCmd));
         const { left, top } = targetDom.getBoundingClientRect();
 
-        Entry.Utils.glideBlock(svgGroup, left, top, () => {
+        RoCode.Utils.glideBlock(svgGroup, left, top, () => {
             restrictor.fadeInTooltip();
         });
     };
     obj.followCmd = true;
     obj.restrict = function(data, domQuery, callback, restrictor) {
         const nextCmd = restrictor.requestNextData().content;
-        if (nextCmd[0] === Entry.STATIC.COMMAND_TYPES.insertBlockFromBlockMenu) {
-            Entry.Command.editor.board.scrollToPointer(nextCmd[2][1]);
+        if (nextCmd[0] === RoCode.STATIC.COMMAND_TYPES.insertBlockFromBlockMenu) {
+            RoCode.Command.editor.board.scrollToPointer(nextCmd[2][1]);
         }
 
         const isDone = false;
-        const tooltip = new Entry.Tooltip(
+        const tooltip = new RoCode.Tooltip(
             [
                 {
                     title: data.tooltip.title,
@@ -82,7 +82,7 @@ import isFunction from 'lodash/isFunction';
     c[COMMAND_TYPES.destroyThread] = {
         do(thread) {
             // thread can be index
-            if (!(thread instanceof Entry.Thread)) {
+            if (!(thread instanceof RoCode.Thread)) {
                 thread = this.editor.board.code.getThread(thread);
             }
             if (thread) {
@@ -91,7 +91,7 @@ import isFunction from 'lodash/isFunction';
             }
         },
         state(thread) {
-            if (!(thread instanceof Entry.Thread)) {
+            if (!(thread instanceof RoCode.Thread)) {
                 thread = this.editor.board.code.getThread(thread);
             }
             const index = this.editor.board.code.getThreadIndex(thread);
@@ -99,13 +99,13 @@ import isFunction from 'lodash/isFunction';
             return [json, index];
         },
         log(threadIndex) {
-            if (threadIndex instanceof Entry.Thread) {
+            if (threadIndex instanceof RoCode.Thread) {
                 threadIndex = this.editor.board.code.getThreadIndex(threadIndex);
             }
 
             return [['index', threadIndex]];
         },
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         restrict(data, domQuery, callback) {
             callback();
         },
@@ -170,7 +170,7 @@ import isFunction from 'lodash/isFunction';
         do(block, targetBlock, count) {
             block = this.editor.board.findBlock(block);
             let blockArgument;
-            if (block instanceof Entry.FieldBlock) {
+            if (block instanceof RoCode.FieldBlock) {
                 blockArgument = block.value;
             } else {
                 blockArgument = block;
@@ -210,10 +210,10 @@ import isFunction from 'lodash/isFunction';
             }
             return result;
         },
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         undo: 'insertBlock',
         restrict(data, domQuery, callback, restrictor) {
-            const board = Entry.Command.editor.board;
+            const board = RoCode.Command.editor.board;
             const block = board.code.getByPointer(data.content[1][1]);
             let blockView;
             board.scrollToPointer(data.content[1][1]);
@@ -224,7 +224,7 @@ import isFunction from 'lodash/isFunction';
             }
             const isDefault = data.tooltip.isDefault;
             let isDone = false;
-            const tooltip = new Entry.Tooltip(
+            const tooltip = new RoCode.Tooltip(
                 [
                     {
                         title: data.tooltip.title,
@@ -259,7 +259,7 @@ import isFunction from 'lodash/isFunction';
                             if (!isDefault) {
                                 restrictor.toolTipRender.contentIndex = 1;
                             } else {
-                                const target = Entry.Command.editor.board.code.getTargetByPointer(
+                                const target = RoCode.Command.editor.board.code.getTargetByPointer(
                                     data.content[2][1]
                                 );
 
@@ -301,13 +301,13 @@ import isFunction from 'lodash/isFunction';
                 return;
             }
             restrictor.fadeOutTooltip();
-            const svgGroup = Entry.getDom(restrictor.processDomQuery(this.dom));
-            const targetDom = Entry.getDom(
+            const svgGroup = RoCode.getDom(restrictor.processDomQuery(this.dom));
+            const targetDom = RoCode.getDom(
                 restrictor.processDomQuery(['playground', 'board', '&1', 'magnet', 'next', 0])
             );
             const targetRect = targetDom.getBoundingClientRect();
 
-            Entry.Utils.glideBlock(svgGroup, targetRect.left, targetRect.top, () => {
+            RoCode.Utils.glideBlock(svgGroup, targetRect.left, targetRect.top, () => {
                 restrictor.fadeInTooltip();
             });
         },
@@ -322,7 +322,7 @@ import isFunction from 'lodash/isFunction';
     obj.restrict = function(data, domQuery, callback, restrictor) {
         if (restrictor.toolTipRender) {
             if (restrictor.toolTipRender) {
-                const target = Entry.Command.editor.board.code.getByPointer(data.content[2][1]);
+                const target = RoCode.Command.editor.board.code.getByPointer(data.content[2][1]);
 
                 if (!target || target.isParamBlockType()) {
                     restrictor.toolTipRender.contentIndex = 1;
@@ -332,7 +332,7 @@ import isFunction from 'lodash/isFunction';
             }
         }
         callback();
-        return new Entry.Tooltip(
+        return new RoCode.Tooltip(
             [
                 {
                     title: data.tooltip.title,
@@ -358,7 +358,7 @@ import isFunction from 'lodash/isFunction';
             block = this.editor.board.findBlock(block);
             let blockView;
             let blockArgument;
-            if (block instanceof Entry.FieldBlock) {
+            if (block instanceof RoCode.FieldBlock) {
                 blockView = block.value.view;
                 blockArgument = block.value;
             } else {
@@ -369,7 +369,7 @@ import isFunction from 'lodash/isFunction';
                 dragMode = undefined;
             }
 
-            dragMode = dragMode === undefined ? Entry.DRAG_MODE_DRAG : dragMode;
+            dragMode = dragMode === undefined ? RoCode.DRAG_MODE_DRAG : dragMode;
 
             if (blockView) {
                 blockView._toGlobalCoordinate(dragMode);
@@ -386,7 +386,7 @@ import isFunction from 'lodash/isFunction';
         state(block) {
             block = this.editor.board.findBlock(block);
             let blockArgument;
-            if (block instanceof Entry.FieldBlock) {
+            if (block instanceof RoCode.FieldBlock) {
                 blockArgument = block.value;
             } else {
                 blockArgument = block;
@@ -400,7 +400,7 @@ import isFunction from 'lodash/isFunction';
             }
             return data;
         },
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         log(block) {
             block = this.editor.board.findBlock(block);
             const blockPointer = block.pointer();
@@ -411,13 +411,13 @@ import isFunction from 'lodash/isFunction';
             return [['block', blockPointer], ['x', block.x], ['y', block.y]];
         },
         restrict(data, domQuery, callback, restrictor) {
-            Entry.Command.editor.board.scrollToPointer(data.content[1][1]);
+            RoCode.Command.editor.board.scrollToPointer(data.content[1][1]);
             let isDone = false;
             if (restrictor.toolTipRender) {
                 restrictor.toolTipRender.titleIndex = 0;
                 restrictor.toolTipRender.contentIndex = 0;
             }
-            const tooltip = new Entry.Tooltip(
+            const tooltip = new RoCode.Tooltip(
                 [
                     {
                         title: data.tooltip.title,
@@ -470,13 +470,13 @@ import isFunction from 'lodash/isFunction';
 
     obj = _.clone(c[COMMAND_TYPES.separateBlock]);
     obj.restrict = function(data, domQuery, callback, restrictor) {
-        Entry.Command.editor.board.scrollToPointer(data.content[1][1]);
+        RoCode.Command.editor.board.scrollToPointer(data.content[1][1]);
         let isDone = false;
         if (restrictor.toolTipRender) {
             restrictor.toolTipRender.titleIndex = 0;
             restrictor.toolTipRender.contentIndex = 0;
         }
-        const tooltip = new Entry.Tooltip(
+        const tooltip = new RoCode.Tooltip(
             [
                 {
                     title: data.tooltip.title,
@@ -522,11 +522,11 @@ import isFunction from 'lodash/isFunction';
             return;
         }
         restrictor.fadeOutTooltip();
-        const svgGroup = Entry.getDom(restrictor.processDomQuery(this.dom));
-        const targetDom = Entry.getDom(['playground', 'board', 'trashcan']);
+        const svgGroup = RoCode.getDom(restrictor.processDomQuery(this.dom));
+        const targetDom = RoCode.getDom(['playground', 'board', 'trashcan']);
         const targetRect = targetDom.getBoundingClientRect();
 
-        Entry.Utils.glideBlock(svgGroup, targetRect.left, targetRect.top, () => {
+        RoCode.Utils.glideBlock(svgGroup, targetRect.left, targetRect.top, () => {
             restrictor.fadeInTooltip();
         });
     };
@@ -547,10 +547,10 @@ import isFunction from 'lodash/isFunction';
             block = this.editor.board.findBlock(block);
             return [block, block.x, block.y];
         },
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         restrict(data, domQuery, callback, restrictor) {
             let isDone = false;
-            const tooltip = new Entry.Tooltip(
+            const tooltip = new RoCode.Tooltip(
                 [
                     {
                         title: data.tooltip.title,
@@ -607,13 +607,13 @@ import isFunction from 'lodash/isFunction';
     obj = _.clone(c[COMMAND_TYPES.moveBlock]);
     obj.followCmd = true;
     obj.restrict = function(data, domQuery, callback, restrictor) {
-        Entry.Command.editor.board.scrollToPointer(data.content[1][1]);
+        RoCode.Command.editor.board.scrollToPointer(data.content[1][1]);
         let isDone = false;
         if (restrictor.toolTipRender) {
             restrictor.toolTipRender.titleIndex = 0;
             restrictor.toolTipRender.contentIndex = 0;
         }
-        const tooltip = new Entry.Tooltip(
+        const tooltip = new RoCode.Tooltip(
             [
                 {
                     title: data.tooltip.title,
@@ -659,7 +659,7 @@ import isFunction from 'lodash/isFunction';
     obj = _.clone(c[COMMAND_TYPES.moveBlock]);
     obj.restrict = function(data, domQuery, callback) {
         callback();
-        return new Entry.Tooltip(
+        return new RoCode.Tooltip(
             [
                 {
                     title: data.tooltip.title,
@@ -695,7 +695,7 @@ import isFunction from 'lodash/isFunction';
         log(dx, dy) {
             return [['dx', dx], ['dy', dy]];
         },
-        recordable: Entry.STATIC.RECORDABLE.SKIP,
+        recordable: RoCode.STATIC.RECORDABLE.SKIP,
         undo: 'scrollBoard',
     };
 
@@ -709,7 +709,7 @@ import isFunction from 'lodash/isFunction';
             }
 
             field.setValue(value, true);
-            Entry.disposeEvent.notify(true);
+            RoCode.disposeEvent.notify(true);
             field._blockView.disableMouseEvent = false;
         },
         state(pointer, value, code) {
@@ -728,9 +728,9 @@ import isFunction from 'lodash/isFunction';
             let isDone = false;
             const isDefault = data.tooltip.isDefault;
 
-            Entry.Command.editor.board.scrollToPointer(data.content[1][1]);
+            RoCode.Command.editor.board.scrollToPointer(data.content[1][1]);
 
-            const field = Entry.Command.editor.board.findBlock(data.content[1][1]);
+            const field = RoCode.Command.editor.board.findBlock(data.content[1][1]);
             const blockView = field._blockView;
             blockView.disableMouseEvent = true;
             const fieldType = field.getFieldRawType();
@@ -755,11 +755,11 @@ import isFunction from 'lodash/isFunction';
             }
 
             const nextValue = data.content[2][1];
-            if (field instanceof Entry.FieldTextInput) {
+            if (field instanceof RoCode.FieldTextInput) {
                 field.fixNextValue(nextValue);
             }
 
-            const tooltip = new Entry.Tooltip(
+            const tooltip = new RoCode.Tooltip(
                 [
                     {
                         title: data.tooltip.title,
@@ -832,26 +832,26 @@ import isFunction from 'lodash/isFunction';
             return tooltip;
         },
         disableMouseUpDispose: true,
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         dom: ['playground', 'board', '&0'],
         undo: 'setFieldValue',
     };
 
     c[COMMAND_TYPES.selectBlockMenu] = {
         do(selector, doNotFold, doNotAlign) {
-            const blockMenu = Entry.getMainWS().blockMenu;
+            const blockMenu = RoCode.getMainWS().blockMenu;
             blockMenu.selectMenu(selector, doNotFold, doNotAlign);
             blockMenu.align();
         },
         state(selector, doNotFold, doNotAlign) {
-            const blockMenu = Entry.getMainWS().blockMenu;
+            const blockMenu = RoCode.getMainWS().blockMenu;
             return [blockMenu.lastSelector, doNotFold, doNotAlign];
         },
         log(selector, doNotFold, doNotAlign) {
             return [['selector', selector]];
         },
         skipUndoStack: true,
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         dom: ['playground', 'blockMenu', 'category', '&0'],
         undo: 'selectBlockMenu',
     };
@@ -904,7 +904,7 @@ import isFunction from 'lodash/isFunction';
             block = this.editor.board.findBlock(block);
             const thread = block.thread;
             let data;
-            if (thread instanceof Entry.Thread) {
+            if (thread instanceof RoCode.Thread) {
                 data = thread.toJSON(false, block);
             } else {
                 data = [block.toJSON()];
@@ -915,7 +915,7 @@ import isFunction from 'lodash/isFunction';
         log(block) {
             return [];
         },
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         undo: 'recoverBlockBelow',
     };
 
@@ -945,4 +945,4 @@ import isFunction from 'lodash/isFunction';
         }
         return c[newType];
     }
-})(Entry.Command);
+})(RoCode.Command);

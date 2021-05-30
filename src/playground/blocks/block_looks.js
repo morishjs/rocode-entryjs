@@ -2,8 +2,8 @@ module.exports = {
     getBlocks() {
         return {
             show: {
-                color: EntryStatic.colorSet.block.default.LOOKS,
-                outerLine: EntryStatic.colorSet.block.darken.LOOKS,
+                color: RoCodeStatic.colorSet.block.default.LOOKS,
+                outerLine: RoCodeStatic.colorSet.block.darken.LOOKS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -24,11 +24,11 @@ module.exports = {
                     sprite.setVisible(true);
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.show()'] },
+                syntax: { js: [], py: ['RoCode.show()'] },
             },
             hide: {
-                color: EntryStatic.colorSet.block.default.LOOKS,
-                outerLine: EntryStatic.colorSet.block.darken.LOOKS,
+                color: RoCodeStatic.colorSet.block.default.LOOKS,
+                outerLine: RoCodeStatic.colorSet.block.darken.LOOKS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -49,11 +49,11 @@ module.exports = {
                     sprite.setVisible(false);
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.hide()'] },
+                syntax: { js: [], py: ['RoCode.hide()'] },
             },
             dialog_time: {
-                color: EntryStatic.colorSet.block.default.LOOKS,
-                outerLine: EntryStatic.colorSet.block.darken.LOOKS,
+                color: RoCodeStatic.colorSet.block.default.LOOKS,
+                outerLine: RoCodeStatic.colorSet.block.darken.LOOKS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -71,8 +71,8 @@ module.exports = {
                         options: [[Lang.Blocks.speak, 'speak']],
                         value: 'speak',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.LOOKS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.LOOKS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -133,8 +133,8 @@ module.exports = {
                         } else {
                             message = `${message}`;
                         }
-                        message = Entry.convertToRoundedDecimals(message, 3);
-                        new Entry.Dialog(sprite, message, mode);
+                        message = RoCode.convertToRoundedDecimals(message, 3);
+                        new RoCode.Dialog(sprite, message, mode);
                         sprite.syncDialogVisible(sprite.getVisible());
                         setTimeout(function() {
                             script.timeFlag = 0;
@@ -154,8 +154,8 @@ module.exports = {
                             if (!message && typeof message !== 'number') {
                                 message = '    ';
                             }
-                            message = Entry.convertToRoundedDecimals(message, 3);
-                            new Entry.Dialog(sprite, message, mode);
+                            message = RoCode.convertToRoundedDecimals(message, 3);
+                            new RoCode.Dialog(sprite, message, mode);
                             sprite.syncDialogVisible(sprite.getVisible());
                         }
                         return script;
@@ -165,7 +165,7 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.print_for_sec(%1, %2)',
+                            syntax: 'RoCode.print_for_sec(%1, %2)',
                             params: [null, null, 'speak'],
                             textParams: [
                                 {
@@ -181,8 +181,8 @@ module.exports = {
                                     options: [[Lang.Blocks.speak, 'speak']],
                                     value: 'speak',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.LOOKS,
-                                    converter: Entry.block.converters.returnStringValue,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.LOOKS,
+                                    converter: RoCode.block.converters.returnStringValue,
                                 },
                             ],
                         },
@@ -190,8 +190,8 @@ module.exports = {
                 },
             },
             dialog: {
-                color: EntryStatic.colorSet.block.default.LOOKS,
-                outerLine: EntryStatic.colorSet.block.darken.LOOKS,
+                color: RoCodeStatic.colorSet.block.default.LOOKS,
+                outerLine: RoCodeStatic.colorSet.block.darken.LOOKS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -204,8 +204,8 @@ module.exports = {
                         options: [[Lang.Blocks.speak, 'speak']],
                         value: 'speak',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.LOOKS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.LOOKS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -252,8 +252,8 @@ module.exports = {
                         message = `${message}`;
                     }
                     const mode = script.getField('OPTION', script);
-                    message = Entry.convertToRoundedDecimals(message, 3);
-                    new Entry.Dialog(sprite, message, mode);
+                    message = RoCode.convertToRoundedDecimals(message, 3);
+                    new RoCode.Dialog(sprite, message, mode);
                     sprite.syncDialogVisible(sprite.getVisible());
                     return script.callReturn();
                 },
@@ -261,15 +261,15 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.print(%1)',
+                            syntax: 'RoCode.print(%1)',
                             params: [null, 'speak'],
                         },
                     ],
                 },
             },
             remove_dialog: {
-                color: EntryStatic.colorSet.block.default.LOOKS,
-                outerLine: EntryStatic.colorSet.block.darken.LOOKS,
+                color: RoCodeStatic.colorSet.block.default.LOOKS,
+                outerLine: RoCodeStatic.colorSet.block.darken.LOOKS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -292,11 +292,11 @@ module.exports = {
                     }
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.clear_print()'] },
+                syntax: { js: [], py: ['RoCode.clear_print()'] },
             },
             change_to_some_shape: {
-                color: EntryStatic.colorSet.block.default.LOOKS,
-                outerLine: EntryStatic.colorSet.block.darken.LOOKS,
+                color: RoCodeStatic.colorSet.block.default.LOOKS,
+                outerLine: RoCodeStatic.colorSet.block.darken.LOOKS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -348,14 +348,14 @@ module.exports = {
                     py: [
                         {
                             passTest: true,
-                            syntax: 'Entry.change_shape(%1)',
+                            syntax: 'RoCode.change_shape(%1)',
                         },
                     ],
                 },
             },
             change_to_next_shape: {
-                color: EntryStatic.colorSet.block.default.LOOKS,
-                outerLine: EntryStatic.colorSet.block.darken.LOOKS,
+                color: RoCodeStatic.colorSet.block.default.LOOKS,
+                outerLine: RoCodeStatic.colorSet.block.darken.LOOKS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -367,8 +367,8 @@ module.exports = {
                         ],
                         value: 'next',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.LOOKS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.LOOKS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -404,7 +404,7 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.change_shape_to(%1)',
+                            syntax: 'RoCode.change_shape_to(%1)',
                             textParams: [
                                 {
                                     type: 'Dropdown',
@@ -414,9 +414,9 @@ module.exports = {
                                     ],
                                     value: 'next',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.LOOKS,
-                                    converter: Entry.block.converters.returnStringValue,
-                                    codeMap: 'Entry.CodeMap.Entry.change_to_next_shape[0]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.LOOKS,
+                                    converter: RoCode.block.converters.returnStringValue,
+                                    codeMap: 'RoCode.CodeMap.RoCode.change_to_next_shape[0]',
                                 },
                             ],
                         },
@@ -424,8 +424,8 @@ module.exports = {
                 },
             },
             add_effect_amount: {
-                color: EntryStatic.colorSet.block.default.LOOKS,
-                outerLine: EntryStatic.colorSet.block.darken.LOOKS,
+                color: RoCodeStatic.colorSet.block.default.LOOKS,
+                outerLine: RoCodeStatic.colorSet.block.darken.LOOKS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -438,8 +438,8 @@ module.exports = {
                         ],
                         value: 'color',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.LOOKS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.LOOKS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Block',
@@ -502,7 +502,7 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.add_effect(%1, %2)',
+                            syntax: 'RoCode.add_effect(%1, %2)',
                             textParams: [
                                 {
                                     type: 'Dropdown',
@@ -513,9 +513,9 @@ module.exports = {
                                     ],
                                     value: 'color',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.LOOKS,
-                                    converter: Entry.block.converters.returnStringValue,
-                                    codeMap: 'Entry.CodeMap.Entry.add_effect_amount[0]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.LOOKS,
+                                    converter: RoCode.block.converters.returnStringValue,
+                                    codeMap: 'RoCode.CodeMap.RoCode.add_effect_amount[0]',
                                 },
                                 {
                                     type: 'Block',
@@ -527,8 +527,8 @@ module.exports = {
                 },
             },
             change_effect_amount: {
-                color: EntryStatic.colorSet.block.default.LOOKS,
-                outerLine: EntryStatic.colorSet.block.darken.LOOKS,
+                color: RoCodeStatic.colorSet.block.default.LOOKS,
+                outerLine: RoCodeStatic.colorSet.block.darken.LOOKS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -541,8 +541,8 @@ module.exports = {
                         ],
                         value: 'color',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.LOOKS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.LOOKS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Block',
@@ -605,7 +605,7 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.set_effect(%1, %2)',
+                            syntax: 'RoCode.set_effect(%1, %2)',
                             textParams: [
                                 {
                                     type: 'Dropdown',
@@ -616,9 +616,9 @@ module.exports = {
                                     ],
                                     value: 'color',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.LOOKS,
-                                    converter: Entry.block.converters.returnStringValue,
-                                    codeMap: 'Entry.CodeMap.Entry.change_effect_amount[0]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.LOOKS,
+                                    converter: RoCode.block.converters.returnStringValue,
+                                    codeMap: 'RoCode.CodeMap.RoCode.change_effect_amount[0]',
                                 },
                                 {
                                     type: 'Block',
@@ -630,8 +630,8 @@ module.exports = {
                 },
             },
             erase_all_effects: {
-                color: EntryStatic.colorSet.block.default.LOOKS,
-                outerLine: EntryStatic.colorSet.block.darken.LOOKS,
+                color: RoCodeStatic.colorSet.block.default.LOOKS,
+                outerLine: RoCodeStatic.colorSet.block.darken.LOOKS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -652,11 +652,11 @@ module.exports = {
                     sprite.resetFilter();
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.clear_effect()'] },
+                syntax: { js: [], py: ['RoCode.clear_effect()'] },
             },
             change_scale_size: {
-                color: EntryStatic.colorSet.block.default.LOOKS,
-                outerLine: EntryStatic.colorSet.block.darken.LOOKS,
+                color: RoCodeStatic.colorSet.block.default.LOOKS,
+                outerLine: RoCodeStatic.colorSet.block.darken.LOOKS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -702,11 +702,11 @@ module.exports = {
                     sprite.setSize(sprite.getSize() + sizeValue);
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.add_size(%1)'] },
+                syntax: { js: [], py: ['RoCode.add_size(%1)'] },
             },
             set_scale_size: {
-                color: EntryStatic.colorSet.block.default.LOOKS,
-                outerLine: EntryStatic.colorSet.block.darken.LOOKS,
+                color: RoCodeStatic.colorSet.block.default.LOOKS,
+                outerLine: RoCodeStatic.colorSet.block.darken.LOOKS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -752,11 +752,11 @@ module.exports = {
                     sprite.setSize(sizeValue);
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.set_size(%1)'] },
+                syntax: { js: [], py: ['RoCode.set_size(%1)'] },
             },
             flip_x: {
-                color: EntryStatic.colorSet.block.default.LOOKS,
-                outerLine: EntryStatic.colorSet.block.darken.LOOKS,
+                color: RoCodeStatic.colorSet.block.default.LOOKS,
+                outerLine: RoCodeStatic.colorSet.block.darken.LOOKS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -777,11 +777,11 @@ module.exports = {
                     sprite.setScaleY(-1 * sprite.getScaleY());
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.flip_horizontal()'] },
+                syntax: { js: [], py: ['RoCode.flip_horizontal()'] },
             },
             flip_y: {
-                color: EntryStatic.colorSet.block.default.LOOKS,
-                outerLine: EntryStatic.colorSet.block.darken.LOOKS,
+                color: RoCodeStatic.colorSet.block.default.LOOKS,
+                outerLine: RoCodeStatic.colorSet.block.darken.LOOKS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -802,11 +802,11 @@ module.exports = {
                     sprite.setScaleX(-1 * sprite.getScaleX());
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.flip_vertical()'] },
+                syntax: { js: [], py: ['RoCode.flip_vertical()'] },
             },
             change_object_index: {
-                color: EntryStatic.colorSet.block.default.LOOKS,
-                outerLine: EntryStatic.colorSet.block.darken.LOOKS,
+                color: RoCodeStatic.colorSet.block.default.LOOKS,
+                outerLine: RoCodeStatic.colorSet.block.darken.LOOKS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -820,8 +820,8 @@ module.exports = {
                         ],
                         value: 'FRONT',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.LOOKS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.LOOKS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -845,7 +845,7 @@ module.exports = {
                 isNotFor: [],
                 func(sprite, script) {
                     const location = script.getField('LOCATION', script);
-                    const selectedObjectContainer = Entry.stage.selectedObjectContainer;
+                    const selectedObjectContainer = RoCode.stage.selectedObjectContainer;
                     const currentIndex = selectedObjectContainer.getChildIndex(sprite.object);
                     const max = selectedObjectContainer.children.length - 1;
                     let targetIndex = currentIndex;
@@ -881,7 +881,7 @@ module.exports = {
                             targetIndex = 0;
                             break;
                     }
-                    Entry.stage.setEntityIndex(sprite, targetIndex);
+                    RoCode.stage.setEntityIndex(sprite, targetIndex);
 
                     return script.callReturn();
                 },
@@ -889,7 +889,7 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.send_layer_to(%1)',
+                            syntax: 'RoCode.send_layer_to(%1)',
                             textParams: [
                                 {
                                     type: 'Dropdown',
@@ -901,9 +901,9 @@ module.exports = {
                                     ],
                                     value: 'FRONT',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.LOOKS,
-                                    converter: Entry.block.converters.returnStringValueLowerCase,
-                                    codeMap: 'Entry.CodeMap.Entry.change_object_index[0]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.LOOKS,
+                                    converter: RoCode.block.converters.returnStringValueLowerCase,
+                                    codeMap: 'RoCode.CodeMap.RoCode.change_object_index[0]',
                                 },
                             ],
                         },

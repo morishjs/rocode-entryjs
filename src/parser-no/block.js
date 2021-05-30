@@ -3,7 +3,7 @@
  */
 'use strict';
 
-Entry.BlockParser = function(syntax) {
+RoCode.BlockParser = function(syntax) {
     this.syntax = syntax;
 
     this._iterVariableCount = 0;
@@ -12,8 +12,8 @@ Entry.BlockParser = function(syntax) {
 
 (function(p) {
     p.Code = function(code) {
-        if (code instanceof Entry.Thread) return this.Thread(code);
-        if (code instanceof Entry.Block) return this.Block(code);
+        if (code instanceof RoCode.Thread) return this.Thread(code);
+        if (code instanceof RoCode.Block) return this.Block(code);
 
         var textCode = '',
             threads = code.getThreads();
@@ -27,7 +27,7 @@ Entry.BlockParser = function(syntax) {
     };
 
     p.Thread = function(thread) {
-        if (thread instanceof Entry.Block) return this.Block(thread);
+        if (thread instanceof RoCode.Block) return this.Block(thread);
         var code = '',
             blocks = thread.getBlocks();
 
@@ -127,4 +127,4 @@ Entry.BlockParser = function(syntax) {
     p.unpublishIterateVariable = function() {
         if (this._iterVariableCount) this._iterVariableCount--;
     };
-})(Entry.BlockParser.prototype);
+})(RoCode.BlockParser.prototype);

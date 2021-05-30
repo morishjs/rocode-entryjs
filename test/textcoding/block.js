@@ -1,37 +1,37 @@
-describe('EntryPython', function(){
-    var allCategories = EntryStatic.getAllBlocks();
+describe('RoCodePython', function(){
+    var allCategories = RoCodeStatic.getAllBlocks();
 
-    Entry.init(null, {type: "invisible"});
+    RoCode.init(null, {type: "invisible"});
 
-    Entry.loadProject(Entry.getStartProject());
-    Entry.playground.object = Entry.container.objects_[0];
+    RoCode.loadProject(RoCode.getStartProject());
+    RoCode.playground.object = RoCode.container.objects_[0];
 
-    //Entry.variableContainer.addVariable({"name": "testVar"})
+    //RoCode.variableContainer.addVariable({"name": "testVar"})
 
     function pairConvertTest(blockType) {
         it (blockType, function(){
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
-            var parser = new Entry.Parser(Entry.Vim.WORKSPACE_MODE);
-            var syntax = parser.mappingSyntax(Entry.Vim.WORKSPACE_MODE);
-            var blockToPyParser = new Entry.BlockToPyParser(syntax);
-            var pyToBlockParser = new Entry.PyToBlockParser(syntax);
-            blockToPyParser._parseMode = Entry.Parser.PARSE_GENERAL;
+            var parser = new RoCode.Parser(RoCode.Vim.WORKSPACE_MODE);
+            var syntax = parser.mappingSyntax(RoCode.Vim.WORKSPACE_MODE);
+            var blockToPyParser = new RoCode.BlockToPyParser(syntax);
+            var pyToBlockParser = new RoCode.PyToBlockParser(syntax);
+            blockToPyParser._parseMode = RoCode.Parser.PARSE_GENERAL;
             var options = { locations: true, ranges: true };
             var code = {
                 registerEvent: function() {},
                 registerBlock: function() {}
             };
 
-            var blockSchema = Entry.block[blockType];
-            var pythonOutput = blockToPyParser.Thread(new Entry.Thread([blockSchema.def], code));
+            var blockSchema = RoCode.block[blockType];
+            var pythonOutput = blockToPyParser.Thread(new RoCode.Thread([blockSchema.def], code));
             var blockOutput = pyToBlockParser.processPrograms([filbert.parse(pythonOutput, options)]);
 
-            blockToPyParser = new Entry.BlockToPyParser(syntax);
-            blockToPyParser._parseMode = Entry.Parser.PARSE_GENERAL;
+            blockToPyParser = new RoCode.BlockToPyParser(syntax);
+            blockToPyParser._parseMode = RoCode.Parser.PARSE_GENERAL;
 
-            var secondPythonOutput = blockToPyParser.Thread(new Entry.Thread(blockOutput[0], code));
+            var secondPythonOutput = blockToPyParser.Thread(new RoCode.Thread(blockOutput[0], code));
             if (pythonOutput !== secondPythonOutput)
                 console.log(
                     pythonOutput,
@@ -40,7 +40,7 @@ describe('EntryPython', function(){
                 );
 
             assert.equal(pythonOutput, secondPythonOutput);
-            Entry.clearProject();
+            RoCode.clearProject();
         });
     }
 
@@ -49,7 +49,7 @@ describe('EntryPython', function(){
             var blocks = allCategories[i].blocks;
             for (var j = 0; j < blocks.length; j++) {
                 var blockType = blocks[j];
-                var blockSchema = Entry.block[blockType];
+                var blockSchema = RoCode.block[blockType];
 
                 if (blockSchema &&
                     blockSchema.syntax &&
@@ -70,7 +70,7 @@ describe('EntryPython', function(){
     describe('should convert block', function(){
         it ("move direction", function() {
             assert.ok(Test.pythonToBlock(
-                "Entry.move_to_direction(10)",
+                "RoCode.move_to_direction(10)",
                 [[{
                     type: "move_direction",
                     params: [{
@@ -84,7 +84,7 @@ describe('EntryPython', function(){
     describe('should convert block', function() {
         it("move_x" , function() {
             assert.ok(Test.pythonToBlock(
-                "Entry.add_x(10)" ,
+                "RoCode.add_x(10)" ,
                 [[{
                     "type": "move_x",
                     "params": [{
@@ -98,7 +98,7 @@ describe('EntryPython', function(){
     describe('minus / plus test', function() {
         it("move_x" , function() {
             assert.ok(Test.pythonToBlock(
-                "Entry.add_x(-10)" ,
+                "RoCode.add_x(-10)" ,
                 [[{
                     "type": "move_x",
                     "params": [{
@@ -169,13 +169,13 @@ describe('EntryPython', function(){
         });
 
         it("Minus action use variable" , function(){
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수1", "id": "abcd" , "value" : "11.0002"
             });
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수2", "id": "abce" , "value" : "10.0003"
             });
             assert.ok(Test.pythonToBlock(
@@ -199,16 +199,16 @@ describe('EntryPython', function(){
                     ]
                 }]]
             ));
-            Entry.clearProject();
+            RoCode.clearProject();
         });
     });
 
     describe('should convert block', function(){
         it ("get_variable", function() {
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수1", "id": "asdf"
             })
 
@@ -223,22 +223,22 @@ describe('EntryPython', function(){
                 }]]
             ));
 
-            Entry.clearProject();
+            RoCode.clearProject();
         });
     });
 
     describe('parameter process test' , function() {
 
         it("dialog block test", function() { // (테스트변수)를 말하기 블록
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수1", "id": "asdf"
             })
 
             assert.ok(Test.pythonToBlock(
-                "Entry.print(테스트변수1)",
+                "RoCode.print(테스트변수1)",
                 [[{
                     type: "dialog",
                     params: [
@@ -251,25 +251,25 @@ describe('EntryPython', function(){
                     ]
                 }]]
             ));
-            Entry.clearProject();
+            RoCode.clearProject();
         });
 
 
 
         it("dialog time block test", function() {
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수1", "id": "asdf"
             })
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수2", "id": "asde"
             })
 
             assert.ok(Test.pythonToBlock(
-                "Entry.print_for_sec(테스트변수1 , 테스트변수2)",
+                "RoCode.print_for_sec(테스트변수1 , 테스트변수2)",
                 [[{
                     type: "dialog_time",
                     params: [
@@ -289,19 +289,19 @@ describe('EntryPython', function(){
                 }]]
             ));
 
-            Entry.clearProject();
+            RoCode.clearProject();
         });
 
 
         it("while not block test", function(){
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수1", "id": "asdf"
             });
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수2", "id": "asde"
             });
 
@@ -333,27 +333,27 @@ describe('EntryPython', function(){
                 }]]
             ));
 
-            Entry.clearProject();
+            RoCode.clearProject();
         });
 
         it("set x, y block test", function(){
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수1", "id": "asdf"
             });
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수2", "id": "asde"
             });
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수3", "id": "asdh"
             });
 
             assert.ok(Test.pythonToBlock(
-                "Entry.set_xy_for_sec(테스트변수2, 테스트변수3, 테스트변수1)",
+                "RoCode.set_xy_for_sec(테스트변수2, 테스트변수3, 테스트변수1)",
                 [[{
                     type : "locate_xy_time",
                     params : [
@@ -373,19 +373,19 @@ describe('EntryPython', function(){
                 }]]
             ));
 
-            Entry.clearProject();
+            RoCode.clearProject();
         });
 
         it("add_brush_size block test", function(){
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수1", "id": "asdf"
             });
 
             assert.ok(Test.pythonToBlock(
-                "Entry.add_brush_size(테스트변수1)",
+                "RoCode.add_brush_size(테스트변수1)",
                 [[{
                     type : "change_thickness",
                     params : [
@@ -397,24 +397,24 @@ describe('EntryPython', function(){
                 }]]
             ));
 
-            Entry.clearProject();
+            RoCode.clearProject();
         });
 
         it("play_sound_from_to block test", function(){
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수1", "id": "asdf"
             });
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수2", "id": "abce"
             });
 
             assert.ok(Test.pythonToBlock(
-                "Entry.play_sound_from_to('강아지 짖는소리', 테스트변수1, 테스트변수2)",
+                "RoCode.play_sound_from_to('강아지 짖는소리', 테스트변수1, 테스트변수2)",
                 [[{
                     type : "sound_from_to",
                     params : [
@@ -434,20 +434,20 @@ describe('EntryPython', function(){
                 }]]
             ));
 
-            Entry.clearProject();
+            RoCode.clearProject();
         });
     })
 
 
     describe('list index change block is ', function(){
         it("value_of_index_from_list block", function() {
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
-            Entry.variableContainer.addList({
+            RoCode.variableContainer.addList({
                 "type": "list", "name": "테스트리스트", "id": "asdf"
             });
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수", "id": "asde"
             });
 
@@ -468,19 +468,19 @@ describe('EntryPython', function(){
                 }]]
             ));
 
-            Entry.clearProject();
+            RoCode.clearProject();
 
         });
 
         it("remove_value_from_list block", function() {
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
-            Entry.variableContainer.addList({
+            RoCode.variableContainer.addList({
                 "type": "list", "name": "테스트리스트", "id": "asdf"
             });
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수", "id": "asde"
             });
 
@@ -498,23 +498,23 @@ describe('EntryPython', function(){
                 }]]
             ));
 
-            Entry.clearProject();
+            RoCode.clearProject();
 
         });
 
         it("insert_value_to_list block", function() {
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
-            Entry.variableContainer.addList({
+            RoCode.variableContainer.addList({
                 "type": "list", "name": "테스트리스트", "id": "asdf"
             });
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수", "id": "asde"
             });
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수2", "id": "asdz"
             });
 
@@ -537,23 +537,23 @@ describe('EntryPython', function(){
                 }]]
             ));
 
-            Entry.clearProject();
+            RoCode.clearProject();
 
         });
 
         it("change_value_list_index block", function() {
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
-            Entry.variableContainer.addList({
+            RoCode.variableContainer.addList({
                 "type": "list", "name": "테스트리스트", "id": "asdf"
             });
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수", "id": "asde"
             });
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수2", "id": "asdz"
             });
 
@@ -576,7 +576,7 @@ describe('EntryPython', function(){
                 }]]
             ));
 
-            Entry.clearProject();
+            RoCode.clearProject();
         });
 
     });
@@ -584,33 +584,33 @@ describe('EntryPython', function(){
     describe('declare', function(){
 
         it("variable" , function() {
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
             var resultBlock = Test.parsePython("test = 2");
-            var variable = Entry.variableContainer.variables_[0];
+            var variable = RoCode.variableContainer.variables_[0];
 
             assert.ok(variable);
             assert.equal(variable.name_ , 'test');
             assert.equal(variable.value_ , '2');
 
-            Entry.clearProject();
+            RoCode.clearProject();
 
         });
 
         it("list" , function() {
 
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
             var resultBlock = Test.parsePython("test = ['2']");
-            var list = Entry.variableContainer.lists_[0];
+            var list = RoCode.variableContainer.lists_[0];
 
             assert.ok(list);
             assert.equal(list.name_ , 'test');
             assert.equal(list.array_[0].data , '2');
 
-            Entry.clearProject();
+            RoCode.clearProject();
 
         });
 
@@ -619,11 +619,11 @@ describe('EntryPython', function(){
     describe('parse', function(){
 
         it("sound" , function(){
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
             assert.ok(Test.pythonToBlock(
-                "Entry.play_sound('강아지 짖는소리')",
+                "RoCode.play_sound('강아지 짖는소리')",
                 [[{
                     type : "sound_something_with_block",
                     params : [
@@ -635,15 +635,15 @@ describe('EntryPython', function(){
                     ]
                 }]]
             ));
-            Entry.clearProject();
+            RoCode.clearProject();
         });
 
         it("picture" , function(){
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
             assert.ok(Test.pythonToBlock(
-                "Entry.change_shape('엔트리봇_걷기2')",
+                "RoCode.change_shape('엔트리봇_걷기2')",
                 [[{
                     type : "change_to_some_shape",
                     params : [
@@ -655,15 +655,15 @@ describe('EntryPython', function(){
                     ]
                 }]]
             ));
-            Entry.clearProject();
+            RoCode.clearProject();
         });
 
         it("object" , function(){
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
             assert.ok(Test.pythonToBlock(
-                'Entry.make_clone_of("엔트리봇")',
+                'RoCode.make_clone_of("엔트리봇")',
                 [[{
                     type : "create_clone",
                     params : [
@@ -671,16 +671,16 @@ describe('EntryPython', function(){
                     ]
                 }]]
             ));
-            Entry.clearProject();
+            RoCode.clearProject();
         });
     });
 
     describe('create ' , function() {
         it('local variable' , function() {
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "테스트변수1", "id": "abcd" , object_ : "7y0y"
 
             });
@@ -694,22 +694,22 @@ describe('EntryPython', function(){
                 }]]
             ));
 
-            Entry.clearProject();
+            RoCode.clearProject();
         })
     });
 
     describe('call' , function() {
         describe('variable' , function() {
             it('ask_and_wait method' , function() {
-                Entry.loadProject(Entry.getStartProject());
-                Entry.playground.object = Entry.container.objects_[0];
+                RoCode.loadProject(RoCode.getStartProject());
+                RoCode.playground.object = RoCode.container.objects_[0];
 
-                Entry.variableContainer.addVariable({
+                RoCode.variableContainer.addVariable({
                     "type": "variable", "name": "테스트변수1", "id": "abcd"
                 });
 
                 assert.ok(Test.pythonToBlock(
-                    'Entry.input(테스트변수1)',
+                    'RoCode.input(테스트변수1)',
                     [[{
                         "type" : "ask_and_wait",
                         "params" : [
@@ -721,19 +721,19 @@ describe('EntryPython', function(){
                     }]]
                 ));
 
-                Entry.clearProject();
+                RoCode.clearProject();
             });
 
             it('show_variable method' , function() {
-                Entry.loadProject(Entry.getStartProject());
-                Entry.playground.object = Entry.container.objects_[0];
+                RoCode.loadProject(RoCode.getStartProject());
+                RoCode.playground.object = RoCode.container.objects_[0];
 
-                Entry.variableContainer.addVariable({
+                RoCode.variableContainer.addVariable({
                     "type": "variable", "name": "테스트변수1", "id": "abcd"
                 });
 
                 assert.ok(Test.pythonToBlock(
-                    'Entry.show_variable("테스트변수1")',
+                    'RoCode.show_variable("테스트변수1")',
                     [[{
                         "type" : "show_variable",
                         "params" : [
@@ -742,20 +742,20 @@ describe('EntryPython', function(){
                     }]]
                 ));
 
-                Entry.clearProject();
+                RoCode.clearProject();
 
             });
 
             it('hide_variable method' , function() {
-                Entry.loadProject(Entry.getStartProject());
-                Entry.playground.object = Entry.container.objects_[0];
+                RoCode.loadProject(RoCode.getStartProject());
+                RoCode.playground.object = RoCode.container.objects_[0];
 
-                Entry.variableContainer.addVariable({
+                RoCode.variableContainer.addVariable({
                     "type": "variable", "name": "테스트변수1", "id": "abcd"
                 });
 
                 assert.ok(Test.pythonToBlock(
-                    "Entry.hide_variable('테스트변수1')",
+                    "RoCode.hide_variable('테스트변수1')",
                     [[{
                         type : 'hide_variable',
                         params: [
@@ -764,14 +764,14 @@ describe('EntryPython', function(){
                     }]]
                 ));
 
-                Entry.clearProject();
+                RoCode.clearProject();
 
             });
 
             it('change_variable method' , function() {
-                Entry.loadProject(Entry.getStartProject());
-                Entry.playground.object = Entry.container.objects_[0];
-                Entry.variableContainer.addVariable({
+                RoCode.loadProject(RoCode.getStartProject());
+                RoCode.playground.object = RoCode.container.objects_[0];
+                RoCode.variableContainer.addVariable({
                     "type": "variable", "name": "test", "id": "abcd"
                 });
                 var resultBlock = Test.parsePython("test=0\n\ntest += 10");
@@ -795,13 +795,13 @@ describe('EntryPython', function(){
                        ]
                     ]
                 ));
-                Entry.clearProject();
+                RoCode.clearProject();
             })
 
             it('char_at method' , function() {
-                Entry.loadProject(Entry.getStartProject());
-                Entry.playground.object = Entry.container.objects_[0];
-                Entry.variableContainer.addVariable({
+                RoCode.loadProject(RoCode.getStartProject());
+                RoCode.playground.object = RoCode.container.objects_[0];
+                RoCode.variableContainer.addVariable({
                     "type": "variable", "name": "test", "id": "abcd"
                 });
                 assert.ok(Test.pythonToBlock(
@@ -826,14 +826,14 @@ describe('EntryPython', function(){
                        ]
                     ]
                 ));
-                Entry.clearProject();
+                RoCode.clearProject();
             })
 
             it('char_at answer method' , function() {
-                Entry.loadProject(Entry.getStartProject());
-                Entry.playground.object = Entry.container.objects_[0];
+                RoCode.loadProject(RoCode.getStartProject());
+                RoCode.playground.object = RoCode.container.objects_[0];
                 assert.ok(Test.pythonToBlock(
-                    "Entry.answer()[0]",
+                    "RoCode.answer()[0]",
                     [
                        [
                           {
@@ -853,52 +853,52 @@ describe('EntryPython', function(){
                        ]
                     ]
                 ));
-                Entry.clearProject();
+                RoCode.clearProject();
             })
         });
 
         describe('list method' , function() {
             it('show_list method' , function() {
-                Entry.loadProject(Entry.getStartProject());
-                Entry.playground.object = Entry.container.objects_[0];
+                RoCode.loadProject(RoCode.getStartProject());
+                RoCode.playground.object = RoCode.container.objects_[0];
 
-                Entry.variableContainer.addList({
+                RoCode.variableContainer.addList({
                     "type": "list", "name": "테스트리스트", "id": "asdf"
                 });
 
                 assert.ok(Test.pythonToBlock(
-                    "Entry.show_list('테스트리스트')",
+                    "RoCode.show_list('테스트리스트')",
                     [[{
                         type: 'show_list',
                         params : ['asdf']
                     }]]
                 ));
-                Entry.clearProject();
+                RoCode.clearProject();
             });
 
             it('hide_list method' , function() {
-                Entry.loadProject(Entry.getStartProject());
-                Entry.playground.object = Entry.container.objects_[0];
+                RoCode.loadProject(RoCode.getStartProject());
+                RoCode.playground.object = RoCode.container.objects_[0];
 
-                Entry.variableContainer.addList({
+                RoCode.variableContainer.addList({
                     "type": "list", "name": "테스트리스트", "id": "asdf"
                 });
 
                 assert.ok(Test.pythonToBlock(
-                    "Entry.hide_list('테스트리스트')",
+                    "RoCode.hide_list('테스트리스트')",
                     [[{
                         type: 'hide_list',
                         params : ['asdf']
                     }]]
                 ));
-                Entry.clearProject();
+                RoCode.clearProject();
             });
 
             it('add_value_to_list method' , function() {
-                Entry.loadProject(Entry.getStartProject());
-                Entry.playground.object = Entry.container.objects_[0];
+                RoCode.loadProject(RoCode.getStartProject());
+                RoCode.playground.object = RoCode.container.objects_[0];
 
-                Entry.variableContainer.addList({
+                RoCode.variableContainer.addList({
                     "type": "list", "name": "테스트리스트", "id": "asdf"
                 });
 
@@ -915,14 +915,14 @@ describe('EntryPython', function(){
                         ]
                     }]]
                 ));
-                Entry.clearProject();
+                RoCode.clearProject();
             });
 
             it('is_included_in_list method' , function() {
-                Entry.loadProject(Entry.getStartProject());
-                Entry.playground.object = Entry.container.objects_[0];
+                RoCode.loadProject(RoCode.getStartProject());
+                RoCode.playground.object = RoCode.container.objects_[0];
 
-                Entry.variableContainer.addList({
+                RoCode.variableContainer.addList({
                     "type": "list", "name": "테스트리스트", "id": "asdf"
                 });
 
@@ -942,15 +942,15 @@ describe('EntryPython', function(){
                         ]
                     }]]
                 ));
-                Entry.clearProject();
+                RoCode.clearProject();
 
             });
 
             it('length_of_list method' , function() {
-                Entry.loadProject(Entry.getStartProject());
-                Entry.playground.object = Entry.container.objects_[0];
+                RoCode.loadProject(RoCode.getStartProject());
+                RoCode.playground.object = RoCode.container.objects_[0];
 
-                Entry.variableContainer.addList({
+                RoCode.variableContainer.addList({
                     "type": "list", "name": "테스트리스트", "id": "asdf"
                 });
 
@@ -965,7 +965,7 @@ describe('EntryPython', function(){
                         ]
                     }]]
                 ));
-                Entry.clearProject();
+                RoCode.clearProject();
             })
         });
 
@@ -1093,10 +1093,10 @@ describe('EntryPython', function(){
 
         describe('about function python mode' , function() {
             it('define' , function() {
-                Entry.loadProject(Entry.getStartProject());
-                Entry.playground.object = Entry.container.objects_[0];
-                Test.parsePython("def 함수(param1, param2):\n    Entry.move_to_direction(10)");
-                var functions = Entry.variableContainer.functions_;
+                RoCode.loadProject(RoCode.getStartProject());
+                RoCode.playground.object = RoCode.container.objects_[0];
+                Test.parsePython("def 함수(param1, param2):\n    RoCode.move_to_direction(10)");
+                var functions = RoCode.variableContainer.functions_;
                 var functionKey = Object.keys(functions)[0];
                 var func = functions[functionKey];
 
@@ -1104,15 +1104,15 @@ describe('EntryPython', function(){
                 assert.equal(func.content._data[0]._data[1].data.type , 'move_direction');
                 assert.equal(func.content._data[0]._data[1].data.params[0].data.params[0] , '10');
 
-                Entry.clearProject();
+                RoCode.clearProject();
             });
 
             it('params convert' , function(){
-                Entry.loadProject(Entry.getStartProject());
-                Entry.playground.object = Entry.container.objects_[0];
+                RoCode.loadProject(RoCode.getStartProject());
+                RoCode.playground.object = RoCode.container.objects_[0];
 
-                var resultBlock = Test.parsePython("def 함수(param1, param2):\n    Entry.move_to_direction(10)\n\n함수(10,True)");
-                var functions = Entry.variableContainer.functions_;
+                var resultBlock = Test.parsePython("def 함수(param1, param2):\n    RoCode.move_to_direction(10)\n\n함수(10,True)");
+                var functions = RoCode.variableContainer.functions_;
                 var functionKey = Object.keys(functions)[0];
                 var func = functions[functionKey];
 
@@ -1130,28 +1130,28 @@ describe('EntryPython', function(){
                         ]
                     }
                 ));
-                Entry.clearProject();
+                RoCode.clearProject();
             });
 
             it('params' , function() {
-                Entry.loadProject(Entry.getStartProject());
-                Entry.playground.object = Entry.container.objects_[0];
+                RoCode.loadProject(RoCode.getStartProject());
+                RoCode.playground.object = RoCode.container.objects_[0];
                 var resultBlock = Test.parsePython("def 함수(param1):\n    함수(param1)\n함수(10)");
-                var functions = Entry.variableContainer.functions_;
+                var functions = RoCode.variableContainer.functions_;
                 var functionKey = Object.keys(functions)[0];
                 var func = functions[functionKey];
                 var functionContent = func.content.toJSON();
 
                 assert.equal(functionContent[0][0].params[0].params[1].params[0].type , functionContent[0][1].params[0].type);
 
-                Entry.clearProject();
+                RoCode.clearProject();
             })
 
             it('recursive' , function() {
-                Entry.loadProject(Entry.getStartProject());
-                Entry.playground.object = Entry.container.objects_[0];
+                RoCode.loadProject(RoCode.getStartProject());
+                RoCode.playground.object = RoCode.container.objects_[0];
                 var resultBlock = Test.parsePython("def 함수(param1):\n    함수(param1)\n함수(10)");
-                var functions = Entry.variableContainer.functions_;
+                var functions = RoCode.variableContainer.functions_;
                 var functionKey = Object.keys(functions)[0];
                 var func = functions[functionKey];
                 var functionData = func.content._data[0];
@@ -1166,12 +1166,12 @@ describe('EntryPython', function(){
 
     describe('indent' , function(){
         it('block' , function(){
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
-            var resultBlock = Test.parsePython("while True:\n    if True:\n    Entry.move_to_direction(0)");
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
+            var resultBlock = Test.parsePython("while True:\n    if True:\n    RoCode.move_to_direction(0)");
 
             assert.ok(Test.pythonToBlock(
-                "while True:\n    if True:\n    Entry.move_to_direction(0)",
+                "while True:\n    if True:\n    RoCode.move_to_direction(0)",
                 [[{
                     "statements":[
                        [
@@ -1203,7 +1203,7 @@ describe('EntryPython', function(){
                     "type":"repeat_inf"
                 }]]
             ));
-            Entry.clearProject();
+            RoCode.clearProject();
 
 
         })
@@ -1317,10 +1317,10 @@ describe('EntryPython', function(){
     describe('def' , function() {
         it('when_start_click block' , function() {
 
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
-            assert.ok(Test.pythonToBlock('def when_start():\n    Entry.move_to_direction(10)',
+            assert.ok(Test.pythonToBlock('def when_start():\n    RoCode.move_to_direction(10)',
                 [
                    [
                       {
@@ -1344,12 +1344,12 @@ describe('EntryPython', function(){
         });
 
         it('repeat basic block' , function() {
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
-            // var resultBlock = Test.parsePython("def when_start():\n    for i in range(10):\n        Entry.move_to_direction(10)");
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
+            // var resultBlock = Test.parsePython("def when_start():\n    for i in range(10):\n        RoCode.move_to_direction(10)");
 
             assert.ok(Test.pythonToBlock(
-                "def when_start():\n    for i in range(10):\n        Entry.move_to_direction(10)",
+                "def when_start():\n    for i in range(10):\n        RoCode.move_to_direction(10)",
                 [
                    [
                       {
@@ -1388,12 +1388,12 @@ describe('EntryPython', function(){
         });
 
         it('if else block' , function() {
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
-            var resultBlock = Test.parsePython("def when_start():\n    if (True and True):\n        Entry.add_x(10)\n    else:\n        Entry.bounce_on_edge()");
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
+            var resultBlock = Test.parsePython("def when_start():\n    if (True and True):\n        RoCode.add_x(10)\n    else:\n        RoCode.bounce_on_edge()");
 
             assert.ok(Test.parsePython(
-                "def when_start():\n    if (True and True):\n        Entry.add_x(10)\n    else:\n        Entry.bounce_on_edge()" ,
+                "def when_start():\n    if (True and True):\n        RoCode.add_x(10)\n    else:\n        RoCode.bounce_on_edge()" ,
                 [
                    [
                       {
@@ -1491,12 +1491,12 @@ describe('EntryPython', function(){
                 ));
         });
         it('while block ' , function() {
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
-            var resultBlock = Test.parsePython("def when_start():\n    while True:\n        for i in range(10):\n            Entry.move_to_direction(10)");
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
+            var resultBlock = Test.parsePython("def when_start():\n    while True:\n        for i in range(10):\n            RoCode.move_to_direction(10)");
 
             assert.ok(Test.pythonToBlock(
-                "def when_start():\n    while True:\n        for i in range(10):\n            Entry.move_to_direction(10)" ,
+                "def when_start():\n    while True:\n        for i in range(10):\n            RoCode.move_to_direction(10)" ,
                 [
                    [
                       {
@@ -1542,13 +1542,13 @@ describe('EntryPython', function(){
         });
 
         it('Do while block ' , function() {
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
-            var resultBlock = Test.parsePython("def when_start():\n    while not (10 > 10):\n       Entry.move_to_direction(10)");
+            var resultBlock = Test.parsePython("def when_start():\n    while not (10 > 10):\n       RoCode.move_to_direction(10)");
 
             assert.ok(Test.pythonToBlock(
-                "def when_start():\n    while not (10 > 10):\n        Entry.move_to_direction(10)" ,
+                "def when_start():\n    while not (10 > 10):\n        RoCode.move_to_direction(10)" ,
                 [
                    [
                         {
@@ -1599,10 +1599,10 @@ describe('EntryPython', function(){
 
 
         it('set variable block ' , function() {
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
-            Entry.variableContainer.addVariable({
+            RoCode.variableContainer.addVariable({
                 "type": "variable", "name": "test", "id": "abcd"
             });
 
@@ -1633,8 +1633,8 @@ describe('EntryPython', function(){
         });
 
         it('when press key ' , function() {
-            Entry.loadProject(Entry.getStartProject());
-            Entry.playground.object = Entry.container.objects_[0];
+            RoCode.loadProject(RoCode.getStartProject());
+            RoCode.playground.object = RoCode.container.objects_[0];
 
             var resultBlock = Test.parsePython('def when_press_key(space):');
 

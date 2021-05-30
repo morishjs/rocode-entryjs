@@ -59,8 +59,8 @@ Blockly.WidgetDiv.dispose_ = null;
  *   is closed.
  */
 Blockly.WidgetDiv.show = function(newField, dispose) {
-  if (typeof(Entry) == "object")
-    Entry.dispatchEvent("entryBlocklyChanged");
+  if (typeof(RoCode) == "object")
+    RoCode.dispatchEvent("RoCodeBlocklyChanged");
   Blockly.WidgetDiv.hide();
   Blockly.WidgetDiv.field_ = newField;
   Blockly.WidgetDiv.dispose_ = dispose;
@@ -73,9 +73,9 @@ Blockly.WidgetDiv.show = function(newField, dispose) {
  */
 Blockly.WidgetDiv.hide = function() {
   if (Blockly.WidgetDiv.field_) {
-    if (typeof(Entry) == "object" &&
+    if (typeof(RoCode) == "object" &&
         Blockly.WidgetDiv.initialValue != Blockly.WidgetDiv.field_.text_) {
-      Entry.dispatchEvent("cancelLastCommand");
+      RoCode.dispatchEvent("cancelLastCommand");
     }
     Blockly.WidgetDiv.DIV.style.display = 'none';
     Blockly.WidgetDiv.dispose_ && Blockly.WidgetDiv.dispose_();

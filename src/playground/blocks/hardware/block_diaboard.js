@@ -2,7 +2,7 @@
 
 const PromiseManager = require('../../../core/promiseManager');
 
-Entry.Diaboard = {
+RoCode.Diaboard = {
     // g:T:F:9:7:2:120:1:200
     // g : L버튼상태 : R버튼상태 : 9컬러센서 : 색상 : 2 IR센서: IR값 : 1빛센서 : 조도값
     // 프로토콜 인자값 : 표준 주파수
@@ -218,8 +218,8 @@ Entry.Diaboard = {
 
     setBPM : function( bpm ) {
         // 출력을 위해, 세팅
-        Entry.hw.sendQueue['bpm']   = bpm;
-        Entry.hw.update();
+        RoCode.hw.sendQueue['bpm']   = bpm;
+        RoCode.hw.update();
         // 글로벌 저장
         this._bpm   = bpm;
     },
@@ -246,7 +246,7 @@ Entry.Diaboard = {
         return this._frequency;
     },
 
-    deferredReturn : function( blockReturn, sleep = Entry.Diaboard.DEFAULT_SLEEP ) {
+    deferredReturn : function( blockReturn, sleep = RoCode.Diaboard.DEFAULT_SLEEP ) {
         if( sleep > 0 ) {
             return new PromiseManager().Promise( ( resolve ) => {
                 setTimeout(() => {
@@ -260,16 +260,16 @@ Entry.Diaboard = {
 
     setFrequency : function( frequency ) {
         // 출력을 위해, 세팅
-        Entry.hw.sendQueue['frequency'] = frequency;
-        Entry.hw.update();
+        RoCode.hw.sendQueue['frequency'] = frequency;
+        RoCode.hw.update();
         // 글로벌 저장
         this._frequency = frequency
     },
 
     fireCommand : function( cmd ) {
-        Entry.hw.sendQueue['cmd'] = cmd;
-        Entry.hw.sendQueue['seq'] = ++this._cmd_seq;
-        Entry.hw.update();
+        RoCode.hw.sendQueue['cmd'] = cmd;
+        RoCode.hw.sendQueue['seq'] = ++this._cmd_seq;
+        RoCode.hw.update();
         // console.log( '>>> ' + cmd );
     },
     
@@ -316,7 +316,7 @@ Entry.Diaboard = {
         let items = pd[ 0 ];    // ['g', 'T', 'F', '9', '7', '2', '120', '1', '200']
         let cmd   = items[ 0 ];
         if( cmd == 'g' ) {      // sensor data
-            Entry.engine.fireEvent('diaboardSensorEventReceive');
+            RoCode.engine.fireEvent('diaboardSensorEventReceive');
         }
     },
     calculateDCMotorValue: function( value ) {
@@ -337,7 +337,7 @@ Entry.Diaboard = {
     }
 };
 
-Entry.Diaboard.blockMenuBlocks = [
+RoCode.Diaboard.blockMenuBlocks = [
     // 이벤트
     // 'diaboard_when_button_pressed',
     // 'diaboard_when_color_is',
@@ -387,7 +387,7 @@ Entry.Diaboard.blockMenuBlocks = [
     'diaboard_buzzer_stop'
 ];
 
-Entry.Diaboard.getBlocks = function() {
+RoCode.Diaboard.getBlocks = function() {
 
     let options_DIABOARD_button1     = 
     [
@@ -525,8 +525,8 @@ Entry.Diaboard.getBlocks = function() {
         //region 
         /**
         diaboard_when_button_pressed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_event',
             statements: [],
@@ -545,16 +545,16 @@ Entry.Diaboard.getBlocks = function() {
                     options: options_DIABOARD_button1,
                     value: 'left',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: options_DIABOARD_button2,
                     value: 'pressed',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -573,8 +573,8 @@ Entry.Diaboard.getBlocks = function() {
             func: function(sprite, script) {
                 let port    = script.getStringField('PORT');
                 let status  = script.getStringField('STATUS');
-                let leftButton      = ( Entry.hw.portData[ 'S1' ] == 'T' ? true : false );
-                let rightButton     = ( Entry.hw.portData[ 'S2' ] == 'T' ? true : false );
+                let leftButton      = ( RoCode.hw.portData[ 'S1' ] == 'T' ? true : false );
+                let rightButton     = ( RoCode.hw.portData[ 'S2' ] == 'T' ? true : false );
                 let buttonStatus    = ( status == 'pressed' ? true : false );
                 if ( port == 'all' ) {    // all
                     if ( leftButton == buttonStatus && rightButton == buttonStatus ) {
@@ -594,8 +594,8 @@ Entry.Diaboard.getBlocks = function() {
             syntax: { js: [], py: ['Diaboard.when_button_pressed(%2,%3)'] },
         },
         diaboard_when_color_is: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_event',
             statements: [],
@@ -614,8 +614,8 @@ Entry.Diaboard.getBlocks = function() {
                     options: options_DIABOARD_color,
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -632,7 +632,7 @@ Entry.Diaboard.getBlocks = function() {
             event: 'diaboardSensorEventReceive',
             func: function(sprite, script) {
                 let color   = script.getNumberField('COLOR');
-                let sensorColor = Entry.hw.portData[ 'S4' ];               // 컬러센서 값 범위 0 ~ 7
+                let sensorColor = RoCode.hw.portData[ 'S4' ];               // 컬러센서 값 범위 0 ~ 7
                 if( color == sensorColor ) {
                     return script.callReturn();
                 } else {
@@ -642,8 +642,8 @@ Entry.Diaboard.getBlocks = function() {
             syntax: { js: [], py: ['Diaboard.when_color_is(%2)'] },
         },
         diaboard_when_sensor_is: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_event',
             statements: [],
@@ -660,17 +660,17 @@ Entry.Diaboard.getBlocks = function() {
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_sensor,
                     value: 'ir',
                 },
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                    options: Entry.Diaboard.INEQ_SIGN,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                    options: RoCode.Diaboard.INEQ_SIGN,
                     value: '<',
                 },
                 {
@@ -706,7 +706,7 @@ Entry.Diaboard.getBlocks = function() {
                 let value       = script.getNumberValue('VALUE');
                 value           = isNaN( value ) ? 0 : value;
                 if( sensor == 'ir' ) {
-                    let irValue     = Entry.hw.portData[ 'S6' ];
+                    let irValue     = RoCode.hw.portData[ 'S6' ];
                     if( ineqSign == '<' && irValue < value ) {
                         return script.callReturn();
                     } else if( ineqSign == '>' && irValue > value ) {
@@ -717,7 +717,7 @@ Entry.Diaboard.getBlocks = function() {
                         return this.die();
                     }
                 } else if( sensor == 'brightness' ) {
-                    let brightnessValue     = Entry.hw.portData[ 'S8' ];
+                    let brightnessValue     = RoCode.hw.portData[ 'S8' ];
                     if( ineqSign == '<' && brightnessValue < value ) {
                         return script.callReturn();
                     } else if( ineqSign == '>' && brightnessValue > value ) {
@@ -736,8 +736,8 @@ Entry.Diaboard.getBlocks = function() {
          */
         // ---
         diaboard_button_pressed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -747,16 +747,16 @@ Entry.Diaboard.getBlocks = function() {
                     options: options_DIABOARD_button1,
                     value: 'left',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: options_DIABOARD_button2,
                     value: 'pressed',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -773,8 +773,8 @@ Entry.Diaboard.getBlocks = function() {
             func: function(sprite, script) {
                 let port    = script.getStringField('PORT');
                 let status  = script.getStringField('STATUS');
-                let leftButton      = ( Entry.hw.portData[ 'S1' ] == 'T' ? true : false );
-                let rightButton     = ( Entry.hw.portData[ 'S2' ] == 'T' ? true : false );
+                let leftButton      = ( RoCode.hw.portData[ 'S1' ] == 'T' ? true : false );
+                let rightButton     = ( RoCode.hw.portData[ 'S2' ] == 'T' ? true : false );
                 let buttonStatus    = ( status == 'pressed' ? true : false );
                 if ( port == 'all' ) {    // all
                     return ( leftButton == buttonStatus && rightButton == buttonStatus );
@@ -788,8 +788,8 @@ Entry.Diaboard.getBlocks = function() {
             syntax: { js: [], py: ['Diaboard.button_pressed(%1,%2)'] },
         },
         diaboard_color_sensor_is: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -799,8 +799,8 @@ Entry.Diaboard.getBlocks = function() {
                     options: options_DIABOARD_color,
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -815,7 +815,7 @@ Entry.Diaboard.getBlocks = function() {
             isNotFor: ['diaboard'],
             func: function(sprite, script) {
                 let color   = script.getNumberField('COLOR');
-                let sensorColor = Entry.hw.portData[ 'S4' ];               // 컬러센서 값 범위 0 ~ 7
+                let sensorColor = RoCode.hw.portData[ 'S4' ];               // 컬러센서 값 범위 0 ~ 7
                 if( color == sensorColor ) {
                     return true;
                 } else {
@@ -825,8 +825,8 @@ Entry.Diaboard.getBlocks = function() {
             syntax: { js: [], py: ['Diaboard.color_sensor_is(%1)'] },
         },
         diaboard_sensor_condition: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -834,17 +834,17 @@ Entry.Diaboard.getBlocks = function() {
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_sensor,
                     value: 'ir',
                 },
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                    options: Entry.Diaboard.INEQ_SIGN,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                    options: RoCode.Diaboard.INEQ_SIGN,
                     value: '<',
                 },
                 {
@@ -877,7 +877,7 @@ Entry.Diaboard.getBlocks = function() {
                 let value       = script.getNumberValue('VALUE');
                 value           = isNaN( value ) ? 0 : value;
                 if( sensor == 'ir' ) {
-                    let irValue     = Entry.hw.portData[ 'S6' ];
+                    let irValue     = RoCode.hw.portData[ 'S6' ];
                     if( ineqSign == '<' && irValue < value ) {
                         return true;
                     } else if( ineqSign == '>' && irValue > value ) {
@@ -888,7 +888,7 @@ Entry.Diaboard.getBlocks = function() {
                         return false;
                     }
                 } else if( sensor == 'brightness' ) {
-                    let brightnessValue     = Entry.hw.portData[ 'S8' ];
+                    let brightnessValue     = RoCode.hw.portData[ 'S8' ];
                     if( ineqSign == '<' && brightnessValue < value ) {
                         return true;
                     } else if( ineqSign == '>' && brightnessValue > value ) {
@@ -905,8 +905,8 @@ Entry.Diaboard.getBlocks = function() {
             syntax: { js: [], py: ['Diaboard.sensor_condition(%1,%2,%3)'] },
         },
         diaboard_color_sensor_seven_hue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -921,15 +921,15 @@ Entry.Diaboard.getBlocks = function() {
             class: 'condition',
             isNotFor: ['diaboard'],
             func: function(sprite, script) {
-                let sensorValue     = Entry.hw.portData[ 'S4' ];            // sensorValue can be 0 ~ 7
-                let colorName       = Entry.Diaboard.COLOR_TYPE[ sensorValue ];     // colorName can be red, blue, white and so on
+                let sensorValue     = RoCode.hw.portData[ 'S4' ];            // sensorValue can be 0 ~ 7
+                let colorName       = RoCode.Diaboard.COLOR_TYPE[ sensorValue ];     // colorName can be red, blue, white and so on
                 return Lang.Blocks['DIABOARD_color_' + colorName];
             },
             syntax: { js: [], py: ['Diaboard.color_sensor_seven_hue()'] },
         },
         diaboard_color_sensor_one_hue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -944,16 +944,16 @@ Entry.Diaboard.getBlocks = function() {
             class: 'condition',
             isNotFor: ['diaboard'],
             func: function(sprite, script) {
-                let hue         = Entry.hw.portData[ 'C1' ];
-                // let saturation  = Entry.hw.portData[ 'C2' ];
-                // let intensity   = Entry.hw.portData[ 'C3' ];
+                let hue         = RoCode.hw.portData[ 'C1' ];
+                // let saturation  = RoCode.hw.portData[ 'C2' ];
+                // let intensity   = RoCode.hw.portData[ 'C3' ];
                 return hue;
             },
             syntax: { js: [], py: ['Diaboard.color_sensor_one_hue()'] },
         },
         diaboard_sensor_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -961,8 +961,8 @@ Entry.Diaboard.getBlocks = function() {
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_sensor,
                     value: 'ir',
                 },
@@ -980,12 +980,12 @@ Entry.Diaboard.getBlocks = function() {
             func: function(sprite, script) {
                 let sensor  = script.getStringField('SENSOR');
                 if( sensor == 'ir' ) {
-                    let irSensor    = Entry.hw.portData[ 'S5' ];
-                    let irValue     = Entry.hw.portData[ 'S6' ];
+                    let irSensor    = RoCode.hw.portData[ 'S5' ];
+                    let irValue     = RoCode.hw.portData[ 'S6' ];
                     return irValue;
                 } else if( sensor == 'brightness' ) {
-                    let brightnessSensor    = Entry.hw.portData[ 'S7' ];
-                    let brightnessValue     = Entry.hw.portData[ 'S8' ];
+                    let brightnessSensor    = RoCode.hw.portData[ 'S7' ];
+                    let brightnessValue     = RoCode.hw.portData[ 'S8' ];
                     return brightnessValue;
                 } else {
                     return "";
@@ -994,8 +994,8 @@ Entry.Diaboard.getBlocks = function() {
             syntax: { js: [], py: ['Diaboard.sensor_value(%1)'] },
         },
         diaboard_convert_scale: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1003,8 +1003,8 @@ Entry.Diaboard.getBlocks = function() {
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_sensor,
                     value: 'ir',
                 },
@@ -1070,13 +1070,13 @@ Entry.Diaboard.getBlocks = function() {
                 out_max  = isNaN( in_min ) ? 0 : out_max;
 
                 if( sensor == 'ir' ) {
-                    let irSensor            = Entry.hw.portData[ 'S5' ];
-                    let irValue             = Entry.hw.portData[ 'S6' ];
+                    let irSensor            = RoCode.hw.portData[ 'S5' ];
+                    let irValue             = RoCode.hw.portData[ 'S6' ];
                     let v                   = (irValue - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
                     return v.toString();
                 } else if ( sensor == 'brightness' ) {
-                    let brightnessSensor    = Entry.hw.portData[ 'S7' ];
-                    let brightnessValue     = Entry.hw.portData[ 'S8' ];
+                    let brightnessSensor    = RoCode.hw.portData[ 'S7' ];
+                    let brightnessValue     = RoCode.hw.portData[ 'S8' ];
                     let v                   = (brightnessValue - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
                     return v.toString();
                 } else {
@@ -1090,8 +1090,8 @@ Entry.Diaboard.getBlocks = function() {
         },
         // ---
         diaboard_led_rainbow: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1114,14 +1114,14 @@ Entry.Diaboard.getBlocks = function() {
                 let color  = 0;
                 let time   = 0;       
                 let cmd = `l:p:${effect}:${color}:${time}`;
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn );
             },
             syntax: { js: [], py: ['Diaboard.led_rainbow()'] },
         },
         diaboard_led_rainbow_time: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1159,30 +1159,30 @@ Entry.Diaboard.getBlocks = function() {
                 second      = ( isNaN( second ) || second < 0 ) ? 0 : second;
                 let time    = second * 10;   // 입력 시간이 1.5초 라면 15로 세팅 (곱하기 10 해야함)
                 let cmd     = `l:p:${effect}:${color}:${time}`;
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn, second * 1000 );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn, second * 1000 );
             },
             syntax: { js: [], py: ['Diaboard.led_rainbow_time(%1)'] },
         },
         diaboard_led_effect: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_effect,
                     value: 'f',
                 },
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_color2,
                     value: 1,
                 },
@@ -1210,42 +1210,42 @@ Entry.Diaboard.getBlocks = function() {
             isNotFor: ['diaboard'],
             func: function(sprite, script) {
                 let effect  = script.getStringValue('EFFECT');
-                if( effect == Entry.Diaboard.EFFECT_RANDOM ) {
+                if( effect == RoCode.Diaboard.EFFECT_RANDOM ) {
                     // returns a random integer from 0 to 3
                     let v = Math.floor(Math.random() * 4);          // 0 ~ 3
-                    effect  = Entry.Diaboard.EFFECT_TYPE[ v ];      // v can be 'f' ~ 'm'
+                    effect  = RoCode.Diaboard.EFFECT_TYPE[ v ];      // v can be 'f' ~ 'm'
                 }
                 let color   = script.getStringValue('COLOR');       // '1' ~ '8'
-                if( color == Entry.Diaboard.COLOR_RANDOM ) {        // '8'
+                if( color == RoCode.Diaboard.COLOR_RANDOM ) {        // '8'
                     // returns a random integer from 1 to 7
                     color   = Math.floor(Math.random() * 7) + 1;    // red(1) ~ white(7)
                 }
                 let time    = 0;
                 let cmd     = `l:p:${effect}:${color}:${time}`;     // l:p:d:5:50
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn );
             },
             syntax: { js: [], py: ['Diaboard.led_effect(%1,%2)'] },
         },
         diaboard_led_effect_time: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_effect,
                     value: 'f',
                 },
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_color2,
                     value: 1,
                 },
@@ -1282,13 +1282,13 @@ Entry.Diaboard.getBlocks = function() {
             isNotFor: ['diaboard'],
             func: function(sprite, script) {
                 let effect  = script.getStringValue('EFFECT');
-                if( effect == Entry.Diaboard.EFFECT_RANDOM ) {
+                if( effect == RoCode.Diaboard.EFFECT_RANDOM ) {
                     // returns a random integer from 0 to 3
                     let v = Math.floor(Math.random() * 4);          // 0 ~ 3
-                    effect  = Entry.Diaboard.EFFECT_TYPE[ v ];      // v can be 'f' ~ 'm'
+                    effect  = RoCode.Diaboard.EFFECT_TYPE[ v ];      // v can be 'f' ~ 'm'
                 }                    
                 let color   = script.getNumberValue('COLOR');
-                if( color == Entry.Diaboard.COLOR_RANDOM ) {        // '8'
+                if( color == RoCode.Diaboard.COLOR_RANDOM ) {        // '8'
                     // returns a random integer from 1 to 7
                     color   = Math.floor(Math.random() * 7) + 1;    // red(1) ~ white(7)
                 }                    
@@ -1296,14 +1296,14 @@ Entry.Diaboard.getBlocks = function() {
                 second      = ( isNaN( second ) || second < 0 ) ? 0 : second;
                 let time    = second * 10;   // 입력 시간이 1.5초 라면 15로 세팅 (곱하기 10 해야함)
                 let cmd     = `l:p:${effect}:${color}:${time}`;     // l:p:d:5:50
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn, second * 1000 );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn, second * 1000 );
             },
             syntax: { js: [], py: ['Diaboard.led_effect_time(%1,%2,%3)'] },
         },
         diaboard_led_six: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1381,22 +1381,22 @@ Entry.Diaboard.getBlocks = function() {
                 let blue6   = parseInt(color6.substr(5, 2), 16);
 
                 let cmd     = `l:a:${red1}:${green1}:${blue1}:${red2}:${green2}:${blue2}:${red3}:${green3}:${blue3}:${red4}:${green4}:${blue4}:${red5}:${green5}:${blue5}:${red6}:${green6}:${blue6}`;
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn );
             },
             syntax: { js: [], py: ['Diaboard.led_six(%1,%2,%3,%4,%5,%6)'] },
         },
         diaboard_led_one: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_led,
                     value: '0',
                 },
@@ -1436,22 +1436,22 @@ Entry.Diaboard.getBlocks = function() {
                 let blue    = parseInt(color.substr(5, 2), 16);
                 let time    = 0;
                 let cmd     = `l:c:${led}:${red}:${green}:${blue}:${time}`; // l:c:0:255:255:255:1
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn );
             },
             syntax: { js: [], py: ['Diaboard.led_one(%1,%2)'] },
         },
         diaboard_led_one_time: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_led,
                     value: 0,
                 },
@@ -1501,23 +1501,23 @@ Entry.Diaboard.getBlocks = function() {
                 second      = ( isNaN( second ) || second < 0 ) ? 0 : second;
                 let time    = second * 10;   // 입력 시간이 1.5초 라면 15로 세팅 (곱하기 10 해야함)
                 let cmd     = `l:c:${led}:${red}:${green}:${blue}:${time}`; // l:c:0:255:255:255:1
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn, second * 1000 );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn, second * 1000 );
             },
             syntax: { js: [], py: ['Diaboard.led_one_time(%1,%2,%3)'] },
         },
 
         diaboard_led_hue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_led,
                     value: 0,
                 },
@@ -1578,22 +1578,22 @@ Entry.Diaboard.getBlocks = function() {
                 }
                 let time    = 0;
                 let cmd     = `l:c:${led}:${r_value}:${g_value}:${b_value}:${time}`; // l:x:c:255:255:255:1
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn );
             },
             syntax: { js: [], py: ['Diaboard.led_hue(%1,%2)'] },
         },
         diaboard_led_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_led,
                     value: 0,
                 },
@@ -1656,22 +1656,22 @@ Entry.Diaboard.getBlocks = function() {
                 blue        = Math.max(Math.min(blue,  255), 0);
                 let time    = 0;
                 let cmd     = `l:c:${led}:${red}:${green}:${blue}:${time}`; // l:x:c:255:255:255:1
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn );
             },
             syntax: { js: [], py: ['Diaboard.led_rgb(%1,%2,%3,%4)'] },
         },
         diaboard_led_turn_off_all: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_led,
                     value: 0,
                 },
@@ -1701,23 +1701,23 @@ Entry.Diaboard.getBlocks = function() {
                     led     = Math.floor(Math.random() * 6) + 1;    // 1 ~ 6
                 }
                 let cmd = `l:x:${led}`;        // l:x:0
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn );
             },
             syntax: { js: [], py: ['Diaboard.led_turn_off_all(%1)'] },
         },
         // ---
         diaboard_servomotor_angle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_motor,
                     value: 'A'
                 },
@@ -1758,22 +1758,22 @@ Entry.Diaboard.getBlocks = function() {
                 let startAngle  = 0;
                 let time        = 0;
                 let cmd         = `m:${motor}:${type}:${endAngle}:${startAngle}:${time}`;
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn );
             },
             syntax: { js: [], py: ['Diaboard.servomotor_angle(%1, %2)'] },
         },
         diaboard_servomotor_angle_time: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_motor,
                     value: 'A'
                 },
@@ -1836,22 +1836,22 @@ Entry.Diaboard.getBlocks = function() {
                 let endAngle    = Math.max( Math.min(value2, 180), 0 );
                 let time        = second * 10;
                 let cmd         = `m:${motor}:${type}:${endAngle}:${startAngle}:${time}`;
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn, second * 1000 );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn, second * 1000 );
             },
             syntax: { js: [], py: ['Diaboard.servomotor_angle_time(%1,%2,%3,%4)'] },
         },
         diaboard_dc_direction_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_motor,
                     value: 'A'
                 },
@@ -1860,8 +1860,8 @@ Entry.Diaboard.getBlocks = function() {
                     options: options_DIABOARD_dc_direction,
                     value: 'CW',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1905,22 +1905,22 @@ Entry.Diaboard.getBlocks = function() {
                     speed = -1 * speed;
                 }
                 let cmd         = `m:${motor}:${type}:${speed}:${time}`;
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn );
             },
             syntax: { js: [], py: ['Diaboard.dc_direction_speed(%1, %2, %3)'] },
         },
         diaboard_dc_direction_speed_time: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_motor,
                     value: 'A'
                 },
@@ -1929,8 +1929,8 @@ Entry.Diaboard.getBlocks = function() {
                     options: options_DIABOARD_dc_direction,
                     value: 'CW',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1985,22 +1985,22 @@ Entry.Diaboard.getBlocks = function() {
                 }
                 let time        = second * 10;
                 let cmd         = `m:${motor}:${type}:${speed}:${time}`;
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn, second * 1000 );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn, second * 1000 );
             },
             syntax: { js: [], py: ['Diaboard.dc_direction_speed_time(%1,%2,%3,%4)'] },
         },
         diaboard_dc_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_motor,
                     value: 'A'
                 },
@@ -2040,22 +2040,22 @@ Entry.Diaboard.getBlocks = function() {
                 let type        = "D";      // db motor
                 let speed       = Math.max( Math.min(value, 100), -100 );
                 let cmd         = `m:${motor}:${type}:${speed}:${time}`;
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn );
             },
             syntax: { js: [], py: ['Diaboard.dc_speed(%1, %2)'] },
         },
         diaboard_dc_speed_time: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_motor,
                     value: 'A'
                 },
@@ -2106,22 +2106,22 @@ Entry.Diaboard.getBlocks = function() {
                 let speed       = Math.max( Math.min(value, 100), -100 );
                 let time        = second * 10;
                 let cmd         = `m:${motor}:${type}:${speed}:${time}`;
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn, second * 1000 );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn, second * 1000 );
             },
             syntax: { js: [], py: ['Diaboard.dc_speed_time(%1,%2,%3)'] },
         },
         diaboard_turn_off_all_motors: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     options: options_DIABOARD_motor,
                     value: 'A'
                 },
@@ -2145,15 +2145,15 @@ Entry.Diaboard.getBlocks = function() {
                 let motor   = script.getStringValue('MOTOR');
                 motor       = motor.toLowerCase();
                 let cmd     = `m:${motor}`;
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn );
             },
             syntax: { js: [], py: ['Diaboard.turn_off_all_motors(%1)'] },
         },
         // ---
         diaboard_buzzer_melody_type: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2162,8 +2162,8 @@ Entry.Diaboard.getBlocks = function() {
                     options: options_DIABOARD_melody,
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2185,27 +2185,27 @@ Entry.Diaboard.getBlocks = function() {
             isNotFor: ['diaboard'],
             func: function(sprite, script) {
                 let melodyIndex = script.getNumberValue('MELODY');
-                let melodyItem  = Entry.Diaboard.MELODY_TYPE[ melodyIndex ];
+                let melodyItem  = RoCode.Diaboard.MELODY_TYPE[ melodyIndex ];
                 let gap         = melodyItem.gap;
                 let commands    = melodyItem.commands;
                 let totalMs     = commands.length * gap;        // gap은 ms
                 for( let index = 0; index < commands.length; index++ ) {
                     let cmd = commands[ index ];
                     if( index == 0 ) {
-                        Entry.Diaboard.fireCommand( cmd );
+                        RoCode.Diaboard.fireCommand( cmd );
                     } else {
                         setTimeout( () => {
-                            Entry.Diaboard.fireCommand( cmd );
+                            RoCode.Diaboard.fireCommand( cmd );
                         }, index * gap );
                     }
                 }
-                return Entry.Diaboard.deferredReturn( script.callReturn, totalMs );
+                return RoCode.Diaboard.deferredReturn( script.callReturn, totalMs );
             },
             syntax: { js: [], py: ['Diaboard.buzzer_melody_type(%1)'] },
         },
         diaboard_buzzer_effect_type: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2214,8 +2214,8 @@ Entry.Diaboard.getBlocks = function() {
                     options: options_DIABOARD_effect_sound,
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2256,16 +2256,16 @@ Entry.Diaboard.getBlocks = function() {
                         let note        = setNote;
                         let cmd         = `b:${command}:${note}:${time}`;               // buzzer : comman n(노트) : 노트번호 : 시간( 100 = 1초 = 1000ms )
                         if( i == 0 ) {
-                            Entry.Diaboard.fireCommand( cmd );
+                            RoCode.Diaboard.fireCommand( cmd );
                         } else {
                             setTimeout( () => {
-                                Entry.Diaboard.fireCommand( cmd );
+                                RoCode.Diaboard.fireCommand( cmd );
                             }, delay * inc );                // every 20ms
                         }
                         inc += 1;
                     }
-                    let totalSecond = inc * delay + Entry.Diaboard.EFFECT_DEFAULT_SLEEP;  // delay 단위는 ms 
-                    return Entry.Diaboard.deferredReturn( script.callReturn, totalSecond );
+                    let totalSecond = inc * delay + RoCode.Diaboard.EFFECT_DEFAULT_SLEEP;  // delay 단위는 ms 
+                    return RoCode.Diaboard.deferredReturn( script.callReturn, totalSecond );
                 } else if( effectIndex == 1 ) {
                     // 2. 시무룩
                     let command     = "f";    
@@ -2276,10 +2276,10 @@ Entry.Diaboard.getBlocks = function() {
                         let freq    = i * 4 + 240;
                         let cmd     = `b:${command}:${freq}:${time}`;
                         if( inc == 0 ) {
-                            Entry.Diaboard.fireCommand( cmd );
+                            RoCode.Diaboard.fireCommand( cmd );
                         } else {
                             setTimeout( () => {
-                                Entry.Diaboard.fireCommand( cmd );
+                                RoCode.Diaboard.fireCommand( cmd );
                             }, delay * inc );        // every 20ms
                         }
                         inc += 1;
@@ -2288,12 +2288,12 @@ Entry.Diaboard.getBlocks = function() {
                         let freq    = i * 4 + 240;
                         let cmd     = `b:${command}:${freq}:${time}`;
                         setTimeout( () => {
-                            Entry.Diaboard.fireCommand( cmd );
+                            RoCode.Diaboard.fireCommand( cmd );
                         }, delay * inc );       // every 20ms
                         inc += 1;
                     }
-                    let totalSecond = inc * delay + Entry.Diaboard.EFFECT_DEFAULT_SLEEP;  // delay 단위는 ms 
-                    return Entry.Diaboard.deferredReturn( script.callReturn, totalSecond );
+                    let totalSecond = inc * delay + RoCode.Diaboard.EFFECT_DEFAULT_SLEEP;  // delay 단위는 ms 
+                    return RoCode.Diaboard.deferredReturn( script.callReturn, totalSecond );
                 } else if( effectIndex == 2 ) {
                     // 3. 슬픔
                     let command     = "f";    
@@ -2304,10 +2304,10 @@ Entry.Diaboard.getBlocks = function() {
                         let freq    =   i * 7 + 900;
                         let cmd     = `b:${command}:${freq}:${time}`;
                         if( inc == 0 ) {
-                            Entry.Diaboard.fireCommand( cmd );
+                            RoCode.Diaboard.fireCommand( cmd );
                         } else {
                             setTimeout( () => {
-                                Entry.Diaboard.fireCommand( cmd );
+                                RoCode.Diaboard.fireCommand( cmd );
                             }, delay * inc );              // every 20ms
                         }
                         inc += 1;
@@ -2316,12 +2316,12 @@ Entry.Diaboard.getBlocks = function() {
                         let freq    =   i * 7 + 900;
                         let cmd     = `b:${command}:${freq}:${time}`;
                         setTimeout( () => {
-                            Entry.Diaboard.fireCommand( cmd );
+                            RoCode.Diaboard.fireCommand( cmd );
                         }, delay * inc );        // every 20ms
                         inc += 1;
                     }
-                    let totalSecond = inc * delay + Entry.Diaboard.EFFECT_DEFAULT_SLEEP;  // delay 단위는 ms 
-                    return Entry.Diaboard.deferredReturn( script.callReturn, totalSecond );
+                    let totalSecond = inc * delay + RoCode.Diaboard.EFFECT_DEFAULT_SLEEP;  // delay 단위는 ms 
+                    return RoCode.Diaboard.deferredReturn( script.callReturn, totalSecond );
                 } else if( effectIndex == 3 ) {
                     // 4. 에너지 모으는
                     let command     = "f";
@@ -2337,16 +2337,16 @@ Entry.Diaboard.getBlocks = function() {
                         }
                         let cmd     = `b:${command}:${freq}:${time}`;
                         if( i == 0 ) {
-                            Entry.Diaboard.fireCommand( cmd );
+                            RoCode.Diaboard.fireCommand( cmd );
                         } else {
                             setTimeout( () => {
-                                Entry.Diaboard.fireCommand( cmd );
+                                RoCode.Diaboard.fireCommand( cmd );
                             }, delay * inc );        // every 20ms
                         }
                         inc += 1;
                     }
-                    let totalSecond = inc * delay + Entry.Diaboard.EFFECT_DEFAULT_SLEEP;  // delay 단위는 ms 
-                    return Entry.Diaboard.deferredReturn( script.callReturn, totalSecond );
+                    let totalSecond = inc * delay + RoCode.Diaboard.EFFECT_DEFAULT_SLEEP;  // delay 단위는 ms 
+                    return RoCode.Diaboard.deferredReturn( script.callReturn, totalSecond );
                 } else if( effectIndex == 4 ) {
                     // 5. 레이저빔
                     let command     = "n";
@@ -2357,26 +2357,26 @@ Entry.Diaboard.getBlocks = function() {
                         let freq    = i * 4 + 10;
                         let cmd     = `b:${command}:${freq}:${time}`;
                         if( i == 20 ) {
-                            Entry.Diaboard.fireCommand( cmd );
+                            RoCode.Diaboard.fireCommand( cmd );
                         } else {
                             setTimeout( () => {
-                                Entry.Diaboard.fireCommand( cmd );
+                                RoCode.Diaboard.fireCommand( cmd );
                             }, delay * inc );                // every 20ms
                         }
                         inc += 1;
                     }
-                    let totalSecond = inc * delay + Entry.Diaboard.EFFECT_DEFAULT_SLEEP;  // delay 단위는 ms 
-                    return Entry.Diaboard.deferredReturn( script.callReturn, totalSecond );
+                    let totalSecond = inc * delay + RoCode.Diaboard.EFFECT_DEFAULT_SLEEP;  // delay 단위는 ms 
+                    return RoCode.Diaboard.deferredReturn( script.callReturn, totalSecond );
                 } else {
                     // invalid effectIndex
-                    return Entry.Diaboard.deferredReturn( script.callReturn );
+                    return RoCode.Diaboard.deferredReturn( script.callReturn );
                 }
             },
             syntax: { js: [], py: ['Diaboard.buzzer_effect_type(%1)'] },
         },
         diaboard_buzzer_eight_melody_bpm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2385,64 +2385,64 @@ Entry.Diaboard.getBlocks = function() {
                     options: options_DIABOARD_tonicsolfa,
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: options_DIABOARD_tonicsolfa,
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: options_DIABOARD_tonicsolfa,
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: options_DIABOARD_tonicsolfa,
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: options_DIABOARD_tonicsolfa,
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: options_DIABOARD_tonicsolfa,
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: options_DIABOARD_tonicsolfa,
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: options_DIABOARD_tonicsolfa,
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2500,7 +2500,7 @@ Entry.Diaboard.getBlocks = function() {
                 let bpm         = script.getNumberValue('BPM');
                 bpm             = isNaN( bpm ) ? 120 : bpm;                         // 유효하지 않은 값은 120bpm으로 설정
                 bpm             = Math.max( Math.min( bpm, 300 ), 30);             // bpm은 30 ~ 300
-                let second      = Entry.Diaboard.convertTimeByBPM( bpm, 0.5 );      // 리턴 단위 초, ( bpm, 박자 )
+                let second      = RoCode.Diaboard.convertTimeByBPM( bpm, 0.5 );      // 리턴 단위 초, ( bpm, 박자 )
                 let totalSecond = second * 8;
                 let octave      = 4;                                                // 기본값 4 옥타브
                 let command     = "n";    
@@ -2510,38 +2510,38 @@ Entry.Diaboard.getBlocks = function() {
                     let time        = second * 100;                                 // 메세지 시간 세팅 시 ( 초 * 100 )
                     let cmd         = `b:${command}:${note}:${time}`;               // buzzer : comman n(노트) : 노트번호 : 시간
                     if( index == 0 ) {
-                        Entry.Diaboard.fireCommand( cmd );
+                        RoCode.Diaboard.fireCommand( cmd );
                     } else {
                         setTimeout( () => {
-                            Entry.Diaboard.fireCommand( cmd );
+                            RoCode.Diaboard.fireCommand( cmd );
                         }, ( second * 1000 ) * index );
                     }
                 }
-                return Entry.Diaboard.deferredReturn( script.callReturn, totalSecond * 1000 );
+                return RoCode.Diaboard.deferredReturn( script.callReturn, totalSecond * 1000 );
             },
             syntax: { js: [], py: ['Diaboard.buzzer_eight_melody_bpm(%1,%2,%3,%4,%5,%6,%7,%8,%9,%10)'] },
         },
         diaboard_buzzer_octave: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
-                    options: Entry.Diaboard.OCTAVE_TYPE,
+                    options: RoCode.Diaboard.OCTAVE_TYPE,
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: options_DIABOARD_tonicsolfa2,
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2569,44 +2569,44 @@ Entry.Diaboard.getBlocks = function() {
                 let tonicsolfa  = script.getNumberValue('TONICSOLFA');
                 let command     = "n";    
                 let note        = ( octave - 1 ) * 12 + tonicsolfa;     // 프로토콜 인자값 ( 0 ~ 11 )
-                let stdFreq     = Entry.Diaboard.STANDARD_FREQ[ note ]; // 프로토콜 인자값으로 표준주파수값을 가져온다
-                Entry.Diaboard.setFrequency( Math.ceil( stdFreq ) );    // 표준주파수값을 저장한다. 
+                let stdFreq     = RoCode.Diaboard.STANDARD_FREQ[ note ]; // 프로토콜 인자값으로 표준주파수값을 가져온다
+                RoCode.Diaboard.setFrequency( Math.ceil( stdFreq ) );    // 표준주파수값을 저장한다. 
                 let time        = 0;
                 let cmd         = `b:${command}:${note}:${time}`;       // buzzer : comman n(노트) : 노트번호 : 시간
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn );
             },
             syntax: { js: [], py: ['Diaboard.buzzer_octave(%1,%2)'] },
         },
         diaboard_buzzer_octave_rhythm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
-                    options: Entry.Diaboard.OCTAVE_TYPE,
+                    options: RoCode.Diaboard.OCTAVE_TYPE,
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: options_DIABOARD_tonicsolfa2,
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
-                    options: Entry.Diaboard.RHYTHM_TYPE,
+                    options: RoCode.Diaboard.RHYTHM_TYPE,
                     value: 0.5,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },                
                 {
                     type: 'Indicator',
@@ -2637,19 +2637,19 @@ Entry.Diaboard.getBlocks = function() {
                 let rhythm      = script.getNumberValue('RHYTHM');
                 let command     = "n";    
                 let note        = ( octave - 1 ) * 12 + tonicsolfa;
-                let stdFreq     = Entry.Diaboard.STANDARD_FREQ[ note ];         // 프로토콜 인자값으로 표준주파수값을 가져온다
-                Entry.Diaboard.setFrequency( Math.ceil( stdFreq ) );            // 표준주파수값을 저장한다. 
-                let second      = Entry.Diaboard.convertTimeForBPM( rhythm );   // 초
+                let stdFreq     = RoCode.Diaboard.STANDARD_FREQ[ note ];         // 프로토콜 인자값으로 표준주파수값을 가져온다
+                RoCode.Diaboard.setFrequency( Math.ceil( stdFreq ) );            // 표준주파수값을 저장한다. 
+                let second      = RoCode.Diaboard.convertTimeForBPM( rhythm );   // 초
                 let time        = second * 100;                                 // 메세지 시간 세팅 시 ( 초 * 100 )
                 let cmd         = `b:${command}:${note}:${time}`;               // buzzer : comman n(노트) : 노트번호 : 시간
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn, second * 1000 );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn, second * 1000 );
             },
             syntax: { js: [], py: ['Diaboard.buzzer_octave_rhythm(%1,%2,%3)'] },
         },
         diaboard_buzzer_hz: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2684,17 +2684,17 @@ Entry.Diaboard.getBlocks = function() {
                 value           = isNaN( value ) ? 60 : Math.round( value );    // 유효하지 않은 값은, 60로 처리
                 let command     = "f";    
                 let freq        = Math.max( Math.min( value, 8000 ), 32);   // 주파수는 32~8000hz 범위로 보내기 
-                Entry.Diaboard.setFrequency( freq );
+                RoCode.Diaboard.setFrequency( freq );
                 let time        = 0;
                 let cmd         = `b:${command}:${freq}:${time}`;   // buzzer : comman n(노트) : 노트번호 : 시간
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn );
             },
             syntax: { js: [], py: ['Diaboard.buzzer_hz(%1)'] },
         },
         diaboard_buzzer_hz_change: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2729,18 +2729,18 @@ Entry.Diaboard.getBlocks = function() {
                 value           = isNaN( value ) ? 0 : Math.round( value );                     // 유효하지 않은 값은, 0으로 설정
                 let command     = "f";    
                 let diffFreq    = Math.max( Math.min( value, 8000 - 32 ), ( -8000 + 32 ) );     // 주파수 변화 값 -7968 ~ 7968
-                let freq        = Entry.Diaboard.getFrequency() + diffFreq;
-                Entry.Diaboard.setFrequency( freq );
+                let freq        = RoCode.Diaboard.getFrequency() + diffFreq;
+                RoCode.Diaboard.setFrequency( freq );
                 let time        = 0;
                 let cmd         = `b:${command}:${freq}:${time}`;   // buzzer : comman n(노트) : 노트번호 : 시간
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn );
             },
             syntax: { js: [], py: ['Diaboard.buzzer_hz_change(%1)'] },
         },
         diaboard_buzzer_speed_bpm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2774,14 +2774,14 @@ Entry.Diaboard.getBlocks = function() {
                 let value   = script.getNumberValue('VALUE');
                 value       = isNaN( value ) ? 120 : Math.round( value );       // 유효하지 않은 값은 120
                 let bpm     = Math.max(Math.min( value, 300 ), 30 );            // BPM 범위는 30 ~ 300
-                Entry.Diaboard.setBPM( bpm );
-                return Entry.Diaboard.deferredReturn( script.callReturn );
+                RoCode.Diaboard.setBPM( bpm );
+                return RoCode.Diaboard.deferredReturn( script.callReturn );
             },
             syntax: { js: [], py: ['Diaboard.buzzer_speed_bpm(%1)'] },
         },
         diaboard_buzzer_speed_bpm_change: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2814,26 +2814,26 @@ Entry.Diaboard.getBlocks = function() {
             func: function(sprite, script) {
                 let value   = script.getNumberValue('VALUE');
                 value       = isNaN( value ) ? 120 : Math.round( value );       // 유효하지 않은 값은 120
-                let newVal  = Entry.Diaboard.getBPM() + value;
+                let newVal  = RoCode.Diaboard.getBPM() + value;
                 let bpm     = Math.max( Math.min( newVal, 300 ), 30 );          // BPM 범위는 30 ~ 300
-                Entry.Diaboard.setBPM( bpm );
-                return Entry.Diaboard.deferredReturn( script.callReturn );
+                RoCode.Diaboard.setBPM( bpm );
+                return RoCode.Diaboard.deferredReturn( script.callReturn );
             },
             syntax: { js: [], py: ['Diaboard.buzzer_speed_bpm_change(%1)'] },
         },
         diaboard_buzzer_sleep_rhythm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
-                    options: Entry.Diaboard.RHYTHM_TYPE,
+                    options: RoCode.Diaboard.RHYTHM_TYPE,
                     value: 0.25,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2856,17 +2856,17 @@ Entry.Diaboard.getBlocks = function() {
             isNotFor: ['diaboard'],
             func: function(sprite, script) {
                 let rhythm      = script.getNumberValue('RHYTHM');
-                let second      = Entry.Diaboard.convertTimeForBPM( rhythm );   // 초
+                let second      = RoCode.Diaboard.convertTimeForBPM( rhythm );   // 초
                 let time        = second * 100;                                 // 메세지 시간 세팅 시 ( 초 * 100 )
                 let cmd         = `b:n:96:${time}`;                             // 96은 무음 (박자 쉬기 블록일 때)
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn, second * 1000 );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn, second * 1000 );
             },
             syntax: { js: [], py: ['Diaboard.buzzer_sleep_rhythm(%1)'] },
         },
         diaboard_buzzer_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2890,8 +2890,8 @@ Entry.Diaboard.getBlocks = function() {
             isNotFor: ['diaboard'],
             func: function(sprite, script) {
                 let cmd         = `b:x`;
-                Entry.Diaboard.fireCommand( cmd );
-                return Entry.Diaboard.deferredReturn( script.callReturn );
+                RoCode.Diaboard.fireCommand( cmd );
+                return RoCode.Diaboard.deferredReturn( script.callReturn );
             },
             syntax: { js: [], py: ['Diaboard.buzzer_stop(%1)'] },
         },
@@ -2899,7 +2899,7 @@ Entry.Diaboard.getBlocks = function() {
     };
 };
 // 언어 적용
-Entry.Diaboard.setLanguage = function() {
+RoCode.Diaboard.setLanguage = function() {
     return {
         ko: {
             // ko.js에 작성하던 내용
@@ -3208,4 +3208,4 @@ Entry.Diaboard.setLanguage = function() {
     };
 };
 
-module.exports = Entry.Diaboard;
+module.exports = RoCode.Diaboard;

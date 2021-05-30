@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Robotis_rb = {
+RoCode.Robotis_rb = {
     INSTRUCTION: {
         NONE: 0,
         WRITE: 3,
@@ -27,9 +27,9 @@ Entry.Robotis_rb = {
         CM_MOTION: [66, 2], //[66,1]
 
         AUX_SERVO_POSITION: [152, 2],
-        
+
         AUX_CUSTOM: [216, 2],
-        
+
         AUX_SERVO_MODE: [126, 1],
         AUX_SERVO_SPEED: [136, 2],
         AUX_MOTOR_SPEED: [136, 2],
@@ -40,20 +40,20 @@ Entry.Robotis_rb = {
     },
     setZero: function () {
         // instruction / address / length / value / default length
-        Entry.hw.sendQueue['setZero'] = [1];
-        Entry.Robotis_carCont.update();
-        Entry.Robotis_carCont.setRobotisData(null);
-        Entry.hw.sendQueue['setZero'] = null;
-        Entry.Robotis_carCont.update();
-        Entry.Robotis_carCont.setRobotisData([
-            [Entry.Robotis_rb.INSTRUCTION.WRITE, 21, 2, 20],
-            [Entry.Robotis_rb.INSTRUCTION.WRITE, 40, 2, 0],
-            [Entry.Robotis_rb.INSTRUCTION.WRITE, 66, 2, 0],
-            [Entry.Robotis_rb.INSTRUCTION.WRITE, 710, 2, 0],
-            // [Entry.Robotis_rb.INSTRUCTION.WRITE, 163, 2, 30759],
-            // [Entry.Robotis_rb.INSTRUCTION.WRITE, 162, 1, 1],
+        RoCode.hw.sendQueue['setZero'] = [1];
+        RoCode.Robotis_carCont.update();
+        RoCode.Robotis_carCont.setRobotisData(null);
+        RoCode.hw.sendQueue['setZero'] = null;
+        RoCode.Robotis_carCont.update();
+        RoCode.Robotis_carCont.setRobotisData([
+            [RoCode.Robotis_rb.INSTRUCTION.WRITE, 21, 2, 20],
+            [RoCode.Robotis_rb.INSTRUCTION.WRITE, 40, 2, 0],
+            [RoCode.Robotis_rb.INSTRUCTION.WRITE, 66, 2, 0],
+            [RoCode.Robotis_rb.INSTRUCTION.WRITE, 710, 2, 0],
+            // [RoCode.Robotis_rb.INSTRUCTION.WRITE, 163, 2, 30759],
+            // [RoCode.Robotis_rb.INSTRUCTION.WRITE, 162, 1, 1],
         ]);
-        Entry.Robotis_carCont.update();
+        RoCode.Robotis_carCont.update();
     },
     id: ['7.5', '7.6'],
     name: 'Robotis_rb',
@@ -67,8 +67,8 @@ Entry.Robotis_rb = {
     readDelay: 30,
 };
 
-Entry.Robotis_rb.blockMenuBlocks = [
-    
+RoCode.Robotis_rb.blockMenuBlocks = [
+
     'robotis_RB_cm_ir_value',
     'robotis_RB_cm_ir_compare',
     'robotis_RB_detectFrontObj',
@@ -78,7 +78,7 @@ Entry.Robotis_rb.blockMenuBlocks = [
     'robotis_RB_detectSound_compare',
     'robotis_RB_imu',
     'robotis_RB_roll_pitch', // 값 안나옴.
-   
+
     'robotis_RB_cm_buzzer_index',
     'robotis_RB_cm_screen',
     'robotis_RB_cm_anim_screen',
@@ -86,7 +86,7 @@ Entry.Robotis_rb.blockMenuBlocks = [
 
     'robotis_RB_LCDBright',
     'robotis_RB_LCDColor',
-    
+
     'robotis_RB_LEDBright',
     'robotis_RB_cm_led',
 
@@ -94,19 +94,19 @@ Entry.Robotis_rb.blockMenuBlocks = [
     'robotis_RB_effectSound',
     'robotis_RB_record',
     'robotis_RB_playRecord',
-    
+
     'robotis_openCM70_RGee_go',
     'robotis_openCM70_RGee_stop',
     'robotis_openCM70_RGee_motion',
-    
+
     'robotis_dxl_control',
     'robotis_dxl_each_control',
-    
+
     // 'robotis_RB_cm_custom_value',
     // 'robotis_RB_cm_custom',
 ];
 
-Entry.Robotis_rb.setLanguage = function() {
+RoCode.Robotis_rb.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -128,7 +128,7 @@ Entry.Robotis_rb.setLanguage = function() {
 
                 robotis_RB_LCDBright: "제어기 화면 밝기를 %1로 정하기 %2",
                 robotis_RB_LCDColor: "제어기 화면 색상을 %1로 정하기 %2",
-                
+
                 robotis_RB_LEDBright: "제어기 %1 LED 밝기를 %2로 정하기 %3",
                 robotis_RB_cm_led: "제어기 %1 LED %2 %3",
 
@@ -320,18 +320,18 @@ Entry.Robotis_rb.setLanguage = function() {
                 robotis_RB_imu:"%1 axis' %2 value",
                 robotis_RB_roll_pitch:"%1 Controller position ",
                 robotis_RB_detectPose:"If robot falls %1",
-                
+
                 robotis_RB_cm_buzzer_index:"%1 at %2 octaves for %3 second(s) -> %4 %5",
                 robotis_RB_cm_screen:"Choose %1 as a screen background %2",
                 robotis_RB_cm_anim_screen: "Choose %1 as a screen animation %2",
                 robotis_RB_rsp_screen:"Print %1 on the screen %2",
-                
+
                 robotis_RB_LCDBright:"Adjust screen brightness to %1 %2",
                 robotis_RB_LCDColor:"Set screen color to %1 %2",
-                
+
                 robotis_RB_LEDBright:"Set the brightness of the %1 LED to %2 %3",
                 robotis_RB_cm_led:"%1 LED %2 %3",
-                
+
                 robotis_RB_Hello:"Say %1 %2",
                 robotis_RB_effectSound:"Play the sound of %1 %2",
                 robotis_RB_record:"Record in room %1 %2",
@@ -512,12 +512,12 @@ Entry.Robotis_rb.setLanguage = function() {
 };
 
 
-Entry.Robotis_rb.getBlocks = function () {
+RoCode.Robotis_rb.getBlocks = function () {
     return {
         //region robotis 로보티즈 openCM70
         robotis_RB_rsp_screen: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -541,8 +541,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '11545',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -565,27 +565,27 @@ Entry.Robotis_rb.getBlocks = function () {
             func: function (sprite, script) {
                 // instruction / address / length / value / default length
                 var iconNum = script.getField('ICON', script);
-                
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address = 166;
                 var data_length = 2;
                 var data_value = 10496;
-            
-               
+
+
                 data_value = iconNum;
 
                 var data_sendqueue = [
                     // [
-                    //     Entry.Robotis_rb.INSTRUCTION.WRITE, 163, 2, 2817
+                    //     RoCode.Robotis_rb.INSTRUCTION.WRITE, 163, 2, 2817
                     // ],
                     [
-                        Entry.Robotis_rb.INSTRUCTION.WRITE, 163, 2, 255
+                        RoCode.Robotis_rb.INSTRUCTION.WRITE, 163, 2, 255
                     ],
                     [
-                        Entry.Robotis_rb.INSTRUCTION.WRITE, 130, 4, 0
+                        RoCode.Robotis_rb.INSTRUCTION.WRITE, 130, 4, 0
                     ],
                     [
-                        Entry.Robotis_rb.INSTRUCTION.WRITE, 149, 2, 200
+                        RoCode.Robotis_rb.INSTRUCTION.WRITE, 149, 2, 200
                     ],
                     [
                         data_instruction,
@@ -594,14 +594,14 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_value,
                     ],
                     [
-                        Entry.Robotis_rb.INSTRUCTION.WRITE, 162, 1, 1
+                        RoCode.Robotis_rb.INSTRUCTION.WRITE, 162, 1, 1
                     ]
                 ];
-                
-                return Entry.Robotis_carCont.postCallReturn(
+
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
-                    Entry.Robotis_openCM70.delay + 1000
+                    RoCode.Robotis_openCM70.delay + 1000
                 );
             },
             syntax: {
@@ -610,8 +610,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_cm_custom_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -629,8 +629,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: 'BYTE',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -654,7 +654,7 @@ Entry.Robotis_rb.getBlocks = function () {
                 var scope = script.executor.scope;
 
                 // instruction / address / length / value / default length
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.READ;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.READ;
                 var data_address = 0;
                 var data_length = 0;
                 var data_value = 0;
@@ -678,22 +678,22 @@ Entry.Robotis_rb.getBlocks = function () {
                 data_default_length = data_length;
 
                 if (
-                    Entry.hw.sendQueue.prevAddress &&
-                    Entry.hw.sendQueue.prevAddress == data_default_address
+                    RoCode.hw.sendQueue.prevAddress &&
+                    RoCode.hw.sendQueue.prevAddress == data_default_address
                 ) {
                     if (
-                        Entry.hw.sendQueue.prevTime &&
-                        new Date() - Entry.hw.sendQueue.prevTime < Entry.Robotis_openCM70.readDelay
+                        RoCode.hw.sendQueue.prevTime &&
+                        new Date() - RoCode.hw.sendQueue.prevTime < RoCode.Robotis_openCM70.readDelay
                     ) {
-                        //throw new Entry.Utils.AsyncError();
-                        if(typeof Entry.hw.sendQueue.prevResult == 'undefined') {
+                        //throw new RoCode.Utils.AsyncError();
+                        if(typeof RoCode.hw.sendQueue.prevResult == 'undefined') {
                             return 0;
                         }
-                        return Entry.hw.sendQueue.prevResult;
+                        return RoCode.hw.sendQueue.prevResult;
                     }
                 }
 
-                Entry.Robotis_carCont.setRobotisData([
+                RoCode.Robotis_carCont.setRobotisData([
                     [
                         data_instruction,
                         data_address,
@@ -702,13 +702,13 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_default_length,
                     ],
                 ]);
-                // Entry.hw.socket.send(JSON.stringify(Entry.hw.sendQueue));
-                Entry.Robotis_carCont.update();
+                // RoCode.hw.socket.send(JSON.stringify(RoCode.hw.sendQueue));
+                RoCode.Robotis_carCont.update();
 
-                var result = Entry.hw.portData[data_default_address];
-                Entry.hw.sendQueue.prevAddress = data_default_address;
-                Entry.hw.sendQueue.prevTime = new Date();
-                Entry.hw.sendQueue.prevResult = result;
+                var result = RoCode.hw.portData[data_default_address];
+                RoCode.hw.sendQueue.prevAddress = data_default_address;
+                RoCode.hw.sendQueue.prevTime = new Date();
+                RoCode.hw.sendQueue.prevResult = result;
 
                 if(typeof result == 'undefined') {
                     console.log('result is undefined')
@@ -722,8 +722,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_cm_custom_value2: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -741,8 +741,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: 'BYTE',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -766,7 +766,7 @@ Entry.Robotis_rb.getBlocks = function () {
                 var scope = script.executor.scope;
 
                 // instruction / address / length / value / default length
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.READ;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.READ;
                 var data_address = 0;
                 var data_length = 0;
                 var data_value = 0;
@@ -790,22 +790,22 @@ Entry.Robotis_rb.getBlocks = function () {
                 data_default_length = data_length;
 
                 if (
-                    Entry.hw.sendQueue.prevAddress &&
-                    Entry.hw.sendQueue.prevAddress == data_default_address
+                    RoCode.hw.sendQueue.prevAddress &&
+                    RoCode.hw.sendQueue.prevAddress == data_default_address
                 ) {
                     if (
-                        Entry.hw.sendQueue.prevTime &&
-                        new Date() - Entry.hw.sendQueue.prevTime < Entry.Robotis_openCM70.readDelay
+                        RoCode.hw.sendQueue.prevTime &&
+                        new Date() - RoCode.hw.sendQueue.prevTime < RoCode.Robotis_openCM70.readDelay
                     ) {
-                        //throw new Entry.Utils.AsyncError();
-                        if(typeof Entry.hw.sendQueue.prevResult == 'undefined') {
+                        //throw new RoCode.Utils.AsyncError();
+                        if(typeof RoCode.hw.sendQueue.prevResult == 'undefined') {
                             return 0;
                         }
-                        return Entry.hw.sendQueue.prevResult;
+                        return RoCode.hw.sendQueue.prevResult;
                     }
                 }
 
-                Entry.Robotis_carCont.setRobotisData([
+                RoCode.Robotis_carCont.setRobotisData([
                     [
                         data_instruction,
                         data_address,
@@ -814,13 +814,13 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_default_length,
                     ],
                 ]);
-                // Entry.hw.socket.send(JSON.stringify(Entry.hw.sendQueue));
-                Entry.Robotis_carCont.update();
+                // RoCode.hw.socket.send(JSON.stringify(RoCode.hw.sendQueue));
+                RoCode.Robotis_carCont.update();
 
-                var result = Entry.hw.portData[data_default_address];
-                Entry.hw.sendQueue.prevAddress = data_default_address;
-                Entry.hw.sendQueue.prevTime = new Date();
-                Entry.hw.sendQueue.prevResult = result;
+                var result = RoCode.hw.portData[data_default_address];
+                RoCode.hw.sendQueue.prevAddress = data_default_address;
+                RoCode.hw.sendQueue.prevTime = new Date();
+                RoCode.hw.sendQueue.prevResult = result;
 
                 if(typeof result == 'undefined') {
                     console.log('result is undefined')
@@ -834,8 +834,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_cm_ir_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -852,8 +852,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '360',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -872,7 +872,7 @@ Entry.Robotis_rb.getBlocks = function () {
                 var scope = script.executor.scope;
 
                 // instruction / address / length / value / default length
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.READ;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.READ;
                 var data_address = 0;
                 var data_length = 2;
                 var data_value = 0;
@@ -880,29 +880,29 @@ Entry.Robotis_rb.getBlocks = function () {
                 var data_default_address = 0;
                 var data_default_length = 0;
 
-                
+
                 data_address = script.getNumberValue('VALUE');
 
                 data_default_address = data_address;
                 data_default_length = data_length;
 
                 if (
-                    Entry.hw.sendQueue.prevAddress &&
-                    Entry.hw.sendQueue.prevAddress == data_default_address
+                    RoCode.hw.sendQueue.prevAddress &&
+                    RoCode.hw.sendQueue.prevAddress == data_default_address
                 ) {
                     if (
-                        Entry.hw.sendQueue.prevTime &&
-                        new Date() - Entry.hw.sendQueue.prevTime < Entry.Robotis_openCM70.readDelay
+                        RoCode.hw.sendQueue.prevTime &&
+                        new Date() - RoCode.hw.sendQueue.prevTime < RoCode.Robotis_openCM70.readDelay
                     ) {
-                        //throw new Entry.Utils.AsyncError();
-                        if(typeof Entry.hw.sendQueue.prevResult == 'undefined') {
+                        //throw new RoCode.Utils.AsyncError();
+                        if(typeof RoCode.hw.sendQueue.prevResult == 'undefined') {
                             return 0;
                         }
-                        return Entry.hw.sendQueue.prevResult;
+                        return RoCode.hw.sendQueue.prevResult;
                     }
                 }
 
-                Entry.Robotis_carCont.setRobotisData([
+                RoCode.Robotis_carCont.setRobotisData([
                     [
                         data_instruction,
                         data_address,
@@ -911,13 +911,13 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_default_length,
                     ],
                 ]);
-                // Entry.hw.socket.send(JSON.stringify(Entry.hw.sendQueue));
-                Entry.Robotis_carCont.update();
+                // RoCode.hw.socket.send(JSON.stringify(RoCode.hw.sendQueue));
+                RoCode.Robotis_carCont.update();
 
-                var result = Entry.hw.portData[data_default_address];
-                Entry.hw.sendQueue.prevAddress = data_default_address;
-                Entry.hw.sendQueue.prevTime = new Date();
-                Entry.hw.sendQueue.prevResult = result;
+                var result = RoCode.hw.portData[data_default_address];
+                RoCode.hw.sendQueue.prevAddress = data_default_address;
+                RoCode.hw.sendQueue.prevTime = new Date();
+                RoCode.hw.sendQueue.prevResult = result;
 
                 if(typeof result == 'undefined') {
                     console.log('result is undefined')
@@ -931,8 +931,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_cm_ir_compare: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -949,8 +949,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '360',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -961,8 +961,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -989,7 +989,7 @@ Entry.Robotis_rb.getBlocks = function () {
                 var scope = script.executor.scope;
 
                 // instruction / address / length / value / default length
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.READ;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.READ;
                 var data_address = 0;
                 var data_length = 2;
                 var data_value = 0;
@@ -1005,28 +1005,28 @@ Entry.Robotis_rb.getBlocks = function () {
                 data_default_length = data_length;
 
                 if (
-                    Entry.hw.sendQueue.prevAddress &&
-                    Entry.hw.sendQueue.prevAddress == data_default_address
+                    RoCode.hw.sendQueue.prevAddress &&
+                    RoCode.hw.sendQueue.prevAddress == data_default_address
                 ) {
                     if (
-                        Entry.hw.sendQueue.prevTime &&
-                        new Date() - Entry.hw.sendQueue.prevTime < Entry.Robotis_openCM70.readDelay//200
+                        RoCode.hw.sendQueue.prevTime &&
+                        new Date() - RoCode.hw.sendQueue.prevTime < RoCode.Robotis_openCM70.readDelay//200
                     ) {
-                        //throw new Entry.Utils.AsyncError();
+                        //throw new RoCode.Utils.AsyncError();
                         switch(compareOP) {
                             case 0:
-                                return Entry.hw.sendQueue.prevResult > compareValue;
+                                return RoCode.hw.sendQueue.prevResult > compareValue;
                             case 1:
-                                return Entry.hw.sendQueue.prevResult < compareValue;
+                                return RoCode.hw.sendQueue.prevResult < compareValue;
                             case 2:
-                                return Entry.hw.sendQueue.prevResult == compareValue;
+                                return RoCode.hw.sendQueue.prevResult == compareValue;
                         }
 
-                        
+
                     }
                 }
 
-                Entry.Robotis_carCont.setRobotisData([
+                RoCode.Robotis_carCont.setRobotisData([
                     [
                         data_instruction,
                         data_address,
@@ -1035,13 +1035,13 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_default_length,
                     ],
                 ]);
-                // Entry.hw.socket.send(JSON.stringify(Entry.hw.sendQueue));
-                Entry.Robotis_carCont.update();
+                // RoCode.hw.socket.send(JSON.stringify(RoCode.hw.sendQueue));
+                RoCode.Robotis_carCont.update();
 
-                var result = Entry.hw.portData[data_default_address];
-                Entry.hw.sendQueue.prevAddress = data_default_address;
-                Entry.hw.sendQueue.prevTime = new Date();
-                Entry.hw.sendQueue.prevResult = result;
+                var result = RoCode.hw.portData[data_default_address];
+                RoCode.hw.sendQueue.prevAddress = data_default_address;
+                RoCode.hw.sendQueue.prevTime = new Date();
+                RoCode.hw.sendQueue.prevResult = result;
 
                 switch(compareOP) {
                     case 0:
@@ -1058,8 +1058,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_LCDBright: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1088,14 +1088,14 @@ Entry.Robotis_rb.getBlocks = function () {
             func: function (sprite, script) {
                 // instruction / address / length / value / default length
                 var bright = script.getNumberValue('BRIGHT', script);
-                
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address = 180;
                 var data_length = 1;
                 var data_value = 0;
-                
+
                 data_value = bright;
-                
+
                 var data_sendqueue = [
                     [
                         data_instruction,
@@ -1104,10 +1104,10 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_value,
                     ],
                 ];
-                return Entry.Robotis_carCont.postCallReturn(
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
-                    Entry.Robotis_openCM70.delay
+                    RoCode.Robotis_openCM70.delay
                 );
             },
             syntax: {
@@ -1116,8 +1116,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_LCDColor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1135,8 +1135,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '224',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1159,17 +1159,17 @@ Entry.Robotis_rb.getBlocks = function () {
             func: function (sprite, script) {
                 // instruction / address / length / value / default length
                 var color = script.getField('COLOR', script);
-                
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address = 163;
                 var data_length = 2;
                 var data_value = 0;
-                
+
                 data_value = color;
-                
+
                 var data_sendqueue = [
                     [
-                        Entry.Robotis_rb.INSTRUCTION.WRITE, 163, 2, 2817
+                        RoCode.Robotis_rb.INSTRUCTION.WRITE, 163, 2, 2817
                     ],
                     [
                         data_instruction,
@@ -1179,10 +1179,10 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     [3, 162, 1, 1]
                 ];
-                return Entry.Robotis_carCont.postCallReturn(
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
-                    Entry.Robotis_openCM70.delay + 100
+                    RoCode.Robotis_openCM70.delay + 100
                 );
             },
             syntax: {
@@ -1191,8 +1191,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_detectSound_compare:{
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -1206,8 +1206,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '255',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1226,7 +1226,7 @@ Entry.Robotis_rb.getBlocks = function () {
                 var scope = script.executor.scope;
 
                 // instruction / address / length / value / default length
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.READ;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.READ;
                 var data_address = 5031;
                 var data_length = 1;
                 var data_value = 0;
@@ -1240,21 +1240,21 @@ Entry.Robotis_rb.getBlocks = function () {
                 data_default_length = data_length;
 
                 if (
-                    Entry.hw.sendQueue.prevAddress &&
-                    Entry.hw.sendQueue.prevAddress == data_default_address
+                    RoCode.hw.sendQueue.prevAddress &&
+                    RoCode.hw.sendQueue.prevAddress == data_default_address
                 ) {
                     if (
-                        Entry.hw.sendQueue.prevTime &&
-                        new Date() - Entry.hw.sendQueue.prevTime < Entry.Robotis_openCM70.readDelay//200
+                        RoCode.hw.sendQueue.prevTime &&
+                        new Date() - RoCode.hw.sendQueue.prevTime < RoCode.Robotis_openCM70.readDelay//200
                     ) {
-                        //throw new Entry.Utils.AsyncError();
-                        console.log(Entry.hw.sendQueue.prevResult)
-                        
-                        return Entry.hw.sendQueue.prevResult == compareValue;
+                        //throw new RoCode.Utils.AsyncError();
+                        console.log(RoCode.hw.sendQueue.prevResult)
+
+                        return RoCode.hw.sendQueue.prevResult == compareValue;
                     }
                 }
 
-                Entry.Robotis_carCont.setRobotisData([
+                RoCode.Robotis_carCont.setRobotisData([
                     [
                         data_instruction,
                         data_address,
@@ -1263,13 +1263,13 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_default_length,
                     ],
                 ]);
-                // Entry.hw.socket.send(JSON.stringify(Entry.hw.sendQueue));
-                Entry.Robotis_carCont.update();
+                // RoCode.hw.socket.send(JSON.stringify(RoCode.hw.sendQueue));
+                RoCode.Robotis_carCont.update();
 
-                var result = Entry.hw.portData[data_default_address];
-                Entry.hw.sendQueue.prevAddress = data_default_address;
-                Entry.hw.sendQueue.prevTime = new Date();
-                Entry.hw.sendQueue.prevResult = result;
+                var result = RoCode.hw.portData[data_default_address];
+                RoCode.hw.sendQueue.prevAddress = data_default_address;
+                RoCode.hw.sendQueue.prevTime = new Date();
+                RoCode.hw.sendQueue.prevResult = result;
 
                 return result == compareValue;
             },
@@ -1279,8 +1279,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_LEDBright: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1293,8 +1293,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: 'RB_LED_L',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1327,35 +1327,35 @@ Entry.Robotis_rb.getBlocks = function () {
                 // instruction / address / length / value / default length
                 var cmLed = script.getField('CMLED', script);
                 var bright = script.getNumberValue('BRIGHT', script);
-                
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address = 0;
                 var data_length = 1;
                 var data_value = 0;
-            
-                if(bright < 0){ 
+
+                if(bright < 0){
                     bright = 0;
                 } else if(bright > 100) {
                     bright = 100
                 }
                 data_value = 100+bright;
-            
+
 
                 if (cmLed == 'RB_LED_L') {
                     data_address =
-                        Entry.Robotis_rb.CONTROL_TABLE.RB_LED_L[0];
+                        RoCode.Robotis_rb.CONTROL_TABLE.RB_LED_L[0];
                     data_length =
-                        Entry.Robotis_rb.CONTROL_TABLE.RB_LED_L[1];
+                        RoCode.Robotis_rb.CONTROL_TABLE.RB_LED_L[1];
                 } else if (cmLed == 'RB_LED_R') {
                     data_address =
-                        Entry.Robotis_rb.CONTROL_TABLE.RB_LED_R[0];
+                        RoCode.Robotis_rb.CONTROL_TABLE.RB_LED_R[0];
                     data_length =
-                        Entry.Robotis_rb.CONTROL_TABLE.RB_LED_R[1];
+                        RoCode.Robotis_rb.CONTROL_TABLE.RB_LED_R[1];
                 } else if (cmLed == 'RB_LED_B') {
                     data_address =
-                        Entry.Robotis_rb.CONTROL_TABLE.RB_LED_B[0];
+                        RoCode.Robotis_rb.CONTROL_TABLE.RB_LED_B[0];
                     data_length =
-                        Entry.Robotis_rb.CONTROL_TABLE.RB_LED_B[1];
+                        RoCode.Robotis_rb.CONTROL_TABLE.RB_LED_B[1];
                     if(bright != 0){
                         data_value = 257*(bright+100);
                     }
@@ -1369,10 +1369,10 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_value,
                     ],
                 ];
-                return Entry.Robotis_carCont.postCallReturn(
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
-                    Entry.Robotis_openCM70.delay
+                    RoCode.Robotis_openCM70.delay
                 );
             },
             syntax: {
@@ -1381,8 +1381,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_Hello: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1452,8 +1452,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1476,13 +1476,13 @@ Entry.Robotis_rb.getBlocks = function () {
             func: function (sprite, script) {
                 // instruction / address / length / value / default length
                 var cmHello = script.getField('HELLO', script);
-                
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address = 110;
                 var data_length = 2;
                 var data_value = 0;
-            
-               
+
+
                 data_value = 25601+Number(cmHello);
 
                 var data_sendqueue = [
@@ -1501,13 +1501,13 @@ Entry.Robotis_rb.getBlocks = function () {
                 ];
                 console.log('hello')
 
-                let extraTime = 0; 
-                
+                let extraTime = 0;
+
                 if(cmHello == '38' || cmHello == '55') {
                     extraTime = 2000;
                 }
 
-                return Entry.Robotis_carCont.postCallReturn(
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
                     2000 + extraTime
@@ -1519,8 +1519,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_effectSound:{
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1548,8 +1548,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1572,13 +1572,13 @@ Entry.Robotis_rb.getBlocks = function () {
             func: function (sprite, script) {
                 // instruction / address / length / value / default length
                 var cmHello = script.getField('HELLO', script);
-                
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address = 110;
                 var data_length = 2;
                 var data_value = 0;
-            
-               
+
+
                 data_value = Number(cmHello);
 
                 var data_sendqueue = [
@@ -1595,7 +1595,7 @@ Entry.Robotis_rb.getBlocks = function () {
                         0
                     ]
                 ];
-                
+
                 let extraTime = 0;
                 if(cmHello == '272' || cmHello == '786' || cmHello == '787' || cmHello == '788' || cmHello == '789') { //오리
                     extraTime = 0;
@@ -1603,7 +1603,7 @@ Entry.Robotis_rb.getBlocks = function () {
                         extraTime += 500;
                     }
                 }
-                return Entry.Robotis_carCont.postCallReturn(
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
                     3000 + extraTime
@@ -1615,8 +1615,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_record:{
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1631,8 +1631,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1655,13 +1655,13 @@ Entry.Robotis_rb.getBlocks = function () {
             func: function (sprite, script) {
                 // instruction / address / length / value / default length
                 var roomNum = script.getField('ROOM', script);
-                
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address = 115;
                 var data_length = 1;
                 var data_value = 0;
-            
-               
+
+
                 data_value = roomNum;
 
                 var data_sendqueue = [
@@ -1672,8 +1672,8 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_value,
                     ],
                 ];
-                
-                return Entry.Robotis_carCont.postCallReturn(
+
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
                     6000
@@ -1685,8 +1685,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_playRecord:{
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1701,8 +1701,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1725,13 +1725,13 @@ Entry.Robotis_rb.getBlocks = function () {
             func: function (sprite, script) {
                 // instruction / address / length / value / default length
                 var roomNum = script.getField('ROOM', script);
-                
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address = 116;
                 var data_length = 1;
                 var data_value = 0;
-            
-               
+
+
                 data_value = roomNum;
 
                 var data_sendqueue = [
@@ -1742,8 +1742,8 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_value,
                     ],
                 ];
-                
-                return Entry.Robotis_carCont.postCallReturn(
+
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
                     6000
@@ -1755,18 +1755,18 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_detectFrontObj:{
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
-                
+
             ],
             events: {},
             def: {
                 params: [
-                  
+
                 ],
                 type: 'robotis_RB_detectFrontObj',
             },
@@ -1779,7 +1779,7 @@ Entry.Robotis_rb.getBlocks = function () {
                 var scope = script.executor.scope;
 
                 // instruction / address / length / value / default length
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.READ;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.READ;
                 var data_address = 360;
                 var data_length = 4;
                 var data_value = 0;
@@ -1793,22 +1793,22 @@ Entry.Robotis_rb.getBlocks = function () {
                 data_default_length = data_length;
 
                 if (
-                    Entry.hw.sendQueue.prevAddress &&
-                    Entry.hw.sendQueue.prevAddress == data_default_address
+                    RoCode.hw.sendQueue.prevAddress &&
+                    RoCode.hw.sendQueue.prevAddress == data_default_address
                 ) {
                     if (
-                        Entry.hw.sendQueue.prevTime &&
-                        new Date() - Entry.hw.sendQueue.prevTime < Entry.Robotis_openCM70.readDelay//200
+                        RoCode.hw.sendQueue.prevTime &&
+                        new Date() - RoCode.hw.sendQueue.prevTime < RoCode.Robotis_openCM70.readDelay//200
                     ) {
-                        
-                        let ir_1 = Entry.hw.sendQueue.prevResult & 0xffff;
-                        let ir_2 =  Entry.hw.sendQueue.prevResult >> 16;
-                        
-                        return ir_1 > 100 && ir_2 > 100//Entry.hw.sendQueue.prevResult// > 10000000;
+
+                        let ir_1 = RoCode.hw.sendQueue.prevResult & 0xffff;
+                        let ir_2 =  RoCode.hw.sendQueue.prevResult >> 16;
+
+                        return ir_1 > 100 && ir_2 > 100//RoCode.hw.sendQueue.prevResult// > 10000000;
                     }
                 }
 
-                Entry.Robotis_carCont.setRobotisData([
+                RoCode.Robotis_carCont.setRobotisData([
                     [
                         data_instruction,
                         data_address,
@@ -1817,16 +1817,16 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_default_length,
                     ],
                 ]);
-                Entry.Robotis_carCont.update();
+                RoCode.Robotis_carCont.update();
 
-                var result = Entry.hw.portData[data_default_address];
-                Entry.hw.sendQueue.prevAddress = data_default_address;
-                Entry.hw.sendQueue.prevTime = new Date();
-                Entry.hw.sendQueue.prevResult = result;
+                var result = RoCode.hw.portData[data_default_address];
+                RoCode.hw.sendQueue.prevAddress = data_default_address;
+                RoCode.hw.sendQueue.prevTime = new Date();
+                RoCode.hw.sendQueue.prevResult = result;
 
-                let ir_1 = Entry.hw.sendQueue.prevResult & 0xffff;
-                let ir_2 =  Entry.hw.sendQueue.prevResult >> 16;
-                
+                let ir_1 = RoCode.hw.sendQueue.prevResult & 0xffff;
+                let ir_2 =  RoCode.hw.sendQueue.prevResult >> 16;
+
 
                 return ir_1 > 100 && ir_2 > 100
                 return result// > 10000000;
@@ -1837,8 +1837,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_detectPose:{
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -1851,8 +1851,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 }
             ],
             events: {},
@@ -1871,7 +1871,7 @@ Entry.Robotis_rb.getBlocks = function () {
                 var scope = script.executor.scope;
 
                 // instruction / address / length / value / default length
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.READ;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.READ;
                 var data_address = 78;
                 var data_length = 2;
                 var data_value = 0;
@@ -1885,24 +1885,24 @@ Entry.Robotis_rb.getBlocks = function () {
                 data_default_length = data_length;
 
                 if (
-                    Entry.hw.sendQueue.prevAddress &&
-                    Entry.hw.sendQueue.prevAddress == data_default_address
+                    RoCode.hw.sendQueue.prevAddress &&
+                    RoCode.hw.sendQueue.prevAddress == data_default_address
                 ) {
                     if (
-                        Entry.hw.sendQueue.prevTime &&
-                        new Date() - Entry.hw.sendQueue.prevTime < Entry.Robotis_openCM70.readDelay//200
+                        RoCode.hw.sendQueue.prevTime &&
+                        new Date() - RoCode.hw.sendQueue.prevTime < RoCode.Robotis_openCM70.readDelay//200
                     ) {
                         switch(compareValue) {
                             case 1:
-                                return Entry.hw.sendQueue.prevResult > 30;
+                                return RoCode.hw.sendQueue.prevResult > 30;
                             case 2:
-                                return Entry.hw.sendQueue.prevResult < -30;
-                        }                        
+                                return RoCode.hw.sendQueue.prevResult < -30;
+                        }
 
                     }
                 }
 
-                Entry.Robotis_carCont.setRobotisData([
+                RoCode.Robotis_carCont.setRobotisData([
                     [
                         data_instruction,
                         data_address,
@@ -1911,12 +1911,12 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_default_length,
                     ],
                 ]);
-                Entry.Robotis_carCont.update();
+                RoCode.Robotis_carCont.update();
 
-                var result = Entry.hw.portData[data_default_address];
-                Entry.hw.sendQueue.prevAddress = data_default_address;
-                Entry.hw.sendQueue.prevTime = new Date();
-                Entry.hw.sendQueue.prevResult = result;
+                var result = RoCode.hw.portData[data_default_address];
+                RoCode.hw.sendQueue.prevAddress = data_default_address;
+                RoCode.hw.sendQueue.prevTime = new Date();
+                RoCode.hw.sendQueue.prevResult = result;
 
                 switch(compareValue) {
                     case 1:
@@ -1931,8 +1931,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_mic:{
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1953,7 +1953,7 @@ Entry.Robotis_rb.getBlocks = function () {
                 var scope = script.executor.scope;
 
                 // instruction / address / length / value / default length
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.READ;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.READ;
                 var data_address = 0;
                 var data_length = 1;
                 var data_value = 0;
@@ -1961,29 +1961,29 @@ Entry.Robotis_rb.getBlocks = function () {
                 var data_default_address = 0;
                 var data_default_length = 0;
 
-                
+
                 data_address = 119;
 
                 data_default_address = data_address;
                 data_default_length = data_length;
 
                 if (
-                    Entry.hw.sendQueue.prevAddress &&
-                    Entry.hw.sendQueue.prevAddress == data_default_address
+                    RoCode.hw.sendQueue.prevAddress &&
+                    RoCode.hw.sendQueue.prevAddress == data_default_address
                 ) {
                     if (
-                        Entry.hw.sendQueue.prevTime &&
-                        new Date() - Entry.hw.sendQueue.prevTime < Entry.Robotis_openCM70.readDelay
+                        RoCode.hw.sendQueue.prevTime &&
+                        new Date() - RoCode.hw.sendQueue.prevTime < RoCode.Robotis_openCM70.readDelay
                     ) {
-                        //throw new Entry.Utils.AsyncError();
-                        if(typeof Entry.hw.sendQueue.prevResult == 'undefined') {
+                        //throw new RoCode.Utils.AsyncError();
+                        if(typeof RoCode.hw.sendQueue.prevResult == 'undefined') {
                             return 0;
                         }
-                        return Entry.hw.sendQueue.prevResult;
+                        return RoCode.hw.sendQueue.prevResult;
                     }
                 }
 
-                Entry.Robotis_carCont.setRobotisData([
+                RoCode.Robotis_carCont.setRobotisData([
                     [
                         data_instruction,
                         data_address,
@@ -1992,13 +1992,13 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_default_length,
                     ],
                 ]);
-                // Entry.hw.socket.send(JSON.stringify(Entry.hw.sendQueue));
-                Entry.Robotis_carCont.update();
+                // RoCode.hw.socket.send(JSON.stringify(RoCode.hw.sendQueue));
+                RoCode.Robotis_carCont.update();
 
-                var result = Entry.hw.portData[data_default_address];
-                Entry.hw.sendQueue.prevAddress = data_default_address;
-                Entry.hw.sendQueue.prevTime = new Date();
-                Entry.hw.sendQueue.prevResult = result;
+                var result = RoCode.hw.portData[data_default_address];
+                RoCode.hw.sendQueue.prevAddress = data_default_address;
+                RoCode.hw.sendQueue.prevTime = new Date();
+                RoCode.hw.sendQueue.prevResult = result;
 
                 if(typeof result == 'undefined') {
                     console.log('result is undefined')
@@ -2012,8 +2012,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_imu:{
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -2027,8 +2027,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '78',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2038,8 +2038,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 }
             ],
             events: {},
@@ -2060,7 +2060,7 @@ Entry.Robotis_rb.getBlocks = function () {
                 var scope = script.executor.scope;
 
                 // instruction / address / length / value / default length
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.READ;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.READ;
                 var data_address = 0;
                 var data_length = 2;
                 var data_value = 0;
@@ -2068,29 +2068,29 @@ Entry.Robotis_rb.getBlocks = function () {
                 var data_default_address = 0;
                 var data_default_length = 0;
 
-                
+
                 data_address = script.getField('AXIS', script) - script.getField('MODE', script);
-                
+
                 data_default_address = data_address;
                 data_default_length = data_length;
 
                 if (
-                    Entry.hw.sendQueue.prevAddress &&
-                    Entry.hw.sendQueue.prevAddress == data_default_address
+                    RoCode.hw.sendQueue.prevAddress &&
+                    RoCode.hw.sendQueue.prevAddress == data_default_address
                 ) {
                     if (
-                        Entry.hw.sendQueue.prevTime &&
-                        new Date() - Entry.hw.sendQueue.prevTime < Entry.Robotis_openCM70.readDelay
+                        RoCode.hw.sendQueue.prevTime &&
+                        new Date() - RoCode.hw.sendQueue.prevTime < RoCode.Robotis_openCM70.readDelay
                     ) {
-                        //throw new Entry.Utils.AsyncError();
-                        if(typeof Entry.hw.sendQueue.prevResult == 'undefined') {
+                        //throw new RoCode.Utils.AsyncError();
+                        if(typeof RoCode.hw.sendQueue.prevResult == 'undefined') {
                             return 0;
                         }
-                        return Entry.hw.sendQueue.prevResult;
+                        return RoCode.hw.sendQueue.prevResult;
                     }
                 }
 
-                Entry.Robotis_carCont.setRobotisData([
+                RoCode.Robotis_carCont.setRobotisData([
                     [
                         data_instruction,
                         data_address,
@@ -2099,13 +2099,13 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_default_length,
                     ],
                 ]);
-                // Entry.hw.socket.send(JSON.stringify(Entry.hw.sendQueue));
-                Entry.Robotis_carCont.update();
+                // RoCode.hw.socket.send(JSON.stringify(RoCode.hw.sendQueue));
+                RoCode.Robotis_carCont.update();
 
-                var result = Entry.hw.portData[data_default_address];
-                Entry.hw.sendQueue.prevAddress = data_default_address;
-                Entry.hw.sendQueue.prevTime = new Date();
-                Entry.hw.sendQueue.prevResult = result;
+                var result = RoCode.hw.portData[data_default_address];
+                RoCode.hw.sendQueue.prevAddress = data_default_address;
+                RoCode.hw.sendQueue.prevTime = new Date();
+                RoCode.hw.sendQueue.prevResult = result;
 
                 if(typeof result == 'undefined') {
                     console.log('result is undefined')
@@ -2119,8 +2119,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_roll_pitch:{
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -2133,8 +2133,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '70',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 }
             ],
             events: {},
@@ -2153,7 +2153,7 @@ Entry.Robotis_rb.getBlocks = function () {
                 var scope = script.executor.scope;
 
                 // instruction / address / length / value / default length
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.READ;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.READ;
                 var data_address = 0;
                 var data_length = 2;
                 var data_value = 0;
@@ -2161,29 +2161,29 @@ Entry.Robotis_rb.getBlocks = function () {
                 var data_default_address = 0;
                 var data_default_length = 0;
 
-                
+
                 data_address = script.getNumberValue('AXIS');
-                
+
                 data_default_address = data_address;
                 data_default_length = data_length;
 
                 if (
-                    Entry.hw.sendQueue.prevAddress &&
-                    Entry.hw.sendQueue.prevAddress == data_default_address
+                    RoCode.hw.sendQueue.prevAddress &&
+                    RoCode.hw.sendQueue.prevAddress == data_default_address
                 ) {
                     if (
-                        Entry.hw.sendQueue.prevTime &&
-                        new Date() - Entry.hw.sendQueue.prevTime < Entry.Robotis_openCM70.readDelay
+                        RoCode.hw.sendQueue.prevTime &&
+                        new Date() - RoCode.hw.sendQueue.prevTime < RoCode.Robotis_openCM70.readDelay
                     ) {
-                        //throw new Entry.Utils.AsyncError();
-                        if(typeof Entry.hw.sendQueue.prevResult == 'undefined') {
+                        //throw new RoCode.Utils.AsyncError();
+                        if(typeof RoCode.hw.sendQueue.prevResult == 'undefined') {
                             return 0;
                         }
-                        return Entry.hw.sendQueue.prevResult;
+                        return RoCode.hw.sendQueue.prevResult;
                     }
                 }
 
-                Entry.Robotis_carCont.setRobotisData([
+                RoCode.Robotis_carCont.setRobotisData([
                     [
                         data_instruction,
                         data_address,
@@ -2192,13 +2192,13 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_default_length,
                     ],
                 ]);
-                // Entry.hw.socket.send(JSON.stringify(Entry.hw.sendQueue));
-                Entry.Robotis_carCont.update();
+                // RoCode.hw.socket.send(JSON.stringify(RoCode.hw.sendQueue));
+                RoCode.Robotis_carCont.update();
 
-                var result = Entry.hw.portData[data_default_address];
-                Entry.hw.sendQueue.prevAddress = data_default_address;
-                Entry.hw.sendQueue.prevTime = new Date();
-                Entry.hw.sendQueue.prevResult = result;
+                var result = RoCode.hw.portData[data_default_address];
+                RoCode.hw.sendQueue.prevAddress = data_default_address;
+                RoCode.hw.sendQueue.prevTime = new Date();
+                RoCode.hw.sendQueue.prevResult = result;
 
                 if(typeof result == 'undefined') {
                     console.log('result is undefined')
@@ -2212,15 +2212,15 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_cm_joystick_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
                 {
                     type: 'Dropdown',
-                    options: [ 
+                    options: [
                         [Lang.Blocks.robotis_center, '0'],
                         ['←', '1'],
                         ['→', '2'],
@@ -2233,8 +2233,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 }
             ],
             events: {},
@@ -2253,7 +2253,7 @@ Entry.Robotis_rb.getBlocks = function () {
                 var scope = script.executor.scope;
 
                 // instruction / address / length / value / default length
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.READ;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.READ;
                 var data_address = 0;
                 var data_length = 1;
                 var data_value = 0;
@@ -2261,7 +2261,7 @@ Entry.Robotis_rb.getBlocks = function () {
                 var data_default_address = 0;
                 var data_default_length = 0;
 
-                
+
                 data_address = 50;
 
                 data_default_address = data_address;
@@ -2270,19 +2270,19 @@ Entry.Robotis_rb.getBlocks = function () {
                 var compareValue = script.getNumberValue('COMPARE_VAL', script);
 
                 if (
-                    Entry.hw.sendQueue.prevAddress &&
-                    Entry.hw.sendQueue.prevAddress == data_default_address
+                    RoCode.hw.sendQueue.prevAddress &&
+                    RoCode.hw.sendQueue.prevAddress == data_default_address
                 ) {
                     if (
-                        Entry.hw.sendQueue.prevTime &&
-                        new Date() - Entry.hw.sendQueue.prevTime < 200
+                        RoCode.hw.sendQueue.prevTime &&
+                        new Date() - RoCode.hw.sendQueue.prevTime < 200
                     ) {
-                        //throw new Entry.Utils.AsyncError();
-                        return (Entry.hw.sendQueue.prevResult == compareValue);
+                        //throw new RoCode.Utils.AsyncError();
+                        return (RoCode.hw.sendQueue.prevResult == compareValue);
                     }
                 }
 
-                Entry.Robotis_carCont.setRobotisData([
+                RoCode.Robotis_carCont.setRobotisData([
                     [
                         data_instruction,
                         data_address,
@@ -2291,13 +2291,13 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_default_length,
                     ],
                 ]);
-                // Entry.hw.socket.send(JSON.stringify(Entry.hw.sendQueue));
-                Entry.Robotis_carCont.update();
+                // RoCode.hw.socket.send(JSON.stringify(RoCode.hw.sendQueue));
+                RoCode.Robotis_carCont.update();
 
-                var result = Entry.hw.portData[data_default_address];
-                Entry.hw.sendQueue.prevAddress = data_default_address;
-                Entry.hw.sendQueue.prevTime = new Date();
-                Entry.hw.sendQueue.prevResult = result;
+                var result = RoCode.hw.portData[data_default_address];
+                RoCode.hw.sendQueue.prevAddress = data_default_address;
+                RoCode.hw.sendQueue.prevTime = new Date();
+                RoCode.hw.sendQueue.prevResult = result;
 
 
 
@@ -2309,8 +2309,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_cm_btn_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -2323,8 +2323,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '45',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2335,8 +2335,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2357,7 +2357,7 @@ Entry.Robotis_rb.getBlocks = function () {
                 var scope = script.executor.scope;
 
                 // instruction / address / length / value / default length
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.READ;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.READ;
                 var data_address = 0;
                 var data_length = 1;
                 var data_value = 0;
@@ -2365,7 +2365,7 @@ Entry.Robotis_rb.getBlocks = function () {
                 var data_default_address = 0;
                 var data_default_length = 0;
 
-                
+
                 data_address = script.getNumberValue('VALUE');
 
                 data_default_address = data_address;
@@ -2373,19 +2373,19 @@ Entry.Robotis_rb.getBlocks = function () {
 
                 var compareValue = script.getNumberValue('COMPARE_VAL');
                 if (
-                    Entry.hw.sendQueue.prevAddress &&
-                    Entry.hw.sendQueue.prevAddress == data_default_address
+                    RoCode.hw.sendQueue.prevAddress &&
+                    RoCode.hw.sendQueue.prevAddress == data_default_address
                 ) {
                     if (
-                        Entry.hw.sendQueue.prevTime &&
-                        new Date() - Entry.hw.sendQueue.prevTime < 50
+                        RoCode.hw.sendQueue.prevTime &&
+                        new Date() - RoCode.hw.sendQueue.prevTime < 50
                     ) {
-                        //throw new Entry.Utils.AsyncError();
-                        return (Entry.hw.sendQueue.prevResult == compareValue);
+                        //throw new RoCode.Utils.AsyncError();
+                        return (RoCode.hw.sendQueue.prevResult == compareValue);
                     }
                 }
 
-                Entry.Robotis_carCont.setRobotisData([
+                RoCode.Robotis_carCont.setRobotisData([
                     [
                         data_instruction,
                         data_address,
@@ -2394,13 +2394,13 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_default_length,
                     ],
                 ]);
-                // Entry.hw.socket.send(JSON.stringify(Entry.hw.sendQueue));
-                Entry.Robotis_carCont.update();
+                // RoCode.hw.socket.send(JSON.stringify(RoCode.hw.sendQueue));
+                RoCode.Robotis_carCont.update();
 
-                var result = Entry.hw.portData[data_default_address];
-                Entry.hw.sendQueue.prevAddress = data_default_address;
-                Entry.hw.sendQueue.prevTime = new Date();
-                Entry.hw.sendQueue.prevResult = result;
+                var result = RoCode.hw.portData[data_default_address];
+                RoCode.hw.sendQueue.prevAddress = data_default_address;
+                RoCode.hw.sendQueue.prevTime = new Date();
+                RoCode.hw.sendQueue.prevResult = result;
 
                 return (result == compareValue);
             },
@@ -2410,8 +2410,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_RB_cm_buzzer_index: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2433,8 +2433,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '47',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2445,8 +2445,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2460,8 +2460,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2495,7 +2495,7 @@ Entry.Robotis_rb.getBlocks = function () {
                 var cmBuzzerTime = script.getNumberValue('CM_BUZZER_DELAY', script);
                 var cmBuzzerPlay = script.getField('CM_BUZZER_PLAY', script);
 
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address_1 = 0;
                 var data_length_1 = 0;
                 var data_value_1 = 0;
@@ -2505,9 +2505,9 @@ Entry.Robotis_rb.getBlocks = function () {
                 var interval = 50;
 
                 data_address_1 =
-                    Entry.Robotis_rb.CONTROL_TABLE.CM_BUZZER_TIME[0];
+                    RoCode.Robotis_rb.CONTROL_TABLE.CM_BUZZER_TIME[0];
                 data_length_1 =
-                    Entry.Robotis_rb.CONTROL_TABLE.CM_BUZZER_TIME[1];
+                    RoCode.Robotis_rb.CONTROL_TABLE.CM_BUZZER_TIME[1];
                 // data_value_1 = cmBuzzerTime * 10;
                 // TODO 텍스트 입력으로 바꾸고 최대는 5초 : 0.5 초 하려면 5를 입력  - console.log(parseInt(0.59 * 10)); max 는 5초
                 data_value_1 = parseInt(cmBuzzerTime * 10);
@@ -2519,9 +2519,9 @@ Entry.Robotis_rb.getBlocks = function () {
                 }
 
                 data_address_2 =
-                    Entry.Robotis_rb.CONTROL_TABLE.CM_BUZZER_INDEX[0];
+                    RoCode.Robotis_rb.CONTROL_TABLE.CM_BUZZER_INDEX[0];
                 data_length_2 =
-                    Entry.Robotis_rb.CONTROL_TABLE.CM_BUZZER_INDEX[1];
+                    RoCode.Robotis_rb.CONTROL_TABLE.CM_BUZZER_INDEX[1];
                 data_value_2 = Number(cmBuzzerIndex) + Number(cmBuzzerOffset * 12);
 
                 // console.log("buzzer send");
@@ -2544,7 +2544,7 @@ Entry.Robotis_rb.getBlocks = function () {
                     data_sendqueue = [];
                 }
 
-                return Entry.Robotis_carCont.postCallReturn(
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
                     cmBuzzerTime * 1000+ interval
@@ -2554,10 +2554,10 @@ Entry.Robotis_rb.getBlocks = function () {
                 js: [],
                 py: ['Robotis.opencm70_cm_buzzer_index(%1, %2)'],
             },
-        }, 
+        },
         robotis_RB_cm_screen: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2581,7 +2581,7 @@ Entry.Robotis_rb.getBlocks = function () {
                         [Lang.Blocks.robotis_face11, '2827'],
                         [Lang.Blocks.robotis_face12, '2828'], //Lang.Blocks.robotis_robotis_common_green_color
                         [Lang.Blocks.robotis_face13, '2829'],
-                        
+
                         [Lang.Blocks.robotis_face14, '2830'],
                         [Lang.Blocks.robotis_face15, '2831'],
                         [Lang.Blocks.robotis_face16, '2832'],
@@ -2596,8 +2596,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '2817',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2618,8 +2618,8 @@ Entry.Robotis_rb.getBlocks = function () {
             func: function (sprite, script) {
                 // instruction / address / length / value / default length
                 var screenValue = script.getField('BACKGROUND', script);
-                
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address = 163;
                 var data_length = 2;
                 var data_value = screenValue;
@@ -2628,20 +2628,20 @@ Entry.Robotis_rb.getBlocks = function () {
                     [data_instruction, data_address, data_length, data_value],
                     [3, 162, 1, 1]
                 ];
-              
 
 
-                return Entry.Robotis_carCont.postCallReturn(
+
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
-                    Entry.Robotis_openCM70.delay + 1000
+                    RoCode.Robotis_openCM70.delay + 1000
                 );
             },
             syntax: { js: [], py: ['Robotis.opencm70_cm_screen(%1)'] },
         },
         robotis_RB_cm_anim_screen: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2665,7 +2665,7 @@ Entry.Robotis_rb.getBlocks = function () {
                         [Lang.Blocks.robotis_face11, '30733'],
                         [Lang.Blocks.robotis_face12, '30734'], //Lang.Blocks.robotis_robotis_common_green_color
                         [Lang.Blocks.robotis_face13, '30732'],
-                        
+
                         [Lang.Blocks.robotis_face14, '30757'],
                         [Lang.Blocks.robotis_face15, '30736'],
                         [Lang.Blocks.robotis_face16, '30731'],
@@ -2680,8 +2680,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '30748',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2702,8 +2702,8 @@ Entry.Robotis_rb.getBlocks = function () {
             func: function (sprite, script) {
                 // instruction / address / length / value / default length
                 var screenValue = script.getField('BACKGROUND', script);
-                
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address = 163;
                 var data_length = 2;
                 var data_value = screenValue;
@@ -2712,20 +2712,20 @@ Entry.Robotis_rb.getBlocks = function () {
                     [data_instruction, data_address, data_length, data_value],
                     [3, 162, 1, 1]
                 ];
-              
 
 
-                return Entry.Robotis_carCont.postCallReturn(
+
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
-                    Entry.Robotis_openCM70.delay + 1000
+                    RoCode.Robotis_openCM70.delay + 1000
                 );
             },
             syntax: { js: [], py: ['Robotis.opencm70_cm_screen(%1)'] },
         },
         robotis_RB_cm_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2747,8 +2747,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '11',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2758,8 +2758,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2783,33 +2783,33 @@ Entry.Robotis_rb.getBlocks = function () {
                 var cmLed = script.getField('RB_LED', script);
                 var value = script.getField('VALUE', script);
 
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address = 40;
                 var data_length = 1;
                 var data_value = 0;
 
-                
+
                 data_value = value * cmLed;
-              
+
                 var data_sendqueue = [
                     [data_instruction, data_address, data_length, data_value],
                 ];
-                
-                return Entry.Robotis_carCont.postCallReturn(
+
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
-                    Entry.Robotis_openCM70.delay
+                    RoCode.Robotis_openCM70.delay
                 );
             },
             syntax: { js: [], py: ['Robotis.opencm70_cm_led(%1, %2)'] },
         },
         robotis_dxl_test: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
-                
+
             ],
             events: {},
             def: {
@@ -2817,89 +2817,89 @@ Entry.Robotis_rb.getBlocks = function () {
                 type: 'robotis_dxl_test',
             },
             paramsKeyMap: {
-                
+
             },
             class: 'robotis_openCM70_cm',
             isNotFor: ['Robotis_rb', 'Robotis_rb_H'],
             func: function (sprite, script) {
                 // instruction / address / length / value / default length
-                //19번지에 1바이트로 1 설정 
+                //19번지에 1바이트로 1 설정
 
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address = 19;
                 var data_length = 1;
                 var data_value = 1;
                 console.log("dxl send");
                 var data_sendqueue = [
                     [data_instruction, data_address, data_length, data_value],
-                    // [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [1]],
-                    // [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [2]],
-                    // [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [3]],
-                    // [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [4]],
-                    // [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [5]],
-                    // [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [6]],
-                    // [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [7]],
-                    // [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [8]],
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [33]],
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [34]],
-                    [Entry.Robotis_rb.INSTRUCTION.ACTION, 0, 0, 0],
-               
+                    // [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [1]],
+                    // [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [2]],
+                    // [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [3]],
+                    // [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [4]],
+                    // [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [5]],
+                    // [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [6]],
+                    // [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [7]],
+                    // [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [8]],
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [33]],
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 64, 1, 1, [34]],
+                    [RoCode.Robotis_rb.INSTRUCTION.ACTION, 0, 0, 0],
 
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [1]],
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [2]],
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [3]],
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [4]],
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [5]],
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [6]],
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [7]],
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [8]],
-                    [Entry.Robotis_rb.INSTRUCTION.ACTION, 0, 0, 0],
 
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2548, [1]],
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 1548, [2]],
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [3]],
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [4]],
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [5]],
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [6]],
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2248, [7]],
-                    [Entry.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 1848, [8]],
-                    [Entry.Robotis_rb.INSTRUCTION.ACTION, 0, 0, 0],
-                    
-                    /*[Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 64, 1, 60, [1,2], [1,1]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 64, 1, 60, [3,4], [1,1]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 64, 1, 60, [5,6], [1,1]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 64, 1, 60, [7,8], [1,1]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [1], [2048]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [2], [2048]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [3], [2048]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [4], [2048]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [5], [2048]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [6], [2048]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [7], [2048]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [8], [2048]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [1], [1948]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [2], [1948]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [3], [1948]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [4], [1948]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [5], [1948]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [6], [1948]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [7], [1948]],
-                    [Entry.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [8], [1948]],*/
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [1]],
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [2]],
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [3]],
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [4]],
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [5]],
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [6]],
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [7]],
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [8]],
+                    [RoCode.Robotis_rb.INSTRUCTION.ACTION, 0, 0, 0],
+
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2548, [1]],
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 1548, [2]],
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [3]],
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [4]],
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [5]],
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2048, [6]],
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 2248, [7]],
+                    [RoCode.Robotis_rb.INSTRUCTION.REGWRITE, 116, 4, 1848, [8]],
+                    [RoCode.Robotis_rb.INSTRUCTION.ACTION, 0, 0, 0],
+
+                    /*[RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 64, 1, 60, [1,2], [1,1]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 64, 1, 60, [3,4], [1,1]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 64, 1, 60, [5,6], [1,1]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 64, 1, 60, [7,8], [1,1]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [1], [2048]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [2], [2048]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [3], [2048]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [4], [2048]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [5], [2048]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [6], [2048]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [7], [2048]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [8], [2048]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [1], [1948]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [2], [1948]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [3], [1948]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [4], [1948]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [5], [1948]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [6], [1948]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [7], [1948]],
+                    [RoCode.Robotis_rb.INSTRUCTION.SYNCWRITE, 116, 4, 60, [8], [1948]],*/
 
                 ];
-               
-                return Entry.Robotis_carCont.postCallReturn(
+
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
                     100
-                    //Entry.Robotis_openCM70.delay
+                    //RoCode.Robotis_openCM70.delay
                 );
             },
             syntax: { js: [], py: ['Robotis.opencm70_cm_led(%1, %2)'] },
         },
         robotis_openCM70_RGee_go: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2918,8 +2918,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2946,12 +2946,12 @@ Entry.Robotis_rb.getBlocks = function () {
                 // instruction / address / length / value / default length
                 var speed = script.getNumberValue('SPEED', script);
                 var direction = script.getField('DIRECTION', script);
-                
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address = 710;
                 var data_length = 2;
                 var data_value = 0;
-                
+
                 switch(direction) {
                     case '1':
                         data_value = speed * 256 + speed;
@@ -2978,10 +2978,10 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_value,
                     ],
                 ];
-                return Entry.Robotis_carCont.postCallReturn(
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
-                    Entry.Robotis_openCM70.delay
+                    RoCode.Robotis_openCM70.delay
                 );
             },
             syntax: {
@@ -2990,8 +2990,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_openCM70_RGee_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3018,12 +3018,12 @@ Entry.Robotis_rb.getBlocks = function () {
                 // instruction / address / length / value / default length
                 var speed = script.getNumberValue('SPEED', script);
                 var direction = script.getField('DIRECTION', script);
-                
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address = 710;
                 var data_length = 2;
                 var data_value = 0;
-            
+
                 console.log("rg stop send");
                 var data_sendqueue = [
                     [
@@ -3033,10 +3033,10 @@ Entry.Robotis_rb.getBlocks = function () {
                         data_value,
                     ],
                 ];
-                return Entry.Robotis_carCont.postCallReturn(
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
-                    Entry.Robotis_openCM70.delay
+                    RoCode.Robotis_openCM70.delay
                 );
             },
             syntax: {
@@ -3045,8 +3045,8 @@ Entry.Robotis_rb.getBlocks = function () {
             },
         },
         robotis_openCM70_RGee_motion: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3060,8 +3060,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: '50007',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3081,14 +3081,14 @@ Entry.Robotis_rb.getBlocks = function () {
             isNotFor: ['Robotis_rb'],
             func: function (sprite, script) {
                 // instruction / address / length / value / default length
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address = 0;
                 var data_length = 0;
                 var data_value = 0;
 
                 data_address =
-                    Entry.Robotis_rb.CONTROL_TABLE.CM_MOTION[0];
-                data_length = Entry.Robotis_rb.CONTROL_TABLE.CM_MOTION[1];
+                    RoCode.Robotis_rb.CONTROL_TABLE.CM_MOTION[0];
+                data_length = RoCode.Robotis_rb.CONTROL_TABLE.CM_MOTION[1];
                 data_value = script.getField('MotionNumber', script);
 
                 console.log("rg motion send");
@@ -3096,21 +3096,21 @@ Entry.Robotis_rb.getBlocks = function () {
                     [data_instruction, data_address, data_length, data_value],
                     //[data_instruction, data_address, data_length, 0],
                 ];
-                
+
                 //console.log(script);
-                return Entry.Robotis_carCont.postCallReturn(
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
-                    
-                    data_value > 50070 ? 2000 : 1000 
-                    //Entry.Robotis_openCM70.delay
+
+                    data_value > 50070 ? 2000 : 1000
+                    //RoCode.Robotis_openCM70.delay
                 );
             },
             syntax: { js: [], py: ['Robotis.opencm70_RGee_motion(%1)'] },
-        }, 
+        },
         robotis_RB_cm_custom: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3127,8 +3127,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: 'BYTE',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3165,14 +3165,14 @@ Entry.Robotis_rb.getBlocks = function () {
             isNotFor: ['Robotis_rb'],
             func: function (sprite, script) {
                 // instruction / address / length / value / default length
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address = 0;
                 var data_length = 0;
                 var data_value = 0;
 
                 data_address = script.getNumberValue('ADDRESS');
                 data_value = script.getNumberValue('VALUE');
-               
+
                 switch(script.getField('LENGTH')){
                     case 'BYTE':
                         data_length = 1;
@@ -3190,17 +3190,17 @@ Entry.Robotis_rb.getBlocks = function () {
                 var data_sendqueue = [
                     [data_instruction, data_address, data_length, data_value],
                 ];
-                return Entry.Robotis_carCont.postCallReturn(
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
-                    Entry.Robotis_openCM70.delay
+                    RoCode.Robotis_openCM70.delay
                 );
             },
             syntax: { js: [], py: ['Robotis.opencm70_cm_custom(%1, %2)'] },
         },
         robotis_RB_cm_custom2: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3217,8 +3217,8 @@ Entry.Robotis_rb.getBlocks = function () {
                     ],
                     value: 'BYTE',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3255,14 +3255,14 @@ Entry.Robotis_rb.getBlocks = function () {
             isNotFor: ['Robotis_rb_H'],
             func: function (sprite, script) {
                 // instruction / address / length / value / default length
-                var data_instruction = Entry.Robotis_rb.INSTRUCTION.WRITE;
+                var data_instruction = RoCode.Robotis_rb.INSTRUCTION.WRITE;
                 var data_address = 0;
                 var data_length = 0;
                 var data_value = 0;
 
                 data_address = script.getNumberValue('ADDRESS');
                 data_value = script.getNumberValue('VALUE');
-               
+
                 switch(script.getField('LENGTH')){
                     case 'BYTE':
                         data_length = 1;
@@ -3280,10 +3280,10 @@ Entry.Robotis_rb.getBlocks = function () {
                 var data_sendqueue = [
                     [data_instruction, data_address, data_length, data_value],
                 ];
-                return Entry.Robotis_carCont.postCallReturn(
+                return RoCode.Robotis_carCont.postCallReturn(
                     script,
                     data_sendqueue,
-                    Entry.Robotis_openCM70.delay
+                    RoCode.Robotis_openCM70.delay
                 );
             },
             syntax: { js: [], py: ['Robotis.opencm70_cm_custom(%1, %2)'] },
@@ -3293,4 +3293,4 @@ Entry.Robotis_rb.getBlocks = function () {
 };
 
 
-module.exports = [Entry.Robotis_rb];
+module.exports = [RoCode.Robotis_rb];

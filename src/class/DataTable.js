@@ -6,7 +6,7 @@ import _flatten from 'lodash/flatten';
 import _cloneDeep from 'lodash/cloneDeep';
 import _findIndex from 'lodash/findIndex';
 import DataTableSource from './source/DataTableSource';
-import { DataAnalytics, ModalChart } from '@entrylabs/tool';
+import { DataAnalytics, ModalChart } from '@RoCodelabs/tool';
 
 class DataTable {
     #tables = [];
@@ -33,22 +33,22 @@ class DataTable {
     }
 
     removeAllBlocks() {
-        const { blocks } = EntryStatic.getAllBlocks().find(
+        const { blocks } = RoCodeStatic.getAllBlocks().find(
             ({ category }) => category === 'analysis'
         );
         blocks.forEach((blockType) => {
-            Entry.Utils.removeBlockByType(blockType);
+            RoCode.Utils.removeBlockByType(blockType);
         });
         this.banAllBlock();
         this.clear();
     }
 
     banAllBlock() {
-        Entry.playground.blockMenu.banClass('analysis');
+        RoCode.playground.blockMenu.banClass('analysis');
     }
 
     unbanBlock() {
-        Entry.playground.blockMenu.unbanClass('analysis');
+        RoCode.playground.blockMenu.unbanClass('analysis');
     }
 
     getTables(blockList = []) {
@@ -98,7 +98,7 @@ class DataTable {
 
     addSource(table, view = true) {
         let data = table || { name: Lang.Workspace.data_table };
-        data.name = Entry.getOrderedName(data.name, this.#tables, 'name');
+        data.name = RoCode.getOrderedName(data.name, this.#tables, 'name');
 
         this.#tables.push(table instanceof DataTableSource ? table : new DataTableSource(table));
         this.hide();
@@ -148,13 +148,13 @@ class DataTable {
 
     saveTable = ({ selected }) => {
         this.setSource(selected);
-        Entry.playground.reloadPlayground();
-        Entry.creationChangedEvent.notify();
+        RoCode.playground.reloadPlayground();
+        RoCode.creationChangedEvent.notify();
     };
 
     removeTable = (index) => {
         this.#tables = _filter(this.#tables, (__, tIndex) => index !== tIndex);
-        Entry.creationChangedEvent.notify();
+        RoCode.creationChangedEvent.notify();
     };
 
     show(data) {
@@ -173,9 +173,9 @@ class DataTable {
         } else {
             this.banAllBlock();
         }
-        Entry.playground.reloadPlayground();
-        Entry.playground.refreshPlayground();
-        Entry.dispatchEvent('dismissModal');
+        RoCode.playground.reloadPlayground();
+        RoCode.playground.refreshPlayground();
+        RoCode.dispatchEvent('dismissModal');
     }
 
     #generateView() {
@@ -185,17 +185,17 @@ class DataTable {
         this.dataAnalytics = new DataAnalytics({ container: view, data: {}, isShow: false })
             .on('submit', this.saveTable)
             .on('alert', ({ message, title = Lang.DataAnalytics.max_row_count_error_title }) =>
-                entrylms.alert(message, title)
+                RoCodelms.alert(message, title)
             )
             .on('toast', (message) => {
                 const { title, content } = message;
-                Entry.toast.alert(title, content);
+                RoCode.toast.alert(title, content);
             })
             .on('close', async () => {
                 this.hide();
             })
             .on('addTable', () => {
-                Entry.dispatchEvent('openTableManager');
+                RoCode.dispatchEvent('openTableManager');
             })
             .on('removeTable', this.removeTable);
     }
@@ -207,7 +207,7 @@ class DataTable {
     setTables(tables = []) {
         tables.forEach((table) => {
             const data = table || { name: Lang.Workspace.data_table };
-            data.name = Entry.getOrderedName(data.name, this.#tables, 'name');
+            data.name = RoCode.getOrderedName(data.name, this.#tables, 'name');
             const isDataTableSource = data instanceof DataTableSource;
             this.#tables.push(isDataTableSource ? data : new DataTableSource(data));
         });
@@ -216,11 +216,11 @@ class DataTable {
     }
 
     refreshPlayground() {
-        const isWorkspace = Entry.type === 'workspace';
+        const isWorkspace = RoCode.type === 'workspace';
         if (isWorkspace) {
             this.unbanBlock();
-            Entry.playground.reloadPlayground();
-            Entry.playground.refreshPlayground();
+            RoCode.playground.reloadPlayground();
+            RoCode.playground.refreshPlayground();
         }
     }
 
@@ -247,16 +247,16 @@ class DataTable {
 
     createChart(source, chartIndex = 0) {
         const { chart = [], fields, rows } = source;
-        const container = Entry.Dom('div', {
-            class: 'entry-table-chart',
+        const container = RoCode.Dom('div', {
+            class: 'RoCode-table-chart',
             parent: $('body'),
         })[0];
         return new ModalChart({
             data: {
                 chartIndex,
                 source: { fields, origin: rows, chart },
-                togglePause: () => Entry.engine.togglePause(),
-                stop: () => Entry.engine.toggleStop(),
+                togglePause: () => RoCode.engine.togglePause(),
+                stop: () => RoCode.engine.toggleStop(),
                 isIframe: self !== top,
             },
             container,

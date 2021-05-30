@@ -7,14 +7,14 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = {
-    entry: {
-        entry: './src/entry.js',
+    RoCode: {
+        RoCode: './src/RoCode.js',
     },
     output: {
         path: path.resolve('./dist'),
         publicPath: '/dist/',
         filename: '[name].js',
-        jsonpFunction: 'entryJsonp',
+        jsonpFunction: 'RoCodeJsonp',
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json'],
@@ -118,8 +118,8 @@ module.exports = {
     externals: {
         react: 'React',
         'react-dom': 'ReactDOM',
-        '@entrylabs/tool': 'EntryTool',
-        'entry-paint': 'EntryPaint',
+        '@RoCodelabs/tool': 'RoCodeTool',
+        'RoCode-paint': 'RoCodePaint',
     },
     plugins: [
         new CleanWebpackPlugin(['dist'], {

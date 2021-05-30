@@ -9,7 +9,7 @@ let invisibleContext = undefined;
 /*
  *
  */
-Entry.Field = class Field {
+RoCode.Field = class Field {
     constructor(content, blockView, index) {
         this.TEXT_LIMIT_LENGTH = 20;
 
@@ -34,7 +34,7 @@ Entry.Field = class Field {
             !_.isUndefined(startValue) &&
             (forceCommand || startValue !== this.getValue())
         ) {
-            Entry.do(
+            RoCode.do(
                 'setFieldValue',
                 this.pointer(),
                 this._nextValue || this.getValue(),
@@ -65,7 +65,7 @@ Entry.Field = class Field {
         invisibleCanvas = undefined;
         invisibleContext = undefined;
 
-        this.isEditing() && Entry.Utils.blur();
+        this.isEditing() && RoCode.Utils.blur();
         this._isEditing = false;
 
         skipCommand !== true && this.command(forceCommand);
@@ -77,7 +77,7 @@ Entry.Field = class Field {
         };
 
         func = func || defaultFunc;
-        this.disposeEvent = Entry.disposeEvent.attach(this, func);
+        this.disposeEvent = RoCode.disposeEvent.attach(this, func);
     }
 
     align(x, y, animate = true) {
@@ -211,11 +211,11 @@ Entry.Field = class Field {
     }
 
     _isEditable() {
-        if (Entry.ContextMenu.visible || this._blockView.getBoard().readOnly) {
+        if (RoCode.ContextMenu.visible || this._blockView.getBoard().readOnly) {
             return false;
         }
         const dragMode = this._block.view.dragMode;
-        if (dragMode == Entry.DRAG_MODE_DRAG) {
+        if (dragMode == RoCode.DRAG_MODE_DRAG) {
             return false;
         }
         const blockView = this._block.view;
@@ -264,7 +264,7 @@ Entry.Field = class Field {
     }
 
     pointer(pointer = []) {
-        return this._block.pointer([Entry.PARAM, this._index, ...pointer]);
+        return this._block.pointer([RoCode.PARAM, this._index, ...pointer]);
     }
 
     getFontSize(size) {
@@ -277,7 +277,7 @@ Entry.Field = class Field {
 
     _getRenderMode() {
         const mode = this._blockView.renderMode;
-        return mode !== undefined ? mode : Entry.BlockView.RENDER_MODE_BLOCK;
+        return mode !== undefined ? mode : RoCode.BlockView.RENDER_MODE_BLOCK;
     }
 
     _convert(key, value) {
@@ -293,7 +293,7 @@ Entry.Field = class Field {
     }
 
     _updateOptions() {
-        const block = Entry.block[this._blockView.type];
+        const block = RoCode.block[this._blockView.type];
         if (!block) {
             return;
         }
@@ -322,7 +322,7 @@ Entry.Field = class Field {
 
     _shouldReturnValue(value) {
         const obj = this._block.getCode().object;
-        return value === '?' || !obj || obj.constructor !== Entry.EntryObject;
+        return value === '?' || !obj || obj.constructor !== RoCode.RoCodeObject;
     }
 
     isEditing(value) {
@@ -354,25 +354,25 @@ Entry.Field = class Field {
     }
 
     getFieldRawType() {
-        if (this instanceof Entry.FieldTextInput) {
+        if (this instanceof RoCode.FieldTextInput) {
             return 'textInput';
-        } else if (this instanceof Entry.FieldDropdown) {
+        } else if (this instanceof RoCode.FieldDropdown) {
             return 'dropdown';
-        } else if (this instanceof Entry.FieldDropdownDynamic) {
+        } else if (this instanceof RoCode.FieldDropdownDynamic) {
             return 'dropdownDynamic';
-        } else if (this instanceof Entry.FieldDropdownExtra) {
+        } else if (this instanceof RoCode.FieldDropdownExtra) {
             return 'dropdownExtra';
-        } else if (this instanceof Entry.FieldKeyboard) {
+        } else if (this instanceof RoCode.FieldKeyboard) {
             return 'keyboard';
-        } else if (this instanceof Entry.FieldDynamicText) {
+        } else if (this instanceof RoCode.FieldDynamicText) {
             return 'dynamicText';
         }
         // 마이크로비트 전용
-        else if (this instanceof Entry.FieldLed) {
+        else if (this instanceof RoCode.FieldLed) {
             return 'led';
-        } else if (this instanceof Entry.FieldLed2) {
+        } else if (this instanceof RoCode.FieldLed2) {
             return 'led2';
-        } else if (this instanceof Entry.FieldMusicScale) {
+        } else if (this instanceof RoCode.FieldMusicScale) {
             return 'musicScale';
         }
     }
@@ -380,7 +380,7 @@ Entry.Field = class Field {
     getTextValueByValue(value) {
         switch (this.getFieldRawType()) {
             case 'keyboard':
-                return Entry.getKeyCodeMap()[value];
+                return RoCode.getKeyCodeMap()[value];
             case 'dropdown':
             case 'dropdownDynamic':
                 return _.chain(this._contents.options)
@@ -405,7 +405,7 @@ Entry.Field = class Field {
     }
 
     getFontFamily() {
-        return window.loadFontFamily || EntryStatic.fontFamily || 'NanumGothic';
+        return window.loadFontFamily || RoCodeStatic.fontFamily || 'NanumGothic';
     }
 
     getIndex() {
@@ -414,7 +414,7 @@ Entry.Field = class Field {
 
     getTextBBox() {
         if (!invisibleContext) {
-            invisibleCanvas = Entry.Dom($('<canvas id="invisibleCanvas"></canvas>'))[0];
+            invisibleCanvas = RoCode.Dom($('<canvas id="invisibleCanvas"></canvas>'))[0];
             invisibleContext = invisibleCanvas.getContext('2d');
         }
 
@@ -435,7 +435,7 @@ Entry.Field = class Field {
         const board = this._blockView.getBoard();
         const { scale = 1 } = board;
         invisibleContext.font = `${fontSize}px ${this.getFontFamily()}`;
-        const heightLetter = EntryStatic.heightLetter || 'M';
+        const heightLetter = RoCodeStatic.heightLetter || 'M';
         bBox = {
             width: Math.round(invisibleContext.measureText(value).width * 100) / 100,
             height: Math.round(invisibleContext.measureText(heightLetter).width * 100) / 100,

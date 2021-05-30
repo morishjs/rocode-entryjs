@@ -1,6 +1,6 @@
 import _get from 'lodash/get';
 
-Entry.skeleton.basic_text = {
+RoCode.skeleton.basic_text = {
     path(blockView) {
         const paramText = _get(blockView, ['_schema', 'params', '0', 'text'], '').match(/[\r\n]/g);
         const textLines = paramText ? paramText.length + 1 : 1;

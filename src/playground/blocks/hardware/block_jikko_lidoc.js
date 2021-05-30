@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.jikko_lidoc = {
+RoCode.jikko_lidoc = {
     id: '47.2',
     name: 'jikko_lidoc',
     url: 'http://www.makeitall.co.kr',
@@ -15,19 +15,19 @@ Entry.jikko_lidoc = {
 
     //정지시 초기화 함수
     setZero: function() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            var keySet = Object.keys(Entry.hw.sendQueue.SET);
+            var keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach((key) => {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     sensorTypes: {
         ALIVE: 0,
@@ -91,7 +91,7 @@ Entry.jikko_lidoc = {
     lowList: ['low', '0', 'off'],
     BlockState: {},
 };
-Entry.jikko_lidoc.setLanguage = function() {
+RoCode.jikko_lidoc.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -179,7 +179,7 @@ Entry.jikko_lidoc.setLanguage = function() {
         },
     };
 };
-Entry.jikko_lidoc.blockMenuBlocks = [
+RoCode.jikko_lidoc.blockMenuBlocks = [
     'jikko_lidoc_set_digital_toggle',
     'jikko_lidoc_set_led_toggle',
     //  'jikko_lidoc_set_digital_pwm',
@@ -205,7 +205,7 @@ Entry.jikko_lidoc.blockMenuBlocks = [
     // 'jikko_lidoc_get_digital_bluetooth',
     // 'jikko_lidoc_module_digital_bluetooth',
 ];
-Entry.jikko_lidoc.getBlocks = function() {
+RoCode.jikko_lidoc.getBlocks = function() {
     var tx;
     var din;
     // var clk;
@@ -223,8 +223,8 @@ Entry.jikko_lidoc.getBlocks = function() {
 
     return {
         jikko_lidoc_list_analog_basic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -241,8 +241,8 @@ Entry.jikko_lidoc.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -257,8 +257,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             },
         },
         jikko_lidoc_list_digital_basic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -283,8 +283,8 @@ Entry.jikko_lidoc.getBlocks = function() {
                     ],
                     value: '10',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -299,8 +299,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             },
         },
         jikko_lidoc_list_digital_octave: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -319,8 +319,8 @@ Entry.jikko_lidoc.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -335,8 +335,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             },
         },
         jikko_lidoc_list_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -353,8 +353,8 @@ Entry.jikko_lidoc.getBlocks = function() {
                     ],
                     value: '11',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -369,8 +369,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             },
         },
         jikko_lidoc_list_digital_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -383,8 +383,8 @@ Entry.jikko_lidoc.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -399,8 +399,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             },
         },
         jikko_lidoc_list_digital_toggle_en: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -413,8 +413,8 @@ Entry.jikko_lidoc.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -429,8 +429,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             },
         },
         jikko_lidoc_list_digital_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -454,8 +454,8 @@ Entry.jikko_lidoc.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -470,8 +470,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             },
         },
         jikko_lidoc_set_neopixel_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -506,16 +506,16 @@ Entry.jikko_lidoc.getBlocks = function() {
                 var port = 10;
                 var value = script.getNumberValue('NUM');
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.jikko_lidoc.sensorTypes.NEOPIXELINIT,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.jikko_lidoc.sensorTypes.NEOPIXELINIT,
                         data: value,
                         time: new Date().getTime(),
                     };
@@ -528,7 +528,7 @@ Entry.jikko_lidoc.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -538,8 +538,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             },
         },
         jikko_lidoc_set_neopixel_bright: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -579,16 +579,16 @@ Entry.jikko_lidoc.getBlocks = function() {
                 value = Math.max(value, 0);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.jikko_lidoc.sensorTypes.NEOPIXELBRIGHT,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.jikko_lidoc.sensorTypes.NEOPIXELBRIGHT,
                         data: value,
                         time: new Date().getTime(),
                     };
@@ -602,7 +602,7 @@ Entry.jikko_lidoc.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -612,8 +612,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             },
         },
         jikko_lidoc_set_neopixel: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -650,7 +650,7 @@ Entry.jikko_lidoc.getBlocks = function() {
             class: 'neo',
             isNotFor: ['jikko_lidoc'],
             func: function(sprite, script) {
-                //var sq = Entry.hw.sendQueue;
+                //var sq = RoCode.hw.sendQueue;
                 var port = 10;
                 var num = script.getNumberValue('NUM', script);
                 var value = script.getStringField('COLOR', script);
@@ -662,7 +662,7 @@ Entry.jikko_lidoc.getBlocks = function() {
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
                     r = Math.round(r);
@@ -677,11 +677,11 @@ Entry.jikko_lidoc.getBlocks = function() {
                     b = Math.min(b, 255);
                     b = Math.max(b, 0);
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.jikko_lidoc.sensorTypes.NEOPIXEL,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.jikko_lidoc.sensorTypes.NEOPIXEL,
                         data: {
                             num: num,
                             r: r,
@@ -699,7 +699,7 @@ Entry.jikko_lidoc.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -709,8 +709,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             },
         },
         jikko_lidoc_set_neopixel_all: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -744,7 +744,7 @@ Entry.jikko_lidoc.getBlocks = function() {
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
                     r = Math.round(r);
                     r = Math.min(r, 255);
@@ -758,11 +758,11 @@ Entry.jikko_lidoc.getBlocks = function() {
                     b = Math.min(b, 255);
                     b = Math.max(b, 0);
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.jikko_lidoc.sensorTypes.NEOPIXELALL,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.jikko_lidoc.sensorTypes.NEOPIXELALL,
                         data: {
                             r: r,
                             g: g,
@@ -779,7 +779,7 @@ Entry.jikko_lidoc.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -790,8 +790,8 @@ Entry.jikko_lidoc.getBlocks = function() {
         },
 
         jikko_lidoc_set_neopixel_clear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -812,16 +812,16 @@ Entry.jikko_lidoc.getBlocks = function() {
             func: function(sprite, script) {
                 var port = 10;
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.jikko_lidoc.sensorTypes.NEOPIXELCLEAR,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.jikko_lidoc.sensorTypes.NEOPIXELCLEAR,
                         time: new Date().getTime(),
                     };
 
@@ -834,7 +834,7 @@ Entry.jikko_lidoc.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -844,8 +844,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             },
         },
         jikko_lidoc_lcd_list_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -858,8 +858,8 @@ Entry.jikko_lidoc.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -874,8 +874,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             },
         },
         jikko_lidoc_list_digital_lcd: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -888,8 +888,8 @@ Entry.jikko_lidoc.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -904,8 +904,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             },
         },
         jikko_lidoc_get_lcd_row: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -917,8 +917,8 @@ Entry.jikko_lidoc.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -945,8 +945,8 @@ Entry.jikko_lidoc.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'jikko_lidoc_get_lcd_row',
@@ -956,8 +956,8 @@ Entry.jikko_lidoc.getBlocks = function() {
         },
 
         jikko_lidoc_get_lcd_col: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -983,8 +983,8 @@ Entry.jikko_lidoc.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1025,8 +1025,8 @@ Entry.jikko_lidoc.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'jikko_lidoc_get_lcd_col',
@@ -1035,8 +1035,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             },
         },
         jikko_lidoc_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.jikko_lidoc_get_analog_value,
@@ -1063,7 +1063,7 @@ Entry.jikko_lidoc.getBlocks = function() {
             isNotFor: ['jikko_lidoc'],
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
 
                 if (port[0] === 'A') port = port.substring(1);
 
@@ -1073,8 +1073,8 @@ Entry.jikko_lidoc.getBlocks = function() {
         },
 
         jikko_lidoc_get_analog_mapping: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.jikko_lidoc_get_analog_mapping,
@@ -1138,7 +1138,7 @@ Entry.jikko_lidoc.getBlocks = function() {
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
                 var result = 0;
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var value2 = script.getNumberValue('VALUE2', script);
                 var value3 = script.getNumberValue('VALUE3', script);
                 var value4 = script.getNumberValue('VALUE4', script);
@@ -1173,8 +1173,8 @@ Entry.jikko_lidoc.getBlocks = function() {
         },
 
         jikko_lidoc_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1202,15 +1202,15 @@ Entry.jikko_lidoc.getBlocks = function() {
             isNotFor: ['jikko_lidoc'],
             func: function(sprite, script) {
                 var port = script.getNumberValue('PORT');
-                var DIGITAL = Entry.hw.portData.DIGITAL;
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                if (Entry.hw.sendQueue.SET[port]) {
-                    return Entry.hw.sendQueue.SET[port].data;
+                if (RoCode.hw.sendQueue.SET[port]) {
+                    return RoCode.hw.sendQueue.SET[port].data;
                 } else {
-                    Entry.hw.sendQueue['GET'][Entry.jikko_lidoc.sensorTypes.DIGITAL] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.jikko_lidoc.sensorTypes.DIGITAL] = {
                         port: port,
                         time: new Date().getTime(),
                     };
@@ -1221,8 +1221,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             syntax: { js: [], py: ['jikko_lidoc.get_digital(%1)'] },
         },
         jikko_lidoc_get_digital_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1249,12 +1249,12 @@ Entry.jikko_lidoc.getBlocks = function() {
             isNotFor: ['jikko_lidoc'],
             func: function(sprite, script) {
                 var port = script.getNumberValue('PORT');
-                var DIGITAL = Entry.hw.portData.DIGITAL;
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.jikko_lidoc.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue['GET'][RoCode.jikko_lidoc.sensorTypes.DIGITAL] = {
                     port: port,
                     time: new Date().getTime(),
                 };
@@ -1265,8 +1265,8 @@ Entry.jikko_lidoc.getBlocks = function() {
         },
 
         jikko_lidoc_set_digital_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1312,18 +1312,18 @@ Entry.jikko_lidoc.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.jikko_lidoc.highList.indexOf(value) > -1) {
+                if (RoCode.jikko_lidoc.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.jikko_lidoc.lowList.indexOf(value) > -1) {
+                } else if (RoCode.jikko_lidoc.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.jikko_lidoc.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.jikko_lidoc.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1333,8 +1333,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             syntax: { js: [], py: ['jikko_lidoc.set_digital_toggle(%1, %2)'] },
         },
         jikko_lidoc_set_led_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1371,18 +1371,18 @@ Entry.jikko_lidoc.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.jikko_lidoc.highList.indexOf(value) > -1) {
+                if (RoCode.jikko_lidoc.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.jikko_lidoc.lowList.indexOf(value) > -1) {
+                } else if (RoCode.jikko_lidoc.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.jikko_lidoc.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.jikko_lidoc.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1392,8 +1392,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             syntax: { js: [], py: ['jikko_lidoc.set_digital_toggle(%1, %2)'] },
         },
         jikko_lidoc_set_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1441,11 +1441,11 @@ Entry.jikko_lidoc.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.min(value, 255);
                 value = Math.max(value, 0);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.jikko_lidoc.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.jikko_lidoc.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1456,8 +1456,8 @@ Entry.jikko_lidoc.getBlocks = function() {
         },
 
         jikko_lidoc_set_digital_buzzer_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1495,18 +1495,18 @@ Entry.jikko_lidoc.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.jikko_lidoc.highList.indexOf(value) > -1) {
+                if (RoCode.jikko_lidoc.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.jikko_lidoc.lowList.indexOf(value) > -1) {
+                } else if (RoCode.jikko_lidoc.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.jikko_lidoc.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.jikko_lidoc.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1519,8 +1519,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             },
         },
         jikko_lidoc_set_digital_buzzer_volume: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1567,11 +1567,11 @@ Entry.jikko_lidoc.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.min(value, 255);
                 value = Math.max(value, 0);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.jikko_lidoc.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.jikko_lidoc.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1584,8 +1584,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             },
         },
         jikko_lidoc_set_digital_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1641,8 +1641,8 @@ Entry.jikko_lidoc.getBlocks = function() {
 
                 if (!script.isStart) {
                     var note = script.getValue('NOTE');
-                    if (!Entry.Utils.isNumber(note)) {
-                        note = Entry.jikko_lidoc.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note)) {
+                        note = RoCode.jikko_lidoc.toneTable[note];
                     }
                     if (note < 0) {
                         note = 0;
@@ -1652,12 +1652,12 @@ Entry.jikko_lidoc.getBlocks = function() {
                     if (duration < 0) {
                         duration = 0;
                     }
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     if (duration === 0) {
-                        Entry.hw.sendQueue['SET'][port] = {
-                            type: Entry.jikko_lidoc.sensorTypes.TONE,
+                        RoCode.hw.sendQueue['SET'][port] = {
+                            type: RoCode.jikko_lidoc.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -1669,14 +1669,14 @@ Entry.jikko_lidoc.getBlocks = function() {
                         octave = 8;
                     }
                     if (note != 0) {
-                        value = Entry.jikko_lidoc.toneMap[note][octave];
+                        value = RoCode.jikko_lidoc.toneMap[note][octave];
                     }
 
                     duration = duration * 1000;
                     script.isStart = true;
                     script.timeFlag = 1;
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.jikko_lidoc.sensorTypes.TONE,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.jikko_lidoc.sensorTypes.TONE,
                         data: {
                             value: value,
                             duration: duration,
@@ -1693,12 +1693,12 @@ Entry.jikko_lidoc.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.jikko_lidoc.sensorTypes.TONE,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.jikko_lidoc.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1708,8 +1708,8 @@ Entry.jikko_lidoc.getBlocks = function() {
             },
         },
         jikko_lidoc_lcd_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1764,17 +1764,17 @@ Entry.jikko_lidoc.getBlocks = function() {
                 var line = script.getValue('LINE');
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 0.1 * 1000;
 
-                    Entry.hw.sendQueue['SET'][1] = {
-                        type: Entry.jikko_lidoc.sensorTypes.LCDINIT,
+                    RoCode.hw.sendQueue['SET'][1] = {
+                        type: RoCode.jikko_lidoc.sensorTypes.LCDINIT,
                         data: {
                             list: list,
                             col: col,
@@ -1792,15 +1792,15 @@ Entry.jikko_lidoc.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: ['jikko_lidoc.module_digital_lcd(%1, %2)'] },
         },
         jikko_lidoc_module_digital_lcd: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1857,17 +1857,17 @@ Entry.jikko_lidoc.getBlocks = function() {
                 var text = script.getValue('STRING');
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 100;
 
-                    Entry.hw.sendQueue['SET'][1] = {
-                        type: Entry.jikko_lidoc.sensorTypes.LCD,
+                    RoCode.hw.sendQueue['SET'][1] = {
+                        type: RoCode.jikko_lidoc.sensorTypes.LCD,
                         data: {
                             line: row,
                             column: col,
@@ -1885,15 +1885,15 @@ Entry.jikko_lidoc.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: ['jikko_lidoc.module_digital_lcd(%1, %2)'] },
         },
         jikko_lidoc_lcd_clear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1912,17 +1912,17 @@ Entry.jikko_lidoc.getBlocks = function() {
             isNotFor: ['jikko_lidoc'],
             func(sprite, script) {
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][1] = {
-                        type: Entry.jikko_lidoc.sensorTypes.LCDCLEAR,
+                    RoCode.hw.sendQueue['SET'][1] = {
+                        type: RoCode.jikko_lidoc.sensorTypes.LCDCLEAR,
                         data: 0,
                         time: new Date().getTime(),
                     };
@@ -1936,7 +1936,7 @@ Entry.jikko_lidoc.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1947,8 +1947,8 @@ Entry.jikko_lidoc.getBlocks = function() {
         },
 
         jikko_lidoc_load_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1974,16 +1974,16 @@ Entry.jikko_lidoc.getBlocks = function() {
                 sck = port2;
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][sck] = {
-                        type: Entry.jikko_lidoc.sensorTypes.LOADINIT,
+                    RoCode.hw.sendQueue['SET'][sck] = {
+                        type: RoCode.jikko_lidoc.sensorTypes.LOADINIT,
                         data: {
                             port1: port1,
                             port2: port2,
@@ -2000,7 +2000,7 @@ Entry.jikko_lidoc.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2011,8 +2011,8 @@ Entry.jikko_lidoc.getBlocks = function() {
         },
 
         jikko_lidoc_load_scale: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2047,16 +2047,16 @@ Entry.jikko_lidoc.getBlocks = function() {
                 var num = script.getNumberValue('NUM', script);
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][sck] = {
-                        type: Entry.jikko_lidoc.sensorTypes.LOADSCALE,
+                    RoCode.hw.sendQueue['SET'][sck] = {
+                        type: RoCode.jikko_lidoc.sensorTypes.LOADSCALE,
                         data: {
                             num: num,
                         },
@@ -2072,7 +2072,7 @@ Entry.jikko_lidoc.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2083,8 +2083,8 @@ Entry.jikko_lidoc.getBlocks = function() {
         },
 
         jikko_lidoc_load_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -2097,20 +2097,20 @@ Entry.jikko_lidoc.getBlocks = function() {
             class: 'load',
             isNotFor: ['jikko_lidoc'],
             func: function(sprite, script) {
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][sck];
+                delete RoCode.hw.sendQueue['SET'][sck];
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.jikko_lidoc.sensorTypes.LOADVALUE] = {
+                RoCode.hw.sendQueue['GET'][RoCode.jikko_lidoc.sensorTypes.LOADVALUE] = {
                     port: sck,
                     time: new Date().getTime(),
                 };
 
-                return Entry.hw.portData.LOADVALUE || 0;
+                return RoCode.hw.portData.LOADVALUE || 0;
             },
             syntax: {
                 js: [],
@@ -2120,4 +2120,4 @@ Entry.jikko_lidoc.getBlocks = function() {
     };
 };
 
-module.exports = Entry.jikko_lidoc;
+module.exports = RoCode.jikko_lidoc;

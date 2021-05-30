@@ -266,8 +266,8 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
         }
       }
       if (value !== null) {
-        if (typeof(Entry) == "object" && this.getValue() != value) {
-          Entry.dispatchEvent("entryBlocklyChanged");
+        if (typeof(RoCode) == "object" && this.getValue() != value) {
+          RoCode.dispatchEvent("RoCodeBlocklyChanged");
         }
         this.setValue(value);
       }

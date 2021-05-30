@@ -1,8 +1,8 @@
 'use strict';
 
-const Entry = require('../entry');
+const RoCode = require('../RoCode');
 
-Entry.STATIC = {
+RoCode.STATIC = {
     /* data type */
     OBJECT: 0,
     ENTITY: 1,
@@ -186,12 +186,12 @@ Entry.STATIC = {
     get COMMAND_TYPES() {
         return Object.assign(
             {},
-            Entry.STATIC.COMMAND_TYPES_ALWAYS,
-            Entry.STATIC.COMMAND_TYPES_NOT_ALWAYS
+            RoCode.STATIC.COMMAND_TYPES_ALWAYS,
+            RoCode.STATIC.COMMAND_TYPES_NOT_ALWAYS
         );
     },
 
     getCommandName(commandType) {
-        return _.findKey(Entry.STATIC.COMMAND_TYPES, _.partial(_.isEqual, commandType));
+        return _.findKey(RoCode.STATIC.COMMAND_TYPES, _.partial(_.isEqual, commandType));
     },
 };

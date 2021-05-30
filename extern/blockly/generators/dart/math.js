@@ -268,7 +268,7 @@ Blockly.Dart['math_on_list'] = function(block) {
           [ 'num ' + Blockly.Dart.FUNCTION_NAME_PLACEHOLDER_ +
               '(List myList) {',
             '  num sumVal = 0;',
-            '  myList.forEach((num entry) {sumVal += entry;});',
+            '  myList.forEach((num RoCode) {sumVal += RoCode;});',
             '  return sumVal;',
             '}']);
       code = functionName + '(' + list + ')';
@@ -282,8 +282,8 @@ Blockly.Dart['math_on_list'] = function(block) {
               '(List myList) {',
             '  if (myList.isEmpty) return null;',
             '  num minVal = myList[0];',
-            '  myList.forEach((num entry) ' +
-              '{minVal = Math.min(minVal, entry);});',
+            '  myList.forEach((num RoCode) ' +
+              '{minVal = Math.min(minVal, RoCode);});',
             '  return minVal;',
             '}']);
       code = functionName + '(' + list + ')';
@@ -297,8 +297,8 @@ Blockly.Dart['math_on_list'] = function(block) {
               '(List myList) {',
             '  if (myList.isEmpty) return null;',
             '  num maxVal = myList[0];',
-            '  myList.forEach((num entry) ' +
-                  '{maxVal = Math.max(maxVal, entry);});',
+            '  myList.forEach((num RoCode) ' +
+                  '{maxVal = Math.max(maxVal, RoCode);});',
             '  return maxVal;',
             '}']);
       code = functionName + '(' + list + ')';
@@ -315,7 +315,7 @@ Blockly.Dart['math_on_list'] = function(block) {
             '  localList.removeMatching((a) => a is! num);',
             '  if (localList.isEmpty) return null;',
             '  num sumVal = 0;',
-            '  localList.forEach((num entry) {sumVal += entry;});',
+            '  localList.forEach((num RoCode) {sumVal += RoCode;});',
             '  return sumVal / localList.length;',
             '}']);
       code = functionName + '(' + list + ')';

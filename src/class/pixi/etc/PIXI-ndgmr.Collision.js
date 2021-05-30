@@ -28,7 +28,7 @@
  * @author olsn, indiegamr.com
  *
  * [edit 2018.09.01]
- * A Pixel Perfect Collision Detection for entryjs PIXI.Sprite-Object
+ * A Pixel Perfect Collision Detection for RoCodejs PIXI.Sprite-Object
  *
  **/
 import * as PIXI from 'pixi.js';

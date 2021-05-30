@@ -1,5 +1,5 @@
 /**
- * @fileoverview stamp entity object is class for entry stamp entity canvas view.
+ * @fileoverview stamp entity object is class for RoCode stamp entity canvas view.
  */
 
 'use strict';
@@ -8,11 +8,11 @@ import { GEHelper } from '../graphicEngine/GEHelper';
 
 /**
  * Construct stamp entity class
- * @param {!Entry.EntryObject} object
- * @param {!Entry.EntityObject} entity
+ * @param {!RoCode.RoCodeObject} object
+ * @param {!RoCode.EntityObject} entity
  * @constructor
  */
-Entry.StampEntity = class StampEntity extends Entry.EntityObject {
+RoCode.StampEntity = class StampEntity extends RoCode.EntityObject {
     constructor(object, entity) {
         /** @type {!string} */
         super(object);

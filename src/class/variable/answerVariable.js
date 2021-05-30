@@ -2,7 +2,7 @@ import Variable from './variable';
 
 class AnswerVariable extends Variable {
     constructor(variable) {
-        Entry.assert(variable.variableType === 'answer', 'Invalid variable type given');
+        RoCode.assert(variable.variableType === 'answer', 'Invalid variable type given');
         super(variable);
     }
 
@@ -35,7 +35,7 @@ class AnswerVariable extends Variable {
             }
 
             this._adjustSingleViewBox('#F57DF1');
-            Entry.requestUpdate = true;
+            RoCode.requestUpdate = true;
         }
     }
 }

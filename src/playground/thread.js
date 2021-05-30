@@ -1,11 +1,11 @@
 'use strict';
 
-Entry.Thread = class Thread {
+RoCode.Thread = class Thread {
     constructor(thread, code, parent) {
-        this.id = Entry.generateHash();
-        this._data = new Entry.Collection();
+        this.id = RoCode.generateHash();
+        this._data = new RoCode.Collection();
         this._code = code;
-        this.changeEvent = new Entry.Event(this);
+        this.changeEvent = new RoCode.Event(this);
         this.changeEvent.attach(this, this.handleChange);
         this._event = null;
         this.parent = parent ? parent : code;
@@ -24,15 +24,15 @@ Entry.Thread = class Thread {
 
         for (let i = 0; i < thread.length; i++) {
             const block = thread[i];
-            if (block instanceof Entry.Block || block instanceof Entry.Comment || block.isDummy) {
+            if (block instanceof RoCode.Block || block instanceof RoCode.Comment || block.isDummy) {
                 block.setThread(this);
                 this._data.push(block);
             } else if (block.type === 'comment') {
-                const commment = new Entry.Comment(block);
+                const commment = new RoCode.Comment(block);
                 commment.setThread(this);
                 this._data.push(commment);
             } else {
-                this._data.push(new Entry.Block(block, this));
+                this._data.push(new RoCode.Block(block, this));
             }
         }
 
@@ -54,7 +54,7 @@ Entry.Thread = class Thread {
 
     createView(board, mode) {
         if (!this.view) {
-            this.view = new Entry.ThreadView(this, board);
+            this.view = new RoCode.ThreadView(this, board);
         }
         this.getBlocks().forEach((b) => {
             let view;
@@ -103,7 +103,7 @@ Entry.Thread = class Thread {
     }
 
     clone(code, mode) {
-        const newThread = new Entry.Thread([], code || this._code);
+        const newThread = new RoCode.Thread([], code || this._code);
         return newThread.load(
             this.getBlocks().reduce((acc, block) => [...acc, block.clone(newThread)], []),
             mode
@@ -111,7 +111,7 @@ Entry.Thread = class Thread {
     }
 
     toJSON(isNew, index = 0, excludeData, option) {
-        if (index instanceof Entry.Block) {
+        if (index instanceof RoCode.Block) {
             index = this.indexOf(index);
         }
 
@@ -119,9 +119,9 @@ Entry.Thread = class Thread {
         const data = this._data;
         for (index; index < data.length; index++) {
             const block = data[index];
-            if (block instanceof Entry.Block) {
+            if (block instanceof RoCode.Block) {
                 array.push(block.toJSON(isNew, excludeData, option));
-            } else if (block instanceof Entry.Comment) {
+            } else if (block instanceof RoCode.Comment) {
                 array.push(block.toJSON());
             }
         }
@@ -220,7 +220,7 @@ Entry.Thread = class Thread {
             const params = block.params;
             for (let k = 0; k < params.length; k++) {
                 const param = params[k];
-                if (param && param.constructor == Entry.Block) {
+                if (param && param.constructor == RoCode.Block) {
                     if (inspectBlock(param)) {
                         return true;
                     }
@@ -257,7 +257,7 @@ Entry.Thread = class Thread {
 
         const parent = this.parent;
 
-        if (parent instanceof Entry.Block) {
+        if (parent instanceof RoCode.Block) {
             pointer.unshift(parent.indexOfStatements(this));
         }
 
@@ -276,7 +276,7 @@ Entry.Thread = class Thread {
     getBlockList(excludePrimitive, type, index) {
         return _.chain(this._data)
             .map((block) => {
-                if (block.constructor !== Entry.Block) {
+                if (block.constructor !== RoCode.Block) {
                     return;
                 }
                 return block.getBlockList(excludePrimitive, type);

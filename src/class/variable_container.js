@@ -12,7 +12,7 @@ import CloudVariable from '../extensions/CloudVariable';
  * @param {variable model} variable
  * @constructor
  */
-Entry.VariableContainer = class VariableContainer {
+RoCode.VariableContainer = class VariableContainer {
     constructor() {
         this.cloudVariable = CloudVariable.getInstance();
         this.variables_ = [];
@@ -51,7 +51,7 @@ Entry.VariableContainer = class VariableContainer {
         this._filterTabs = {};
         this.listView_ = null;
 
-        Entry.addEventListener('workspaceChangeMode', this.updateList.bind(this));
+        RoCode.addEventListener('workspaceChangeMode', this.updateList.bind(this));
     }
 
     #removeChildrenClass({ children }, className) {
@@ -64,13 +64,13 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     createDom(view) {
-        const createElement = Entry.createElement;
+        const createElement = RoCode.createElement;
         const that = this;
 
         this.filterElements = {};
         this.view_ = view;
         const selectView = createElement('table')
-            .addClass('entryVariableSelectorWorkspace')
+            .addClass('RoCodeVariableSelectorWorkspace')
             .appendTo(this.view_);
 
         $(selectView).on('click tab', 'td', function() {
@@ -78,7 +78,7 @@ Entry.VariableContainer = class VariableContainer {
                 return;
             }
 
-            Entry.do(
+            RoCode.do(
                 'variableContainerSelectFilter',
                 this.getAttribute('data-type'),
                 that.viewMode_
@@ -95,33 +95,33 @@ Entry.VariableContainer = class VariableContainer {
         allButton.setAttribute('rowspan', '2');
         this.filterElements.variable = this.createSelectButton(
             'variable',
-            Entry.variableEnable
+            RoCode.variableEnable
         ).appendTo(selectTrView);
         this.filterElements.message = this.createSelectButton(
             'message',
-            Entry.messageEnable
+            RoCode.messageEnable
         ).appendTo(selectTrView);
 
         selectTrView = createElement('tr').appendTo(selectView);
-        this.filterElements.list = this.createSelectButton('list', Entry.listEnable).appendTo(
+        this.filterElements.list = this.createSelectButton('list', RoCode.listEnable).appendTo(
             selectTrView
         );
-        this.filterElements.func = this.createSelectButton('func', Entry.functionEnable).appendTo(
+        this.filterElements.func = this.createSelectButton('func', RoCode.functionEnable).appendTo(
             selectTrView
         );
 
-        const listViewContainer = createElement('div').addClass('entryVariableListWorkspace');
+        const listViewContainer = createElement('div').addClass('RoCodeVariableListWorkspace');
         this.view_.appendChild(listViewContainer);
 
         const listView = createElement('div')
-            .addClass('entryVariableAdd_box')
+            .addClass('RoCodeVariableAdd_box')
             .appendTo(listViewContainer);
 
-        $(listView).on('mouseenter', '.entryVariableListElementWorkspace', function() {
+        $(listView).on('mouseenter', '.RoCodeVariableListElementWorkspace', function() {
             this.addClass('active');
         });
 
-        $(listView).on('mouseleave', '.entryVariableListElementWorkspace', function() {
+        $(listView).on('mouseleave', '.RoCodeVariableListElementWorkspace', function() {
             this.removeClass('active');
         });
 
@@ -136,20 +136,20 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     generateAddButtons() {
-        const createElement = Entry.createElement;
-        const variableAddButton = createElement('button').addClass('entryVariableAddWorkspace');
+        const createElement = RoCode.createElement;
+        const variableAddButton = createElement('button').addClass('RoCodeVariableAddWorkspace');
         variableAddButton.textContent = Lang.Workspace.variable_add;
         this.variableAddButton_ = variableAddButton;
 
-        const messageAddButton = createElement('button').addClass('entryVariableAddWorkspace');
+        const messageAddButton = createElement('button').addClass('RoCodeVariableAddWorkspace');
         messageAddButton.textContent = Lang.Workspace.message_create;
         this.messageAddButton_ = messageAddButton;
 
-        const listAddButton = createElement('button').addClass('entryVariableAddWorkspace');
+        const listAddButton = createElement('button').addClass('RoCodeVariableAddWorkspace');
         listAddButton.textContent = Lang.Workspace.list_create;
         this.listAddButton_ = listAddButton;
 
-        const functionAddButton = createElement('button').addClass('entryVariableAddWorkspace');
+        const functionAddButton = createElement('button').addClass('RoCodeVariableAddWorkspace');
         functionAddButton.textContent = Lang.Workspace.function_add;
         this.functionAddButton_ = functionAddButton;
     }
@@ -159,9 +159,9 @@ Entry.VariableContainer = class VariableContainer {
      * @param {?Boolean} isEnable
      */
     createSelectButton(type, isEnable = true) {
-        const view = Entry.createElement('td').addClass('entryVariableSelectButtonWorkspace', type);
-        const textView = Entry.createElement('div');
-        const text = Entry.createElement('span')
+        const view = RoCode.createElement('td').addClass('RoCodeVariableSelectButtonWorkspace', type);
+        const textView = RoCode.createElement('div');
+        const text = RoCode.createElement('span')
             .addClass('text')
             .appendTo(textView);
 
@@ -214,16 +214,16 @@ Entry.VariableContainer = class VariableContainer {
         if (object) {
             globalCheck.removeClass('on');
             localCheck.addClass('on');
-            cloudWrapper.addClass('entryVariableAddSpaceUnCheckedWorkspace');
+            cloudWrapper.addClass('RoCodeVariableAddSpaceUnCheckedWorkspace');
         } else {
             globalCheck.addClass('on');
             localCheck.removeClass('on');
-            cloudWrapper.removeClass('entryVariableAddSpaceUnCheckedWorkspace');
+            cloudWrapper.removeClass('RoCodeVariableAddSpaceUnCheckedWorkspace');
         }
     }
 
     /**
-     * @param {object|Entry.Variable} object
+     * @param {object|RoCode.Variable} object
      */
     select(object) {
         object = this.selected == object ? null : object;
@@ -244,7 +244,7 @@ Entry.VariableContainer = class VariableContainer {
         this.selected = object;
         this.selected.listElement.removeClass('fold');
         this.selected.listElement.addClass('unfold');
-        if (object instanceof Entry.Variable) {
+        if (object instanceof RoCode.Variable) {
             if (object.type === 'variable') {
                 this.generateVariableSettingView(object);
                 this.updateVariableSettingView(object);
@@ -253,9 +253,9 @@ Entry.VariableContainer = class VariableContainer {
                 this.updateListSettingView(object);
             }
             if (object.object_) {
-                Entry.container.selectObject(object.object_, true);
+                RoCode.container.selectObject(object.object_, true);
             }
-        } else if (object instanceof Entry.Func) {
+        } else if (object instanceof RoCode.Func) {
             this.renderFunctionReference(object);
         } else {
             this.renderMessageReference(object);
@@ -280,41 +280,41 @@ Entry.VariableContainer = class VariableContainer {
         let usedWrapper;
 
         if (callers.length) {
-            usedWrapper = Entry.createElement('div').addClass('use_block');
-            const listView = Entry.createElement('ul')
+            usedWrapper = RoCode.createElement('div').addClass('use_block');
+            const listView = RoCode.createElement('ul')
                 .addClass('obj_list')
                 .appendTo(usedWrapper);
             const fragment = document.createDocumentFragment();
             callers.forEach((caller) => {
-                const element = Entry.createElement('li');
+                const element = RoCode.createElement('li');
                 !caller.object.thumbnailView_ && caller.object.generateView();
                 const thumb = element.appendChild(caller.object.thumbnailView_.cloneNode());
                 thumb.addClass('thmb');
                 element.appendChild(thumb);
-                Entry.createElement('span')
+                RoCode.createElement('span')
                     .addClass('text')
                     .appendTo(element).textContent = `${caller.object.name} : ${
                     Lang.Blocks[`START_${caller.block.type}`]
                 }`;
                 element.bindOnClick((e) => {
                     e.stopPropagation();
-                    if (Entry.playground.object !== caller.object) {
-                        Entry.container.selectObject();
-                        Entry.container.selectObject(caller.object.id, true);
+                    if (RoCode.playground.object !== caller.object) {
+                        RoCode.container.selectObject();
+                        RoCode.container.selectObject(caller.object.id, true);
                     }
                     const block = caller.funcBlock || caller.block;
                     const board = _.result(block.view, 'getBoard');
                     if (board) {
                         board.setSelectedBlock(block.view);
                     }
-                    Entry.playground.toggleOnVariableView();
-                    Entry.playground.changeViewMode('variable');
+                    RoCode.playground.toggleOnVariableView();
+                    RoCode.playground.changeViewMode('variable');
                 });
                 fragment.appendChild(element);
             });
             listView.appendChild(fragment);
         } else {
-            usedWrapper = Entry.createElement('p').addClass('caution_dsc');
+            usedWrapper = RoCode.createElement('p').addClass('caution_dsc');
             usedWrapper.textContent = Lang.Workspace.no_use;
         }
         message.usedView = usedWrapper;
@@ -331,8 +331,8 @@ Entry.VariableContainer = class VariableContainer {
             _.includes(params, variableId)
         );
 
-        const usedWrapper = Entry.createElement('div').addClass('use_obj');
-        const usedSubject = Entry.createElement('span')
+        const usedWrapper = RoCode.createElement('div').addClass('use_obj');
+        const usedSubject = RoCode.createElement('span')
             .addClass('box_sjt')
             .appendTo(usedWrapper);
 
@@ -343,7 +343,7 @@ Entry.VariableContainer = class VariableContainer {
             usedSubject.textContent = Lang.Workspace.List_used_objects;
         }
 
-        const listView = Entry.createElement('ul')
+        const listView = RoCode.createElement('ul')
             .addClass('obj_list')
             .appendTo(usedWrapper);
 
@@ -351,12 +351,12 @@ Entry.VariableContainer = class VariableContainer {
             const fragment = document.createDocumentFragment();
 
             callers.forEach((caller) => {
-                const element = Entry.createElement('li');
+                const element = RoCode.createElement('li');
                 !caller.object.thumbnailView_ && caller.object.generateView();
                 const thumb = caller.object.thumbnailView_.cloneNode();
                 thumb.addClass('thmb');
                 element.appendChild(thumb);
-                Entry.createElement('span')
+                RoCode.createElement('span')
                     .addClass('text')
                     .appendTo(element).textContent = `${caller.object.name} : ${
                     Lang.Blocks[`VARIABLE_${caller.block.type}`]
@@ -364,23 +364,23 @@ Entry.VariableContainer = class VariableContainer {
                 element.variable = variable;
                 element.bindOnClick((e) => {
                     e.stopPropagation();
-                    if (Entry.playground.object != caller.object) {
-                        Entry.container.selectObject();
-                        Entry.container.selectObject(caller.object.id, true);
+                    if (RoCode.playground.object != caller.object) {
+                        RoCode.container.selectObject();
+                        RoCode.container.selectObject(caller.object.id, true);
                     }
                     const block = caller.funcBlock || caller.block;
                     const board = _.result(block.view, 'getBoard');
                     if (board) {
                         board.setSelectedBlock(block.view);
                     }
-                    Entry.playground.toggleOnVariableView();
-                    Entry.playground.changeViewMode('variable');
+                    RoCode.playground.toggleOnVariableView();
+                    RoCode.playground.changeViewMode('variable');
                 });
                 fragment.appendChild(element);
             });
             listView.appendChild(fragment);
         } else {
-            Entry.createElement('li')
+            RoCode.createElement('li')
                 .addClass('text red')
                 .appendTo(listView).textContent = Lang.Workspace.no_use;
         }
@@ -401,36 +401,36 @@ Entry.VariableContainer = class VariableContainer {
         let usedWrapper;
 
         if (callers.length) {
-            usedWrapper = Entry.createElement('div').addClass('use_block');
-            const listView = Entry.createElement('ul')
+            usedWrapper = RoCode.createElement('div').addClass('use_block');
+            const listView = RoCode.createElement('ul')
                 .addClass('obj_list')
                 .appendTo(usedWrapper);
             const fragment = document.createDocumentFragment();
             callers.forEach((caller) => {
-                const element = Entry.createElement('li');
+                const element = RoCode.createElement('li');
                 !caller.object.thumbnailView_ && caller.object.generateView();
                 const thumb = element.appendChild(caller.object.thumbnailView_.cloneNode());
                 thumb.addClass('thmb');
                 element.appendChild(thumb);
-                const nameElement = Entry.createElement('span').addClass('text');
+                const nameElement = RoCode.createElement('span').addClass('text');
                 nameElement.textContent = caller.object.name;
                 element.appendChild(nameElement);
                 element.bindOnClick(() => {
-                    if (Entry.playground.object != caller.object) {
-                        Entry.container.selectObject();
-                        Entry.container.selectObject(caller.object.id, true);
+                    if (RoCode.playground.object != caller.object) {
+                        RoCode.container.selectObject();
+                        RoCode.container.selectObject(caller.object.id, true);
                     }
-                    Entry.playground.toggleOnVariableView();
+                    RoCode.playground.toggleOnVariableView();
                     const block = caller.block;
                     const blockView = block.view;
                     blockView && blockView.getBoard().setSelectedBlock(block.view);
-                    Entry.playground.changeViewMode('variable');
+                    RoCode.playground.changeViewMode('variable');
                 });
                 fragment.appendChild(element);
             });
             listView.appendChild(fragment);
         } else {
-            usedWrapper = Entry.createElement('p').addClass('caution_dsc');
+            usedWrapper = RoCode.createElement('p').addClass('caution_dsc');
             usedWrapper.textContent = Lang.Workspace.no_use;
         }
 
@@ -449,9 +449,9 @@ Entry.VariableContainer = class VariableContainer {
 
         const isPythonMode = this._isPythonMode();
         if (isPythonMode) {
-            listView.addClass('entryVariableContainerTextMode');
+            listView.addClass('RoCodeVariableContainerTextMode');
         } else {
-            listView.removeClass('entryVariableContainerTextMode');
+            listView.removeClass('RoCodeVariableContainerTextMode');
         }
 
         this.clearListElement();
@@ -514,10 +514,10 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     updateAllTab() {
-        const createElement = Entry.createElement;
+        const createElement = RoCode.createElement;
         const listView = this.listView_;
         const listWrapper = createElement('div').addClass(
-            'entryVariableSplitterWorkspace unfold all'
+            'RoCodeVariableSplitterWorkspace unfold all'
         );
 
         const listBox = createElement('div')
@@ -536,21 +536,21 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     updateMessageTab() {
-        const createElement = Entry.createElement;
+        const createElement = RoCode.createElement;
         const listView = this.listView_;
 
-        if (Entry.isTextMode) {
+        if (RoCode.isTextMode) {
             this.messageAddButton_.unBindOnClick().addClass('disabled');
         } else {
             this.messageAddButton_
                 .unBindOnClick()
-                .bindOnClick(() => Entry.do('variableContainerClickMessageAddButton'))
+                .bindOnClick(() => RoCode.do('variableContainerClickMessageAddButton'))
                 .removeClass('disabled');
         }
         listView.appendChild(this.messageAddButton_);
         listView.appendChild(this.messageAddPanel.view);
 
-        const messageList = createElement('div').addClass('entryVariableSplitterWorkspace unfold');
+        const messageList = createElement('div').addClass('RoCodeVariableSplitterWorkspace unfold');
 
         const messageListBox = createElement('div')
             .addClass('attr_box')
@@ -565,19 +565,19 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     updateVariableTab() {
-        const createElement = Entry.createElement;
+        const createElement = RoCode.createElement;
         const listView = this.listView_;
         const info = this.variableAddPanel.info;
-        if (info.object && !Entry.playground.object) {
+        if (info.object && !RoCode.playground.object) {
             info.object = null;
         }
 
-        if (Entry.isTextMode) {
+        if (RoCode.isTextMode) {
             this.variableAddButton_.unBindOnClick().addClass('disabled');
         } else {
             this.variableAddButton_
                 .unBindOnClick()
-                .bindOnClick(() => Entry.do('variableContainerClickVariableAddButton'))
+                .bindOnClick(() => RoCode.do('variableContainerClickVariableAddButton'))
                 .removeClass('disabled');
         }
 
@@ -585,10 +585,10 @@ Entry.VariableContainer = class VariableContainer {
         listView.appendChild(this.variableAddPanel.view);
 
         //global list container
-        const globalList = createElement('div').addClass('entryVariableSplitterWorkspace');
+        const globalList = createElement('div').addClass('RoCodeVariableSplitterWorkspace');
         let isGlobalFolded = false;
 
-        const globalListTitle = Entry.createElement('a')
+        const globalListTitle = RoCode.createElement('a')
             .addClass('attr_link')
             .bindOnClick(() => {
                 isGlobalFolded = !isGlobalFolded;
@@ -601,10 +601,10 @@ Entry.VariableContainer = class VariableContainer {
             .appendTo(globalList);
 
         //local list container
-        const localList = createElement('div').addClass('entryVariableSplitterWorkspace');
+        const localList = createElement('div').addClass('RoCodeVariableSplitterWorkspace');
         let isLocalFolded = false;
 
-        const localListTitle = Entry.createElement('a')
+        const localListTitle = RoCode.createElement('a')
             .addClass('attr_link')
             .bindOnClick(() => {
                 isLocalFolded = !isLocalFolded;
@@ -648,29 +648,29 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     updateListTab() {
-        const createElement = Entry.createElement;
+        const createElement = RoCode.createElement;
         const listView = this.listView_;
         const info = this.listAddPanel.info;
-        if (info.object && !Entry.playground.object) {
+        if (info.object && !RoCode.playground.object) {
             info.object = null;
         }
 
-        if (Entry.isTextMode) {
+        if (RoCode.isTextMode) {
             this.listAddButton_.unBindOnClick().addClass('disabled');
         } else {
             this.listAddButton_
                 .unBindOnClick()
-                .bindOnClick(() => Entry.do('variableContainerClickListAddButton'))
+                .bindOnClick(() => RoCode.do('variableContainerClickListAddButton'))
                 .removeClass('disabled');
         }
         listView.appendChild(this.listAddButton_);
         listView.appendChild(this.listAddPanel.view);
 
         //global list container
-        const globalList = createElement('div').addClass('entryVariableSplitterWorkspace');
+        const globalList = createElement('div').addClass('RoCodeVariableSplitterWorkspace');
         let isGlobalFolded = false;
 
-        const globalListTitle = Entry.createElement('a')
+        const globalListTitle = RoCode.createElement('a')
             .addClass('attr_link')
             .bindOnClick(() => {
                 isGlobalFolded = !isGlobalFolded;
@@ -683,10 +683,10 @@ Entry.VariableContainer = class VariableContainer {
             .appendTo(globalList);
 
         //local list container
-        const localList = createElement('div').addClass('entryVariableSplitterWorkspace');
+        const localList = createElement('div').addClass('RoCodeVariableSplitterWorkspace');
         let isLocalFolded = false;
 
-        const localListTitle = Entry.createElement('a')
+        const localListTitle = RoCode.createElement('a')
             .addClass('attr_link')
             .bindOnClick(() => {
                 isLocalFolded = !isLocalFolded;
@@ -717,20 +717,20 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     updateFuncTab() {
-        const createElement = Entry.createElement;
+        const createElement = RoCode.createElement;
         const listView = this.listView_;
 
-        if (Entry.isTextMode) {
+        if (RoCode.isTextMode) {
             this.functionAddButton_.unBindOnClick().addClass('disabled');
         } else {
             this.functionAddButton_
                 .unBindOnClick()
-                .bindOnClick(() => Entry.do('funcEditStart', Entry.generateHash()))
+                .bindOnClick(() => RoCode.do('funcEditStart', RoCode.generateHash()))
                 .removeClass('disabled');
         }
         listView.appendChild(this.functionAddButton_);
 
-        const funcList = createElement('div').addClass('entryVariableSplitterWorkspace unfold');
+        const funcList = createElement('div').addClass('RoCodeVariableSplitterWorkspace unfold');
 
         const funcListBox = createElement('div')
             .addClass('attr_box')
@@ -750,11 +750,11 @@ Entry.VariableContainer = class VariableContainer {
     setMessages(messages = []) {
         this.messages_ = messages.map((message) => {
             if (!message.id) {
-                message.id = Entry.generateHash();
+                message.id = RoCode.generateHash();
             }
             return message;
         });
-        Entry.playground.reloadPlayground();
+        RoCode.playground.reloadPlayground();
     }
 
     /**
@@ -764,18 +764,18 @@ Entry.VariableContainer = class VariableContainer {
         for (const i in messages) {
             const message = messages[i];
             if (!message.id) {
-                message.id = Entry.generateHash();
+                message.id = RoCode.generateHash();
             } else if (this.messages_.some((item) => item.id === message.id)) {
                 continue;
             }
             let name = message.name;
             name = this.checkAllVariableName(name, 'messages_', 'name')
-                ? Entry.getOrderedName(name, this.messages_, 'name')
+                ? RoCode.getOrderedName(name, this.messages_, 'name')
                 : name;
             message.name = name;
             this.messages_.push(message);
         }
-        Entry.playground.reloadPlayground();
+        RoCode.playground.reloadPlayground();
     }
 
     /**
@@ -783,7 +783,7 @@ Entry.VariableContainer = class VariableContainer {
      */
     setVariables(variables = []) {
         variables.forEach((variable) => {
-            variable = Entry.Variable.create(variable);
+            variable = RoCode.Variable.create(variable);
             switch (variable.getType()) {
                 case 'variable':
                 case 'slide':
@@ -806,23 +806,23 @@ Entry.VariableContainer = class VariableContainer {
             }
         });
 
-        if (_.isEmpty(Entry.engine.projectTimer)) {
+        if (_.isEmpty(RoCode.engine.projectTimer)) {
             this.generateTimer();
         }
-        if (_.isEmpty(Entry.container.inputValue)) {
+        if (_.isEmpty(RoCode.container.inputValue)) {
             this.generateAnswer();
         }
-        if (_.isEmpty(Entry.container.sttValue)) {
+        if (_.isEmpty(RoCode.container.sttValue)) {
             this.generateStt();
         }
 
-        Entry.playground.reloadPlayground();
+        RoCode.playground.reloadPlayground();
     }
 
     generateVariable(variable, data, key) {
         const name = variable.name_;
         variable.name_ = this.checkAllVariableName(name, key)
-            ? Entry.getOrderedName(name, data, 'name_')
+            ? RoCode.getOrderedName(name, data, 'name_')
             : name;
         variable.generateView(data.length);
     }
@@ -832,9 +832,9 @@ Entry.VariableContainer = class VariableContainer {
      */
     appendVariables(variables) {
         for (const i in variables) {
-            const variable = Entry.Variable.create(variables[i]);
+            const variable = RoCode.Variable.create(variables[i]);
             if (!variable.id_) {
-                variable.id_ = Entry.generateHash();
+                variable.id_ = RoCode.generateHash();
             }
             const type = variable.getType();
             if (type === 'variable' || type === 'slide') {
@@ -851,16 +851,16 @@ Entry.VariableContainer = class VariableContainer {
                 this.lists_.push(variable);
             }
         }
-        if (Entry.isEmpty(Entry.engine.projectTimer)) {
-            Entry.variableContainer.generateTimer();
+        if (RoCode.isEmpty(RoCode.engine.projectTimer)) {
+            RoCode.variableContainer.generateTimer();
         }
-        if (Entry.isEmpty(Entry.container.inputValue)) {
-            Entry.variableContainer.generateAnswer();
+        if (RoCode.isEmpty(RoCode.container.inputValue)) {
+            RoCode.variableContainer.generateAnswer();
         }
-        if (Entry.isEmpty(Entry.container.sttValue)) {
-            Entry.variableContainer.generateStt();
+        if (RoCode.isEmpty(RoCode.container.sttValue)) {
+            RoCode.variableContainer.generateStt();
         }
-        Entry.playground.reloadPlayground();
+        RoCode.playground.reloadPlayground();
     }
 
     /**
@@ -868,7 +868,7 @@ Entry.VariableContainer = class VariableContainer {
      */
     setFunctions(functions = []) {
         functions.forEach((func) => {
-            func = new Entry.Func(func);
+            func = new RoCode.Func(func);
             func.generateBlock();
             this.functions_[func.id] = func;
         });
@@ -881,11 +881,11 @@ Entry.VariableContainer = class VariableContainer {
         for (const i in functions) {
             const func = functions[i];
             if (!func.id) {
-                func.id = Entry.generateHash();
+                func.id = RoCode.generateHash();
             } else if (`${func.id}` in this.functions_) {
                 continue;
             }
-            const parseFunc = new Entry.Func(func);
+            const parseFunc = new RoCode.Func(func);
             this.changeFunctionName(parseFunc);
             parseFunc.generateBlock();
             this.functions_[parseFunc.id] = parseFunc;
@@ -909,7 +909,7 @@ Entry.VariableContainer = class VariableContainer {
         const isDuplecate = funcsParamNames.some(({ name }) => funcParamName === name);
 
         if (isDuplecate) {
-            const orderedNumber = Entry.getOrderedNameNumber(
+            const orderedNumber = RoCode.getOrderedNameNumber(
                 funcParamName,
                 funcsParamNames,
                 'name'
@@ -922,7 +922,7 @@ Entry.VariableContainer = class VariableContainer {
                 }
             }
 
-            Entry.Func.generateWsBlock(func);
+            RoCode.Func.generateWsBlock(func);
         }
     }
 
@@ -939,7 +939,7 @@ Entry.VariableContainer = class VariableContainer {
                     type: 'string',
                     parent: parentParams,
                 };
-            } else if (param instanceof Entry.Block) {
+            } else if (param instanceof RoCode.Block) {
                 const { data = {} } = param;
                 const { params = [], type } = data;
 
@@ -963,7 +963,7 @@ Entry.VariableContainer = class VariableContainer {
 
     /**
      * get func
-     * @return {Entry.Func}
+     * @return {RoCode.Func}
      */
     getFunction(funcId) {
         return this.functions_[funcId];
@@ -971,7 +971,7 @@ Entry.VariableContainer = class VariableContainer {
 
     /**
      * get variable on canvas
-     * @return {Entry.Variable}
+     * @return {RoCode.Variable}
      */
     getVariable(id_, entity = {}) {
         const criteria = { id_ };
@@ -985,7 +985,7 @@ Entry.VariableContainer = class VariableContainer {
 
     /**
      * get variable on canvas
-     * @return {Entry.List}
+     * @return {RoCode.List}
      */
     getList(listId, { isClone, lists } = {}) {
         const criteria = { id_: listId };
@@ -1001,19 +1001,19 @@ Entry.VariableContainer = class VariableContainer {
      * Create function
      */
     createFunction(data) {
-        if (Entry.Func.isEdit) {
+        if (RoCode.Func.isEdit) {
             return;
         }
-        Entry.Func.edit(new Entry.Func(data));
+        RoCode.Func.edit(new RoCode.Func(data));
     }
 
     removeBlocksInFunctionByType(blockType) {
         Object.values(this.functions_).forEach((func) => {
-            Entry.do('funcEditStart', func.id).isPass(true);
+            RoCode.do('funcEditStart', func.id).isPass(true);
             func.content.getBlockList(false, blockType).forEach((b, index) => {
-                Entry.do('destroyBlock', b).isPass(true);
+                RoCode.do('destroyBlock', b).isPass(true);
             });
-            Entry.do('funcEditEnd', 'save').isPass(true);
+            RoCode.do('funcEditEnd', 'save').isPass(true);
         });
     }
 
@@ -1030,7 +1030,7 @@ Entry.VariableContainer = class VariableContainer {
             Object.values(this.functions_).map(async (func) => {
                 await Promise.all(
                     func.content.getBlockList(false, blockType).map(
-                        Entry.Utils.runAsyncCurry((block) => {
+                        RoCode.Utils.runAsyncCurry((block) => {
                             block.destroy();
                         })
                     )
@@ -1047,7 +1047,7 @@ Entry.VariableContainer = class VariableContainer {
 
     /**
      * Remove variable
-     * @param {Entry.Variable} variable
+     * @param {RoCode.Variable} variable
      */
     removeFunction({ id: functionId }) {
         const functions = this.functions_;
@@ -1055,7 +1055,7 @@ Entry.VariableContainer = class VariableContainer {
         delete functions[functionId];
         const functionType = `func_${functionId}`;
 
-        Entry.container.removeFuncBlocks(functionType);
+        RoCode.container.removeFuncBlocks(functionType);
         for (const id in functions) {
             functions[id].content.removeBlocksByType(functionType);
         }
@@ -1093,7 +1093,7 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     _getVariableByName(arr, variableName, isSelf, currentObjectId) {
-        const object = _.result(Entry.playground, 'object');
+        const object = _.result(RoCode.playground, 'object');
         if (!currentObjectId && object) {
             currentObjectId = object.id;
         }
@@ -1126,22 +1126,22 @@ Entry.VariableContainer = class VariableContainer {
 
     /**
      * Save variable
-     * @param {Entry.Func} func
+     * @param {RoCode.Func} func
      */
     saveFunction(func) {
         /* add to function list when not exist */
-        const ws = Entry.getMainWS();
+        const ws = RoCode.getMainWS();
 
-        if (ws && ws.overlayModefrom == Entry.Workspace.MODE_VIMBOARD) {
+        if (ws && ws.overlayModefrom == RoCode.Workspace.MODE_VIMBOARD) {
             if (func && func.description) {
                 const funcName = func.description.substring(1, func.description.length - 1);
-                const alertMsg = Entry.TextCodingUtil.validateNameIncludeSpace(
+                const alertMsg = RoCode.TextCodingUtil.validateNameIncludeSpace(
                     funcName,
                     'function'
                 );
                 if (alertMsg) {
-                    entrylms.alert(alertMsg);
-                    Entry.Func.cancelEdit();
+                    RoCodelms.alert(alertMsg);
+                    RoCode.Func.cancelEdit();
                     return;
                 }
             }
@@ -1159,19 +1159,19 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     /**
-     * @param {Entry.Func} func
+     * @param {RoCode.Func} func
      */
     createFunctionView(func) {
-        const createElement = Entry.createElement;
+        const createElement = RoCode.createElement;
 
-        const view = Entry.createElement('div').addClass('list default_func');
+        const view = RoCode.createElement('div').addClass('list default_func');
 
         const editBoxWrapper = createElement('div')
             .addClass('inpt_box')
             .bindOnClick((e) => {
                 e.stopPropagation();
-                if (!Entry.isTextMode) {
-                    Entry.do('funcEditStart', func.id);
+                if (!RoCode.isTextMode) {
+                    RoCode.do('funcEditStart', func.id);
                 }
                 return this.select(func);
             })
@@ -1188,7 +1188,7 @@ Entry.VariableContainer = class VariableContainer {
             .addClass('del')
             .bindOnClick((e) => {
                 e.stopPropagation();
-                entrylms.confirm(Lang.Workspace.will_you_delete_function).then((result) => {
+                RoCodelms.confirm(Lang.Workspace.will_you_delete_function).then((result) => {
                     if (result === true) {
                         this.destroyFunction(func);
                         this.selected = null;
@@ -1202,20 +1202,20 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     async destroyFunction(func) {
-        if (Entry.Func.targetFunc) {
-            Entry.do('funcEditEnd', 'cancel');
+        if (RoCode.Func.targetFunc) {
+            RoCode.do('funcEditEnd', 'cancel');
         }
-        const currentObjectId = Entry.playground.object.id;
-        Entry.do('selectObject', currentObjectId);
+        const currentObjectId = RoCode.playground.object.id;
+        RoCode.do('selectObject', currentObjectId);
         const functionType = `func_${func.id}`;
-        await Entry.Utils.removeBlockByTypeAsync(functionType);
-        Entry.do('funcRemove', func).isPass(true);
-        Entry.do('selectObject', currentObjectId).isPass(true);
+        await RoCode.Utils.removeBlockByTypeAsync(functionType);
+        RoCode.do('funcRemove', func).isPass(true);
+        RoCode.do('selectObject', currentObjectId).isPass(true);
     }
 
     /**
      * Add variable
-     * @param {Entry.Variable} variable
+     * @param {RoCode.Variable} variable
      * @return {boolean} return true when success
      */
     checkAllVariableName(name, variable, key = 'name_') {
@@ -1229,10 +1229,10 @@ Entry.VariableContainer = class VariableContainer {
         const panel = this._getAddPanel(type);
         const name = panel.view.name.value.trim();
 
-        if (Entry.isTextMode) {
-            const alertMsg = Entry.TextCodingUtil.validateNameIncludeSpace(name, type);
+        if (RoCode.isTextMode) {
+            const alertMsg = RoCode.TextCodingUtil.validateNameIncludeSpace(name, type);
             if (alertMsg) {
-                entrylms.alert(alertMsg);
+                RoCodelms.alert(alertMsg);
                 this.resetVariableAddPanel(type);
                 return;
             }
@@ -1244,8 +1244,8 @@ Entry.VariableContainer = class VariableContainer {
 
         this.resetVariableAddPanel(type);
 
-        if (!(data instanceof Entry.Variable)) {
-            data = Entry.Variable.create(data);
+        if (!(data instanceof RoCode.Variable)) {
+            data = RoCode.Variable.create(data);
         }
 
         if (type === 'variable') {
@@ -1258,7 +1258,7 @@ Entry.VariableContainer = class VariableContainer {
 
         this[target].unshift(data);
 
-        const playground = Entry.playground;
+        const playground = RoCode.playground;
 
         if (playground) {
             const { blockMenu } = playground;
@@ -1277,10 +1277,10 @@ Entry.VariableContainer = class VariableContainer {
 
     /**
      * Remove variable
-     * @param {Entry.Variable} variable
+     * @param {RoCode.Variable} variable
      */
     removeVariable(variable) {
-        if (!(variable instanceof Entry.Variable)) {
+        if (!(variable instanceof RoCode.Variable)) {
             variable = this.getVariable(variable.id);
         }
 
@@ -1291,12 +1291,12 @@ Entry.VariableContainer = class VariableContainer {
         variable.remove();
         const variables = this.variables_;
         variables.splice(variables.indexOf(variable), 1);
-        Entry.playground.reloadPlayground();
+        RoCode.playground.reloadPlayground();
         this.updateList();
     }
 
     /**
-     * @param {Entry.Variable} variable
+     * @param {RoCode.Variable} variable
      * @param {String} name
      */
     changeVariableName(variable, name) {
@@ -1304,32 +1304,32 @@ Entry.VariableContainer = class VariableContainer {
             return;
         }
 
-        if (Entry.isTextMode) {
-            const alertMsg = Entry.TextCodingUtil.validateNameIncludeSpace(name, 'variable');
+        if (RoCode.isTextMode) {
+            const alertMsg = RoCode.TextCodingUtil.validateNameIncludeSpace(name, 'variable');
             if (alertMsg) {
-                entrylms.alert(alertMsg);
+                RoCodelms.alert(alertMsg);
                 variable.listElement.nameField.value = variable.name_;
                 return;
             }
         }
 
-        if (Entry.isExist(name, 'name_', this.variables_)) {
+        if (RoCode.isExist(name, 'name_', this.variables_)) {
             return this.changeVariableNameDuplicated(variable, 'variable', name);
         } else if (name.length > 10) {
             variable.listElement.nameField.value = variable.name_;
-            return Entry.toast.alert(
+            return RoCode.toast.alert(
                 Lang.Workspace.variable_rename_failed,
                 Lang.Workspace.variable_too_long
             );
         }
         variable.setName(name);
         variable.listElement.nameField.value = name;
-        Entry.playground.reloadPlayground();
-        Entry.toast.success(Lang.Workspace.variable_rename, Lang.Workspace.variable_rename_ok);
+        RoCode.playground.reloadPlayground();
+        RoCode.toast.success(Lang.Workspace.variable_rename, Lang.Workspace.variable_rename_ok);
     }
 
     /**
-     * @param {Entry.Variable} list
+     * @param {RoCode.Variable} list
      * @param {String} name
      */
     changeListName(list, name) {
@@ -1337,38 +1337,38 @@ Entry.VariableContainer = class VariableContainer {
             return;
         }
 
-        if (Entry.isTextMode) {
-            const alertMsg = Entry.TextCodingUtil.validateNameIncludeSpace(name, 'list');
+        if (RoCode.isTextMode) {
+            const alertMsg = RoCode.TextCodingUtil.validateNameIncludeSpace(name, 'list');
             if (alertMsg) {
-                entrylms.alert(alertMsg);
+                RoCodelms.alert(alertMsg);
                 list.listElement.nameField.value = list.name_;
                 return;
             }
         }
 
-        if (Entry.isExist(name, 'name_', this.lists_)) {
+        if (RoCode.isExist(name, 'name_', this.lists_)) {
             return this.changeVariableNameDuplicated(list, 'list', name);
         } else if (name.length > 10) {
-            Entry.toast.alert(Lang.Workspace.list_rename_failed, Lang.Workspace.list_too_long);
+            RoCode.toast.alert(Lang.Workspace.list_rename_failed, Lang.Workspace.list_too_long);
         } else {
             //name successfully changed
             list.name_ = name;
             list.updateView();
-            Entry.playground.reloadPlayground();
-            Entry.toast.success(Lang.Workspace.list_rename, Lang.Workspace.list_rename_ok);
+            RoCode.playground.reloadPlayground();
+            RoCode.toast.success(Lang.Workspace.list_rename, Lang.Workspace.list_rename_ok);
         }
 
         list.listElement.nameField.value = list.name_;
     }
 
     /**
-     * @param {Entry.Variable} variable or list
+     * @param {RoCode.Variable} variable or list
      * @param {string} type [variable, list]
      * @param {string} name
      */
     changeVariableNameDuplicated(variable, type, name) {
         const variables = this[`${type}s_`].filter(({ id_ }) => id_ !== variable.id_);
-        const newName = Entry.getOrderedName(
+        const newName = RoCode.getOrderedName(
             this._truncName(name, type, this._maxNameLength),
             variables,
             'name_'
@@ -1377,16 +1377,16 @@ Entry.VariableContainer = class VariableContainer {
         variable.setName(newName);
         variable.listElement.nameField.value = newName;
 
-        Entry.playground.reloadPlayground();
-        Entry.toast.warning(Lang.Workspace[`${type}_rename`], Lang.Workspace[`${type}_dup`]);
+        RoCode.playground.reloadPlayground();
+        RoCode.toast.warning(Lang.Workspace[`${type}_rename`], Lang.Workspace[`${type}_dup`]);
     }
 
     /**
      * Remove list
-     * @param {Entry.Variable} list
+     * @param {RoCode.Variable} list
      */
     removeList(list) {
-        if (!(list instanceof Entry.Variable)) {
+        if (!(list instanceof RoCode.Variable)) {
             list = this.getList(list.id);
         }
 
@@ -1396,16 +1396,16 @@ Entry.VariableContainer = class VariableContainer {
         list.remove();
         const lists = this.lists_;
         lists.splice(lists.indexOf(list), 1);
-        Entry.playground.reloadPlayground();
+        RoCode.playground.reloadPlayground();
         this.updateList();
     }
 
     /**
-     * @param {Entry.Variable} variable
+     * @param {RoCode.Variable} variable
      */
     createVariableView(variable) {
         const that = this;
-        const createElement = Entry.createElement;
+        const createElement = RoCode.createElement;
 
         const variableWrapper = createElement('div').addClass('list fold');
 
@@ -1438,7 +1438,7 @@ Entry.VariableContainer = class VariableContainer {
                     that.select(variable);
                     that.updateSelectedVariable(null, 'variable');
                 } else {
-                    Entry.do('setVariableEditable', variable.id_);
+                    RoCode.do('setVariableEditable', variable.id_);
                 }
             })
             .appendTo(variableWrapper);
@@ -1457,19 +1457,19 @@ Entry.VariableContainer = class VariableContainer {
         editBoxInput.onblur = function() {
             const value = this.value.trim();
             if (!value) {
-                Entry.toast.alert(Lang.Msgs.warn, Lang.Msgs.variable_can_not_space);
+                RoCode.toast.alert(Lang.Msgs.warn, Lang.Msgs.variable_can_not_space);
                 this.value = variable.getName();
                 return this.focus();
             }
             const targetVariable = that.getVariable(variable.getId());
-            targetVariable && Entry.do('variableSetName', targetVariable.getId(), value);
+            targetVariable && RoCode.do('variableSetName', targetVariable.getId(), value);
         };
-        editBoxInput.onkeydown = Entry.Utils.blurWhenEnter;
+        editBoxInput.onkeydown = RoCode.Utils.blurWhenEnter;
         const watchButton = createElement('a')
             .addClass('watch')
             .bindOnClick((e) => {
                 e.stopPropagation();
-                Entry.do('variableSetVisibility', variable.id_, !variable.isVisible());
+                RoCode.do('variableSetVisibility', variable.id_, !variable.isVisible());
                 if (variable.isVisible()) {
                     watchButton.addClass('on');
                 } else {
@@ -1487,7 +1487,7 @@ Entry.VariableContainer = class VariableContainer {
             .addClass('del')
             .bindOnClick((e) => {
                 e.stopPropagation();
-                Entry.do('variableContainerRemoveVariable', variable);
+                RoCode.do('variableContainerRemoveVariable', variable);
             })
             .appendTo(editBoxWrapper);
         delButton.href = '#';
@@ -1506,12 +1506,12 @@ Entry.VariableContainer = class VariableContainer {
             message.name = `${Lang.Workspace.message} ${messages.length + 1}`;
         }
         if (!message.id) {
-            message.id = Entry.generateHash();
+            message.id = RoCode.generateHash();
         }
         this.createMessageView(message);
         messages.unshift(message);
 
-        const { playground } = Entry;
+        const { playground } = RoCode;
 
         if (playground) {
             const { blockMenu } = playground;
@@ -1541,7 +1541,7 @@ Entry.VariableContainer = class VariableContainer {
         const messages_ = this.messages_;
         messages_.splice(messages_.indexOf(message), 1);
         this.updateList();
-        Entry.playground.reloadPlayground();
+        RoCode.playground.reloadPlayground();
     }
 
     /**
@@ -1555,12 +1555,12 @@ Entry.VariableContainer = class VariableContainer {
         }
 
         const messages = this.messages_;
-        const exist = Entry.isExist(name, 'name', messages);
+        const exist = RoCode.isExist(name, 'name', messages);
 
         const {
             listElement: { nameField },
         } = message;
-        const { playground, toast } = Entry;
+        const { playground, toast } = RoCode;
 
         if (exist) {
             return failFunc(
@@ -1592,7 +1592,7 @@ Entry.VariableContainer = class VariableContainer {
 
     activateMessageEditView(message) {
         $(message.listElement)
-            .find('.entryVariableListElementNameWorkspace')
+            .find('.RoCodeVariableListElementNameWorkspace')
             .removeAttr('disabled')
             .focus();
     }
@@ -1601,9 +1601,9 @@ Entry.VariableContainer = class VariableContainer {
      * @param {object} message
      */
     createMessageView(message) {
-        const createElement = Entry.createElement;
+        const createElement = RoCode.createElement;
 
-        const view = Entry.createElement('div').addClass('list default_message');
+        const view = RoCode.createElement('div').addClass('list default_message');
 
         const editBoxWrapper = createElement('div')
             .addClass('inpt_box')
@@ -1623,29 +1623,29 @@ Entry.VariableContainer = class VariableContainer {
             .appendTo(editBoxInputWrapper);
         editBoxInput.setAttribute('type', 'text');
         editBoxInput.value = message.name;
-        editBoxInput.onfocus = Entry.Utils.setFocused;
-        editBoxInput.onblur = Entry.Utils.setBlurredTimer(function() {
+        editBoxInput.onfocus = RoCode.Utils.setFocused;
+        editBoxInput.onblur = RoCode.Utils.setBlurredTimer(function() {
             const value = this.value;
             if (!value.trim()) {
-                Entry.toast.alert(Lang.Msgs.warn, Lang.Msgs.sign_can_not_space);
+                RoCode.toast.alert(Lang.Msgs.warn, Lang.Msgs.sign_can_not_space);
                 this.value = message.name;
                 return this.focus();
             }
 
             //check message exist currently
-            message = Entry.variableContainer.getMessage(message.id);
+            message = RoCode.variableContainer.getMessage(message.id);
             if (message && !(this.isFirst && value === message.name)) {
-                Entry.do('messageSetName', message.id, value);
+                RoCode.do('messageSetName', message.id, value);
             }
             delete this.isFirst;
         }, 200);
-        editBoxInput.onkeydown = Entry.Utils.blurWhenEnter;
+        editBoxInput.onkeydown = RoCode.Utils.blurWhenEnter;
 
         const delButton = createElement('a')
             .addClass('del')
             .bindOnClick((e) => {
                 e.stopPropagation();
-                Entry.do('variableContainerRemoveMessage', message);
+                RoCode.do('variableContainerRemoveMessage', message);
             })
             .appendTo(editBoxWrapper);
         delButton.href = '#';
@@ -1663,11 +1663,11 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     /**
-     * @param {Entry.Variable} list
+     * @param {RoCode.Variable} list
      */
     createListView(list) {
         const that = this;
-        const createElement = Entry.createElement;
+        const createElement = RoCode.createElement;
 
         const listWrapper = createElement('div')
             .addClass('list fold')
@@ -1700,7 +1700,7 @@ Entry.VariableContainer = class VariableContainer {
                     that.select(list);
                     that.updateSelectedVariable(null, 'list');
                 } else {
-                    Entry.do('setListEditable', list.id_);
+                    RoCode.do('setListEditable', list.id_);
                 }
             })
             .appendTo(listWrapper);
@@ -1719,19 +1719,19 @@ Entry.VariableContainer = class VariableContainer {
         editBoxInput.onblur = function() {
             const value = this.value.trim();
             if (!value) {
-                Entry.toast.alert(Lang.Msgs.warn, Lang.Msgs.list_can_not_space);
+                RoCode.toast.alert(Lang.Msgs.warn, Lang.Msgs.list_can_not_space);
                 this.value = list.getName();
                 return this.focus();
             }
             const targetList = that.getList(list.getId());
-            targetList && Entry.do('listSetName', targetList.getId(), value);
+            targetList && RoCode.do('listSetName', targetList.getId(), value);
         };
-        editBoxInput.onkeydown = Entry.Utils.blurWhenEnter;
+        editBoxInput.onkeydown = RoCode.Utils.blurWhenEnter;
         const watchButton = createElement('a')
             .addClass('watch')
             .bindOnClick((e) => {
                 e.stopPropagation();
-                Entry.do('listSetVisibility', list.id_, !list.isVisible());
+                RoCode.do('listSetVisibility', list.id_, !list.isVisible());
                 if (list.isVisible()) {
                     watchButton.addClass('on');
                 } else {
@@ -1749,7 +1749,7 @@ Entry.VariableContainer = class VariableContainer {
             .addClass('del')
             .bindOnClick((e) => {
                 e.stopPropagation();
-                Entry.do('variableContainerRemoveList', list);
+                RoCode.do('variableContainerRemoveList', list);
             })
             .appendTo(editBoxWrapper);
         delButton.href = '#';
@@ -1784,8 +1784,8 @@ Entry.VariableContainer = class VariableContainer {
         return [
             ...this.variables_,
             ...this.lists_,
-            _.result(Entry.engine, 'projectTimer'),
-            _.result(Entry.container, 'inputValue'),
+            _.result(RoCode.engine, 'projectTimer'),
+            _.result(RoCode.container, 'inputValue'),
         ]
             .filter(_.identity)
             .map((v) => (v.toJSON ? v.toJSON() : v));
@@ -1832,36 +1832,36 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     generateVariableAddView() {
-        const createElement = Entry.createElement;
-        const _whenEnter = Entry.Utils.whenEnter;
-        const _setFocused = Entry.Utils.setFocused;
-        const _setBlurredTimer = Entry.Utils.setBlurredTimer;
+        const createElement = RoCode.createElement;
+        const _whenEnter = RoCode.Utils.whenEnter;
+        const _setFocused = RoCode.Utils.setFocused;
+        const _setBlurredTimer = RoCode.Utils.setBlurredTimer;
 
         const that = this;
 
         // 변수 만들기 폼
         const variableAddSpace = createElement('div').addClass(
-            'entryVariableAddSpaceWorkspace off'
+            'RoCodeVariableAddSpaceWorkspace off'
         );
         this.variableAddPanel.view = variableAddSpace;
         this.variableAddPanel.isOpen = false;
 
         // 입력 폼
         const addSpaceNameWrapper = createElement('div')
-            .addClass('entryVariableAddSpaceNameWrapperWorkspace')
+            .addClass('RoCodeVariableAddSpaceNameWrapperWorkspace')
             .appendTo(variableAddSpace);
 
         const addSpaceInputLabel = createElement('label')
-            .addClass('entryVariableAddSpaceInputLabelWorkspace')
+            .addClass('RoCodeVariableAddSpaceInputLabelWorkspace')
             .appendTo(addSpaceNameWrapper);
-        addSpaceInputLabel.setAttribute('for', 'entryVariableAddSpaceInputWorkspace');
+        addSpaceInputLabel.setAttribute('for', 'RoCodeVariableAddSpaceInputWorkspace');
         addSpaceInputLabel.innerText = Lang.Workspace.Variable_placeholder_name;
 
         const addSpaceInput = createElement('input')
-            .addClass('entryVariableAddSpaceInputWorkspace')
+            .addClass('RoCodeVariableAddSpaceInputWorkspace')
             .appendTo(addSpaceNameWrapper);
         addSpaceInput.setAttribute('type', 'text');
-        addSpaceInput.id = 'entryVariableAddSpaceInputWorkspace';
+        addSpaceInput.id = 'RoCodeVariableAddSpaceInputWorkspace';
         addSpaceInput.setAttribute('placeholder', Lang.Workspace.Variable_placeholder_content);
         addSpaceInput.variableContainer = this;
         addSpaceInput.onkeypress = _whenEnter(function() {
@@ -1874,7 +1874,7 @@ Entry.VariableContainer = class VariableContainer {
         addSpaceInput.onfocus = _setFocused;
         const doBlur = _setBlurredTimer(function() {
             this.isBlurred = false;
-            Entry.do('variableAddSetName', this.value);
+            RoCode.do('variableAddSetName', this.value);
             this.blurCallback && this.blurCallback();
         });
         addSpaceInput.onblur = () => {
@@ -1885,11 +1885,11 @@ Entry.VariableContainer = class VariableContainer {
 
         // 모든 오브젝트
         const addSpaceGlobalWrapper = createElement('div')
-            .addClass('entryVariableAddSpaceGlobalWrapperWorkspace on')
+            .addClass('RoCodeVariableAddSpaceGlobalWrapperWorkspace on')
             .bindOnClick(() => {
                 addSpaceLocalWrapper.removeClass('on');
                 addSpaceGlobalWrapper.addClass('on');
-                return Entry.do('variableAddSetScope', 'global');
+                return RoCode.do('variableAddSetScope', 'global');
             })
             .appendTo(variableAddSpace);
         this.variableAddPanel.view.globalCheck = addSpaceGlobalWrapper;
@@ -1899,24 +1899,24 @@ Entry.VariableContainer = class VariableContainer {
             .appendTo(addSpaceGlobalWrapper).textContent = Lang.Workspace.use_all_objects;
 
         createElement('span')
-            .addClass('entryVariableAddSpaceCheckWorkspace')
+            .addClass('RoCodeVariableAddSpaceCheckWorkspace')
             .appendTo(addSpaceGlobalWrapper);
 
         // 공유 리스트
         const addSpaceCloudWrapper = createElement('div')
-            .addClass('entryVariableAddSpaceCloudWrapperWorkspace')
+            .addClass('RoCodeVariableAddSpaceCloudWrapperWorkspace')
             .appendTo(addSpaceGlobalWrapper);
         variableAddSpace.cloudWrapper = addSpaceCloudWrapper;
         this.variableAddPanel.view.cloudCheck = addSpaceCloudWrapper;
 
         ['normal', 'cloud', 'real_time'].forEach((type) => {
             const wrapper = createElement('div')
-                .addClass('entryCloudTypeWrapper')
+                .addClass('RoCodeCloudTypeWrapper')
                 .appendTo(addSpaceCloudWrapper)
                 .bindOnClick((e) => {
                     e.stopImmediatePropagation();
                     const { object, isCloud, isRealTime } = this.variableAddPanel.info;
-                    !object && Entry.do('variableAddSetCloud', type);
+                    !object && RoCode.do('variableAddSetCloud', type);
                     this.#removeChildrenClass(addSpaceCloudWrapper, 'on');
                     wrapper.addClass('on');
                 });
@@ -1924,21 +1924,21 @@ Entry.VariableContainer = class VariableContainer {
                 wrapper.addClass('on');
             }
             createElement('span')
-                .addClass('entryVariableAddSpaceCloudSpanWorkspace')
+                .addClass('RoCodeVariableAddSpaceCloudSpanWorkspace')
                 .appendTo(wrapper).textContent = Lang.Workspace[`variable_create_${type}`];
             createElement('span')
-                .addClass('entryVariableAddSpaceCheckWorkspace')
+                .addClass('RoCodeVariableAddSpaceCheckWorkspace')
                 .appendTo(wrapper);
         });
 
         // 이 오브젝트에서 사용
         const addSpaceLocalWrapper = createElement('div')
-            .addClass('entryVariableAddSpaceGlobalWrapperWorkspace')
+            .addClass('RoCodeVariableAddSpaceGlobalWrapperWorkspace')
             .bindOnClick(() => {
                 addSpaceGlobalWrapper.removeClass('on');
                 addSpaceCloudWrapper.removeClass('on');
                 addSpaceLocalWrapper.addClass('on');
-                return Entry.do('variableAddSetScope', 'local');
+                return RoCode.do('variableAddSetScope', 'local');
             })
             .appendTo(variableAddSpace);
         this.variableAddPanel.view.localCheck = addSpaceLocalWrapper;
@@ -1948,17 +1948,17 @@ Entry.VariableContainer = class VariableContainer {
             .appendTo(addSpaceLocalWrapper).textContent = Lang.Workspace.Variable_use_this_object;
 
         createElement('span')
-            .addClass('entryVariableAddSpaceCheckWorkspace')
+            .addClass('RoCodeVariableAddSpaceCheckWorkspace')
             .appendTo(addSpaceLocalWrapper);
 
         // 확인 취소 버튼
         const addSpaceButtonWrapper = createElement('div')
-            .addClass('entryVariableAddSpaceButtonWrapperWorkspace')
+            .addClass('RoCodeVariableAddSpaceButtonWrapperWorkspace')
             .appendTo(variableAddSpace);
 
         const addSpaceCancelButton = createElement('a')
-            .addClass('entryVariableAddSpaceCancelWorkspace')
-            .addClass('entryVariableAddSpaceButtonWorkspace')
+            .addClass('RoCodeVariableAddSpaceCancelWorkspace')
+            .addClass('RoCodeVariableAddSpaceButtonWorkspace')
             .bindOnClick(() => {
                 this.variableAddPanel.view.addClass('off');
                 this.resetVariableAddPanel('variable');
@@ -1968,8 +1968,8 @@ Entry.VariableContainer = class VariableContainer {
         addSpaceCancelButton.textContent = Lang.Buttons.cancel;
 
         const addSpaceConfirmButton = createElement('a')
-            .addClass('entryVariableAddSpaceConfirmWorkspace')
-            .addClass('entryVariableAddSpaceButtonWorkspace')
+            .addClass('RoCodeVariableAddSpaceConfirmWorkspace')
+            .addClass('RoCodeVariableAddSpaceButtonWorkspace')
             .bindOnClick(() => {
                 that._addVariable();
             })
@@ -1980,13 +1980,13 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     _addVariable() {
-        const variableInput = Entry.getDom(['variableContainer', 'variableAddInput']);
+        const variableInput = RoCode.getDom(['variableContainer', 'variableAddInput']);
         this.variableAddPanel.view.addClass('off');
         const blurCallback = () => {
             delete variableInput.blurCallback;
-            Entry.do(
+            RoCode.do(
                 'variableContainerAddVariable',
-                Entry.Variable.create(this._makeVariableData('variable'))
+                RoCode.Variable.create(this._makeVariableData('variable'))
             );
             const [variable] = this.variables_;
             this.updateSelectedVariable(variable);
@@ -2002,12 +2002,12 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     _addList() {
-        const listInput = Entry.getDom(['variableContainer', 'listAddInput']);
+        const listInput = RoCode.getDom(['variableContainer', 'listAddInput']);
         this.listAddPanel.view.addClass('off');
         const blurCallback = () => {
-            Entry.do(
+            RoCode.do(
                 'variableContainerAddList',
-                Entry.Variable.create(this._makeVariableData('list'))
+                RoCode.Variable.create(this._makeVariableData('list'))
             );
             const [list] = this.lists_;
             this.updateSelectedVariable(list);
@@ -2024,35 +2024,35 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     generateListAddView() {
-        const createElement = Entry.createElement;
-        const _setFocused = Entry.Utils.setFocused;
-        const _setBlurredTimer = Entry.Utils.setBlurredTimer;
+        const createElement = RoCode.createElement;
+        const _setFocused = RoCode.Utils.setFocused;
+        const _setBlurredTimer = RoCode.Utils.setBlurredTimer;
 
         const that = this;
 
         // 리스트 만들기 폼
-        const listAddSpace = createElement('div').addClass('entryVariableAddSpaceWorkspace off');
+        const listAddSpace = createElement('div').addClass('RoCodeVariableAddSpaceWorkspace off');
         this.listAddPanel.view = listAddSpace;
         this.listAddPanel.isOpen = false;
 
         // 리스트 만들기
         const addSpaceNameWrapper = createElement('div')
-            .addClass('entryVariableAddSpaceNameWrapperWorkspace')
+            .addClass('RoCodeVariableAddSpaceNameWrapperWorkspace')
             .appendTo(listAddSpace);
 
         const addSpaceInputLabel = createElement('label')
-            .addClass('entryVariableAddSpaceInputLabelWorkspace')
+            .addClass('RoCodeVariableAddSpaceInputLabelWorkspace')
             .appendTo(addSpaceNameWrapper);
         addSpaceInputLabel.innerText = Lang.Workspace.list_name;
-        addSpaceInputLabel.setAttribute('for', 'entryVariableAddSpaceInputWorkspace');
+        addSpaceInputLabel.setAttribute('for', 'RoCodeVariableAddSpaceInputWorkspace');
 
         const addSpaceInput = createElement('input')
-            .addClass('entryVariableAddSpaceInputWorkspace')
+            .addClass('RoCodeVariableAddSpaceInputWorkspace')
             .appendTo(addSpaceNameWrapper);
         addSpaceInput.setAttribute('type', 'text');
-        addSpaceInput.id = 'entryVariableAddSpaceInputWorkspace';
+        addSpaceInput.id = 'RoCodeVariableAddSpaceInputWorkspace';
         addSpaceInput.setAttribute('placeholder', Lang.Workspace.list_create_placeholder);
-        addSpaceInput.onkeypress = Entry.Utils.whenEnter(function() {
+        addSpaceInput.onkeypress = RoCode.Utils.whenEnter(function() {
             if (this.enterKeyDisabled) {
                 this.blur();
             } else {
@@ -2062,7 +2062,7 @@ Entry.VariableContainer = class VariableContainer {
         addSpaceInput.onfocus = _setFocused;
         const doBlur = _setBlurredTimer(function() {
             this.isBlurred = false;
-            Entry.do('listAddSetName', this.value);
+            RoCode.do('listAddSetName', this.value);
             this.blurCallback && this.blurCallback();
         });
         addSpaceInput.onblur = () => {
@@ -2073,11 +2073,11 @@ Entry.VariableContainer = class VariableContainer {
 
         // 모든 오브젝트에서 사용
         const addSpaceGlobalWrapper = createElement('div')
-            .addClass('entryVariableAddSpaceGlobalWrapperWorkspace on')
+            .addClass('RoCodeVariableAddSpaceGlobalWrapperWorkspace on')
             .bindOnClick(() => {
                 addSpaceLocalWrapper.removeClass('on');
                 addSpaceGlobalWrapper.addClass('on');
-                return Entry.do('listAddSetScope', 'global');
+                return RoCode.do('listAddSetScope', 'global');
             })
             .appendTo(listAddSpace);
         this.listAddPanel.view.globalCheck = addSpaceGlobalWrapper;
@@ -2087,24 +2087,24 @@ Entry.VariableContainer = class VariableContainer {
             .appendTo(addSpaceGlobalWrapper).textContent = Lang.Workspace.use_all_objects;
 
         createElement('span')
-            .addClass('entryVariableAddSpaceCheckWorkspace')
+            .addClass('RoCodeVariableAddSpaceCheckWorkspace')
             .appendTo(addSpaceGlobalWrapper);
 
         // 공유 리스트
         const addSpaceCloudWrapper = createElement('div')
-            .addClass('entryVariableAddSpaceCloudWrapperWorkspace')
+            .addClass('RoCodeVariableAddSpaceCloudWrapperWorkspace')
             .appendTo(addSpaceGlobalWrapper);
         listAddSpace.cloudWrapper = addSpaceCloudWrapper;
         this.listAddPanel.view.cloudCheck = addSpaceCloudWrapper;
 
         ['normal', 'cloud', 'real_time'].forEach((type) => {
             const wrapper = createElement('div')
-                .addClass('entryCloudTypeWrapper')
+                .addClass('RoCodeCloudTypeWrapper')
                 .appendTo(addSpaceCloudWrapper)
                 .bindOnClick((e) => {
                     e.stopImmediatePropagation();
                     const { object } = this.listAddPanel.info;
-                    !object && Entry.do('listAddSetCloud', type);
+                    !object && RoCode.do('listAddSetCloud', type);
                     this.#removeChildrenClass(addSpaceCloudWrapper, 'on');
                     wrapper.addClass('on');
                 });
@@ -2112,21 +2112,21 @@ Entry.VariableContainer = class VariableContainer {
                 wrapper.addClass('on');
             }
             createElement('span')
-                .addClass('entryVariableAddSpaceCloudSpanWorkspace')
+                .addClass('RoCodeVariableAddSpaceCloudSpanWorkspace')
                 .appendTo(wrapper).textContent = Lang.Workspace[`list_create_${type}`];
             createElement('span')
-                .addClass('entryVariableAddSpaceCheckWorkspace')
+                .addClass('RoCodeVariableAddSpaceCheckWorkspace')
                 .appendTo(wrapper);
         });
 
         // 이 오브젝트에서 사용
         const addSpaceLocalWrapper = createElement('div')
-            .addClass('entryVariableAddSpaceGlobalWrapperWorkspace')
+            .addClass('RoCodeVariableAddSpaceGlobalWrapperWorkspace')
             .bindOnClick(() => {
                 addSpaceGlobalWrapper.removeClass('on');
                 addSpaceCloudWrapper.removeClass('on');
                 addSpaceLocalWrapper.addClass('on');
-                return Entry.do('listAddSetScope', 'local');
+                return RoCode.do('listAddSetScope', 'local');
             })
             .appendTo(listAddSpace);
         this.listAddPanel.view.localCheck = addSpaceLocalWrapper;
@@ -2136,17 +2136,17 @@ Entry.VariableContainer = class VariableContainer {
             .appendTo(addSpaceLocalWrapper).textContent = Lang.Workspace.Variable_use_this_object;
 
         createElement('span')
-            .addClass('entryVariableAddSpaceCheckWorkspace')
+            .addClass('RoCodeVariableAddSpaceCheckWorkspace')
             .appendTo(addSpaceLocalWrapper);
 
         // 확인 취소 버튼
         const addSpaceButtonWrapper = createElement('div')
-            .addClass('entryVariableAddSpaceButtonWrapperWorkspace')
+            .addClass('RoCodeVariableAddSpaceButtonWrapperWorkspace')
             .appendTo(listAddSpace);
 
         const addSpaceCancelButton = createElement('a')
-            .addClass('entryVariableAddSpaceCancelWorkspace')
-            .addClass('entryVariableAddSpaceButtonWorkspace')
+            .addClass('RoCodeVariableAddSpaceCancelWorkspace')
+            .addClass('RoCodeVariableAddSpaceButtonWorkspace')
             .bindOnClick(() => {
                 this.listAddPanel.view.addClass('off');
                 this.resetVariableAddPanel('list');
@@ -2156,8 +2156,8 @@ Entry.VariableContainer = class VariableContainer {
         addSpaceCancelButton.textContent = Lang.Buttons.cancel;
 
         const addSpaceConfirmButton = createElement('a')
-            .addClass('entryVariableAddSpaceConfirmWorkspace')
-            .addClass('entryVariableAddSpaceButtonWorkspace')
+            .addClass('RoCodeVariableAddSpaceConfirmWorkspace')
+            .addClass('RoCodeVariableAddSpaceButtonWorkspace')
             .bindOnClick(() => {
                 that._addList();
             })
@@ -2168,7 +2168,7 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     generateMessageAddView() {
-        const createElement = Entry.createElement;
+        const createElement = RoCode.createElement;
         const that = this;
 
         // 신호 만들기 폼
@@ -2179,7 +2179,7 @@ Entry.VariableContainer = class VariableContainer {
         const msgNameInput = createElement('input').appendTo(msgAddSpace);
         msgNameInput.setAttribute('type', 'text');
         msgNameInput.setAttribute('placeholder', Lang.Workspace.message_create_placeholder);
-        msgNameInput.onkeydown = Entry.Utils.whenEnter(function() {
+        msgNameInput.onkeydown = RoCode.Utils.whenEnter(function() {
             if (this.enterKeyDisabled) {
                 this.blur();
             } else {
@@ -2187,9 +2187,9 @@ Entry.VariableContainer = class VariableContainer {
                 that.messageAddPanel.isOpen = false;
                 msgAddSpace.addClass('off');
                 msgNameInput.value = '';
-                Entry.do('variableContainerAddMessage', {
-                    id: Entry.generateHash(),
-                    name: Entry.getOrderedName(
+                RoCode.do('variableContainerAddMessage', {
+                    id: RoCode.generateHash(),
+                    name: RoCode.getOrderedName(
                         value || Lang.Workspace.message,
                         that.messages_,
                         'name'
@@ -2200,12 +2200,12 @@ Entry.VariableContainer = class VariableContainer {
         this.messageAddPanel.view.name = msgNameInput;
 
         const buttonWrapper = createElement('div')
-            .addClass('entryVariableAddSpaceButtonWrapperWorkspace')
+            .addClass('RoCodeVariableAddSpaceButtonWrapperWorkspace')
             .appendTo(msgAddSpace);
 
         const msgCancel = createElement('a')
-            .addClass('entryVariableAddSpaceCancelWorkspace')
-            .addClass('entryVariableAddSpaceButtonWorkspace')
+            .addClass('RoCodeVariableAddSpaceCancelWorkspace')
+            .addClass('RoCodeVariableAddSpaceButtonWorkspace')
             .bindOnClick(() => {
                 msgAddSpace.addClass('off');
                 msgNameInput.value = '';
@@ -2216,16 +2216,16 @@ Entry.VariableContainer = class VariableContainer {
         msgCancel.textContent = Lang.Buttons.cancel;
 
         const msgConfirm = createElement('a')
-            .addClass('entryVariableAddSpaceConfirmWorkspace')
-            .addClass('entryVariableAddSpaceButtonWorkspace')
+            .addClass('RoCodeVariableAddSpaceConfirmWorkspace')
+            .addClass('RoCodeVariableAddSpaceButtonWorkspace')
             .bindOnClick(() => {
                 const value = msgNameInput.value;
                 this.messageAddPanel.isOpen = false;
                 msgAddSpace.addClass('off');
                 msgNameInput.value = '';
-                Entry.do('variableContainerAddMessage', {
-                    id: Entry.generateHash(),
-                    name: Entry.getOrderedName(
+                RoCode.do('variableContainerAddMessage', {
+                    id: RoCode.generateHash(),
+                    name: RoCode.getOrderedName(
                         value || Lang.Workspace.message,
                         this.messages_,
                         'name'
@@ -2245,8 +2245,8 @@ Entry.VariableContainer = class VariableContainer {
      * @param type {'variable'|'list'|'message'}
      */
     openVariableAddPanel(type = 'variable') {
-        Entry.playground.toggleOnVariableView();
-        Entry.playground.changeViewMode('variable');
+        RoCode.playground.toggleOnVariableView();
+        RoCode.playground.changeViewMode('variable');
         switch (type) {
             case 'variable':
                 this.selectFilter(type);
@@ -2295,10 +2295,10 @@ Entry.VariableContainer = class VariableContainer {
 
             const cloned = variable.toJSON();
             cloned.originId = cloned.id;
-            cloned.id = Entry.generateHash();
+            cloned.id = RoCode.generateHash();
             cloned.object = param.newObjectId;
             cloned.name = that.checkAllVariableName(cloned.name, nameSpace)
-                ? Entry.getOrderedName(cloned.name, that[nameSpace], 'name_')
+                ? RoCode.getOrderedName(cloned.name, that[nameSpace], 'name_')
                 : cloned.name;
             delete cloned.x;
             delete cloned.y;
@@ -2313,8 +2313,8 @@ Entry.VariableContainer = class VariableContainer {
         const x = 240 - (Lang.Workspace.Variable_Timer.length * 12 + 70);
         timer =
             timer ||
-            Entry.Variable.create({
-                id: Entry.generateHash(),
+            RoCode.Variable.create({
+                id: RoCode.generateHash(),
                 name: Lang.Workspace.Variable_Timer,
                 value: 0,
                 variableType: 'timer',
@@ -2325,10 +2325,10 @@ Entry.VariableContainer = class VariableContainer {
 
         timer.generateView();
         timer.tick = null;
-        Entry.engine.projectTimer = timer;
+        RoCode.engine.projectTimer = timer;
 
-        Entry.addEventListener('stop', () => {
-            Entry.engine.stopProjectTimer();
+        RoCode.addEventListener('stop', () => {
+            RoCode.engine.stopProjectTimer();
         });
     }
 
@@ -2336,8 +2336,8 @@ Entry.VariableContainer = class VariableContainer {
     generateAnswer(answer) {
         answer =
             answer ||
-            Entry.Variable.create({
-                id: Entry.generateHash(),
+            RoCode.Variable.create({
+                id: RoCode.generateHash(),
                 name: Lang.Blocks.VARIABLE_get_canvas_input_value,
                 value: 0,
                 variableType: 'answer',
@@ -2347,15 +2347,15 @@ Entry.VariableContainer = class VariableContainer {
             });
 
         answer.generateView();
-        Entry.container.inputValue = answer;
-        Entry.container.inputValue.setName(Lang.Blocks.VARIABLE_get_canvas_input_value);
+        RoCode.container.inputValue = answer;
+        RoCode.container.inputValue.setName(Lang.Blocks.VARIABLE_get_canvas_input_value);
     }
 
     generateStt(answer) {
         answer =
             answer ||
-            Entry.Variable.create({
-                id: Entry.generateHash(),
+            RoCode.Variable.create({
+                id: RoCode.generateHash(),
                 name: 'stt',
                 value: 0,
                 variableType: 'stt',
@@ -2364,15 +2364,15 @@ Entry.VariableContainer = class VariableContainer {
                 y: -100,
             });
         answer.generateView();
-        Entry.container.sttValue = answer;
-        Entry.container.sttValue.setName('STT');
+        RoCode.container.sttValue = answer;
+        RoCode.container.sttValue.setName('STT');
     }
 
     generateVariableSettingView(variable) {
         const that = this;
-        const createElement = Entry.createElement;
-        const _setFocused = Entry.Utils.setFocused;
-        const _setBlurredTimer = Entry.Utils.setBlurredTimer;
+        const createElement = RoCode.createElement;
+        const _setFocused = RoCode.Utils.setFocused;
+        const _setBlurredTimer = RoCode.Utils.setBlurredTimer;
 
         // 변수 속성 설정
         const element = createElement('div')
@@ -2410,7 +2410,7 @@ Entry.VariableContainer = class VariableContainer {
         const attrInput = createElement('input').appendTo(attrInputWrapper);
         attrInput.setAttribute('type', 'text');
         attrInput.value = 0;
-        attrInput.onkeypress = Entry.Utils.blurWhenEnter;
+        attrInput.onkeypress = RoCode.Utils.blurWhenEnter;
         attrInput.onfocus = _setFocused;
         attrInput.onblur = _setBlurredTimer(function() {
             const v = that.selected;
@@ -2418,7 +2418,7 @@ Entry.VariableContainer = class VariableContainer {
                 console.error('error: not selected');
                 return;
             }
-            Entry.do('variableSetDefaultValue', v.id_, this.value);
+            RoCode.do('variableSetDefaultValue', v.id_, this.value);
         });
         element.initValueInput = attrInput;
 
@@ -2431,10 +2431,10 @@ Entry.VariableContainer = class VariableContainer {
             .addClass('chk_box')
             .appendTo(slideInputBox);
         element.slideCheck = createElement('span')
-            .addClass('entryVariableAddSpaceCheckWorkspace')
+            .addClass('RoCodeVariableAddSpaceCheckWorkspace')
             .bindOnClick(() => {
                 const v = that.selected;
-                Entry.do(
+                RoCode.do(
                     'variableSetSlidable',
                     v.id_,
                     v.getType() === 'variable' ? 'slide' : 'variable'
@@ -2463,13 +2463,13 @@ Entry.VariableContainer = class VariableContainer {
         } else {
             minValueInput.value = 0;
         }
-        minValueInput.onkeypress = Entry.Utils.blurWhenEnter;
+        minValueInput.onkeypress = RoCode.Utils.blurWhenEnter;
         minValueInput.onfocus = _setFocused;
         minValueInput.onblur = _setBlurredTimer(function() {
             const v = that.selected;
             let value = this.value;
-            value = Entry.Utils.isNumber(value) ? value : v.getMinValue();
-            Entry.do('variableSetMinValue', v.id_, value);
+            value = RoCode.Utils.isNumber(value) ? value : v.getMinValue();
+            RoCode.do('variableSetMinValue', v.id_, value);
         });
         element.minValueInput = minValueInput;
 
@@ -2487,20 +2487,20 @@ Entry.VariableContainer = class VariableContainer {
             maxValueInput.value = 100;
         }
 
-        maxValueInput.onkeypress = Entry.Utils.blurWhenEnter;
+        maxValueInput.onkeypress = RoCode.Utils.blurWhenEnter;
         maxValueInput.onfocus = _setFocused;
         maxValueInput.onblur = _setBlurredTimer(function() {
             const v = that.selected;
             let value = this.value;
-            value = Entry.Utils.isNumber(value) ? value : v.getMaxValue();
-            Entry.do('variableSetMaxValue', v.id_, value);
+            value = RoCode.Utils.isNumber(value) ? value : v.getMaxValue();
+            RoCode.do('variableSetMaxValue', v.id_, value);
         });
         element.maxValueInput = maxValueInput;
         this.renderVariableReference(variable);
     }
 
     /**
-     * @param {object|Entry.Variable} object
+     * @param {object|RoCode.Variable} object
      */
     updateVariableSettingView(v) {
         const view = this.variableSettingView;
@@ -2534,7 +2534,7 @@ Entry.VariableContainer = class VariableContainer {
      * 속성 > 리스트 편집창 표기
      */
     generateListSettingView(list) {
-        const createElement = Entry.createElement;
+        const createElement = RoCode.createElement;
 
         // 리스트 속성 설정
         const element = createElement('div')
@@ -2565,7 +2565,7 @@ Entry.VariableContainer = class VariableContainer {
 
     generateListImportExportView(element) {
         const that = this;
-        const createElement = Entry.createElement;
+        const createElement = RoCode.createElement;
 
         const buttonBox = createElement('div')
             .addClass('btn_box')
@@ -2578,9 +2578,9 @@ Entry.VariableContainer = class VariableContainer {
                 const { name_ } = that.selected;
                 const array_ = that.selected.getArray();
                 if (array_.length === 0) {
-                    entrylms.alert(Lang.Menus.nothing_to_export);
+                    RoCodelms.alert(Lang.Menus.nothing_to_export);
                 } else {
-                    Entry.dispatchEvent('openExportListModal', array_, name_);
+                    RoCode.dispatchEvent('openExportListModal', array_, name_);
                 }
             })
             .appendTo(buttonBox);
@@ -2590,7 +2590,7 @@ Entry.VariableContainer = class VariableContainer {
             .addClass('btn_list')
             .bindOnClick((e) => {
                 e.stopPropagation();
-                Entry.dispatchEvent('openImportListModal');
+                RoCode.dispatchEvent('openImportListModal');
             })
             .appendTo(buttonBox);
         buttonImport.textContent = Lang.Workspace.list_import;
@@ -2598,7 +2598,7 @@ Entry.VariableContainer = class VariableContainer {
 
     generateListCountView(element) {
         const that = this;
-        const createElement = Entry.createElement;
+        const createElement = RoCode.createElement;
 
         const listCount = createElement('div')
             .addClass('list_cnt')
@@ -2619,7 +2619,7 @@ Entry.VariableContainer = class VariableContainer {
                 const {
                     selected: { id_ },
                 } = that;
-                Entry.do('listChangeLength', id_, 'minus');
+                RoCode.do('listChangeLength', id_, 'minus');
             })
             .appendTo(countInputBox);
         buttonMinus.textContent = '-';
@@ -2645,13 +2645,13 @@ Entry.VariableContainer = class VariableContainer {
                     selected: { id_ },
                 } = that;
 
-                const array_ = Entry.variableContainer.selected.getArray();
+                const array_ = RoCode.variableContainer.selected.getArray();
                 const selectedLength = array_.length;
 
                 if (selectedLength >= limitValue) {
-                    Entry.do('listChangeLength', id_, '');
+                    RoCode.do('listChangeLength', id_, '');
                 } else {
-                    Entry.do('listChangeLength', id_, 'plus');
+                    RoCode.do('listChangeLength', id_, 'plus');
                 }
             })
             .appendTo(countInputBox);
@@ -2667,20 +2667,20 @@ Entry.VariableContainer = class VariableContainer {
             const v = that.selected;
             let value = this.value;
             const array_ = v.getArray();
-            value = Entry.Utils.isNumber(value) ? value : array_.length;
+            value = RoCode.Utils.isNumber(value) ? value : array_.length;
 
             if (value >= limitValue) {
                 value = limitValue;
             }
 
-            Entry.do('listChangeLength', v.id_, Number(value));
+            RoCode.do('listChangeLength', v.id_, Number(value));
         };
-        countInput.onkeypress = Entry.Utils.blurWhenEnter;
+        countInput.onkeypress = RoCode.Utils.blurWhenEnter;
         this.listSettingView.lengthInput = countInput;
     }
 
     generateListValuesView(element) {
-        const createElement = Entry.createElement;
+        const createElement = RoCode.createElement;
 
         const countGroup = createElement('div')
             .addClass('cnt_group')
@@ -2693,7 +2693,7 @@ Entry.VariableContainer = class VariableContainer {
         this.listSettingView.scrollBox = scrollBox;
         this.listSettingView.simpleBar = el;
         this.listSettingView.listValues = el.getContentElement();
-        this.listSettingView.infinityScroll = new Entry.VirtualScroll(
+        this.listSettingView.infinityScroll = new RoCode.VirtualScroll(
             this.listSettingView.listValues,
             {
                 dataWrapper: parent,
@@ -2734,10 +2734,10 @@ Entry.VariableContainer = class VariableContainer {
         const $listValues = $(listValues);
         $listValues.empty();
         $listValues.off();
-        const startIndex = Entry.getMainWS().mode === Entry.Workspace.MODE_VIMBOARD ? 0 : 1;
+        const startIndex = RoCode.getMainWS().mode === RoCode.Workspace.MODE_VIMBOARD ? 0 : 1;
         if (arr.length === 0) {
             const fragment = document.createDocumentFragment();
-            Entry.createElement('p')
+            RoCode.createElement('p')
                 .addClass('caution_dsc')
                 .appendTo(fragment).textContent = Lang.Workspace.empty_of_list;
             listValues.appendChild(fragment);
@@ -2759,8 +2759,8 @@ Entry.VariableContainer = class VariableContainer {
                     list.updateView();
                 })
             );
-            $listValues.on('focus', 'input', Entry.Utils.setFocused);
-            $listValues.on('keypress', 'input', Entry.Utils.blurWhenEnter);
+            $listValues.on('focus', 'input', RoCode.Utils.setFocused);
+            $listValues.on('keypress', 'input', RoCode.Utils.blurWhenEnter);
             $listValues.on('click', 'a', function() {
                 const index = this.getAttribute('data-index');
                 arr.splice(index, 1);
@@ -2775,7 +2775,7 @@ Entry.VariableContainer = class VariableContainer {
         value = Number(value);
         const arr = this.selected.getArray();
         const times = value - arr.length;
-        if (times && Entry.Utils.isNumber(value)) {
+        if (times && RoCode.Utils.isNumber(value)) {
             if (times > 0) {
                 _.times(times, () => this.selected.appendValue(0));
             } else {
@@ -2833,8 +2833,8 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     addRef(type, blockData) {
-        const wsMode = _.result(Entry.getMainWS(), 'getMode');
-        if (!this.view_ || wsMode !== Entry.Workspace.MODE_BOARD) {
+        const wsMode = _.result(RoCode.getMainWS(), 'getMode');
+        if (!this.view_ || wsMode !== RoCode.Workspace.MODE_BOARD) {
             return;
         }
 
@@ -2852,7 +2852,7 @@ Entry.VariableContainer = class VariableContainer {
 
         if (type === '_functionRefs') {
             const id = blockData.type.substr(5);
-            const func = Entry.variableContainer.functions_[id];
+            const func = RoCode.variableContainer.functions_[id];
             if (func.isAdded) {
                 return;
             }
@@ -2875,17 +2875,17 @@ Entry.VariableContainer = class VariableContainer {
                 });
             });
         }
-        Entry.playground.viewMode_ !== 'default' && this.updateList();
+        RoCode.playground.viewMode_ !== 'default' && this.updateList();
 
         return datum;
     }
 
     removeRef(type, block) {
-        if (!Entry.playground.mainWorkspace) {
+        if (!RoCode.playground.mainWorkspace) {
             return;
         }
-        const wsMode = Entry.getMainWS().getMode();
-        if (wsMode !== Entry.Workspace.MODE_BOARD) {
+        const wsMode = RoCode.getMainWS().getMode();
+        if (wsMode !== RoCode.Workspace.MODE_BOARD) {
             return;
         }
 
@@ -2900,7 +2900,7 @@ Entry.VariableContainer = class VariableContainer {
 
         if (type === '_functionRefs') {
             const id = block.type.substr(5);
-            const func = Entry.variableContainer.functions_[id];
+            const func = RoCode.variableContainer.functions_[id];
             if (!func || func.isRemoved) {
                 return;
             }
@@ -2924,7 +2924,7 @@ Entry.VariableContainer = class VariableContainer {
                 });
             }
         }
-        Entry.playground.viewMode_ !== 'default' && this.updateList();
+        RoCode.playground.viewMode_ !== 'default' && this.updateList();
     }
 
     updateSelected() {
@@ -2987,8 +2987,8 @@ Entry.VariableContainer = class VariableContainer {
             if (!type) {
                 return;
             }
-            const isMessage = _.includes(EntryStatic.messageBlockList, type);
-            const isVariable = _.includes(EntryStatic.variableBlockList, type);
+            const isMessage = _.includes(RoCodeStatic.messageBlockList, type);
+            const isVariable = _.includes(RoCodeStatic.variableBlockList, type);
 
             if (isMessage || isVariable) {
                 block.data.params.forEach((param) => {
@@ -3015,7 +3015,7 @@ Entry.VariableContainer = class VariableContainer {
     }
 
     _getBlockMenu() {
-        return _.result(Entry.getMainWS(), 'getBlockMenu');
+        return _.result(RoCode.getMainWS(), 'getBlockMenu');
     }
 
     _truncName(name, type, maxLen) {
@@ -3025,7 +3025,7 @@ Entry.VariableContainer = class VariableContainer {
             return name;
         }
 
-        Entry.toast.warning(
+        RoCode.toast.warning(
             Lang.Workspace[`${type}_name_auto_edited_title`],
             Lang.Workspace[`${type}_too_long`]
         );
@@ -3038,7 +3038,7 @@ Entry.VariableContainer = class VariableContainer {
     clear() {
         this.select(null);
         const _removeFunc = _.partial(_.result, _, 'remove');
-        const { engine = {}, container = {}, playground } = Entry;
+        const { engine = {}, container = {}, playground } = RoCode;
 
         [...this.variables_, ...this.lists_].forEach(_removeFunc);
         _removeFunc(engine.projectTimer);
@@ -3055,13 +3055,13 @@ Entry.VariableContainer = class VariableContainer {
         this._messageRefs = [];
         this._functionRefs = [];
 
-        Entry.Func.reset();
+        RoCode.Func.reset();
         playground.reloadPlayground();
         this.updateList();
     }
 
     _isPythonMode() {
-        return _.result(Entry.getMainWS(), 'isVimMode');
+        return _.result(RoCode.getMainWS(), 'isVimMode');
     }
 
     getDom(query) {
@@ -3119,16 +3119,16 @@ Entry.VariableContainer = class VariableContainer {
             case 'listChangeLength':
                 return this.listSettingView[query.shift()];
             case 'listDefaultValue':
-                return $('.entryListSettingEachInputWorkspace')[query.shift()];
+                return $('.RoCodeListSettingEachInputWorkspace')[query.shift()];
             case 'messageEditButton':
                 return $(this.getMessage(query.shift()).listElement).find('.editButton')[0];
             case 'variableEditButton':
                 return $(this.getVariable(query.shift()).listElement).find(
-                    '.entryVariableListElementEditWorkspace'
+                    '.RoCodeVariableListElementEditWorkspace'
                 )[0];
             case 'listEditButton':
                 return $(this.getList(query.shift()).listElement).find(
-                    '.entryVariableListElementEditWorkspace'
+                    '.RoCodeVariableListElementEditWorkspace'
                 )[0];
             case 'variableName':
                 return this.getVariable(query.shift()).listElement.nameField;
@@ -3145,7 +3145,7 @@ Entry.VariableContainer = class VariableContainer {
         } else {
             panelViewName.value = '';
             panelView.removeClass('off');
-            !doNotFocus && Entry.Utils.focusIfNotActive(panelViewName);
+            !doNotFocus && RoCode.Utils.focusIfNotActive(panelViewName);
             panel.isOpen = true;
         }
     }
@@ -3177,8 +3177,8 @@ Entry.VariableContainer = class VariableContainer {
 
         const target = `${type}s_`;
         if (this.checkAllVariableName(name, target)) {
-            name = Entry.getOrderedName(name, this[target], 'name_');
-            Entry.toast.warning(Lang.Workspace[`${type}_rename`], Lang.Workspace[`${type}_dup`]);
+            name = RoCode.getOrderedName(name, this[target], 'name_');
+            RoCode.toast.warning(Lang.Workspace[`${type}_rename`], Lang.Workspace[`${type}_dup`]);
         }
 
         return {
@@ -3193,10 +3193,10 @@ Entry.VariableContainer = class VariableContainer {
     applyOption() {
         const { variable, message, list, func } = this._filterTabs;
 
-        process(variable, Entry.variableEnable);
-        process(message, Entry.messageEnable);
-        process(list, Entry.listEnable);
-        process(func, Entry.functionEnable);
+        process(variable, RoCode.variableEnable);
+        process(message, RoCode.messageEnable);
+        process(list, RoCode.listEnable);
+        process(func, RoCode.functionEnable);
 
         function process(view, value) {
             if (value) {
@@ -3217,7 +3217,7 @@ Entry.VariableContainer = class VariableContainer {
         const variables = this.variables_;
         const variableJSON = v.toJSON();
         variableJSON.variableType = type;
-        const newVariable = Entry.Variable.create(variableJSON);
+        const newVariable = RoCode.Variable.create(variableJSON);
         variables.splice(variables.indexOf(v), 0, newVariable);
         if (value !== undefined) {
             variableJSON.value = value;

@@ -5,11 +5,11 @@
 import DataTable from '../../class/DataTable';
 
 (function(c) {
-    const { COMMAND_TYPES, RECORDABLE } = Entry.STATIC;
+    const { COMMAND_TYPES, RECORDABLE } = RoCode.STATIC;
 
     c[COMMAND_TYPES.dataTableAddSource] = {
         do(table) {
-            Entry.playground.selectTable(table);
+            RoCode.playground.selectTable(table);
         },
         state(table) {
             return [table];
@@ -31,10 +31,10 @@ import DataTable from '../../class/DataTable';
                 return;
             }
             DataTable.tables.splice(index, 1);
-            const isWorkspace = Entry.type === 'workspace';
+            const isWorkspace = RoCode.type === 'workspace';
             if (isWorkspace) {
-                Entry.playground.reloadPlayground();
-                Entry.playground.refreshPlayground();
+                RoCode.playground.reloadPlayground();
+                RoCode.playground.refreshPlayground();
                 !DataTable.tables.length && DataTable.banAllBlock();
             }
         },
@@ -49,4 +49,4 @@ import DataTable from '../../class/DataTable';
         undo: 'dataTableAddSource',
         dom: ['playground', 'tableAddButton'],
     };
-})(Entry.Command);
+})(RoCode.Command);

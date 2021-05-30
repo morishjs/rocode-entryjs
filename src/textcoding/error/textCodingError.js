@@ -3,7 +3,7 @@
  */
 'use strict';
 
-Entry.TextCodingError = {};
+RoCode.TextCodingError = {};
 
 (function(tce) {
     tce.TITLE_SYNTAX = 'title_syntax';
@@ -22,7 +22,7 @@ Entry.TextCodingError = {};
     tce.MESSAGE_CONV_NO_LIST = 'message_conv_no_list';
     tce.MESSAGE_CONV_NO_OBJECT = 'message_conv_no_object';
     tce.MESSAGE_CONV_NO_FUNCTION = 'message_conv_no_function';
-    tce.MESSAGE_CONV_NO_ENTRY_EVENT_FUNCTION = 'message_conv_no_entry_event_function';
+    tce.MESSAGE_CONV_NO_RoCode_EVENT_FUNCTION = 'message_conv_no_RoCode_event_function';
 
     tce.SUBJECT_SYNTAX_DEFAULT = 'subject_syntax_default';
     tce.SUBJECT_SYNTAX_TOKEN = 'subject_syntax_token';
@@ -94,4 +94,4 @@ Entry.TextCodingError = {};
 
         return info;
     };
-})(Entry.TextCodingError);
+})(RoCode.TextCodingError);

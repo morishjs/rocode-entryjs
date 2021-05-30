@@ -4,7 +4,7 @@
 'use strict';
 class Executor {
     constructor(block, entity, code) {
-        this.scope = new Entry.Scope(block, this);
+        this.scope = new RoCode.Scope(block, this);
         this.isUpdateTime = 0;
         this.entity = entity;
         this.code = code;
@@ -14,11 +14,11 @@ class Executor {
         this.parentExecutor = null;
         this.valueMap = {};
         this.valueState = {};
-        this.id = Entry.Utils.generateId();
+        this.id = RoCode.Utils.generateId();
     }
 
     execute(isFromOrigin) {
-        if (Entry.isTurbo && !this.isUpdateTime) {
+        if (RoCode.isTurbo && !this.isUpdateTime) {
             this.isUpdateTime = performance.now();
         }
         if (this.isEnd()) {
@@ -28,7 +28,7 @@ class Executor {
         const executedBlocks = [];
         const promises = [];
         if (isFromOrigin) {
-            Entry.callStackLength = 0;
+            RoCode.callStackLength = 0;
         }
 
         const entity = this.entity;
@@ -39,25 +39,25 @@ class Executor {
             try {
                 const schema = this.scope.block.getSchema();
                 if (schema.class === 'ai_learning' && isOffline) {
-                    throw new Entry.Utils.OfflineError();
+                    throw new RoCode.Utils.OfflineError();
                 }
-                if (schema && Entry.skeleton[schema.skeleton].executable) {
-                    Entry.dispatchEvent('blockExecute', this.scope.block && this.scope.block.view);
+                if (schema && RoCode.skeleton[schema.skeleton].executable) {
+                    RoCode.dispatchEvent('blockExecute', this.scope.block && this.scope.block.view);
                     returnVal = this.scope.run(entity);
-                    this.scope.key = Entry.generateHash();
+                    this.scope.key = RoCode.generateHash();
                 }
             } catch (e) {
                 if (e.name === 'AsyncError') {
-                    returnVal = Entry.STATIC.BREAK;
+                    returnVal = RoCode.STATIC.BREAK;
                 } else if (e.name === 'IncompatibleError') {
-                    Entry.Utils.stopProjectWithToast(this.scope, 'IncompatibleError', e);
+                    RoCode.Utils.stopProjectWithToast(this.scope, 'IncompatibleError', e);
                 } else if (e.name === 'OfflineError') {
-                    Entry.Utils.stopProjectWithToast(this.scope, 'OfflineError', e);
+                    RoCode.Utils.stopProjectWithToast(this.scope, 'OfflineError', e);
                 } else if (this.isFuncExecutor) {
                     //function executor
                     throw e;
                 } else {
-                    Entry.Utils.stopProjectWithToast(this.scope, undefined, e);
+                    RoCode.Utils.stopProjectWithToast(this.scope, undefined, e);
                 }
             }
 
@@ -74,11 +74,11 @@ class Executor {
                         this.valueMap = {};
                         this.valueState = {};
                         this.paused = false;
-                        if (returnVal === Entry.STATIC.CONTINUE || returnVal === this.scope) {
+                        if (returnVal === RoCode.STATIC.CONTINUE || returnVal === this.scope) {
                             return;
                         }
-                        if (this.scope.block && Entry.engine.isState('run')) {
-                            this.scope = new Entry.Scope(this.scope.block.getNextBlock(), this);
+                        if (this.scope.block && RoCode.engine.isState('run')) {
+                            this.scope = new RoCode.Scope(this.scope.block.getNextBlock(), this);
                         }
                         if (this.scope.block === null && this._callStack.length) {
                             const oldScope = this.scope;
@@ -91,22 +91,22 @@ class Executor {
                     .catch((e) => {
                         this.paused = false;
                         if (e.name === 'AsyncError') {
-                            returnVal = Entry.STATIC.BREAK;
+                            returnVal = RoCode.STATIC.BREAK;
                         } else if (e.name === 'IncompatibleError') {
-                            Entry.Utils.stopProjectWithToast(this.scope, 'IncompatibleError', e);
+                            RoCode.Utils.stopProjectWithToast(this.scope, 'IncompatibleError', e);
                         } else if (this.isFuncExecutor) {
                             throw e;
                         } else {
-                            Entry.Utils.stopProjectWithToast(this.scope, undefined, e);
+                            RoCode.Utils.stopProjectWithToast(this.scope, undefined, e);
                         }
                     });
                 break;
             } else if (
                 returnVal === undefined ||
                 returnVal === null ||
-                returnVal === Entry.STATIC.PASS
+                returnVal === RoCode.STATIC.PASS
             ) {
-                this.scope = new Entry.Scope(this.scope.block.getNextBlock(), this);
+                this.scope = new RoCode.Scope(this.scope.block.getNextBlock(), this);
                 this.valueMap = {};
                 this.valueState = {};
                 if (this.scope.block === null) {
@@ -121,14 +121,14 @@ class Executor {
                         break;
                     }
                 }
-            } else if (returnVal === Entry.STATIC.CONTINUE) {
+            } else if (returnVal === RoCode.STATIC.CONTINUE) {
                 this.valueMap = {};
                 this.valueState = {};
             } else if (returnVal === this.scope) {
                 this.valueMap = {};
                 this.valueState = {};
                 break;
-            } else if (returnVal === Entry.STATIC.BREAK) {
+            } else if (returnVal === RoCode.STATIC.BREAK) {
                 break;
             }
         }
@@ -137,17 +137,17 @@ class Executor {
 
     checkExecutorError(error) {
         if (error.name === 'AsyncError') {
-            return Entry.STATIC.BREAK;
+            return RoCode.STATIC.BREAK;
         } else if (this.isFuncExecutor) {
             throw error;
         } else {
-            Entry.Utils.stopProjectWithToast(this.scope, undefined, error);
+            RoCode.Utils.stopProjectWithToast(this.scope, undefined, error);
         }
     }
 
     checkExecutorResult(returnVal) {
-        if (returnVal === undefined || returnVal === null || returnVal === Entry.STATIC.PASS) {
-            this.scope = new Entry.Scope(this.scope.block.getNextBlock(), this);
+        if (returnVal === undefined || returnVal === null || returnVal === RoCode.STATIC.PASS) {
+            this.scope = new RoCode.Scope(this.scope.block.getNextBlock(), this);
             this.valueMap = {};
             this.valueState = {};
             if (this.scope.block === null) {
@@ -162,39 +162,39 @@ class Executor {
                     return true;
                 }
             }
-        } else if (returnVal === Entry.STATIC.CONTINUE) {
+        } else if (returnVal === RoCode.STATIC.CONTINUE) {
             this.valueMap = {};
             this.valueState = {};
         } else if (returnVal === this.scope) {
             this.valueMap = {};
             this.valueState = {};
             return true;
-        } else if (returnVal === Entry.STATIC.BREAK) {
+        } else if (returnVal === RoCode.STATIC.BREAK) {
             return true;
         }
     }
 
     stepInto(thread) {
-        if (!(thread instanceof Entry.Thread)) {
+        if (!(thread instanceof RoCode.Thread)) {
             console.error('Must step in to thread');
         }
 
         const block = thread.getFirstBlock();
         if (!block) {
-            return Entry.STATIC.BREAK;
+            return RoCode.STATIC.BREAK;
         }
 
         this._callStack.push(this.scope);
 
-        this.scope = new Entry.Scope(block, this);
-        return Entry.STATIC.CONTINUE;
+        this.scope = new RoCode.Scope(block, this);
+        return RoCode.STATIC.CONTINUE;
     }
 
     break() {
         if (this._callStack.length) {
             this.scope = this._callStack.pop();
         }
-        return Entry.STATIC.PASS;
+        return RoCode.STATIC.PASS;
     }
 
     breakLoop() {
@@ -202,17 +202,17 @@ class Executor {
             this.scope = this._callStack.pop();
         }
         while (this._callStack.length) {
-            const schema = Entry.block[this.scope.block.type];
+            const schema = RoCode.block[this.scope.block.type];
             if (schema.class === 'repeat') {
                 break;
             }
             this.scope = this._callStack.pop();
         }
-        return Entry.STATIC.PASS;
+        return RoCode.STATIC.PASS;
     }
 
     end() {
-        Entry.dispatchEvent('blockExecuteEnd', this.scope.block && this.scope.block.view);
+        RoCode.dispatchEvent('blockExecuteEnd', this.scope.block && this.scope.block.view);
         this.scope.block = null;
     }
 
@@ -225,4 +225,4 @@ class Executor {
     }
 }
 
-Entry.Executor = Executor;
+RoCode.Executor = Executor;

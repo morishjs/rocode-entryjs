@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.hummingbird = {
+RoCode.hummingbird = {
     PORT_MAP: {
         triLEDR1: 256, //D7
         triLEDG1: 256, //D4
@@ -22,13 +22,13 @@ Entry.hummingbird = {
         //servo4: 256  //spi
     },
     setZero: function() {
-        var portMap = Entry.hummingbird.PORT_MAP;
-        var sq = Entry.hw.sendQueue;
+        var portMap = RoCode.hummingbird.PORT_MAP;
+        var sq = RoCode.hw.sendQueue;
         for (var port in portMap) {
             sq[port] = portMap[port];
         }
-        Entry.hw.update();
-        var hummingbird = Entry.hummingbird;
+        RoCode.hw.update();
+        var hummingbird = RoCode.hummingbird;
         hummingbird.removeAllTimeouts();
     },
     timeouts: [],
@@ -58,7 +58,7 @@ Entry.hummingbird = {
         ko: '허밍버드 듀오',
     },
 };
-Entry.hummingbird.blockMenuBlocks = [
+RoCode.hummingbird.blockMenuBlocks = [
     //hummingbirdduo
     'hummingbird_sensorValue',
     'hummingbird_temperatureValue',
@@ -72,14 +72,14 @@ Entry.hummingbird.blockMenuBlocks = [
     'hummingbird_triLED',
     'hummingbird_led',
 ];
-Entry.hummingbird.getBlocks = function() {
+RoCode.hummingbird.getBlocks = function() {
     return {
         //region hummingbird 허밍버드
         //Hummingbird parts
         //범용 센서
         hummingbird_sensorValue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -90,8 +90,8 @@ Entry.hummingbird.getBlocks = function() {
                     options: [['1', 'adc1'], ['2', 'adc2'], ['3', 'adc3'], ['4', 'adc4']],
                     value: 'adc1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -105,7 +105,7 @@ Entry.hummingbird.getBlocks = function() {
             class: 'hummingbird_sensor',
             isNotFor: ['hummingbird'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 return pd[dev];
             },
@@ -114,8 +114,8 @@ Entry.hummingbird.getBlocks = function() {
 
         //온도센서
         hummingbird_temperatureValue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -126,8 +126,8 @@ Entry.hummingbird.getBlocks = function() {
                     options: [['1', 'adc1'], ['2', 'adc2'], ['3', 'adc3'], ['4', 'adc4']],
                     value: 'adc1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -141,7 +141,7 @@ Entry.hummingbird.getBlocks = function() {
             class: 'hummingbird_sensor',
             isNotFor: ['hummingbird'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 var rawData = (pd[dev] >> 2) & 0xff;
                 var temperature_value = Math.floor(((rawData - 127) / 2.4 + 25) * 100 / 100);
@@ -151,8 +151,8 @@ Entry.hummingbird.getBlocks = function() {
         },
         // 빛 블럭
         hummingbird_lightValue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -163,8 +163,8 @@ Entry.hummingbird.getBlocks = function() {
                     options: [['1', 'adc1'], ['2', 'adc2'], ['3', 'adc3'], ['4', 'adc4']],
                     value: 'adc1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -178,7 +178,7 @@ Entry.hummingbird.getBlocks = function() {
             class: 'hummingbird_sensor',
             isNotFor: ['hummingbird'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 var light_value = Math.round(pd[dev] * 100 / 1024);
                 return light_value;
@@ -188,8 +188,8 @@ Entry.hummingbird.getBlocks = function() {
 
         // 거리센서 블럭
         hummingbird_distanceValue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -200,8 +200,8 @@ Entry.hummingbird.getBlocks = function() {
                     options: [['1', 'adc1'], ['2', 'adc2'], ['3', 'adc3'], ['4', 'adc4']],
                     value: 'adc1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -215,7 +215,7 @@ Entry.hummingbird.getBlocks = function() {
             class: 'hummingbird_sensor',
             isNotFor: ['hummingbird'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
 
                 var distance = 0;
@@ -244,8 +244,8 @@ Entry.hummingbird.getBlocks = function() {
 
         // 소음 센서 블럭
         hummingbird_soundValue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -256,8 +256,8 @@ Entry.hummingbird.getBlocks = function() {
                     options: [['1', 'adc1'], ['2', 'adc2'], ['3', 'adc3'], ['4', 'adc4']],
                     value: 'adc1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -271,7 +271,7 @@ Entry.hummingbird.getBlocks = function() {
             class: 'hummingbird_sensor',
             isNotFor: ['hummingbird'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 var sound_value = (pd[dev] >> 2) & 0xff;
 
@@ -286,8 +286,8 @@ Entry.hummingbird.getBlocks = function() {
 
         // 회전센서
         hummingbird_rotaryValue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -298,8 +298,8 @@ Entry.hummingbird.getBlocks = function() {
                     options: [['1', 'adc1'], ['2', 'adc2'], ['3', 'adc3'], ['4', 'adc4']],
                     value: 'adc1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -313,7 +313,7 @@ Entry.hummingbird.getBlocks = function() {
             class: 'hummingbird_sensor',
             isNotFor: ['hummingbird'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 var rotary_value = Math.round(pd[dev] * 100 / 1024);
                 //if (rotary_value == 0) rotary_value = 1;
@@ -324,8 +324,8 @@ Entry.hummingbird.getBlocks = function() {
 
         //진동모터
         hummingbird_vibeMotor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: 'HB 진동모터 %1번 세기: %2 %3',
@@ -335,8 +335,8 @@ Entry.hummingbird.getBlocks = function() {
                     options: [['1', 'vibeMotor1'], ['2', 'vibeMotor2']],
                     value: 'vibeMotor1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -367,7 +367,7 @@ Entry.hummingbird.getBlocks = function() {
             class: 'hummingbird_motor',
             isNotFor: ['hummingbird'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var dev = script.getStringField('DEVICE', script);
                 var value = script.getNumberValue('VALUE', script);
 
@@ -384,8 +384,8 @@ Entry.hummingbird.getBlocks = function() {
 
         //서보모터
         hummingbird_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: 'HB 서보모터 %1번 각도: %2 %3',
@@ -395,8 +395,8 @@ Entry.hummingbird.getBlocks = function() {
                     options: [['1', 'servo1'], ['2', 'servo2'], ['3', 'servo3'], ['4', 'servo4']],
                     value: 'servo1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -427,7 +427,7 @@ Entry.hummingbird.getBlocks = function() {
             class: 'hummingbird_motor',
             isNotFor: ['hummingbird'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var mtype = script.getStringField('DEVICE', script);
                 var angle = script.getNumberValue('VALUE', script);
 
@@ -445,8 +445,8 @@ Entry.hummingbird.getBlocks = function() {
 
         //기어모터
         hummingbird_dcMotor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: 'HB 기어모터 %1번 속도: %2 %3',
@@ -456,8 +456,8 @@ Entry.hummingbird.getBlocks = function() {
                     options: [['1', 'dcMotor1'], ['2', 'dcMotor2']],
                     value: 'dcMotor1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -488,7 +488,7 @@ Entry.hummingbird.getBlocks = function() {
             class: 'hummingbird_motor',
             isNotFor: ['hummingbird'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var dir = script.getStringField('DEVICE', script);
                 var speed = script.getNumberValue('VALUE', script);
 
@@ -506,8 +506,8 @@ Entry.hummingbird.getBlocks = function() {
 
         // 단색LED
         hummingbird_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: 'HB 단색LED %1번 밝기: %2 %3',
@@ -517,8 +517,8 @@ Entry.hummingbird.getBlocks = function() {
                     options: [['1', 'led1'], ['2', 'led2'], ['3', 'led3'], ['4', 'led4']],
                     value: 'led1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -549,7 +549,7 @@ Entry.hummingbird.getBlocks = function() {
             class: 'hummingbird_led',
             isNotFor: ['hummingbird'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var ledtype = script.getStringField('DEVICE', script);
                 var value = script.getNumberValue('VALUE', script);
                 if (value > 100) value = 100;
@@ -567,8 +567,8 @@ Entry.hummingbird.getBlocks = function() {
 
         // 삼색LED
         hummingbird_triLED: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: 'HB 삼색LED %1번 빨강%2 초록%3 파랑%4 %5',
@@ -578,8 +578,8 @@ Entry.hummingbird.getBlocks = function() {
                     options: [['1', 'triLED1'], ['2', 'triLED2']],
                     value: 'triLED1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -632,7 +632,7 @@ Entry.hummingbird.getBlocks = function() {
             class: 'hummingbird_led',
             isNotFor: ['hummingbird'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var ledtype = script.getStringField('DEVICE', script);
                 var colorRed = script.getNumberValue('cRED', script);
                 var colorGreen = script.getNumberValue('cGREEN', script);
@@ -666,4 +666,4 @@ Entry.hummingbird.getBlocks = function() {
     };
 };
 
-module.exports = Entry.hummingbird;
+module.exports = RoCode.hummingbird;

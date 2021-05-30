@@ -18,16 +18,16 @@ enum HardwareStatement {
 
 export default class Hardware {
     get httpsServerAddress() {
-        return 'https://hw.playentry.org:23518';
+        return 'https://hw.playRoCode.org:23518';
     } // 하드웨어 프로그램 접속용 주소
     get httpsServerAddress2() {
-        return 'https://hardware.playentry.org:23518';
+        return 'https://hardware.playRoCode.org:23518';
     } // legacy
     get httpServerAddress() {
         return 'http://127.0.0.1:23518';
     } // http 인 오프라인 접속용 주소
     get cloudRoomIdKey() {
-        return 'entryhwRoomId';
+        return 'RoCodehwRoomId';
     }
     private get socketConnectOption() {
         return {
@@ -47,12 +47,12 @@ export default class Hardware {
     private socket: SocketIOClient.Socket; // 실제 연결된 소켓
     private socketMode: number;
 
-    // entryjs 내 하드웨어모듈 통신용
+    // RoCodejs 내 하드웨어모듈 통신용
     public portData: UnknownAny;
     public sendQueue: UnknownAny;
 
     // 현재 연결된 모듈 컨트롤용
-    public hwModule?: EntryHardwareBlockModule;
+    public hwModule?: RoCodeHardwareBlockModule;
     public communicationType: string; // 'manual' || 'auto'
     private currentDeviceKey?: string;
     private hwModuleType: HardwareModuleType;
@@ -77,18 +77,18 @@ export default class Hardware {
         this.hwModuleType = HardwareModuleType.builtIn;
 
         this._initHardwareObject();
-        this._addEntryEventListener();
+        this._addRoCodeEventListener();
     }
 
     async _loadExternalHardwareBlock(moduleName: string) {
         try {
-            await Entry.moduleManager.loadModule(moduleName);
+            await RoCode.moduleManager.loadModule(moduleName);
         } catch (e) {
-            // Entry.toast.alert(
+            // RoCode.toast.alert(
             //     Lang.Hw.hw_module_load_fail_title,
             //     `${moduleName} ${Lang.Hw.hw_module_load_fail_desc}`
             // );
-            Entry.toast.alert(
+            RoCode.toast.alert(
                 '모듈 로드 실패',
                 `${moduleName} 로드에 실패했습니다. 관리자에게 문의하세요`
             );
@@ -117,11 +117,11 @@ export default class Hardware {
      * 현재 보여지고 있는 하드웨어 블록들을 전부 숨김처리한다.
      * @param moduleObject
      */
-    setExternalModule(moduleObject: EntryHardwareBlockModule) {
+    setExternalModule(moduleObject: RoCodeHardwareBlockModule) {
         this.hwModule = moduleObject;
         this.hwModuleType = HardwareModuleType.module;
         this._banClassAllHardware();
-        Entry.dispatchEvent('hwChanged');
+        RoCode.dispatchEvent('hwChanged');
     }
 
     /**
@@ -130,7 +130,7 @@ export default class Hardware {
      * 현재 하드웨어 로드가 외부 모듈에 의한 것인 경우는 연결이 해제되어도 블록숨김을 실행하지 않는다.
      */
     refreshHardwareBlockMenu() {
-        const workspace = Entry.getMainWS();
+        const workspace = RoCode.getMainWS();
         const blockMenu = workspace && workspace.blockMenu;
 
         if (!blockMenu) {
@@ -161,12 +161,12 @@ export default class Hardware {
 
     disconnectSocket() {
         if (this.programConnected) {
-            Entry.propertyPanel && Entry.propertyPanel.removeMode('hw');
+            RoCode.propertyPanel && RoCode.propertyPanel.removeMode('hw');
             this.programConnected = false;
             this.currentDeviceKey = undefined;
 
             /*
-            entryjs 내에 존재하던 기존 하드웨어의 경우 원래 프로세스에 따라 연결 종료시 보여주지 않는다.
+            RoCodejs 내에 존재하던 기존 하드웨어의 경우 원래 프로세스에 따라 연결 종료시 보여주지 않는다.
             만약 외부모듈인 경우, 하드웨어가 연결종료 되더라도 블록은 남는다.
              */
             if (this.hwModuleType === HardwareModuleType.builtIn) {
@@ -176,8 +176,8 @@ export default class Hardware {
             this.socket && this.socket.close();
             this.socket = undefined;
 
-            Entry.dispatchEvent('hwChanged');
-            Entry.toast.alert(
+            RoCode.dispatchEvent('hwChanged');
+            RoCode.toast.alert(
                 Lang.Hw.hw_module_terminaltion_title,
                 Lang.Hw.hw_module_terminaltion_desc,
                 false
@@ -189,7 +189,7 @@ export default class Hardware {
      * @deprecated
      */
     setDigitalPortValue(port: any, value: any) {
-        console.warn('this function will be deprecated. please use Entry.hw.sendQueue directly.');
+        console.warn('this function will be deprecated. please use RoCode.hw.sendQueue directly.');
         this.sendQueue[port] = value;
         this.removePortReadable(port);
     }
@@ -198,7 +198,7 @@ export default class Hardware {
      * @deprecated
      */
     getAnalogPortValue(port: any) {
-        console.warn('this function will be deprecated. please use Entry.hw.portData directly.');
+        console.warn('this function will be deprecated. please use RoCode.hw.portData directly.');
         if (!this.programConnected || !this.hwModule) {
             return 0;
         }
@@ -209,7 +209,7 @@ export default class Hardware {
      * @deprecated
      */
     getDigitalPortValue(port: any) {
-        console.warn('this function will be deprecated. please use Entry.hw.portData directly.');
+        console.warn('this function will be deprecated. please use RoCode.hw.portData directly.');
         if (!this.programConnected || !this.hwModule) {
             return 0;
         }
@@ -247,7 +247,7 @@ export default class Hardware {
      * @deprecated
      */
     removePortReadable(port: any) {
-        console.warn('this function will be deprecated. please use Entry.hw.sendQueue directly.');
+        console.warn('this function will be deprecated. please use RoCode.hw.sendQueue directly.');
         if (!this.sendQueue.readablePorts && !Array.isArray(this.sendQueue.readablePorts)) {
             return;
         }
@@ -294,15 +294,15 @@ export default class Hardware {
     }
 
     downloadConnector() {
-        Entry.dispatchEvent('hwDownload', 'hardware');
+        RoCode.dispatchEvent('hwDownload', 'hardware');
     }
 
     downloadGuide() {
-        Entry.dispatchEvent('hwDownload', 'manual');
+        RoCode.dispatchEvent('hwDownload', 'manual');
     }
 
     downloadSource() {
-        Entry.dispatchEvent('hwDownload', 'ino');
+        RoCode.dispatchEvent('hwDownload', 'ino');
     }
 
     setZero() {
@@ -332,44 +332,44 @@ export default class Hardware {
         }
 
         this.currentDeviceKey = key;
-        this.hwModule = Entry.HARDWARE_LIST[key];
+        this.hwModule = RoCode.HARDWARE_LIST[key];
         if (!this.hwModule) {
             return;
         }
         this.communicationType = this.hwModule.communicationType || 'auto';
         this._banClassAllHardware();
-        Entry.dispatchEvent('hwChanged');
+        RoCode.dispatchEvent('hwChanged');
 
         let descMsg;
-        if (Entry.propertyPanel && this.hwModule.monitorTemplate) {
+        if (RoCode.propertyPanel && this.hwModule.monitorTemplate) {
             descMsg = Lang.Msgs.hw_connection_success_desc;
             this._setHardwareMonitorTemplate();
         } else {
             descMsg = Lang.Msgs.hw_connection_success_desc2;
         }
-        Entry.toast.success(Lang.Msgs.hw_connection_success, descMsg);
+        RoCode.toast.success(Lang.Msgs.hw_connection_success, descMsg);
     }
 
     openHardwareDownloadPopup() {
-        if (Entry.events_.openHardWareDownloadModal) {
-            Entry.dispatchEvent('openHardWareDownloadModal');
+        if (RoCode.events_.openHardWareDownloadModal) {
+            RoCode.dispatchEvent('openHardWareDownloadModal');
         } else {
             this.popupHelper.show('hwDownload', true);
         }
     }
 
     private _initHardwareObject() {
-        const { hardwareEnable } = Entry;
+        const { hardwareEnable } = RoCode;
         this.popupHelper = createHardwarePopup(() => {
             this.downloadConnector();
         });
         hardwareEnable && this._initSocket();
     }
 
-    private _addEntryEventListener() {
+    private _addRoCodeEventListener() {
         // hwChanged 에 걸려있는 다른 이벤트 함수와 동일선상에 두기위함
-        Entry.addEventListener('hwChanged', this.refreshHardwareBlockMenu.bind(this));
-        Entry.addEventListener('stop', this.setZero.bind(this));
+        RoCode.addEventListener('hwChanged', this.refreshHardwareBlockMenu.bind(this));
+        RoCode.addEventListener('stop', this.setZero.bind(this));
     }
 
     private _createRandomRoomId() {
@@ -402,8 +402,8 @@ export default class Hardware {
         // this._initHardware(socket);
         this.socket = socket;
         this._setSocketConnected();
-        if (Entry.playground && Entry.playground.object) {
-            Entry.playground.setMenu(Entry.playground.object.objectType);
+        if (RoCode.playground && RoCode.playground.object) {
+            RoCode.playground.setMenu(RoCode.playground.object.objectType);
         }
 
         socket.on('connect', () => {
@@ -464,14 +464,14 @@ export default class Hardware {
     private _setSocketConnected() {
         this.programConnected = true;
         console.log('Hardware Program Connected'); // 하드웨어 프로그램 연결 성공, 스테이터스 변화 필요
-        Entry.dispatchEvent('hwChanged');
+        RoCode.dispatchEvent('hwChanged');
     }
 
     private _setSocketClosed(needRedraw: boolean = true) {
         this.programConnected = false;
         this.hwModule = undefined;
         this.currentDeviceKey = undefined;
-        needRedraw && Entry.dispatchEvent('hwChanged');
+        needRedraw && RoCode.dispatchEvent('hwChanged');
     }
 
     /**
@@ -531,7 +531,7 @@ export default class Hardware {
      * @private
      */
     private _setHardwareDefaultMenu(statement: HardwareStatement) {
-        const workspace = Entry.getMainWS();
+        const workspace = RoCode.getMainWS();
         const blockMenu = workspace && workspace.blockMenu;
 
         if (!blockMenu) {
@@ -564,23 +564,23 @@ export default class Hardware {
      * @private
      */
     private _banClassAllHardware() {
-        const workspace = Entry.getMainWS();
+        const workspace = RoCode.getMainWS();
         const blockMenu = workspace && workspace.blockMenu;
         if (!blockMenu) {
             return;
         }
 
-        Object.values(Entry.HARDWARE_LIST).forEach((hardware: any) => {
+        Object.values(RoCode.HARDWARE_LIST).forEach((hardware: any) => {
             blockMenu.banClass(hardware.name, true);
         });
     }
 
     private _disconnectHardware() {
         if (this.hwModule) {
-            Entry.propertyPanel && Entry.propertyPanel.removeMode('hw');
+            RoCode.propertyPanel && RoCode.propertyPanel.removeMode('hw');
             this.currentDeviceKey = undefined;
             this.hwModule = undefined;
-            Entry.dispatchEvent('hwChanged');
+            RoCode.dispatchEvent('hwChanged');
         }
     }
 
@@ -591,7 +591,7 @@ export default class Hardware {
     }
 
     private _updatePortData(data: HardwareMessageData) {
-        if (this.hwMonitor && Entry.propertyPanel && Entry.propertyPanel.selected === 'hw') {
+        if (this.hwMonitor && RoCode.propertyPanel && RoCode.propertyPanel.selected === 'hw') {
             this.hwMonitor.update(data, this.sendQueue);
         }
     }
@@ -603,7 +603,7 @@ export default class Hardware {
             this.hwMonitor.setHwModule(this.hwModule);
             this.hwMonitor.initView();
         }
-        Entry.propertyPanel.addMode('hw', this.hwMonitor);
+        RoCode.propertyPanel.addMode('hw', this.hwMonitor);
         this.hwMonitor.generateViewByMode();
     }
 
@@ -620,7 +620,7 @@ export default class Hardware {
             if (!dontShowChecked) {
                 const title = Lang.Msgs.hardware_need_update_title;
                 const content = Lang.Msgs.hardware_need_update_content;
-                entrylms
+                RoCodelms
                     .alert(content, title, { withDontShowAgain: true })
                     .one(
                         'click',
@@ -649,9 +649,9 @@ export default class Hardware {
             ''
         );
 
-        const entryHardwareUrl = `entryhw://?${customSchemaArgsString}`;
-        console.log('request Hardware using url custom schema.. : ', entryHardwareUrl);
-        this.programLauncher.executeUrl(entryHardwareUrl, () => this.openHardwareDownloadPopup());
+        const RoCodeHardwareUrl = `RoCodehw://?${customSchemaArgsString}`;
+        console.log('request Hardware using url custom schema.. : ', RoCodeHardwareUrl);
+        this.programLauncher.executeUrl(RoCodeHardwareUrl, () => this.openHardwareDownloadPopup());
     }
 
     private _convertHexToString(num: number | string) {
@@ -663,4 +663,4 @@ export default class Hardware {
     }
 }
 
-Entry.HW = Hardware;
+RoCode.HW = Hardware;

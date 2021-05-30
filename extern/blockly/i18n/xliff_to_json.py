@@ -38,7 +38,7 @@ def _parse_trans_unit(trans_unit):
 
     Returns:
         A dictionary with useful information about the translation unit.
-        The returned dictionary is guaranteed to have an entry for 'key' and
+        The returned dictionary is guaranteed to have an RoCode for 'key' and
         may have entries for 'source', 'target', 'description', and 'meaning'
         if present in the argument.
 

@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-Entry.playcode = {
+RoCode.playcode = {
     id: '1E.1',
     name: 'playcode',
     url: 'http://www.playcode.kr/product',
@@ -10,19 +10,19 @@ Entry.playcode = {
         ko: '플레이코드',
     },
     setZero: function() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            var keySet = Object.keys(Entry.hw.sendQueue.SET);
+            var keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach(function(key) {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     toByte: function(data) {
         switch (data) {
@@ -366,7 +366,7 @@ Entry.playcode = {
     BlockState: {},
 };
 
-Entry.playcode.blockMenuBlocks = [
+RoCode.playcode.blockMenuBlocks = [
     // playcode Added 2018-01-02
     'playcode_get_light_value',
     'playcode_get_mic_value',
@@ -376,12 +376,12 @@ Entry.playcode.blockMenuBlocks = [
     // playcode Added 2018-01-02
 ];
 
-Entry.playcode.getBlocks = function() {
+RoCode.playcode.getBlocks = function() {
     return {
         //region playcode
         playcode_port_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -400,8 +400,8 @@ Entry.playcode.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -416,8 +416,8 @@ Entry.playcode.getBlocks = function() {
             },
         },
         playcode_first_port_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -427,8 +427,8 @@ Entry.playcode.getBlocks = function() {
                     options: [['1', '1'], ['2', '2'], ['3', '3'], ['4', '4']],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -443,8 +443,8 @@ Entry.playcode.getBlocks = function() {
             },
         },
         playcode_get_light_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: '빛센서 : %1 포트 값',
@@ -471,15 +471,15 @@ Entry.playcode.getBlocks = function() {
             isNotFor: ['playcode'],
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.LIGHT;
+                var ANALOG = RoCode.hw.portData.LIGHT;
 
                 if (port[0] === 'A') port = port.substring(1);
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
 
-                Entry.hw.sendQueue['GET'][Entry.playcode.sensorTypes.LIGHT] = {
+                RoCode.hw.sendQueue['GET'][RoCode.playcode.sensorTypes.LIGHT] = {
                     port: [port],
                     data: 1,
                     time: new Date().getTime(),
@@ -490,8 +490,8 @@ Entry.playcode.getBlocks = function() {
             syntax: { js: [], py: ['playcode.get_analog_value(%1)'] },
         },
         playcode_get_mic_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: '마이크센서 : %1 포트 값',
@@ -518,15 +518,15 @@ Entry.playcode.getBlocks = function() {
             isNotFor: ['playcode'],
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.MIC;
+                var ANALOG = RoCode.hw.portData.MIC;
 
                 if (port[0] === 'A') port = port.substring(1);
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
 
-                Entry.hw.sendQueue['GET'][Entry.playcode.sensorTypes.MICROPHONE] = {
+                RoCode.hw.sendQueue['GET'][RoCode.playcode.sensorTypes.MICROPHONE] = {
                     port: [port],
                     data: 1,
                     time: new Date().getTime(),
@@ -537,8 +537,8 @@ Entry.playcode.getBlocks = function() {
             syntax: { js: [], py: ['playcode.get_analog_value(%1)'] },
         },
         playcode_gpio: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             template: 'GPIO : %1포트에 %2 보내기 %3',
@@ -553,8 +553,8 @@ Entry.playcode.getBlocks = function() {
                     options: [[Lang.Blocks.ARDUINO_on, 'on'], [Lang.Blocks.ARDUINO_off, 'off']],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -584,25 +584,25 @@ Entry.playcode.getBlocks = function() {
                 var operator = script.getField('OPERATOR');
                 var value = operator == 'on' ? 1 : 0;
 
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 if (!sq['SET']) {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.playcode.sensorTypes.DIGITAL,
+                    type: RoCode.playcode.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
 
-                Entry.hw.setDigitalPortValue(port, value);
+                RoCode.hw.setDigitalPortValue(port, value);
                 return script.callReturn();
             },
             syntax: { js: [], py: ['playcode.playcode_gpio(%1)'] },
         },
         playcode_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             template: 'Servo : %1포트에 %2 보내기 %3',
             params: [
@@ -650,12 +650,12 @@ Entry.playcode.getBlocks = function() {
                 value = Math.min(value, 180);
                 value = Math.max(value, 0);
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.playcode.sensorTypes.SERVO_PIN,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.playcode.sensorTypes.SERVO_PIN,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -664,8 +664,8 @@ Entry.playcode.getBlocks = function() {
             },
         },
         playcode_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             template: 'Speed : %1포트에 %2 보내기 %3',
             params: [
@@ -712,12 +712,12 @@ Entry.playcode.getBlocks = function() {
                 value = Math.min(value, 255);
                 value = Math.max(value, 0);
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
 
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.playcode.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.playcode.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -729,4 +729,4 @@ Entry.playcode.getBlocks = function() {
     };
 };
 
-module.exports = Entry.playcode;
+module.exports = RoCode.playcode;

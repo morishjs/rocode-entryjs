@@ -1,5 +1,5 @@
 /**;
- * @fileoverview Object for Entry.
+ * @fileoverview Object for RoCode.
  */
 'use strict';
 
@@ -9,32 +9,32 @@ import { GEHelper } from '../graphicEngine/GEHelper';
 const _findIndex = require('lodash/findIndex');
 
 /**
- * Class for entry object.
+ * Class for RoCode object.
  * @param {?object model} model for object
  * @constructor
  */
-Entry.EntryObject = class {
+RoCode.RoCodeObject = class {
     constructor(model) {
         if (model) {
             this.id = model.id;
             this.name = model.name || model.sprite.name;
             this.text = model.text || this.name;
             this.objectType = model.objectType || 'sprite';
-            this.script = new Entry.Code(model.script || [], this);
-            this.pictures = Entry.Utils.copy(model.sprite.pictures || []);
-            this.sounds = Entry.Utils.copy(model.sprite.sounds || []);
+            this.script = new RoCode.Code(model.script || [], this);
+            this.pictures = RoCode.Utils.copy(model.sprite.pictures || []);
+            this.sounds = RoCode.Utils.copy(model.sprite.sounds || []);
 
-            this._setFocused = Entry.Utils.setFocused;
-            this._setBlurredTimer = Entry.Utils.setBlurredTimer;
-            this.editObjectValueWhenEnterPress = Entry.Utils.whenEnter(() => {
+            this._setFocused = RoCode.Utils.setFocused;
+            this._setBlurredTimer = RoCode.Utils.setBlurredTimer;
+            this.editObjectValueWhenEnterPress = RoCode.Utils.whenEnter(() => {
                 this.editObjectValues(false);
             });
 
             this.sounds.forEach((s) => {
                 if (!s.id) {
-                    s.id = Entry.generateHash();
+                    s.id = RoCode.generateHash();
                 }
-                Entry.initSound(s);
+                RoCode.initSound(s);
             });
 
             this.lock = model.lock ? model.lock : false;
@@ -46,12 +46,12 @@ Entry.EntryObject = class {
                     : this.getPicture(model.selectedPictureId);
             }
 
-            this.scene = Entry.scene.getSceneById(model.scene) || Entry.scene.selectedScene;
+            this.scene = RoCode.scene.getSceneById(model.scene) || RoCode.scene.selectedScene;
 
             this.setRotateMethod(model.rotateMethod);
 
             //entity
-            this.entity = new Entry.EntityObject(this);
+            this.entity = new RoCode.EntityObject(this);
             this.entity.injectModel(
                 this.selectedPicture ? this.selectedPicture : null,
                 model.entity ? model.entity : this.initEntity(model)
@@ -59,7 +59,7 @@ Entry.EntryObject = class {
 
             this.clonedEntities = [];
 
-            Entry.stage.loadObject(this);
+            RoCode.stage.loadObject(this);
 
             const pictures = this.pictures;
 
@@ -67,11 +67,11 @@ Entry.EntryObject = class {
                 const picture = pictures[i];
                 picture.objectId = this.id;
                 if (!picture.id) {
-                    picture.id = Entry.generateHash();
+                    picture.id = RoCode.generateHash();
                 }
                 GEHelper.resManager.reqResource(null, this.scene.id, picture);
             }
-            Entry.requestUpdate = true;
+            RoCode.requestUpdate = true;
         }
 
         this._isContextMenuEnabled = true;
@@ -81,7 +81,7 @@ Entry.EntryObject = class {
 
     /**
      * View generator for workspace or others.
-     * Entry.type === 'phone' 관련 뷰 삭제
+     * RoCode.type === 'phone' 관련 뷰 삭제
      * @return {!Element}
      */
     generateView() {
@@ -93,7 +93,7 @@ Entry.EntryObject = class {
      * @param {!string} name
      */
     setName(name) {
-        Entry.assert(typeof name === 'string', 'object name must be string');
+        RoCode.assert(typeof name === 'string', 'object name must be string');
 
         this.name = name;
         if (this.nameView_) {
@@ -110,7 +110,7 @@ Entry.EntryObject = class {
      * @param {!string} name
      */
     setText(text) {
-        Entry.assert(typeof text === 'string', 'object text must be string');
+        RoCode.assert(typeof text === 'string', 'object text must be string');
         this.text = text;
     }
 
@@ -226,7 +226,7 @@ Entry.EntryObject = class {
                 this.thumbUrl = picture.fileurl;
             } else {
                 const fileName = picture.filename;
-                this.thumbUrl = `${Entry.defaultPath}/uploads/${fileName.substring(
+                this.thumbUrl = `${RoCode.defaultPath}/uploads/${fileName.substring(
                     0,
                     2
                 )}/${fileName.substring(2, 4)}/thumb/${fileName}.png`;
@@ -235,8 +235,8 @@ Entry.EntryObject = class {
         } else if (objectType === 'textBox') {
             const { type } = Lang || {};
             const filename = type === 'ko' ? 'text_icon_ko.svg' : 'text_icon.svg';
-            this.thumbUrl = `${Entry.mediaFilePath}${filename}`;
-            $(thumb).addClass('entryObjectTextBox');
+            this.thumbUrl = `${RoCode.mediaFilePath}${filename}`;
+            $(thumb).addClass('RoCodeObjectTextBox');
         }
     }
 
@@ -279,7 +279,7 @@ Entry.EntryObject = class {
         }
         const rotateMethod = this.getRotateMethod();
         const entity = this.entity;
-        const className = 'entryRemove';
+        const className = 'RoCodeRemove';
 
         if (rotateMethod === 'free') {
             this.rotateSpan_.removeClass(className);
@@ -307,7 +307,7 @@ Entry.EntryObject = class {
             this.pictures.splice(index, 0, picture);
         }
 
-        Entry.playground.injectPicture(this);
+        RoCode.playground.injectPicture(this);
     }
 
     /**
@@ -321,7 +321,7 @@ Entry.EntryObject = class {
             return;
         }
 
-        const playground = Entry.playground;
+        const playground = RoCode.playground;
         const picture = this.getPicture(pictureId);
 
         pictures.splice(pictures.indexOf(picture), 1);
@@ -363,7 +363,7 @@ Entry.EntryObject = class {
             }
         }
 
-        const checker = Entry.parseNumber(value);
+        const checker = RoCode.parseNumber(value);
         if (!(checker === false && typeof checker === 'boolean') && len >= checker && checker > 0) {
             return pictures[checker - 1];
         }
@@ -419,17 +419,17 @@ Entry.EntryObject = class {
      */
     addSound(sound, index) {
         if (!sound.id) {
-            sound.id = Entry.generateHash();
+            sound.id = RoCode.generateHash();
         }
 
-        Entry.initSound(sound, index);
+        RoCode.initSound(sound, index);
 
         if (typeof index === 'undefined') {
             this.sounds.push(sound);
         } else {
             this.sounds.splice(index, 0, sound);
         }
-        Entry.playground.injectSound();
+        RoCode.playground.injectSound();
     }
 
     /**
@@ -439,8 +439,8 @@ Entry.EntryObject = class {
     removeSound(soundId) {
         const index = _findIndex(this.sounds, (sound) => sound.id === soundId);
         this.sounds.splice(index, 1);
-        Entry.playground.reloadPlayground();
-        Entry.playground.injectSound();
+        RoCode.playground.reloadPlayground();
+        RoCode.playground.injectSound();
     }
 
     /**
@@ -464,7 +464,7 @@ Entry.EntryObject = class {
         this.rotateMethod = rotateMethod;
         this.updateRotateMethodView();
 
-        const stage = Entry.stage;
+        const stage = RoCode.stage;
         const entity = stage.selectedObject && stage.selectedObject.entity;
 
         if (entity) {
@@ -512,16 +512,16 @@ Entry.EntryObject = class {
      * Add clone entity for clone block
      * If parameter given, this clone the parameter entity itself.
      * Otherwise, this clone this object's entity.
-     * @param {?Entry.EntryObject} object
-     * @param {?Entry.EntityObject} entity
+     * @param {?RoCode.RoCodeObject} object
+     * @param {?RoCode.EntityObject} entity
      * @param {?xml block} script
      */
     addCloneEntity(object, entity, script) {
-        if (this.clonedEntities.length > Entry.maxCloneLimit) {
+        if (this.clonedEntities.length > RoCode.maxCloneLimit) {
             return;
         }
 
-        const clonedEntity = new Entry.EntityObject(this);
+        const clonedEntity = new RoCode.EntityObject(this);
         clonedEntity.isClone = true;
 
         entity = entity || this.entity;
@@ -534,7 +534,7 @@ Entry.EntryObject = class {
             clonedEntity.applyFilter();
         }
 
-        Entry.engine.raiseEventOnEntity(clonedEntity, [clonedEntity, 'when_clone_start']);
+        RoCode.engine.raiseEventOnEntity(clonedEntity, [clonedEntity, 'when_clone_start']);
 
         clonedEntity.isStarted = true;
         this.addCloneVariables(
@@ -545,12 +545,12 @@ Entry.EntryObject = class {
         );
 
         this.clonedEntities.push(clonedEntity);
-        let targetIndex = Entry.stage.selectedObjectContainer.getChildIndex(entity.object);
+        let targetIndex = RoCode.stage.selectedObjectContainer.getChildIndex(entity.object);
         targetIndex -= (entity.shapes.length ? 1 : 0) + entity.stamps.length;
-        Entry.stage.loadEntity(clonedEntity, targetIndex);
+        RoCode.stage.loadEntity(clonedEntity, targetIndex);
 
         if (entity.brush) {
-            Entry.setCloneBrush(clonedEntity, entity.brush);
+            RoCode.setCloneBrush(clonedEntity, entity.brush);
         }
     }
 
@@ -568,15 +568,15 @@ Entry.EntryObject = class {
      */
     toJSON(isClone) {
         const json = {};
-        json.id = isClone ? Entry.generateHash() : this.id;
+        json.id = isClone ? RoCode.generateHash() : this.id;
         json.name = this.name;
         json.script = this.getScriptText();
         json.objectType = this.objectType;
         json.rotateMethod = this.getRotateMethod();
         json.scene = this.scene.id;
         json.sprite = {
-            pictures: Entry.getPicturesJSON(this.pictures, isClone),
-            sounds: Entry.getSoundsJSON(this.sounds, isClone),
+            pictures: RoCode.getPicturesJSON(this.pictures, isClone),
+            sounds: RoCode.getSoundsJSON(this.sounds, isClone),
         };
         if (this.objectType === 'textBox') {
             json.text = this.text;
@@ -594,7 +594,7 @@ Entry.EntryObject = class {
      */
     destroy() {
         this.entity && this.entity.destroy();
-        Entry.removeElement(this.view_);
+        RoCode.removeElement(this.view_);
     }
 
     /**
@@ -623,7 +623,7 @@ Entry.EntryObject = class {
             }
         }
 
-        const checker = Entry.parseNumber(value);
+        const checker = RoCode.parseNumber(value);
         if (!(checker === false && typeof checker === 'boolean') && len >= checker && checker > 0) {
             return sounds[checker - 1];
         }
@@ -634,7 +634,7 @@ Entry.EntryObject = class {
     addCloneVariables({ id }, entity, variables, lists) {
         const _whereFunc = _.partial(_.filter, _, { object_: id });
         const _cloneFunc = (v) => v.clone();
-        const { variables_, lists_ } = Entry.variableContainer;
+        const { variables_, lists_ } = RoCode.variableContainer;
 
         entity.variables = (variables || _whereFunc(variables_)).map(_cloneFunc);
         entity.lists = (lists || _whereFunc(lists_)).map(_cloneFunc);
@@ -646,7 +646,7 @@ Entry.EntryObject = class {
 
     setLock(bool) {
         this.lock = bool;
-        Entry.stage.updateObject();
+        RoCode.stage.updateObject();
         return bool;
     }
 
@@ -719,29 +719,29 @@ Entry.EntryObject = class {
         }
         e.stopPropagation();
 
-        const { options = {} } = Entry;
+        const { options = {} } = RoCode;
         const { backpackDisable } = options;
         const object = this;
-        const container = Entry.container;
+        const container = RoCode.container;
         const contextMenus = [
             {
                 text: Lang.Workspace.context_duplicate,
-                enable: !Entry.engine.isState('run'),
+                enable: !RoCode.engine.isState('run'),
                 callback() {
                     container.addCloneObject(object);
                 },
             },
             {
                 text: Lang.Workspace.context_remove,
-                enable: !Entry.engine.isState('run') && !this.getLock(),
+                enable: !RoCode.engine.isState('run') && !this.getLock(),
                 callback: () => {
                     if (this.getLock()) {
                         return true;
                     }
-                    Entry.dispatchEvent('removeObject', object);
+                    RoCode.dispatchEvent('removeObject', object);
                     const { id } = object;
-                    Entry.do('removeObject', id);
-                    Entry.Utils.forceStopSounds();
+                    RoCode.do('removeObject', id);
+                    RoCode.Utils.forceStopSounds();
                 },
             },
             {
@@ -752,13 +752,13 @@ Entry.EntryObject = class {
             },
             {
                 text: Lang.Blocks.Paste_blocks,
-                enable: !Entry.engine.isState('run') && !!container.copiedObject,
+                enable: !RoCode.engine.isState('run') && !!container.copiedObject,
                 callback() {
-                    const container = Entry.container;
+                    const container = RoCode.container;
                     if (container.copiedObject) {
                         container.addCloneObject(container.copiedObject);
                     } else {
-                        Entry.toast.alert(
+                        RoCode.toast.alert(
                             Lang.Workspace.add_object_alert,
                             Lang.Workspace.object_not_found_for_paste
                         );
@@ -770,7 +770,7 @@ Entry.EntryObject = class {
         if (!backpackDisable) {
             contextMenus.push({
                 text: Lang.Blocks.add_my_storage,
-                enable: !Entry.engine.isState('run') && !!window.user,
+                enable: !RoCode.engine.isState('run') && !!window.user,
                 callback: () => {
                     this.addStorage();
                 },
@@ -780,16 +780,16 @@ Entry.EntryObject = class {
         contextMenus.push({
             text: Lang.Blocks.export_object,
             callback() {
-                Entry.dispatchEvent('exportObject', object);
+                RoCode.dispatchEvent('exportObject', object);
             },
         });
 
-        const { clientX: x, clientY: y } = Entry.Utils.convertMouseEvent(e);
-        Entry.ContextMenu.show(contextMenus, 'workspace-contextmenu', { x, y });
+        const { clientX: x, clientY: y } = RoCode.Utils.convertMouseEvent(e);
+        RoCode.ContextMenu.show(contextMenus, 'workspace-contextmenu', { x, y });
     }
 
     addStorage() {
-        Entry.dispatchEvent('addStorage', {
+        RoCode.dispatchEvent('addStorage', {
             type: 'object',
             data: this,
         });
@@ -804,17 +804,17 @@ Entry.EntryObject = class {
     }
 
     isContextMenuEnabled() {
-        return this._isContextMenuEnabled && Entry.objectEditable;
+        return this._isContextMenuEnabled && RoCode.objectEditable;
     }
 
     toggleEditObject() {
-        if (this.isEditing || Entry.engine.isState('run')) {
+        if (this.isEditing || RoCode.engine.isState('run')) {
             return;
         }
 
         this.editObjectValues(true);
-        if (Entry.playground.object !== this) {
-            Entry.container.selectObject(this.id);
+        if (RoCode.playground.object !== this) {
+            RoCode.container.selectObject(this.id);
         }
     }
 
@@ -860,8 +860,8 @@ Entry.EntryObject = class {
         const objectId = this.id;
 
         this.view_ = this.createObjectView(objectId, exceptionsForMouseDown); // container
-        if (!Entry.objectEditable) {
-            this.view_.addClass('entryDisabled');
+        if (!RoCode.objectEditable) {
+            this.view_.addClass('RoCodeDisabled');
         }
         this.view_.appendChild(this.createObjectInfoView()); // visible, lock
 
@@ -889,45 +889,45 @@ Entry.EntryObject = class {
     }
 
     createRotationMethodWrapperView() {
-        const rotationMethodWrapper = Entry.createElement('div').addClass('rotationMethodWrapper');
+        const rotationMethodWrapper = RoCode.createElement('div').addClass('rotationMethodWrapper');
 
-        const rotateMethodLabelView = Entry.createElement('span').addClass(
-            'entryObjectRotateMethodLabelWorkspace'
+        const rotateMethodLabelView = RoCode.createElement('span').addClass(
+            'RoCodeObjectRotateMethodLabelWorkspace'
         );
         rotationMethodWrapper.appendChild(rotateMethodLabelView);
         rotateMethodLabelView.innerHTML = `${Lang.Workspace.rotate_method}`;
 
-        const rotateModeAView = Entry.createElement('div').addClass(
-            'entryObjectRotateModeWorkspace entryObjectRotateModeAWorkspace'
+        const rotateModeAView = RoCode.createElement('div').addClass(
+            'RoCodeObjectRotateModeWorkspace RoCodeObjectRotateModeAWorkspace'
         );
         this.rotateModeAView_ = rotateModeAView;
         rotationMethodWrapper.appendChild(rotateModeAView);
         rotationMethodWrapper.appendChild(rotateModeAView);
         rotateModeAView.bindOnClick(
             this._whenRotateEditable(() => {
-                Entry.do('objectUpdateRotateMethod', this.id, 'free');
+                RoCode.do('objectUpdateRotateMethod', this.id, 'free');
             }, this)
         );
 
-        const rotateModeBView = Entry.createElement('div').addClass(
-            'entryObjectRotateModeWorkspace entryObjectRotateModeBWorkspace'
+        const rotateModeBView = RoCode.createElement('div').addClass(
+            'RoCodeObjectRotateModeWorkspace RoCodeObjectRotateModeBWorkspace'
         );
         this.rotateModeBView_ = rotateModeBView;
         rotationMethodWrapper.appendChild(rotateModeBView);
         rotateModeBView.bindOnClick(
             this._whenRotateEditable(() => {
-                Entry.do('objectUpdateRotateMethod', this.id, 'vertical');
+                RoCode.do('objectUpdateRotateMethod', this.id, 'vertical');
             }, this)
         );
 
-        const rotateModeCView = Entry.createElement('div').addClass(
-            'entryObjectRotateModeWorkspace entryObjectRotateModeCWorkspace'
+        const rotateModeCView = RoCode.createElement('div').addClass(
+            'RoCodeObjectRotateModeWorkspace RoCodeObjectRotateModeCWorkspace'
         );
         this.rotateModeCView_ = rotateModeCView;
         rotationMethodWrapper.appendChild(rotateModeCView);
         rotateModeCView.bindOnClick(
             this._whenRotateEditable(() => {
-                Entry.do('objectUpdateRotateMethod', this.id, 'none');
+                RoCode.do('objectUpdateRotateMethod', this.id, 'none');
             }, this)
         );
 
@@ -935,20 +935,20 @@ Entry.EntryObject = class {
     }
 
     createRotateLabelWrapperView() {
-        const rotateLabelWrapperView = Entry.createElement('div').addClass(
-            'entryObjectRotateLabelWrapperWorkspace'
+        const rotateLabelWrapperView = RoCode.createElement('div').addClass(
+            'RoCodeObjectRotateLabelWrapperWorkspace'
         );
 
-        const rotateSpan = Entry.createElement('span').addClass('entryObjectRotateSpanWorkspace');
+        const rotateSpan = RoCode.createElement('span').addClass('RoCodeObjectRotateSpanWorkspace');
         rotateSpan.innerHTML = `${Lang.Workspace.rotation}`;
-        const rotateInput = Entry.createElement('input').addClass(
-            'entryObjectRotateInputWorkspace'
+        const rotateInput = RoCode.createElement('input').addClass(
+            'RoCodeObjectRotateInputWorkspace'
         );
         rotateInput.setAttribute('type', 'number');
         rotateInput.onkeypress = this.editObjectValueWhenEnterPress;
         rotateInput.onfocus = this._setFocused;
         rotateInput.onblur = this._setBlurredTimer(() => {
-            const object = Entry.container.getObject(this.id);
+            const object = RoCode.container.getObject(this.id);
             if (!object) {
                 return;
             }
@@ -958,28 +958,28 @@ Entry.EntryObject = class {
                 value = value.substring(0, idx);
             }
 
-            Entry.do(
+            RoCode.do(
                 'objectUpdateRotationValue',
                 this.id,
-                Entry.Utils.isNumber(value) ? value : this.entity.getRotation()
+                RoCode.Utils.isNumber(value) ? value : this.entity.getRotation()
             );
         });
 
         this.rotateSpan_ = rotateSpan;
         this.rotateInput_ = rotateInput;
 
-        const directionSpan = Entry.createElement('span').addClass(
-            'entryObjectDirectionSpanWorkspace'
+        const directionSpan = RoCode.createElement('span').addClass(
+            'RoCodeObjectDirectionSpanWorkspace'
         );
         directionSpan.innerHTML = `${Lang.Workspace.direction}`;
-        const directionInput = Entry.createElement('input').addClass(
-            'entryObjectDirectionInputWorkspace'
+        const directionInput = RoCode.createElement('input').addClass(
+            'RoCodeObjectDirectionInputWorkspace'
         );
         directionInput.setAttribute('type', 'number');
         directionInput.onkeypress = this.editObjectValueWhenEnterPress;
         directionInput.onfocus = this._setFocused;
         directionInput.onblur = this._setBlurredTimer(() => {
-            const object = Entry.container.getObject(this.id);
+            const object = RoCode.container.getObject(this.id);
             if (!object) {
                 return;
             }
@@ -989,10 +989,10 @@ Entry.EntryObject = class {
                 value = value.substring(0, idx);
             }
 
-            Entry.do(
+            RoCode.do(
                 'objectUpdateDirectionValue',
                 this.id,
-                Entry.Utils.isNumber(value) ? value : this.entity.getDirection()
+                RoCode.Utils.isNumber(value) ? value : this.entity.getDirection()
             );
         });
 
@@ -1008,70 +1008,70 @@ Entry.EntryObject = class {
     }
 
     createCoordinationView() {
-        const coordinationView = Entry.createElement('span').addClass(
-            'entryObjectCoordinateWorkspace'
+        const coordinationView = RoCode.createElement('span').addClass(
+            'RoCodeObjectCoordinateWorkspace'
         );
 
-        const xCoordi = Entry.createElement('span').addClass('entryObjectCoordinateSpanWorkspace');
+        const xCoordi = RoCode.createElement('span').addClass('RoCodeObjectCoordinateSpanWorkspace');
         xCoordi.innerHTML = 'X';
-        const xInput = Entry.createElement('input').addClass('entryObjectCoordinateInputWorkspace');
+        const xInput = RoCode.createElement('input').addClass('RoCodeObjectCoordinateInputWorkspace');
         xInput.setAttribute('type', 'number');
         xInput.onkeypress = this.editObjectValueWhenEnterPress;
         xInput.onfocus = this._setFocused;
         xInput.onblur = this._setBlurredTimer(() => {
-            const object = Entry.container.getObject(this.id);
+            const object = RoCode.container.getObject(this.id);
             if (!object) {
                 return;
             }
 
             const value = xInput.value;
-            Entry.do(
+            RoCode.do(
                 'objectUpdatePosX',
                 this.id,
-                Entry.Utils.isNumber(value) ? value : this.entity.getX()
+                RoCode.Utils.isNumber(value) ? value : this.entity.getX()
             );
         });
 
-        const yCoordi = Entry.createElement('span').addClass('entryObjectCoordinateSpanWorkspace');
+        const yCoordi = RoCode.createElement('span').addClass('RoCodeObjectCoordinateSpanWorkspace');
         yCoordi.innerHTML = 'Y';
-        const yInput = Entry.createElement('input').addClass(
-            'entryObjectCoordinateInputWorkspace entryObjectCoordinateInputWorkspace_right'
+        const yInput = RoCode.createElement('input').addClass(
+            'RoCodeObjectCoordinateInputWorkspace RoCodeObjectCoordinateInputWorkspace_right'
         );
         yInput.setAttribute('type', 'number');
         yInput.onkeypress = this.editObjectValueWhenEnterPress;
         yInput.onfocus = this._setFocused;
         yInput.onblur = this._setBlurredTimer(() => {
-            const object = Entry.container.getObject(this.id);
+            const object = RoCode.container.getObject(this.id);
             if (!object) {
                 return;
             }
             const value = yInput.value;
-            Entry.do(
+            RoCode.do(
                 'objectUpdatePosY',
                 this.id,
-                Entry.Utils.isNumber(value) ? value : this.entity.getY()
+                RoCode.Utils.isNumber(value) ? value : this.entity.getY()
             );
         });
 
-        const sizeSpan = Entry.createElement('span').addClass('entryObjectCoordinateSizeWorkspace');
+        const sizeSpan = RoCode.createElement('span').addClass('RoCodeObjectCoordinateSizeWorkspace');
         sizeSpan.innerHTML = `${Lang.Workspace.Size}`;
-        const sizeInput = Entry.createElement('input').addClass(
-            'entryObjectCoordinateInputWorkspace',
-            'entryObjectCoordinateInputWorkspace_size'
+        const sizeInput = RoCode.createElement('input').addClass(
+            'RoCodeObjectCoordinateInputWorkspace',
+            'RoCodeObjectCoordinateInputWorkspace_size'
         );
         sizeInput.setAttribute('type', 'number');
         sizeInput.onkeypress = this.editObjectValueWhenEnterPress;
         sizeInput.onfocus = this._setFocused;
         sizeInput.onblur = this._setBlurredTimer(() => {
-            const object = Entry.container.getObject(this.id);
+            const object = RoCode.container.getObject(this.id);
             if (!object) {
                 return;
             }
             const value = sizeInput.value;
-            Entry.do(
+            RoCode.do(
                 'objectUpdateSize',
                 this.id,
-                Entry.Utils.isNumber(value) ? value : this.entity.getSize()
+                RoCode.Utils.isNumber(value) ? value : this.entity.getSize()
             );
         });
 
@@ -1089,8 +1089,8 @@ Entry.EntryObject = class {
     }
 
     createRotationWrapperView() {
-        const rotationWrapperView = Entry.createElement('div').addClass(
-            'entryObjectRotationWrapperWorkspace'
+        const rotationWrapperView = RoCode.createElement('div').addClass(
+            'RoCodeObjectRotationWrapperWorkspace'
         );
 
         const coordinationView = this.createCoordinationView();
@@ -1124,8 +1124,8 @@ Entry.EntryObject = class {
     }
 
     createInformationView() {
-        const informationView = Entry.createElement('div').addClass(
-            'entryObjectInformationWorkspace'
+        const informationView = RoCode.createElement('div').addClass(
+            'RoCodeObjectInformationWorkspace'
         );
         informationView.bindOnClick(() => {
             const $view = $(this.view_);
@@ -1137,55 +1137,55 @@ Entry.EntryObject = class {
     }
 
     createDeleteView(exceptionsForMouseDown) {
-        const deleteView = Entry.createElement('div').addClass('entryObjectDeleteWorkspace');
+        const deleteView = RoCode.createElement('div').addClass('RoCodeObjectDeleteWorkspace');
         exceptionsForMouseDown.push(deleteView);
-        if (Entry.objectEditable && Entry.objectDeletable) {
+        if (RoCode.objectEditable && RoCode.objectDeletable) {
             deleteView.bindOnClick((e) => {
                 e.stopPropagation();
-                if (this.getLock() || Entry.engine.isState('run')) {
+                if (this.getLock() || RoCode.engine.isState('run')) {
                     return;
                 }
-                Entry.do('removeObject', this.id);
+                RoCode.do('removeObject', this.id);
             });
         }
         return deleteView;
     }
 
     createNameView() {
-        const nameView = Entry.createElement('input').addClass('entryObjectNameWorkspace');
+        const nameView = RoCode.createElement('input').addClass('RoCodeObjectNameWorkspace');
         nameView.addEventListener('click', (e) => {
             if (!_.includes(this.view_.classList, 'selectedObject')) {
                 e.preventDefault();
             }
         });
 
-        const onKeyPressed = Entry.Utils.whenEnter(() => {
+        const onKeyPressed = RoCode.Utils.whenEnter(() => {
             this.editObjectValues(false);
         });
 
         nameView.onkeypress = onKeyPressed;
 
-        nameView.onfocus = Entry.Utils.setFocused;
+        nameView.onfocus = RoCode.Utils.setFocused;
 
         const nameViewBlur = this._setBlurredTimer(() => {
-            const object = Entry.container.getObject(this.id);
+            const object = RoCode.container.getObject(this.id);
             if (!object) {
                 return;
             } else if (nameView.value.trim() === '') {
-                return entrylms.alert(Lang.Workspace.enter_the_name).on('hide', () => {
+                return RoCodelms.alert(Lang.Workspace.enter_the_name).on('hide', () => {
                     nameView.focus();
                 });
             }
-            Entry.do('objectNameEdit', this.id, nameView.value);
+            RoCode.do('objectNameEdit', this.id, nameView.value);
         });
 
-        Entry.attachEventListener(nameView, 'blur', nameViewBlur);
+        RoCode.attachEventListener(nameView, 'blur', nameViewBlur);
         nameView.value = this.name;
         return nameView;
     }
 
     createWrapperView() {
-        const wrapperView = Entry.createElement('div').addClass('entryObjectWrapperWorkspace');
+        const wrapperView = RoCode.createElement('div').addClass('RoCodeObjectWrapperWorkspace');
 
         const nameView = this.createNameView();
         wrapperView.appendChild(nameView);
@@ -1199,10 +1199,10 @@ Entry.EntryObject = class {
     }
 
     createThumbnailView(objectId) {
-        const thumbnail = Entry.createElement('div').addClass('entryObjectThumbnailWorkspace');
+        const thumbnail = RoCode.createElement('div').addClass('RoCodeObjectThumbnailWorkspace');
 
         DomUtils.addEventListenerMultiple(thumbnail, 'mousedown touchstart', (e) => {
-            Entry.do('containerSelectObject', objectId);
+            RoCode.do('containerSelectObject', objectId);
         });
 
         thumbnail.addEventListener('touchmove', (e) => {
@@ -1213,20 +1213,20 @@ Entry.EntryObject = class {
     }
 
     createObjectInfoView() {
-        const objectInfoView = Entry.createElement('ul').addClass('objectInfoView');
-        const objectInfoVisible = Entry.createElement('li').addClass('objectInfo_visible');
+        const objectInfoView = RoCode.createElement('ul').addClass('objectInfoView');
+        const objectInfoVisible = RoCode.createElement('li').addClass('objectInfo_visible');
         if (!this.entity.getVisible()) {
             objectInfoVisible.addClass('objectInfo_unvisible');
         }
 
-        const objectInfoLock = Entry.createElement('li').addClass('objectInfo_unlock');
+        const objectInfoLock = RoCode.createElement('li').addClass('objectInfo_unlock');
         if (this.getLock()) {
             objectInfoLock.addClass('objectInfo_lock');
         }
 
-        if (Entry.objectEditable) {
+        if (RoCode.objectEditable) {
             objectInfoVisible.bindOnClick(() => {
-                if (Entry.engine.isState('run')) {
+                if (RoCode.engine.isState('run')) {
                     return;
                 }
 
@@ -1240,7 +1240,7 @@ Entry.EntryObject = class {
             });
 
             objectInfoLock.bindOnClick(() => {
-                if (Entry.engine.isState('run')) {
+                if (RoCode.engine.isState('run')) {
                     return;
                 }
 
@@ -1260,8 +1260,8 @@ Entry.EntryObject = class {
     }
 
     createObjectView(objectId, exceptionsForMouseDown) {
-        const objectView = Entry.createElement('li', objectId).addClass(
-            'entryContainerListElementWorkspace'
+        const objectView = RoCode.createElement('li', objectId).addClass(
+            'RoCodeContainerListElementWorkspace'
         );
 
         $(objectView).on('dragstart', (e) => {
@@ -1271,26 +1271,26 @@ Entry.EntryObject = class {
         const fragment = document.createDocumentFragment();
         fragment.appendChild(objectView);
         // generate context menu
-        Entry.Utils.disableContextmenu(objectView);
+        RoCode.Utils.disableContextmenu(objectView);
 
         objectView.addEventListener('click', (e) => {
             const isFirstClick = !_.includes(this.view_.classList, 'selectedObject');
-            if (isFirstClick && Entry.isMobile()) {
+            if (isFirstClick && RoCode.isMobile()) {
                 e.preventDefault();
                 document.activeElement.blur();
             }
 
             if (
-                Entry.container.getObject(objectId) &&
+                RoCode.container.getObject(objectId) &&
                 !_.includes(exceptionsForMouseDown, e.target)
             ) {
-                Entry.do('selectObject', objectId);
+                RoCode.do('selectObject', objectId);
             }
         });
 
         const longPressEvent = (e) => {
             const doc = $(document);
-            const touchEvent = Entry.Utils.convertMouseEvent(e);
+            const touchEvent = RoCode.Utils.convertMouseEvent(e);
             const mouseDownCoordinate = { x: touchEvent.clientX, y: touchEvent.clientY };
             let longPressTimer = null;
 
@@ -1302,7 +1302,7 @@ Entry.EntryObject = class {
             }, 1000);
 
             doc.bind('mousemove.object touchmove.object', (e) => {
-                const touchEvent = Entry.Utils.convertMouseEvent(e);
+                const touchEvent = RoCode.Utils.convertMouseEvent(e);
 
                 const diff = Math.sqrt(
                     Math.pow(touchEvent.pageX - mouseDownCoordinate.x, 2) +
@@ -1325,20 +1325,20 @@ Entry.EntryObject = class {
         };
 
         objectView.addEventListener('mousedown', (e) => {
-            if (Entry.Utils.isRightButton(e)) {
+            if (RoCode.Utils.isRightButton(e)) {
                 e.stopPropagation();
                 this._rightClick(e);
             }
 
-            if (Entry.isMobile()) {
+            if (RoCode.isMobile()) {
                 e.stopPropagation();
                 longPressEvent(e);
             }
         });
 
         objectView.addEventListener('touchstart', (e) => {
-            e.eventFromEntryObject = true;
-            Entry.documentMousedown.notify(e);
+            e.eventFromRoCodeObject = true;
+            RoCode.documentMousedown.notify(e);
             longPressEvent(e);
         });
 
@@ -1356,10 +1356,10 @@ Entry.EntryObject = class {
     }
 
     getIndex() {
-        return Entry.container.getObjectIndex(this.id);
+        return RoCode.container.getObjectIndex(this.id);
     }
 
     _whenRotateEditable(func, obj) {
-        return Entry.Utils.when(() => !(Entry.engine.isState('run') || obj.getLock()), func);
+        return RoCode.Utils.when(() => !(RoCode.engine.isState('run') || obj.getLock()), func);
     }
 };

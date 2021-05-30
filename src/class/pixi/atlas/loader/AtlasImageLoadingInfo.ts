@@ -5,7 +5,7 @@ import PIXIHelper from '../../helper/PIXIHelper';
 import { cwarn } from '../../utils/logs';
 import { ImageLoaderHandler } from './AtlasImageLoader';
 
-declare let Entry: any;
+declare let RoCode: any;
 
 enum LoadingState {
     NONE = 1,
@@ -73,7 +73,7 @@ export class AtlasImageLoadingInfo {
         this._img = img;
 
         img.onload = () => {
-            Entry.Loader.removeQueue();
+            RoCode.Loader.removeQueue();
             if (this.loadState == LoadingState.DESTROYED) {
                 return;
             }
@@ -93,19 +93,19 @@ export class AtlasImageLoadingInfo {
         };
 
         img.onerror = (err) => {
-            Entry.Loader.removeQueue();
+            RoCode.Loader.removeQueue();
             if (this.loadState == LoadingState.DESTROYED) {
                 return;
             }
             if (!this._triedCnt) {
-                if (Entry.type !== 'invisible') {
+                if (RoCode.type !== 'invisible') {
                     console.log('err=', this._picName, 'load failed');
                 }
                 this._triedCnt = 1;
                 this._loadPath(this._realPath);
             } else if (this._triedCnt < 3) {
                 this._triedCnt++;
-                this._loadPath(`${Entry.mediaFilePath}_1x1.png`);
+                this._loadPath(`${RoCode.mediaFilePath}_1x1.png`);
             } else {
                 //prevent infinite call
                 img.onerror = null;
@@ -118,7 +118,7 @@ export class AtlasImageLoadingInfo {
         if (this.loadState == LoadingState.DESTROYED) {
             return;
         }
-        Entry.Loader.addQueue();
+        RoCode.Loader.addQueue();
         this._img.src = path;
     }
 
@@ -137,7 +137,7 @@ export class AtlasImageLoadingInfo {
         }
 
         const name = picture.filename;
-        return `${Entry.defaultPath}/uploads/${name.substring(0, 2)}/${name.substring(
+        return `${RoCode.defaultPath}/uploads/${name.substring(0, 2)}/${name.substring(
             2,
             4
         )}/image/${name}.png`;

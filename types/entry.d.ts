@@ -1,6 +1,6 @@
 /// <reference path="./index.d.ts" />
 
-declare interface EntryOptions {
+declare interface RoCodeOptions {
     hardwareEnable?: boolean;
     mediaFilePath?: string;
     moduleBaseUrl?: string;
@@ -10,7 +10,7 @@ declare interface EntryOptions {
 /**
  * 엔트리 실제 인스턴스에 대한 정의
  */
-declare interface IEntry extends EntryOptions {
+declare interface IRoCode extends RoCodeOptions {
     HW: typeof import('../src/class/hw').default;
     Intro: typeof import('../src/class/intro').default;
     PropertyPanel: typeof import('../src/class/property_panel').default;
@@ -19,7 +19,7 @@ declare interface IEntry extends EntryOptions {
     Dom: typeof import('../src/core/dom').default;
     Dialog: typeof import('../src/class/dialog').default;
     popupHelper: typeof import('../src/class/popup_helper').default;
-    moduleManager: typeof import('../src/class/entryModuleLoader').default;
+    moduleManager: typeof import('../src/class/RoCodeModuleLoader').default;
     Model: (target: any, isSeal: boolean) => void;
     BlockView: any;
     SVG: any;
@@ -29,15 +29,15 @@ declare interface IEntry extends EntryOptions {
 
     // 엔트리 내 클래스들
     skeleton: { [name: string]: ISkeleton };
-    options: EntryOptions;
+    options: RoCodeOptions;
     engine: any;
-    toast: IEntry.WorkspaceToast;
-    playground: IEntry.Playground;
+    toast: IRoCode.WorkspaceToast;
+    playground: IRoCode.Playground;
     workspace: any;
     console: any;
     propertyPanel: import('../src/class/property_panel').default;
-    container: IEntry.Container;
-    stage: IEntry.Stage;
+    container: IRoCode.Container;
+    stage: IRoCode.Stage;
     Utils: any;
     GlobalSvg: any;
     Workspace: any;
@@ -55,7 +55,7 @@ declare interface IEntry extends EntryOptions {
     TEXT_ALIGN_LEFT: number;
     TEXT_ALIGN_CENTER: number;
     TEXT_ALIGN_RIGHT: number;
-    block: { [blockName: string]: EntryBlock };
+    block: { [blockName: string]: RoCodeBlock };
     hw: import('../src/class/hw').default; // HW instance
     interfaceState: { [key: string]: any };
 
@@ -89,4 +89,4 @@ declare interface IEntry extends EntryOptions {
     do(commandName: string, ...args: any[]): any;
 }
 
-declare var Entry: IEntry;
+declare var RoCode: IRoCode;

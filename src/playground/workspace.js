@@ -1,14 +1,14 @@
 import { Destroyer } from '../util/destroyer/Destroyer';
 import debounce from 'lodash/debounce';
 
-Entry.Workspace = class Workspace {
+RoCode.Workspace = class Workspace {
     schema = {
         selectedBlockView: null,
         selectedBoard: null,
     };
 
     constructor(options) {
-        Entry.Model(this, false);
+        RoCode.Model(this, false);
         this._destroyer = this._destroyer || new Destroyer();
         this._destroyer.destroy();
         this.scale = 1;
@@ -16,21 +16,21 @@ Entry.Workspace = class Workspace {
         this.dReDraw = debounce(this.reDraw, 150);
 
         this.observe(this, '_handleChangeBoard', ['selectedBoard'], false);
-        this.trashcan = new Entry.FieldTrashcan();
-        this.zoomController = new Entry.ZoomController();
+        this.trashcan = new RoCode.FieldTrashcan();
+        this.zoomController = new RoCode.ZoomController();
 
         this.readOnly = options.readOnly === undefined ? false : options.readOnly;
 
-        this.blockViewMouseUpEvent = new Entry.Event(this);
-        this.widgetUpdateEvent = new Entry.Event(this);
-        this.reDrawEvent = new Entry.Event(this);
+        this.blockViewMouseUpEvent = new RoCode.Event(this);
+        this.widgetUpdateEvent = new RoCode.Event(this);
+        this.reDrawEvent = new RoCode.Event(this);
         this._blockViewMouseUpEvent = null;
         this.widgetUpdateEveryTime = false;
         this._hoverBlockView = null;
 
         let option = options.blockMenu;
         if (option) {
-            this.blockMenu = new Entry.BlockMenu(
+            this.blockMenu = new RoCode.BlockMenu(
                 option.dom,
                 option.align,
                 option.categoryData,
@@ -45,14 +45,14 @@ Entry.Workspace = class Workspace {
         if (option) {
             option.workspace = this;
             option.readOnly = this.readOnly;
-            this.board = new Entry.Board(option);
+            this.board = new RoCode.Board(option);
             this.board.observe(this, '_setSelectedBlockView', ['selectedBlockView'], false);
             this.set({ selectedBoard: this.board });
         }
 
         option = options.vimBoard;
         if (option) {
-            this.vimBoard = new Entry.Vim(option.dom);
+            this.vimBoard = new RoCode.Vim(option.dom);
             this.vimBoard.workspace = this;
         }
 
@@ -60,25 +60,25 @@ Entry.Workspace = class Workspace {
             this.vimBoard.hide();
         }
 
-        Entry.GlobalSvg.createDom();
+        RoCode.GlobalSvg.createDom();
 
-        this.mode = Entry.Workspace.MODE_BOARD;
+        this.mode = RoCode.Workspace.MODE_BOARD;
 
         this.attachKeyboardCapture();
 
         // view state change event
-        this.changeEvent = new Entry.Event(this);
+        this.changeEvent = new RoCode.Event(this);
 
-        Entry.commander.setCurrentEditor('board', this.board);
+        RoCode.commander.setCurrentEditor('board', this.board);
 
         if (options.textType !== undefined) {
             this.textType = options.textType;
         } else {
-            this.textType = Entry.Vim.TEXT_TYPE_PY;
+            this.textType = RoCode.Vim.TEXT_TYPE_PY;
         }
 
-        this.oldMode = Entry.Workspace.MODE_BOARD;
-        this.mode = Entry.Workspace.MODE_BOARD;
+        this.oldMode = RoCode.Workspace.MODE_BOARD;
+        this.mode = RoCode.Workspace.MODE_BOARD;
     }
 
     getBoard() {
@@ -103,22 +103,22 @@ Entry.Workspace = class Workspace {
 
     setMode(mode, message, isForce) {
         if (
-            Entry.options &&
-            !Entry.options.textCodingEnable &&
-            Entry.Workspace.MODE_VIMBOARD === mode.boardType
+            RoCode.options &&
+            !RoCode.options.textCodingEnable &&
+            RoCode.Workspace.MODE_VIMBOARD === mode.boardType
         ) {
             return;
         }
 
-        Entry.disposeEvent.notify();
+        RoCode.disposeEvent.notify();
 
-        const playground = Entry.playground;
+        const playground = RoCode.playground;
 
         if (!isForce && !checkObjectAndAlert(playground && playground.object)) {
             return false;
         } // change mode fail
 
-        if (Entry.Utils.isNumber(mode)) {
+        if (RoCode.Utils.isNumber(mode)) {
             this.mode = mode;
         } else {
             this.mode = mode.boardType;
@@ -130,20 +130,20 @@ Entry.Workspace = class Workspace {
         if (this.oldMode === this.mode) {
             return;
         }
-        Entry.variableContainer.updateList();
+        RoCode.variableContainer.updateList();
 
-        const VIM = Entry.Vim;
-        const WORKSPACE = Entry.Workspace;
+        const VIM = RoCode.Vim;
+        const WORKSPACE = RoCode.Workspace;
         const blockMenu = this.blockMenu;
-        const Util = Entry.TextCodingUtil;
+        const Util = RoCode.TextCodingUtil;
         const dispatchChangeBoardEvent = () => {
             this.oldMode = this.mode;
-            Entry.isTextMode = this.mode === WORKSPACE.MODE_VIMBOARD;
+            RoCode.isTextMode = this.mode === WORKSPACE.MODE_VIMBOARD;
 
             blockMenu.align();
-            Entry.dispatchEvent('workspaceChangeMode');
+            RoCode.dispatchEvent('workspaceChangeMode');
             this.changeEvent.notify(message);
-            Entry.dispatchEvent('cancelBlockMenuDynamic');
+            RoCode.dispatchEvent('cancelBlockMenuDynamic');
         };
 
         const changeToPythonMode = () => {
@@ -168,7 +168,7 @@ Entry.Workspace = class Workspace {
                 } else if (this.oldTextType === VIM.TEXT_TYPE_PY) {
                     mode.runType = VIM.WORKSPACE_MODE;
                 }
-                e.block && Entry.getMainWS() && Entry.getMainWS().board.activateBlock(e.block);
+                e.block && RoCode.getMainWS() && RoCode.getMainWS().board.activateBlock(e.block);
             }
         };
 
@@ -180,38 +180,38 @@ Entry.Workspace = class Workspace {
                     Util.hasNotSupportedBlocks();
 
                 const invalidEditorModeErrorMessage = Util.canConvertTextModeForOverlayMode(
-                    Entry.Workspace.MODE_VIMBOARD
+                    RoCode.Workspace.MODE_VIMBOARD
                 );
                 if (invalidEditorModeErrorMessage) {
-                    entrylms.alert(invalidEditorModeErrorMessage);
+                    RoCodelms.alert(invalidEditorModeErrorMessage);
                     return;
                 }
 
                 if (alertMessage) {
                     if (alertMessage.type === 'warning') {
-                        entrylms.confirm(alertMessage.message).then((result) => {
+                        RoCodelms.confirm(alertMessage.message).then((result) => {
                             if (result) {
-                                Entry.expansion.banExpansionBlocks(Entry.expansionBlocks);
-                                Entry.aiUtilize.banAIUtilizeBlocks(Entry.aiUtilizeBlocks);
-                                Entry.playground.dataTable.removeAllBlocks();
-                                Entry.aiLearning.removeAllBlocks();
+                                RoCode.expansion.banExpansionBlocks(RoCode.expansionBlocks);
+                                RoCode.aiUtilize.banAIUtilizeBlocks(RoCode.aiUtilizeBlocks);
+                                RoCode.playground.dataTable.removeAllBlocks();
+                                RoCode.aiLearning.removeAllBlocks();
                                 changeToPythonMode();
                                 dispatchChangeBoardEvent();
                             } else {
                                 const mode = {};
                                 mode.boardType = WORKSPACE.MODE_BOARD;
                                 mode.textType = -1;
-                                Entry.getMainWS().setMode(mode);
+                                RoCode.getMainWS().setMode(mode);
                                 dispatchChangeBoardEvent();
                             }
                         });
                     } else if (alertMessage.type === 'error') {
-                        entrylms.alert(alertMessage.message);
+                        RoCodelms.alert(alertMessage.message);
 
                         const mode = {};
                         mode.boardType = WORKSPACE.MODE_BOARD;
                         mode.textType = -1;
-                        Entry.getMainWS().setMode(mode);
+                        RoCode.getMainWS().setMode(mode);
                         dispatchChangeBoardEvent();
                         break;
                     }
@@ -254,7 +254,7 @@ Entry.Workspace = class Workspace {
                         this.runType = VIM.WORKSPACE_MODE;
                     }
                 }
-                Entry.commander.setCurrentEditor('board', this.board);
+                RoCode.commander.setCurrentEditor('board', this.board);
                 dispatchChangeBoardEvent();
                 break;
 
@@ -270,14 +270,14 @@ Entry.Workspace = class Workspace {
                 }
                 this.overlayBoard.show();
                 this.set({ selectedBoard: this.overlayBoard });
-                Entry.commander.setCurrentEditor('board', this.overlayBoard);
+                RoCode.commander.setCurrentEditor('board', this.overlayBoard);
                 dispatchChangeBoardEvent();
                 break;
         }
 
         function checkObjectAndAlert(object, message) {
-            if (Entry.type === 'workspace' && !object) {
-                entrylms.alert(message || Lang.Workspace.object_not_exist_error);
+            if (RoCode.type === 'workspace' && !object) {
+                RoCodelms.alert(message || Lang.Workspace.object_not_exist_error);
                 return false;
             }
             return true;
@@ -286,7 +286,7 @@ Entry.Workspace = class Workspace {
 
     changeBoardCode(code, cb) {
         this._syncTextCode();
-        const isVim = this.mode === Entry.Workspace.MODE_VIMBOARD;
+        const isVim = this.mode === RoCode.Workspace.MODE_VIMBOARD;
         this.board.changeCode(code, isVim, cb);
         if (isVim) {
             const mode = {};
@@ -308,7 +308,7 @@ Entry.Workspace = class Workspace {
     }
 
     textToCode(mode, oldTextType) {
-        if (!this.vimBoard || mode !== Entry.Workspace.MODE_VIMBOARD) {
+        if (!this.vimBoard || mode !== RoCode.Workspace.MODE_VIMBOARD) {
             return;
         }
 
@@ -375,29 +375,29 @@ Entry.Workspace = class Workspace {
     }
 
     initOverlayBoard() {
-        this.overlayBoard = new Entry.Board({
+        this.overlayBoard = new RoCode.Board({
             dom: this.board.view,
             workspace: this,
             isOverlay: true,
             scale: this.scale,
         });
-        this.overlayBoard.changeCode(new Entry.Code([]));
+        this.overlayBoard.changeCode(new RoCode.Code([]));
         this.overlayBoard.workspace = this;
         this.overlayBoard.observe(this, '_setSelectedBlockView', ['selectedBlockView'], false);
     }
 
     _keyboardControl(e, isForce) {
-        if (Entry.Loader && !Entry.Loader.isLoaded()) {
+        if (RoCode.Loader && !RoCode.Loader.isLoaded()) {
             return;
         }
         const keyCode = e.keyCode || e.which;
         const ctrlKey = e.ctrlKey;
         const shiftKey = e.shiftKey;
         const altKey = e.altKey;
-        const playground = Entry.playground;
+        const playground = RoCode.playground;
         const object = playground && playground.object ? playground.object : undefined;
 
-        if (Entry.Utils.isInInput(e) && !isForce) {
+        if (RoCode.Utils.isInInput(e) && !isForce) {
             return;
         }
 
@@ -416,22 +416,22 @@ Entry.Workspace = class Workspace {
                     return;
                 }
             }
-            const mainWorksapceMode = Entry.playground.mainWorkspace.getMode();
-            const playgroundMode = Entry.playground.getViewMode();
+            const mainWorksapceMode = RoCode.playground.mainWorkspace.getMode();
+            const playgroundMode = RoCode.playground.getViewMode();
             const isBlockCodeView =
-                (mainWorksapceMode === Entry.Workspace.MODE_OVERLAYBOARD ||
-                    mainWorksapceMode === Entry.Workspace.MODE_BOARD) &&
+                (mainWorksapceMode === RoCode.Workspace.MODE_OVERLAYBOARD ||
+                    mainWorksapceMode === RoCode.Workspace.MODE_BOARD) &&
                 (playgroundMode === 'code' || playgroundMode === 'variable');
             switch (keyCode) {
                 case 86: //paste
                     if (
                         !isBoardReadOnly &&
                         board &&
-                        board instanceof Entry.Board &&
-                        Entry.clipboard &&
+                        board instanceof RoCode.Board &&
+                        RoCode.clipboard &&
                         isBlockCodeView
                     ) {
-                        Entry.do('addThread', Entry.clipboard)
+                        RoCode.do('addThread', RoCode.clipboard)
                             .value.getFirstBlock()
                             .copyToClipboard();
                     }
@@ -439,18 +439,18 @@ Entry.Workspace = class Workspace {
                 case 219: {
                     //setMode(block) for textcoding ( ctrl + [ )
                     if (
-                        !Entry.options.textCodingEnable ||
-                        Entry.playground.getViewMode() === 'picture'
+                        !RoCode.options.textCodingEnable ||
+                        RoCode.playground.getViewMode() === 'picture'
                     ) {
                         return;
                     }
-                    const oldMode = Entry.getMainWS().oldMode;
-                    if (oldMode === Entry.Workspace.MODE_OVERLAYBOARD) {
+                    const oldMode = RoCode.getMainWS().oldMode;
+                    if (oldMode === RoCode.Workspace.MODE_OVERLAYBOARD) {
                         return;
                     }
 
                     this.dSetMode({
-                        boardType: Entry.Workspace.MODE_BOARD,
+                        boardType: RoCode.Workspace.MODE_BOARD,
                         textType: -1,
                     });
                     e.preventDefault();
@@ -459,24 +459,24 @@ Entry.Workspace = class Workspace {
                 case 221: {
                     //setMode(python) for textcoding ( ctrl + ] )
                     if (
-                        !Entry.options.textCodingEnable ||
-                        Entry.playground.getViewMode() === 'picture'
+                        !RoCode.options.textCodingEnable ||
+                        RoCode.playground.getViewMode() === 'picture'
                     ) {
                         return;
                     }
 
-                    const message = Entry.TextCodingUtil.canConvertTextModeForOverlayMode(
-                        Entry.Workspace.MODE_VIMBOARD
+                    const message = RoCode.TextCodingUtil.canConvertTextModeForOverlayMode(
+                        RoCode.Workspace.MODE_VIMBOARD
                     );
                     if (message) {
-                        entrylms.alert(message);
+                        RoCodelms.alert(message);
                         return;
                     }
 
                     this.dSetMode({
-                        boardType: Entry.Workspace.MODE_VIMBOARD,
-                        textType: Entry.Vim.TEXT_TYPE_PY,
-                        runType: Entry.Vim.WORKSPACE_MODE,
+                        boardType: RoCode.Workspace.MODE_VIMBOARD,
+                        textType: RoCode.Vim.TEXT_TYPE_PY,
+                        runType: RoCode.Vim.WORKSPACE_MODE,
                     });
                     e.preventDefault();
                     break;
@@ -534,15 +534,15 @@ Entry.Workspace = class Workspace {
                     e.preventDefault();
                     break;
                 case 219:
-                    if (Entry.container) {
+                    if (RoCode.container) {
                         e.preventDefault();
-                        Entry.container.selectNeighborObject('prev');
+                        RoCode.container.selectNeighborObject('prev');
                     }
                     break;
                 case 221:
-                    if (Entry.container) {
+                    if (RoCode.container) {
                         e.preventDefault();
-                        Entry.container.selectNeighborObject('next');
+                        RoCode.container.selectNeighborObject('next');
                     }
                     break;
             }
@@ -572,8 +572,8 @@ Entry.Workspace = class Workspace {
                         blockView.block.isDeletable() &&
                         !blockView.isFieldEditing()
                     ) {
-                        if (Entry.engine.isState('stop')) {
-                            Entry.do('destroyBlock', blockView.block);
+                        if (RoCode.engine.isState('stop')) {
+                            RoCode.do('destroyBlock', blockView.block);
                             this.board.set({ selectedBlockView: null });
                             e.preventDefault();
                         }
@@ -584,13 +584,13 @@ Entry.Workspace = class Workspace {
 
         //delay for fields value applied
         setTimeout(() => {
-            Entry.disposeEvent && Entry.disposeEvent.notify(e);
+            RoCode.disposeEvent && RoCode.disposeEvent.notify(e);
         }, 0);
 
         function checkObjectAndAlert(object, message) {
             if (!object) {
                 message = message || Lang.Workspace.object_not_exist_error;
-                entrylms.alert(message);
+                RoCodelms.alert(message);
                 return false;
             }
             return true;
@@ -602,7 +602,7 @@ Entry.Workspace = class Workspace {
         if (!board) {
             return;
         }
-        if (board.constructor === Entry.Board) {
+        if (board.constructor === RoCode.Board) {
             this.zoomController.setBoard(board);
             this.trashcan.setBoard(board);
         }
@@ -610,8 +610,8 @@ Entry.Workspace = class Workspace {
 
     _syncTextCode() {
         if (
-            this.mode !== Entry.Workspace.MODE_VIMBOARD ||
-            (Entry.engine && Entry.engine.isState('run'))
+            this.mode !== RoCode.Workspace.MODE_VIMBOARD ||
+            (RoCode.engine && RoCode.engine.isState('run'))
         ) {
             return;
         }
@@ -624,7 +624,7 @@ Entry.Workspace = class Workspace {
             code.load(changedCode);
         }
 
-        const event = Entry.creationChangedEvent;
+        const event = RoCode.creationChangedEvent;
         event && event.notify(true);
     }
 
@@ -632,7 +632,7 @@ Entry.Workspace = class Workspace {
         if (this.vimBoard) {
             return;
         }
-        this.vimBoard = new Entry.Vim(dom);
+        this.vimBoard = new RoCode.Vim(dom);
         this.vimBoard.workspace = this;
         this.vimBoard.hide();
     }
@@ -643,29 +643,29 @@ Entry.Workspace = class Workspace {
 
     getBlockViewRenderMode() {
         switch (this.mode) {
-            case Entry.Workspace.MODE_BOARD:
-            case Entry.Workspace.MODE_OVERLAYBOARD:
-                return Entry.BlockView.RENDER_MODE_BLOCK;
-            case Entry.Workspace.MODE_VIMBOARD:
-                return Entry.BlockView.RENDER_MODE_TEXT;
+            case RoCode.Workspace.MODE_BOARD:
+            case RoCode.Workspace.MODE_OVERLAYBOARD:
+                return RoCode.BlockView.RENDER_MODE_BLOCK;
+            case RoCode.Workspace.MODE_VIMBOARD:
+                return RoCode.BlockView.RENDER_MODE_TEXT;
         }
     }
 
     _isVimMode() {
-        return this.oldMode === Entry.Workspace.MODE_VIMBOARD;
+        return this.oldMode === RoCode.Workspace.MODE_VIMBOARD;
     }
 
     isVimMode = this._isVimMode;
 
     attachKeyboardCapture() {
-        if (Entry.keyPressed) {
+        if (RoCode.keyPressed) {
             this._keyboardEvent && this.detachKeyboardCapture();
-            this._keyboardEvent = Entry.keyPressed.attach(this, this._keyboardControl);
+            this._keyboardEvent = RoCode.keyPressed.attach(this, this._keyboardControl);
         }
     }
 
     detachKeyboardCapture() {
-        if (Entry.keyPressed && this._keyboardEvent) {
+        if (RoCode.keyPressed && this._keyboardEvent) {
             this._keyboardEvent.destroy();
             delete this._keyboardEvent;
         }
@@ -684,7 +684,7 @@ Entry.Workspace = class Workspace {
 
     syncCode() {
         switch (this.mode) {
-            case Entry.Workspace.MODE_VIMBOARD:
+            case RoCode.Workspace.MODE_VIMBOARD:
                 this._syncTextCode();
                 break;
         }
@@ -711,7 +711,7 @@ Entry.Workspace = class Workspace {
     }
 
     getCurrentBoard() {
-        const { MODE_BOARD, MODE_VIMBOARD, MODE_OVERLAYBOARD } = Entry.Workspace;
+        const { MODE_BOARD, MODE_VIMBOARD, MODE_OVERLAYBOARD } = RoCode.Workspace;
 
         switch (this.mode) {
             case MODE_BOARD:
@@ -726,7 +726,7 @@ Entry.Workspace = class Workspace {
     setScale(scale = 1) {
         this.scale = scale;
         this.board.setScale(scale);
-        Entry.GlobalSvg.setScale(scale);
+        RoCode.GlobalSvg.setScale(scale);
         if (this.overlayBoard) {
             this.overlayBoard.setScale(scale);
         }
@@ -737,6 +737,6 @@ Entry.Workspace = class Workspace {
     }
 };
 
-Entry.Workspace.MODE_BOARD = 0;
-Entry.Workspace.MODE_VIMBOARD = 1;
-Entry.Workspace.MODE_OVERLAYBOARD = 2;
+RoCode.Workspace.MODE_BOARD = 0;
+RoCode.Workspace.MODE_VIMBOARD = 1;
+RoCode.Workspace.MODE_OVERLAYBOARD = 2;

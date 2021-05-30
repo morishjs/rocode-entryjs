@@ -1,4 +1,4 @@
-.entryWorkspaceBlockMenu {
+.RoCodeWorkspaceBlockMenu {
     background-color: #fff;
     position: absolute;
     top: 0;
@@ -6,14 +6,14 @@
     z-index: 2;
 }
 
-.entryWorkspaceBlockMenu.entryRemove.init {
+.RoCodeWorkspaceBlockMenu.RoCodeRemove.init {
     opacity: 0 !important;
     display: block !important;
     z-index: -9999;
 }
 
 
-.entryCategoryListWorkspace {
+.RoCodeCategoryListWorkspace {
     .scrollIndicator {
         position: absolute;
         width: 58px;
@@ -51,7 +51,7 @@
     -ms-overflow-style: none;  // IE 10+
     overflow: -moz-scrollbars-none;  // Firefox
 
-    .entryCategoryList {
+    .RoCodeCategoryList {
         height: 100%;
         overflow: hidden;
         overflow-y: scroll;
@@ -64,14 +64,14 @@
             margin: 0;
         }
 
-        #entryCategoryarduino {
+        #RoCodeCategoryarduino {
             border-bottom-right-radius: 6px;
             border-bottom-left-radius: 6px;
             margin-bottom: 1px;
         }
     }
 }
-.entryCategoryListWorkspace:before {
+.RoCodeCategoryListWorkspace:before {
   position: absolute;
   left: 0;
   right: 0;
@@ -82,15 +82,15 @@
   content: '';
 }
 
-.entryCategoryListWorkspace li {
+.RoCodeCategoryListWorkspace li {
     position: relative;
     background-color: #ecf8ff;
     z-index: 5;
 }
-.entryCategoryListWorkspace li:first-child {
+.RoCodeCategoryListWorkspace li:first-child {
     margin-top: 0;
 }
-.entrySelectedCategory {
+.RoCodeSelectedCategory {
     position: relative;
     z-index: 5;
 }
@@ -120,8 +120,8 @@
         filter: none;
 
         &:not([fill^='url(#blockHoverPattern']) {
-            -webkit-filter: url(#entryBlockSelectFilter_blockMenu);
-            filter: url(#entryBlockSelectFilter_blockMenu);
+            -webkit-filter: url(#RoCodeBlockSelectFilter_blockMenu);
+            filter: url(#RoCodeBlockSelectFilter_blockMenu);
         }
     }
 }
@@ -131,13 +131,13 @@
     min-width: 500px;
 }
 
-.entryCategoryListPhone {
+.RoCodeCategoryListPhone {
     padding: 0;
     margin: 0;
     list-style-type: none;
 }
 
-.entryCategoryElementWorkspace {
+.RoCodeCategoryElementWorkspace {
     padding: 34px 0 4px;
     min-width: 58px;
     text-align: center;
@@ -147,14 +147,14 @@
     border: 1px solid #d6e9f4;
     border-bottom: transparent;
     cursor: pointer;
-    font-family: EntryFont, NanumGothic !important;
+    font-family: RoCodeFont, NanumGothic !important;
     line-height: 14px;
     background-size: 32px auto;
     background-position: 50% 4px;
     position:relative;
 }
 
-.entryCategoryBetaTag{
+.RoCodeCategoryBetaTag{
     .backgroundImage("beta_tag.svg");
     position:absolute;
     bottom:18px;
@@ -163,7 +163,7 @@
     height:14px;
 }
 
-.entryCategoryElementPhone {
+.RoCodeCategoryElementPhone {
     height: 50px;
     clear: both;
     width: 56px;
@@ -178,7 +178,7 @@
     cursor: pointer;
 }
 
-.entryCategoryElementEndWorkspace {
+.RoCodeCategoryElementEndWorkspace {
     clear: both;
     width: 3px;
     margin-left: 56px;
@@ -186,14 +186,14 @@
     height: 4000px;
 }
 
-.entryCategoryWorkspace {
+.RoCodeCategoryWorkspace {
     width: 74px;
     height: 100%;
     display: block;
 }
 
 
-.entryBlockMenuWorkspace {
+.RoCodeBlockMenuWorkspace {
     background-color: #e5e5e5;
     position: absolute;
     left: 64px;
@@ -203,275 +203,275 @@
     z-index: 100;
 }
 
-#entryCategorystart {
+#RoCodeCategorystart {
     background-repeat: no-repeat;
 }
 
-.entryUnSelectedCategory#entryCategorystart {
+.RoCodeUnSelectedCategory#RoCodeCategorystart {
     .backgroundImage("start.svg");
 }
 
-.entrySelectedCategory#entryCategorystart {
+.RoCodeSelectedCategory#RoCodeCategorystart {
     .backgroundImage("start_on.svg");
     background-color: #00b400;
     border-color: #00b400;
     color: #fff;
 }
 
-#entryCategoryflow {
+#RoCodeCategoryflow {
     .backgroundImage("flow.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategoryflow {
+.RoCodeSelectedCategory#RoCodeCategoryflow {
     .backgroundImage("flow_on.svg");
     background-color: #17a6d1;
     border-color: #17a6d1;
     color: #fff;
 }
 
-#entryCategorymoving {
+#RoCodeCategorymoving {
     .backgroundImage("moving.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategorymoving {
+.RoCodeSelectedCategory#RoCodeCategorymoving {
     .backgroundImage("moving_on.svg");
     background-color: #ad3efb;
     border-color: #ad3efb;
     color: #fff;
 }
 
-#entryCategorylooks {
+#RoCodeCategorylooks {
     /*border-right: 4px solid #EC4466;*/
     .backgroundImage("looks.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategorylooks {
+.RoCodeSelectedCategory#RoCodeCategorylooks {
     .backgroundImage("looks_on.svg");
     background-color: #ff3a61;
     border-color: #ff3a61;
     color: #fff;
 }
 
-#entryCategorybrush {
+#RoCodeCategorybrush {
     .backgroundImage("brush.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategorybrush {
+.RoCodeSelectedCategory#RoCodeCategorybrush {
     .backgroundImage("brush_on.svg");
     background-color: #fc7e01;
     border-color: #fc7e01;
     color: #fff;
 }
 
-#entryCategorytext {
+#RoCodeCategorytext {
     .backgroundImage("text.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategorytext {
+.RoCodeSelectedCategory#RoCodeCategorytext {
     .backgroundImage("text_on.svg");
     background-color: #e43500;
     border-color: #e43500;
     color: #fff;
 }
 
-#entryCategorysound {
+#RoCodeCategorysound {
     .backgroundImage("sound.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategorysound {
+.RoCodeSelectedCategory#RoCodeCategorysound {
     .backgroundImage("sound_on.svg");
     background-color: #67b100;
     border-color: #67b100;
     color: #fff;
 }
 
-#entryCategoryjudgement {
+#RoCodeCategoryjudgement {
     .backgroundImage("judgement.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategoryjudgement {
+.RoCodeSelectedCategory#RoCodeCategoryjudgement {
     .backgroundImage("judgement_on.svg");
     background-color: #4562f5;
     border-color: #4562f5;
     color: #fff;
 }
 
-#entryCategorycalc {
+#RoCodeCategorycalc {
     .backgroundImage("calc.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategorycalc {
+.RoCodeSelectedCategory#RoCodeCategorycalc {
     .backgroundImage("calc_on.svg");
     background-color: #f4af18;
     border-color: #f4af18;
     color: #fff;
 }
 
-#entryCategoryvariable {
+#RoCodeCategoryvariable {
     .backgroundImage("variable.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategoryvariable {
+.RoCodeSelectedCategory#RoCodeCategoryvariable {
     .backgroundImage("variable_on.svg");
     background-color: #dd47d8;
     border-color: #dd47d8;
     color: #fff;
 }
 
-#entryCategoryfunc {
+#RoCodeCategoryfunc {
     .backgroundImage("func.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategoryfunc {
+.RoCodeSelectedCategory#RoCodeCategoryfunc {
     .backgroundImage("func_on.svg");
     background-color: #de5c04;
     border-color: #de5c04;
     color: #fff;
 }
 
-#entryCategoryanalysis {
+#RoCodeCategoryanalysis {
     .backgroundImage("analysis.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategoryanalysis {
+.RoCodeSelectedCategory#RoCodeCategoryanalysis {
     .backgroundImage("analysis_on.svg");
     background-color: #17a6d1;
     border-color: #17a6d1;
     color: #fff;
 }
 
-#entryCategoryai {
+#RoCodeCategoryai {
     .backgroundImage("ai.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategoryai {
+.RoCodeSelectedCategory#RoCodeCategoryai {
     .backgroundImage("ai_on.svg");
     background-color: #8222ff;
     border-color: #8222ff;
     color: #fff;
 }
 
-#entryCategoryexpansion {
+#RoCodeCategoryexpansion {
     .backgroundImage("expansion.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategoryexpansion {
+.RoCodeSelectedCategory#RoCodeCategoryexpansion {
     .backgroundImage("expansion_on.svg");
     background-color: #ef6d6d;
     border-color: #ef6d6d;
     color: #fff;
 }
 
-#entryCategoryai_utilize {
+#RoCodeCategoryai_utilize {
     .backgroundImage("ai_utilize.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategoryai_utilize {
+.RoCodeSelectedCategory#RoCodeCategoryai_utilize {
     .backgroundImage("ai_utilize_on.svg");
     background-color: #8222ff;
     border-color: #670bdd;
     color: #fff;
 }
 
-#entryCategoryscene {
+#RoCodeCategoryscene {
     .backgroundImage("scene.png");
     background-repeat: no-repeat;
     border-right: none;
 }
 
-.entrySelectedCategory#entryCategoryscene {
+.RoCodeSelectedCategory#RoCodeCategoryscene {
     border-left: none;
     border-right: none;
 }
 
-#entryCategoryarduino {
+#RoCodeCategoryarduino {
     .backgroundImage("hardware.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategoryarduino {
+.RoCodeSelectedCategory#RoCodeCategoryarduino {
     .backgroundImage("hardware_on.svg");
     background-color: #00b6b1;
     border-color: #00b6b1;
     color: #fff;
 }
 
-#entryCategoryhw_sensor {
+#RoCodeCategoryhw_sensor {
     .backgroundImage("sensor.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategoryhw_sensor {
+.RoCodeSelectedCategory#RoCodeCategoryhw_sensor {
     .backgroundImage("sensor_on.svg");
     background-color: #00cfca;
     border-color: #00cfca;
     color: #fff;
 }
 
-#entryCategoryhw_led {
+#RoCodeCategoryhw_led {
     .backgroundImage("diode.svg");
     background-repeat: no-repeat;
     font-size: 10px;
 }
 
-.entrySelectedCategory#entryCategoryhw_led {
+.RoCodeSelectedCategory#RoCodeCategoryhw_led {
     .backgroundImage("diode_on.svg");
     background-color: #00cfca;
     border-color: #00cfca;
     color: #fff;
 }
 
-#entryCategoryhw_motor {
+#RoCodeCategoryhw_motor {
     .backgroundImage("dcmotor.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategoryhw_motor {
+.RoCodeSelectedCategory#RoCodeCategoryhw_motor {
     .backgroundImage("dcmotor_on.svg");
     background-color: #00cfca;
     border-color: #00cfca;
     color: #fff;
 }
 
-#entryCategoryhw_melody {
+#RoCodeCategoryhw_melody {
     .backgroundImage("melody.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategoryhw_melody {
+.RoCodeSelectedCategory#RoCodeCategoryhw_melody {
     .backgroundImage("melody_on.svg");
     background-color: #00cfca;
     border-color: #00cfca;
     color: #fff;
 }
 
-#entryCategoryhw_robot {
+#RoCodeCategoryhw_robot {
     .backgroundImage("robot.svg");
     background-repeat: no-repeat;
 }
 
-.entrySelectedCategory#entryCategoryhw_robot {
+.RoCodeSelectedCategory#RoCodeCategoryhw_robot {
     .backgroundImage("robot_on.svg");
     background-color: #00cfca;
     border-color: #00cfca;
     color: #fff;
 }
 
-.entryBlocklyWorkspace {
+.RoCodeBlocklyWorkspace {
     position: absolute;
     left: 250px;
     top: 8px;
@@ -480,10 +480,10 @@
     overflow: hidden;
     border: solid 1px #C4C4B9;
     border-top-left-radius: 10px;
-    .backgroundImage("entry_bg.svg");
+    .backgroundImage("RoCode_bg.svg");
 }
 
-.entryBlocklyWorkspace.folding {
+.RoCodeBlocklyWorkspace.folding {
     z-index: 300;
     border-left: solid 1px #C4C4B9;
     .animation-duration(0.7s);
@@ -501,7 +501,7 @@
     to {left: 64px;}
 }
 
-.entryBlocklyWorkspace.foldOut {
+.RoCodeBlocklyWorkspace.foldOut {
     z-index:300;
     .animation-duration(0.7s);
     .animation-name(foldOutBlockly);
@@ -518,7 +518,7 @@
     to {}
 }
 
-.entryBlocklyPhone {
+.RoCodeBlocklyPhone {
     position: absolute;
     top: 0px;
     left: 56px;
@@ -527,5 +527,5 @@
     overflow: hidden;
     border: solid 1px #C4C4B9;
     border-left: 0;
-    .backgroundImage("entry_bg_1.png");
+    .backgroundImage("RoCode_bg_1.png");
 }

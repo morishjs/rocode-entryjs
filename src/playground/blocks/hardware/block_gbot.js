@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.GBot = {
+RoCode.GBot = {
     id: '49.1',
     name: 'GBot',
     url: 'https://www.gbot123.com/',
@@ -10,19 +10,19 @@ Entry.GBot = {
         en: 'G.Bot',
     },
     setZero() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            const keySet = Object.keys(Entry.hw.sendQueue.SET);
+            const keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach((key) => {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     sensorTypes: {
         ALIVE: 0,
@@ -78,9 +78,9 @@ Entry.GBot = {
         TIME_20ms: 20,
         TIME_50ms: 50,
         TIME_100ms: 100,
-        TIME_200ms: 200, 
-        TIME_500ms: 500,    
-        TIME_600ms: 600,   
+        TIME_200ms: 200,
+        TIME_500ms: 500,
+        TIME_600ms: 600,
     },
     toByte: function(data) {
         if (data == '0') {
@@ -94,7 +94,7 @@ Entry.GBot = {
     BlockState: {},
 };
 
-Entry.GBot.setLanguage = function() {
+RoCode.GBot.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -139,7 +139,7 @@ Entry.GBot.setLanguage = function() {
     };
 };
 
-Entry.GBot.blockMenuBlocks = [
+RoCode.GBot.blockMenuBlocks = [
     'g_bot_get_analog_value',
     'g_bot_get_analog_value_map',
     'g_bot_get_ultrasonic_value',
@@ -158,7 +158,7 @@ Entry.GBot.blockMenuBlocks = [
 	'g_bot_led_off_all',
 ];
 
-Entry.GBot.getBlocks = function() {
+RoCode.GBot.getBlocks = function() {
     return {
         //region GBot
         g_bot_analog_list: {
@@ -178,15 +178,15 @@ Entry.GBot.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             syntax: undefined,
         },
         g_bot_ext_analog_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -203,8 +203,8 @@ Entry.GBot.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -234,10 +234,10 @@ Entry.GBot.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                converter: Entry.block.converters.returnStringKey,
-                                codeMap: 'Entry.CodeMap.Arduino.arduino_ext_analog_list[0]',
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringKey,
+                                codeMap: 'RoCode.CodeMap.Arduino.arduino_ext_analog_list[0]',
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'arduino_ext_analog_list',
@@ -408,8 +408,8 @@ Entry.GBot.getBlocks = function() {
         },
         // GBot
         g_bot_set_led_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -462,23 +462,23 @@ Entry.GBot.getBlocks = function() {
             class: 'GBotLED',
             isNotFor: ['GBot'],
             func(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port1 = script.getNumberValue('PORT1', script)
                 var port2 = script.getNumberValue('PORT2', script);
                 var port3 = script.getNumberValue('PORT3', script);
 
-                if (!script.isStart) 
+                if (!script.isStart)
                 {
 					if (!sq.SET) {
 						sq.SET = {};
 					}
-					
-					var duration = Entry.GBot.duration.TIME_200ms;
+
+					var duration = RoCode.GBot.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
-					
+
 					sq.SET['14'] = {
-							type: Entry.GBot.sensorTypes.LED_INIT,
+							type: RoCode.GBot.sensorTypes.LED_INIT,
 							data: {
                                 port1: port1,
                                 port2: port2,
@@ -495,12 +495,12 @@ Entry.GBot.getBlocks = function() {
                 {
                     return script;
                 }
-                else 
+                else
                 {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -508,14 +508,14 @@ Entry.GBot.getBlocks = function() {
                 js: [],
                 py: [
                     {
-                        
+
                     },
                 ],
             },
         },
         g_bot_get_brightness: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -541,8 +541,8 @@ Entry.GBot.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -583,8 +583,8 @@ Entry.GBot.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'g_bot_get_brightness',
@@ -593,8 +593,8 @@ Entry.GBot.getBlocks = function() {
             },
         },
         g_bot_get_led_row: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -612,8 +612,8 @@ Entry.GBot.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -646,8 +646,8 @@ Entry.GBot.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'g_bot_get_led_row',
@@ -656,8 +656,8 @@ Entry.GBot.getBlocks = function() {
             },
         },
         g_bot_get_led_col: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -675,8 +675,8 @@ Entry.GBot.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -709,8 +709,8 @@ Entry.GBot.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'g_bot_get_led_col',
@@ -719,8 +719,8 @@ Entry.GBot.getBlocks = function() {
             },
         },
         g_bot_set_brightness: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -755,11 +755,11 @@ Entry.GBot.getBlocks = function() {
             func(sprite, script) {
                 var level = script.getNumberValue('LEVEL', script);
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET['15'] = {
-                    type: Entry.GBot.sensorTypes.LED_BRIGHT,
+                RoCode.hw.sendQueue.SET['15'] = {
+                    type: RoCode.GBot.sensorTypes.LED_BRIGHT,
                     data: level,
                     time: new Date().getTime(),
                 };
@@ -769,14 +769,14 @@ Entry.GBot.getBlocks = function() {
                 js: [],
                 py: [
                     {
-                        
+
                     },
                 ],
             },
         },
         g_bot_get_row_col: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -785,8 +785,8 @@ Entry.GBot.getBlocks = function() {
                     options: [[Lang.Blocks.table_row, 'row'], [Lang.Blocks.table_col, 'column']],
                     value: 'row',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -813,10 +813,10 @@ Entry.GBot.getBlocks = function() {
                                 ],
                                 value: 'row',
                                 fontSize: 11,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValueUpperCase,
-                                codeMap: 'Entry.CodeMap.Arduino.g_bot_get_row_col[0]',
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValueUpperCase,
+                                codeMap: 'RoCode.CodeMap.Arduino.g_bot_get_row_col[0]',
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
                             },
                         ],
                         keyOption: 'g_bot_get_row_col',
@@ -825,8 +825,8 @@ Entry.GBot.getBlocks = function() {
             },
         },
         g_bot_led_onoff: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -845,8 +845,8 @@ Entry.GBot.getBlocks = function() {
                     options: [[Lang.Blocks.ARDUINO_on, 'on'], [Lang.Blocks.ARDUINO_off, 'off']],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -878,24 +878,24 @@ Entry.GBot.getBlocks = function() {
             class: 'GBotLED',
             isNotFor: ['GBot'],
             func(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var row = script.getNumberValue('ROW');
                 var col = script.getNumberValue('COL');
                 var operator = script.getField('OPERATOR');
                 let onoff = operator == 'on' ? 255 : 0;
 
-                if (!script.isStart) 
-                {					
+                if (!script.isStart)
+                {
 					if (!sq.SET) {
 						sq.SET = {};
 					}
-					
-					var duration = Entry.GBot.duration.TIME_100ms;
+
+					var duration = RoCode.GBot.duration.TIME_100ms;
                     script.isStart = true;
                     script.timeFlag = 1;
-					
+
 					sq.SET['16'] = {
-							type: Entry.GBot.sensorTypes.LED_ONOFF,
+							type: RoCode.GBot.sensorTypes.LED_ONOFF,
 							data: {
                                 row: row,
 								col: col,
@@ -912,12 +912,12 @@ Entry.GBot.getBlocks = function() {
                 {
                     return script;
                 }
-                else 
+                else
                 {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -925,14 +925,14 @@ Entry.GBot.getBlocks = function() {
                 js: [],
                 py: [
                     {
-                        
+
                     },
                 ],
             },
         },
         g_bot_led_output: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -946,8 +946,8 @@ Entry.GBot.getBlocks = function() {
                     options: [[Lang.Blocks.table_row, 'row'], [Lang.Blocks.table_col, 'column']],
                     value: 'row',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -984,28 +984,28 @@ Entry.GBot.getBlocks = function() {
             class: 'GBotLED',
             isNotFor: ['GBot'],
             func(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var row = script.getNumberValue('ROW', script);
                 var operator = script.getField('OPERATOR', script);
                 var string = script.getValue('STRING', script);
                 var text = [];
 
-                if (!script.isStart) 
+                if (!script.isStart)
                 {
-					if (typeof string === 'string') 
+					if (typeof string === 'string')
                     {
                         for (var i = 0; i < string.length; i++) {
-                            text[i] = Entry.GBot.toByte(string[i]);
+                            text[i] = RoCode.GBot.toByte(string[i]);
                         }
                     }
-                    else if (typeof string === 'number') 
+                    else if (typeof string === 'number')
                     {
                         var num_to_string = string.toString();
                         for (var i = 0; i < num_to_string.length; i++) {
-                            text[i] = Entry.GBot.toByte(num_to_string[i]);
+                            text[i] = RoCode.GBot.toByte(num_to_string[i]);
                         }
-                    } 
-                    else 
+                    }
+                    else
                     {
                         text[0] = string;
                     }
@@ -1018,17 +1018,17 @@ Entry.GBot.getBlocks = function() {
                     {
                         operator = 1;
                     }
-					
+
 					if (!sq.SET) {
 						sq.SET = {};
 					}
-					
-					var duration = Entry.GBot.duration.TIME_500ms;
+
+					var duration = RoCode.GBot.duration.TIME_500ms;
                     script.isStart = true;
                     script.timeFlag = 1;
-					
+
 					sq.SET['17'] = {
-							type: Entry.GBot.sensorTypes.LED_OUTPUT,
+							type: RoCode.GBot.sensorTypes.LED_OUTPUT,
 							data: {
                                 row_col: row,
 								sel: operator,
@@ -1052,12 +1052,12 @@ Entry.GBot.getBlocks = function() {
                 {
                     return script;
                 }
-                else 
+                else
                 {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1065,14 +1065,14 @@ Entry.GBot.getBlocks = function() {
                 js: [],
                 py: [
                     {
-                        
+
                     },
                 ],
             },
         },
         g_bot_led_off_all: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1114,22 +1114,22 @@ Entry.GBot.getBlocks = function() {
             class: 'GBotLED',
             isNotFor: ['GBot'],
             func(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
 				var port1 = script.getNumberValue('PORT1', script);
 
-				if (!script.isStart) 
+				if (!script.isStart)
                 {
 					if (!sq.SET) {
 						sq.SET = {};
 					}
-					
-					var duration = Entry.GBot.duration.TIME_200ms;
+
+					var duration = RoCode.GBot.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
-					
+
 					sq.SET[port] = {
-							type: Entry.GBot.sensorTypes.LED_OFF,
+							type: RoCode.GBot.sensorTypes.LED_OFF,
 							data: port1,
 							time: new Date().getTime(),
 					};
@@ -1142,12 +1142,12 @@ Entry.GBot.getBlocks = function() {
                 {
                     return script;
                 }
-                else 
+                else
                 {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1155,7 +1155,7 @@ Entry.GBot.getBlocks = function() {
                 js: [],
                 py: [
                     {
-						
+
                     },
                 ],
             },
@@ -1164,4 +1164,4 @@ Entry.GBot.getBlocks = function() {
     };
 };
 
-module.exports = Entry.GBot;
+module.exports = RoCode.GBot;

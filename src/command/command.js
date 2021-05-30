@@ -1,29 +1,29 @@
 'use strict';
 
-Entry.Command = {};
+RoCode.Command = {};
 
 (function(c) {
-    c[Entry.STATIC.COMMAND_TYPES.do] = {
-        recordable: Entry.STATIC.RECORDABLE.SKIP,
+    c[RoCode.STATIC.COMMAND_TYPES.do] = {
+        recordable: RoCode.STATIC.RECORDABLE.SKIP,
         log(objectId) {
             return [];
         },
         skipUndoStack: true,
     };
 
-    c[Entry.STATIC.COMMAND_TYPES.undo] = {
-        recordable: Entry.STATIC.RECORDABLE.SKIP,
+    c[RoCode.STATIC.COMMAND_TYPES.undo] = {
+        recordable: RoCode.STATIC.RECORDABLE.SKIP,
         log(objectId) {
             return [];
         },
         skipUndoStack: true,
     };
 
-    c[Entry.STATIC.COMMAND_TYPES.redo] = {
-        recordable: Entry.STATIC.RECORDABLE.SKIP,
+    c[RoCode.STATIC.COMMAND_TYPES.redo] = {
+        recordable: RoCode.STATIC.RECORDABLE.SKIP,
         log(objectId) {
             return [];
         },
         skipUndoStack: true,
     };
-})(Entry.Command);
+})(RoCode.Command);

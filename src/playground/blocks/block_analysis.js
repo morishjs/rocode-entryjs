@@ -26,12 +26,12 @@ module.exports = {
         return {
             analizyDataAddButton: {
                 skeleton: 'basic_button',
-                color: EntryStatic.colorSet.common.BUTTON_BACKGROUND,
+                color: RoCodeStatic.colorSet.common.BUTTON_BACKGROUND,
                 params: [
                     {
                         type: 'Text',
                         text: Lang.Workspace.open_analizy_data_import,
-                        color: EntryStatic.colorSet.common.BUTTON,
+                        color: RoCodeStatic.colorSet.common.BUTTON,
                         align: 'center',
                     },
                 ],
@@ -41,15 +41,15 @@ module.exports = {
                 events: {
                     mousedown: [
                         function() {
-                            Entry.playground.dataTable.show();
+                            RoCode.playground.dataTable.show();
                         },
                     ],
                 },
                 syntax: { js: [], py: [''] },
             },
             append_row_to_table: {
-                color: EntryStatic.colorSet.block.default.ANALYSIS,
-                outerLine: EntryStatic.colorSet.block.darken.ANALYSIS,
+                color: RoCodeStatic.colorSet.block.default.ANALYSIS,
+                outerLine: RoCodeStatic.colorSet.block.darken.ANALYSIS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -59,8 +59,8 @@ module.exports = {
                         menuName: 'tables',
                         dropdownSync: 'dataTables',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.ANALYSIS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.ANALYSIS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Dropdown',
@@ -70,8 +70,8 @@ module.exports = {
                         ],
                         value: 'ROW',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.ANALYSIS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.ANALYSIS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -120,8 +120,8 @@ module.exports = {
                 },
             },
             insert_row_to_table: {
-                color: EntryStatic.colorSet.block.default.ANALYSIS,
-                outerLine: EntryStatic.colorSet.block.darken.ANALYSIS,
+                color: RoCodeStatic.colorSet.block.default.ANALYSIS,
+                outerLine: RoCodeStatic.colorSet.block.darken.ANALYSIS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -131,8 +131,8 @@ module.exports = {
                         menuName: 'tables',
                         dropdownSync: 'dataTables',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.ANALYSIS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.ANALYSIS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Block',
@@ -147,8 +147,8 @@ module.exports = {
                         ],
                         value: 'ROW',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.ANALYSIS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.ANALYSIS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -212,8 +212,8 @@ module.exports = {
                 },
             },
             delete_row_from_table: {
-                color: EntryStatic.colorSet.block.default.ANALYSIS,
-                outerLine: EntryStatic.colorSet.block.darken.ANALYSIS,
+                color: RoCodeStatic.colorSet.block.default.ANALYSIS,
+                outerLine: RoCodeStatic.colorSet.block.darken.ANALYSIS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -223,8 +223,8 @@ module.exports = {
                         menuName: 'tables',
                         dropdownSync: 'dataTables',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.ANALYSIS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.ANALYSIS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Block',
@@ -239,8 +239,8 @@ module.exports = {
                         ],
                         value: 'ROW',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.ANALYSIS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.ANALYSIS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -304,8 +304,8 @@ module.exports = {
                 },
             },
             set_value_from_table: {
-                color: EntryStatic.colorSet.block.default.ANALYSIS,
-                outerLine: EntryStatic.colorSet.block.darken.ANALYSIS,
+                color: RoCodeStatic.colorSet.block.default.ANALYSIS,
+                outerLine: RoCodeStatic.colorSet.block.darken.ANALYSIS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -315,8 +315,8 @@ module.exports = {
                         menuName: 'tables',
                         dropdownSync: 'dataTables',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.ANALYSIS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.ANALYSIS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Block',
@@ -413,8 +413,8 @@ module.exports = {
             },
             // 테이블 %1 %2 개수
             get_table_count: {
-                color: EntryStatic.colorSet.block.default.ANALYSIS,
-                outerLine: EntryStatic.colorSet.block.darken.ANALYSIS,
+                color: RoCodeStatic.colorSet.block.default.ANALYSIS,
+                outerLine: RoCodeStatic.colorSet.block.darken.ANALYSIS,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -424,8 +424,8 @@ module.exports = {
                         menuName: 'tables',
                         dropdownSync: 'dataTables',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.ANALYSIS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.ANALYSIS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Dropdown',
@@ -435,8 +435,8 @@ module.exports = {
                         ],
                         value: 'ROW',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.ANALYSIS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.ANALYSIS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                 ],
                 events: {},
@@ -470,8 +470,8 @@ module.exports = {
             },
             // 테이블 %1 행 %2 속성 %3 의 값
             get_value_from_table: {
-                color: EntryStatic.colorSet.block.default.ANALYSIS,
-                outerLine: EntryStatic.colorSet.block.darken.ANALYSIS,
+                color: RoCodeStatic.colorSet.block.default.ANALYSIS,
+                outerLine: RoCodeStatic.colorSet.block.darken.ANALYSIS,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -481,8 +481,8 @@ module.exports = {
                         menuName: 'tables',
                         dropdownSync: 'dataTables',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.ANALYSIS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.ANALYSIS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Block',
@@ -532,8 +532,8 @@ module.exports = {
                 },
             },
             get_value_from_last_row: {
-                color: EntryStatic.colorSet.block.default.ANALYSIS,
-                outerLine: EntryStatic.colorSet.block.darken.ANALYSIS,
+                color: RoCodeStatic.colorSet.block.default.ANALYSIS,
+                outerLine: RoCodeStatic.colorSet.block.darken.ANALYSIS,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -543,8 +543,8 @@ module.exports = {
                         menuName: 'tables',
                         dropdownSync: 'dataTables',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.ANALYSIS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.ANALYSIS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Block',
@@ -585,8 +585,8 @@ module.exports = {
             },
             // 테이블 %1 속성 %1의 합
             calc_values_from_table: {
-                color: EntryStatic.colorSet.block.default.ANALYSIS,
-                outerLine: EntryStatic.colorSet.block.darken.ANALYSIS,
+                color: RoCodeStatic.colorSet.block.default.ANALYSIS,
+                outerLine: RoCodeStatic.colorSet.block.darken.ANALYSIS,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -596,8 +596,8 @@ module.exports = {
                         menuName: 'tables',
                         dropdownSync: 'dataTables',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.ANALYSIS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.ANALYSIS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Block',
@@ -615,8 +615,8 @@ module.exports = {
                         ],
                         value: 'SUM',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.ANALYSIS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.ANALYSIS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                 ],
                 events: {},
@@ -675,8 +675,8 @@ module.exports = {
                 },
             },
             open_table_chart: {
-                color: EntryStatic.colorSet.block.default.ANALYSIS,
-                outerLine: EntryStatic.colorSet.block.darken.ANALYSIS,
+                color: RoCodeStatic.colorSet.block.default.ANALYSIS,
+                outerLine: RoCodeStatic.colorSet.block.darken.ANALYSIS,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -686,8 +686,8 @@ module.exports = {
                         menuName: 'tables',
                         dropdownSync: 'dataTables',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.ANALYSIS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.ANALYSIS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'DropdownDynamic',
@@ -700,8 +700,8 @@ module.exports = {
                         },
                         needDeepCopy: true,
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.ANALYSIS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.ANALYSIS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                         defaultValue: (value, options) => {
                             if (options.length) {
                                 return options[0][1];
@@ -748,8 +748,8 @@ module.exports = {
                 },
             },
             close_table_chart: {
-                color: EntryStatic.colorSet.block.default.ANALYSIS,
-                outerLine: EntryStatic.colorSet.block.darken.ANALYSIS,
+                color: RoCodeStatic.colorSet.block.default.ANALYSIS,
+                outerLine: RoCodeStatic.colorSet.block.darken.ANALYSIS,
                 skeleton: 'basic',
                 statements: [],
                 params: [

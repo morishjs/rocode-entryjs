@@ -1,7 +1,7 @@
 import { ImageRect } from '../../../maxrect-packer/geom/ImageRect';
 import { Texture, RenderTexture, Rectangle, BaseTexture } from 'pixi.js';
 
-export class EntryTextureBase extends Texture {
+export class RoCodeTextureBase extends Texture {
     public textureScaleFactorX: number;
     public textureScaleFactorY: number;
 

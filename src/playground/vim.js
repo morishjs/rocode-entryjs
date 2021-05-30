@@ -14,7 +14,7 @@ class Vim {
 
     static INEDITABLE_LINE_PY = 3;
 
-    static PYTHON_IMPORT_ENTRY = 'import Entry';
+    static PYTHON_IMPORT_RoCode = 'import RoCode';
     static PYTHON_IMPORT_HW = '';
 
     constructor(dom) {
@@ -31,11 +31,11 @@ class Vim {
         this._parentView = dom;
         this.createDom(dom);
 
-        this._parser = new Entry.Parser(null, null, this.codeMirror);
+        this._parser = new RoCode.Parser(null, null, this.codeMirror);
 
-        Entry.addEventListener('hwChanged', (e) => {
-            if (Entry.hw.hwModule) {
-                let name = Entry.hw.hwModule.name;
+        RoCode.addEventListener('hwChanged', (e) => {
+            if (RoCode.hw.hwModule) {
+                let name = RoCode.hw.hwModule.name;
                 name = name[0].toUpperCase() + name.slice(1);
                 if (name === 'ArduinoExt') {
                     name = 'Arduino';
@@ -52,9 +52,9 @@ class Vim {
     createDom(dom) {
         const parent = dom;
 
-        this.view = Entry.Dom('div', {
+        this.view = RoCode.Dom('div', {
             parent,
-            class: 'entryVimBoard',
+            class: 'RoCodeVimBoard',
         });
 
         this.codeMirror = CodeMirror(this.view[0], {
@@ -78,7 +78,7 @@ class Vim {
         });
 
         const dShowHint = debounce(() => {
-            if (Entry.isTextMode) {
+            if (RoCode.isTextMode) {
                 this.codeMirror.showHint({
                     completeSingle: false,
                     globalScope: this.#getAssistScope(),
@@ -87,8 +87,8 @@ class Vim {
         }, 250);
 
         this.codeMirror.on('keydown', (cm, event) => {
-            if (Entry && Entry.keyPressed) {
-                Entry.keyPressed.notify(event, true);
+            if (RoCode && RoCode.keyPressed) {
+                RoCode.keyPressed.notify(event, true);
             }
             if (event.key.length === 1) {
                 dShowHint();
@@ -126,12 +126,12 @@ class Vim {
     }
 
     hide() {
-        this.view.addClass('entryRemove');
+        this.view.addClass('RoCodeRemove');
         this.view.remove();
     }
 
     show() {
-        this.view.removeClass('entryRemove');
+        this.view.removeClass('RoCodeRemove');
         this._parentView.append(this.view);
     }
 
@@ -182,8 +182,8 @@ class Vim {
             this._oldParserType = this._parserType;
         }
 
-        if (Entry.playground) {
-            this._currentObject = Entry.playground.object;
+        if (RoCode.playground) {
+            this._currentObject = RoCode.playground.object;
         }
 
         this._parser._hasDeclaration = false;
@@ -191,12 +191,12 @@ class Vim {
         if (textType === Vim.TEXT_TYPE_PY) {
             if (this._currentObject) {
                 codeDescription = `# ${this._currentObject.name}${Lang.TextCoding.python_code}`;
-                textCode = this._parser.parse(code, Entry.Parser.PARSE_GENERAL);
+                textCode = this._parser.parse(code, RoCode.Parser.PARSE_GENERAL);
 
                 if (textType === Vim.TEXT_TYPE_PY) {
                     textCode = codeDescription
                         .concat('\n\n')
-                        .concat(Vim.PYTHON_IMPORT_ENTRY)
+                        .concat(Vim.PYTHON_IMPORT_RoCode)
                         .concat(Vim.PYTHON_IMPORT_HW)
                         .concat('\n\n')
                         .concat(textCode);
@@ -218,13 +218,13 @@ class Vim {
                 this.clearText();
             }
         } else if (textType === Vim.TEXT_TYPE_JS) {
-            textCode = this._parser.parse(code, Entry.Parser.PARSE_GENERAL);
+            textCode = this._parser.parse(code, RoCode.Parser.PARSE_GENERAL);
             this.codeMirror.setValue(textCode);
             doc = this.codeMirror.getDoc();
             doc.setCursor({ line: doc.lastLine() - 1 });
         }
 
-        if (Entry.isTextMode) {
+        if (RoCode.isTextMode) {
             this._parser._onRunError = false;
         }
     }
@@ -234,7 +234,7 @@ class Vim {
 
         return parseType
             ? this._parser.parse(code, parseType)
-            : this._parser.parse(code, Entry.Parser.PARSE_SYNTAX);
+            : this._parser.parse(code, RoCode.Parser.PARSE_SYNTAX);
     }
 
     setParserAvailableCode(blockMenuCode, boardCode) {
@@ -279,10 +279,10 @@ class Vim {
         }
 
         const codeMirror = this.codeMirror;
-        const textCode = this.getCodeToText(block, Entry.Parser.PARSE_BLOCK);
+        const textCode = this.getCodeToText(block, RoCode.Parser.PARSE_BLOCK);
 
         codeMirror.display.dragFunctions.leave(e);
-        codeMirror.display.scroller.dispatchEvent(Entry.Utils.createMouseEvent('mousedown', e));
+        codeMirror.display.scroller.dispatchEvent(RoCode.Utils.createMouseEvent('mousedown', e));
 
         const testArr = textCode.split('\n');
         const max = testArr.length - 1;
@@ -305,7 +305,7 @@ class Vim {
             CodeMirror.commands.indentAuto(codeMirror);
         }
 
-        codeMirror.display.scroller.dispatchEvent(Entry.Utils.createMouseEvent('mouseup', e));
+        codeMirror.display.scroller.dispatchEvent(RoCode.Utils.createMouseEvent('mouseup', e));
     };
 
     #handleDragOver = (e) => {
@@ -313,4 +313,4 @@ class Vim {
     };
 }
 
-Entry.Vim = Vim;
+RoCode.Vim = Vim;

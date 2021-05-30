@@ -240,7 +240,7 @@ class dmetTable {
     }
 
     #getNewColName() {
-        return Entry.getOrderedName(
+        return RoCode.getOrderedName(
             Lang.DataAnalytics.new_attribute,
             this.fields.map((name) => ({ name })),
             'name'

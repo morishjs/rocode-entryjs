@@ -459,8 +459,8 @@ Blockly.Workspace.prototype.paste = function(xmlBlock) {
     return;
   }
 
-  if (typeof(Entry) === "object") {
-      xmlBlock = Entry.changeXmlHashId(xmlBlock);
+  if (typeof(RoCode) === "object") {
+      xmlBlock = RoCode.changeXmlHashId(xmlBlock);
   } else if (typeof(Ntry) === "object") {
       xmlBlock = Ntry.changeXmlHashId(xmlBlock);
   }
@@ -495,7 +495,7 @@ Blockly.Workspace.prototype.paste = function(xmlBlock) {
   }
   block.select();
   if (xmlBlock.getAttribute('isForFunc')) {
-    Entry.Func.positionBlock_(block);
+    RoCode.Func.positionBlock_(block);
     xmlBlock.removeAttribute('isForFunc');
   }
 };

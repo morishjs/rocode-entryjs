@@ -4,8 +4,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-    entry: {
-        'entry.min': './src/entry.js',
+    RoCode: {
+        'RoCode.min': './src/RoCode.js',
     },
     mode: 'production',
     output: {

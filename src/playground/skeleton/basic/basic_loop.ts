@@ -1,4 +1,4 @@
-Entry.skeleton.basic_loop = {
+RoCode.skeleton.basic_loop = {
     executable: true,
     path(blockView) {
         let width = blockView.contentWidth;

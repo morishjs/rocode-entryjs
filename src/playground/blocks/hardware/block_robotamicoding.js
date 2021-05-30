@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.RobotamiCoding = {
+RoCode.RobotamiCoding = {
     id: '2A.1',
     name: 'RobotamiCoding',
     url: 'http://robotron.co.kr/',
@@ -10,19 +10,19 @@ Entry.RobotamiCoding = {
         "en": 'RobotamiCoding'
     },
     setZero: function() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            var keySet = Object.keys(Entry.hw.sendQueue.SET);
+            var keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach(function(key) {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     sensorTypes: {
         ALIVE: 0,
@@ -73,7 +73,7 @@ Entry.RobotamiCoding = {
     BlockState: {},
 };
 
-Entry.RobotamiCoding.setLanguage = function() {
+RoCode.RobotamiCoding.setLanguage = function() {
     return {
         ko: {
             Blocks: {
@@ -130,7 +130,7 @@ Entry.RobotamiCoding.setLanguage = function() {
     };
 };
 
-Entry.RobotamiCoding.blockMenuBlocks = [
+RoCode.RobotamiCoding.blockMenuBlocks = [
     'robotami_coding_get_analog_value',
     'robotami_coding_get_digital_value',
     'robotami_coding_set_digital_value',
@@ -143,13 +143,13 @@ Entry.RobotamiCoding.blockMenuBlocks = [
     'robotami_coding_set_robot_stop',
 ];
 
-Entry.RobotamiCoding.getBlocks = function() {
+RoCode.RobotamiCoding.getBlocks = function() {
     return {
 
         // 로보타미 코딩 아날로그 리스트
         robotami_coding_analog_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -166,8 +166,8 @@ Entry.RobotamiCoding.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -182,10 +182,10 @@ Entry.RobotamiCoding.getBlocks = function() {
             },
             syntax: undefined,
         },
-        
+
         robotami_coding_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -212,7 +212,7 @@ Entry.RobotamiCoding.getBlocks = function() {
             isNotFor: ['RobotamiCoding'],
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 if (port[0] === 'A') port = port.substring(1);
                 return ANALOG ? ANALOG[port] || 0 : 0;
             },
@@ -221,8 +221,8 @@ Entry.RobotamiCoding.getBlocks = function() {
 
         // 로보타미 코딩 디지털 리스트
         robotami_coding_digital_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -241,8 +241,8 @@ Entry.RobotamiCoding.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -259,8 +259,8 @@ Entry.RobotamiCoding.getBlocks = function() {
         },
 
         robotami_coding_get_digital_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -286,21 +286,21 @@ Entry.RobotamiCoding.getBlocks = function() {
             class: 'RobotamiCodingGet',
             isNotFor: ['RobotamiCoding'],
             func: function(sprite, script) {
-                const { hwModule = {} } = Entry.hw;
+                const { hwModule = {} } = RoCode.hw;
                 const { name } = hwModule;
                 if (name === 'RobotamiCoding') {
                     var port = script.getNumberValue('PORT', script);
-                    var DIGITAL = Entry.hw.portData.DIGITAL;
-                    if (!Entry.hw.sendQueue['GET']) {
-                        Entry.hw.sendQueue['GET'] = {};
+                    var DIGITAL = RoCode.hw.portData.DIGITAL;
+                    if (!RoCode.hw.sendQueue['GET']) {
+                        RoCode.hw.sendQueue['GET'] = {};
                     }
-                    Entry.hw.sendQueue['GET'][Entry.RobotamiCoding.sensorTypes.DIGITAL] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.RobotamiCoding.sensorTypes.DIGITAL] = {
                         port: port,
                         time: new Date().getTime(),
                     };
                     return DIGITAL ? DIGITAL[port] || 0 : 0;
                 } else {
-                    return Entry.block.robotami_coding_get_digital_value.func(sprite, script);
+                    return RoCode.block.robotami_coding_get_digital_value.func(sprite, script);
                 }
             },
             syntax: undefined,
@@ -308,8 +308,8 @@ Entry.RobotamiCoding.getBlocks = function() {
 
         // 로보타미 코딩 디지털 리스트
         robotami_coding_digital_value_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -322,8 +322,8 @@ Entry.RobotamiCoding.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -340,8 +340,8 @@ Entry.RobotamiCoding.getBlocks = function() {
         },
 
         robotami_coding_set_digital_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -384,11 +384,11 @@ Entry.RobotamiCoding.getBlocks = function() {
                 var port = script.getNumberValue('PORT');
                 var value = script.getNumberValue('VALUE');
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.RobotamiCoding.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.RobotamiCoding.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -399,8 +399,8 @@ Entry.RobotamiCoding.getBlocks = function() {
 
         // 로보타미 코딩 PWM 포트 리스트
         robotami_coding_pwm_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -415,8 +415,8 @@ Entry.RobotamiCoding.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -433,8 +433,8 @@ Entry.RobotamiCoding.getBlocks = function() {
         },
 
         robotami_coding_set_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -480,11 +480,11 @@ Entry.RobotamiCoding.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.RobotamiCoding.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.RobotamiCoding.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -492,11 +492,11 @@ Entry.RobotamiCoding.getBlocks = function() {
             },
             syntax: undefined,
         },
-        
+
         // 로보타미 코딩 계명 리스트
         robotami_coding_tone_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -519,8 +519,8 @@ Entry.RobotamiCoding.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -537,8 +537,8 @@ Entry.RobotamiCoding.getBlocks = function() {
         },
 
         robotami_coding_tone_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -568,8 +568,8 @@ Entry.RobotamiCoding.getBlocks = function() {
 
         // 로보타미 코딩 옥타브 리스트
         robotami_coding_octave_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -587,8 +587,8 @@ Entry.RobotamiCoding.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -605,8 +605,8 @@ Entry.RobotamiCoding.getBlocks = function() {
         },
 
         robotami_coding_set_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -655,12 +655,12 @@ Entry.RobotamiCoding.getBlocks = function() {
             class: 'RobotamiCoding',
             isNotFor: ['RobotamiCoding'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = 13;
 
                 if (!script.isStart) {
                     var note = script.getValue('NOTE', script);
-                    if (!Entry.Utils.isNumber(note)) note = Entry.RobotamiCoding.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note)) note = RoCode.RobotamiCoding.toneTable[note];
 
                     if (note < 0) {
                         note = 0;
@@ -680,7 +680,7 @@ Entry.RobotamiCoding.getBlocks = function() {
 
                     if (duration === 0) {
                         sq['SET'][port] = {
-                            type: Entry.RobotamiCoding.sensorTypes.TONE,
+                            type: RoCode.RobotamiCoding.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -697,7 +697,7 @@ Entry.RobotamiCoding.getBlocks = function() {
                     var value = 0;
 
                     if (note != 0) {
-                        value = Entry.RobotamiCoding.toneMap[note][octave];
+                        value = RoCode.RobotamiCoding.toneMap[note][octave];
                     }
 
                     duration = duration * 1000;
@@ -705,7 +705,7 @@ Entry.RobotamiCoding.getBlocks = function() {
                     script.timeFlag = 1;
 
                     sq['SET'][port] = {
-                        type: Entry.RobotamiCoding.sensorTypes.TONE,
+                        type: RoCode.RobotamiCoding.sensorTypes.TONE,
                         data: {
                             value: value,
                             duration: duration,
@@ -723,11 +723,11 @@ Entry.RobotamiCoding.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
                     sq['SET'][port] = {
-                        type: Entry.RobotamiCoding.sensorTypes.TONE,
+                        type: RoCode.RobotamiCoding.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -735,8 +735,8 @@ Entry.RobotamiCoding.getBlocks = function() {
         },
 
         robotami_coding_set_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -777,7 +777,7 @@ Entry.RobotamiCoding.getBlocks = function() {
             class: 'RobotamiCoding',
             isNotFor: ['RobotamiCoding'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
                 var value = script.getNumberValue('VALUE', script);
                 value = Math.min(180, value);
@@ -787,7 +787,7 @@ Entry.RobotamiCoding.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.ArduinoExt.sensorTypes.SERVO_PIN,
+                    type: RoCode.ArduinoExt.sensorTypes.SERVO_PIN,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -799,8 +799,8 @@ Entry.RobotamiCoding.getBlocks = function() {
 
         // 로보타미 코딩 DC 모터 리스트
         robotami_coding_dcm_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -813,8 +813,8 @@ Entry.RobotamiCoding.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -832,8 +832,8 @@ Entry.RobotamiCoding.getBlocks = function() {
 
         // 로보타미 코딩 DC 모터 방향 리스트
         robotami_coding_dcm_dir_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -846,8 +846,8 @@ Entry.RobotamiCoding.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -864,8 +864,8 @@ Entry.RobotamiCoding.getBlocks = function() {
         },
 
         robotami_coding_set_dcm_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -920,11 +920,11 @@ Entry.RobotamiCoding.getBlocks = function() {
                 var value = script.getNumberValue('VALUE', script);
                 var motor_dir = script.getNumberValue('MOTOR_DIR', script);
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.RobotamiCoding.sensorTypes.DC_MOTOR,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.RobotamiCoding.sensorTypes.DC_MOTOR,
                     data: {
                         value: value,
                         motor_dir: motor_dir,
@@ -936,8 +936,8 @@ Entry.RobotamiCoding.getBlocks = function() {
             syntax: undefined,
         },
         robotami_coding_set_dcm_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -972,11 +972,11 @@ Entry.RobotamiCoding.getBlocks = function() {
                 var port = script.getNumberValue('PORT', script);
                 var value = 0;
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.RobotamiCoding.sensorTypes.DC_STOP,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.RobotamiCoding.sensorTypes.DC_STOP,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -987,8 +987,8 @@ Entry.RobotamiCoding.getBlocks = function() {
 
         // 로보타미 코딩 로봇 동작 리스트
         robotami_coding_robot_move_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1007,8 +1007,8 @@ Entry.RobotamiCoding.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1025,8 +1025,8 @@ Entry.RobotamiCoding.getBlocks = function() {
         },
 
         robotami_coding_set_robot_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1072,11 +1072,11 @@ Entry.RobotamiCoding.getBlocks = function() {
                 var value = script.getNumberValue('VALUE', script);
                 var robot_move = script.getNumberValue('ROBOT_MOVE', script);
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.RobotamiCoding.sensorTypes.ROBOT,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.RobotamiCoding.sensorTypes.ROBOT,
                     data: {
                         value: value,
                         robot_move: robot_move,
@@ -1088,8 +1088,8 @@ Entry.RobotamiCoding.getBlocks = function() {
             syntax: undefined,
         },
         robotami_coding_set_robot_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1116,11 +1116,11 @@ Entry.RobotamiCoding.getBlocks = function() {
                 var port = 0;
                 var value = 0;
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.RobotamiCoding.sensorTypes.ROBOT_STOP,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.RobotamiCoding.sensorTypes.ROBOT_STOP,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1131,4 +1131,4 @@ Entry.RobotamiCoding.getBlocks = function() {
     };
 };
 
-module.exports = Entry.RobotamiCoding;
+module.exports = RoCode.RobotamiCoding;

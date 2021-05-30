@@ -6,7 +6,7 @@ const _merge = require('lodash/merge');
 const _clamp = require('lodash/clamp');
 const { version } = require('@babel/core');
 
-Entry.Microbit2 = new (class Microbit2 {
+RoCode.Microbit2 = new (class Microbit2 {
     constructor() {
         this.functionKeys = {
             GET_ANALOG: 'get-analog',
@@ -270,11 +270,11 @@ Entry.Microbit2 = new (class Microbit2 {
 
     // will not use in this module
     requestCommand(type, payload) {
-        Entry.hw.sendQueue = {
+        RoCode.hw.sendQueue = {
             type,
             payload,
         };
-        Entry.hw.update();
+        RoCode.hw.update();
     }
     waitMilliSec(milli) {
         this.blockReq = true;
@@ -290,23 +290,23 @@ Entry.Microbit2 = new (class Microbit2 {
      */
     requestCommandWithResponse({ id, command: type, payload }) {
         if (this.blockReq) {
-            throw new Entry.Utils.AsyncError();
+            throw new RoCode.Utils.AsyncError();
         }
         const codeId = this.generateCodeId(id, type, payload);
         if (!this.commandStatus[codeId]) {
             // 첫 진입시 무조건 AsyncError
-            Entry.hw.sendQueue = {
+            RoCode.hw.sendQueue = {
                 type,
                 payload,
             };
 
             this.commandStatus[codeId] = 'pending';
-            Entry.hw.sendQueue.codeId = codeId;
-            Entry.hw.update();
-            throw new Entry.Utils.AsyncError();
+            RoCode.hw.sendQueue.codeId = codeId;
+            RoCode.hw.update();
+            throw new RoCode.Utils.AsyncError();
         } else if (this.commandStatus[codeId] === 'pending') {
             // 두 번째 이상의 진입시도이며 작업이 아직 끝나지 않은 경우
-            throw new Entry.Utils.AsyncError();
+            throw new RoCode.Utils.AsyncError();
         } else if (this.commandStatus[codeId] === 'completed') {
             // 두 번째 이상의 진입시도이며 pending 도 아닌 경우
             // 블록 func 로직에서 다음 데이터를 처리한다.
@@ -342,7 +342,7 @@ Entry.Microbit2 = new (class Microbit2 {
             }
         }
 
-        if (!Entry.engine.isState('run')) {
+        if (!RoCode.engine.isState('run')) {
             this.commandStatus = {};
         }
     }
@@ -948,7 +948,7 @@ Entry.Microbit2 = new (class Microbit2 {
         return {
             microbit2_common_title: {
                 skeleton: 'basic_text',
-                color: EntryStatic.colorSet.common.TRANSPARENT,
+                color: RoCodeStatic.colorSet.common.TRANSPARENT,
                 fontColor: '#333333',
                 params: [
                     {
@@ -967,7 +967,7 @@ Entry.Microbit2 = new (class Microbit2 {
             },
             microbit2_v2_title: {
                 skeleton: 'basic_text',
-                color: EntryStatic.colorSet.common.TRANSPARENT,
+                color: RoCodeStatic.colorSet.common.TRANSPARENT,
                 fontColor: '#333333',
                 params: [
                     {
@@ -985,8 +985,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 events: {},
             },
             microbit2_get_analog: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -996,8 +996,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         options: this.analogPins,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1022,8 +1022,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_get_digital: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -1033,8 +1033,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         options: this.digitalPins,
                         value: 8,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1057,8 +1057,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_set_analog: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic',
                 statements: [],
@@ -1068,8 +1068,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         options: this.analogPins,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -1108,8 +1108,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_set_digital: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic',
                 statements: [],
@@ -1119,8 +1119,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         options: this.digitalPins,
                         value: 8,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
@@ -1130,8 +1130,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         ],
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -1161,8 +1161,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_set_led: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1242,8 +1242,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_get_led: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -1307,8 +1307,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_show_preset_image: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic',
                 statements: [],
@@ -1382,8 +1382,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         ],
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -1413,8 +1413,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_show_custom_image: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1453,8 +1453,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_show_string: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1500,8 +1500,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_reset_screen: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1528,8 +1528,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_screen_toggle: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1541,8 +1541,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         ],
                         value: this.functionKeys.DISPLAY_ON,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -1569,8 +1569,8 @@ Entry.Microbit2 = new (class Microbit2 {
             },
 
             microbit2_change_tempo: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1625,8 +1625,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_set_tone: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1644,8 +1644,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         ],
                         value: 4,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -1678,8 +1678,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_play_preset_music: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic',
                 statements: [],
@@ -1711,8 +1711,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         ],
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -1743,8 +1743,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_radio_toggle: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1756,8 +1756,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         ],
                         value: this.functionKeys.RADIO_ON,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -1783,8 +1783,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_radio_setting: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1808,7 +1808,7 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
                 paramsKeyMap: { RATE: 0, CHANNEL: 1 },
                 func: (sprite, script) => {
-                    if (!Entry.Utils.isNumber(script.getNumberValue('CHANNEL'))) {
+                    if (!RoCode.Utils.isNumber(script.getNumberValue('CHANNEL'))) {
                         return;
                     }
                     const channel = Math.round(_clamp(script.getNumberValue('CHANNEL'), 0, 83));
@@ -1822,8 +1822,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_radio_send: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1856,8 +1856,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_radio_received: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -1880,8 +1880,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_get_btn: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_boolean_field',
                 statements: [],
@@ -1895,8 +1895,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         ],
                         value: 'a',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1928,8 +1928,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_get_acc: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -1944,8 +1944,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         ],
                         value: 'x',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1970,8 +1970,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_get_gesture: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_boolean_field',
                 statements: [],
@@ -1993,8 +1993,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         ],
                         value: 'up',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -2020,8 +2020,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_get_direction: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -2044,8 +2044,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_get_field_strength_axis: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -2060,8 +2060,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         ],
                         value: 'x',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -2086,8 +2086,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_get_light_level: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -2110,8 +2110,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_get_temperature: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -2134,8 +2134,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_get_sound_level: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -2158,8 +2158,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_set_pwm: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic',
                 statements: [],
@@ -2169,8 +2169,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         options: this.analogPins,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -2185,8 +2185,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         ],
                         value: 'milli',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -2226,8 +2226,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_set_servo: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic',
                 statements: [],
@@ -2237,8 +2237,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         options: this.majorPins,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -2277,8 +2277,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_get_logo: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic_boolean_field',
                 statements: [],
@@ -2292,7 +2292,7 @@ Entry.Microbit2 = new (class Microbit2 {
                 paramsKeyMap: {},
                 func: (sprite, script) => {
                     if (this.version === '1') {
-                        throw new Entry.Utils.IncompatibleError('IncompatibleError', [
+                        throw new RoCode.Utils.IncompatibleError('IncompatibleError', [
                             Lang.Msgs.microbit2_compatible_error,
                         ]);
                     }
@@ -2309,8 +2309,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_speaker_toggle: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -2322,8 +2322,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         ],
                         value: this.functionKeys.SPEAKER_ON,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -2340,7 +2340,7 @@ Entry.Microbit2 = new (class Microbit2 {
                 paramsKeyMap: { VALUE: 0 },
                 func: (sprite, script) => {
                     if (this.version === '1') {
-                        throw new Entry.Utils.IncompatibleError('IncompatibleError', [
+                        throw new RoCode.Utils.IncompatibleError('IncompatibleError', [
                             Lang.Msgs.microbit2_compatible_error,
                         ]);
                     }
@@ -2354,8 +2354,8 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
             },
             microbit2_play_sound_effect: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#ffffff',
                 skeleton: 'basic',
                 statements: [],
@@ -2376,8 +2376,8 @@ Entry.Microbit2 = new (class Microbit2 {
                         ],
                         value: 21,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -2396,7 +2396,7 @@ Entry.Microbit2 = new (class Microbit2 {
                 },
                 func: (sprite, script) => {
                     if (this.version === '1') {
-                        throw new Entry.Utils.IncompatibleError('IncompatibleError', [
+                        throw new RoCode.Utils.IncompatibleError('IncompatibleError', [
                             Lang.Msgs.microbit2_compatible_error,
                         ]);
                     }
@@ -2415,4 +2415,4 @@ Entry.Microbit2 = new (class Microbit2 {
     };
 })();
 
-module.exports = Entry.Microbit2;
+module.exports = RoCode.Microbit2;

@@ -1,4 +1,4 @@
-Entry.skeleton = {};
+RoCode.skeleton = {};
 
 // index.js 를 제외한 playground/skeleton 디렉토리 하위의 모든 js 를 불러옴
 // https://webpack.js.org/guides/dependency-management/#requirecontext

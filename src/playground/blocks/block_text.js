@@ -4,9 +4,9 @@ module.exports = {
     getBlocks() {
         return {
             text_read: {
-                color: EntryStatic.colorSet.block.default.TEXT,
-                outerLine: EntryStatic.colorSet.block.darken.TEXT,
-                fontColor: EntryStatic.colorSet.common.WHITE,
+                color: RoCodeStatic.colorSet.block.default.TEXT,
+                outerLine: RoCodeStatic.colorSet.block.darken.TEXT,
+                fontColor: RoCodeStatic.colorSet.common.WHITE,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -15,8 +15,8 @@ module.exports = {
                         value: null,
                         menuName: 'textBoxWithSelf',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.TEXT,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.TEXT,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                 ],
                 events: {},
@@ -43,7 +43,7 @@ module.exports = {
                         }
                         targetEntity = sprite;
                     } else {
-                        targetEntity = Entry.container.getEntity(targetId);
+                        targetEntity = RoCode.container.getEntity(targetId);
                     }
                     let value = targetEntity.getText() || '';
                     value = value.replace(/\n/gim, ' ');
@@ -53,16 +53,16 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.contents_of_textbox(%1)',
+                            syntax: 'RoCode.contents_of_textbox(%1)',
                             textParams: [
                                 {
                                     type: 'DropdownDynamic',
                                     value: null,
                                     menuName: 'textBoxWithSelf',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.TEXT,
-                                    converter: Entry.block.converters.returnStringKey,
-                                    codeMap: 'Entry.CodeMap.Entry.text_read[0]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.TEXT,
+                                    converter: RoCode.block.converters.returnStringKey,
+                                    codeMap: 'RoCode.CodeMap.RoCode.text_read[0]',
                                 },
                             ],
                         },
@@ -70,8 +70,8 @@ module.exports = {
                 },
             },
             text_write: {
-                color: EntryStatic.colorSet.block.default.TEXT,
-                outerLine: EntryStatic.colorSet.block.darken.TEXT,
+                color: RoCodeStatic.colorSet.block.default.TEXT,
+                outerLine: RoCodeStatic.colorSet.block.darken.TEXT,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -90,7 +90,7 @@ module.exports = {
                     params: [
                         {
                             type: 'text',
-                            params: [Lang.Blocks.entry],
+                            params: [Lang.Blocks.RoCode],
                         },
                         null,
                     ],
@@ -116,11 +116,11 @@ module.exports = {
                     sprite.setText(text);
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.write_text(%1)'] },
+                syntax: { js: [], py: ['RoCode.write_text(%1)'] },
             },
             text_append: {
-                color: EntryStatic.colorSet.block.default.TEXT,
-                outerLine: EntryStatic.colorSet.block.darken.TEXT,
+                color: RoCodeStatic.colorSet.block.default.TEXT,
+                outerLine: RoCodeStatic.colorSet.block.darken.TEXT,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -139,7 +139,7 @@ module.exports = {
                     params: [
                         {
                             type: 'text',
-                            params: [Lang.Blocks.entry],
+                            params: [Lang.Blocks.RoCode],
                         },
                         null,
                     ],
@@ -165,11 +165,11 @@ module.exports = {
                     sprite.setText(`${sprite.getText()}${text}`);
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.append_text(%1)'] },
+                syntax: { js: [], py: ['RoCode.append_text(%1)'] },
             },
             text_prepend: {
-                color: EntryStatic.colorSet.block.default.TEXT,
-                outerLine: EntryStatic.colorSet.block.darken.TEXT,
+                color: RoCodeStatic.colorSet.block.default.TEXT,
+                outerLine: RoCodeStatic.colorSet.block.darken.TEXT,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -188,7 +188,7 @@ module.exports = {
                     params: [
                         {
                             type: 'text',
-                            params: [Lang.Blocks.entry],
+                            params: [Lang.Blocks.RoCode],
                         },
                         null,
                     ],
@@ -214,11 +214,11 @@ module.exports = {
                     sprite.setText(`${text}${sprite.getText()}`);
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.prepend_text(%1)'] },
+                syntax: { js: [], py: ['RoCode.prepend_text(%1)'] },
             },
             text_change_effect: {
-                color: EntryStatic.colorSet.block.default.TEXT,
-                outerLine: EntryStatic.colorSet.block.darken.TEXT,
+                color: RoCodeStatic.colorSet.block.default.TEXT,
+                outerLine: RoCodeStatic.colorSet.block.darken.TEXT,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -234,8 +234,8 @@ module.exports = {
                         value: 'strike',
                         fontSize: 10,
                         textColor: '#fff',
-                        bgColor: EntryStatic.colorSet.block.darken.LOOKS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.LOOKS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Dropdown',
@@ -246,8 +246,8 @@ module.exports = {
                         value: 'on',
                         fontSize: 10,
                         textColor: '#fff',
-                        bgColor: EntryStatic.colorSet.block.darken.LOOKS,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.LOOKS,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -272,11 +272,11 @@ module.exports = {
                     sprite.setTextEffect(effect, mode);
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.changeTextEffect(%1, %2)'] },
+                syntax: { js: [], py: ['RoCode.changeTextEffect(%1, %2)'] },
             },
             text_change_font: {
-                color: EntryStatic.colorSet.block.default.TEXT,
-                outerLine: EntryStatic.colorSet.block.darken.TEXT,
+                color: RoCodeStatic.colorSet.block.default.TEXT,
+                outerLine: RoCodeStatic.colorSet.block.darken.TEXT,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -307,11 +307,11 @@ module.exports = {
                     sprite.setFontWithLog(`${sprite.getFontSize()} ${font}`, false);
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.text_change_font(%1)'] },
+                syntax: { js: [], py: ['RoCode.text_change_font(%1)'] },
             },
             text_change_font_color: {
-                color: EntryStatic.colorSet.block.default.TEXT,
-                outerLine: EntryStatic.colorSet.block.darken.TEXT,
+                color: RoCodeStatic.colorSet.block.default.TEXT,
+                outerLine: RoCodeStatic.colorSet.block.darken.TEXT,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -339,11 +339,11 @@ module.exports = {
                     sprite.setColorWithLog(color);
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.text_change_font_color(%1)'] },
+                syntax: { js: [], py: ['RoCode.text_change_font_color(%1)'] },
             },
             text_change_bg_color: {
-                color: EntryStatic.colorSet.block.default.TEXT,
-                outerLine: EntryStatic.colorSet.block.darken.TEXT,
+                color: RoCodeStatic.colorSet.block.default.TEXT,
+                outerLine: RoCodeStatic.colorSet.block.darken.TEXT,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -371,11 +371,11 @@ module.exports = {
                     sprite.setBGColourWithLog(color);
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.text_change_bg_color(%1)'] },
+                syntax: { js: [], py: ['RoCode.text_change_bg_color(%1)'] },
             },
             text_flush: {
-                color: EntryStatic.colorSet.block.default.TEXT,
-                outerLine: EntryStatic.colorSet.block.darken.TEXT,
+                color: RoCodeStatic.colorSet.block.default.TEXT,
+                outerLine: RoCodeStatic.colorSet.block.darken.TEXT,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -396,7 +396,7 @@ module.exports = {
                     sprite.setText('');
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.clear_text()'] },
+                syntax: { js: [], py: ['RoCode.clear_text()'] },
             },
         };
     },

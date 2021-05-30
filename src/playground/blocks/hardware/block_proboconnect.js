@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.ProboConnect = {
+RoCode.ProboConnect = {
     id: '27.1',
     name: 'ProboConnect', // isNotFor 속성과 대소문자까지 정확하게 매치되어야 합니다.
     url: 'http://www.arduino.cc/', // 생략 가능합니다. 엔트리 사이트에서 홍보시 사용됩니다.
@@ -111,13 +111,13 @@ Entry.ProboConnect = {
 
     setZero: function() {
         for (var key in this.EdgeFlag) this.EdgeFlag[key] = 0;
-        for (var key in this.RemoteData) Entry.hw.sendQueue[key] = this.RemoteData[key];
-        Entry.hw.update();
+        for (var key in this.RemoteData) RoCode.hw.sendQueue[key] = this.RemoteData[key];
+        RoCode.hw.update();
     },
 };
 
 // 언어 적용
-Entry.ProboConnect.setLanguage = function() {
+RoCode.ProboConnect.setLanguage = function() {
     return {
         ko: {
             // ko.js에 작성하던 내용
@@ -182,7 +182,7 @@ Entry.ProboConnect.setLanguage = function() {
     };
 };
 
-Entry.ProboConnect.blockMenuBlocks = [
+RoCode.ProboConnect.blockMenuBlocks = [
     //region proboconnect
     ////input
     'connect_senser_setting',
@@ -215,11 +215,11 @@ Entry.ProboConnect.blockMenuBlocks = [
 ];
 
 // 블록 생성
-Entry.ProboConnect.getBlocks = function() {
+RoCode.ProboConnect.getBlocks = function() {
     return {
         connect_remote_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -243,8 +243,8 @@ Entry.ProboConnect.getBlocks = function() {
                         ['R_R2', 'R_R2'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -259,12 +259,12 @@ Entry.ProboConnect.getBlocks = function() {
             func: function(sprite, script) {
                 const btn = script.getStringField('BUTTON', script);
 
-                return Entry.hw.portData.InputData.Remote[btn] == 1 ? true : false;
+                return RoCode.hw.portData.InputData.Remote[btn] == 1 ? true : false;
             },
         },
         connect_digital_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -291,8 +291,8 @@ Entry.ProboConnect.getBlocks = function() {
                     ],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -322,22 +322,22 @@ Entry.ProboConnect.getBlocks = function() {
                     port == 'BEA3' ||
                     port == 'BEA4'
                 ) {
-                    if (Entry.hw.portData.InputData.Digital[port] == 1) {
-                        if (Entry.ProboConnect.EdgeFlag[port] == 0) {
-                            Entry.ProboConnect.EdgeFlag[port] = 1;
+                    if (RoCode.hw.portData.InputData.Digital[port] == 1) {
+                        if (RoCode.ProboConnect.EdgeFlag[port] == 0) {
+                            RoCode.ProboConnect.EdgeFlag[port] = 1;
                             rt = true;
                         }
                     } else {
-                        Entry.ProboConnect.EdgeFlag[port] = 0;
+                        RoCode.ProboConnect.EdgeFlag[port] = 0;
                     }
-                } else rt = Entry.hw.portData.InputData.Digital[port] == 1 ? true : false;
+                } else rt = RoCode.hw.portData.InputData.Digital[port] == 1 ? true : false;
 
                 return rt;
             },
         },
         connect_analog_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_string_field',
             params: [
@@ -349,8 +349,8 @@ Entry.ProboConnect.getBlocks = function() {
                     options: [['AA1', 'AA1'], ['AA2', 'AA2'], ['AA3', 'AA3'], ['AA4', 'AA4']],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -369,12 +369,12 @@ Entry.ProboConnect.getBlocks = function() {
                 const port = script.getStringField('PORT', script);
 
                 // Port 라는 key값을 가진 정보를 읽는다.
-                return Entry.hw.portData.InputData.Analog[port];
+                return RoCode.hw.portData.InputData.Analog[port];
             },
         },
         connect_value_mapping: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_string_field',
             params: [
@@ -445,8 +445,8 @@ Entry.ProboConnect.getBlocks = function() {
             },
         },
         connect_color_input_b: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -455,8 +455,8 @@ Entry.ProboConnect.getBlocks = function() {
                     options: [['AA1', 'AA1'], ['AA2', 'AA2'], ['AA3', 'AA3'], ['AA4', 'AA4']],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -470,8 +470,8 @@ Entry.ProboConnect.getBlocks = function() {
                     ],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -487,15 +487,15 @@ Entry.ProboConnect.getBlocks = function() {
             func: function(sprite, script) {
                 const port = script.getStringField('PORT', script);
                 const target = script.getNumberField('COLOR', script);
-                const value = Entry.hw.portData.InputData.Analog[port];
-                var color = Entry.ProboConnect.Color;
+                const value = RoCode.hw.portData.InputData.Analog[port];
+                var color = RoCode.ProboConnect.Color;
 
                 return color[target][0] <= value && value <= color[target][1];
             },
         },
         connect_color_input_r: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_string_field',
             params: [
@@ -504,8 +504,8 @@ Entry.ProboConnect.getBlocks = function() {
                     options: [['AA1', 'AA1'], ['AA2', 'AA2'], ['AA3', 'AA3'], ['AA4', 'AA4']],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -519,8 +519,8 @@ Entry.ProboConnect.getBlocks = function() {
             isNotFor: ['ProboConnect'],
             func: function(sprite, script) {
                 const port = script.getStringField('PORT', script);
-                const value = Entry.hw.portData.InputData.Analog[port];
-                var color = Entry.ProboConnect.Color;
+                const value = RoCode.hw.portData.InputData.Analog[port];
+                var color = RoCode.ProboConnect.Color;
 
                 for (var i = 0; i < 6; i++) {
                     if (color[i][0] <= value && value <= color[i][1]) {
@@ -544,8 +544,8 @@ Entry.ProboConnect.getBlocks = function() {
             },
         },
         connect_infinite_reset: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             params: [
@@ -554,8 +554,8 @@ Entry.ProboConnect.getBlocks = function() {
                     options: [['AA1', 'AA1'], ['AA2', 'AA2'], ['AA3', 'AA3'], ['AA4', 'AA4']],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -574,15 +574,15 @@ Entry.ProboConnect.getBlocks = function() {
             isNotFor: ['ProboConnect'],
             func: function(sprite, script) {
                 const port = script.getStringField('PORT', script);
-                const value = Entry.hw.portData.InputData.Analog[port];
-                Entry.ProboConnect.Infinite_Start[port] = value;
-                Entry.ProboConnect.Infinite_Buff[port] = Entry.ProboConnect.Infinite_Start[port];
-                Entry.ProboConnect.Infinite_Count[port] = 0;
+                const value = RoCode.hw.portData.InputData.Analog[port];
+                RoCode.ProboConnect.Infinite_Start[port] = value;
+                RoCode.ProboConnect.Infinite_Buff[port] = RoCode.ProboConnect.Infinite_Start[port];
+                RoCode.ProboConnect.Infinite_Count[port] = 0;
             },
         },
         connect_infinite_transform_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_string_field',
             params: [
@@ -591,16 +591,16 @@ Entry.ProboConnect.getBlocks = function() {
                     options: [['AA1', 'AA1'], ['AA2', 'AA2'], ['AA3', 'AA3'], ['AA4', 'AA4']],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [['값', '1'], ['각도', '2'], ['회전 수', '3']],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -615,33 +615,33 @@ Entry.ProboConnect.getBlocks = function() {
             isNotFor: ['ProboConnect'],
             func: function(sprite, script) {
                 const port = script.getStringField('PORT', script);
-                const value = Entry.hw.portData.InputData.Analog[port];
+                const value = RoCode.hw.portData.InputData.Analog[port];
                 const select = script.getNumberField('SELECT', script);
 
-                if (value < Entry.ProboConnect.Infinite_Buff[port] - 150)
-                    Entry.ProboConnect.Infinite_Count[port]++;
-                else if (value > Entry.ProboConnect.Infinite_Buff[port] + 150)
-                    Entry.ProboConnect.Infinite_Count[port]--;
+                if (value < RoCode.ProboConnect.Infinite_Buff[port] - 150)
+                    RoCode.ProboConnect.Infinite_Count[port]++;
+                else if (value > RoCode.ProboConnect.Infinite_Buff[port] + 150)
+                    RoCode.ProboConnect.Infinite_Count[port]--;
 
-                Entry.ProboConnect.Infinite_Buff[port] = value;
+                RoCode.ProboConnect.Infinite_Buff[port] = value;
 
                 switch (select) {
                     case 2:
                         return value * 1.41732;
                     case 3:
-                        return Entry.ProboConnect.Infinite_Count[port];
+                        return RoCode.ProboConnect.Infinite_Count[port];
                     default:
                         return (
                             value -
-                            Entry.ProboConnect.Infinite_Start[port] +
-                            Entry.ProboConnect.Infinite_Count[port] * 255
+                            RoCode.ProboConnect.Infinite_Start[port] +
+                            RoCode.ProboConnect.Infinite_Count[port] * 255
                         );
                 }
             },
         },
         connect_infinite_mm_diameter: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_string_field',
             params: [
@@ -650,8 +650,8 @@ Entry.ProboConnect.getBlocks = function() {
                     options: [['AA1', 'AA1'], ['AA2', 'AA2'], ['AA3', 'AA3'], ['AA4', 'AA4']],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -670,13 +670,13 @@ Entry.ProboConnect.getBlocks = function() {
             isNotFor: ['ProboConnect'],
             func: function(sprite, script) {
                 const port = script.getStringField('PORT', script);
-                const value = Entry.hw.portData.InputData.Analog[port];
+                const value = RoCode.hw.portData.InputData.Analog[port];
                 const diameter = script.getNumberField('DIAMETER', script);
 
-                if (value < Entry.ProboConnect.Infinite_Buff[port] - 150)
-                    Entry.ProboConnect.Infinite_Count[port]++;
-                else if (value > Entry.ProboConnect.Infinite_Buff[port] + 150)
-                    Entry.ProboConnect.Infinite_Count[port]--;
+                if (value < RoCode.ProboConnect.Infinite_Buff[port] - 150)
+                    RoCode.ProboConnect.Infinite_Count[port]++;
+                else if (value > RoCode.ProboConnect.Infinite_Buff[port] + 150)
+                    RoCode.ProboConnect.Infinite_Count[port]--;
 
                 return Number(
                     2 *
@@ -684,16 +684,16 @@ Entry.ProboConnect.getBlocks = function() {
                         (diameter / 2) /
                         255 *
                         (value -
-                            Entry.ProboConnect.Infinite_Start[port] +
-                            Entry.ProboConnect.Infinite_Count[port] * 255)
+                            RoCode.ProboConnect.Infinite_Start[port] +
+                            RoCode.ProboConnect.Infinite_Count[port] * 255)
                 ).toFixed(3);
             },
         },
 
         //============================================ output =====================================================
         connect_senser_setting: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             params: [
@@ -716,8 +716,8 @@ Entry.ProboConnect.getBlocks = function() {
                     ],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -738,8 +738,8 @@ Entry.ProboConnect.getBlocks = function() {
                     ],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -760,8 +760,8 @@ Entry.ProboConnect.getBlocks = function() {
                     ],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -782,8 +782,8 @@ Entry.ProboConnect.getBlocks = function() {
                     ],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -845,13 +845,13 @@ Entry.ProboConnect.getBlocks = function() {
                     }
                 }
 
-                Entry.hw.sendQueue['ASET2'] = (value[0] << 4) | value[1];
-                Entry.hw.sendQueue['ASET1'] = (value[2] << 4) | value[3];
+                RoCode.hw.sendQueue['ASET2'] = (value[0] << 4) | value[1];
+                RoCode.hw.sendQueue['ASET1'] = (value[2] << 4) | value[3];
             },
         },
         connect_port_output: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             params: [
@@ -860,16 +860,16 @@ Entry.ProboConnect.getBlocks = function() {
                     options: [['B1', 'B1'], ['B2', 'B2'], ['B3', 'B3'], ['B4', 'B4']],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [['on', 1], ['off', 0]],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -891,12 +891,12 @@ Entry.ProboConnect.getBlocks = function() {
                 const motor = script.getStringField('PORT', script);
                 const value = script.getNumberField('VALUE', script);
 
-                Entry.hw.sendQueue[motor] = value;
+                RoCode.hw.sendQueue[motor] = value;
             },
         },
         connect_servo_output: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             params: [
@@ -910,8 +910,8 @@ Entry.ProboConnect.getBlocks = function() {
                     ],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -937,12 +937,12 @@ Entry.ProboConnect.getBlocks = function() {
                 const servo = script.getStringField('SERVO', script);
                 const value = script.getNumberValue('VALUE', script) | 0x80;
 
-                Entry.hw.sendQueue[servo] = value;
+                RoCode.hw.sendQueue[servo] = value;
             },
         },
         connect_dc_output: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             params: [
@@ -951,8 +951,8 @@ Entry.ProboConnect.getBlocks = function() {
                     options: [['M1', 'DC1'], ['M2', 'DC2'], ['M3', 'DC3'], ['M4', 'DC4']],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -978,12 +978,12 @@ Entry.ProboConnect.getBlocks = function() {
                 const motor = script.getStringField('MOTOR', script);
                 const value = script.getNumberValue('VALUE', script);
 
-                Entry.hw.sendQueue[motor] = value;
+                RoCode.hw.sendQueue[motor] = value;
             },
         },
         connect_mel_sec_output: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             params: [
@@ -1021,8 +1021,8 @@ Entry.ProboConnect.getBlocks = function() {
                     ],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1052,19 +1052,19 @@ Entry.ProboConnect.getBlocks = function() {
                     var timeValue = script.getNumberValue('SEC', script);
                     var melody = 0;
 
-                    if (mel > 0 && mel < 13) melody = Entry.ProboConnect.Melody[mel];
-                    else if (mel < 25) melody = Entry.ProboConnect.Melody[mel - 12] / 2;
-                    else if (mel < 37) melody = Entry.ProboConnect.Melody[mel - 24] / 4;
-                    else if (mel < 49) melody = Entry.ProboConnect.Melody[mel - 36] / 8;
+                    if (mel > 0 && mel < 13) melody = RoCode.ProboConnect.Melody[mel];
+                    else if (mel < 25) melody = RoCode.ProboConnect.Melody[mel - 12] / 2;
+                    else if (mel < 37) melody = RoCode.ProboConnect.Melody[mel - 24] / 4;
+                    else if (mel < 49) melody = RoCode.ProboConnect.Melody[mel - 36] / 8;
 
-                    Entry.hw.sendQueue['MEL2'] = melody >> 8;
-                    Entry.hw.sendQueue['MEL1'] = melody;
+                    RoCode.hw.sendQueue['MEL2'] = melody >> 8;
+                    RoCode.hw.sendQueue['MEL1'] = melody;
 
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     timeValue = 60 / fps * timeValue * 1000;
 
                     var blockId = script.block.id;
-                    Entry.TimeWaitManager.add(
+                    RoCode.TimeWaitManager.add(
                         blockId,
                         function() {
                             script.timeFlag = 0;
@@ -1075,19 +1075,19 @@ Entry.ProboConnect.getBlocks = function() {
                 } else if (script.timeFlag == 1) {
                     return script;
                 } else {
-                    Entry.hw.sendQueue['MEL2'] = 0;
-                    Entry.hw.sendQueue['MEL1'] = 0;
+                    RoCode.hw.sendQueue['MEL2'] = 0;
+                    RoCode.hw.sendQueue['MEL1'] = 0;
 
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         connect_melody_output: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             params: [
@@ -1125,8 +1125,8 @@ Entry.ProboConnect.getBlocks = function() {
                     ],
                     fontSize: 11,
 
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1147,18 +1147,18 @@ Entry.ProboConnect.getBlocks = function() {
                 const mel = script.getNumberField('MELODY', script);
                 var melody = 0;
 
-                if (mel > 0 && mel < 13) melody = Entry.ProboConnect.Melody[mel];
-                else if (mel < 25) melody = Entry.ProboConnect.Melody[mel - 12] / 2;
-                else if (mel < 37) melody = Entry.ProboConnect.Melody[mel - 24] / 4;
-                else if (mel < 49) melody = Entry.ProboConnect.Melody[mel - 36] / 8;
+                if (mel > 0 && mel < 13) melody = RoCode.ProboConnect.Melody[mel];
+                else if (mel < 25) melody = RoCode.ProboConnect.Melody[mel - 12] / 2;
+                else if (mel < 37) melody = RoCode.ProboConnect.Melody[mel - 24] / 4;
+                else if (mel < 49) melody = RoCode.ProboConnect.Melody[mel - 36] / 8;
 
-                Entry.hw.sendQueue['MEL2'] = melody >> 8;
-                Entry.hw.sendQueue['MEL1'] = melody;
+                RoCode.hw.sendQueue['MEL2'] = melody >> 8;
+                RoCode.hw.sendQueue['MEL1'] = melody;
             },
         },
         connect_melody_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             params: [
@@ -1175,13 +1175,13 @@ Entry.ProboConnect.getBlocks = function() {
             class: 'output',
             isNotFor: ['ProboConnect'],
             func: function(sprite, script) {
-                Entry.hw.sendQueue['MEL2'] = 0;
-                Entry.hw.sendQueue['MEL1'] = 0;
+                RoCode.hw.sendQueue['MEL2'] = 0;
+                RoCode.hw.sendQueue['MEL1'] = 0;
             },
         },
         connect_fnd_output: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             params: [
@@ -1206,12 +1206,12 @@ Entry.ProboConnect.getBlocks = function() {
             isNotFor: ['ProboConnect'],
             func: function(sprite, script) {
                 const fnd = script.getNumberValue('FND', script);
-                Entry.hw.sendQueue['FND'] = fnd;
+                RoCode.hw.sendQueue['FND'] = fnd;
             },
         },
         connect_fnd_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             params: [
@@ -1228,14 +1228,14 @@ Entry.ProboConnect.getBlocks = function() {
             class: 'output',
             isNotFor: ['ProboConnect'],
             func: function(sprite, script) {
-                Entry.hw.sendQueue['FND'] = 100;
+                RoCode.hw.sendQueue['FND'] = 100;
             },
         },
 
         //============================================ EEPROM =====================================================
         connect_eeprom_buffset: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             params: [
@@ -1261,18 +1261,18 @@ Entry.ProboConnect.getBlocks = function() {
             func: function(sprite, script) {
                 const address = script.getNumberValue('ADDRESS', script);
                 if (!script.isStart) {
-                    Entry.ProboConnect.EEPROM.EEPROM_Count = Entry.hw.portData.InputData.EEPROM.EC;
-                    Entry.hw.sendQueue['EEPR4'] = 0x40;
-                    Entry.hw.sendQueue['EEPR3'] = address;
+                    RoCode.ProboConnect.EEPROM.EEPROM_Count = RoCode.hw.portData.InputData.EEPROM.EC;
+                    RoCode.hw.sendQueue['EEPR4'] = 0x40;
+                    RoCode.hw.sendQueue['EEPR3'] = address;
 
                     script.isStart = true;
                     script.timeFlag = 1;
                     var timeValue = 0.05;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     timeValue = 60 / fps * timeValue * 1000;
 
                     var blockId = script.block.id;
-                    Entry.TimeWaitManager.add(
+                    RoCode.TimeWaitManager.add(
                         blockId,
                         function() {
                             script.timeFlag = 0;
@@ -1284,21 +1284,21 @@ Entry.ProboConnect.getBlocks = function() {
                 } else if (script.timeFlag == 1) {
                     return script;
                 } else {
-                    Entry.ProboConnect.EEPROM.EEPROM_Buff =
-                        (Entry.hw.portData.InputData.EEPROM.EEPR2 << 8) +
-                        Entry.hw.portData.InputData.EEPROM.EEPR1;
-                    Entry.hw.sendQueue['EEPR4'] = 0;
+                    RoCode.ProboConnect.EEPROM.EEPROM_Buff =
+                        (RoCode.hw.portData.InputData.EEPROM.EEPR2 << 8) +
+                        RoCode.hw.portData.InputData.EEPROM.EEPR1;
+                    RoCode.hw.sendQueue['EEPR4'] = 0;
 
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         connect_buff_read: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_string_field',
             def: {
@@ -1308,16 +1308,16 @@ Entry.ProboConnect.getBlocks = function() {
             isNotFor: ['ProboConnect'],
             func: function(sprite, script) {
                 var value = 0;
-                const count = Entry.ProboConnect.EEPROM.EEPROM_Count;
-                if (Entry.hw.portData.InputData.EEPROM.EC != count) {
-                    value = Entry.ProboConnect.EEPROM.EEPROM_Buff;
+                const count = RoCode.ProboConnect.EEPROM.EEPROM_Count;
+                if (RoCode.hw.portData.InputData.EEPROM.EC != count) {
+                    value = RoCode.ProboConnect.EEPROM.EEPROM_Buff;
                 }
                 return value;
             },
         },
         connect_eeprom_write: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             params: [
@@ -1353,19 +1353,19 @@ Entry.ProboConnect.getBlocks = function() {
                 const address = script.getNumberValue('ADDRESS', script);
                 const value = script.getNumberValue('VALUE', script);
                 if (!script.isStart) {
-                    Entry.hw.sendQueue['EEPR4'] = 0x80;
-                    Entry.hw.sendQueue['EEPR3'] = address;
-                    Entry.hw.sendQueue['EEPR2'] = value >> 8;
-                    Entry.hw.sendQueue['EEPR1'] = value & 0xff;
+                    RoCode.hw.sendQueue['EEPR4'] = 0x80;
+                    RoCode.hw.sendQueue['EEPR3'] = address;
+                    RoCode.hw.sendQueue['EEPR2'] = value >> 8;
+                    RoCode.hw.sendQueue['EEPR1'] = value & 0xff;
 
                     script.isStart = true;
                     script.timeFlag = 1;
                     var timeValue = 0.05;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     timeValue = 60 / fps * timeValue * 1000;
 
                     var blockId = script.block.id;
-                    Entry.TimeWaitManager.add(
+                    RoCode.TimeWaitManager.add(
                         blockId,
                         function() {
                             script.timeFlag = 0;
@@ -1379,7 +1379,7 @@ Entry.ProboConnect.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1387,4 +1387,4 @@ Entry.ProboConnect.getBlocks = function() {
     };
 };
 
-module.exports = Entry.ProboConnect;
+module.exports = RoCode.ProboConnect;

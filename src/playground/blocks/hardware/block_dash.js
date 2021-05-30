@@ -6,7 +6,7 @@ var DashState = {
     STATE_DONE: 'done',
 };
 
-Entry.Dash = {
+RoCode.Dash = {
     PORT_MAP: {
         seq: 0,
         category: 0,
@@ -20,15 +20,15 @@ Entry.Dash = {
         modeB: 0,
     },
     setZero: function() {
-        var portMap = Entry.Dash.PORT_MAP;
-        var sq = Entry.hw.sendQueue;
-        Entry.Dash.sequance = 1;
-        Entry.Dash.isStarted = false;
-        Entry.Dash.state = DashState.STATE_DONE;
+        var portMap = RoCode.Dash.PORT_MAP;
+        var sq = RoCode.hw.sendQueue;
+        RoCode.Dash.sequance = 1;
+        RoCode.Dash.isStarted = false;
+        RoCode.Dash.state = DashState.STATE_DONE;
         for (var port in portMap) {
             sq[port] = portMap[port];
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     id: '24.1',
     name: 'Dash',
@@ -47,7 +47,7 @@ Entry.Dash = {
     isStarted: false,
     state: DashState.STATE_DONE,
 };
-Entry.Dash.blockMenuBlocks = [
+RoCode.Dash.blockMenuBlocks = [
     //region dash
     'dash_sensor1',
     'dash_sensor2',
@@ -71,12 +71,12 @@ Entry.Dash.blockMenuBlocks = [
     //endregion dash
 ];
 
-Entry.Dash.getBlocks = function() {
+RoCode.Dash.getBlocks = function() {
     return {
         // 소리
         dash_sound_say: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -97,8 +97,8 @@ Entry.Dash.getBlocks = function() {
                         ['무작위', 0x1e],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -118,10 +118,10 @@ Entry.Dash.getBlocks = function() {
             class: 'Dash_Sound',
             isNotFor: ['Dash'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var var1 = script.getNumberField('SOUND', script);
-                if (!Entry.Dash.isStarted) {
+                if (!RoCode.Dash.isStarted) {
                     sq.category = 5; // 소리
                     sq.action = 2; // 말하기
                     sq.param_cnt = 1; // param 갯수
@@ -130,29 +130,29 @@ Entry.Dash.getBlocks = function() {
                     }
                     sq.paramA = var1;
                     sq.modeA = 2; // WR
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             // 재생이 시작되었는지 확인
                             if (pd.isPlaying) {
-                                Entry.Dash.state = DashState.STATE_WAIT;
+                                RoCode.Dash.state = DashState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case DashState.STATE_WAIT:
                             // 재생이 끝났는지 확인
                             if (!pd.isPlaying) {
-                                Entry.Dash.state = DashState.STATE_DONE;
+                                RoCode.Dash.state = DashState.STATE_DONE;
                             }
                             return script;
                             break;
                         case DashState.STATE_DONE:
                             // 다음 블럭 진행
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -161,8 +161,8 @@ Entry.Dash.getBlocks = function() {
             },
         },
         dash_sound_animal: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -182,8 +182,8 @@ Entry.Dash.getBlocks = function() {
                         ['무작위', 0x1e],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -203,10 +203,10 @@ Entry.Dash.getBlocks = function() {
             class: 'Dash_Sound',
             isNotFor: ['Dash'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var var1 = script.getNumberField('SOUND', script);
-                if (!Entry.Dash.isStarted) {
+                if (!RoCode.Dash.isStarted) {
                     console.log(var1);
                     sq.category = 5; // 소리
                     sq.action = 2; // 말하기
@@ -216,29 +216,29 @@ Entry.Dash.getBlocks = function() {
                     }
                     sq.paramA = var1;
                     sq.modeA = 2; // WR
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             // 재생이 시작되었는지 확인
                             if (pd.isPlaying) {
-                                Entry.Dash.state = DashState.STATE_WAIT;
+                                RoCode.Dash.state = DashState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case DashState.STATE_WAIT:
                             // 재생이 끝났는지 확인
                             if (!pd.isPlaying) {
-                                Entry.Dash.state = DashState.STATE_DONE;
+                                RoCode.Dash.state = DashState.STATE_DONE;
                             }
                             return script;
                             break;
                         case DashState.STATE_DONE:
                             // 다음 블럭 진행
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             console.log('Goto Next Block');
                             return script.callReturn();
                             break;
@@ -248,8 +248,8 @@ Entry.Dash.getBlocks = function() {
             },
         },
         dash_sound_move: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -269,8 +269,8 @@ Entry.Dash.getBlocks = function() {
                         ['무작위', 0x1e],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -290,10 +290,10 @@ Entry.Dash.getBlocks = function() {
             class: 'Dash_Sound',
             isNotFor: ['Dash'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var var1 = script.getNumberField('SOUND', script);
-                if (!Entry.Dash.isStarted) {
+                if (!RoCode.Dash.isStarted) {
                     console.log(var1);
                     sq.category = 5; // 소리
                     sq.action = 2; // 말하기
@@ -303,29 +303,29 @@ Entry.Dash.getBlocks = function() {
                     }
                     sq.paramA = var1;
                     sq.modeA = 2; // WR
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             // 재생이 시작되었는지 확인
                             if (pd.isPlaying) {
-                                Entry.Dash.state = DashState.STATE_WAIT;
+                                RoCode.Dash.state = DashState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case DashState.STATE_WAIT:
                             // 재생이 끝났는지 확인
                             if (!pd.isPlaying) {
-                                Entry.Dash.state = DashState.STATE_DONE;
+                                RoCode.Dash.state = DashState.STATE_DONE;
                             }
                             return script;
                             break;
                         case DashState.STATE_DONE:
                             // 다음 블럭 진행
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             console.log('Goto Next Block');
                             return script.callReturn();
                             break;
@@ -335,8 +335,8 @@ Entry.Dash.getBlocks = function() {
             },
         },
         dash_sound_strange: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -354,8 +354,8 @@ Entry.Dash.getBlocks = function() {
                         ['무작위', 0x1e],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -375,10 +375,10 @@ Entry.Dash.getBlocks = function() {
             class: 'Dash_Sound',
             isNotFor: ['Dash'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var var1 = script.getNumberField('SOUND', script);
-                if (!Entry.Dash.isStarted) {
+                if (!RoCode.Dash.isStarted) {
                     console.log(var1);
                     sq.category = 5; // 소리
                     sq.action = 2; // 말하기
@@ -388,29 +388,29 @@ Entry.Dash.getBlocks = function() {
                     }
                     sq.paramA = var1;
                     sq.modeA = 2; // WR
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             // 재생이 시작되었는지 확인
                             if (pd.isPlaying) {
-                                Entry.Dash.state = DashState.STATE_WAIT;
+                                RoCode.Dash.state = DashState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case DashState.STATE_WAIT:
                             // 재생이 끝났는지 확인
                             if (!pd.isPlaying) {
-                                Entry.Dash.state = DashState.STATE_DONE;
+                                RoCode.Dash.state = DashState.STATE_DONE;
                             }
                             return script;
                             break;
                         case DashState.STATE_DONE:
                             // 다음 블럭 진행
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             console.log('Goto Next Block');
                             return script.callReturn();
                             break;
@@ -420,8 +420,8 @@ Entry.Dash.getBlocks = function() {
             },
         },
         dash_my_sound: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -442,8 +442,8 @@ Entry.Dash.getBlocks = function() {
                         ['#10', 0x09],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -463,38 +463,38 @@ Entry.Dash.getBlocks = function() {
             class: 'Dash_Sound',
             isNotFor: ['Dash'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var var1 = script.getNumberField('SOUND', script);
-                if (!Entry.Dash.isStarted) {
+                if (!RoCode.Dash.isStarted) {
                     sq.category = 5;
                     sq.action = 1;
                     sq.param_cnt = 1;
                     sq.paramA = var1;
                     sq.modeA = 2;
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             // 재생이 시작되었는지 확인
                             if (pd.isPlaying) {
-                                Entry.Dash.state = DashState.STATE_WAIT;
+                                RoCode.Dash.state = DashState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case DashState.STATE_WAIT:
                             // 재생이 끝났는지 확인
                             if (!pd.isPlaying) {
-                                Entry.Dash.state = DashState.STATE_DONE;
+                                RoCode.Dash.state = DashState.STATE_DONE;
                             }
                             return script;
                             break;
                         case DashState.STATE_DONE:
                             // 다음 블럭 진행
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -504,8 +504,8 @@ Entry.Dash.getBlocks = function() {
         },
         // LED
         dash_light_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -520,8 +520,8 @@ Entry.Dash.getBlocks = function() {
                         ['전면', 0x04],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Color',
@@ -546,9 +546,9 @@ Entry.Dash.getBlocks = function() {
             func: function(sprite, script) {
                 var var1 = script.getNumberField('LED', script);
                 var var2 = script.getStringField('COLOR', script);
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Dash.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Dash.isStarted) {
                     sq.category = 4;
                     sq.action = var1;
                     sq.param_cnt = 1;
@@ -556,24 +556,24 @@ Entry.Dash.getBlocks = function() {
                     sq.paramB = parseInt(parseInt(var2.substr(3, 2), 16));
                     sq.paramC = parseInt(parseInt(var2.substr(5, 2), 16));
                     sq.modeA = 3;
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             var timer = setTimeout(function() {
-                                Entry.Dash.state = DashState.STATE_DONE;
+                                RoCode.Dash.state = DashState.STATE_DONE;
                             }, 500);
-                            Entry.Dash.state = DashState.STATE_WAIT;
+                            RoCode.Dash.state = DashState.STATE_WAIT;
                             return script;
                             break;
                         case DashState.STATE_WAIT:
                             return script;
                             break;
                         case DashState.STATE_DONE:
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -582,8 +582,8 @@ Entry.Dash.getBlocks = function() {
             },
         },
         dash_tail_light_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -596,8 +596,8 @@ Entry.Dash.getBlocks = function() {
                         ['끄기', 0x00],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Color',
@@ -620,32 +620,32 @@ Entry.Dash.getBlocks = function() {
             isNotFor: ['Dash'],
             func: function(sprite, script) {
                 var var1 = script.getNumberField('LED', script);
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Dash.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Dash.isStarted) {
                     sq.category = 4;
                     sq.action = 0x05;
                     sq.param_cnt = 1;
                     sq.paramA = var1;
                     sq.modeA = 3;
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             var timer = setTimeout(function() {
-                                Entry.Dash.state = DashState.STATE_DONE;
+                                RoCode.Dash.state = DashState.STATE_DONE;
                             }, 500);
-                            Entry.Dash.state = DashState.STATE_WAIT;
+                            RoCode.Dash.state = DashState.STATE_WAIT;
                             return script;
                             break;
                         case DashState.STATE_WAIT:
                             return script;
                             break;
                         case DashState.STATE_DONE:
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -654,8 +654,8 @@ Entry.Dash.getBlocks = function() {
             },
         },
         dash_eye: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -672,8 +672,8 @@ Entry.Dash.getBlocks = function() {
                         ['모두 켜기', 0x05],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -693,32 +693,32 @@ Entry.Dash.getBlocks = function() {
             isNotFor: ['Dash'],
             func: function(sprite, script) {
                 var var1 = script.getNumberField('EYE', script);
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Dash.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Dash.isStarted) {
                     sq.category = 4;
                     sq.action = 6;
                     sq.param_cnt = 1;
                     sq.paramA = var1;
                     sq.modeA = 3;
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             var timer = setTimeout(function() {
-                                Entry.Dash.state = DashState.STATE_DONE;
+                                RoCode.Dash.state = DashState.STATE_DONE;
                             }, 500);
-                            Entry.Dash.state = DashState.STATE_WAIT;
+                            RoCode.Dash.state = DashState.STATE_WAIT;
                             return script;
                             break;
                         case DashState.STATE_WAIT:
                             return script;
                             break;
                         case DashState.STATE_DONE:
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -728,8 +728,8 @@ Entry.Dash.getBlocks = function() {
         },
         // 머리
         dash_v_head: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -743,8 +743,8 @@ Entry.Dash.getBlocks = function() {
                         ['아래쪽', 0x06],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -764,31 +764,31 @@ Entry.Dash.getBlocks = function() {
             isNotFor: ['Dash'],
             func: function(sprite, script) {
                 var var1 = script.getNumberField('DIRECTION', script);
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Dash.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Dash.isStarted) {
                     sq.category = 3;
                     sq.action = var1;
                     sq.param_cnt = 0;
                     sq.modeA = 3;
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             var timer = setTimeout(function() {
-                                Entry.Dash.state = DashState.STATE_DONE;
+                                RoCode.Dash.state = DashState.STATE_DONE;
                             }, 500);
-                            Entry.Dash.state = DashState.STATE_WAIT;
+                            RoCode.Dash.state = DashState.STATE_WAIT;
                             return script;
                             break;
                         case DashState.STATE_WAIT:
                             return script;
                             break;
                         case DashState.STATE_DONE:
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -797,8 +797,8 @@ Entry.Dash.getBlocks = function() {
             },
         },
         dash_h_head: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -812,8 +812,8 @@ Entry.Dash.getBlocks = function() {
                         ['오른쪽', 0x03],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 // {	// 드롭다운으로 변경
                 // 	"type": "Angle",
@@ -832,8 +832,8 @@ Entry.Dash.getBlocks = function() {
                         ['120˚', 120],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -855,9 +855,9 @@ Entry.Dash.getBlocks = function() {
             func: function(sprite, script) {
                 var var1 = script.getNumberField('DIRECTION', script);
                 var var2 = script.getNumberField('VALUE', script);
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Dash.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Dash.isStarted) {
                     sq.category = 3;
                     sq.action = var1;
                     sq.param_cnt = 1;
@@ -866,24 +866,24 @@ Entry.Dash.getBlocks = function() {
                     }
                     sq.paramA = var2;
                     sq.modeA = 3;
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             var timer = setTimeout(function() {
-                                Entry.Dash.state = DashState.STATE_DONE;
+                                RoCode.Dash.state = DashState.STATE_DONE;
                             }, 500);
-                            Entry.Dash.state = DashState.STATE_WAIT;
+                            RoCode.Dash.state = DashState.STATE_WAIT;
                             return script;
                             break;
                         case DashState.STATE_WAIT:
                             return script;
                             break;
                         case DashState.STATE_DONE:
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -892,8 +892,8 @@ Entry.Dash.getBlocks = function() {
             },
         },
         dash_forward_head: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -916,31 +916,31 @@ Entry.Dash.getBlocks = function() {
             class: 'Dash_head',
             isNotFor: ['Dash'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Dash.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Dash.isStarted) {
                     sq.category = 3;
                     sq.action = 0x02;
                     sq.param_cnt = 0;
                     sq.modeA = 3;
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             var timer = setTimeout(function() {
-                                Entry.Dash.state = DashState.STATE_DONE;
+                                RoCode.Dash.state = DashState.STATE_DONE;
                             }, 500);
-                            Entry.Dash.state = DashState.STATE_WAIT;
+                            RoCode.Dash.state = DashState.STATE_WAIT;
                             return script;
                             break;
                         case DashState.STATE_WAIT:
                             return script;
                             break;
                         case DashState.STATE_DONE:
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -949,8 +949,8 @@ Entry.Dash.getBlocks = function() {
             },
         },
         dash_voice_head: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -973,24 +973,24 @@ Entry.Dash.getBlocks = function() {
             class: 'Dash_head',
             isNotFor: ['Dash'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Dash.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Dash.isStarted) {
                     sq.category = 3;
                     sq.action = 7;
                     sq.param_cnt = 0;
                     sq.modeA = 3;
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             if (pd.soundDirection) {
-                                Entry.Dash.state = DashState.STATE_WAIT;
+                                RoCode.Dash.state = DashState.STATE_WAIT;
                                 var timer = setTimeout(function() {
-                                    Entry.Dash.state = DashState.STATE_DONE;
+                                    RoCode.Dash.state = DashState.STATE_DONE;
                                 }, 500);
                             }
                             return script;
@@ -999,7 +999,7 @@ Entry.Dash.getBlocks = function() {
                             return script;
                             break;
                         case DashState.STATE_DONE:
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -1009,8 +1009,8 @@ Entry.Dash.getBlocks = function() {
         },
         // 움직임
         dash_turn_drive: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1023,8 +1023,8 @@ Entry.Dash.getBlocks = function() {
                         ['반 시계 방향', 0x04],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1051,34 +1051,34 @@ Entry.Dash.getBlocks = function() {
             func: function(sprite, script) {
                 var var1 = script.getNumberField('ROTATION', script);
                 var var2 = script.getNumberValue('VALUE', script);
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Dash.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Dash.isStarted) {
                     sq.category = 1;
                     sq.action = var1;
                     sq.param_cnt = 1;
                     sq.paramA = var2;
                     sq.modeA = 3;
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             if (pd.isDriving) {
-                                Entry.Dash.state = DashState.STATE_WAIT;
+                                RoCode.Dash.state = DashState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case DashState.STATE_WAIT:
                             if (!pd.isDriving) {
-                                Entry.Dash.state = DashState.STATE_DONE;
+                                RoCode.Dash.state = DashState.STATE_DONE;
                             }
                             return script;
                             break;
                         case DashState.STATE_DONE:
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -1087,8 +1087,8 @@ Entry.Dash.getBlocks = function() {
             },
         },
         dash_turn_drive_360: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1101,8 +1101,8 @@ Entry.Dash.getBlocks = function() {
                         ['반 시계 방향', 0x04],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1122,34 +1122,34 @@ Entry.Dash.getBlocks = function() {
             isNotFor: ['Dash'],
             func: function(sprite, script) {
                 var var1 = script.getNumberField('ROTATION', script);
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Dash.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Dash.isStarted) {
                     sq.category = 1;
                     sq.action = var1;
                     sq.param_cnt = 1;
                     sq.paramA = 360;
                     sq.modeA = 3;
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             if (pd.isDriving) {
-                                Entry.Dash.state = DashState.STATE_WAIT;
+                                RoCode.Dash.state = DashState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case DashState.STATE_WAIT:
                             if (!pd.isDriving) {
-                                Entry.Dash.state = DashState.STATE_DONE;
+                                RoCode.Dash.state = DashState.STATE_DONE;
                             }
                             return script;
                             break;
                         case DashState.STATE_DONE:
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -1158,8 +1158,8 @@ Entry.Dash.getBlocks = function() {
             },
         },
         dash_drive: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1172,8 +1172,8 @@ Entry.Dash.getBlocks = function() {
                         ['뒤', 0x02],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1189,8 +1189,8 @@ Entry.Dash.getBlocks = function() {
                         ['매우 빠르게', 0x05],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1214,9 +1214,9 @@ Entry.Dash.getBlocks = function() {
                 var var1 = script.getNumberField('DIRECTION', script);
                 var var2 = script.getNumberValue('DISTANCE', script);
                 var var3 = script.getNumberField('SPEED', script);
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Dash.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Dash.isStarted) {
                     sq.category = 1;
                     sq.action = var1;
                     sq.param_cnt = 2;
@@ -1226,26 +1226,26 @@ Entry.Dash.getBlocks = function() {
                     sq.paramA = var2;
                     sq.paramB = var3;
                     sq.modeA = 3;
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             if (pd.isDriving) {
-                                Entry.Dash.state = DashState.STATE_WAIT;
+                                RoCode.Dash.state = DashState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case DashState.STATE_WAIT:
                             if (!pd.isDriving) {
-                                Entry.Dash.state = DashState.STATE_DONE;
+                                RoCode.Dash.state = DashState.STATE_DONE;
                             }
                             return script;
                             break;
                         case DashState.STATE_DONE:
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -1254,8 +1254,8 @@ Entry.Dash.getBlocks = function() {
             },
         },
         dash_wheel_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1268,8 +1268,8 @@ Entry.Dash.getBlocks = function() {
                         ['뒤', 0x02],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1281,8 +1281,8 @@ Entry.Dash.getBlocks = function() {
                         ['매우 빠르게', 0x05],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1291,8 +1291,8 @@ Entry.Dash.getBlocks = function() {
                         ['뒤', 0x02],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1304,8 +1304,8 @@ Entry.Dash.getBlocks = function() {
                         ['매우 빠르게', 0x05],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1331,9 +1331,9 @@ Entry.Dash.getBlocks = function() {
                 var var2 = script.getNumberField('SPEED_L', script);
                 var var3 = script.getNumberField('DIRECTION_R', script);
                 var var4 = script.getNumberField('SPEED_R', script);
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Dash.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Dash.isStarted) {
                     sq.category = 0x01;
                     sq.action = 0x05;
                     sq.param_cnt = 0x04;
@@ -1342,24 +1342,24 @@ Entry.Dash.getBlocks = function() {
                     sq.paramC = var3;
                     sq.paramD = var4;
                     sq.modeA = 3;
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             var timer = setTimeout(function() {
-                                Entry.Dash.state = DashState.STATE_DONE;
+                                RoCode.Dash.state = DashState.STATE_DONE;
                             }, 500);
-                            Entry.Dash.state = DashState.STATE_WAIT;
+                            RoCode.Dash.state = DashState.STATE_WAIT;
                             return script;
                             break;
                         case DashState.STATE_WAIT:
                             return script;
                             break;
                         case DashState.STATE_DONE:
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -1368,8 +1368,8 @@ Entry.Dash.getBlocks = function() {
             },
         },
         dash_drive_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1392,31 +1392,31 @@ Entry.Dash.getBlocks = function() {
             class: 'Dash_drive',
             isNotFor: ['Dash'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
-                if (!Entry.Dash.isStarted) {
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
+                if (!RoCode.Dash.isStarted) {
                     sq.category = 0x01;
                     sq.action = 0x06;
                     sq.param_cnt = 0;
                     sq.modeA = 3;
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             var timer = setTimeout(function() {
-                                Entry.Dash.state = DashState.STATE_DONE;
+                                RoCode.Dash.state = DashState.STATE_DONE;
                             }, 500);
-                            Entry.Dash.state = DashState.STATE_WAIT;
+                            RoCode.Dash.state = DashState.STATE_WAIT;
                             return script;
                             break;
                         case DashState.STATE_WAIT:
                             return script;
                             break;
                         case DashState.STATE_DONE:
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -1425,8 +1425,8 @@ Entry.Dash.getBlocks = function() {
             },
         },
         dash_sensor1: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             template: '%1',
             params: [
@@ -1441,8 +1441,8 @@ Entry.Dash.getBlocks = function() {
                         ['소리', 0x0a],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -1456,7 +1456,7 @@ Entry.Dash.getBlocks = function() {
             class: 'Dash_senor',
             func: function(sprite, script) {
                 var var1 = script.getNumberField('VALUE', script);
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 switch (var1) {
                     case 0x05:
                         return pd.button0 ? true : false;
@@ -1483,8 +1483,8 @@ Entry.Dash.getBlocks = function() {
             },
         },
         dash_sensor2: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             template: '%1',
             params: [
@@ -1499,8 +1499,8 @@ Entry.Dash.getBlocks = function() {
                         ['들림', 0x0a],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -1514,7 +1514,7 @@ Entry.Dash.getBlocks = function() {
             class: 'Dash_senor',
             func: function(sprite, script) {
                 var var1 = script.getNumberField('VALUE', script);
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 switch (var1) {
                     case 0x00:
                         return pd.barrier_front ? true : false;
@@ -1541,8 +1541,8 @@ Entry.Dash.getBlocks = function() {
             },
         },
         dash_animation: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1568,8 +1568,8 @@ Entry.Dash.getBlocks = function() {
                         ['출발', 0x0e],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1588,36 +1588,36 @@ Entry.Dash.getBlocks = function() {
             class: 'Dash_animation',
             isNotFor: ['Dash'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var var1 = script.getNumberField('PORT', script);
-                if (!Entry.Dash.isStarted) {
+                if (!RoCode.Dash.isStarted) {
                     sq.category = 0x06;
                     sq.action = 0x01;
                     sq.param_cnt = 1;
                     sq.paramA = var1;
                     sq.modeA = 3;
-                    sq.seq = Entry.Dash.sequance++;
-                    Entry.Dash.isStarted = true;
-                    Entry.Dash.state = DashState.STATE_READY;
+                    sq.seq = RoCode.Dash.sequance++;
+                    RoCode.Dash.isStarted = true;
+                    RoCode.Dash.state = DashState.STATE_READY;
                     return script;
                 } else {
-                    switch (Entry.Dash.state) {
+                    switch (RoCode.Dash.state) {
                         case DashState.STATE_READY:
                             if (pd.animation) {
-                                Entry.Dash.state = DashState.STATE_WAIT;
+                                RoCode.Dash.state = DashState.STATE_WAIT;
                             }
                             return script;
                             break;
                         case DashState.STATE_WAIT:
                             if (!pd.animation) {
-                                Entry.Dash.state = DashState.STATE_DONE;
+                                RoCode.Dash.state = DashState.STATE_DONE;
                             }
                             return script;
                             break;
                         case DashState.STATE_DONE:
                             // 다음 블럭 진행
-                            Entry.Dash.isStarted = false;
+                            RoCode.Dash.isStarted = false;
                             return script.callReturn();
                             break;
                     }
@@ -1628,4 +1628,4 @@ Entry.Dash.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Dash;
+module.exports = RoCode.Dash;

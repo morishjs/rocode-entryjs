@@ -1,18 +1,18 @@
 'use strict';
 
 class TextCodingUtil {
-    // Entry 에서 사용 중
+    // RoCode 에서 사용 중
     canUsePythonVariables(variables) {
         return variables.every((variable) => {
             const target = variable.variableType === 'variable' ? 'v' : 'l';
-            return !Entry.TextCodingUtil.validateName(variable.name, target);
+            return !RoCode.TextCodingUtil.validateName(variable.name, target);
         });
     }
 
-    // Entry 에서 사용 중
+    // RoCode 에서 사용 중
     canUsePythonFunctions(functions) {
         return functions.every(({ content }) => {
-            const code = new Entry.Code(content);
+            const code = new RoCode.Code(content);
             const funcSchemaBlock = code.getEventMap('funcDef')[0];
             // const funcSchemaBlock = targets[targetKey].content.getEventMap('funcDef')[0];
             const functionBlock = funcSchemaBlock && funcSchemaBlock.params[0];
@@ -30,8 +30,8 @@ class TextCodingUtil {
     }
 
     initQueue() {
-        this._funcParamQ = new Entry.Queue();
-        this._funcNameQ = new Entry.Queue();
+        this._funcParamQ = new RoCode.Queue();
+        this._funcNameQ = new RoCode.Queue();
     }
 
     clearQueue() {
@@ -81,14 +81,14 @@ class TextCodingUtil {
 
         switch (menuName) {
             case 'variables': {
-                const entryVariables = Entry.variableContainer.variables_;
-                for (const varKey in entryVariables) {
-                    const entryVariable = entryVariables[varKey];
-                    if (entryVariable.id_ === id) {
-                        if (entryVariable.object_) {
-                            result = `self.${entryVariable.name_}`;
+                const RoCodeVariables = RoCode.variableContainer.variables_;
+                for (const varKey in RoCodeVariables) {
+                    const RoCodeVariable = RoCodeVariables[varKey];
+                    if (RoCodeVariable.id_ === id) {
+                        if (RoCodeVariable.object_) {
+                            result = `self.${RoCodeVariable.name_}`;
                         } else {
-                            result = entryVariable.name_;
+                            result = RoCodeVariable.name_;
                         }
                         break;
                     }
@@ -96,14 +96,14 @@ class TextCodingUtil {
                 break;
             }
             case 'lists': {
-                const entryLists = Entry.variableContainer.lists_;
-                for (const listKey in entryLists) {
-                    const entryList = entryLists[listKey];
-                    if (entryList.id_ === id) {
-                        if (entryList.object_) {
-                            result = `self.${entryList.name_}`;
+                const RoCodeLists = RoCode.variableContainer.lists_;
+                for (const listKey in RoCodeLists) {
+                    const RoCodeList = RoCodeLists[listKey];
+                    if (RoCodeList.id_ === id) {
+                        if (RoCodeList.object_) {
+                            result = `self.${RoCodeList.name_}`;
                         } else {
-                            result = entryList.name_;
+                            result = RoCodeList.name_;
                         }
                         break;
                     }
@@ -111,18 +111,18 @@ class TextCodingUtil {
                 break;
             }
             case 'messages': {
-                const entryMessages = Entry.variableContainer.messages_;
-                for (const messageKey in entryMessages) {
-                    const entryList = entryMessages[messageKey];
-                    if (entryList.id === id) {
-                        result = entryList.name;
+                const RoCodeMessages = RoCode.variableContainer.messages_;
+                for (const messageKey in RoCodeMessages) {
+                    const RoCodeList = RoCodeMessages[messageKey];
+                    if (RoCodeList.id === id) {
+                        result = RoCodeList.name;
                         break;
                     }
                 }
                 break;
             }
             case 'pictures': {
-                const objects = Entry.container.getAllObjects();
+                const objects = RoCode.container.getAllObjects();
                 for (const objKey in objects) {
                     const object = objects[objKey];
                     const pictures = object.pictures;
@@ -137,7 +137,7 @@ class TextCodingUtil {
                 break;
             }
             case 'sounds': {
-                const objects = Entry.container.getAllObjects();
+                const objects = RoCode.container.getAllObjects();
                 for (const objKey in objects) {
                     const object = objects[objKey];
                     const sounds = object.sounds;
@@ -152,7 +152,7 @@ class TextCodingUtil {
                 break;
             }
             case 'scenes': {
-                const scenes = Entry.scene.getScenes();
+                const scenes = RoCode.scene.getScenes();
                 for (const sceneKey in scenes) {
                     const scene = scenes[sceneKey];
                     if (scene.id === id) {
@@ -167,7 +167,7 @@ class TextCodingUtil {
                 if (id === 'self') {
                     result = id;
                 } else {
-                    const objects = Entry.container.objects_.filter((obj) => obj.id === id);
+                    const objects = RoCode.container.objects_.filter((obj) => obj.id === id);
                     result = objects[0] ? objects[0].name : null;
                 }
                 break;
@@ -192,7 +192,7 @@ class TextCodingUtil {
         );
     }
 
-    isEntryEventFuncByFullText(text) {
+    isRoCodeEventFuncByFullText(text) {
         const index = text.indexOf('(');
         const name = text.substring(0, index);
 
@@ -206,15 +206,15 @@ class TextCodingUtil {
             name == 'def when_get_signal' ||
             name == 'def when_start_scene' ||
             name == 'def when_make_clone' ||
-            name == 'def entry_event_start' ||
-            name == 'def entry_event_key' ||
-            name == 'def entry_event_mouse_down' ||
-            name == 'def entry_event_mouse_up' ||
-            name == 'def entry_event_object_down' ||
-            name == 'def entry_event_object_up' ||
-            name == 'def entry_event_signal' ||
-            name == 'def entry_event_scene_start' ||
-            name == 'def entry_event_clone_create'
+            name == 'def RoCode_event_start' ||
+            name == 'def RoCode_event_key' ||
+            name == 'def RoCode_event_mouse_down' ||
+            name == 'def RoCode_event_mouse_up' ||
+            name == 'def RoCode_event_object_down' ||
+            name == 'def RoCode_event_object_up' ||
+            name == 'def RoCode_event_signal' ||
+            name == 'def RoCode_event_scene_start' ||
+            name == 'def RoCode_event_clone_create'
         );
     }
 
@@ -477,13 +477,13 @@ class TextCodingUtil {
 
     canConvertTextModeForOverlayMode(convertingMode) {
         let message;
-        const oldMode = Entry.getMainWS().oldMode;
+        const oldMode = RoCode.getMainWS().oldMode;
 
         if (
-            oldMode == Entry.Workspace.MODE_OVERLAYBOARD &&
-            convertingMode == Entry.Workspace.MODE_VIMBOARD
+            oldMode == RoCode.Workspace.MODE_OVERLAYBOARD &&
+            convertingMode == RoCode.Workspace.MODE_VIMBOARD
         ) {
-            message = Lang.TextCoding[Entry.TextCodingError.ALERT_FUNCTION_EDITOR];
+            message = Lang.TextCoding[RoCode.TextCodingError.ALERT_FUNCTION_EDITOR];
             return message;
         }
 
@@ -492,26 +492,26 @@ class TextCodingUtil {
 
     /**
      * TODO 18년 9월자 배포(10/4) 일 임시 코드입니다. 차후 수정 필수입니다.
-     * https://oss.navercorp.com/entry/Entry/issues/9155 링크 참조
+     * https://oss.navercorp.com/RoCode/RoCode/issues/9155 링크 참조
      * @returns {{message: string, type: string} || undefined}
      */
     hasNotSupportedBlocks() {
-        const vc = Entry.variableContainer;
+        const vc = RoCode.variableContainer;
         if (!vc) {
             return;
         }
 
-        const activatedExpansionBlocks = Entry.expansionBlocks;
-        const activatedUtilizeBlock = Entry.aiUtilizeBlocks;
-        const tables = Entry.playground.dataTable ? Entry.playground.dataTable.tables : [];
+        const activatedExpansionBlocks = RoCode.expansionBlocks;
+        const activatedUtilizeBlock = RoCode.aiUtilizeBlocks;
+        const tables = RoCode.playground.dataTable ? RoCode.playground.dataTable.tables : [];
         if (
             activatedExpansionBlocks.length > 0 ||
             activatedUtilizeBlock.length > 0 ||
-            Entry.aiLearning.isLoaded ||
+            RoCode.aiLearning.isLoaded ||
             tables.length > 0
         ) {
             return {
-                message: Lang.TextCoding[Entry.TextCodingError.ALERT_API_NO_SUPPORT],
+                message: Lang.TextCoding[RoCode.TextCodingError.ALERT_API_NO_SUPPORT],
                 type: 'warning',
             };
         }
@@ -522,7 +522,7 @@ class TextCodingUtil {
      * @return {Object} 에러오브젝트
      */
     validateVariableAndListToPython() {
-        const vc = Entry.variableContainer;
+        const vc = RoCode.variableContainer;
         if (!vc) {
             return;
         }
@@ -570,7 +570,7 @@ class TextCodingUtil {
      * @return {Object} 에러 / 경고 오브젝트
      */
     validateFunctionToPython() {
-        const vc = Entry.variableContainer;
+        const vc = RoCode.variableContainer;
         if (!vc) {
             return;
         }
@@ -602,7 +602,7 @@ class TextCodingUtil {
             ALERT_FUNCTION_NAME_DISORDER,
             ALERT_FUNCTION_NAME_FIELD_MULTI,
             ALERT_FUNCTION_HAS_BOOLEAN,
-        } = Entry.TextCodingError;
+        } = RoCode.TextCodingError;
         const DISORDER = Lang.TextCoding[ALERT_FUNCTION_NAME_DISORDER];
         const FIELD_MULTI = Lang.TextCoding[ALERT_FUNCTION_NAME_FIELD_MULTI];
         const HAS_BOOLEAN = Lang.TextCoding[ALERT_FUNCTION_HAS_BOOLEAN];
@@ -738,7 +738,7 @@ class TextCodingUtil {
 
         if (!isValid) {
             return this._generateErrorObject(
-                Lang.TextCoding[Entry.TextCodingError.ALERT_LIST_CONTAINS_EXCEED_LENGTH_VALUE],
+                Lang.TextCoding[RoCode.TextCodingError.ALERT_LIST_CONTAINS_EXCEED_LENGTH_VALUE],
                 'error'
             );
         }
@@ -756,11 +756,11 @@ class TextCodingUtil {
         }
 
         if (type === 'variable' || type === 'v') {
-            return Lang.TextCoding[Entry.TextCodingError.ALERT_VARIABLE_EMPTY_TEXT_ADD_CHANGE];
+            return Lang.TextCoding[RoCode.TextCodingError.ALERT_VARIABLE_EMPTY_TEXT_ADD_CHANGE];
         } else if (type === 'list' || type === 'l') {
-            return Lang.TextCoding[Entry.TextCodingError.ALERT_LIST_EMPTY_TEXT_ADD_CHANGE];
+            return Lang.TextCoding[RoCode.TextCodingError.ALERT_LIST_EMPTY_TEXT_ADD_CHANGE];
         } else if (type === 'function' || type === 'f') {
-            return Lang.TextCoding[Entry.TextCodingError.ALERT_FUNCTION_NAME_EMPTY_TEXT_ADD_CHANGE];
+            return Lang.TextCoding[RoCode.TextCodingError.ALERT_FUNCTION_NAME_EMPTY_TEXT_ADD_CHANGE];
         }
     }
 
@@ -859,8 +859,8 @@ class TextCodingUtil {
 
     generateVariablesDeclaration() {
         let result = '';
-        const currentObject = Entry.playground.object;
-        const vc = Entry.variableContainer;
+        const currentObject = RoCode.playground.object;
+        const vc = RoCode.variableContainer;
         if (!vc) {
             return;
         }
@@ -892,8 +892,8 @@ class TextCodingUtil {
 
     generateListsDeclaration() {
         let result = '';
-        const currentObject = Entry.playground.object;
-        const vc = Entry.variableContainer;
+        const currentObject = RoCode.playground.object;
+        const vc = RoCode.variableContainer;
         if (!vc) {
             return;
         }
@@ -974,5 +974,5 @@ class TextCodingUtil {
     }
 }
 
-Entry.TextCodingUtil = {};
-Entry.TextCodingUtil = new TextCodingUtil();
+RoCode.TextCodingUtil = {};
+RoCode.TextCodingUtil = new TextCodingUtil();

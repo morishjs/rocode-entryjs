@@ -6,21 +6,21 @@ export default class AIUtilize {
     }
 
     banAllAIUtilizeBlock() {
-        ExtraBlockUtils.banAllBlocks(this.playground, Entry.AI_UTILIZE_BLOCK_LIST);
+        ExtraBlockUtils.banAllBlocks(this.playground, RoCode.AI_UTILIZE_BLOCK_LIST);
     }
 
     banAIUtilizeBlocks(aiUtilizeNames = []) {
-        ExtraBlockUtils.banBlocks(aiUtilizeNames, Entry.AI_UTILIZE_BLOCK_LIST, (aiUtilizeTypes) =>
-            Entry.do('objectRemoveAIUtilizeBlocks', aiUtilizeTypes).isPass(true)
+        ExtraBlockUtils.banBlocks(aiUtilizeNames, RoCode.AI_UTILIZE_BLOCK_LIST, (aiUtilizeTypes) =>
+            RoCode.do('objectRemoveAIUtilizeBlocks', aiUtilizeTypes).isPass(true)
         );
     }
 
     isActive(aiUtilizeName) {
-        return ExtraBlockUtils.isActive(aiUtilizeName, Entry.AI_UTILIZE_BLOCK_LIST);
+        return ExtraBlockUtils.isActive(aiUtilizeName, RoCode.AI_UTILIZE_BLOCK_LIST);
     }
 
     addAIUtilizeBlocks(blockNames) {
-        Entry.do('objectAddAIUtilizeBlocks', blockNames);
+        RoCode.do('objectAddAIUtilizeBlocks', blockNames);
     }
 
     getAIUtilizes(blockList) {

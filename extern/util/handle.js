@@ -323,8 +323,8 @@ var EaselHandle = function(canvas) {
     p.checkCenterPointState = function(x, y) {
         var standard = 718;
         var res = Math.sqrt(x * x + y * y);
-        if (res > standard && Entry.engine.isState('stop')) {
-            Entry.toast.warning(
+        if (res > standard && RoCode.engine.isState('stop')) {
+            RoCode.toast.warning(
                 Lang.Workspace.toast_error_title_object_center,
                 Lang.Workspace.toast_error_contents_object_center
             );

@@ -3,11 +3,11 @@
  */
 'use strict';
 
-Entry.Console = function() {
-    if (!Entry.propertyPanel) return;
+RoCode.Console = function() {
+    if (!RoCode.propertyPanel) return;
     this.createView();
-    Entry.propertyPanel.addMode('console', this);
-    Entry.console = this;
+    RoCode.propertyPanel.addMode('console', this);
+    RoCode.console = this;
 
     this._isEditing = false;
     this._inputData = null;
@@ -15,8 +15,8 @@ Entry.Console = function() {
 
 (function(p) {
     p.createView = function() {
-        this.view = Entry.Dom('div', {
-            id: 'entryConsole',
+        this.view = RoCode.Dom('div', {
+            id: 'RoCodeConsole',
         });
 
         this.codeMirror = CodeMirror(this.view[0], {
@@ -55,7 +55,7 @@ Entry.Console = function() {
             cm.execCommand('goDocEnd');
         });
 
-        Entry.addEventListener('stop', this.clear.bind(this));
+        RoCode.addEventListener('stop', this.clear.bind(this));
 
         this.clear();
     };
@@ -66,7 +66,7 @@ Entry.Console = function() {
 
     p.clear = function() {
         this.setEditing(true);
-        this.codeMirror.setValue('Entry Console \n');
+        this.codeMirror.setValue('RoCode Console \n');
         this.codeMirror.execCommand('goDocEnd');
         this.setEditing(false);
     };
@@ -106,7 +106,7 @@ Entry.Console = function() {
             };
             this._doc.replaceRange('\n', pos);
         } else this._inputData = this._doc.getLine(cursor.line - 1);
-        Entry.container.setInputValue(this._inputData);
+        RoCode.container.setInputValue(this._inputData);
         this.setEditing(false);
     };
 
@@ -118,4 +118,4 @@ Entry.Console = function() {
         if (this._isEditing === set) return;
         this._isEditing = set;
     };
-})(Entry.Console.prototype);
+})(RoCode.Console.prototype);

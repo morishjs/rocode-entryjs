@@ -5,9 +5,9 @@
 import { AtlasBaseTexture } from './AtlasBaseTexture';
 import { ImageRect } from '../../../maxrect-packer/geom/ImageRect';
 import { AtlasImageLoadingInfo } from '../loader/AtlasImageLoadingInfo';
-import { EntryTextureBase } from './EntryTextureBase';
+import { RoCodeTextureBase } from './RoCodeTextureBase';
 
-export class AtlasTexture extends EntryTextureBase {
+export class AtlasTexture extends RoCodeTextureBase {
     /** binpacking의 rect 참조를 위한 변수. 다용 용도로 사용하지 말긔. */
     public imageRectForPacking: ImageRect;
     private _isEmptyTexture: boolean;

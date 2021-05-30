@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.JDKit = {
+RoCode.JDKit = {
     Cmd: {
         LED: 1,
         TUNE: 2,
@@ -28,7 +28,7 @@ Entry.JDKit = {
         DRONEREADY: 10,
     },
     setZero: function() {
-        Entry.hw.sendQueue.CMD = [
+        RoCode.hw.sendQueue.CMD = [
             0xf0,
             0x00,
             0x00,
@@ -43,7 +43,7 @@ Entry.JDKit = {
             0x00,
             0x00,
         ];
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     id: '1D.1',
     name: 'JDKit',
@@ -147,7 +147,7 @@ Entry.JDKit = {
     },
 };
 
-Entry.JDKit.setLanguage = function() {
+RoCode.JDKit.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -246,7 +246,7 @@ Entry.JDKit.setLanguage = function() {
     };
 };
 
-Entry.JDKit.blockMenuBlocks = [
+RoCode.JDKit.blockMenuBlocks = [
     'jdkit_led',
     'jdkit_tune',
     'jdkit_motor',
@@ -262,12 +262,12 @@ Entry.JDKit.blockMenuBlocks = [
     'jdkit_yaw',
     'jdkit_emergency',
 ];
-Entry.JDKit.getBlocks = function() {
+RoCode.JDKit.getBlocks = function() {
     return {
         //region JDKit
         jdkit_joystick: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -282,8 +282,8 @@ Entry.JDKit.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -297,19 +297,19 @@ Entry.JDKit.getBlocks = function() {
             class: 'JDKit_Sensor',
             isNotFor: ['JDKit'],
             func: function(sprite, script) {
-                var sensorData = Entry.hw.portData.CMD;
+                var sensorData = RoCode.hw.portData.CMD;
                 var joystick = script.getField('JOYSTICK');
 
-                if (joystick == 1) return sensorData[Entry.JDKit.Sensor.JOYSTICK_LTB];
-                else if (joystick == 2) return 100 - sensorData[Entry.JDKit.Sensor.JOYSTICK_LLR];
-                else if (joystick == 3) return sensorData[Entry.JDKit.Sensor.JOYSTICK_RTB] - 100;
-                else return 100 - sensorData[Entry.JDKit.Sensor.JOYSTICK_RLR];
+                if (joystick == 1) return sensorData[RoCode.JDKit.Sensor.JOYSTICK_LTB];
+                else if (joystick == 2) return 100 - sensorData[RoCode.JDKit.Sensor.JOYSTICK_LLR];
+                else if (joystick == 3) return sensorData[RoCode.JDKit.Sensor.JOYSTICK_RTB] - 100;
+                else return 100 - sensorData[RoCode.JDKit.Sensor.JOYSTICK_RLR];
             },
             syntax: { js: [], py: [] },
         },
         jdkit_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -328,8 +328,8 @@ Entry.JDKit.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -343,15 +343,15 @@ Entry.JDKit.getBlocks = function() {
             class: 'JDKit_Sensor',
             isNotFor: ['JDKit'],
             func: function(sprite, script) {
-                var sensorData = Entry.hw.portData.CMD;
+                var sensorData = RoCode.hw.portData.CMD;
                 var button = script.getField('BUTTON');
-                return sensorData[Entry.JDKit.Sensor.BUTTON] & (0x01 << button) ? 0 : 1;
+                return sensorData[RoCode.JDKit.Sensor.BUTTON] & (0x01 << button) ? 0 : 1;
             },
             syntax: { js: [], py: [] },
         },
         jdkit_gyro: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -364,8 +364,8 @@ Entry.JDKit.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -379,18 +379,18 @@ Entry.JDKit.getBlocks = function() {
             class: 'JDKit_Sensor',
             isNotFor: ['JDKit'],
             func: function(sprite, script) {
-                var sensorData = Entry.hw.portData.CMD;
+                var sensorData = RoCode.hw.portData.CMD;
                 var gyro = script.getField('GYRO');
-                var gyro_x = sensorData[Entry.JDKit.Sensor.GYRO_X];
-                var gyro_y = sensorData[Entry.JDKit.Sensor.GYRO_Y];
+                var gyro_x = sensorData[RoCode.JDKit.Sensor.GYRO_X];
+                var gyro_y = sensorData[RoCode.JDKit.Sensor.GYRO_Y];
                 if (gyro == 1) return gyro_y > 127 ? (gyro_y ^ 0xff) + 1 : -1 * gyro_y;
                 else return gyro_x > 127 ? (gyro_x ^ 0xff) + 1 : -1 * gyro_x;
             },
             syntax: { js: [], py: [] },
         },
         jdkit_ultrasonic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -403,14 +403,14 @@ Entry.JDKit.getBlocks = function() {
             class: 'JDKit_Sensor',
             isNotFor: ['JDKit'],
             func: function(sprite, script) {
-                var sensorData = Entry.hw.portData.CMD;
-                return sensorData[Entry.JDKit.Sensor.ULTRASONIC];
+                var sensorData = RoCode.hw.portData.CMD;
+                return sensorData[RoCode.JDKit.Sensor.ULTRASONIC];
             },
             syntax: { js: [], py: [] },
         },
         jdkit_connect: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -423,14 +423,14 @@ Entry.JDKit.getBlocks = function() {
             class: 'JDKit_Sensor',
             isNotFor: ['JDKit'],
             func: function(sprite, script) {
-                var sensorData = Entry.hw.portData.CMD;
-                return sensorData[Entry.JDKit.Sensor.DRONECONNECT];
+                var sensorData = RoCode.hw.portData.CMD;
+                return sensorData[RoCode.JDKit.Sensor.DRONECONNECT];
             },
             syntax: { js: [], py: [] },
         },
         jdkit_ready: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -443,15 +443,15 @@ Entry.JDKit.getBlocks = function() {
             class: 'JDKit_Sensor',
             isNotFor: ['JDKit'],
             func: function(sprite, script) {
-                var sensorData = Entry.hw.portData.CMD;
-                return sensorData[Entry.JDKit.Sensor.DRONEREADY];
+                var sensorData = RoCode.hw.portData.CMD;
+                return sensorData[RoCode.JDKit.Sensor.DRONEREADY];
             },
             syntax: { js: [], py: [] },
         },
 
         jdkit_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -463,8 +463,8 @@ Entry.JDKit.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -474,8 +474,8 @@ Entry.JDKit.getBlocks = function() {
                     ],
                     value: 3,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -496,20 +496,20 @@ Entry.JDKit.getBlocks = function() {
             isNotFor: ['JDKit'],
 
             func: function(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined')
-                    Entry.hw.sendQueue.CMD = [0xf0, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0, 0, 0];
-                var cmd = Entry.hw.sendQueue.CMD;
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined')
+                    RoCode.hw.sendQueue.CMD = [0xf0, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0, 0, 0];
+                var cmd = RoCode.hw.sendQueue.CMD;
                 var color = script.getField('COLOR', script);
                 var act = script.getField('ACTION', script);
-                if (color == 1) cmd[Entry.JDKit.Cmd.LED] = act == 3 ? cmd[1] | 0x01 : cmd[1] & 0x02;
-                else cmd[Entry.JDKit.Cmd.LED] = act == 3 ? cmd[1] | 0x02 : cmd[1] & 0x01;
+                if (color == 1) cmd[RoCode.JDKit.Cmd.LED] = act == 3 ? cmd[1] | 0x01 : cmd[1] & 0x02;
+                else cmd[RoCode.JDKit.Cmd.LED] = act == 3 ? cmd[1] | 0x02 : cmd[1] & 0x01;
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
         jdkit_tune: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -526,8 +526,8 @@ Entry.JDKit.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -544,8 +544,8 @@ Entry.JDKit.getBlocks = function() {
                     ],
                     value: 10,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -566,24 +566,24 @@ Entry.JDKit.getBlocks = function() {
             isNotFor: ['JDKit'],
 
             func: function(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined')
-                    Entry.hw.sendQueue.CMD = [0xf0, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0, 0, 0];
-                var cmd = Entry.hw.sendQueue.CMD;
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined')
+                    RoCode.hw.sendQueue.CMD = [0xf0, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0, 0, 0];
+                var cmd = RoCode.hw.sendQueue.CMD;
 
                 var note = script.getField('NOTE', script);
                 var duration = script.getField('DURATION', script);
-                var noteCount = Entry.hw.sendQueue.noteCount;
-                Entry.hw.sendQueue.noteCount = typeof noteCount == 'undefined' ? 1 : noteCount + 1;
-                cmd[Entry.JDKit.Cmd.TUNE] = note;
-                cmd[Entry.JDKit.Cmd.TUNEDUR] = duration;
+                var noteCount = RoCode.hw.sendQueue.noteCount;
+                RoCode.hw.sendQueue.noteCount = typeof noteCount == 'undefined' ? 1 : noteCount + 1;
+                cmd[RoCode.JDKit.Cmd.TUNE] = note;
+                cmd[RoCode.JDKit.Cmd.TUNEDUR] = duration;
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
 
         jdkit_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -597,8 +597,8 @@ Entry.JDKit.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -625,21 +625,21 @@ Entry.JDKit.getBlocks = function() {
             isNotFor: ['JDKit'],
 
             func: function(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined')
-                    Entry.hw.sendQueue.CMD = [0xf0, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0, 0, 0];
-                var cmd = Entry.hw.sendQueue.CMD;
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined')
+                    RoCode.hw.sendQueue.CMD = [0xf0, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0, 0, 0];
+                var cmd = RoCode.hw.sendQueue.CMD;
                 var motor = script.getField('MOTOR', script);
                 var power = script.getNumberValue('POWER', script);
 
-                cmd[Entry.JDKit.Cmd.MOTOR0 + motor] = power > 100 ? 100 : power < 0 ? 0 : power;
+                cmd[RoCode.JDKit.Cmd.MOTOR0 + motor] = power > 100 ? 100 : power < 0 ? 0 : power;
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
 
         jdkit_throttle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -667,20 +667,20 @@ Entry.JDKit.getBlocks = function() {
             isNotFor: ['JDKit'],
 
             func: function(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined')
-                    Entry.hw.sendQueue.CMD = [0xf0, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0, 0, 0];
-                var cmd = Entry.hw.sendQueue.CMD;
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined')
+                    RoCode.hw.sendQueue.CMD = [0xf0, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0, 0, 0];
+                var cmd = RoCode.hw.sendQueue.CMD;
                 var throttle = script.getNumberValue('THROTTLE', script);
 
-                cmd[Entry.JDKit.Cmd.THROTTLE] = throttle > 200 ? 200 : throttle < 0 ? 0 : throttle;
-                cmd[Entry.JDKit.Cmd.OPTION] = 0x01;
+                cmd[RoCode.JDKit.Cmd.THROTTLE] = throttle > 200 ? 200 : throttle < 0 ? 0 : throttle;
+                cmd[RoCode.JDKit.Cmd.OPTION] = 0x01;
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
         jdkit_altitude: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -708,20 +708,20 @@ Entry.JDKit.getBlocks = function() {
             isNotFor: ['JDKit'],
 
             func: function(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined')
-                    Entry.hw.sendQueue.CMD = [0xf0, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0, 0, 0];
-                var cmd = Entry.hw.sendQueue.CMD;
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined')
+                    RoCode.hw.sendQueue.CMD = [0xf0, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0, 0, 0];
+                var cmd = RoCode.hw.sendQueue.CMD;
                 var alt = script.getNumberValue('ALTITUDE', script);
 
-                cmd[Entry.JDKit.Cmd.THROTTLE] = alt > 200 ? 200 : alt < 0 ? 0 : alt;
-                cmd[Entry.JDKit.Cmd.OPTION] = 0x05;
+                cmd[RoCode.JDKit.Cmd.THROTTLE] = alt > 200 ? 200 : alt < 0 ? 0 : alt;
+                cmd[RoCode.JDKit.Cmd.OPTION] = 0x05;
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
         jdkit_rollpitch: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -733,16 +733,16 @@ Entry.JDKit.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
                     accept: 'string',
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -763,21 +763,21 @@ Entry.JDKit.getBlocks = function() {
             isNotFor: ['JDKit'],
 
             func: function(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined')
-                    Entry.hw.sendQueue.CMD = [0xf0, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0, 0, 0];
-                var cmd = Entry.hw.sendQueue.CMD;
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined')
+                    RoCode.hw.sendQueue.CMD = [0xf0, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0, 0, 0];
+                var cmd = RoCode.hw.sendQueue.CMD;
                 var dir = script.getField('DIR', script);
                 var power = script.getNumberValue('POWER', script);
                 if (dir == 1)
-                    cmd[Entry.JDKit.Cmd.PITCH] = power > 100 ? 200 : power < -100 ? 0 : power + 100;
-                else cmd[Entry.JDKit.Cmd.ROLL] = power > 100 ? 200 : power < -100 ? 0 : power + 100;
+                    cmd[RoCode.JDKit.Cmd.PITCH] = power > 100 ? 200 : power < -100 ? 0 : power + 100;
+                else cmd[RoCode.JDKit.Cmd.ROLL] = power > 100 ? 200 : power < -100 ? 0 : power + 100;
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
         jdkit_yaw: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -805,19 +805,19 @@ Entry.JDKit.getBlocks = function() {
             isNotFor: ['JDKit'],
 
             func: function(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined')
-                    Entry.hw.sendQueue.CMD = [0xf0, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0, 0, 0];
-                var cmd = Entry.hw.sendQueue.CMD;
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined')
+                    RoCode.hw.sendQueue.CMD = [0xf0, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0, 0, 0];
+                var cmd = RoCode.hw.sendQueue.CMD;
                 var yaw = script.getNumberValue('YAW', script);
 
-                cmd[Entry.JDKit.Cmd.YAW] = yaw > 25 ? 101 : yaw < -25 ? 99 : 100;
+                cmd[RoCode.JDKit.Cmd.YAW] = yaw > 25 ? 101 : yaw < -25 ? 99 : 100;
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
         jdkit_emergency: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -837,12 +837,12 @@ Entry.JDKit.getBlocks = function() {
             isNotFor: ['JDKit'],
 
             func: function(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined')
-                    Entry.hw.sendQueue.CMD = [0xf0, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0, 0, 0];
-                var cmd = Entry.hw.sendQueue.CMD;
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined')
+                    RoCode.hw.sendQueue.CMD = [0xf0, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0, 0, 0];
+                var cmd = RoCode.hw.sendQueue.CMD;
 
-                cmd[Entry.JDKit.Cmd.OPTION] = 0x81;
-                Entry.hw.update();
+                cmd[RoCode.JDKit.Cmd.OPTION] = 0x81;
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
@@ -851,4 +851,4 @@ Entry.JDKit.getBlocks = function() {
     };
 };
 
-module.exports = Entry.JDKit;
+module.exports = RoCode.JDKit;

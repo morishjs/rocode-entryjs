@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.HyACT_Xylobot = {
+RoCode.HyACT_Xylobot = {
     id: '33.1',
     name: 'hyact_xylobot',
     url: 'http://www.naver.com/',
@@ -53,15 +53,15 @@ Entry.HyACT_Xylobot = {
         }
         this.timeouts = [];
     },
-    setZero: function() {    
-        Entry.hw.sendQueue['SEND'] = {};
-        Entry.hw.sendQueue['SEND'][Entry.HyACT_Xylobot.array.SET_ZERO] = {
+    setZero: function() {
+        RoCode.hw.sendQueue['SEND'] = {};
+        RoCode.hw.sendQueue['SEND'][RoCode.HyACT_Xylobot.array.SET_ZERO] = {
             Time: new Date().getTime(),
         };
-        Entry.hw.update();
+        RoCode.hw.update();
     },
 };
-Entry.HyACT_Xylobot.setLanguage = function() {
+RoCode.HyACT_Xylobot.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -201,7 +201,7 @@ Entry.HyACT_Xylobot.setLanguage = function() {
         },
     };
 };
-Entry.HyACT_Xylobot.blockMenuBlocks = [
+RoCode.HyACT_Xylobot.blockMenuBlocks = [
     'hyact_xylobot_get_now_aixs_block',
     'hyact_xylobot_get_note_aixs_block',
     'hyact_xylobot_set_led_movement_block',
@@ -216,12 +216,12 @@ Entry.HyACT_Xylobot.blockMenuBlocks = [
     'hyact_xylobot_set_move_note_block',
     'hyact_xylobot_set_move_default_block',
 ];
-Entry.HyACT_Xylobot.getBlocks = function() {
+RoCode.HyACT_Xylobot.getBlocks = function() {
     return {
         //region HyACT 하이액트 Xylobot
         hyact_xylobot_list_aixs_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -235,8 +235,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -251,8 +251,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_list_aixs_ex_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -267,8 +267,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -283,8 +283,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_list_note_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -303,8 +303,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -319,8 +319,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_list_movement_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -334,8 +334,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -350,8 +350,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_list_toggle_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -364,8 +364,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -380,8 +380,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_list_color_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -401,8 +401,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -417,8 +417,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_list_position_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -431,8 +431,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -447,8 +447,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_get_now_aixs_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -479,7 +479,7 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                 var xylobotDatas = new Object();
                 var axis = 0;
 
-                xylobotDatas = Entry.hw.portData;
+                xylobotDatas = RoCode.hw.portData;
 
                 if (axisData == 0) axis = xylobotDatas.positionNow.aixs1;
                 else if (axisData == 1) axis = xylobotDatas.positionNow.aixs2;
@@ -491,8 +491,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_get_note_aixs_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -533,50 +533,50 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                 var xylobotDatas = 0;
                 var axis = 0;
 
-                xylobotDatas = Entry.hw.portData;
+                xylobotDatas = RoCode.hw.portData;
 
                 switch(noteData)
                 {
-                    case Entry.HyACT_Xylobot.note.C:
+                    case RoCode.HyACT_Xylobot.note.C:
                         if(axisData == 0) axis = xylobotDatas.positionC.aixs1;
                         else if(axisData == 1) axis = xylobotDatas.positionC.aixs2;
                         else if(axisData == 2) axis = xylobotDatas.positionC.aixs3;
                         break;
-                    case Entry.HyACT_Xylobot.note.D:                        
+                    case RoCode.HyACT_Xylobot.note.D:
                         if(axisData == 0) axis = xylobotDatas.positionD.aixs1;
                         else if(axisData == 1) axis = xylobotDatas.positionD.aixs2;
                         else if(axisData == 2) axis = xylobotDatas.positionD.aixs3;
-                        break; 
-                    case Entry.HyACT_Xylobot.note.E:
+                        break;
+                    case RoCode.HyACT_Xylobot.note.E:
                         if(axisData == 0) axis = xylobotDatas.positionE.aixs1;
                         else if(axisData == 1) axis = xylobotDatas.positionE.aixs2;
                         else if(axisData == 2) axis = xylobotDatas.positionE.aixs3;
-                        break; 
-                    case Entry.HyACT_Xylobot.note.F:
+                        break;
+                    case RoCode.HyACT_Xylobot.note.F:
                         if(axisData == 0) axis = xylobotDatas.positionF.aixs1;
                         else if(axisData == 1) axis = xylobotDatas.positionF.aixs2;
                         else if(axisData == 2) axis = xylobotDatas.positionF.aixs3;
-                        break; 
-                    case Entry.HyACT_Xylobot.note.G:
+                        break;
+                    case RoCode.HyACT_Xylobot.note.G:
                         if(axisData == 0) axis = xylobotDatas.positionG.aixs1;
                         else if(axisData == 1) axis = xylobotDatas.positionG.aixs2;
                         else if(axisData == 2) axis = xylobotDatas.positionG.aixs3;
-                        break; 
-                    case Entry.HyACT_Xylobot.note.A:
+                        break;
+                    case RoCode.HyACT_Xylobot.note.A:
                         if(axisData == 0) axis = xylobotDatas.positionA.aixs1;
                         else if(axisData == 1) axis = xylobotDatas.positionA.aixs2;
                         else if(axisData == 2) axis = xylobotDatas.positionA.aixs3;
-                        break; 
-                    case Entry.HyACT_Xylobot.note.B:
+                        break;
+                    case RoCode.HyACT_Xylobot.note.B:
                         if(axisData == 0) axis = xylobotDatas.positionB.aixs1;
                         else if(axisData == 1) axis = xylobotDatas.positionB.aixs2;
                         else if(axisData == 2) axis = xylobotDatas.positionB.aixs3;
-                        break; 
-                    case Entry.HyACT_Xylobot.note.HIGH_C:
+                        break;
+                    case RoCode.HyACT_Xylobot.note.HIGH_C:
                         if(axisData == 0) axis = xylobotDatas.positionHighC.aixs1;
                         else if(axisData == 1) axis = xylobotDatas.positionHighC.aixs2;
                         else if(axisData == 2) axis = xylobotDatas.positionHighC.aixs3;
-                        break; 
+                        break;
                 }
                 axis = Math.floor((axis / 1023) * 300);
                 axis = (axis - 150) * -1;
@@ -585,8 +585,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_set_led_movement_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -627,9 +627,9 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.HyACT_Xylobot.removeTimeout(timer);
-                    }, Entry.HyACT_Xylobot.delayTime);
-                    Entry.HyACT_Xylobot.timeouts.push(timer);
+                        RoCode.HyACT_Xylobot.removeTimeout(timer);
+                    }, RoCode.HyACT_Xylobot.delayTime);
+                    RoCode.HyACT_Xylobot.timeouts.push(timer);
                     return script;
 
                 }
@@ -639,8 +639,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['SEND'] = {};
-                    Entry.hw.sendQueue['SEND'][Entry.HyACT_Xylobot.array.SET_LED_MOVEMENT] = {
+                    RoCode.hw.sendQueue['SEND'] = {};
+                    RoCode.hw.sendQueue['SEND'][RoCode.HyACT_Xylobot.array.SET_LED_MOVEMENT] = {
                         Movement: movementData,
                         Time: new Date().getTime(),
                     };
@@ -649,15 +649,15 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_set_led_color_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
             template: Lang.template.hyact_xylobot_set_led_color_block,
             params: [
                 {
-                    type: 'Block',                    
+                    type: 'Block',
                     accept: 'string',
                     defaultType: 'number',
                 },
@@ -691,9 +691,9 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.HyACT_Xylobot.removeTimeout(timer);
-                    }, Entry.HyACT_Xylobot.delayTime);
-                    Entry.HyACT_Xylobot.timeouts.push(timer);
+                        RoCode.HyACT_Xylobot.removeTimeout(timer);
+                    }, RoCode.HyACT_Xylobot.delayTime);
+                    RoCode.HyACT_Xylobot.timeouts.push(timer);
                     return script;
 
                 }
@@ -703,8 +703,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['SEND'] = {};
-                    Entry.hw.sendQueue['SEND'][Entry.HyACT_Xylobot.array.SET_LED_COLOR] = {
+                    RoCode.hw.sendQueue['SEND'] = {};
+                    RoCode.hw.sendQueue['SEND'][RoCode.HyACT_Xylobot.array.SET_LED_COLOR] = {
                         Color: colorData,
                         Time: new Date().getTime(),
                     };
@@ -714,8 +714,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_set_led_rgb_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -793,9 +793,9 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.HyACT_Xylobot.removeTimeout(timer);
-                    }, Entry.HyACT_Xylobot.delayTime);
-                    Entry.HyACT_Xylobot.timeouts.push(timer);
+                        RoCode.HyACT_Xylobot.removeTimeout(timer);
+                    }, RoCode.HyACT_Xylobot.delayTime);
+                    RoCode.HyACT_Xylobot.timeouts.push(timer);
                     return script;
 
                 }
@@ -805,8 +805,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['SEND'] = {};
-                    Entry.hw.sendQueue['SEND'][Entry.HyACT_Xylobot.array.SET_LED_RGB] = {
+                    RoCode.hw.sendQueue['SEND'] = {};
+                    RoCode.hw.sendQueue['SEND'][RoCode.HyACT_Xylobot.array.SET_LED_RGB] = {
                         Red: redData,
                         Green: greenData,
                         Blue: blueData,
@@ -817,8 +817,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_set_torque_toggle_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -869,9 +869,9 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.HyACT_Xylobot.removeTimeout(timer);
-                    }, Entry.HyACT_Xylobot.delayTime);
-                    Entry.HyACT_Xylobot.timeouts.push(timer);
+                        RoCode.HyACT_Xylobot.removeTimeout(timer);
+                    }, RoCode.HyACT_Xylobot.delayTime);
+                    RoCode.HyACT_Xylobot.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1)
@@ -880,8 +880,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['SEND'] = {};
-                    Entry.hw.sendQueue['SEND'][Entry.HyACT_Xylobot.array.SET_TORQUE_TOGGLE] = {
+                    RoCode.hw.sendQueue['SEND'] = {};
+                    RoCode.hw.sendQueue['SEND'][RoCode.HyACT_Xylobot.array.SET_TORQUE_TOGGLE] = {
                         Axis: axisData,
                         Toggle: toggleData,
                         Time: new Date().getTime(),
@@ -891,8 +891,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_set_position_single_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -950,9 +950,9 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.HyACT_Xylobot.removeTimeout(timer);
-                    }, Entry.HyACT_Xylobot.delayTime);
-                    Entry.HyACT_Xylobot.timeouts.push(timer);
+                        RoCode.HyACT_Xylobot.removeTimeout(timer);
+                    }, RoCode.HyACT_Xylobot.delayTime);
+                    RoCode.HyACT_Xylobot.timeouts.push(timer);
                     return script;
 
                 }
@@ -962,8 +962,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['SEND'] = {};
-                    Entry.hw.sendQueue['SEND'][Entry.HyACT_Xylobot.array.SET_POSITION_SINGLE] = {
+                    RoCode.hw.sendQueue['SEND'] = {};
+                    RoCode.hw.sendQueue['SEND'][RoCode.HyACT_Xylobot.array.SET_POSITION_SINGLE] = {
                         Axis: axisData,
                         Position: positionData,
                         Time: new Date().getTime(),
@@ -973,8 +973,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_set_position_many_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1055,9 +1055,9 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.HyACT_Xylobot.removeTimeout(timer);
-                    }, Entry.HyACT_Xylobot.delayTime);
-                    Entry.HyACT_Xylobot.timeouts.push(timer);
+                        RoCode.HyACT_Xylobot.removeTimeout(timer);
+                    }, RoCode.HyACT_Xylobot.delayTime);
+                    RoCode.HyACT_Xylobot.timeouts.push(timer);
                     return script;
 
                 }
@@ -1067,8 +1067,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['SEND'] = {};
-                    Entry.hw.sendQueue['SEND'][Entry.HyACT_Xylobot.array.SET_POSITION_MANY] = {
+                    RoCode.hw.sendQueue['SEND'] = {};
+                    RoCode.hw.sendQueue['SEND'][RoCode.HyACT_Xylobot.array.SET_POSITION_MANY] = {
                         Position1: position1Data,
                         Position2: position2Data,
                         Position3: position3Data,
@@ -1079,8 +1079,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_set_speed_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1126,7 +1126,7 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                 var axisData = script.getNumberValue("AIXS");
                 var speed = script.getNumberValue("SPEED");
                 var speedData = 0;
-                
+
                 if(speed >= 100) speed = 0;    // 0 값이 최대 속력
                 else if(speed < 0) speed = 1;
                 speedData = Math.floor((1023 * speed) / 100);
@@ -1137,9 +1137,9 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.HyACT_Xylobot.removeTimeout(timer);
-                    }, Entry.HyACT_Xylobot.delayTime);
-                    Entry.HyACT_Xylobot.timeouts.push(timer);
+                        RoCode.HyACT_Xylobot.removeTimeout(timer);
+                    }, RoCode.HyACT_Xylobot.delayTime);
+                    RoCode.HyACT_Xylobot.timeouts.push(timer);
                     return script;
 
                 }
@@ -1149,8 +1149,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['SEND'] = {};
-                    Entry.hw.sendQueue['SEND'][Entry.HyACT_Xylobot.array.SET_SPEED] = {
+                    RoCode.hw.sendQueue['SEND'] = {};
+                    RoCode.hw.sendQueue['SEND'][RoCode.HyACT_Xylobot.array.SET_SPEED] = {
                         Axis: axisData,
                         Speed: speedData,
                         Time: new Date().getTime(),
@@ -1160,8 +1160,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_set_torque_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1218,9 +1218,9 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.HyACT_Xylobot.removeTimeout(timer);
-                    }, Entry.HyACT_Xylobot.delayTime);
-                    Entry.HyACT_Xylobot.timeouts.push(timer);
+                        RoCode.HyACT_Xylobot.removeTimeout(timer);
+                    }, RoCode.HyACT_Xylobot.delayTime);
+                    RoCode.HyACT_Xylobot.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1)
@@ -1229,8 +1229,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['SEND'] = {};
-                    Entry.hw.sendQueue['SEND'][Entry.HyACT_Xylobot.array.SET_TORQUE] = {
+                    RoCode.hw.sendQueue['SEND'] = {};
+                    RoCode.hw.sendQueue['SEND'][RoCode.HyACT_Xylobot.array.SET_TORQUE] = {
                         Axis: axisData,
                         Torque: torqueData,
                         Time: new Date().getTime(),
@@ -1240,8 +1240,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_set_play_note_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1282,9 +1282,9 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.HyACT_Xylobot.removeTimeout(timer);
-                    }, Entry.HyACT_Xylobot.delayTime);
-                    Entry.HyACT_Xylobot.timeouts.push(timer);
+                        RoCode.HyACT_Xylobot.removeTimeout(timer);
+                    }, RoCode.HyACT_Xylobot.delayTime);
+                    RoCode.HyACT_Xylobot.timeouts.push(timer);
                     return script;
 
                 }
@@ -1294,8 +1294,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['SEND'] = {};
-                    Entry.hw.sendQueue['SEND'][Entry.HyACT_Xylobot.array.SET_PLAY_NOTE] = {
+                    RoCode.hw.sendQueue['SEND'] = {};
+                    RoCode.hw.sendQueue['SEND'][RoCode.HyACT_Xylobot.array.SET_PLAY_NOTE] = {
                         Note: noteData,
                         Time: new Date().getTime(),
                     };
@@ -1304,8 +1304,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_set_move_note_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1356,9 +1356,9 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.HyACT_Xylobot.removeTimeout(timer);
-                    }, Entry.HyACT_Xylobot.delayTime);
-                    Entry.HyACT_Xylobot.timeouts.push(timer);
+                        RoCode.HyACT_Xylobot.removeTimeout(timer);
+                    }, RoCode.HyACT_Xylobot.delayTime);
+                    RoCode.HyACT_Xylobot.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1)
@@ -1367,8 +1367,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['SEND'] = {};
-                    Entry.hw.sendQueue['SEND'][Entry.HyACT_Xylobot.array.SET_MOVE_NOTE] = {
+                    RoCode.hw.sendQueue['SEND'] = {};
+                    RoCode.hw.sendQueue['SEND'][RoCode.HyACT_Xylobot.array.SET_MOVE_NOTE] = {
                         Note: noteData,
                         Location: locationData,
                         Time: new Date().getTime(),
@@ -1378,8 +1378,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
             },
         },
         hyact_xylobot_set_move_default_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1409,9 +1409,9 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.HyACT_Xylobot.removeTimeout(timer);
-                    }, Entry.HyACT_Xylobot.delayTime);
-                    Entry.HyACT_Xylobot.timeouts.push(timer);
+                        RoCode.HyACT_Xylobot.removeTimeout(timer);
+                    }, RoCode.HyACT_Xylobot.delayTime);
+                    RoCode.HyACT_Xylobot.timeouts.push(timer);
                     return script;
 
                 }
@@ -1421,8 +1421,8 @@ Entry.HyACT_Xylobot.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['SEND'] = {};
-                    Entry.hw.sendQueue['SEND'][Entry.HyACT_Xylobot.array.SET_MOVE_DEFAULT] = {
+                    RoCode.hw.sendQueue['SEND'] = {};
+                    RoCode.hw.sendQueue['SEND'][RoCode.HyACT_Xylobot.array.SET_MOVE_DEFAULT] = {
                         Time: new Date().getTime(),
                     };
                     return script.callReturn();
@@ -1433,4 +1433,4 @@ Entry.HyACT_Xylobot.getBlocks = function() {
     };
 };
 
-module.exports = Entry.HyACT_Xylobot;
+module.exports = RoCode.HyACT_Xylobot;

@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.DaduBlock = {
+RoCode.DaduBlock = {
     id: 'C.1',
     name: 'dadublock',
     url: 'http://www.dadublock.com/',
@@ -10,19 +10,19 @@ Entry.DaduBlock = {
         en: 'DaduBlock',
     },
     setZero: function() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            var keySet = Object.keys(Entry.hw.sendQueue.SET);
+            var keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach(function(key) {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     sensorTypes: {
         ALIVE: 0,
@@ -52,7 +52,7 @@ Entry.DaduBlock = {
     BlockState: {},
 };
 
-Entry.DaduBlock_Car = {
+RoCode.DaduBlock_Car = {
     id: 'C.2',
     name: 'dadublock_car',
     url: 'http://www.dadublock.com/',
@@ -62,19 +62,19 @@ Entry.DaduBlock_Car = {
         en: 'DaduBlock Car',
     },
     setZero: function() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            var keySet = Object.keys(Entry.hw.sendQueue.SET);
+            var keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach(function(key) {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     sensorTypes: {
         ALIVE: 0,
@@ -103,7 +103,7 @@ Entry.DaduBlock_Car = {
     },
     BlockState: {},
 };
-Entry.DaduBlock_Car.setLanguage = function() {
+RoCode.DaduBlock_Car.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -147,7 +147,7 @@ Entry.DaduBlock_Car.setLanguage = function() {
         },
     };
 };
-Entry.DaduBlock.setLanguage = function() {
+RoCode.DaduBlock.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -179,7 +179,7 @@ Entry.DaduBlock.setLanguage = function() {
     };
 };
 
-Entry.DaduBlock.blockMenuBlocks = [
+RoCode.DaduBlock.blockMenuBlocks = [
     //dadublock 2016-12-19
     'dadublock_get_analog_value',
     'dadublock_get_analog_value_map',
@@ -190,7 +190,7 @@ Entry.DaduBlock.blockMenuBlocks = [
     'dadublock_set_servo',
     'dadublock_set_tone',
 ];
-Entry.DaduBlock_Car.blockMenuBlocks = [
+RoCode.DaduBlock_Car.blockMenuBlocks = [
     //dadublock_car
     'dadublock_car_get_analog_value',
     'dadublock_car_get_analog_value_map',
@@ -204,12 +204,12 @@ Entry.DaduBlock_Car.blockMenuBlocks = [
     'dadublock_car_motor',
     'dadublock_car_get_irsensor',
 ];
-Entry.DaduBlock.getBlocks = function() {
+RoCode.DaduBlock.getBlocks = function() {
     return {
         //region dadublock 다두블록
         dadublock_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -224,8 +224,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -240,13 +240,13 @@ Entry.DaduBlock.getBlocks = function() {
             isNotFor: ['dadublock'],
             func: function(sprite, script) {
                 var port = script.getField('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[port] || 0 : 0;
             },
         },
         dadublock_get_analog_value_map: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -261,8 +261,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -315,7 +315,7 @@ Entry.DaduBlock.getBlocks = function() {
             isNotFor: ['dadublock'],
             func: function(sprite, script) {
                 var port = script.getField('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var value2 = script.getNumberValue('VALUE2', script);
                 var value3 = script.getNumberValue('VALUE3', script);
                 var value4 = script.getNumberValue('VALUE4', script);
@@ -342,8 +342,8 @@ Entry.DaduBlock.getBlocks = function() {
             },
         },
         dadublock_get_ultrasonic_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -366,8 +366,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -387,8 +387,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -405,25 +405,25 @@ Entry.DaduBlock.getBlocks = function() {
             func: function(sprite, script) {
                 var port1 = script.getField('PORT1', script);
                 var port2 = script.getField('PORT2', script);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][port1];
-                delete Entry.hw.sendQueue['SET'][port2];
+                delete RoCode.hw.sendQueue['SET'][port1];
+                delete RoCode.hw.sendQueue['SET'][port2];
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.DaduBlock.sensorTypes.ULTRASONIC] = {
+                RoCode.hw.sendQueue['GET'][RoCode.DaduBlock.sensorTypes.ULTRASONIC] = {
                     port: [port1, port2],
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.ULTRASONIC || 0;
+                return RoCode.hw.portData.ULTRASONIC || 0;
             },
         },
         dadublock_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -445,8 +445,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -462,11 +462,11 @@ Entry.DaduBlock.getBlocks = function() {
             func: function(sprite, script) {
                 //var port = script.getNumberValue("PORT", script);
                 var port = script.getField('PORT', script);
-                var DIGITAL = Entry.hw.portData.DIGITAL;
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.DaduBlock.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue['GET'][RoCode.DaduBlock.sensorTypes.DIGITAL] = {
                     port: port,
                     time: new Date().getTime(),
                 };
@@ -474,8 +474,8 @@ Entry.DaduBlock.getBlocks = function() {
             },
         },
         dadublock_toggle_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -497,8 +497,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -508,8 +508,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -537,11 +537,11 @@ Entry.DaduBlock.getBlocks = function() {
                 } else {
                     value = 0;
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.DaduBlock.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.DaduBlock.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -549,8 +549,8 @@ Entry.DaduBlock.getBlocks = function() {
             },
         },
         dadublock_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -564,8 +564,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '5',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -602,11 +602,11 @@ Entry.DaduBlock.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.DaduBlock.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.DaduBlock.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -615,8 +615,8 @@ Entry.DaduBlock.getBlocks = function() {
             syntax: { js: [], py: ['Arduino.analogWrite(%1, %2)'] },
         },
         dadublock_set_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -638,8 +638,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -663,7 +663,7 @@ Entry.DaduBlock.getBlocks = function() {
             class: 'dadublockset',
             isNotFor: ['dadublock'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 //var port = script.getNumberValue("PORT", script);
                 var port = script.getField('PORT', script);
                 var value = script.getNumberValue('VALUE', script);
@@ -674,7 +674,7 @@ Entry.DaduBlock.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.DaduBlock.sensorTypes.SERVO_PIN,
+                    type: RoCode.DaduBlock.sensorTypes.SERVO_PIN,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -684,8 +684,8 @@ Entry.DaduBlock.getBlocks = function() {
             syntax: { js: [], py: ['Arduino.servomotorWrite(%1, %2)'] },
         },
         dadublock_set_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -707,8 +707,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -729,8 +729,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -744,8 +744,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -780,7 +780,7 @@ Entry.DaduBlock.getBlocks = function() {
             class: 'dadublockset',
             isNotFor: ['dadublock'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 //var port = script.getNumberValue("PORT", script);
                 var port = script.getField('PORT', script);
 
@@ -794,7 +794,7 @@ Entry.DaduBlock.getBlocks = function() {
 
                     if (note === 0 || duration === 0) {
                         sq['SET'][port] = {
-                            type: Entry.DaduBlock.sensorTypes.TONE,
+                            type: RoCode.DaduBlock.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -802,7 +802,7 @@ Entry.DaduBlock.getBlocks = function() {
                     }
 
                     var octave = script.getNumberField('OCTAVE', script);
-                    var value = Entry.DaduBlock.toneMap[note][octave];
+                    var value = RoCode.DaduBlock.toneMap[note][octave];
 
                     duration = duration * 1000;
                     script.isStart = true;
@@ -813,7 +813,7 @@ Entry.DaduBlock.getBlocks = function() {
                     }
 
                     sq['SET'][port] = {
-                        type: Entry.DaduBlock.sensorTypes.TONE,
+                        type: RoCode.DaduBlock.sensorTypes.TONE,
                         data: {
                             value: value,
                             duration: duration,
@@ -831,18 +831,18 @@ Entry.DaduBlock.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
                     sq['SET'][port] = {
-                        type: Entry.DaduBlock.sensorTypes.TONE,
+                        type: RoCode.DaduBlock.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         dadublock_car_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -857,8 +857,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -873,13 +873,13 @@ Entry.DaduBlock.getBlocks = function() {
             isNotFor: ['dadublock_car'],
             func: function(sprite, script) {
                 var port = script.getField('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[port] || 0 : 0;
             },
         },
         dadublock_car_get_analog_value_map: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -894,8 +894,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -948,7 +948,7 @@ Entry.DaduBlock.getBlocks = function() {
             isNotFor: ['dadublock_car'],
             func: function(sprite, script) {
                 var port = script.getField('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var value2 = script.getNumberValue('VALUE2', script);
                 var value3 = script.getNumberValue('VALUE3', script);
                 var value4 = script.getNumberValue('VALUE4', script);
@@ -975,8 +975,8 @@ Entry.DaduBlock.getBlocks = function() {
             },
         },
         dadublock_car_get_ultrasonic_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -999,8 +999,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1020,8 +1020,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1038,25 +1038,25 @@ Entry.DaduBlock.getBlocks = function() {
             func: function(sprite, script) {
                 var port1 = script.getField('PORT1', script);
                 var port2 = script.getField('PORT2', script);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][port1];
-                delete Entry.hw.sendQueue['SET'][port2];
+                delete RoCode.hw.sendQueue['SET'][port1];
+                delete RoCode.hw.sendQueue['SET'][port2];
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.DaduBlock.sensorTypes.ULTRASONIC] = {
+                RoCode.hw.sendQueue['GET'][RoCode.DaduBlock.sensorTypes.ULTRASONIC] = {
                     port: [port1, port2],
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.ULTRASONIC || 0;
+                return RoCode.hw.portData.ULTRASONIC || 0;
             },
         },
         dadublock_car_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -1078,8 +1078,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1095,11 +1095,11 @@ Entry.DaduBlock.getBlocks = function() {
             func: function(sprite, script) {
                 //var port = script.getNumberValue("PORT", script);
                 var port = script.getField('PORT', script);
-                var DIGITAL = Entry.hw.portData.DIGITAL;
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.DaduBlock.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue['GET'][RoCode.DaduBlock.sensorTypes.DIGITAL] = {
                     port: port,
                     time: new Date().getTime(),
                 };
@@ -1107,8 +1107,8 @@ Entry.DaduBlock.getBlocks = function() {
             },
         },
         dadublock_car_toggle_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1130,8 +1130,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1141,8 +1141,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1170,11 +1170,11 @@ Entry.DaduBlock.getBlocks = function() {
                 } else {
                     value = 0;
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.DaduBlock.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.DaduBlock.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1182,8 +1182,8 @@ Entry.DaduBlock.getBlocks = function() {
             },
         },
         dadublock_car_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1197,8 +1197,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '5',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1235,11 +1235,11 @@ Entry.DaduBlock.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.DaduBlock.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.DaduBlock.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1248,8 +1248,8 @@ Entry.DaduBlock.getBlocks = function() {
             syntax: { js: [], py: ['Arduino.analogWrite(%1, %2)'] },
         },
         dadublock_car_set_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1271,8 +1271,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1296,7 +1296,7 @@ Entry.DaduBlock.getBlocks = function() {
             class: 'dadublock_car_set',
             isNotFor: ['dadublock_car'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 //var port = script.getNumberValue("PORT", script);
                 var port = script.getField('PORT', script);
                 var value = script.getNumberValue('VALUE', script);
@@ -1307,7 +1307,7 @@ Entry.DaduBlock.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.DaduBlock.sensorTypes.SERVO_PIN,
+                    type: RoCode.DaduBlock.sensorTypes.SERVO_PIN,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1317,8 +1317,8 @@ Entry.DaduBlock.getBlocks = function() {
             syntax: { js: [], py: ['Arduino.servomotorWrite(%1, %2)'] },
         },
         dadublock_car_set_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1340,8 +1340,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1362,8 +1362,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1377,8 +1377,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1413,7 +1413,7 @@ Entry.DaduBlock.getBlocks = function() {
             class: 'dadublock_car_set',
             isNotFor: ['dadublock_car'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 //var port = script.getNumberValue("PORT", script);
                 var port = script.getField('PORT', script);
 
@@ -1427,7 +1427,7 @@ Entry.DaduBlock.getBlocks = function() {
 
                     if (note === 0 || duration === 0) {
                         sq['SET'][port] = {
-                            type: Entry.DaduBlock.sensorTypes.TONE,
+                            type: RoCode.DaduBlock.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -1435,7 +1435,7 @@ Entry.DaduBlock.getBlocks = function() {
                     }
 
                     var octave = script.getNumberField('OCTAVE', script);
-                    var value = Entry.DaduBlock.toneMap[note][octave];
+                    var value = RoCode.DaduBlock.toneMap[note][octave];
 
                     duration = duration * 1000;
                     script.isStart = true;
@@ -1446,7 +1446,7 @@ Entry.DaduBlock.getBlocks = function() {
                     }
 
                     sq['SET'][port] = {
-                        type: Entry.DaduBlock.sensorTypes.TONE,
+                        type: RoCode.DaduBlock.sensorTypes.TONE,
                         data: {
                             value: value,
                             duration: duration,
@@ -1464,18 +1464,18 @@ Entry.DaduBlock.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
                     sq['SET'][port] = {
-                        type: Entry.DaduBlock.sensorTypes.TONE,
+                        type: RoCode.DaduBlock.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         dadublock_car_motor_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1487,8 +1487,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1510,40 +1510,40 @@ Entry.DaduBlock.getBlocks = function() {
                 var port = script.getField('PORT');
                 if (port == 1) {
                     //~5,~6번을 선택했을때
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
-                    Entry.hw.sendQueue['SET'][5] = {
-                        type: Entry.DaduBlock.sensorTypes.PWM,
+                    RoCode.hw.sendQueue['SET'][5] = {
+                        type: RoCode.DaduBlock.sensorTypes.PWM,
                         data: 0,
                         time: new Date().getTime(),
                     };
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
-                    Entry.hw.sendQueue['SET'][6] = {
-                        type: Entry.DaduBlock.sensorTypes.PWM,
+                    RoCode.hw.sendQueue['SET'][6] = {
+                        type: RoCode.DaduBlock.sensorTypes.PWM,
                         data: 0,
                         time: new Date().getTime(),
                     };
                     return script.callReturn();
                 } else if (port == 2) {
                     //~9,~10번을 선택했을때
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
-                    Entry.hw.sendQueue['SET'][9] = {
-                        type: Entry.DaduBlock.sensorTypes.PWM,
+                    RoCode.hw.sendQueue['SET'][9] = {
+                        type: RoCode.DaduBlock.sensorTypes.PWM,
                         data: 0,
                         time: new Date().getTime(),
                     };
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
-                    Entry.hw.sendQueue['SET'][10] = {
-                        type: Entry.DaduBlock.sensorTypes.PWM,
+                    RoCode.hw.sendQueue['SET'][10] = {
+                        type: RoCode.DaduBlock.sensorTypes.PWM,
                         data: 0,
                         time: new Date().getTime(),
                     };
@@ -1552,8 +1552,8 @@ Entry.DaduBlock.getBlocks = function() {
             },
         },
         dadublock_car_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1565,8 +1565,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1576,8 +1576,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1620,39 +1620,39 @@ Entry.DaduBlock.getBlocks = function() {
                 if (port == 1) {
                     //~5,~6번을 선택했을때
                     if (direction == 1) {
-                        if (!Entry.hw.sendQueue['SET']) {
-                            Entry.hw.sendQueue['SET'] = {};
+                        if (!RoCode.hw.sendQueue['SET']) {
+                            RoCode.hw.sendQueue['SET'] = {};
                         }
-                        Entry.hw.sendQueue['SET'][5] = {
-                            type: Entry.DaduBlock.sensorTypes.PWM,
+                        RoCode.hw.sendQueue['SET'][5] = {
+                            type: RoCode.DaduBlock.sensorTypes.PWM,
                             data: value,
                             time: new Date().getTime(),
                         };
 
-                        if (!Entry.hw.sendQueue['SET']) {
-                            Entry.hw.sendQueue['SET'] = {};
+                        if (!RoCode.hw.sendQueue['SET']) {
+                            RoCode.hw.sendQueue['SET'] = {};
                         }
-                        Entry.hw.sendQueue['SET'][6] = {
-                            type: Entry.DaduBlock.sensorTypes.PWM,
+                        RoCode.hw.sendQueue['SET'][6] = {
+                            type: RoCode.DaduBlock.sensorTypes.PWM,
                             data: 0,
                             time: new Date().getTime(),
                         };
                         return script.callReturn();
                     } else if (direction == 2) {
-                        if (!Entry.hw.sendQueue['SET']) {
-                            Entry.hw.sendQueue['SET'] = {};
+                        if (!RoCode.hw.sendQueue['SET']) {
+                            RoCode.hw.sendQueue['SET'] = {};
                         }
-                        Entry.hw.sendQueue['SET'][5] = {
-                            type: Entry.DaduBlock.sensorTypes.PWM,
+                        RoCode.hw.sendQueue['SET'][5] = {
+                            type: RoCode.DaduBlock.sensorTypes.PWM,
                             data: 0,
                             time: new Date().getTime(),
                         };
 
-                        if (!Entry.hw.sendQueue['SET']) {
-                            Entry.hw.sendQueue['SET'] = {};
+                        if (!RoCode.hw.sendQueue['SET']) {
+                            RoCode.hw.sendQueue['SET'] = {};
                         }
-                        Entry.hw.sendQueue['SET'][6] = {
-                            type: Entry.DaduBlock.sensorTypes.PWM,
+                        RoCode.hw.sendQueue['SET'][6] = {
+                            type: RoCode.DaduBlock.sensorTypes.PWM,
                             data: value,
                             time: new Date().getTime(),
                         };
@@ -1661,39 +1661,39 @@ Entry.DaduBlock.getBlocks = function() {
                 } else if (port == 2) {
                     //~9,~10번을 선택했을때
                     if (direction == 1) {
-                        if (!Entry.hw.sendQueue['SET']) {
-                            Entry.hw.sendQueue['SET'] = {};
+                        if (!RoCode.hw.sendQueue['SET']) {
+                            RoCode.hw.sendQueue['SET'] = {};
                         }
-                        Entry.hw.sendQueue['SET'][9] = {
-                            type: Entry.DaduBlock.sensorTypes.PWM,
+                        RoCode.hw.sendQueue['SET'][9] = {
+                            type: RoCode.DaduBlock.sensorTypes.PWM,
                             data: value,
                             time: new Date().getTime(),
                         };
 
-                        if (!Entry.hw.sendQueue['SET']) {
-                            Entry.hw.sendQueue['SET'] = {};
+                        if (!RoCode.hw.sendQueue['SET']) {
+                            RoCode.hw.sendQueue['SET'] = {};
                         }
-                        Entry.hw.sendQueue['SET'][10] = {
-                            type: Entry.DaduBlock.sensorTypes.PWM,
+                        RoCode.hw.sendQueue['SET'][10] = {
+                            type: RoCode.DaduBlock.sensorTypes.PWM,
                             data: 0,
                             time: new Date().getTime(),
                         };
                         return script.callReturn();
                     } else if (direction == 2) {
-                        if (!Entry.hw.sendQueue['SET']) {
-                            Entry.hw.sendQueue['SET'] = {};
+                        if (!RoCode.hw.sendQueue['SET']) {
+                            RoCode.hw.sendQueue['SET'] = {};
                         }
-                        Entry.hw.sendQueue['SET'][9] = {
-                            type: Entry.DaduBlock.sensorTypes.PWM,
+                        RoCode.hw.sendQueue['SET'][9] = {
+                            type: RoCode.DaduBlock.sensorTypes.PWM,
                             data: 0,
                             time: new Date().getTime(),
                         };
 
-                        if (!Entry.hw.sendQueue['SET']) {
-                            Entry.hw.sendQueue['SET'] = {};
+                        if (!RoCode.hw.sendQueue['SET']) {
+                            RoCode.hw.sendQueue['SET'] = {};
                         }
-                        Entry.hw.sendQueue['SET'][10] = {
-                            type: Entry.DaduBlock.sensorTypes.PWM,
+                        RoCode.hw.sendQueue['SET'][10] = {
+                            type: RoCode.DaduBlock.sensorTypes.PWM,
                             data: value,
                             time: new Date().getTime(),
                         };
@@ -1703,8 +1703,8 @@ Entry.DaduBlock.getBlocks = function() {
             },
         },
         dadublock_car_get_irsensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -1726,8 +1726,8 @@ Entry.DaduBlock.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1743,11 +1743,11 @@ Entry.DaduBlock.getBlocks = function() {
             func: function(sprite, script) {
                 //var port = script.getNumberValue("PORT", script);
                 var port = script.getField('PORT', script);
-                var DIGITAL = Entry.hw.portData.DIGITAL;
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.DaduBlock.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue['GET'][RoCode.DaduBlock.sensorTypes.DIGITAL] = {
                     port: port,
                     time: new Date().getTime(),
                 };
@@ -1758,4 +1758,4 @@ Entry.DaduBlock.getBlocks = function() {
     };
 };
 
-module.exports = [Entry.DaduBlock, Entry.DaduBlock_Car];
+module.exports = [RoCode.DaduBlock, RoCode.DaduBlock_Car];

@@ -7,32 +7,32 @@
  * Constructor of toast
  * @constructor
  */
-Entry.Toast = class Toast {
+RoCode.Toast = class Toast {
     constructor() {
         this.toasts_ = [];
         /** @type {Element} */
-        const exist = document.getElementById('entryToastContainer');
+        const exist = document.getElementById('RoCodeToastContainer');
         if (exist) {
             document.body.removeChild(exist);
         }
-        this.body_ = Entry.createElement('div', 'entryToastContainer');
-        this.body_.addClass('entryToastContainer');
+        this.body_ = RoCode.createElement('div', 'RoCodeToastContainer');
+        this.body_.addClass('RoCodeToastContainer');
         document.body.appendChild(this.body_);
     }
 
     warning(title, message, isNotAutoDispose) {
-        const toast = Entry.createElement('div', 'entryToast');
-        toast.addClass('entryToast');
-        toast.addClass('entryToastWarning');
+        const toast = RoCode.createElement('div', 'RoCodeToast');
+        toast.addClass('RoCodeToast');
+        toast.addClass('RoCodeToastWarning');
         toast.bindOnClick(() => {
-            Entry.toast.body_.removeChild(toast);
+            RoCode.toast.body_.removeChild(toast);
         });
-        const toastTitle = Entry.createElement('div', 'entryToast');
-        toastTitle.addClass('entryToastTitle');
+        const toastTitle = RoCode.createElement('div', 'RoCodeToast');
+        toastTitle.addClass('RoCodeToastTitle');
         toastTitle.textContent = title;
         toast.appendChild(toastTitle);
-        const toastMessage = Entry.createElement('p', 'entryToast');
-        toastMessage.addClass('entryToastMessage');
+        const toastMessage = RoCode.createElement('p', 'RoCodeToast');
+        toastMessage.addClass('RoCodeToastMessage');
         toastMessage.textContent = message;
         toast.appendChild(toastMessage);
         this.toasts_.push(toast);
@@ -43,7 +43,7 @@ Entry.Toast = class Toast {
                 if (toast.style.opacity < 0.05) {
                     clearInterval(timer);
                     toast.style.display = 'none';
-                    Entry.removeElement(toast);
+                    RoCode.removeElement(toast);
                 }
                 toast.style.opacity *= 0.9;
             }, 20);
@@ -54,18 +54,18 @@ Entry.Toast = class Toast {
     }
 
     success(title, message, isNotAutoDispose) {
-        const toast = Entry.createElement('div', 'entryToast');
-        toast.addClass('entryToast');
-        toast.addClass('entryToastSuccess');
+        const toast = RoCode.createElement('div', 'RoCodeToast');
+        toast.addClass('RoCodeToast');
+        toast.addClass('RoCodeToastSuccess');
         toast.bindOnClick(() => {
-            Entry.toast.body_.removeChild(toast);
+            RoCode.toast.body_.removeChild(toast);
         });
-        const toastTitle = Entry.createElement('div', 'entryToast');
-        toastTitle.addClass('entryToastTitle');
+        const toastTitle = RoCode.createElement('div', 'RoCodeToast');
+        toastTitle.addClass('RoCodeToastTitle');
         toastTitle.textContent = title;
         toast.appendChild(toastTitle);
-        const toastMessage = Entry.createElement('p', 'entryToast');
-        toastMessage.addClass('entryToastMessage');
+        const toastMessage = RoCode.createElement('p', 'RoCodeToast');
+        toastMessage.addClass('RoCodeToastMessage');
         toastMessage.textContent = message;
         toast.appendChild(toastMessage);
         this.toasts_.push(toast);
@@ -76,7 +76,7 @@ Entry.Toast = class Toast {
                 if (toast.style.opacity < 0.05) {
                     clearInterval(timer);
                     toast.style.display = 'none';
-                    Entry.removeElement(toast);
+                    RoCode.removeElement(toast);
                 }
                 toast.style.opacity *= 0.9;
             }, 20);
@@ -87,22 +87,22 @@ Entry.Toast = class Toast {
     }
 
     alert(title, message, isNotAutoDispose) {
-        const toast = Entry.createElement('div', 'entryToast');
+        const toast = RoCode.createElement('div', 'RoCodeToast');
         let timer;
-        toast.addClass('entryToast');
-        toast.addClass('entryToastAlert');
+        toast.addClass('RoCodeToast');
+        toast.addClass('RoCodeToastAlert');
         toast.bindOnClick(() => {
-            Entry.toast.body_.removeChild(toast);
+            RoCode.toast.body_.removeChild(toast);
             if (timer) {
                 clearInterval(timer);
             }
         });
-        const toastTitle = Entry.createElement('div', 'entryToast');
-        toastTitle.addClass('entryToastTitle');
+        const toastTitle = RoCode.createElement('div', 'RoCodeToast');
+        toastTitle.addClass('RoCodeToastTitle');
         toastTitle.textContent = title;
         toast.appendChild(toastTitle);
-        const toastMessage = Entry.createElement('p', 'entryToast');
-        toastMessage.addClass('entryToastMessage');
+        const toastMessage = RoCode.createElement('p', 'RoCodeToast');
+        toastMessage.addClass('RoCodeToastMessage');
 
         if (Array.isArray(message)) {
             toastMessage.innerHTML = message.reduce(
@@ -124,7 +124,7 @@ Entry.Toast = class Toast {
                     toast.style.display = 'none';
                     //check element already removed from parent
                     if (toast.parentElement) {
-                        Entry.toast.body_.removeChild(toast);
+                        RoCode.toast.body_.removeChild(toast);
                     }
                 }
                 toast.style.opacity *= 0.9;

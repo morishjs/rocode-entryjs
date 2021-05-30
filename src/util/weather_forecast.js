@@ -4,7 +4,7 @@ const PromiseManager = require('../core/promiseManager');
 const { callApi } = require('../util/common');
 const { locationData } = require('../util/location');
 
-Entry.EXPANSION_BLOCK.weather = {
+RoCode.EXPANSION_BLOCK.weather = {
     isInitialized: false,
     api: '/api/expansionBlock/weather/',
     date : new Date(),
@@ -13,11 +13,11 @@ Entry.EXPANSION_BLOCK.weather = {
         if (this.isInitialized) {
             return;
         }
-        Entry.EXPANSION_BLOCK.weather.date = new Date();
-        Entry.EXPANSION_BLOCK.weather.getData("week","Seoul","today");
-        Entry.EXPANSION_BLOCK.weather.getData("hour","Seoul","00");
-        Entry.EXPANSION_BLOCK.weather.getData("now","Seoul");
-        Entry.EXPANSION_BLOCK.weather.isInitialized = true;
+        RoCode.EXPANSION_BLOCK.weather.date = new Date();
+        RoCode.EXPANSION_BLOCK.weather.getData("week","Seoul","today");
+        RoCode.EXPANSION_BLOCK.weather.getData("hour","Seoul","00");
+        RoCode.EXPANSION_BLOCK.weather.getData("now","Seoul");
+        RoCode.EXPANSION_BLOCK.weather.isInitialized = true;
     },
     locationMap: {
         Seoul : {
@@ -383,11 +383,11 @@ function resolveData(weatherData, type, dateStr) {
     } else if (type === 'hour') {
         return weatherData[dateStr];
     } else {
-        return weatherData[Entry.EXPANSION_BLOCK.weather.getDate(dateStr)];
+        return weatherData[RoCode.EXPANSION_BLOCK.weather.getDate(dateStr)];
     }
 }
 
-Entry.EXPANSION_BLOCK.weather.getData = function(type, location, dateStr) {
+RoCode.EXPANSION_BLOCK.weather.getData = function(type, location, dateStr) {
     let cityCode = null;
     if (typeof location === 'string') {
         cityCode = this.locationMap[location].code;
@@ -403,20 +403,20 @@ Entry.EXPANSION_BLOCK.weather.getData = function(type, location, dateStr) {
     return new PromiseManager().Promise(function(resolve) {
             callApi(url, { url })
                 .then((response) => {
-                    Entry.EXPANSION_BLOCK.weather.apiFail[type] = false;
+                    RoCode.EXPANSION_BLOCK.weather.apiFail[type] = false;
                     resolve(resolveData(response.data[cityCode], type, dateStr));
                 })
                 .catch((error) => {
-                    Entry.EXPANSION_BLOCK.weather.apiFail[type] = { error };
-                    resolve(Entry.EXPANSION_BLOCK.weather.defaultData);
+                    RoCode.EXPANSION_BLOCK.weather.apiFail[type] = { error };
+                    resolve(RoCode.EXPANSION_BLOCK.weather.defaultData);
                 });
         })
-        .catch(() => Entry.EXPANSION_BLOCK.weather.defaultData);
+        .catch(() => RoCode.EXPANSION_BLOCK.weather.defaultData);
 };
 
-Entry.EXPANSION_BLOCK.weather.getDate = function(key) {
-    Entry.EXPANSION_BLOCK.weather.date = Entry.EXPANSION_BLOCK.weather.date || new Date();
-    const date = new Date(Entry.EXPANSION_BLOCK.weather.date);
+RoCode.EXPANSION_BLOCK.weather.getDate = function(key) {
+    RoCode.EXPANSION_BLOCK.weather.date = RoCode.EXPANSION_BLOCK.weather.date || new Date();
+    const date = new Date(RoCode.EXPANSION_BLOCK.weather.date);
     switch (key) {
         case 'yesterday':
             date.setDate(date.getDate() - 1);
@@ -447,8 +447,8 @@ Entry.EXPANSION_BLOCK.weather.getDate = function(key) {
     return date.toISOString().slice(0, 10).replace(/-/g, '');
 };
 
-Entry.EXPANSION_BLOCK.weather.checkWeather = function(sky_code, weather) {
-    if (Entry.EXPANSION_BLOCK.weather.apiFail.week) {
+RoCode.EXPANSION_BLOCK.weather.checkWeather = function(sky_code, weather) {
+    if (RoCode.EXPANSION_BLOCK.weather.apiFail.week) {
         return true;
     }
 
@@ -485,8 +485,8 @@ Entry.EXPANSION_BLOCK.weather.checkWeather = function(sky_code, weather) {
     }
 };
 
-Entry.EXPANSION_BLOCK.weather.checkFineDust = function(pm10, finedust) {
-    if (Entry.EXPANSION_BLOCK.weather.apiFail.now) {
+RoCode.EXPANSION_BLOCK.weather.checkFineDust = function(pm10, finedust) {
+    if (RoCode.EXPANSION_BLOCK.weather.apiFail.now) {
         return true;
     }
 

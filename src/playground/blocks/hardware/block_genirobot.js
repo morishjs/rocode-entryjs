@@ -52,7 +52,7 @@ function getAngleStepTime(angle){
     return stepTime;
 }
 
-Entry.GENIBOT = {
+RoCode.GENIBOT = {
     id: '44.1',
     name: 'genibot',
     url: 'https://www.arduino.cc/',
@@ -68,11 +68,11 @@ Entry.GENIBOT = {
         if (myfunc == undefined) {
             return script.callReturn();
         }
-        
+
         if (script.is_start == undefined) {
             script.is_start = true;
             const waitTime = myfunc();
-            let today = new Date(); 
+            let today = new Date();
             let hours = today.getHours(); // 시
             let minutes = today.getMinutes();  // 분
             let seconds = today.getSeconds();  // 초
@@ -80,20 +80,20 @@ Entry.GENIBOT = {
 
             setTimeout(() => {
                 script.is_start = false;
-                let today = new Date();   
-    
+                let today = new Date();
+
                 let hours = today.getHours(); // 시
                 let minutes = today.getMinutes();  // 분
                 let seconds = today.getSeconds();  // 초
                 let milliseconds = today.getMilliseconds();
             }, waitTime);
-    
+
             return script;
         } else if (script.is_start == true) {
             return script;
         } else {
             delete script.is_start;
-    
+
             return script.callReturn();
         }
     },setZero() {
@@ -108,7 +108,7 @@ Entry.GENIBOT = {
 
         }
         if (pd['BUTTON']) {
-            Entry.engine.fireEvent('buttonPressed');
+            RoCode.engine.fireEvent('buttonPressed');
         }
         if(pd['LOGGER'] && pd['LOGGER'].list.length > 0){
             console.log("pd['LOGGER']",pd['LOGGER']);
@@ -287,7 +287,7 @@ const en = {
     'genibot.instrument.beat.dottedEight': 'dottedEight',
     'genibot.instrument.beat.sixteenth': 'sixteenth',
 };
-Entry.GENIBOT.setLanguage = function() {
+RoCode.GENIBOT.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -338,7 +338,7 @@ Entry.GENIBOT.setLanguage = function() {
     };
 };
 
-Entry.GENIBOT.blockMenuBlocks = [
+RoCode.GENIBOT.blockMenuBlocks = [
     'getButtonPressed',
     'setRobotSpeedItem',
     'moveDistance',
@@ -362,12 +362,12 @@ Entry.GENIBOT.blockMenuBlocks = [
 
 
 
-Entry.GENIBOT.getBlocks = function() {
+RoCode.GENIBOT.getBlocks = function() {
     return {
         //region arduino 아두이노
         getButtonPressed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_event',
             // skeleton: 'basic_boolean_field',
@@ -392,8 +392,8 @@ Entry.GENIBOT.getBlocks = function() {
             class: 'geni_input',
             isNotFor: ['genibot'],
             func(sprite, script) {
-                var portData = Entry.hw.portData['BUTTON'];
-                
+                var portData = RoCode.hw.portData['BUTTON'];
+
                 if (portData) {
                     portData = '0';
                     return script.callReturn();
@@ -404,8 +404,8 @@ Entry.GENIBOT.getBlocks = function() {
             event: 'buttonPressed',
         },
         setRobotSpeedItem: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -419,8 +419,8 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: en['genibot.steppersSpeed.normal'],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -440,14 +440,14 @@ Entry.GENIBOT.getBlocks = function() {
             class: 'geni_output',
             isNotFor:['genibot'],
             func(sprite, script) {
-                return Entry.GENIBOT.postDelayBlockHandler(script, () => {
+                return RoCode.GENIBOT.postDelayBlockHandler(script, () => {
                     const speed = script.getStringField('SPEED', script);
                     if (speed) {
-                        Entry.hw.sendQueue.SET_ROBOT_SPEED_ITEM = {
+                        RoCode.hw.sendQueue.SET_ROBOT_SPEED_ITEM = {
                             'SPEED': speed,
                             'ACK': ack++,
                         };
-                        Entry.hw.update();
+                        RoCode.hw.update();
                     }
                     let speedInt = STEPPER_RATE.NORMAL;
                     switch (speed) {
@@ -467,8 +467,8 @@ Entry.GENIBOT.getBlocks = function() {
             }
         },
         moveDistance: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -481,8 +481,8 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: en['genibot.move.forward'],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -501,8 +501,8 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: '6',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -523,19 +523,19 @@ Entry.GENIBOT.getBlocks = function() {
             class: 'geni_output',
             isNotFor:['genibot'],
             func(sprite, script){
-                return Entry.GENIBOT.postDelayBlockHandler(script, () => {
+                return RoCode.GENIBOT.postDelayBlockHandler(script, () => {
                     const direction = script.getStringField('DIRECTION', script);
                     const distance = script.getStringField('DISTANCE', script);
-                  
+
                     if (direction && distance) {
-                        Entry.hw.sendQueue.MOVE_DISTANCE = {
+                        RoCode.hw.sendQueue.MOVE_DISTANCE = {
                             'DIRECTION': direction,
                             'DISTANCE': distance,
                             'ACK': ack++,
                         };
-                        Entry.hw.update();
+                        RoCode.hw.update();
                     }
-    
+
                     let stepRate =  motion.stepRate;
                     if (direction == 'front') {
                         stepRate *= 1;
@@ -548,8 +548,8 @@ Entry.GENIBOT.getBlocks = function() {
             }
         },
         turnAngle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -562,8 +562,8 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: en['genibot.rotate.right'],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -578,8 +578,8 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: '90',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -600,25 +600,25 @@ Entry.GENIBOT.getBlocks = function() {
             class: 'geni_output',
             isNotFor:['genibot'],
             func(sprite, script) {
-                return Entry.GENIBOT.postDelayBlockHandler(script, () => {
+                return RoCode.GENIBOT.postDelayBlockHandler(script, () => {
                     const direction = script.getStringField('DIRECTION', script);
                     const angle = script.getStringField('ANGLE', script);
-                
+
                     if (direction && angle) {
-                        Entry.hw.sendQueue.TURN_ANGLE = {
+                        RoCode.hw.sendQueue.TURN_ANGLE = {
                             'DIRECTION': direction,
                             'ANGLE': angle,
                             'ACK': ack++,
                         };
-                        Entry.hw.update();
+                        RoCode.hw.update();
                     }
                     return getAngleStepTime(angle);
                 });
             }
         },
         startMoving: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -640,8 +640,8 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: '5',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -660,8 +660,8 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: '5',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -682,24 +682,24 @@ Entry.GENIBOT.getBlocks = function() {
             class: 'geni_output',
             isNotFor:['genibot'],
             func(sprite, script) {
-                return Entry.GENIBOT.postDelayBlockHandler(script, () => {
+                return RoCode.GENIBOT.postDelayBlockHandler(script, () => {
                     const VELOCITY1 = script.getStringField('VELOCITY1', script);
                     const VELOCITY2 = script.getStringField('VELOCITY2', script);
                     if (VELOCITY1 && VELOCITY2) {
-                        Entry.hw.sendQueue.START_MOVING = {
+                        RoCode.hw.sendQueue.START_MOVING = {
                             'VELOCITY1': VELOCITY1,
                             'VELOCITY2': VELOCITY2,
                             'ACK': ack++,
                         };
-                        Entry.hw.update();
+                        RoCode.hw.update();
                     }
                     return 100;
                 });
             }
         },
         stopMoving: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -720,18 +720,18 @@ Entry.GENIBOT.getBlocks = function() {
             class: 'geni_output',
             isNotFor:['genibot'],
             func(sprite, script) {
-                return Entry.GENIBOT.postDelayBlockHandler(script, () => {
-                    Entry.hw.sendQueue.STOP_MOVING = {
+                return RoCode.GENIBOT.postDelayBlockHandler(script, () => {
+                    RoCode.hw.sendQueue.STOP_MOVING = {
                         'ACK': ack++,
                     };
-                    Entry.hw.update();
+                    RoCode.hw.update();
                     return 100;
                 });
             }
         },
         motionGoDistance: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -753,8 +753,8 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: '5',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -785,8 +785,8 @@ Entry.GENIBOT.getBlocks = function() {
             class: 'geni_output',
             isNotFor:['genibot'],
             func(sprite, script) {
-                return Entry.GENIBOT.postDelayBlockHandler(script, () => {
-     
+                return RoCode.GENIBOT.postDelayBlockHandler(script, () => {
+
                     const VELOCITY = script.getStringField('VELOCITY', script);
                     const DISTANCE_ANY = script.getValue('DISTANCE')
                     const DISTANCE = script.getNumberValue('DISTANCE')//Field('DISTANCE', script);
@@ -796,20 +796,20 @@ Entry.GENIBOT.getBlocks = function() {
                         throw "error"
                     }
                     if (VELOCITY && DISTANCE) {
-                        Entry.hw.sendQueue.MOTION_GO_DISTANCE = {
+                        RoCode.hw.sendQueue.MOTION_GO_DISTANCE = {
                             'VELOCITY': VELOCITY,
                             'DISTANCE': DISTANCE,
                             'ACK': ack++,
                         };
-                        Entry.hw.update();
+                        RoCode.hw.update();
                     }
                     return getDistanceStepTime(DISTANCE);
                 });
             },
         },
         motionRotateAngle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -831,8 +831,8 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: '5',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -863,8 +863,8 @@ Entry.GENIBOT.getBlocks = function() {
             class: 'geni_output',
             isNotFor:['genibot'],
             func(sprite, script) {
-                return Entry.GENIBOT.postDelayBlockHandler(script, () => {
-         
+                return RoCode.GENIBOT.postDelayBlockHandler(script, () => {
+
                     const VELOCITY = script.getStringField('VELOCITY', script);
                     const ANGLE_ANY = script.getValue('ANGLE')
                     const ANGLE = script.getNumberValue('ANGLE', script);
@@ -874,20 +874,20 @@ Entry.GENIBOT.getBlocks = function() {
                         throw 'error'
                     }
                     if (VELOCITY && ANGLE) {
-                        Entry.hw.sendQueue.MOTION_ROTATE_ANGLE = {
+                        RoCode.hw.sendQueue.MOTION_ROTATE_ANGLE = {
                             'VELOCITY': VELOCITY,
                             'ANGLE': ANGLE,
                             'ACK': ack++,
                         };
-                        Entry.hw.update();
+                        RoCode.hw.update();
                     }
                     return getAngleStepTime(ANGLE);
                 });
             },
         },
         startLineFollower: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -900,8 +900,8 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: en['genibot.lineFollower.start'],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -921,23 +921,23 @@ Entry.GENIBOT.getBlocks = function() {
             class: 'geni_output',
             isNotFor:['genibot'],
             func(sprite, script){
-                return Entry.GENIBOT.postDelayBlockHandler(script, () => {
+                return RoCode.GENIBOT.postDelayBlockHandler(script, () => {
                     const ACTION = script.getStringField('ACTION', script);
                     // const speed = script.getStringField('SPEED',script);
                     if (ACTION) {
-                        Entry.hw.sendQueue.START_LINE_FOLLOWER = {
+                        RoCode.hw.sendQueue.START_LINE_FOLLOWER = {
                             'ACTION': ACTION,
                             'ACK': ack++,
                         };
-                        Entry.hw.update();
+                        RoCode.hw.update();
                     }
                     return 100;
                 });
             },
         },
         setLedColor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -953,14 +953,14 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: en['genibot.ledColor.all'],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Color',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -981,7 +981,7 @@ Entry.GENIBOT.getBlocks = function() {
             class: 'geni_output',
             isNotFor:['genibot'],
             func(sprite, script) {
-                return Entry.GENIBOT.postDelayBlockHandler(script, () => {
+                return RoCode.GENIBOT.postDelayBlockHandler(script, () => {
                     const side = script.getStringField('SIDE', script);
                     let ledId = 0xff;
                     switch (side) {
@@ -1001,22 +1001,22 @@ Entry.GENIBOT.getBlocks = function() {
                             ledId = 0xff;
                     }
                     const color = script.getStringField('COLOR', script);
-                    const rgb = Entry.hex2rgb(color);
+                    const rgb = RoCode.hex2rgb(color);
 
-                    Entry.hw.sendQueue.SET_LED_COLOR = {
+                    RoCode.hw.sendQueue.SET_LED_COLOR = {
                         'SIDE': ledId,
                         'COLOR': [rgb.r, rgb.g, rgb.b],
                         'ACK': ack++,
                     };
-                    Entry.hw.update();
+                    RoCode.hw.update();
                     return 100;
                 });
             },
 
         },
         setLedColorName: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1032,8 +1032,8 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: en['genibot.ledColor.all'],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1052,8 +1052,8 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: en['genibot.ledColorName.white'],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1160,8 +1160,8 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: '100',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1183,29 +1183,29 @@ Entry.GENIBOT.getBlocks = function() {
             class: 'geni_output',
             isNotFor:['genibot'],
             func(sprite, script) {
-                return Entry.GENIBOT.postDelayBlockHandler(script, () => {
+                return RoCode.GENIBOT.postDelayBlockHandler(script, () => {
                     const SIDE = script.getStringField('SIDE', script);
                     const COLOR = script.getStringField('COLOR', script);
                     const COLOR_BRIGHTNESS = script.getStringField('COLOR_BRIGHTNESS', script);
-                    
-                    if (SIDE && COLOR && COLOR_BRIGHTNESS) {
-                        
 
-                        Entry.hw.sendQueue.SET_LED_COLOR_NAME = {
+                    if (SIDE && COLOR && COLOR_BRIGHTNESS) {
+
+
+                        RoCode.hw.sendQueue.SET_LED_COLOR_NAME = {
                             'LED': SIDE,
                             'COLOR_NAME': COLOR,
                             'COLOR_BRIGHTNESS': Number(COLOR_BRIGHTNESS),
                             'ACK': ack++,
                         };
-                        Entry.hw.update();
+                        RoCode.hw.update();
                     }
                     return 100;
                 });
             }
         },
         setSpeakerVolume: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1226,8 +1226,8 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: '10',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1247,22 +1247,22 @@ Entry.GENIBOT.getBlocks = function() {
             class: 'geni_output',
             isNotFor:['genibot'],
             func(sprite, script) {
-                return Entry.GENIBOT.postDelayBlockHandler(script, () => {
+                return RoCode.GENIBOT.postDelayBlockHandler(script, () => {
                     const VOLUME = script.getStringField('VOLUME', script);
                     if (VOLUME) {
-                        Entry.hw.sendQueue.SET_SPEAKER_VOLUME = {
+                        RoCode.hw.sendQueue.SET_SPEAKER_VOLUME = {
                             'VOLUME': VOLUME,
                             'ACK': ack++,
                         };
-                        Entry.hw.update();
+                        RoCode.hw.update();
                     }
                     return 100;
                 });
             }
         },
         setTempo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1295,14 +1295,14 @@ Entry.GENIBOT.getBlocks = function() {
             class: 'geni_output',
             isNotFor:['genibot'],
             func(sprite, script) {
-                return Entry.GENIBOT.postDelayBlockHandler(script, () => {
+                return RoCode.GENIBOT.postDelayBlockHandler(script, () => {
                     const TEMPO = script.getNumberValue('TEMPO', script);
                     if (TEMPO) {
-                        Entry.hw.sendQueue.SET_TEMPO = {
+                        RoCode.hw.sendQueue.SET_TEMPO = {
                             'TEMPO': TEMPO,
                             'ACK': ack++,
                         };
-                        Entry.hw.update();
+                        RoCode.hw.update();
                     }
                     music.tempo = TEMPO;
                     return 100;
@@ -1310,8 +1310,8 @@ Entry.GENIBOT.getBlocks = function() {
             }
         },
         setInstrument: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1325,8 +1325,8 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: en['genibot.instrument.piano'],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1347,14 +1347,14 @@ Entry.GENIBOT.getBlocks = function() {
             class: 'geni_output',
             isNotFor:['genibot'],
             func(sprite, script) {
-                return Entry.GENIBOT.postDelayBlockHandler(script, () => {
+                return RoCode.GENIBOT.postDelayBlockHandler(script, () => {
                     const INSTRUMENT = script.getStringField('INSTRUMENT', script);
-                    if (INSTRUMENT) {          
-                        Entry.hw.sendQueue.SET_INSTRUMENT = {
+                    if (INSTRUMENT) {
+                        RoCode.hw.sendQueue.SET_INSTRUMENT = {
                             'INSTRUMENT': INSTRUMENT,
                             'ACK': ack++,
                         };
-                        Entry.hw.update();
+                        RoCode.hw.update();
 
                     }
                     return 100;
@@ -1363,8 +1363,8 @@ Entry.GENIBOT.getBlocks = function() {
 
         },
         playNote: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1383,8 +1383,8 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: en['genibot.instrument.beat.whole'],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 }, {
                     type: 'Dropdown',
                     options: [
@@ -1410,8 +1410,8 @@ Entry.GENIBOT.getBlocks = function() {
                     ],
                     value: en['genibot.instrument.note.code.lowTi'],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1433,27 +1433,27 @@ Entry.GENIBOT.getBlocks = function() {
             class: 'geni_output',
             isNotFor:['genibot'],
             func(sprite, script) {
-                return Entry.GENIBOT.postDelayBlockHandler(script, () => {
+                return RoCode.GENIBOT.postDelayBlockHandler(script, () => {
                     const BEATS = script.getStringField('BEATS', script);
                     const NOTE = script.getStringField('NOTE', script);
                     const noteLabel = ['whole', 'half', 'dottedHalf', 'quarter', 'dottedQuarter', 'eight', 'dottedEight', 'sixteenth'];
                     const noteId = noteLabel.findIndex(element => element === BEATS);
 
                     if (BEATS && NOTE) {
-                        Entry.hw.sendQueue.PLAY_NOTE = {
+                        RoCode.hw.sendQueue.PLAY_NOTE = {
                             'BEATS': BEATS,
                             'NOTE': NOTE,
                             'ACK': ack++,
                         };
-                        Entry.hw.update();
+                        RoCode.hw.update();
                     }
                     return (countNoteLength(noteId) * 1000)+100;
                 });
             }
         },
         getAcceleration: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1463,8 +1463,8 @@ Entry.GENIBOT.getBlocks = function() {
                     options: [['x', 'x'], ['y', 'y'], ['z', 'z']],
                     value: 'x',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1479,15 +1479,15 @@ Entry.GENIBOT.getBlocks = function() {
             isNotFor: ['genibot'],
             func(sprite, script){
                 let port = script.getStringField('PORT');
-                const ACC_TILT = Entry.hw.getDigitalPortValue('ACC_TILT');
+                const ACC_TILT = RoCode.hw.getDigitalPortValue('ACC_TILT');
                 const value = ACC_TILT['a' + port.toUpperCase()];
 
                 return value || 0;
             },
         },
         getTilt: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1501,16 +1501,16 @@ Entry.GENIBOT.getBlocks = function() {
             class: 'geni_input',
             isNotFor: ['genibot'],
             func: function(sprite, script) {
-                const ACC_TILT = Entry.hw.getDigitalPortValue('ACC_TILT');
+                const ACC_TILT = RoCode.hw.getDigitalPortValue('ACC_TILT');
                 const tilt = ACC_TILT['tilt'];
                 const tiltStatusKo = {'3':'위', '-3':'아래', '1':'오른쪽', '-1':'왼쪽', '2':'앞', '-2':'뒤'};
-                
+
                 return tiltStatusKo[tilt] || "0";
             },
         },
         getOidCode: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1526,8 +1526,8 @@ Entry.GENIBOT.getBlocks = function() {
             class: 'geni_input',
             isNotFor: ['genibot'],
             func: function(sprite, script) {
-                var OIDCODE = Entry.hw.getDigitalPortValue('OIDCODE');
-                const ROBOT_VERSION = Entry.hw.getDigitalPortValue('ROBOT_VERSION');
+                var OIDCODE = RoCode.hw.getDigitalPortValue('OIDCODE');
+                const ROBOT_VERSION = RoCode.hw.getDigitalPortValue('ROBOT_VERSION');
                 if(OIDCODE == 65535){
                     OIDCODE = -1;
                     if(ROBOT_VERSION < 8){
@@ -1540,4 +1540,4 @@ Entry.GENIBOT.getBlocks = function() {
     };
 };
 
-module.exports = Entry.GENIBOT;
+module.exports = RoCode.GENIBOT;

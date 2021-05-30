@@ -3,25 +3,25 @@
 const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_util');
 
 (function(c) {
-    const COMMAND_TYPES = Entry.STATIC.COMMAND_TYPES;
+    const COMMAND_TYPES = RoCode.STATIC.COMMAND_TYPES;
 
     c[COMMAND_TYPES.containerSelectObject] = {
         do(objectId) {
-            Entry.container.selectObject(objectId);
+            RoCode.container.selectObject(objectId);
         },
         state(objectId) {
-            return [Entry.playground.object.id, objectId];
+            return [RoCode.playground.object.id, objectId];
         },
         log(objectId) {
             return [
                 ['objectId', objectId],
-                ['objectIndex', Entry.container.getObjectIndex(objectId)],
+                ['objectIndex', RoCode.container.getObjectIndex(objectId)],
             ];
         },
         restrict(data, domQuery, callback) {
-            Entry.container.scrollToObject(data.content[1][1]);
+            RoCode.container.scrollToObject(data.content[1][1]);
 
-            return new Entry.Tooltip(
+            return new RoCode.Tooltip(
                 [
                     {
                         title: data.tooltip.title,
@@ -39,38 +39,38 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
             );
         },
         undo: 'containerSelectObject',
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         dom: ['container', 'objectIndex', '&1'],
     };
 
     c[COMMAND_TYPES.removeObject] = {
         do(objectId) {
-            Entry.Utils.forceStopSounds();
-            const { name } = Entry.container.getObject(objectId);
-            Entry.container.removeObject(objectId);
+            RoCode.Utils.forceStopSounds();
+            const { name } = RoCode.container.getObject(objectId);
+            RoCode.container.removeObject(objectId);
 
-            Entry.toast.success(
+            RoCode.toast.success(
                 Lang.Workspace.remove_object,
                 `${name} ${Lang.Workspace.remove_object_msg}`
             );
         },
         state(objectId) {
-            const object = Entry.container.getObject(objectId);
+            const object = RoCode.container.getObject(objectId);
             return [object.toJSON(), object.getIndex()];
         },
         log(objectId) {
             return [['objectId', objectId]];
         },
         undo: 'addObject',
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         dom: ['container', 'objectId', '&0', 'removeButton'],
     };
 
     c[COMMAND_TYPES.addObject] = {
         do(objectModel, index) {
             objectModel.id = getExpectedData('objectModel', {}).id || objectModel.id;
-            Entry.container.addObjectFunc(objectModel, index);
-            Entry.dispatchEvent('dismissModal');
+            RoCode.container.addObjectFunc(objectModel, index);
+            RoCode.dispatchEvent('dismissModal');
         },
         state(objectModel, index) {
             objectModel.id = getExpectedData('objectModel', {}).id || objectModel.id;
@@ -91,7 +91,7 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
         },
         dom: ['.btn_confirm_modal'],
         restrict(data, domQuery, callback) {
-            Entry.dispatchEvent('dismissModal');
+            RoCode.dispatchEvent('dismissModal');
             const {
                 tooltip: { title, content },
             } = data;
@@ -100,10 +100,10 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
                 render: false,
             });
 
-            const event = Entry.getMainWS().widgetUpdateEvent;
+            const event = RoCode.getMainWS().widgetUpdateEvent;
 
             if (!data.skip) {
-                Entry.dispatchEvent(
+                RoCode.dispatchEvent(
                     'openSpriteManager',
                     getExpectedData('spriteId'),
                     event.notify.bind(event)
@@ -113,19 +113,19 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
         },
         undo: 'removeObject',
         validate: false,
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
     };
 
     c[COMMAND_TYPES.addObjectButtonClick] = {
         do() {
-            Entry.dispatchEvent('dismissModal');
-            Entry.dispatchEvent('openSpriteManager');
+            RoCode.dispatchEvent('dismissModal');
+            RoCode.dispatchEvent('openSpriteManager');
         },
         state: returnEmptyArr,
         log: returnEmptyArr,
         undo: 'dismissModal',
-        recordable: Entry.STATIC.RECORDABLE.SUPPORT,
+        recordable: RoCode.STATIC.RECORDABLE.SUPPORT,
         validate: false,
         dom: ['engine', 'objectAddButton'],
     };
-})(Entry.Command);
+})(RoCode.Command);

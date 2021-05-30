@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.memaker = {
+RoCode.memaker = {
     id: '6.2',
     name: 'memaker',
     url: 'http://www.jkelec.co.kr/',
@@ -10,19 +10,19 @@ Entry.memaker = {
         en: 'memaker',
     },
     setZero: function() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            var keySet = Object.keys(Entry.hw.sendQueue.SET);
+            var keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach(function(key) {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     toByte: function(data) {
         switch (data) {
@@ -365,7 +365,7 @@ Entry.memaker = {
     lowList: ['low', '0', 'off'],
     BlockState: {},
 };
-Entry.memaker.blockMenuBlocks = [
+RoCode.memaker.blockMenuBlocks = [
     // memaker Added 2017-10-01
     'memaker_get_analog_value',
     'memaker_get_analog_value_map',
@@ -379,7 +379,7 @@ Entry.memaker.blockMenuBlocks = [
     // memaker Added 2017-10-01
 ];
 
-Entry.memaker.setLanguage = function() {
+RoCode.memaker.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -409,12 +409,12 @@ Entry.memaker.setLanguage = function() {
         },
     };
 };
-Entry.memaker.getBlocks = function() {
+RoCode.memaker.getBlocks = function() {
     return {
         //region memaker 미메이커
         memaker_analog_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -433,8 +433,8 @@ Entry.memaker.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -450,8 +450,8 @@ Entry.memaker.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         memaker_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -477,15 +477,15 @@ Entry.memaker.getBlocks = function() {
             isNotFor: ['memaker'],
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 if (port[0] === 'A') port = port.substring(1);
                 return ANALOG ? ANALOG[port] || 0 : 0;
             },
             syntax: { js: [], py: [] },
         },
         memaker_get_analog_value_map: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -552,7 +552,7 @@ Entry.memaker.getBlocks = function() {
             isNotFor: ['memaker'],
             func: function(sprite, script) {
                 var result = script.getValue('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var value2 = script.getNumberValue('VALUE2', script);
                 var value3 = script.getNumberValue('VALUE3', script);
                 var value4 = script.getNumberValue('VALUE4', script);
@@ -579,8 +579,8 @@ Entry.memaker.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         memaker_get_ultrasonic_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -618,26 +618,26 @@ Entry.memaker.getBlocks = function() {
                 var port1 = script.getNumberValue('PORT1', script);
                 var port2 = script.getNumberValue('PORT2', script);
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][port1];
-                delete Entry.hw.sendQueue['SET'][port2];
+                delete RoCode.hw.sendQueue['SET'][port1];
+                delete RoCode.hw.sendQueue['SET'][port2];
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.memaker.sensorTypes.ULTRASONIC] = {
+                RoCode.hw.sendQueue['GET'][RoCode.memaker.sensorTypes.ULTRASONIC] = {
                     port: [port1, port2],
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.ULTRASONIC || 0;
+                return RoCode.hw.portData.ULTRASONIC || 0;
             },
             syntax: { js: [], py: [] },
         },
         memaker_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -662,11 +662,11 @@ Entry.memaker.getBlocks = function() {
             isNotFor: ['memaker'],
             func: function(sprite, script) {
                 var port = script.getNumberValue('PORT', script);
-                var DIGITAL = Entry.hw.portData.DIGITAL;
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.memaker.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue['GET'][RoCode.memaker.sensorTypes.DIGITAL] = {
                     port: port,
                     time: new Date().getTime(),
                 };
@@ -675,8 +675,8 @@ Entry.memaker.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         memaker_toggle_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -721,18 +721,18 @@ Entry.memaker.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.memaker.highList.indexOf(value) > -1) {
+                if (RoCode.memaker.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.memaker.lowList.indexOf(value) > -1) {
+                } else if (RoCode.memaker.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.memaker.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.memaker.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -741,8 +741,8 @@ Entry.memaker.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         memaker_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -786,11 +786,11 @@ Entry.memaker.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.memaker.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.memaker.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -799,8 +799,8 @@ Entry.memaker.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         memaker_set_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -836,7 +836,7 @@ Entry.memaker.getBlocks = function() {
             class: 'memaker',
             isNotFor: ['memaker'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
                 var value = script.getNumberValue('VALUE', script);
                 value = Math.min(180, value);
@@ -846,7 +846,7 @@ Entry.memaker.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.memaker.sensorTypes.SERVO_PIN,
+                    type: RoCode.memaker.sensorTypes.SERVO_PIN,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -856,8 +856,8 @@ Entry.memaker.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         memaker_list_digital_lcd_line: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -870,8 +870,8 @@ Entry.memaker.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -886,8 +886,8 @@ Entry.memaker.getBlocks = function() {
             },
         },
         memaker_list_digital_lcd_column: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -914,8 +914,8 @@ Entry.memaker.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -930,8 +930,8 @@ Entry.memaker.getBlocks = function() {
             },
         },
         memaker_set_lcd: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             template: Lang.template.memaker_set_lcd,
@@ -980,7 +980,7 @@ Entry.memaker.getBlocks = function() {
             class: 'memakerLcd',
             isNotFor: ['memaker'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var line = script.getValue('LINE', script);
                 var column = script.getValue('COLUMN', script);
                 var string = script.getValue('STRING', script);
@@ -989,28 +989,28 @@ Entry.memaker.getBlocks = function() {
                 if (!script.isStart) {
                     if (typeof string === 'string') {
                         for (var i = 0; i < string.length; i++) {
-                            text[i] = Entry.memaker.toByte(string[i]);
+                            text[i] = RoCode.memaker.toByte(string[i]);
                         }
                     } else if (typeof string === 'number') {
                         var num_to_string = string.toString();
                         for (var i = 0; i < num_to_string.length; i++) {
-                            text[i] = Entry.memaker.toByte(num_to_string[i]);
+                            text[i] = RoCode.memaker.toByte(num_to_string[i]);
                         }
                     } else {
                         text[0] = string;
                     }
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][line] = {
-                        type: Entry.memaker.sensorTypes.LCD,
+                    RoCode.hw.sendQueue['SET'][line] = {
+                        type: RoCode.memaker.sensorTypes.LCD,
                         data: {
                             line: line,
                             column: column,
@@ -1043,15 +1043,15 @@ Entry.memaker.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = true;
+                    RoCode.engine.isContinue = true;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: ['memaker.memaker_set_lcd(%1, %2, %3)'] },
         },
         memaker_list_lcd_command: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1065,8 +1065,8 @@ Entry.memaker.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1082,8 +1082,8 @@ Entry.memaker.getBlocks = function() {
         },
 
         memaker_lcd_command: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             template: Lang.template.memaker_lcd_command,
             statements: [],
@@ -1114,7 +1114,7 @@ Entry.memaker.getBlocks = function() {
             class: 'memakerLcd',
             isNotFor: ['memaker'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var value = script.getNumberValue('COMMAND', script);
                 var command = script.getNumberValue('COMMAND', script);
 
@@ -1122,7 +1122,7 @@ Entry.memaker.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][0] = {
-                    type: Entry.memaker.sensorTypes.LCD_COMMAND,
+                    type: RoCode.memaker.sensorTypes.LCD_COMMAND,
                     data: {
                         value: value,
                         command: command,
@@ -1137,4 +1137,4 @@ Entry.memaker.getBlocks = function() {
     };
 };
 
-module.exports = Entry.memaker;
+module.exports = RoCode.memaker;

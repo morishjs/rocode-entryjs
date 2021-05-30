@@ -1,15 +1,15 @@
-Entry.FieldIndicator = class FieldIndicator extends Entry.Field {
+RoCode.FieldIndicator = class FieldIndicator extends RoCode.Field {
     constructor(content, blockView, index) {
         super(content, blockView, index);
         this._block = blockView.block;
         this._blockView = blockView;
 
-        const box = new Entry.BoxModel();
+        const box = new RoCode.BoxModel();
         this.box = box;
 
         this._size = content.size;
         if (content.img) {
-            if (this._block.deletable === Entry.Block.DELETABLE_FALSE_LIGHTEN) {
+            if (this._block.deletable === RoCode.Block.DELETABLE_FALSE_LIGHTEN) {
                 this._imgUrl = content.img.replace('.png', '_un.png');
             } else {
                 this._imgUrl = content.img;
@@ -38,7 +38,7 @@ Entry.FieldIndicator = class FieldIndicator extends Entry.Field {
 
         if (this._imgUrl) {
             options = {
-                href: Entry.mediaFilePath + this._imgUrl,
+                href: RoCode.mediaFilePath + this._imgUrl,
                 x: this._position ? this._size * -1 : 0,
                 y: this._size * -1,
                 width: this._size * 2,

@@ -4,7 +4,7 @@ import { GEDragHelper } from '../../graphicEngine/GEDragHelper';
 
 class SlideVariable extends Variable {
     constructor(variable) {
-        Entry.assert(variable.variableType === 'slide', 'Invalid variable type given');
+        RoCode.assert(variable.variableType === 'slide', 'Invalid variable type given');
         super(variable);
 
         this.setMinValue(variable.minValue);
@@ -40,7 +40,7 @@ class SlideVariable extends Variable {
         );
 
         this.view_.on(GEDragHelper.types.DOWN, function(evt) {
-            if (Entry.type !== 'workspace') {
+            if (RoCode.type !== 'workspace') {
                 return;
             }
             this.offset = {
@@ -50,7 +50,7 @@ class SlideVariable extends Variable {
         });
 
         this.view_.on(GEDragHelper.types.MOVE, function(evt) {
-            if (Entry.type !== 'workspace' || slide.isAdjusting) {
+            if (RoCode.type !== 'workspace' || slide.isAdjusting) {
                 return;
             }
             this.variable.setX(evt.stageX * 0.75 - 240 + this.offset.x);
@@ -72,7 +72,7 @@ class SlideVariable extends Variable {
         this.slideBar_.mouseEnabled = true;
         GEDragHelper.handleDrag(this.slideBar_);
         this.slideBar_.on(GEDragHelper.types.DOWN, (evt) => {
-            if (!Entry.engine.isState('run')) {
+            if (!RoCode.engine.isState('run')) {
                 return;
             }
             const value = evt.stageX * 0.75 - (this.getX() + 240 + 5) + 5;
@@ -81,11 +81,11 @@ class SlideVariable extends Variable {
         this.view_.addChild(this.slideBar_);
 
         const position = this.getSlidePosition(this.maxWidth);
-        const { stage_variable_slider } = EntryStatic.images || {};
+        const { stage_variable_slider } = RoCodeStatic.images || {};
         this.valueSetter_ = GEHelper.newSpriteWithCallback(
-            stage_variable_slider || `${Entry.mediaFilePath}stage_variable_slider.png`,
+            stage_variable_slider || `${RoCode.mediaFilePath}stage_variable_slider.png`,
             () => {
-                Entry.requestUpdate = true;
+                RoCode.requestUpdate = true;
             }
         );
         this.valueSetter_.cursor = 'pointer';
@@ -97,7 +97,7 @@ class SlideVariable extends Variable {
 
         GEDragHelper.handleDrag(this.valueSetter_);
         this.valueSetter_.on(GEDragHelper.types.DOWN, function(evt) {
-            if (!Entry.engine.isState('run')) {
+            if (!RoCode.engine.isState('run')) {
                 return;
             }
             slide.isAdjusting = true;
@@ -105,7 +105,7 @@ class SlideVariable extends Variable {
         });
 
         this.valueSetter_.on(GEDragHelper.types.MOVE, function(evt) {
-            if (!Entry.engine.isState('run')) {
+            if (!RoCode.engine.isState('run')) {
                 return;
             }
             const value = (evt.stageX * 0.75) - this.offsetX + 5;
@@ -116,7 +116,7 @@ class SlideVariable extends Variable {
             slide.isAdjusting = false;
         });
         this.view_.addChild(this.valueSetter_);
-        const variableLength = Entry.variableContainer.variables_.length;
+        const variableLength = RoCode.variableContainer.variables_.length;
         if (this.getX() && this.getY()) {
             this.setX(this.getX());
             this.setY(this.getY());
@@ -126,7 +126,7 @@ class SlideVariable extends Variable {
         }
 
         this.setVisible(this.isVisible());
-        Entry.stage.loadVariable(this);
+        RoCode.stage.loadVariable(this);
     }
 
     updateView() {
@@ -139,7 +139,7 @@ class SlideVariable extends Variable {
             const oldContent = this.textView_.text;
             let newContent;
             if (this.object_) {
-                const obj = Entry.container.getObject(this.object_);
+                const obj = RoCode.container.getObject(this.object_);
                 if (obj) {
                     newContent = `${obj.name}:${this.getName()}`;
                 } else {
@@ -180,7 +180,7 @@ class SlideVariable extends Variable {
                 this._valueWidth = this.valueView_.getMeasuredWidth();
             }
             let width = this._nameWidth + this._valueWidth + 35;
-            const colorSet = EntryStatic.colorSet.canvas || {};
+            const colorSet = RoCodeStatic.colorSet.canvas || {};
             width = Math.max(width, 90);
             this.rect_.graphics
                 .clear()
@@ -215,7 +215,7 @@ class SlideVariable extends Variable {
             //     .ss(1)
             //     .dc(position, 10 + 0.5, 3);
         }
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     getValue() {

@@ -2,19 +2,19 @@
  */
 'use strict';
 
-import { LedPicker } from '@entrylabs/tool';
+import { LedPicker } from '@RoCodelabs/tool';
 
 /*
  *
  */
-Entry.FieldLed2 = class FieldLed2 extends Entry.Field {
+RoCode.FieldLed2 = class FieldLed2 extends RoCode.Field {
     constructor(content, blockView, index) {
         super(content, blockView, index);
         this.props = { content, blockView, index };
         this._block = blockView.block;
         this._blockView = blockView;
         const board = blockView.getBoard();
-        this.box = new Entry.BoxModel();
+        this.box = new RoCode.BoxModel();
         this.svgGroup = null;
         this._contents = content;
         this._index = index;
@@ -80,7 +80,7 @@ Entry.FieldLed2 = class FieldLed2 extends Entry.Field {
         }
         const { contentSvgGroup, renderMode } = this._blockView;
         this.svgGroup = contentSvgGroup.elem('g', {
-            class: 'entry-field-microbit-led',
+            class: 'RoCode-field-microbit-led',
         });
 
         let x, y, WIDTH, HEIGHT;
@@ -150,12 +150,12 @@ Entry.FieldLed2 = class FieldLed2 extends Entry.Field {
                 this._selectBlockView();
             };
         }
-        this.disposeEvent = Entry.disposeEvent.attach(this, action);
+        this.disposeEvent = RoCode.disposeEvent.attach(this, action);
     }
 
     renderOptions() {
-        this.optionGroup = Entry.Dom('div', {
-            class: 'entry-field-microbit-led',
+        this.optionGroup = RoCode.Dom('div', {
+            class: 'RoCode-field-microbit-led',
             parent: $('body'),
         });
         this.ledPicker = new LedPicker({

@@ -5,10 +5,10 @@
 
 import _includes from 'lodash/includes';
 
-Entry.BlockToPyParser = class {
+RoCode.BlockToPyParser = class {
     constructor() {
         this._type = 'BlockToPyParser';
-        this._funcParamMap = new Entry.Map();
+        this._funcParamMap = new RoCode.Map();
         this.funcDefMap = {};
 
         this.globalCommentList = [];
@@ -23,10 +23,10 @@ Entry.BlockToPyParser = class {
         if (!code) {
             return;
         }
-        if (code instanceof Entry.Thread) {
+        if (code instanceof RoCode.Thread) {
             return this.Thread(code);
         }
-        if (code instanceof Entry.Block) {
+        if (code instanceof RoCode.Block) {
             return this.Block(code);
         }
 
@@ -46,7 +46,7 @@ Entry.BlockToPyParser = class {
     }
 
     Thread(thread) {
-        if (thread instanceof Entry.Block) {
+        if (thread instanceof RoCode.Block) {
             return this.Block(thread);
         }
         const blocks = thread.getBlocks();
@@ -55,16 +55,16 @@ Entry.BlockToPyParser = class {
             return '';
         }
 
-        if (blocks[0] instanceof Entry.Comment) {
+        if (blocks[0] instanceof RoCode.Comment) {
             this.Comment(blocks[0]);
-        } else if (this._parseMode === Entry.Parser.PARSE_SYNTAX) {
+        } else if (this._parseMode === RoCode.Parser.PARSE_SYNTAX) {
             return blocks.map((block) => `${this.Block(block)}\n`).trim();
-        } else if (this._parseMode === Entry.Parser.PARSE_GENERAL) {
+        } else if (this._parseMode === RoCode.Parser.PARSE_GENERAL) {
             let rootResult = '';
             let contentResult = '';
 
             blocks.forEach((block, index) => {
-                if (index === 0 && Entry.TextCodingUtil.isEventBlock(block)) {
+                if (index === 0 && RoCode.TextCodingUtil.isEventBlock(block)) {
                     rootResult = `${this.Block(block)}\n`;
                 } else {
                     contentResult += `${this.Block(block)}\n`;
@@ -72,7 +72,7 @@ Entry.BlockToPyParser = class {
             });
 
             if (rootResult !== '') {
-                contentResult = Entry.TextCodingUtil.indent(contentResult);
+                contentResult = RoCode.TextCodingUtil.indent(contentResult);
             }
 
             return `${(rootResult + contentResult).trim()}\n`;
@@ -80,7 +80,7 @@ Entry.BlockToPyParser = class {
     }
 
     Block(block) {
-        if (!block || !(block instanceof Entry.Block)) {
+        if (!block || !(block instanceof RoCode.Block)) {
             return '';
         }
         !block._schema && block.loadSchema();
@@ -103,7 +103,7 @@ Entry.BlockToPyParser = class {
             if (this.isRegisteredFunc(block)) {
                 syntax = this.makeFuncSyntax(block);
             }
-            if (this._parseMode === Entry.Parser.PARSE_SYNTAX) {
+            if (this._parseMode === RoCode.Parser.PARSE_SYNTAX) {
                 return syntax;
             }
         } else if (this.isFuncStmtParam(block)) {
@@ -154,7 +154,7 @@ Entry.BlockToPyParser = class {
             if (statements) {
                 statements.forEach((value) => {
                     const [, index] = value.split('$');
-                    resultTextCode += Entry.TextCodingUtil.indent(
+                    resultTextCode += RoCode.TextCodingUtil.indent(
                         this.Thread(block.statements[index - 1])
                     );
                 });
@@ -170,7 +170,7 @@ Entry.BlockToPyParser = class {
             if (syntaxObj) {
                 switch (syntaxObj.key) {
                     case 'repeat_while_true':
-                        resultTextCode = Entry.TextCodingUtil.assembleRepeatWhileTrueBlock(
+                        resultTextCode = RoCode.TextCodingUtil.assembleRepeatWhileTrueBlock(
                             block,
                             resultTextCode
                         );
@@ -179,7 +179,7 @@ Entry.BlockToPyParser = class {
                         const forStmtTokens = resultTextCode.split(' ');
 
                         if (_includes(forStmtTokens, 'for', 'i', 'in')) {
-                            forStmtTokens[1] = Entry.TextCodingUtil.generateForStmtIndex(
+                            forStmtTokens[1] = RoCode.TextCodingUtil.generateForStmtIndex(
                                 this._forIdCharIndex++
                             );
                             resultTextCode = forStmtTokens.join(' ');
@@ -189,7 +189,7 @@ Entry.BlockToPyParser = class {
                     case 'substring': {
                         // "안녕 엔트리"[1:5] -> "안녕 엔트리", [1:5]
                         const tokens = resultTextCode.split(/(?=\[)/);
-                        if (tokens.length === 2 && Entry.Utils.isNumber(tokens[0])) {
+                        if (tokens.length === 2 && RoCode.Utils.isNumber(tokens[0])) {
                             tokens[0] = `"${tokens[0]}"`;
                         }
                         resultTextCode = tokens.join('');
@@ -257,7 +257,7 @@ Entry.BlockToPyParser = class {
                     }
 
                     if (textParam && textParam.paramType === 'index') {
-                        if (Entry.Utils.isNumber(param)) {
+                        if (RoCode.Utils.isNumber(param)) {
                             param = param - 1;
                         } else {
                             const tokens = param.split('+');
@@ -272,7 +272,7 @@ Entry.BlockToPyParser = class {
                     }
 
                     if (textParam && textParam.paramType === 'integer') {
-                        if (Entry.Utils.isNumber(param) && Entry.isFloat(param)) {
+                        if (RoCode.Utils.isNumber(param) && RoCode.isFloat(param)) {
                             result = result.replace('randint', 'uniform');
                         }
                     }
@@ -292,27 +292,27 @@ Entry.BlockToPyParser = class {
                             textParam
                         );
                     }
-                    const isTypeNumber = Entry.Utils.isNumber(param);
+                    const isTypeNumber = RoCode.Utils.isNumber(param);
 
                     // 필드 블록이 아닌 블록에 내재된 파라미터 처리
                     if (
-                        !Entry.Utils.isNumber(param) &&
+                        !RoCode.Utils.isNumber(param) &&
                         (block.type === 'when_some_key_pressed' ||
                             block.type === 'is_press_some_key')
                     ) {
                         if (
-                            !Entry.KeyboardCode.map[
+                            !RoCode.KeyboardCode.map[
                                 typeof param === 'string' ? param.toLowerCase() : param
                             ]
                         ) {
-                            Entry.toast.alert(Lang.Msgs.warn, Lang.Msgs.parameter_can_not_space);
+                            RoCode.toast.alert(Lang.Msgs.warn, Lang.Msgs.parameter_can_not_space);
                             throw Error('');
                         }
 
                         result += `"${param}"`;
                     } else if (
                         !isTypeNumber &&
-                        Entry.Utils.isNumber(param) &&
+                        RoCode.Utils.isNumber(param) &&
                         (block.type === 'number' || block.type === 'string')
                     ) {
                         result += `"${param}"`;
@@ -330,10 +330,10 @@ Entry.BlockToPyParser = class {
     searchSyntax(datum) {
         let schema;
         let appliedParams;
-        if (datum instanceof Entry.BlockView) {
+        if (datum instanceof RoCode.BlockView) {
             schema = datum.block._schema;
             appliedParams = datum.block.data.params;
-        } else if (datum instanceof Entry.Block) {
+        } else if (datum instanceof RoCode.Block) {
             schema = datum._schema;
             appliedParams = datum.params;
         } else {
@@ -415,7 +415,7 @@ Entry.BlockToPyParser = class {
                 let key = options[i][0];
                 const value = options[i][1];
                 if (dataParam == value) {
-                    const name = Entry.TextCodingUtil.dropdownDynamicIdToNameConvertor(
+                    const name = RoCode.TextCodingUtil.dropdownDynamicIdToNameConvertor(
                         value,
                         textParam.menuName
                     );
@@ -425,7 +425,7 @@ Entry.BlockToPyParser = class {
                     return (dataParam = textParam.converter(key, value));
                 }
             }
-            const value = Entry.TextCodingUtil.dropdownDynamicIdToNameConvertor(
+            const value = RoCode.TextCodingUtil.dropdownDynamicIdToNameConvertor(
                 dataParam,
                 textParam.menuName
             );
@@ -462,7 +462,7 @@ Entry.BlockToPyParser = class {
             return dataParam.replace(/\"/gm, '');
         }
 
-        const map = Entry.KeyboardCode.map;
+        const map = RoCode.KeyboardCode.map;
         for (const key in map) {
             const value = map[key];
             if (value == dataParam) {
@@ -535,7 +535,7 @@ Entry.BlockToPyParser = class {
     isRegisteredFunc(block) {
         const tokens = block.data.type.split('_');
         const funcId = tokens[1];
-        return !!Entry.variableContainer.functions_[funcId];
+        return !!RoCode.variableContainer.functions_[funcId];
     }
 
     isFuncStmtParam(block) {
@@ -564,7 +564,7 @@ Entry.BlockToPyParser = class {
                     schemaTemplate = funcBlock._schema.template.trim();
                 }
             } else if (this._hasRootFunc) {
-                const rootFunc = Entry.block[this._rootFuncId];
+                const rootFunc = RoCode.block[this._rootFuncId];
                 schemaTemplate = rootFunc.block.template;
             }
         }
@@ -572,7 +572,7 @@ Entry.BlockToPyParser = class {
         const templateParams = schemaTemplate.trim().match(/%\d/gim);
         templateParams.pop(); // pop() 이유는 맨 마지막 템플릿은 Indicator 로 판단할 것이기 때문이다.
 
-        return Entry.TextCodingUtil.getFunctionNameFromTemplate(schemaTemplate)
+        return RoCode.TextCodingUtil.getFunctionNameFromTemplate(schemaTemplate)
             .trim()
             .concat(`(${templateParams.join(',')})`);
     }
@@ -629,7 +629,7 @@ Entry.BlockToPyParser = class {
                         stmtResult += this.Block(block).concat('\n');
                     }
                 }
-                result += Entry.TextCodingUtil.indent(stmtResult).concat('\n');
+                result += RoCode.TextCodingUtil.indent(stmtResult).concat('\n');
             }
 
             return result.trim();
@@ -640,14 +640,14 @@ Entry.BlockToPyParser = class {
         const result = {};
         const funcId = funcBlock.getFuncId();
 
-        const func = funcId && Entry.variableContainer.getFunction(funcId);
+        const func = funcId && RoCode.variableContainer.getFunction(funcId);
         if (!func) {
             return null;
         }
 
-        const funcName = Entry.TextCodingUtil.getFunctionNameFromTemplate(func.block.template);
+        const funcName = RoCode.TextCodingUtil.getFunctionNameFromTemplate(func.block.template);
 
-        Entry.TextCodingUtil.initQueue();
+        RoCode.TextCodingUtil.initQueue();
 
         const funcContents = func.content
             .getEventMap('funcDef')[0]
@@ -657,7 +657,7 @@ Entry.BlockToPyParser = class {
 
         const funcComment = defBlock.getCommentValue();
 
-        Entry.TextCodingUtil.gatherFuncDefParam(defBlock.getParam(0));
+        RoCode.TextCodingUtil.gatherFuncDefParam(defBlock.getParam(0));
 
         const that = this;
         const funcParams = [];
@@ -665,7 +665,7 @@ Entry.BlockToPyParser = class {
         if (!this._hasRootFunc) {
             const funcDefParams = [];
             let param;
-            while ((param = Entry.TextCodingUtil._funcParamQ.dequeue())) {
+            while ((param = RoCode.TextCodingUtil._funcParamQ.dequeue())) {
                 funcDefParams.push(param);
             }
 
@@ -679,7 +679,7 @@ Entry.BlockToPyParser = class {
             });
         } else {
             funcBlock.params
-                .filter((p) => p instanceof Entry.Block)
+                .filter((p) => p instanceof RoCode.Block)
                 .forEach((p) => {
                     let paramText = that.Block(p);
                     if (!paramText) {
@@ -690,7 +690,7 @@ Entry.BlockToPyParser = class {
                 });
         }
 
-        Entry.TextCodingUtil.clearQueue();
+        RoCode.TextCodingUtil.clearQueue();
 
         if (funcName) {
             result.name = funcName;

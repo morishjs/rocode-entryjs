@@ -1,5 +1,5 @@
-Entry.Comment = class Comment {
-    dragMode = Entry.DRAG_MODE_NONE;
+RoCode.Comment = class Comment {
+    dragMode = RoCode.DRAG_MODE_NONE;
     offsetX = 50;
     offsetY = 10;
     schema = {
@@ -18,11 +18,11 @@ Entry.Comment = class Comment {
         display: true,
         movable: true,
         isOpened: true,
-        deletable: Entry.Block.DELETABLE_TRUE,
+        deletable: RoCode.Block.DELETABLE_TRUE,
     };
 
     constructor(schema, board, block) {
-        Entry.Model(this, false);
+        RoCode.Model(this, false);
 
         if (schema) {
             this.set(schema);
@@ -117,7 +117,7 @@ Entry.Comment = class Comment {
     }
 
     generateId(schema = {}) {
-        const id = schema.id || Entry.Utils.generateId();
+        const id = schema.id || RoCode.Utils.generateId();
         this.set({ id });
     }
 
@@ -257,13 +257,13 @@ Entry.Comment = class Comment {
             href: `#${this.id}t`,
         });
 
-        const path = `${Entry.mediaFilePath}block_icon/comment/`;
+        const path = `${RoCode.mediaFilePath}block_icon/comment/`;
 
         this._resizeArea.attr({
             width: 20,
             height: 20,
             fill: 'transparent',
-            class: 'entry-comment-resize-arrow',
+            class: 'RoCode-comment-resize-arrow',
         });
 
         this._resizeArrow.attr({
@@ -277,7 +277,7 @@ Entry.Comment = class Comment {
             width: 20,
             height: this.titleHeight,
             fill: 'transparent',
-            class: 'entry-comment-toggle-arrow',
+            class: 'RoCode-comment-toggle-arrow',
         });
 
         this._toggleArrow.attr({
@@ -433,9 +433,9 @@ Entry.Comment = class Comment {
     }
 
     setDragInstance(e) {
-        const mouseEvent = Entry.Utils.convertMouseEvent(e);
+        const mouseEvent = RoCode.Utils.convertMouseEvent(e);
         const matrix = this.svgGroup.getCTM();
-        const { x, y } = Entry.GlobalSvg.getRelativePoint(matrix);
+        const { x, y } = RoCode.GlobalSvg.getRelativePoint(matrix);
         const { left: startX, top: startY } = (this.pathGroup &&
             this.pathGroup.getBoundingClientRect()) || { left: x, top: y };
         this.mouseDownCoordinate = {
@@ -444,7 +444,7 @@ Entry.Comment = class Comment {
             parentX: x,
             parentY: y,
         };
-        this.dragInstance = new Entry.DragInstance({
+        this.dragInstance = new RoCode.DragInstance({
             startX,
             startY,
             offsetX: mouseEvent.pageX,
@@ -485,12 +485,12 @@ Entry.Comment = class Comment {
 
         if ((e.button === 0 || e.type === 'touchstart') && !this.board.readOnly) {
             this.setDragInstance(e);
-            this.dragMode = Entry.DRAG_MODE_MOUSEDOWN;
+            this.dragMode = RoCode.DRAG_MODE_MOUSEDOWN;
             this.bindDomEvent(this.mouseMove, this.mouseUp);
             const eventType = e.type;
             this.board.set({ dragBlock: this });
 
-            if (eventType === 'touchstart' || Entry.isMobile()) {
+            if (eventType === 'touchstart' || RoCode.isMobile()) {
                 this.longPressTimer = setTimeout(() => {
                     if (this.longPressTimer) {
                         this.longPressTimer = null;
@@ -499,23 +499,23 @@ Entry.Comment = class Comment {
                     }
                 }, 700);
             }
-        } else if (Entry.Utils.isRightButton(e)) {
+        } else if (RoCode.Utils.isRightButton(e)) {
             this.rightClick(e);
         }
     }
 
     rightClick(e) {
-        const disposeEvent = Entry.disposeEvent;
+        const disposeEvent = RoCode.disposeEvent;
         if (disposeEvent) {
             disposeEvent.notify(e);
         }
         delete this.board.workingEvent;
-        this.dragMode = Entry.DRAG_MODE_NONE;
+        this.dragMode = RoCode.DRAG_MODE_NONE;
 
-        const { clientX: x, clientY: y } = Entry.Utils.convertMouseEvent(e);
+        const { clientX: x, clientY: y } = RoCode.Utils.convertMouseEvent(e);
 
         const board = this.board;
-        return Entry.ContextMenu.show(_getOptions(this), null, { x, y });
+        return RoCode.ContextMenu.show(_getOptions(this), null, { x, y });
 
         function _getOptions(comment) {
             const readOnly = comment.readOnly;
@@ -524,7 +524,7 @@ Entry.Comment = class Comment {
                 text: Lang.Blocks.copy_paste_comment,
                 enable: !readOnly,
                 callback() {
-                    Entry.do('cloneComment', comment.copy(), board);
+                    RoCode.do('cloneComment', comment.copy(), board);
                 },
             };
 
@@ -540,7 +540,7 @@ Entry.Comment = class Comment {
                 text: Lang.Blocks.delete_comment,
                 enable: !readOnly,
                 callback() {
-                    Entry.do('removeComment', comment);
+                    RoCode.do('removeComment', comment);
                 },
             };
 
@@ -548,7 +548,7 @@ Entry.Comment = class Comment {
                 text: comment.isOpened ? Lang.Blocks.fold_comment : Lang.Blocks.open_comment,
                 enable: !readOnly,
                 callback() {
-                    Entry.do('toggleComment', comment);
+                    RoCode.do('toggleComment', comment);
                 },
             };
 
@@ -556,7 +556,7 @@ Entry.Comment = class Comment {
                 text: Lang.Blocks.separate_comment,
                 enable: !!comment.block,
                 callback() {
-                    Entry.do('separateComment', comment);
+                    RoCode.do('separateComment', comment);
                 },
             };
 
@@ -568,10 +568,10 @@ Entry.Comment = class Comment {
 
     mouseMove(e) {
         e.stopPropagation();
-        const mouseEvent = Entry.Utils.convertMouseEvent(e);
+        const mouseEvent = RoCode.Utils.convertMouseEvent(e);
         if (
-            this.dragMode === Entry.DRAG_MODE_DRAG ||
-            this.getMouseMoveDiff(mouseEvent) > Entry.BlockView.DRAG_RADIUS
+            this.dragMode === RoCode.DRAG_MODE_DRAG ||
+            this.getMouseMoveDiff(mouseEvent) > RoCode.BlockView.DRAG_RADIUS
         ) {
             if (this.longPressTimer) {
                 clearTimeout(this.longPressTimer);
@@ -581,13 +581,13 @@ Entry.Comment = class Comment {
                 this.destroyTextArea();
             }
             const workspaceMode = this.board.workspace.getMode();
-            if (this.dragMode !== Entry.DRAG_MODE_DRAG) {
+            if (this.dragMode !== RoCode.DRAG_MODE_DRAG) {
                 this.set({
                     moveX: this.x,
                     moveY: this.y,
                 });
-                this.dragMode = Entry.DRAG_MODE_DRAG;
-                Entry.GlobalSvg.setComment(this, workspaceMode);
+                this.dragMode = RoCode.DRAG_MODE_DRAG;
+                RoCode.GlobalSvg.setComment(this, workspaceMode);
                 this.visible && this.set({ visible: false });
                 this.generateCommentableBlocks();
             }
@@ -602,7 +602,7 @@ Entry.Comment = class Comment {
                 offsetX: mouseEvent.pageX,
                 offsetY: mouseEvent.pageY,
             });
-            Entry.GlobalSvg.commentPosition(this.dragInstance);
+            RoCode.GlobalSvg.commentPosition(this.dragInstance);
         }
     }
 
@@ -613,13 +613,13 @@ Entry.Comment = class Comment {
             this.longPressTimer = null;
         }
 
-        if (!this.isEditing && this.isOpened && this.dragMode === Entry.DRAG_MODE_MOUSEDOWN) {
+        if (!this.isEditing && this.isOpened && this.dragMode === RoCode.DRAG_MODE_MOUSEDOWN) {
             this.renderTextArea();
-        } else if (this.dragMode === Entry.DRAG_MODE_DRAG) {
+        } else if (this.dragMode === RoCode.DRAG_MODE_DRAG) {
             this.destroyTextArea();
-            Entry.do('moveComment', this);
+            RoCode.do('moveComment', this);
             if (this.connectableBlockView) {
-                Entry.do('connectComment', this.toJSON(), this.connectableBlockView.block).isPass(
+                RoCode.do('connectComment', this.toJSON(), this.connectableBlockView.block).isPass(
                     true,
                     true
                 );
@@ -636,18 +636,18 @@ Entry.Comment = class Comment {
 
     removeMoveSetting(mouseMove, mouseUp) {
         const dragMode = this.dragMode;
-        this.dragMode = Entry.DRAG_MODE_NONE;
+        this.dragMode = RoCode.DRAG_MODE_NONE;
         this.board.set({ dragBlock: null });
         delete this.connectableBlocks;
         this.set({ visible: true });
         this.setPosition();
         this.removeDomEvent(mouseMove, mouseUp);
-        const gs = Entry.GlobalSvg;
+        const gs = RoCode.GlobalSvg;
         const gsRet = gs.terminateDrag(this);
-        if (gsRet === gs.REMOVE && dragMode === Entry.DRAG_MODE_DRAG) {
-            Entry.do('removeComment', this).isPass(true, true);
+        if (gsRet === gs.REMOVE && dragMode === RoCode.DRAG_MODE_DRAG) {
+            RoCode.do('removeComment', this).isPass(true, true);
         }
-        Entry.GlobalSvg.remove();
+        RoCode.GlobalSvg.remove();
         delete this.mouseDownCoordinate;
         delete this.dragInstance;
     }
@@ -666,8 +666,8 @@ Entry.Comment = class Comment {
 
     updateOpacity() {
         this.visible
-            ? Entry.Utils.removeClass(this.svgGroup, 'invisible')
-            : Entry.Utils.addClass(this.svgGroup, 'invisible');
+            ? RoCode.Utils.removeClass(this.svgGroup, 'invisible')
+            : RoCode.Utils.addClass(this.svgGroup, 'invisible');
     }
 
     isReadOnly() {
@@ -689,7 +689,7 @@ Entry.Comment = class Comment {
             parentX = this.mouseDownCoordinate.parentX;
             parentY = this.mouseDownCoordinate.parentY;
         }
-        if (this.blockView && dragMode !== Entry.DRAG_MODE_DRAG) {
+        if (this.blockView && dragMode !== RoCode.DRAG_MODE_DRAG) {
             x += this.blockView.getAbsoluteCoordinate().x;
             y += this.blockView.getAbsoluteCoordinate().y;
         }
@@ -706,12 +706,12 @@ Entry.Comment = class Comment {
         this.isEditing = true;
         const { top, left } = this._comment.getBoundingClientRect();
         const scrollTop = document.documentElement.scrollTop;
-        this.event = Entry.disposeEvent.attach(this, () => {
+        this.event = RoCode.disposeEvent.attach(this, () => {
             this._textPath.textContent = this.value;
             this.destroyTextArea();
         });
-        this.textArea = Entry.Dom('textarea', {
-            class: 'entry-widget-textarea',
+        this.textArea = RoCode.Dom('textarea', {
+            class: 'RoCode-widget-textarea',
             parent: $('body'),
         });
         this.bindDomEventTextArea();
@@ -764,12 +764,12 @@ Entry.Comment = class Comment {
             this.textArea.remove();
             const value = this.textArea.val();
             if (this.value !== value) {
-                Entry.do('writeComment', this, value);
+                RoCode.do('writeComment', this, value);
             }
             delete this.textArea;
         }
 
-        Entry.Utils.blur();
+        RoCode.Utils.blur();
     }
 
     writeComment(value) {
@@ -784,15 +784,15 @@ Entry.Comment = class Comment {
     resizeMouseDown(e) {
         e.stopPropagation();
         e.preventDefault();
-        if (Entry.documentMousedown) {
-            Entry.documentMousedown.notify(e);
+        if (RoCode.documentMousedown) {
+            RoCode.documentMousedown.notify(e);
         }
 
         if ((e.button === 0 || e.type === 'touchstart') && !this.board.readOnly) {
             this.setDragInstance(e);
-            this.dragMode = Entry.DRAG_MODE_MOUSEDOWN;
+            this.dragMode = RoCode.DRAG_MODE_MOUSEDOWN;
             this.bindDomEvent(this.resizeMouseMove, this.resizeMouseUp);
-        } else if (Entry.Utils.isRightButton(e)) {
+        } else if (RoCode.Utils.isRightButton(e)) {
             this.rightClick(e);
         }
     }
@@ -800,13 +800,13 @@ Entry.Comment = class Comment {
     resizeMouseMove(e) {
         e.stopPropagation();
 
-        const mouseEvent = Entry.Utils.convertMouseEvent(e);
+        const mouseEvent = RoCode.Utils.convertMouseEvent(e);
         if (
-            this.dragMode === Entry.DRAG_MODE_DRAG ||
-            this.getMouseMoveDiff(mouseEvent) > Entry.BlockView.DRAG_RADIUS
+            this.dragMode === RoCode.DRAG_MODE_DRAG ||
+            this.getMouseMoveDiff(mouseEvent) > RoCode.BlockView.DRAG_RADIUS
         ) {
-            if (this.dragMode !== Entry.DRAG_MODE_DRAG) {
-                this.dragMode = Entry.DRAG_MODE_DRAG;
+            if (this.dragMode !== RoCode.DRAG_MODE_DRAG) {
+                this.dragMode = RoCode.DRAG_MODE_DRAG;
             }
             this.resize(
                 (mouseEvent.pageX - this.dragInstance.offsetX) / this.scale,
@@ -834,15 +834,15 @@ Entry.Comment = class Comment {
     toggleMouseDown(e) {
         e.stopPropagation();
         e.preventDefault();
-        if (Entry.documentMousedown) {
-            Entry.documentMousedown.notify(e);
+        if (RoCode.documentMousedown) {
+            RoCode.documentMousedown.notify(e);
         }
 
         if ((e.button === 0 || e.type === 'touchstart') && !this.board.readOnly) {
             this.setDragInstance(e);
-            this.dragMode = Entry.DRAG_MODE_MOUSEDOWN;
+            this.dragMode = RoCode.DRAG_MODE_MOUSEDOWN;
             this.bindDomEvent(this.mouseMove, this.toggleMouseUp);
-        } else if (Entry.Utils.isRightButton(e)) {
+        } else if (RoCode.Utils.isRightButton(e)) {
             this.rightClick(e);
         }
     }
@@ -850,28 +850,28 @@ Entry.Comment = class Comment {
     toggleMouseUp(e) {
         e.stopPropagation();
 
-        if (this.dragMode === Entry.DRAG_MODE_MOUSEDOWN) {
-            Entry.do('toggleComment', this);
+        if (this.dragMode === RoCode.DRAG_MODE_MOUSEDOWN) {
+            RoCode.do('toggleComment', this);
         } else {
-            Entry.do('moveComment', this);
+            RoCode.do('moveComment', this);
         }
         this.removeMoveSetting(this.mouseMove, this.toggleMouseUp);
     }
 
     toggleContent() {
-        const path = `${Entry.mediaFilePath}block_icon/comment/`;
+        const path = `${RoCode.mediaFilePath}block_icon/comment/`;
         let fileName;
         if (this.isOpened) {
-            Entry.Utils.removeClass(this._contentGroup, 'invisible');
-            Entry.Utils.addClass(this._titleText, 'invisible');
-            Entry.Utils.removeClass(this._titleGroup, 'invisible');
+            RoCode.Utils.removeClass(this._contentGroup, 'invisible');
+            RoCode.Utils.addClass(this._titleText, 'invisible');
+            RoCode.Utils.removeClass(this._titleGroup, 'invisible');
             fileName = 'toggle_open_arrow.svg';
         } else {
             if (this._block) {
-                Entry.Utils.addClass(this._titleGroup, 'invisible');
+                RoCode.Utils.addClass(this._titleGroup, 'invisible');
             }
-            Entry.Utils.addClass(this._contentGroup, 'invisible');
-            Entry.Utils.removeClass(this._titleText, 'invisible');
+            RoCode.Utils.addClass(this._contentGroup, 'invisible');
+            RoCode.Utils.removeClass(this._titleText, 'invisible');
             fileName = 'toggle_close_arrow.svg';
             this.destroyTextArea();
         }
@@ -899,14 +899,14 @@ Entry.Comment = class Comment {
         const { x, y } = this.getAbsoluteCoordinate();
         cloned.x = x + 15;
         cloned.y = y + 15;
-        cloned.id = Entry.Utils.generateId();
+        cloned.id = RoCode.Utils.generateId();
         cloned.type = 'comment';
 
         return cloned;
     }
 
     copyToClipboard() {
-        Entry.clipboard = this.copy();
+        RoCode.clipboard = this.copy();
     }
 
     connectToBlock(block) {
@@ -916,7 +916,7 @@ Entry.Comment = class Comment {
         delete data.y;
         delete data.visible;
         this.destroy();
-        block.connectComment(new Entry.Comment(data, board, block));
+        block.connectComment(new RoCode.Comment(data, board, block));
     }
 
     separateFromBlock() {
@@ -926,7 +926,7 @@ Entry.Comment = class Comment {
         data.x = x;
         data.y = y;
         this.destroy();
-        const comment = new Entry.Comment(data, board);
+        const comment = new RoCode.Comment(data, board);
         this.board.code.createThread([comment], 0);
     }
 
@@ -975,7 +975,7 @@ Entry.Comment = class Comment {
         const blockMap = this.getBlocksInThreads(threads);
         for (const index in blockMap) {
             const block = blockMap[index];
-            if (block instanceof Entry.Block && !block.comment && block.isCommentable()) {
+            if (block instanceof RoCode.Block && !block.comment && block.isCommentable()) {
                 const coordinate = block.view.getAbsoluteCoordinate();
                 const { width, height, topFieldHeight } = block.view;
                 this.connectableBlocks.push({

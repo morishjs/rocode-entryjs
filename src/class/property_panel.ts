@@ -2,35 +2,35 @@ class PropertyPanel {
     public modes: any = {};
     public selected: string = undefined;
 
-    private _view: EntryDom;
-    private _tabView: EntryDom;
-    private _contentView: EntryDom;
-    private _cover: EntryDom & { _isVisible?: boolean };
+    private _view: RoCodeDom;
+    private _tabView: RoCodeDom;
+    private _contentView: RoCodeDom;
+    private _cover: RoCodeDom & { _isVisible?: boolean };
 
     generateView(parentDom: HTMLElement) {
         const container = $(parentDom);
-        this._view = Entry.Dom('div', {
+        this._view = RoCode.Dom('div', {
             class: 'propertyPanel',
             parent: container,
         });
 
-        this._tabView = Entry.Dom('div', {
+        this._tabView = RoCode.Dom('div', {
             class: 'propertyTab',
             parent: this._view,
         });
 
-        this._contentView = Entry.Dom('div', {
+        this._contentView = RoCode.Dom('div', {
             class: 'propertyContent',
             parent: this._view,
         });
 
-        this._cover = Entry.Dom('div', {
-            classes: ['propertyPanelCover', 'entryRemove'],
+        this._cover = RoCode.Dom('div', {
+            classes: ['propertyPanelCover', 'RoCodeRemove'],
             parent: this._view,
         });
 
-        const splitter = Entry.Dom('div', {
-            class: 'entryObjectSelectedImgWorkspace',
+        const splitter = RoCode.Dom('div', {
+            class: 'RoCodeObjectSelectedImgWorkspace',
             parent: container,
         });
         this._initializeSplitter(splitter);
@@ -43,11 +43,11 @@ class PropertyPanel {
 
         let contentDom = contentObj.getView();
         // will be removed after apply new Dom class
-        contentDom = Entry.Dom(contentDom, {
+        contentDom = RoCode.Dom(contentDom, {
             parent: this._contentView,
         });
 
-        const tabDom = Entry.Dom(`<div>${Lang.Menus[mode]}</div>`, {
+        const tabDom = RoCode.Dom(`<div>${Lang.Menus[mode]}</div>`, {
             classes: ['propertyTabElement', `propertyTab${mode}`],
             parent: this._tabView,
         });
@@ -69,7 +69,7 @@ class PropertyPanel {
 
         if (mode === 'hw') {
             $('.propertyTabhw').bind('dblclick', () => {
-                Entry.dispatchEvent('hwModeChange');
+                RoCode.dispatchEvent('hwModeChange');
             });
         }
     }
@@ -99,7 +99,7 @@ class PropertyPanel {
             this._view.addClass('collapsed');
         }
 
-        Entry.dispatchEvent('windowResized');
+        RoCode.dispatchEvent('windowResized');
 
         const obj = this.modes[selected].obj;
         if (selected === 'hw') {
@@ -117,7 +117,7 @@ class PropertyPanel {
         for (const key in this.modes) {
             const mode = this.modes[key];
             mode.tabDom.removeClass('selected');
-            mode.contentDom.addClass('entryRemove');
+            mode.contentDom.addClass('RoCodeRemove');
             $(mode.contentDom).detach();
             mode.obj.visible = false;
         }
@@ -125,7 +125,7 @@ class PropertyPanel {
         const selected = this.modes[modeName];
         $(this._contentView).append(selected.contentDom);
         selected.tabDom.addClass('selected');
-        selected.contentDom.removeClass('entryRemove');
+        selected.contentDom.removeClass('RoCodeRemove');
         if (selected.obj.resize) {
             selected.obj.resize();
         }
@@ -133,27 +133,27 @@ class PropertyPanel {
         this.selected = modeName;
     }
 
-    private _initializeSplitter(splitter: EntryDom) {
+    private _initializeSplitter(splitter: RoCodeDom) {
         splitter.bind('mousedown touchstart', (e) => {
             e.preventDefault();
-            if (Entry.disposeEvent) {
-                Entry.disposeEvent.notify();
+            if (RoCode.disposeEvent) {
+                RoCode.disposeEvent.notify();
             }
-            const container = Entry.container;
-            this._cover.removeClass('entryRemove');
+            const container = RoCode.container;
+            this._cover.removeClass('RoCodeRemove');
             this._cover._isVisible = true;
             container.splitterEnable = true;
-            if (Entry.documentMousemove) {
-                container.resizeEvent = Entry.documentMousemove.attach(this, (e: any) => {
+            if (RoCode.documentMousemove) {
+                container.resizeEvent = RoCode.documentMousemove.attach(this, (e: any) => {
                     if (container.splitterEnable) {
-                        Entry.resizeElement({
+                        RoCode.resizeElement({
                             canvasWidth: e.clientX || e.x,
                         });
                     }
                 });
             }
             $(document).bind('mouseup.container:splitter touchend.container:splitter', () => {
-                const container = Entry.container;
+                const container = RoCode.container;
                 const listener = container.resizeEvent;
                 if (listener) {
                     container.splitterEnable = false;
@@ -162,7 +162,7 @@ class PropertyPanel {
                 }
                 if (this._cover._isVisible) {
                     this._cover._isVisible = false;
-                    this._cover.addClass('entryRemove');
+                    this._cover.addClass('RoCodeRemove');
                 }
                 $(document).unbind('.container:splitter');
             });
@@ -182,4 +182,4 @@ class PropertyPanel {
 }
 
 export default PropertyPanel;
-Entry.PropertyPanel = PropertyPanel;
+RoCode.PropertyPanel = PropertyPanel;

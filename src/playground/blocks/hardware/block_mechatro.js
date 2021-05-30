@@ -193,10 +193,10 @@ class mechatro {
 
     setZero() {
         // 엔트리 정지시 하드웨어 초기화 로직
-        Entry.hw.sendQueue = {
-            SEND_DATA: {}, // key 값이 없으면 entry-HW에서 entryJS 정지로 인식
+        RoCode.hw.sendQueue = {
+            SEND_DATA: {}, // key 값이 없으면 RoCode-HW에서 RoCodeJS 정지로 인식
         };
-        Entry.hw.update(); // 반드시 업데이트 해야 전송됨
+        RoCode.hw.update(); // 반드시 업데이트 해야 전송됨
         this.eventState = {
             FALLING: {
                 '2': false,
@@ -221,7 +221,7 @@ class mechatro {
     }
 
     afterReceive(pd) {
-        if (!Entry.engine.isState('run')) {
+        if (!RoCode.engine.isState('run')) {
             // 정지시에도 이전값 저장으로 실행하는 순간 발생할 수 있는 이벤트 발생을 금지
             Object.keys(this.prev_sensor_data).forEach((key) => {
                 this.prev_sensor_data[key] = pd[key];
@@ -248,12 +248,12 @@ class mechatro {
 
         if (this.eventState.RISING.TRIGGER) {
             this.eventState.RISING.TRIGGER = false;
-            Entry.engine.fireEvent('event_digital_input_is_rising');
+            RoCode.engine.fireEvent('event_digital_input_is_rising');
         }
 
         if (this.eventState.FALLING.TRIGGER) {
             this.eventState.FALLING.TRIGGER = false;
-            Entry.engine.fireEvent('event_digital_input_is_falling');
+            RoCode.engine.fireEvent('event_digital_input_is_falling');
         }
     }
 
@@ -265,12 +265,12 @@ class mechatro {
     //};
 
     transferModeValue(portNo, mode, value) {
-        if (Entry.hw.sendQueue.SEND_DATA == undefined) {
-            Entry.hw.sendQueue = {
+        if (RoCode.hw.sendQueue.SEND_DATA == undefined) {
+            RoCode.hw.sendQueue = {
                 SEND_DATA: {},
             };
         }
-        Entry.hw.sendQueue.SEND_DATA[portNo] = {
+        RoCode.hw.sendQueue.SEND_DATA[portNo] = {
             MODE: mode,
             VALUE: value,
         };
@@ -278,23 +278,23 @@ class mechatro {
 
     transferValue(portNo, value) {
         // only used in mechatro_set_dc_motor Block
-        if (Entry.hw.sendQueue.SEND_DATA == undefined) {
-            Entry.hw.sendQueue = {
+        if (RoCode.hw.sendQueue.SEND_DATA == undefined) {
+            RoCode.hw.sendQueue = {
                 SEND_DATA: {},
             };
         }
-        Entry.hw.sendQueue.SEND_DATA[portNo] = {
+        RoCode.hw.sendQueue.SEND_DATA[portNo] = {
             VALUE: value,
         };
     }
 
     transferMode(portNo, mode) {
-        if (Entry.hw.sendQueue.SEND_DATA == undefined) {
-            Entry.hw.sendQueue = {
+        if (RoCode.hw.sendQueue.SEND_DATA == undefined) {
+            RoCode.hw.sendQueue = {
                 SEND_DATA: {},
             };
         }
-        Entry.hw.sendQueue.SEND_DATA[portNo] = {
+        RoCode.hw.sendQueue.SEND_DATA[portNo] = {
             MODE: mode,
         };
     }
@@ -352,8 +352,8 @@ class mechatro {
     getBlocks() {
         return {
             mechatro_event_rising: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#fff',
                 skeleton: 'basic_event',
                 params: [
@@ -375,8 +375,8 @@ class mechatro {
                         ],
                         value: '2',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -392,8 +392,8 @@ class mechatro {
                 event: 'event_digital_input_is_rising',
                 func(sprite, script) {
                     const portNo = script.getNumberField('PORT', script);
-                    if (Entry.mechatro.eventState.RISING[portNo]) {
-                        Entry.mechatro.eventState.RISING[portNo] = false;
+                    if (RoCode.mechatro.eventState.RISING[portNo]) {
+                        RoCode.mechatro.eventState.RISING[portNo] = false;
                         return script.callReturn();
                     }
                     return this.die();
@@ -401,8 +401,8 @@ class mechatro {
                 syntax: { js: [], py: [] },
             },
             mechatro_event_falling: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#fff',
                 skeleton: 'basic_event',
                 params: [
@@ -424,8 +424,8 @@ class mechatro {
                         ],
                         value: '2',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -442,8 +442,8 @@ class mechatro {
                 events: {},
                 func(sprite, script) {
                     const portNo = script.getNumberField('PORT', script);
-                    if (Entry.mechatro.eventState.FALLING[portNo]) {
-                        Entry.mechatro.eventState.FALLING[portNo] = false;
+                    if (RoCode.mechatro.eventState.FALLING[portNo]) {
+                        RoCode.mechatro.eventState.FALLING[portNo] = false;
                         return script.callReturn();
                     }
                     return this.die();
@@ -451,8 +451,8 @@ class mechatro {
                 syntax: { js: [], py: [] },
             },
             mechatro_get_digital: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#fff',
                 skeleton: 'basic_boolean_field',
                 params: [
@@ -474,8 +474,8 @@ class mechatro {
                         ],
                         value: '2',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -494,17 +494,17 @@ class mechatro {
                     var value;
 
                     if (portNo > 14) {
-                        mode = Entry.mechatro.portMode.SET_ANALOG_IN;
+                        mode = RoCode.mechatro.portMode.SET_ANALOG_IN;
                     } else {
-                        mode = Entry.mechatro.portMode.SET_DIGITAL_IN;
+                        mode = RoCode.mechatro.portMode.SET_DIGITAL_IN;
                     }
 
-                    Entry.mechatro.transferMode(portNo, mode);
+                    RoCode.mechatro.transferMode(portNo, mode);
 
-                    if (Entry.hw.portData[portNo] !== undefined) {
-                        value = Entry.hw.portData[portNo];
+                    if (RoCode.hw.portData[portNo] !== undefined) {
+                        value = RoCode.hw.portData[portNo];
                         if (portNo > 14) {
-                            value = value > Entry.mechatro.thresHold[portNo] ? 1 : 0;
+                            value = value > RoCode.mechatro.thresHold[portNo] ? 1 : 0;
                         }
                         return value;
                     } else {
@@ -514,8 +514,8 @@ class mechatro {
                 syntax: { js: [], py: [] },
             },
             mechatro_get_sensor_value: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#fff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -532,8 +532,8 @@ class mechatro {
                         ],
                         value: '16',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -549,12 +549,12 @@ class mechatro {
                 func(sprite, script) {
                     const portNo = script.getNumberField('PORT', script);
                     //const mPortNo = `m${portNo}`;
-                    const mode = Entry.mechatro.portMode.SET_ANALOG_IN;
+                    const mode = RoCode.mechatro.portMode.SET_ANALOG_IN;
 
-                    Entry.mechatro.transferMode(portNo, mode);
+                    RoCode.mechatro.transferMode(portNo, mode);
 
-                    if (Entry.hw.portData[portNo] !== undefined) {
-                        return Entry.hw.portData[portNo];
+                    if (RoCode.hw.portData[portNo] !== undefined) {
+                        return RoCode.hw.portData[portNo];
                     } else {
                         return 0;
                     }
@@ -562,8 +562,8 @@ class mechatro {
                 syntax: { js: [], py: ['mechatro.sensor_value(%1)'] },
             },
             mechatro_set_threshold: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -579,8 +579,8 @@ class mechatro {
                         ],
                         value: '16',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -614,21 +614,21 @@ class mechatro {
                     const portNo = script.getNumberField('PORT', script);
                     let value = script.getValue('VALUE');
 
-                    if (!Entry.Utils.isNumber(value)) {
+                    if (!RoCode.Utils.isNumber(value)) {
                         value = 0;
                     }
                     value = Math.max(value, 100);
                     value = Math.min(value, 900);
 
-                    Entry.mechatro.thresHold[portNo] = value;
+                    RoCode.mechatro.thresHold[portNo] = value;
 
                     return script.callReturn();
                 },
                 syntax: { js: [], py: ['mechatro.set_threshold(%1, %2)'] },
             },
             mechatro_get_temperature: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#fff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -645,8 +645,8 @@ class mechatro {
                         ],
                         value: '16',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -662,10 +662,10 @@ class mechatro {
                 func(sprite, script) {
                     const portNo = script.getNumberField('PORT', script);
                     //const mPortNo = `m${portNo}`;
-                    const mode = Entry.mechatro.portMode.SET_ANALOG_IN;
-                    Entry.mechatro.transferMode(portNo, mode);
-                    if (Entry.hw.portData[portNo] !== undefined) {
-                        return Math.round(Entry.hw.portData[portNo] * 4.883 - 500) / 10.0;
+                    const mode = RoCode.mechatro.portMode.SET_ANALOG_IN;
+                    RoCode.mechatro.transferMode(portNo, mode);
+                    if (RoCode.hw.portData[portNo] !== undefined) {
+                        return Math.round(RoCode.hw.portData[portNo] * 4.883 - 500) / 10.0;
                     } else {
                         return 0;
                     }
@@ -673,8 +673,8 @@ class mechatro {
                 syntax: { js: [], py: ['mechatro.sensor_temp(%1)'] },
             },
             mechatro_set_get_sensor_value_map: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#fff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -750,8 +750,8 @@ class mechatro {
                     let isFloat = false;
 
                     if (
-                        (Entry.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
-                        (Entry.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
+                        (RoCode.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
+                        (RoCode.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
                     ) {
                         isFloat = true;
                     }
@@ -803,8 +803,8 @@ class mechatro {
                 },
             },
             mechatro_get_ultrasonic_value: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#fff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -821,8 +821,8 @@ class mechatro {
                         ],
                         value: '2',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
@@ -836,8 +836,8 @@ class mechatro {
                         ],
                         value: '4',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -854,12 +854,12 @@ class mechatro {
                 func(sprite, script) {
                     const trig = script.getNumberField('TIRG', script);
                     const echo = script.getNumberField('ECHO', script);
-                    const mode = Entry.mechatro.portMode.SET_ULTRASONIC;
-                    Entry.mechatro.transferModeValue(trig, mode, echo);
+                    const mode = RoCode.mechatro.portMode.SET_ULTRASONIC;
+                    RoCode.mechatro.transferModeValue(trig, mode, echo);
 
-                    Entry.mechatro.eventState.ENABLE[echo] = false;
-                    if (Entry.hw.portData.hasOwnProperty(echo)) {
-                        return Entry.hw.portData[echo];
+                    RoCode.mechatro.eventState.ENABLE[echo] = false;
+                    if (RoCode.hw.portData.hasOwnProperty(echo)) {
+                        return RoCode.hw.portData[echo];
                     } else {
                         return 0;
                     }
@@ -885,8 +885,8 @@ class mechatro {
                 },
             },
             mechatro_set_digital: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -902,8 +902,8 @@ class mechatro {
                         ],
                         value: '2',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
@@ -913,8 +913,8 @@ class mechatro {
                         ],
                         value: '1',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -935,17 +935,17 @@ class mechatro {
                 isNotFor: ['mechatro'],
                 func(sprite, script) {
                     const portNo = script.getNumberField('PORT', script);
-                    const mode = Entry.mechatro.portMode.SET_DIGITAL_OUT;
+                    const mode = RoCode.mechatro.portMode.SET_DIGITAL_OUT;
                     const value = script.getNumberField('OPERATOR');
 
-                    Entry.mechatro.transferModeValue(portNo, mode, value);
+                    RoCode.mechatro.transferModeValue(portNo, mode, value);
                     return script.callReturn();
                 },
                 syntax: { js: [], py: ['mechatro.set_digital(%1, %2)'] },
             },
             mechatro_set_pwm: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -957,8 +957,8 @@ class mechatro {
                         ],
                         value: '5',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -990,24 +990,24 @@ class mechatro {
                 isNotFor: ['mechatro'],
                 func(sprite, script) {
                     const portNo = script.getNumberField('PORT', script);
-                    const mode = Entry.mechatro.portMode.SET_PWM;
+                    const mode = RoCode.mechatro.portMode.SET_PWM;
                     let value = script.getValue('VALUE');
 
-                    if (!Entry.Utils.isNumber(value)) {
+                    if (!RoCode.Utils.isNumber(value)) {
                         value = 0;
                     }
                     value = Math.max(value, 0);
                     value = Math.min(value, 100);
 
-                    Entry.mechatro.transferModeValue(portNo, mode, value);
+                    RoCode.mechatro.transferModeValue(portNo, mode, value);
 
                     return script.callReturn();
                 },
                 syntax: { js: [], py: ['mechatro.set_pwm(%1, %2)'] },
             },
             mechatro_set_tone_time: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1023,8 +1023,8 @@ class mechatro {
                         ],
                         value: '2',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
@@ -1045,8 +1045,8 @@ class mechatro {
                         ],
                         value: '1',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
@@ -1060,8 +1060,8 @@ class mechatro {
                         ],
                         value: '3',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -1114,11 +1114,11 @@ class mechatro {
                         script.timeFlag = 1;
 
                         if (duration === 0 || note === 0) {
-                            mode = Entry.mechatro.portMode.SET_NO_TONE;
-                            Entry.mechatro.transferMode(portNo, mode);
+                            mode = RoCode.mechatro.portMode.SET_NO_TONE;
+                            RoCode.mechatro.transferMode(portNo, mode);
                         } else {
-                            mode = Entry.mechatro.portMode.SET_TONE;
-                            Entry.mechatro.transferModeValue(portNo, mode, value);
+                            mode = RoCode.mechatro.portMode.SET_TONE;
+                            RoCode.mechatro.transferModeValue(portNo, mode, value);
                         }
 
                         setTimeout(() => {
@@ -1128,12 +1128,12 @@ class mechatro {
                     } else if (script.timeFlag == 1) {
                         return script;
                     } else {
-                        mode = Entry.mechatro.portMode.SET_NO_TONE;
-                        Entry.mechatro.transferMode(portNo, mode);
+                        mode = RoCode.mechatro.portMode.SET_NO_TONE;
+                        RoCode.mechatro.transferMode(portNo, mode);
 
                         delete script.timeFlag;
                         delete script.isStart;
-                        Entry.engine.isContinue = false;
+                        RoCode.engine.isContinue = false;
 
                         return script.callReturn();
                     }
@@ -1166,8 +1166,8 @@ class mechatro {
                 },
             },
             mechatro_set_tone: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1183,8 +1183,8 @@ class mechatro {
                         ],
                         value: '2',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
@@ -1205,8 +1205,8 @@ class mechatro {
                         ],
                         value: '1',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
@@ -1220,8 +1220,8 @@ class mechatro {
                         ],
                         value: '3',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -1249,11 +1249,11 @@ class mechatro {
                     let value = (octave << 4) | (note - 1);
 
                     if (note === 0) {
-                        mode = Entry.mechatro.portMode.SET_NO_TONE;
-                        Entry.mechatro.transferMode(portNo, mode);
+                        mode = RoCode.mechatro.portMode.SET_NO_TONE;
+                        RoCode.mechatro.transferMode(portNo, mode);
                     } else {
-                        mode = Entry.mechatro.portMode.SET_TONE;
-                        Entry.mechatro.transferModeValue(portNo, mode, value);
+                        mode = RoCode.mechatro.portMode.SET_TONE;
+                        RoCode.mechatro.transferModeValue(portNo, mode, value);
                     }
                     return script.callReturn();
                 },
@@ -1281,8 +1281,8 @@ class mechatro {
                 },
             },
             mechatro_set_dc_motor: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1294,8 +1294,8 @@ class mechatro {
                         ],
                         value: '3',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -1329,7 +1329,7 @@ class mechatro {
                     const portNo = script.getField('PORT', script);
                     let value = script.getValue('SPEED');
 
-                    if (!Entry.Utils.isNumber(value)) {
+                    if (!RoCode.Utils.isNumber(value)) {
                         value = 0;
                     }
 
@@ -1338,13 +1338,13 @@ class mechatro {
                     value = Math.max(value, 0);
                     value = Math.min(value, 200);
 
-                    Entry.mechatro.transferValue(portNo, value);
+                    RoCode.mechatro.transferValue(portNo, value);
                     return script.callReturn();
                 },
             },
             mechatro_get_dc_motor_current: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 fontColor: '#fff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -1357,8 +1357,8 @@ class mechatro {
                         ],
                         value: '14',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1373,12 +1373,12 @@ class mechatro {
                 isNotFor: ['mechatro'],
                 func(sprite, script) {
                     const portNo = script.getNumberField('PORT', script);
-                    const mode = Entry.mechatro.portMode.SET_MOTOR_CURRENT;
+                    const mode = RoCode.mechatro.portMode.SET_MOTOR_CURRENT;
 
-                    Entry.mechatro.transferMode(portNo, mode);
+                    RoCode.mechatro.transferMode(portNo, mode);
 
-                    if (Entry.hw.portData[portNo] !== undefined) {
-                        return Entry.hw.portData[portNo];
+                    if (RoCode.hw.portData[portNo] !== undefined) {
+                        return RoCode.hw.portData[portNo];
                     } else {
                         return 0;
                     }
@@ -1389,8 +1389,8 @@ class mechatro {
                 },
             },
             mechatro_set_servo_position: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1404,8 +1404,8 @@ class mechatro {
                         ],
                         value: '2',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -1437,16 +1437,16 @@ class mechatro {
                 isNotFor: ['mechatro'],
                 func(sprite, script) {
                     const portNo = script.getNumberField('PORT', script);
-                    const mode = Entry.mechatro.portMode.SET_SERVO_POSITION;
+                    const mode = RoCode.mechatro.portMode.SET_SERVO_POSITION;
                     let value = script.getValue('DEGREE');
 
-                    if (!Entry.Utils.isNumber(value)) {
+                    if (!RoCode.Utils.isNumber(value)) {
                         value = 90;
                     }
                     value = Math.max(value, 0);
                     value = Math.min(value, 180);
 
-                    Entry.mechatro.transferModeValue(portNo, mode, value);
+                    RoCode.mechatro.transferModeValue(portNo, mode, value);
 
                     return script.callReturn();
                 },
@@ -1456,8 +1456,8 @@ class mechatro {
                 },
             },
             mechatro_set_servo_speed: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1471,8 +1471,8 @@ class mechatro {
                         ],
                         value: '22',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -1504,16 +1504,16 @@ class mechatro {
                 isNotFor: ['mechatro'],
                 func(sprite, script) {
                     const portNo = script.getNumberField('PORT', script);
-                    const mode = Entry.mechatro.portMode.SET_SERVO_SPEED;
+                    const mode = RoCode.mechatro.portMode.SET_SERVO_SPEED;
                     let value = script.getValue('SPEED');
 
-                    if (!Entry.Utils.isNumber(value)) {
+                    if (!RoCode.Utils.isNumber(value)) {
                         value = 255;
                     }
                     value = Math.max(value, 0);
                     value = Math.min(value, 255);
 
-                    Entry.mechatro.transferModeValue(portNo, mode, value);
+                    RoCode.mechatro.transferModeValue(portNo, mode, value);
 
                     return script.callReturn();
                 },
@@ -1523,8 +1523,8 @@ class mechatro {
                 },
             },
             mechatro_set_blue_pw: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1586,7 +1586,7 @@ class mechatro {
                 class: 'Mechatro_blue',
                 isNotFor: ['mechatro'],
                 func(sprite, script) {
-                    const mode = Entry.mechatro.portMode.SET_BLUE_PW;
+                    const mode = RoCode.mechatro.portMode.SET_BLUE_PW;
 
                     const value =
                         script.getNumberValue('PW1') * 1000 +
@@ -1594,7 +1594,7 @@ class mechatro {
                         script.getNumberValue('PW3') * 10 +
                         script.getNumberValue('PW4');
 
-                    Entry.mechatro.transferModeValue(2, mode, value);
+                    RoCode.mechatro.transferModeValue(2, mode, value);
 
                     return script.callReturn();
                 },
@@ -1604,5 +1604,5 @@ class mechatro {
     }
 }
 
-Entry.mechatro = new mechatro();
-module.exports = Entry.mechatro;
+RoCode.mechatro = new mechatro();
+module.exports = RoCode.mechatro;

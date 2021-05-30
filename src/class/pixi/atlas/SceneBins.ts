@@ -16,7 +16,7 @@ import { AtlasImageLoader } from './loader/AtlasImageLoader';
 import { PIXIAtlasHelper } from './PIXIAtlasHelper';
 import { TimeoutTimer } from '../utils/TimeoutTimer';
 import { ImageRect } from '../../maxrect-packer/geom/ImageRect';
-import { EntryTextureOption } from './EntryTextureOption';
+import { RoCodeTextureOption } from './RoCodeTextureOption';
 import { ISceneTextures } from './ISceneTextures';
 import each from 'lodash/each';
 
@@ -57,7 +57,7 @@ export class SceneBins implements ISceneTextures {
 
     constructor(
         public sceneID: string,
-        private _option: EntryTextureOption,
+        private _option: RoCodeTextureOption,
         private _loader: AtlasImageLoader,
         private _viewer: AtlasCanvasViewer
     ) {
@@ -217,7 +217,7 @@ export class SceneBins implements ISceneTextures {
         if (forceUpdateBaseTexture) {
             base.update();
         }
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**

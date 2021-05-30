@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Choco = {
+RoCode.Choco = {
     id: '45.1',
     name: 'choco',
     url: "http://jjomulrak.com",
@@ -15,15 +15,15 @@ Entry.Choco = {
         if (key.length === 1) {
             key += ((Math.random() * 16) | 0).toString(16);
         }
-        return Entry.generateHash() + key;
+        return RoCode.generateHash() + key;
     },
 
     setZero: function () {
-        Entry.hw.update(); // 해당 데이터를 하드웨어에 전달한다.
+        RoCode.hw.update(); // 해당 데이터를 하드웨어에 전달한다.
     },
 };
 
-Entry.Choco.setLanguage = function () {
+RoCode.Choco.setLanguage = function () {
     return {
         ko: {
             template: {
@@ -52,7 +52,7 @@ Entry.Choco.setLanguage = function () {
                 choco_direction_right: '오른쪽',
                 choco_direction_left: '왼쪽',
                 choco_direction_dual: '양쪽(오른쪽,왼쪽)',
-                
+
                 choco_color_off: '끄기',
                 choco_color_blue: '파란색',
                 choco_color_red: '빨간색',
@@ -61,7 +61,7 @@ Entry.Choco.setLanguage = function () {
                 choco_color_pink: '분홍색',
                 choco_color_bluegreen: '청록색',
                 choco_color_white: '흰색',
-                
+
                 choco_sound_car: '자동차',
                 choco_sound_robot: '로봇',
                 choco_sound_dog: '강아지',
@@ -108,7 +108,7 @@ Entry.Choco.setLanguage = function () {
                 choco_sound_no: '노우~',
                 choco_sound_wow: '오우~',
                 choco_sound_yahoo: '야호~',
-                
+
             }
         },
         en: {
@@ -138,7 +138,7 @@ Entry.Choco.setLanguage = function () {
                 choco_direction_right: 'right',
                 choco_direction_left: 'left',
                 choco_direction_dual: 'all(right,left)',
-                
+
                 choco_color_off: 'off',
                 choco_color_blue: 'blue',
                 choco_color_red: 'red',
@@ -147,7 +147,7 @@ Entry.Choco.setLanguage = function () {
                 choco_color_pink: 'pink',
                 choco_color_bluegreen: 'bluegreen',
                 choco_color_white: 'white',
-                
+
                 choco_sound_car: 'car',
                 choco_sound_robot: 'robot',
                 choco_sound_dog: 'dog',
@@ -199,7 +199,7 @@ Entry.Choco.setLanguage = function () {
     };
 };
 
-Entry.Choco.blockMenuBlocks = [
+RoCode.Choco.blockMenuBlocks = [
     //choco
     'choco_move_forward',
     'choco_move_backward',
@@ -218,11 +218,11 @@ Entry.Choco.blockMenuBlocks = [
     'choco_get_light_sensor',
 ];
 
-Entry.Choco.getBlocks = function () {
+RoCode.Choco.getBlocks = function () {
     return {
         choco_move_forward: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [{
@@ -238,8 +238,8 @@ Entry.Choco.getBlocks = function () {
                     ],
                     value: 'step',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -259,16 +259,16 @@ Entry.Choco.getBlocks = function () {
             class: 'choco_command',
             isNotFor: ['choco'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
-                
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
+
                 const move_cnt = script.getValue('MOVE_CNT');
                 let move_unit = script.getValue('MOVE_UNIT');
                 if(move_cnt===0) return script.callReturn();
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Choco.getHashKey();
+                    const msgId = RoCode.Choco.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -288,15 +288,15 @@ Entry.Choco.getBlocks = function () {
                     delete script.is_started;
                     delete script.msg_id;
                     delete pd.msgId;
-                    
+
                     return script.callReturn();
                 }
                 return script;
             },
         },
         choco_move_backward: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [{
@@ -312,8 +312,8 @@ Entry.Choco.getBlocks = function () {
                     ],
                     value: 'step',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -333,8 +333,8 @@ Entry.Choco.getBlocks = function () {
             class: 'choco_command',
             isNotFor: ['choco'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
 
                 const move_cnt = script.getValue('MOVE_CNT');
                 let move_unit = script.getValue('MOVE_UNIT');
@@ -342,7 +342,7 @@ Entry.Choco.getBlocks = function () {
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Choco.getHashKey();
+                    const msgId = RoCode.Choco.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -368,8 +368,8 @@ Entry.Choco.getBlocks = function () {
             },
         },
         choco_turn_left: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [{
@@ -385,8 +385,8 @@ Entry.Choco.getBlocks = function () {
                     ],
                     value: 'degree',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -406,17 +406,17 @@ Entry.Choco.getBlocks = function () {
             class: 'choco_command',
             isNotFor: ['choco'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
 
                 const turn_cnt = script.getValue('TURN_CNT');
                 let turn_unit = script.getValue('TURN_UNIT');
-                if (turn_cnt < 0) turn_cnt = 0;                    
+                if (turn_cnt < 0) turn_cnt = 0;
                 if(turn_cnt===0) return script.callReturn();
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Choco.getHashKey();
+                    const msgId = RoCode.Choco.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -442,8 +442,8 @@ Entry.Choco.getBlocks = function () {
             },
         },
         choco_turn_right: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [{
@@ -459,8 +459,8 @@ Entry.Choco.getBlocks = function () {
                     ],
                     value: 'degree',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -480,17 +480,17 @@ Entry.Choco.getBlocks = function () {
             class: 'choco_command',
             isNotFor: ['choco'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
 
                 const turn_cnt = script.getValue('TURN_CNT');
                 let turn_unit = script.getValue('TURN_UNIT');
-                if (turn_cnt < 0) turn_cnt = 0;                                
+                if (turn_cnt < 0) turn_cnt = 0;
                 if(turn_cnt===0) return script.callReturn();
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Choco.getHashKey();
+                    const msgId = RoCode.Choco.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -516,15 +516,15 @@ Entry.Choco.getBlocks = function () {
             },
         },
         choco_move_right_left: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [{
                     type: 'Block',
                     accept: 'string',
                     defaultType: 'number',
-                },            
+                },
                 {
                     type: 'Block',
                     accept: 'string',
@@ -538,8 +538,8 @@ Entry.Choco.getBlocks = function () {
                     ],
                     value: 'step',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -553,23 +553,23 @@ Entry.Choco.getBlocks = function () {
                 type: 'choco_move_right_left',
             },
             paramsKeyMap: {
-                MOVE_RIGHT_CNT: 0,                
+                MOVE_RIGHT_CNT: 0,
                 MOVE_LEFT_CNT: 1,
                 MOVE_UNIT: 2,
             },
             class: 'choco_command',
             isNotFor: ['choco'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
 
                 const move_right_cnt = script.getValue('MOVE_RIGHT_CNT');
-                const move_left_cnt = script.getValue('MOVE_LEFT_CNT');                
+                const move_left_cnt = script.getValue('MOVE_LEFT_CNT');
                 let move_unit = script.getValue('MOVE_UNIT');
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Choco.getHashKey();
+                    const msgId = RoCode.Choco.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -596,8 +596,8 @@ Entry.Choco.getBlocks = function () {
             },
         },
         choco_onoff_led_rear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [{
@@ -608,8 +608,8 @@ Entry.Choco.getBlocks = function () {
                     ],
                     value: 'On',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -628,13 +628,13 @@ Entry.Choco.getBlocks = function () {
             class: 'choco_command',
             isNotFor: ['choco'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
                 const led_onoff = script.getValue('VALUE');
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Choco.getHashKey();
+                    const msgId = RoCode.Choco.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -659,8 +659,8 @@ Entry.Choco.getBlocks = function () {
             },
         },
         choco_set_led_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [{
@@ -672,8 +672,8 @@ Entry.Choco.getBlocks = function () {
                     ],
                     value: 'right',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -689,8 +689,8 @@ Entry.Choco.getBlocks = function () {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -710,14 +710,14 @@ Entry.Choco.getBlocks = function () {
             class: 'choco_command',
             isNotFor: ['choco'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
                 const led_dir = script.getValue('DIRECTION');
                 const led_color = script.getValue('COLOR');
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Choco.getHashKey();
+                    const msgId = RoCode.Choco.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -743,8 +743,8 @@ Entry.Choco.getBlocks = function () {
             },
         },
         choco_play_sound: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [{
@@ -799,8 +799,8 @@ Entry.Choco.getBlocks = function () {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -819,13 +819,13 @@ Entry.Choco.getBlocks = function () {
             class: 'choco_command',
             isNotFor: ['choco'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
                 const sound = script.getValue('SOUND');
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Choco.getHashKey();
+                    const msgId = RoCode.Choco.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -850,16 +850,16 @@ Entry.Choco.getBlocks = function () {
             },
         },
         choco_is_front_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [{
                     type: "Text",
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -872,26 +872,26 @@ Entry.Choco.getBlocks = function () {
             class: 'choco_command',
             isNotFor: ['choco'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
                 let retVal = false;
                 if (pd.sensorData) {
                     retVal = pd.sensorData.is_front_sensor;
                 }
                 return retVal;
             },
-        },        
+        },
         choco_is_bottom_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [{
                     type: "Text",
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -904,8 +904,8 @@ Entry.Choco.getBlocks = function () {
             class: 'choco_command',
             isNotFor: ['choco'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
                 let retVal = false
                 if (pd.sensorData) {
                     retVal = pd.sensorData.is_bottom_sensor;
@@ -914,16 +914,16 @@ Entry.Choco.getBlocks = function () {
             },
         },
         choco_is_light_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [{
                     type: "Text",
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -936,8 +936,8 @@ Entry.Choco.getBlocks = function () {
             class: 'choco_command',
             isNotFor: ['choco'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
                 let retVal = false;
                 if (pd.sensorData) {
                     retVal = pd.sensorData.is_light_sensor;
@@ -947,16 +947,16 @@ Entry.Choco.getBlocks = function () {
         },
 
         choco_get_front_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
             params: [{
                     type: "Text",
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -969,8 +969,8 @@ Entry.Choco.getBlocks = function () {
             class: 'choco_command',
             isNotFor: ['choco'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
                 let retVal = 0;
                 if (pd.sensorData) {
                     retVal = pd.sensorData.front_sensor;
@@ -979,16 +979,16 @@ Entry.Choco.getBlocks = function () {
             },
         },
         choco_get_bottom_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
             params: [{
                     type: "Text",
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1001,8 +1001,8 @@ Entry.Choco.getBlocks = function () {
             class: 'choco_command',
             isNotFor: ['choco'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
                 let retVal = 0;
                 if (pd.sensorData) {
                     retVal = pd.sensorData.bottom_sensor;
@@ -1011,16 +1011,16 @@ Entry.Choco.getBlocks = function () {
             },
         },
         choco_get_light_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
             params: [{
                     type: "Text",
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1033,8 +1033,8 @@ Entry.Choco.getBlocks = function () {
             class: 'choco_command',
             isNotFor: ['choco'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
                 let retVal = 0;
                 if (pd.sensorData) {
                     retVal = pd.sensorData.light_sensor;
@@ -1045,4 +1045,4 @@ Entry.Choco.getBlocks = function () {
     };
 };
 
-module.exports = Entry.Choco;
+module.exports = RoCode.Choco;

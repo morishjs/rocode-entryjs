@@ -2,8 +2,8 @@ module.exports = {
     getBlocks() {
         return {
             brush_stamp: {
-                color: EntryStatic.colorSet.block.default.BRUSH,
-                outerLine: EntryStatic.colorSet.block.darken.BRUSH,
+                color: RoCodeStatic.colorSet.block.default.BRUSH,
+                outerLine: RoCodeStatic.colorSet.block.darken.BRUSH,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -25,11 +25,11 @@ module.exports = {
 
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.stamp()'] },
+                syntax: { js: [], py: ['RoCode.stamp()'] },
             },
             start_drawing: {
-                color: EntryStatic.colorSet.block.default.BRUSH,
-                outerLine: EntryStatic.colorSet.block.darken.BRUSH,
+                color: RoCodeStatic.colorSet.block.default.BRUSH,
+                outerLine: RoCodeStatic.colorSet.block.darken.BRUSH,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -50,18 +50,18 @@ module.exports = {
                     if (sprite.brush) {
                         sprite.brush.stop = false;
                     } else {
-                        Entry.setBasicBrush(sprite);
+                        RoCode.setBasicBrush(sprite);
                     }
 
                     sprite.brush.moveTo(sprite.getX(), sprite.getY() * -1);
 
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.start_drawing()'] },
+                syntax: { js: [], py: ['RoCode.start_drawing()'] },
             },
             stop_drawing: {
-                color: EntryStatic.colorSet.block.default.BRUSH,
-                outerLine: EntryStatic.colorSet.block.darken.BRUSH,
+                color: RoCodeStatic.colorSet.block.default.BRUSH,
+                outerLine: RoCodeStatic.colorSet.block.darken.BRUSH,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -85,11 +85,11 @@ module.exports = {
 
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.stop_drawing()'] },
+                syntax: { js: [], py: ['RoCode.stop_drawing()'] },
             },
             set_color: {
-                color: EntryStatic.colorSet.block.default.BRUSH,
-                outerLine: EntryStatic.colorSet.block.darken.BRUSH,
+                color: RoCodeStatic.colorSet.block.default.BRUSH,
+                outerLine: RoCodeStatic.colorSet.block.darken.BRUSH,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -120,12 +120,12 @@ module.exports = {
                     const colour = script.getField('VALUE', script);
 
                     if (!sprite.brush || !sprite.shapes.length) {
-                        Entry.setBasicBrush(sprite);
+                        RoCode.setBasicBrush(sprite);
                         sprite.brush.stop = true;
                     }
 
                     if (sprite.brush) {
-                        const rgb = Entry.hex2rgb(colour);
+                        const rgb = RoCode.hex2rgb(colour);
                         sprite.brush.rgb = rgb;
                         sprite.brush.endStroke();
                         sprite.brush.beginStroke(
@@ -141,12 +141,12 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.set_brush_color_to(%1)',
+                            syntax: 'RoCode.set_brush_color_to(%1)',
                             textParams: [
                                 {
                                     type: 'Color',
-                                    converter: Entry.block.converters.returnStringValueUpperCase,
-                                    codeMap: 'Entry.CodeMap.Entry.set_color[0]',
+                                    converter: RoCode.block.converters.returnStringValueUpperCase,
+                                    codeMap: 'RoCode.CodeMap.RoCode.set_color[0]',
                                 },
                             ],
                         },
@@ -154,8 +154,8 @@ module.exports = {
                 },
             },
             set_random_color: {
-                color: EntryStatic.colorSet.block.default.BRUSH,
-                outerLine: EntryStatic.colorSet.block.darken.BRUSH,
+                color: RoCodeStatic.colorSet.block.default.BRUSH,
+                outerLine: RoCodeStatic.colorSet.block.darken.BRUSH,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -174,12 +174,12 @@ module.exports = {
                 isNotFor: ['textBox'],
                 func(sprite, script) {
                     if (!sprite.brush || !sprite.shapes.length) {
-                        Entry.setBasicBrush(sprite);
+                        RoCode.setBasicBrush(sprite);
                         sprite.brush.stop = true;
                     }
 
                     if (sprite.brush) {
-                        const rgb = Entry.generateRgb();
+                        const rgb = RoCode.generateRgb();
                         sprite.brush.rgb = rgb;
                         sprite.brush.endStroke();
                         sprite.brush.beginStroke(
@@ -190,11 +190,11 @@ module.exports = {
                     }
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.set_brush_color_to_random()'] },
+                syntax: { js: [], py: ['RoCode.set_brush_color_to_random()'] },
             },
             change_thickness: {
-                color: EntryStatic.colorSet.block.default.BRUSH,
-                outerLine: EntryStatic.colorSet.block.darken.BRUSH,
+                color: RoCodeStatic.colorSet.block.default.BRUSH,
+                outerLine: RoCodeStatic.colorSet.block.darken.BRUSH,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -239,7 +239,7 @@ module.exports = {
                     const thickness = script.getNumberValue('VALUE', script);
 
                     if (!sprite.brush || !sprite.shapes.length) {
-                        Entry.setBasicBrush(sprite);
+                        RoCode.setBasicBrush(sprite);
                         sprite.brush.stop = true;
                     }
 
@@ -256,11 +256,11 @@ module.exports = {
 
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.add_brush_size(%1)'] },
+                syntax: { js: [], py: ['RoCode.add_brush_size(%1)'] },
             },
             set_thickness: {
-                color: EntryStatic.colorSet.block.default.BRUSH,
-                outerLine: EntryStatic.colorSet.block.darken.BRUSH,
+                color: RoCodeStatic.colorSet.block.default.BRUSH,
+                outerLine: RoCodeStatic.colorSet.block.darken.BRUSH,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -305,7 +305,7 @@ module.exports = {
                     const thickness = script.getNumberValue('VALUE', script);
 
                     if (!sprite.brush || !sprite.shapes.length) {
-                        Entry.setBasicBrush(sprite);
+                        RoCode.setBasicBrush(sprite);
                         sprite.brush.stop = true;
                     }
 
@@ -318,11 +318,11 @@ module.exports = {
 
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.set_brush_size(%1)'] },
+                syntax: { js: [], py: ['RoCode.set_brush_size(%1)'] },
             },
             change_brush_transparency: {
-                color: EntryStatic.colorSet.block.default.BRUSH,
-                outerLine: EntryStatic.colorSet.block.darken.BRUSH,
+                color: RoCodeStatic.colorSet.block.default.BRUSH,
+                outerLine: RoCodeStatic.colorSet.block.darken.BRUSH,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -367,10 +367,10 @@ module.exports = {
                     let opacity = script.getNumberValue('VALUE', script);
 
                     if (!sprite.brush || !sprite.shapes.length) {
-                        Entry.setBasicBrush(sprite);
+                        RoCode.setBasicBrush(sprite);
                         sprite.brush.stop = true;
                     }
-                    opacity = Entry.adjustValueWithMaxMin(sprite.brush.opacity + opacity, 0, 100);
+                    opacity = RoCode.adjustValueWithMaxMin(sprite.brush.opacity + opacity, 0, 100);
 
                     if (sprite.brush) {
                         sprite.brush.opacity = opacity;
@@ -384,11 +384,11 @@ module.exports = {
 
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.add_brush_transparency(%1)'] },
+                syntax: { js: [], py: ['RoCode.add_brush_transparency(%1)'] },
             },
             set_brush_tranparency: {
-                color: EntryStatic.colorSet.block.default.BRUSH,
-                outerLine: EntryStatic.colorSet.block.darken.BRUSH,
+                color: RoCodeStatic.colorSet.block.default.BRUSH,
+                outerLine: RoCodeStatic.colorSet.block.darken.BRUSH,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -433,12 +433,12 @@ module.exports = {
                     const opacity = script.getNumberValue('VALUE', script);
 
                     if (!sprite.brush || !sprite.shapes.length) {
-                        Entry.setBasicBrush(sprite);
+                        RoCode.setBasicBrush(sprite);
                         sprite.brush.stop = true;
                     }
 
                     if (sprite.brush) {
-                        sprite.brush.opacity = Entry.adjustValueWithMaxMin(opacity, 0, 100);
+                        sprite.brush.opacity = RoCode.adjustValueWithMaxMin(opacity, 0, 100);
                         sprite.brush.endStroke();
                         const rgb = sprite.brush.rgb;
                         sprite.brush.beginStroke(
@@ -449,11 +449,11 @@ module.exports = {
 
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.set_brush_transparency(%1)'] },
+                syntax: { js: [], py: ['RoCode.set_brush_transparency(%1)'] },
             },
             brush_erase_all: {
-                color: EntryStatic.colorSet.block.default.BRUSH,
-                outerLine: EntryStatic.colorSet.block.darken.BRUSH,
+                color: RoCodeStatic.colorSet.block.default.BRUSH,
+                outerLine: RoCodeStatic.colorSet.block.darken.BRUSH,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -475,7 +475,7 @@ module.exports = {
                     sprite.removeStamps();
                     return script.callReturn();
                 },
-                syntax: { js: [], py: ['Entry.clear_drawing()'] },
+                syntax: { js: [], py: ['RoCode.clear_drawing()'] },
             },
         };
     },

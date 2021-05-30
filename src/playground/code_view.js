@@ -6,8 +6,8 @@
 /*
  *
  */
-Entry.CodeView = function(code, board) {
-    Entry.Model(this, false);
+RoCode.CodeView = function(code, board) {
+    RoCode.Model(this, false);
 
     this.code = code;
     this.set({ board: board });
@@ -64,4 +64,4 @@ Entry.CodeView = function(code, board) {
             thread.destroyView();
         });
     };
-})(Entry.CodeView.prototype);
+})(RoCode.CodeView.prototype);

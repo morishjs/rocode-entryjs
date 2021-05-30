@@ -24,7 +24,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template,
-            title: 'Entry Example',
+            title: 'RoCode Example',
             filename: path.resolve('dist', 'index.html'),
             inject: false,
             hash: true,
@@ -36,9 +36,9 @@ module.exports = {
         historyApiFallback: true,
         publicPath: '/',
         proxy: {
-            '/lib/entry-js': {
+            '/lib/RoCode-js': {
                 target: `http://localhost:${devServerPort}`,
-                pathRewrite: { '^/lib/entry-js': '' },
+                pathRewrite: { '^/lib/RoCode-js': '' },
             },
             '/dist': {
                 target: `http://localhost:${devServerPort}`,

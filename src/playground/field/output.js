@@ -4,20 +4,20 @@
 /*
  *
  */
-Entry.FieldOutput = class FieldOutput extends Entry.Field {
+RoCode.FieldOutput = class FieldOutput extends RoCode.Field {
     schema = {
         magneting: false,
     };
     constructor(content, blockView, index, mode, contentIndex) {
         super(content, blockView, index);
-        Entry.Model(this, false);
+        RoCode.Model(this, false);
 
         this._blockView = blockView;
         this._block = blockView.block;
         this._valueBlock = null;
 
-        this.box = new Entry.BoxModel();
-        this.changeEvent = new Entry.Event(this);
+        this.box = new RoCode.BoxModel();
+        this.changeEvent = new RoCode.Event(this);
 
         this._index = index;
         this.contentIndex = contentIndex;
@@ -56,7 +56,7 @@ Entry.FieldOutput = class FieldOutput extends Entry.Field {
         this._updateValueBlock(block);
         this._valueBlock && this._valueBlock.view._startContentRender(this.renderMode);
 
-        if (this._blockView.getBoard().constructor == Entry.BlockMenu && this._valueBlock) {
+        if (this._blockView.getBoard().constructor == RoCode.BlockMenu && this._valueBlock) {
             this._valueBlock.view.removeControl();
         }
     }
@@ -136,7 +136,7 @@ Entry.FieldOutput = class FieldOutput extends Entry.Field {
     }
 
     _updateValueBlock(block) {
-        if (!(block instanceof Entry.Block)) {
+        if (!(block instanceof RoCode.Block)) {
             block = undefined;
         }
 
@@ -258,7 +258,7 @@ Entry.FieldOutput = class FieldOutput extends Entry.Field {
     pointer(pointer) {
         pointer = pointer || [];
         pointer.unshift(this._index);
-        pointer.unshift(Entry.PARAM);
+        pointer.unshift(RoCode.PARAM);
         return this._block.pointer(pointer);
     }
 };

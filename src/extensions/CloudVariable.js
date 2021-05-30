@@ -120,7 +120,7 @@ class CloudVariableExtension {
         } else if (type === 'table') {
             await this.#createTable(name, id_);
         }
-        // Entry.dispatchEvent('saveVariable');
+        // RoCode.dispatchEvent('saveVariable');
     }
 
     #createVariable(name, id) {
@@ -213,14 +213,14 @@ class CloudVariableExtension {
     #applyValue(operation) {
         const { id, value, data, variableType } = operation;
         if (variableType === 'variable' || variableType === 'slide') {
-            const variable = Entry.variableContainer.getVariable(id);
+            const variable = RoCode.variableContainer.getVariable(id);
             if (variable) {
                 variable.value_ = value;
                 variable._valueWidth = null;
                 variable.updateView();
             }
         } else if (variableType === 'list') {
-            const list = Entry.variableContainer.getList(id);
+            const list = RoCode.variableContainer.getList(id);
             if (!list) {
                 return;
             }

@@ -702,7 +702,7 @@ HamsterRobot.prototype.boardForward = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -728,7 +728,7 @@ HamsterRobot.prototype.boardTurn = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -787,7 +787,7 @@ HamsterRobot.prototype.moveForwardSecs = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -813,7 +813,7 @@ HamsterRobot.prototype.moveBackwardSecs = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -852,7 +852,7 @@ HamsterRobot.prototype.turnSecs = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -895,7 +895,7 @@ HamsterRobot.prototype.moveForwardUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -926,7 +926,7 @@ HamsterRobot.prototype.moveBackwardUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -970,7 +970,7 @@ HamsterRobot.prototype.turnUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -1083,7 +1083,7 @@ HamsterRobot.prototype.pivotUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -1255,7 +1255,7 @@ HamsterRobot.prototype.swingUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -1428,7 +1428,7 @@ HamsterRobot.prototype.followLineUntil = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -1585,7 +1585,7 @@ HamsterRobot.prototype.beep = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -1635,7 +1635,7 @@ HamsterRobot.prototype.playSoundUntil = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -1782,7 +1782,7 @@ HamsterRobot.prototype.playNoteBeat = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         self.motoring.note = 0;
         return script.callReturn();
     }
@@ -1820,7 +1820,7 @@ HamsterRobot.prototype.restBeat = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -1971,7 +1971,7 @@ HamsterRobot.prototype.gripper = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -2696,7 +2696,7 @@ HamsterSRobot.prototype.boardForward = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -2722,7 +2722,7 @@ HamsterSRobot.prototype.boardTurn = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -2791,7 +2791,7 @@ HamsterSRobot.prototype.moveForwardSecs = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -2817,7 +2817,7 @@ HamsterSRobot.prototype.moveBackwardSecs = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -2856,7 +2856,7 @@ HamsterSRobot.prototype.turnSecs = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -2905,7 +2905,7 @@ HamsterSRobot.prototype.moveForwardUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -2934,7 +2934,7 @@ HamsterSRobot.prototype.moveBackwardUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -2976,7 +2976,7 @@ HamsterSRobot.prototype.turnUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -3088,7 +3088,7 @@ HamsterSRobot.prototype.pivotUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -3252,7 +3252,7 @@ HamsterSRobot.prototype.swingUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -3431,7 +3431,7 @@ HamsterSRobot.prototype.followLineUntil = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -3731,7 +3731,7 @@ HamsterSRobot.prototype.beep = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -3803,7 +3803,7 @@ HamsterSRobot.prototype.playSoundUntil = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -3962,7 +3962,7 @@ HamsterSRobot.prototype.playNoteBeat = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         self.motoring.note = 0;
         return script.callReturn();
     }
@@ -4002,7 +4002,7 @@ HamsterSRobot.prototype.restBeat = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -4153,7 +4153,7 @@ HamsterSRobot.prototype.gripper = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -4199,7 +4199,7 @@ HamsterSRobot.prototype.writeSerial = function(script) {
     } else {
         delete script.isStart;
         delete script.isWriting;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -4239,7 +4239,7 @@ HamsterSRobot.prototype.readSerialUntil = function(script) {
     } else {
         delete script.isStart;
         delete script.isReading;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -4733,7 +4733,7 @@ TurtleRobot.prototype.moveForwardUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -4762,7 +4762,7 @@ TurtleRobot.prototype.moveBackwardUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -4804,7 +4804,7 @@ TurtleRobot.prototype.turnUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -4872,7 +4872,7 @@ TurtleRobot.prototype.pivotUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -4941,7 +4941,7 @@ TurtleRobot.prototype.swingUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -5090,7 +5090,7 @@ TurtleRobot.prototype.followLineUntil = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -5119,7 +5119,7 @@ TurtleRobot.prototype.followLineUntilBlack = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -5146,7 +5146,7 @@ TurtleRobot.prototype.crossIntersection = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -5175,7 +5175,7 @@ TurtleRobot.prototype.turnAtIntersection = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -5344,7 +5344,7 @@ TurtleRobot.prototype.playSoundUntil = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -5467,7 +5467,7 @@ TurtleRobot.prototype.playNoteBeat = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         self.motoring.note = 0;
         return script.callReturn();
     }
@@ -5509,7 +5509,7 @@ TurtleRobot.prototype.restBeat = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -5982,7 +5982,7 @@ LineRobot.prototype.moveForwardUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -6011,7 +6011,7 @@ LineRobot.prototype.moveBackwardUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -6053,7 +6053,7 @@ LineRobot.prototype.turnUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -6121,7 +6121,7 @@ LineRobot.prototype.pivotUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -6190,7 +6190,7 @@ LineRobot.prototype.circleUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -6344,7 +6344,7 @@ LineRobot.prototype.followLineUntil = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -6371,7 +6371,7 @@ LineRobot.prototype.followLineUntilIntersection = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -6398,7 +6398,7 @@ LineRobot.prototype.crossIntersection = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -6431,7 +6431,7 @@ LineRobot.prototype.turnAtIntersection = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -6461,7 +6461,7 @@ LineRobot.prototype.jumpLine = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -6649,7 +6649,7 @@ LineRobot.prototype.playSoundUntil = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -6804,7 +6804,7 @@ LineRobot.prototype.playNoteBeat = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         self.motoring.note = 0;
         return script.callReturn();
     }
@@ -6844,7 +6844,7 @@ LineRobot.prototype.restBeat = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -7224,7 +7224,7 @@ ZeroneRobot.prototype.moveForwardUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -7253,7 +7253,7 @@ ZeroneRobot.prototype.moveBackwardUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -7295,7 +7295,7 @@ ZeroneRobot.prototype.turnUnit = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -7655,7 +7655,7 @@ ZeroneRobot.prototype.playSoundUntil = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -7810,7 +7810,7 @@ ZeroneRobot.prototype.playNoteBeat = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         self.motoring.note = 0;
         return script.callReturn();
     }
@@ -7850,7 +7850,7 @@ ZeroneRobot.prototype.restBeat = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -10426,7 +10426,7 @@ CheeseRobot.prototype.playSoundUntil = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -10580,7 +10580,7 @@ CheeseRobot.prototype.playNoteBeat = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         self.__setNote(0);
         return script.callReturn();
     }
@@ -10619,7 +10619,7 @@ CheeseRobot.prototype.restBeat = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -11070,7 +11070,7 @@ CheeseRobot.prototype.rotateStepMotor = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -11378,7 +11378,7 @@ CheeseRobot.prototype.neopixelSetNumberAndType = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -11412,7 +11412,7 @@ CheeseRobot.prototype.neopixelSetAllColor = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -11448,7 +11448,7 @@ CheeseRobot.prototype.neopixelSetAllRgbArray = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -11486,7 +11486,7 @@ CheeseRobot.prototype.neopixelChangeAllRgb = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -11524,7 +11524,7 @@ CheeseRobot.prototype.neopixelSetAllRgb = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -11584,7 +11584,7 @@ CheeseRobot.prototype.neopixelSetAllPattern = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -11612,7 +11612,7 @@ CheeseRobot.prototype.neopixelClearAll = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -11651,7 +11651,7 @@ CheeseRobot.prototype.neopixelSetLedColor = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -11692,7 +11692,7 @@ CheeseRobot.prototype.neopixelSetLedRgbArray = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -11735,7 +11735,7 @@ CheeseRobot.prototype.neopixelChangeLedRgb = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -11778,7 +11778,7 @@ CheeseRobot.prototype.neopixelSetLedRgb = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -11815,7 +11815,7 @@ CheeseRobot.prototype.neopixelClearLed = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -11858,7 +11858,7 @@ CheeseRobot.prototype.neopixelSetRangeColor = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -11903,7 +11903,7 @@ CheeseRobot.prototype.neopixelSetRangeRgbArray = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -11950,7 +11950,7 @@ CheeseRobot.prototype.neopixelChangeRangeRgb = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -11997,7 +11997,7 @@ CheeseRobot.prototype.neopixelSetRangeRgb = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -12038,7 +12038,7 @@ CheeseRobot.prototype.neopixelSetRangePattern = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -12079,7 +12079,7 @@ CheeseRobot.prototype.neopixelClearRange = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -12116,7 +12116,7 @@ CheeseRobot.prototype.neopixelShift = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -12153,7 +12153,7 @@ CheeseRobot.prototype.neopixelRotate = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -12187,7 +12187,7 @@ CheeseRobot.prototype.neopixelChangeBrightness = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -12221,7 +12221,7 @@ CheeseRobot.prototype.neopixelSetBrightness = function(script) {
         delete script.isStart;
         delete script.isWaiting;
         delete script.isWorking;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -12254,7 +12254,7 @@ CheeseRobot.prototype.writeSerial = function(script) {
     } else {
         delete script.isStart;
         delete script.isWriting;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -12293,7 +12293,7 @@ CheeseRobot.prototype.readSerialUntil = function(script) {
     } else {
         delete script.isStart;
         delete script.isReading;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -12955,7 +12955,7 @@ CheeseRobot.prototype.hat010SetBrightnessTo = function(script) {
     return script.callReturn();
 };
 
-Entry.Robomation = {
+RoCode.Robomation = {
     robots: {},
     robotsByGroup: {},
     afterReceive(pd, multi) {
@@ -13024,7 +13024,7 @@ Entry.Robomation = {
             }
             if (robot) {
                 if (multi) {
-                    Entry.hw.sendQueue[key] = robot.motoring;
+                    RoCode.hw.sendQueue[key] = robot.motoring;
                 }
                 robot.afterReceive(pd);
             }
@@ -13045,8 +13045,8 @@ Entry.Robomation = {
         for (const i in robots) {
             robots[i].setZero();
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
 };
 
-module.exports = Entry.Robomation;
+module.exports = RoCode.Robomation;

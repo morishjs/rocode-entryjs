@@ -6,7 +6,7 @@
 /*
  *
  */
-Entry.ExtSideTag = class ExtSideTag {
+RoCode.ExtSideTag = class ExtSideTag {
     constructor(content, blockView, mode) {
         this.blockView = blockView;
         this.color = content.color ? content.color : '#EBC576';
@@ -36,7 +36,7 @@ Entry.ExtSideTag = class ExtSideTag {
         this.textElement = this.svgGroup.elem('text').attr({
             style: 'white-space: pre;',
             'font-size': '10px',
-            'font-family': EntryStatic.fontFamily || 'NanumGothic',
+            'font-family': RoCodeStatic.fontFamily || 'NanumGothic',
             class: 'dragNone',
             fill: '#000000',
         });

@@ -32,7 +32,7 @@ class NumberClassification {
     constructor(params = {}) {
         this.#view = new LearningView({ name: params.name || '', status: 0 });
         // 정지시 data 초기화.
-        Entry.addEventListener('stop', () => {
+        RoCode.addEventListener('stop', () => {
             this.init({ ...params });
         });
         this.init({ ...params });
@@ -63,7 +63,7 @@ class NumberClassification {
     setTable() {
         const tableSource = DataTable.getSource(this.#table.id);
         if (this.#table.fieldsInfo.length !== tableSource.fields.length) {
-            Entry.toast.alert(Lang.Msgs.warn, Lang.AiLearning.train_param_error);
+            RoCode.toast.alert(Lang.Msgs.warn, Lang.AiLearning.train_param_error);
             throw Error(Lang.AiLearning.train_param_error);
         }
         this.#table.data = tableSource.rows;
@@ -81,9 +81,9 @@ class NumberClassification {
         return this.#trainParam.labels.reduce((acc, cur, idx, arr) => {
             return {
                 ...acc,
-                [cur]: Entry.Utils.randomColor(),
+                [cur]: RoCode.Utils.randomColor(),
             }
-        }, {}); 
+        }, {});
     }
 
     setVisible(visible) {
@@ -213,7 +213,7 @@ class NumberClassification {
         }
 
         distData.sort((a, b) => a.dist - b.dist);
-       
+
         let counts = {};
         for (let i = 0; i < neighbors; i++) {
             const { label, dist } = distData[i];
@@ -237,7 +237,7 @@ class NumberClassification {
         }).sort((a, b) => b.probability - a.probability);
         return this.#predictResult;
     }
-    
+
     findLabel(x, y) {
         const strX = String(x);
         const strY = String(y);
@@ -254,7 +254,7 @@ class NumberClassification {
 
     get chartData() {
         const json = this.#trainParam.trainData.map((row, idx) => ({
-            x: row[0], 
+            x: row[0],
             y: row[1],
             index: this.#trainParam.trainLabels[idx],
         }));

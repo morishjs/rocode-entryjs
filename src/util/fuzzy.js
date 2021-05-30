@@ -76,7 +76,7 @@
         return null;
     };
 
-    // The normal entry point. Filters `arr` for matches against `pattern`.
+    // The normal RoCode point. Filters `arr` for matches against `pattern`.
     // It returns an array with matching values of the type:
     //
     //     [{
@@ -94,7 +94,7 @@
     //        // string to put after matching character
     //      , post:    '</b>'
     //
-    //        // Optional function. Input is an entry in the given arr`,
+    //        // Optional function. Input is an RoCode in the given arr`,
     //        // output should be the string to test `pattern` against.
     //        // In this example, if `arr = [{crying: 'koala'}]` we would return
     //        // 'koala'.
@@ -131,4 +131,4 @@
                 })
         );
     };
-})(Entry.Utils);
+})(RoCode.Utils);

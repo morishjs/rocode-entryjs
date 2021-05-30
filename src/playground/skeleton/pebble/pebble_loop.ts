@@ -1,4 +1,4 @@
-Entry.skeleton.pebble_loop = {
+RoCode.skeleton.pebble_loop = {
     executable: true,
     fontSize: 16,
     dropdownHeight: 23,

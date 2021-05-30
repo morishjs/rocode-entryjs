@@ -1,9 +1,9 @@
 import _get from 'lodash/get';
 
 /**
- * line entry 의 hardware font-light-weight noti 를 위해 만든 스켈레톤
+ * line RoCode 의 hardware font-light-weight noti 를 위해 만든 스켈레톤
  */
-Entry.skeleton.basic_text_light = {
+RoCode.skeleton.basic_text_light = {
     path(blockView) {
         const paramText = _get(blockView, ['_schema', 'params', '0', 'text'], '').match(/[\r\n]/g);
         const textLines = paramText ? paramText.length + 1 : 1;

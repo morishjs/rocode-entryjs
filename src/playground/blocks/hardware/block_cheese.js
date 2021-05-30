@@ -1,19 +1,19 @@
 'use strict';
 
-Entry.Cheese = {
+RoCode.Cheese = {
     setZero() {
-        Entry.Robomation.setZero();
+        RoCode.Robomation.setZero();
     },
     afterReceive(pd) {
-        Entry.Robomation.afterReceive(pd, false);
+        RoCode.Robomation.afterReceive(pd, false);
     },
     afterSend(sq) {
-        Entry.Robomation.afterSend(sq);
+        RoCode.Robomation.afterSend(sq);
     },
     getRobot() {
-        const robot = Entry.Robomation.getRobot('cheese', 0);
+        const robot = RoCode.Robomation.getRobot('cheese', 0);
         if (robot) {
-            robot.setMotoring(Entry.hw.sendQueue);
+            robot.setMotoring(RoCode.hw.sendQueue);
         }
         return robot;
     },
@@ -139,7 +139,7 @@ Entry.Cheese = {
     }),
 };
 
-Entry.Cheese.setLanguage = () => ({
+RoCode.Cheese.setLanguage = () => ({
     ko: {
         template: {
             cheese_value: '%1',
@@ -1382,7 +1382,7 @@ Entry.Cheese.setLanguage = () => ({
     },
 });
 
-Entry.Cheese.blockMenuBlocks = [
+RoCode.Cheese.blockMenuBlocks = [
     'cheese_value',
     'cheese_boolean',
     'cheese_play_sound_times',
@@ -1471,7 +1471,7 @@ Entry.Cheese.blockMenuBlocks = [
     'cheese_hat010_sprite_set_to_shape',
     'cheese_hat010_sprite_set_to_string',
     'cheese_hat010_sprite_set_to_pattern',
-    'cheese_hat010_sprite_clear_show_hide',        
+    'cheese_hat010_sprite_clear_show_hide',
     'cheese_hat010_sprite_change_positions_by_xy',
     'cheese_hat010_sprite_set_positions_to_xy',
     'cheese_hat010_sprite_change_position_by_value',
@@ -1486,11 +1486,11 @@ Entry.Cheese.blockMenuBlocks = [
     'cheese_hat010_set_brightness_to',
 ];
 
-Entry.Cheese.getBlocks = function() {
+RoCode.Cheese.getBlocks = function() {
     return {
         cheese_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1505,8 +1505,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'ACCELERATION_X',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1520,7 +1520,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_sensor',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 if (robot) {
                     return robot.getValue(script);
                 }
@@ -1542,9 +1542,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'ACCELERATION_X',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1552,8 +1552,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_boolean: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -1575,8 +1575,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'TILT_NOT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1590,7 +1590,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_sensor',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.checkBoolean(script) : false;
             },
             syntax: {
@@ -1617,9 +1617,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'TILT_NOT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1627,8 +1627,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_play_sound_times: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1653,8 +1653,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'BEEP',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1685,7 +1685,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_sound',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.playSound(script) : script;
             },
             syntax: {
@@ -1715,9 +1715,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'BEEP',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -1726,8 +1726,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_play_sound_times_until_done: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1752,8 +1752,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'BEEP',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1784,7 +1784,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_sound',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.playSoundUntil(script) : script;
             },
             syntax: {
@@ -1814,9 +1814,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'BEEP',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -1825,8 +1825,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_change_buzzer_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1857,7 +1857,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_sound',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.changeBuzzer(script) : script;
             },
             syntax: {
@@ -1870,8 +1870,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_set_buzzer_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1902,7 +1902,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_sound',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setBuzzer(script) : script;
             },
             syntax: {
@@ -1915,8 +1915,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_clear_sound: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1934,7 +1934,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_sound',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.clearSound(script) : script;
             },
             syntax: {
@@ -1947,8 +1947,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_play_note: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1970,8 +1970,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1986,8 +1986,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2007,7 +2007,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_sound',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.playNote(script) : script;
             },
             syntax: {
@@ -2034,9 +2034,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'C',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2051,9 +2051,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -2061,8 +2061,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_play_note_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2084,8 +2084,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2100,8 +2100,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2134,7 +2134,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_sound',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.playNoteBeat(script) : script;
             },
             syntax: {
@@ -2161,9 +2161,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'C',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2178,9 +2178,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             { type: 'Block', accept: 'string' },
                         ],
@@ -2189,8 +2189,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_rest_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2221,7 +2221,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_sound',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.restBeat(script) : script;
             },
             syntax: {
@@ -2240,8 +2240,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_change_tempo_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2272,7 +2272,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_sound',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.changeTempo(script) : script;
             },
             syntax: {
@@ -2291,8 +2291,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_set_tempo_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2323,7 +2323,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_sound',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setTempo(script) : script;
             },
             syntax: {
@@ -2342,8 +2342,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_set_sound_port_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2355,8 +2355,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'INTERNAL',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2378,7 +2378,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_sound',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setSoundPort(script) : script;
             },
             syntax: {
@@ -2395,9 +2395,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'INTERNAL',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2405,8 +2405,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_set_input_mode_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2422,8 +2422,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2437,8 +2437,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'MAKEY',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2462,7 +2462,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_input',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setInputModeTo(script) : script;
             },
             syntax: {
@@ -2483,9 +2483,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2499,9 +2499,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'MAKEY',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2509,8 +2509,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_set_input_range_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2526,8 +2526,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2553,8 +2553,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'INTEGER',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2598,7 +2598,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_input',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setInputRangeTo(script) : script;
             },
             syntax: {
@@ -2619,9 +2619,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -2647,8 +2647,8 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'INTEGER',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                     },
@@ -2656,8 +2656,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_set_three_input_ranges_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2673,8 +2673,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2708,8 +2708,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'INTEGER',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2763,7 +2763,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_input',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setThreeInputRangesTo(script) : script;
             },
             syntax: {
@@ -2784,9 +2784,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -2820,8 +2820,8 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'INTEGER',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                     },
@@ -2829,8 +2829,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_analog_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -2847,8 +2847,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2864,7 +2864,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_input',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 if (robot) {
                     return robot.getAnalogInput(script);
                 }
@@ -2888,9 +2888,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2898,8 +2898,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_digital_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -2916,8 +2916,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2927,8 +2927,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2946,7 +2946,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_input',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.checkDigitalInput(script) : false;
             },
             syntax: {
@@ -2968,9 +2968,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2980,9 +2980,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -2990,8 +2990,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_button_state: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -3008,8 +3008,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -3019,8 +3019,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'CLICKED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -3038,7 +3038,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_input',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.checkButtonState(script) : false;
             },
             syntax: {
@@ -3060,9 +3060,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3072,9 +3072,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'CLICKED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -3082,8 +3082,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_set_pulse_mode_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3095,8 +3095,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'SC',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -3107,8 +3107,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'PULSE',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3132,7 +3132,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_input',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setInputModeTo(script) : script;
             },
             syntax: {
@@ -3149,9 +3149,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'SC',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3162,9 +3162,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'PULSE',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -3172,8 +3172,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_pulse_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -3186,8 +3186,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'SC',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -3203,7 +3203,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_input',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.checkPulseInput(script) : false;
             },
             syntax: {
@@ -3221,9 +3221,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'SC',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -3231,8 +3231,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_set_digital_output_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3250,8 +3250,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -3261,8 +3261,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3286,7 +3286,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_digital_output',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setDigitalOutput(script) : script;
             },
             syntax: {
@@ -3309,9 +3309,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3321,9 +3321,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -3331,8 +3331,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_change_pwm_output_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3348,8 +3348,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3380,7 +3380,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_pwm_output',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.changePwmOutput(script) : script;
             },
             syntax: {
@@ -3401,9 +3401,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -3415,8 +3415,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_set_pwm_output_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3432,8 +3432,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3464,7 +3464,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_pwm_output',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setPwmOutput(script) : script;
             },
             syntax: {
@@ -3485,9 +3485,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -3499,8 +3499,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_change_servo_motor_angle_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3519,8 +3519,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3551,7 +3551,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_servo_motor',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.changeServoMotorAngle(script) : script;
             },
             syntax: {
@@ -3575,9 +3575,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -3589,8 +3589,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_set_servo_motor_angle_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3609,8 +3609,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3641,7 +3641,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_servo_motor',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setServoMotorAngle(script) : script;
             },
             syntax: {
@@ -3665,9 +3665,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -3679,8 +3679,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_turn_off_servo_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3699,8 +3699,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'SA',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3722,7 +3722,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_servo_motor',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.turnOffServoMotor(script) : script;
             },
             syntax: {
@@ -3746,9 +3746,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'SA',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -3756,8 +3756,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_change_dc_motor_velocity_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3769,8 +3769,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'MAB',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3801,7 +3801,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_dc_motor',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.changeDcMotorVelocity(script) : script;
             },
             syntax: {
@@ -3818,9 +3818,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'MAB',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -3832,8 +3832,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_set_dc_motor_velocity_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3845,8 +3845,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'MAB',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3877,7 +3877,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_dc_motor',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setDcMotorVelocity(script) : script;
             },
             syntax: {
@@ -3894,9 +3894,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'MAB',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -3908,8 +3908,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_stop_dc_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3921,8 +3921,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'MAB',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3944,7 +3944,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_dc_motor',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.stopDcMotor(script) : script;
             },
             syntax: {
@@ -3961,9 +3961,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'MAB',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -3971,8 +3971,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_rotate_step_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4012,7 +4012,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_step_motor',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.rotateStepMotor(script) : script;
             },
             syntax: {
@@ -4035,8 +4035,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_change_step_motor_velocity_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4067,7 +4067,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_step_motor',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.changeStepMotorVelocity(script) : script;
             },
             syntax: {
@@ -4086,8 +4086,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_set_step_motor_velocity_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4118,7 +4118,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_step_motor',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setStepMotorVelocity(script) : script;
             },
             syntax: {
@@ -4137,8 +4137,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_stop_off_step_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4150,8 +4150,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'STOP',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -4173,7 +4173,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_step_motor',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.stopOffStepMotor(script) : script;
             },
             syntax: {
@@ -4190,9 +4190,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'STOP',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -4200,8 +4200,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_set_step_motor_mode_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4213,8 +4213,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'NORMAL',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -4236,7 +4236,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_step_motor',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setStepMotorMode(script) : script;
             },
             syntax: {
@@ -4253,9 +4253,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'NORMAL',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -4263,8 +4263,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_step_count: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -4280,7 +4280,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_step_motor',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 if (robot) {
                     return robot.getStepCount(script);
                 }
@@ -4296,8 +4296,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_set_led_to_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4309,8 +4309,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'L',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -4321,8 +4321,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'NORMAL',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -4339,8 +4339,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -4366,7 +4366,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_led',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setLedColor(script) : script;
             },
             syntax: {
@@ -4383,9 +4383,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'L',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -4396,9 +4396,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'NORMAL',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -4415,9 +4415,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -4425,8 +4425,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_pick_led_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4438,8 +4438,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'L',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Color',
@@ -4466,7 +4466,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_led',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setLedRgbArray(script) : script;
             },
             syntax: {
@@ -4483,13 +4483,13 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'L',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Color',
-                                converter: Entry.block.converters.returnStringValue,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -4497,8 +4497,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_change_led_by_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4510,8 +4510,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'L',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -4560,7 +4560,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_led',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.changeLedRgb(script) : script;
             },
             syntax: {
@@ -4577,9 +4577,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'L',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -4599,8 +4599,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_setLed_to_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4612,8 +4612,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'L',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -4662,7 +4662,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_led',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setLedRgb(script) : script;
             },
             syntax: {
@@ -4679,9 +4679,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'L',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -4701,8 +4701,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_clear_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4714,8 +4714,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'L',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -4737,7 +4737,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_led',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.clearLed(script) : script;
             },
             syntax: {
@@ -4754,9 +4754,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'L',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -4764,8 +4764,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_set_led_type_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4777,8 +4777,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'L',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -4799,8 +4799,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'DEFAULT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -4824,7 +4824,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_led',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setLedType(script) : script;
             },
             syntax: {
@@ -4841,9 +4841,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'L',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -4864,9 +4864,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'DEFAULT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -4874,8 +4874,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_set_number_and_type_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4891,8 +4891,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'GRB',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -4919,7 +4919,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelSetNumberAndType(script) : script;
             },
             syntax: {
@@ -4940,9 +4940,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'GRB',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -4950,8 +4950,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_set_all_leds_to_pattern: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4984,8 +4984,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'FILL_3_COLORS',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -5007,7 +5007,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelSetAllPattern(script) : script;
             },
             syntax: {
@@ -5045,9 +5045,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'FILL_3_COLORS',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -5055,8 +5055,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_set_all_leds_to_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5075,8 +5075,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -5098,7 +5098,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelSetAllColor(script) : script;
             },
             syntax: {
@@ -5122,9 +5122,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -5132,8 +5132,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_pick_all_leds_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5160,7 +5160,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelSetAllRgbArray(script) : script;
             },
             syntax: {
@@ -5171,7 +5171,7 @@ Entry.Cheese.getBlocks = function() {
                         textParams: [
                             {
                                 type: 'Color',
-                                converter: Entry.block.converters.returnStringValue,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -5179,8 +5179,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_change_all_leds_by_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5229,7 +5229,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelChangeAllRgb(script) : script;
             },
             syntax: {
@@ -5256,8 +5256,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_set_all_leds_to_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5306,7 +5306,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelSetAllRgb(script) : script;
             },
             syntax: {
@@ -5333,8 +5333,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_clear_all_leds: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5356,7 +5356,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelClearAll(script) : script;
             },
             syntax: {
@@ -5369,8 +5369,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_set_led_to_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5393,8 +5393,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -5421,7 +5421,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelSetLedColor(script) : script;
             },
             syntax: {
@@ -5449,9 +5449,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -5459,8 +5459,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_pick_led_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5496,7 +5496,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelSetLedRgbArray(script) : script;
             },
             syntax: {
@@ -5511,7 +5511,7 @@ Entry.Cheese.getBlocks = function() {
                             },
                             {
                                 type: 'Color',
-                                converter: Entry.block.converters.returnStringValue,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -5519,8 +5519,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_change_led_by_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5578,7 +5578,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelChangeLedRgb(script) : script;
             },
             syntax: {
@@ -5609,8 +5609,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_set_led_to_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5668,7 +5668,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelSetLedRgb(script) : script;
             },
             syntax: {
@@ -5699,8 +5699,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_clear_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5731,7 +5731,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelClearLed(script) : script;
             },
             syntax: {
@@ -5750,8 +5750,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_set_led_range_to_pattern: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5792,8 +5792,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'FILL_3_COLORS',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -5825,7 +5825,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelSetRangePattern(script) : script;
             },
             syntax: {
@@ -5871,9 +5871,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'FILL_3_COLORS',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -5881,8 +5881,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_set_led_range_to_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -5913,8 +5913,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -5951,7 +5951,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelSetRangeColor(script) : script;
             },
             syntax: {
@@ -5987,9 +5987,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -5997,8 +5997,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_pick_led_range_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -6052,7 +6052,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelSetRangeRgbArray(script) : script;
             },
             syntax: {
@@ -6075,7 +6075,7 @@ Entry.Cheese.getBlocks = function() {
                             },
                             {
                                 type: 'Color',
-                                converter: Entry.block.converters.returnStringValue,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -6083,8 +6083,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_change_led_range_by_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -6160,7 +6160,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelChangeRangeRgb(script) : script;
             },
             syntax: {
@@ -6199,8 +6199,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_set_led_range_to_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -6276,7 +6276,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelSetRangeRgb(script) : script;
             },
             syntax: {
@@ -6315,8 +6315,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_clear_led_range: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -6365,7 +6365,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelClearRange(script) : script;
             },
             syntax: {
@@ -6392,8 +6392,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_shift: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -6424,7 +6424,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelShift(script) : script;
             },
             syntax: {
@@ -6443,8 +6443,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_rotate: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -6475,7 +6475,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelRotate(script) : script;
             },
             syntax: {
@@ -6494,8 +6494,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_change_brightness_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -6526,7 +6526,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelChangeBrightness(script) : script;
             },
             syntax: {
@@ -6545,8 +6545,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_neopixel_set_brightness_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -6577,7 +6577,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_neopixel',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.neopixelSetBrightness(script) : script;
             },
             syntax: {
@@ -6596,8 +6596,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_write_serial: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -6609,8 +6609,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'STRING',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -6641,7 +6641,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_serial',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.writeSerial(script) : script;
             },
             syntax: {
@@ -6658,9 +6658,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'STRING',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -6672,8 +6672,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_read_serial_until: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -6689,8 +6689,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'ALL',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -6712,7 +6712,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_serial',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.readSerialUntil(script) : script;
             },
             syntax: {
@@ -6733,9 +6733,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'ALL',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -6743,8 +6743,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_set_serial_port_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -6758,8 +6758,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'WRITE_READ',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -6781,7 +6781,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_serial',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setSerialPort(script) : script;
             },
             syntax: {
@@ -6800,9 +6800,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'WRITE_READ',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -6810,8 +6810,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_set_serial_rate_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -6829,8 +6829,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: '9600',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -6852,7 +6852,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_serial',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.setSerialRate(script) : script;
             },
             syntax: {
@@ -6875,9 +6875,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: '9600',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -6885,8 +6885,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_serial_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -6903,7 +6903,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_serial',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 if (robot) {
                     return robot.getSerialInput(script);
                 }
@@ -6919,8 +6919,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_pid_start: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -6939,8 +6939,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: '10',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -6962,7 +6962,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_pid',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.pidStart(script) : script;
             },
             syntax: {
@@ -6986,9 +6986,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: '10',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -6996,8 +6996,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_pid_set_range_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -7011,8 +7011,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'X1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -7038,8 +7038,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'INTEGER',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -7083,7 +7083,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_pid',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.pidSetRangeTo(script) : script;
             },
             syntax: {
@@ -7102,9 +7102,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'X1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -7130,8 +7130,8 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'INTEGER',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                     },
@@ -7139,8 +7139,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_pid_set_three_ranges_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -7154,8 +7154,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'X1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -7189,8 +7189,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'INTEGER',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -7244,7 +7244,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_pid',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.pidSetThreeRangesTo(script) : script;
             },
             syntax: {
@@ -7263,9 +7263,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'X1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -7299,8 +7299,8 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'INTEGER',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                     },
@@ -7308,8 +7308,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_pid_reset_encoder: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -7331,7 +7331,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_pid',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.pidResetEncoder(script) : script;
             },
             syntax: {
@@ -7344,8 +7344,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_pid_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -7366,8 +7366,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'DISTANCE',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -7383,7 +7383,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_pid',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 if (robot) {
                     return robot.pidGetInput(script);
                 }
@@ -7411,9 +7411,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'DISTANCE',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -7421,8 +7421,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_pid_button_state: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -7435,8 +7435,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -7446,8 +7446,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'CLICKED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -7465,7 +7465,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_pid',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.pidCheckButtonState(script) : false;
             },
             syntax: {
@@ -7483,9 +7483,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -7495,9 +7495,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'CLICKED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -7505,8 +7505,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_start: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -7528,7 +7528,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010Start(script) : script;
             },
             syntax: {
@@ -7541,8 +7541,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -7555,8 +7555,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -7572,7 +7572,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 if (robot) {
                     return robot.hat010GetButton(script);
                 }
@@ -7592,9 +7592,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -7602,8 +7602,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_button_state: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -7616,8 +7616,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -7627,8 +7627,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'CLICKED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -7646,7 +7646,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010CheckButtonState(script) : false;
             },
             syntax: {
@@ -7664,9 +7664,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'A',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -7677,9 +7677,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'CLICKED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -7687,8 +7687,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_background_turn_on_xy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -7715,8 +7715,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -7748,7 +7748,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010BackgroundTurnOnXY(script) : script;
             },
             syntax: {
@@ -7780,9 +7780,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -7790,8 +7790,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_background_turn_off_xy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -7831,7 +7831,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010BackgroundTurnOffXY(script) : script;
             },
             syntax: {
@@ -7854,8 +7854,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_background_draw_shape_at_xy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -7874,8 +7874,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -7906,8 +7906,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'SQUARE',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -7949,7 +7949,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010BackgroundDrawShapeAtXY(script) : script;
             },
             syntax: {
@@ -7973,9 +7973,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -8006,9 +8006,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'SQUARE',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -8024,8 +8024,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_background_draw_string_at_xy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -8044,8 +8044,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -8094,7 +8094,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010BackgroundDrawStringAtXY(script) : script;
             },
             syntax: {
@@ -8118,9 +8118,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -8140,8 +8140,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_background_draw_pattern_at_xy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -8160,8 +8160,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -8210,7 +8210,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010BackgroundDrawPatternAtXY(script) : script;
             },
             syntax: {
@@ -8234,9 +8234,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -8256,8 +8256,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_clear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -8269,8 +8269,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'BACKGROUND',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -8292,7 +8292,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010Clear(script) : script;
             },
             syntax: {
@@ -8309,9 +8309,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'BACKGROUND',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -8319,8 +8319,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_scroll_by_xy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -8332,8 +8332,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'BACKGROUND',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -8369,12 +8369,12 @@ Entry.Cheese.getBlocks = function() {
                 TARGET: 0,
                 X: 1,
                 Y: 2,
-                
+
             },
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010ScrollByXY(script) : script;
             },
             syntax: {
@@ -8391,9 +8391,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'BACKGROUND',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -8409,8 +8409,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_sprite_set_to_shape: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -8433,8 +8433,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -8465,8 +8465,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'SQUARE',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -8495,7 +8495,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010SpriteSetToShape(script) : script;
             },
             syntax: {
@@ -8523,9 +8523,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -8556,9 +8556,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'SQUARE',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -8566,8 +8566,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_sprite_set_to_string: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -8590,8 +8590,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -8627,7 +8627,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010SpriteSetToString(script) : script;
             },
             syntax: {
@@ -8655,9 +8655,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -8669,8 +8669,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_sprite_set_to_pattern: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -8693,8 +8693,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -8730,7 +8730,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010SpriteSetToPattern(script) : script;
             },
             syntax: {
@@ -8758,9 +8758,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -8772,8 +8772,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_sprite_clear_show_hide: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -8790,8 +8790,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'CLEAR',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -8818,7 +8818,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010SpriteClearShowHide(script) : script;
             },
             syntax: {
@@ -8840,9 +8840,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'CLEAR',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -8850,8 +8850,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_sprite_change_positions_by_xy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -8900,7 +8900,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010SpriteChangePositionsByXY(script) : script;
             },
             syntax: {
@@ -8927,8 +8927,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_sprite_set_positions_to_xy: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -8977,7 +8977,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010SpriteSetPositionsToXY(script) : script;
             },
             syntax: {
@@ -9004,8 +9004,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_sprite_change_position_by_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9021,8 +9021,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'X',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -9058,7 +9058,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010SpriteChangePositionByValue(script) : script;
             },
             syntax: {
@@ -9079,9 +9079,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'X',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -9093,8 +9093,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_sprite_set_position_to_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9110,8 +9110,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'X',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -9147,7 +9147,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010SpriteSetPositionToValue(script) : script;
             },
             syntax: {
@@ -9168,9 +9168,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'X',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -9182,8 +9182,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_sprite_rotate: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9199,8 +9199,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'CLOCKWISE',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -9227,7 +9227,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010SpriteRotate(script) : script;
             },
             syntax: {
@@ -9248,9 +9248,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'CLOCKWISE',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -9258,8 +9258,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_sprite_flip_in_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9275,8 +9275,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'LEFT_RIGHT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -9303,7 +9303,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010SpriteFlipInDirection(script) : script;
             },
             syntax: {
@@ -9324,9 +9324,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'LEFT_RIGHT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -9334,8 +9334,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_sprite_stamp_to_background: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9366,7 +9366,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010SpriteStampToBackground(script) : script;
             },
             syntax: {
@@ -9385,8 +9385,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_sprite_position: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -9403,8 +9403,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'X',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -9425,7 +9425,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 if (robot) {
                     return robot.hat010GetSpritePosition(script);
                 }
@@ -9449,9 +9449,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'X',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -9459,8 +9459,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_sprite_touching_sprite: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -9495,7 +9495,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010CheckCheckSpriteSpriteTouched(script) : false;
             },
             syntax: {
@@ -9519,8 +9519,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_sprite_touching: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -9542,8 +9542,8 @@ Entry.Cheese.getBlocks = function() {
                     ],
                     value: 'BACKGROUND',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -9564,7 +9564,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010CheckCheckSpriteTouched(script) : false;
             },
             syntax: {
@@ -9591,9 +9591,9 @@ Entry.Cheese.getBlocks = function() {
                                 ],
                                 value: 'BACKGROUND',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -9601,8 +9601,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_change_brightness_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9633,7 +9633,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010ChangeBrightnessBy(script) : script;
             },
             syntax: {
@@ -9652,8 +9652,8 @@ Entry.Cheese.getBlocks = function() {
             },
         },
         cheese_hat010_set_brightness_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -9684,7 +9684,7 @@ Entry.Cheese.getBlocks = function() {
             class: 'cheese_hat010',
             isNotFor: ['cheese'],
             func(sprite, script) {
-                const robot = Entry.Cheese.getRobot();
+                const robot = RoCode.Cheese.getRobot();
                 return robot ? robot.hat010SetBrightnessTo(script) : script;
             },
             syntax: {
@@ -9705,4 +9705,4 @@ Entry.Cheese.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Cheese;
+module.exports = RoCode.Cheese;

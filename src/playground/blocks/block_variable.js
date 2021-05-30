@@ -3,12 +3,12 @@ module.exports = {
         return {
             variableAddButton: {
                 skeleton: 'basic_button',
-                color: EntryStatic.colorSet.common.BUTTON_BACKGROUND,
+                color: RoCodeStatic.colorSet.common.BUTTON_BACKGROUND,
                 params: [
                     {
                         type: 'Text',
                         text: Lang.Workspace.variable_create,
-                        color: EntryStatic.colorSet.common.BUTTON,
+                        color: RoCodeStatic.colorSet.common.BUTTON,
                         align: 'center',
                     },
                 ],
@@ -18,7 +18,7 @@ module.exports = {
                 events: {
                     mousedown: [
                         function() {
-                            Entry.variableContainer.openVariableAddPanel('variable');
+                            RoCode.variableContainer.openVariableAddPanel('variable');
                         },
                     ],
                 },
@@ -26,12 +26,12 @@ module.exports = {
             },
             listAddButton: {
                 skeleton: 'basic_button',
-                color: EntryStatic.colorSet.common.BUTTON_BACKGROUND,
+                color: RoCodeStatic.colorSet.common.BUTTON_BACKGROUND,
                 params: [
                     {
                         type: 'Text',
                         text: Lang.Workspace.create_list_block,
-                        color: EntryStatic.colorSet.common.BUTTON,
+                        color: RoCodeStatic.colorSet.common.BUTTON,
                         align: 'center',
                     },
                 ],
@@ -41,14 +41,14 @@ module.exports = {
                 events: {
                     mousedown: [
                         function() {
-                            Entry.variableContainer.openVariableAddPanel('list');
+                            RoCode.variableContainer.openVariableAddPanel('list');
                         },
                     ],
                 },
             },
             ask_and_wait: {
-                color: EntryStatic.colorSet.block.default.VARIABLE,
-                outerLine: EntryStatic.colorSet.block.darken.VARIABLE,
+                color: RoCodeStatic.colorSet.block.default.VARIABLE,
+                outerLine: RoCodeStatic.colorSet.block.darken.VARIABLE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -65,15 +65,15 @@ module.exports = {
                 events: {
                     viewAdd: [
                         function() {
-                            if (Entry.container) {
-                                Entry.container.showProjectAnswer();
+                            if (RoCode.container) {
+                                RoCode.container.showProjectAnswer();
                             }
                         },
                     ],
                     viewDestroy: [
                         function(block, notIncludeSelf) {
-                            if (Entry.container) {
-                                Entry.container.hideProjectAnswer(block, notIncludeSelf);
+                            if (RoCode.container) {
+                                RoCode.container.hideProjectAnswer(block, notIncludeSelf);
                             }
                         },
                     ],
@@ -104,8 +104,8 @@ module.exports = {
                 class: 'ask',
                 isNotFor: [],
                 func(sprite, script) {
-                    const inputModel = Entry.container.inputValue;
-                    const inputView = Entry.stage.inputField;
+                    const inputModel = RoCode.container.inputValue;
+                    const inputView = RoCode.stage.inputField;
                     const message = script.getValue('VALUE', script);
 
                     if (_.isUndefined(message) || message === '') {
@@ -133,8 +133,8 @@ module.exports = {
                         delete script.isInit;
                         return script.callReturn();
                     } else {
-                        Entry.stage.showInputField();
-                        new Entry.Dialog(sprite, Entry.convertToRoundedDecimals(message, 3), 'ask');
+                        RoCode.stage.showInputField();
+                        new RoCode.Dialog(sprite, RoCode.convertToRoundedDecimals(message, 3), 'ask');
                         inputModel.script = script;
                         inputModel.sprite = sprite;
                         inputModel.complete = false;
@@ -142,11 +142,11 @@ module.exports = {
                         return script;
                     }
                 },
-                syntax: { js: [], py: ['Entry.input(%1)'] },
+                syntax: { js: [], py: ['RoCode.input(%1)'] },
             },
             get_canvas_input_value: {
-                color: EntryStatic.colorSet.block.default.VARIABLE,
-                outerLine: EntryStatic.colorSet.block.darken.VARIABLE,
+                color: RoCodeStatic.colorSet.block.default.VARIABLE,
+                outerLine: RoCodeStatic.colorSet.block.darken.VARIABLE,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -159,15 +159,15 @@ module.exports = {
                 events: {
                     viewAdd: [
                         function() {
-                            if (Entry.container) {
-                                Entry.container.showProjectAnswer();
+                            if (RoCode.container) {
+                                RoCode.container.showProjectAnswer();
                             }
                         },
                     ],
                     viewDestroy: [
                         function(block, notIncludeSelf) {
-                            if (Entry.container) {
-                                Entry.container.hideProjectAnswer(block, notIncludeSelf);
+                            if (RoCode.container) {
+                                RoCode.container.hideProjectAnswer(block, notIncludeSelf);
                             }
                         },
                     ],
@@ -179,19 +179,19 @@ module.exports = {
                 class: 'ask',
                 isNotFor: [],
                 func(sprite, script) {
-                    return Entry.container.getInputValue();
+                    return RoCode.container.getInputValue();
                 },
                 syntax: {
                     js: [],
                     py: [
                         {
                             template: '%1',
-                            syntax: 'Entry.answer()',
+                            syntax: 'RoCode.answer()',
                             blockType: 'param',
                             textParams: [
                                 {
                                     type: 'Text',
-                                    text: 'Entry.answer()',
+                                    text: 'RoCode.answer()',
                                     color: '#fff',
                                 },
                             ],
@@ -200,8 +200,8 @@ module.exports = {
                 },
             },
             set_visible_answer: {
-                color: EntryStatic.colorSet.block.default.VARIABLE,
-                outerLine: EntryStatic.colorSet.block.darken.VARIABLE,
+                color: RoCodeStatic.colorSet.block.default.VARIABLE,
+                outerLine: RoCodeStatic.colorSet.block.darken.VARIABLE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -213,8 +213,8 @@ module.exports = {
                         ],
                         value: 'SHOW',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.VARIABLE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.VARIABLE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -225,15 +225,15 @@ module.exports = {
                 events: {
                     viewAdd: [
                         function() {
-                            if (Entry.container) {
-                                Entry.container.showProjectAnswer();
+                            if (RoCode.container) {
+                                RoCode.container.showProjectAnswer();
                             }
                         },
                     ],
                     viewDestroy: [
                         function(block, notIncludeSelf) {
-                            if (Entry.container) {
-                                Entry.container.hideProjectAnswer(block, notIncludeSelf);
+                            if (RoCode.container) {
+                                RoCode.container.hideProjectAnswer(block, notIncludeSelf);
                             }
                         },
                     ],
@@ -254,9 +254,9 @@ module.exports = {
                 func(sprite, script) {
                     const bool = script.getField('BOOL', script);
                     if (bool === 'HIDE') {
-                        Entry.container.inputValue.setVisible(false);
+                        RoCode.container.inputValue.setVisible(false);
                     } else {
-                        Entry.container.inputValue.setVisible(true);
+                        RoCode.container.inputValue.setVisible(true);
                     }
                     return script.callReturn();
                 },
@@ -264,7 +264,7 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.answer_view(%1)',
+                            syntax: 'RoCode.answer_view(%1)',
                             textParams: [
                                 {
                                     type: 'Dropdown',
@@ -274,9 +274,9 @@ module.exports = {
                                     ],
                                     value: 'SHOW',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.VARIABLE,
-                                    converter: Entry.block.converters.returnStringValueLowerCase,
-                                    codeMap: 'Entry.CodeMap.Entry.set_visible_answer[0]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.VARIABLE,
+                                    converter: RoCode.block.converters.returnStringValueLowerCase,
+                                    codeMap: 'RoCode.CodeMap.RoCode.set_visible_answer[0]',
                                 },
                             ],
                         },
@@ -284,8 +284,8 @@ module.exports = {
                 },
             },
             get_variable: {
-                color: EntryStatic.colorSet.block.default.VARIABLE,
-                outerLine: EntryStatic.colorSet.block.darken.VARIABLE,
+                color: RoCodeStatic.colorSet.block.default.VARIABLE,
+                outerLine: RoCodeStatic.colorSet.block.darken.VARIABLE,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -294,8 +294,8 @@ module.exports = {
                         value: null,
                         menuName: 'variables',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.VARIABLE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.VARIABLE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Text',
@@ -306,7 +306,7 @@ module.exports = {
                 events: {
                     dataAdd: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.addRef('_variableRefs', block);
                             }
@@ -314,7 +314,7 @@ module.exports = {
                     ],
                     dataDestroy: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.removeRef('_variableRefs', block);
                             }
@@ -336,7 +336,7 @@ module.exports = {
                 isNotFor: ['variableNotExist'],
                 func(sprite, script) {
                     const variableId = script.getField('VARIABLE', script);
-                    const variable = Entry.variableContainer.getVariable(variableId, sprite);
+                    const variable = RoCode.variableContainer.getVariable(variableId, sprite);
                     return variable.getValue();
                 },
                 syntax: {
@@ -353,8 +353,8 @@ module.exports = {
                                     value: null,
                                     menuName: 'variables',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.VARIABLE,
-                                    converter: Entry.block.converters.returnRawStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.VARIABLE,
+                                    converter: RoCode.block.converters.returnRawStringKey,
                                 },
                             ],
                         },
@@ -362,8 +362,8 @@ module.exports = {
                 },
             },
             change_variable: {
-                color: EntryStatic.colorSet.block.default.VARIABLE,
-                outerLine: EntryStatic.colorSet.block.darken.VARIABLE,
+                color: RoCodeStatic.colorSet.block.default.VARIABLE,
+                outerLine: RoCodeStatic.colorSet.block.darken.VARIABLE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -372,8 +372,8 @@ module.exports = {
                         value: null,
                         menuName: 'variables',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.VARIABLE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.VARIABLE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Block',
@@ -388,7 +388,7 @@ module.exports = {
                 events: {
                     dataAdd: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.addRef('_variableRefs', block);
                             }
@@ -396,7 +396,7 @@ module.exports = {
                     ],
                     dataDestroy: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.removeRef('_variableRefs', block);
                             }
@@ -440,14 +440,14 @@ module.exports = {
                         throw new Error('Type is not correct');
                     }
 
-                    const variable = Entry.variableContainer.getVariable(variableId, sprite);
+                    const variable = RoCode.variableContainer.getVariable(variableId, sprite);
                     const { isRealTime_ } = variable;
                     let variableValue = variable.getValue();
                     let sumValue;
-                    if (Entry.Utils.isNumber(value) && variable.isNumber()) {
-                        value = Entry.parseNumber(value);
-                        variableValue = Entry.parseNumber(variableValue);
-                        fixed = Entry.getMaxFloatPoint([value, variable.getValue()]);
+                    if (RoCode.Utils.isNumber(value) && variable.isNumber()) {
+                        value = RoCode.parseNumber(value);
+                        variableValue = RoCode.parseNumber(variableValue);
+                        fixed = RoCode.getMaxFloatPoint([value, variable.getValue()]);
                         sumValue = new BigNumber(value)
                             .plus(variableValue)
                             .toNumber()
@@ -481,8 +481,8 @@ module.exports = {
                                     value: null,
                                     menuName: 'variables',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.VARIABLE,
-                                    converter: Entry.block.converters.returnRawStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.VARIABLE,
+                                    converter: RoCode.block.converters.returnRawStringKey,
                                 },
                                 {
                                     type: 'Block',
@@ -498,8 +498,8 @@ module.exports = {
                                     value: null,
                                     menuName: 'variables',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.VARIABLE,
-                                    converter: Entry.block.converters.returnRawStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.VARIABLE,
+                                    converter: RoCode.block.converters.returnRawStringKey,
                                 },
                                 {
                                     type: 'Block',
@@ -511,8 +511,8 @@ module.exports = {
                 },
             },
             set_variable: {
-                color: EntryStatic.colorSet.block.default.VARIABLE,
-                outerLine: EntryStatic.colorSet.block.darken.VARIABLE,
+                color: RoCodeStatic.colorSet.block.default.VARIABLE,
+                outerLine: RoCodeStatic.colorSet.block.darken.VARIABLE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -521,8 +521,8 @@ module.exports = {
                         value: null,
                         menuName: 'variables',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.VARIABLE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.VARIABLE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Block',
@@ -537,7 +537,7 @@ module.exports = {
                 events: {
                     dataAdd: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.addRef('_variableRefs', block);
                             }
@@ -545,7 +545,7 @@ module.exports = {
                     ],
                     dataDestroy: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.removeRef('_variableRefs', block);
                             }
@@ -583,7 +583,7 @@ module.exports = {
                 func(sprite, script) {
                     const variableId = script.getField('VARIABLE', script);
                     const value = script.getValue('VALUE', script);
-                    const variable = Entry.variableContainer.getVariable(variableId, sprite);
+                    const variable = RoCode.variableContainer.getVariable(variableId, sprite);
                     const { isRealTime_ } = variable;
 
                     if (!isRealTime_) {
@@ -613,8 +613,8 @@ module.exports = {
                                     value: null,
                                     menuName: 'variables',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.VARIABLE,
-                                    converter: Entry.block.converters.returnRawStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.VARIABLE,
+                                    converter: RoCode.block.converters.returnRawStringKey,
                                 },
                                 {
                                     type: 'Block',
@@ -626,8 +626,8 @@ module.exports = {
                 },
             },
             show_variable: {
-                color: EntryStatic.colorSet.block.default.VARIABLE,
-                outerLine: EntryStatic.colorSet.block.darken.VARIABLE,
+                color: RoCodeStatic.colorSet.block.default.VARIABLE,
+                outerLine: RoCodeStatic.colorSet.block.darken.VARIABLE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -636,8 +636,8 @@ module.exports = {
                         value: null,
                         menuName: 'variables',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.VARIABLE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.VARIABLE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -648,7 +648,7 @@ module.exports = {
                 events: {
                     dataAdd: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.addRef('_variableRefs', block);
                             }
@@ -656,7 +656,7 @@ module.exports = {
                     ],
                     dataDestroy: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.removeRef('_variableRefs', block);
                             }
@@ -678,7 +678,7 @@ module.exports = {
                 isNotFor: ['variableNotExist'],
                 func(sprite, script) {
                     const variableId = script.getField('VARIABLE', script);
-                    const variable = Entry.variableContainer.getVariable(variableId, sprite);
+                    const variable = RoCode.variableContainer.getVariable(variableId, sprite);
                     variable.setVisible(true);
                     variable.updateView();
                     return script.callReturn();
@@ -687,15 +687,15 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.show_variable(%1)',
+                            syntax: 'RoCode.show_variable(%1)',
                             textParams: [
                                 {
                                     type: 'DropdownDynamic',
                                     value: null,
                                     menuName: 'variables',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.VARIABLE,
-                                    converter: Entry.block.converters.returnStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.VARIABLE,
+                                    converter: RoCode.block.converters.returnStringKey,
                                 },
                             ],
                         },
@@ -703,8 +703,8 @@ module.exports = {
                 },
             },
             hide_variable: {
-                color: EntryStatic.colorSet.block.default.VARIABLE,
-                outerLine: EntryStatic.colorSet.block.darken.VARIABLE,
+                color: RoCodeStatic.colorSet.block.default.VARIABLE,
+                outerLine: RoCodeStatic.colorSet.block.darken.VARIABLE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -713,8 +713,8 @@ module.exports = {
                         value: null,
                         menuName: 'variables',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.VARIABLE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.VARIABLE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -725,7 +725,7 @@ module.exports = {
                 events: {
                     dataAdd: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.addRef('_variableRefs', block);
                             }
@@ -733,7 +733,7 @@ module.exports = {
                     ],
                     dataDestroy: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.removeRef('_variableRefs', block);
                             }
@@ -755,7 +755,7 @@ module.exports = {
                 isNotFor: ['variableNotExist'],
                 func(sprite, script) {
                     const variableId = script.getField('VARIABLE', script);
-                    const variable = Entry.variableContainer.getVariable(variableId, sprite);
+                    const variable = RoCode.variableContainer.getVariable(variableId, sprite);
                     variable.setVisible(false);
                     return script.callReturn();
                 },
@@ -763,15 +763,15 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.hide_variable(%1)',
+                            syntax: 'RoCode.hide_variable(%1)',
                             textParams: [
                                 {
                                     type: 'DropdownDynamic',
                                     value: null,
                                     menuName: 'variables',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.VARIABLE,
-                                    converter: Entry.block.converters.returnStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.VARIABLE,
+                                    converter: RoCode.block.converters.returnStringKey,
                                 },
                             ],
                         },
@@ -779,8 +779,8 @@ module.exports = {
                 },
             },
             value_of_index_from_list: {
-                color: EntryStatic.colorSet.block.default.VARIABLE,
-                outerLine: EntryStatic.colorSet.block.darken.VARIABLE,
+                color: RoCodeStatic.colorSet.block.default.VARIABLE,
+                outerLine: RoCodeStatic.colorSet.block.darken.VARIABLE,
                 fontColor: '#fff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -795,8 +795,8 @@ module.exports = {
                         value: null,
                         menuName: 'lists',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.VARIABLE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.VARIABLE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Text',
@@ -818,7 +818,7 @@ module.exports = {
                 events: {
                     dataAdd: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.addRef('_variableRefs', block);
                             }
@@ -826,7 +826,7 @@ module.exports = {
                     ],
                     dataDestroy: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.removeRef('_variableRefs', block);
                             }
@@ -866,10 +866,10 @@ module.exports = {
                 func(sprite, script) {
                     const listId = script.getField('LIST', script);
                     let index = script.getValue('INDEX', script);
-                    const list = Entry.variableContainer.getList(listId, sprite);
-                    index = Entry.getListRealIndex(index, list);
+                    const list = RoCode.variableContainer.getList(listId, sprite);
+                    index = RoCode.getListRealIndex(index, list);
                     const array = list.getArray();
-                    if (!array || !Entry.Utils.isNumber(index) || index > array.length) {
+                    if (!array || !RoCode.Utils.isNumber(index) || index > array.length) {
                         throw new Error('can not insert value to array');
                     }
 
@@ -889,8 +889,8 @@ module.exports = {
                                     value: null,
                                     menuName: 'lists',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.VARIABLE,
-                                    converter: Entry.block.converters.returnRawStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.VARIABLE,
+                                    converter: RoCode.block.converters.returnRawStringKey,
                                 },
                                 undefined,
                                 {
@@ -904,8 +904,8 @@ module.exports = {
                 },
             },
             add_value_to_list: {
-                color: EntryStatic.colorSet.block.default.VARIABLE,
-                outerLine: EntryStatic.colorSet.block.darken.VARIABLE,
+                color: RoCodeStatic.colorSet.block.default.VARIABLE,
+                outerLine: RoCodeStatic.colorSet.block.darken.VARIABLE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -918,8 +918,8 @@ module.exports = {
                         value: null,
                         menuName: 'lists',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.VARIABLE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.VARIABLE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -930,7 +930,7 @@ module.exports = {
                 events: {
                     dataAdd: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.addRef('_variableRefs', block);
                             }
@@ -938,7 +938,7 @@ module.exports = {
                     ],
                     dataDestroy: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.removeRef('_variableRefs', block);
                             }
@@ -976,7 +976,7 @@ module.exports = {
                 func(sprite, script) {
                     const listId = script.getField('LIST', script);
                     const value = script.getValue('VALUE', script);
-                    const list = Entry.variableContainer.getList(listId, sprite);
+                    const list = RoCode.variableContainer.getList(listId, sprite);
 
                     if (!list.isCloud_) {
                         list.appendValue(value);
@@ -1008,8 +1008,8 @@ module.exports = {
                                     value: null,
                                     menuName: 'lists',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.VARIABLE,
-                                    converter: Entry.block.converters.returnRawStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.VARIABLE,
+                                    converter: RoCode.block.converters.returnRawStringKey,
                                 },
                             ],
                         },
@@ -1017,8 +1017,8 @@ module.exports = {
                 },
             },
             remove_value_from_list: {
-                color: EntryStatic.colorSet.block.default.VARIABLE,
-                outerLine: EntryStatic.colorSet.block.darken.VARIABLE,
+                color: RoCodeStatic.colorSet.block.default.VARIABLE,
+                outerLine: RoCodeStatic.colorSet.block.darken.VARIABLE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1033,8 +1033,8 @@ module.exports = {
                         value: null,
                         menuName: 'lists',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.VARIABLE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.VARIABLE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -1045,7 +1045,7 @@ module.exports = {
                 events: {
                     dataAdd: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.addRef('_variableRefs', block);
                             }
@@ -1053,7 +1053,7 @@ module.exports = {
                     ],
                     dataDestroy: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.removeRef('_variableRefs', block);
                             }
@@ -1091,9 +1091,9 @@ module.exports = {
                 func(sprite, script) {
                     const listId = script.getField('LIST', script);
                     const value = script.getValue('VALUE', script);
-                    const list = Entry.variableContainer.getList(listId, sprite);
+                    const list = RoCode.variableContainer.getList(listId, sprite);
                     const array = list.getArray();
-                    if (!array || !Entry.Utils.isNumber(value) || value > array.length) {
+                    if (!array || !RoCode.Utils.isNumber(value) || value > array.length) {
                         throw new Error('can not remove value from array');
                     }
 
@@ -1129,8 +1129,8 @@ module.exports = {
                                     value: null,
                                     menuName: 'lists',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.VARIABLE,
-                                    converter: Entry.block.converters.returnRawStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.VARIABLE,
+                                    converter: RoCode.block.converters.returnRawStringKey,
                                 },
                             ],
                         },
@@ -1138,8 +1138,8 @@ module.exports = {
                 },
             },
             insert_value_to_list: {
-                color: EntryStatic.colorSet.block.default.VARIABLE,
-                outerLine: EntryStatic.colorSet.block.darken.VARIABLE,
+                color: RoCodeStatic.colorSet.block.default.VARIABLE,
+                outerLine: RoCodeStatic.colorSet.block.darken.VARIABLE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1152,8 +1152,8 @@ module.exports = {
                         value: null,
                         menuName: 'lists',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.VARIABLE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.VARIABLE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Block',
@@ -1170,7 +1170,7 @@ module.exports = {
                 events: {
                     dataAdd: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.addRef('_variableRefs', block);
                             }
@@ -1178,7 +1178,7 @@ module.exports = {
                     ],
                     dataDestroy: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.removeRef('_variableRefs', block);
                             }
@@ -1225,11 +1225,11 @@ module.exports = {
                 func(sprite, script) {
                     const listId = script.getField('LIST', script);
                     const [data, index] = script.getValues(['DATA', 'INDEX'], script);
-                    const list = Entry.variableContainer.getList(listId, sprite);
+                    const list = RoCode.variableContainer.getList(listId, sprite);
                     const array = list.getArray();
                     if (
                         !array ||
-                        !Entry.Utils.isNumber(index) ||
+                        !RoCode.Utils.isNumber(index) ||
                         index == 0 ||
                         index > array.length + 1
                     ) {
@@ -1267,8 +1267,8 @@ module.exports = {
                                     value: null,
                                     menuName: 'lists',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.VARIABLE,
-                                    converter: Entry.block.converters.returnRawStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.VARIABLE,
+                                    converter: RoCode.block.converters.returnRawStringKey,
                                 },
                                 {
                                     type: 'Block',
@@ -1281,8 +1281,8 @@ module.exports = {
                 },
             },
             change_value_list_index: {
-                color: EntryStatic.colorSet.block.default.VARIABLE,
-                outerLine: EntryStatic.colorSet.block.darken.VARIABLE,
+                color: RoCodeStatic.colorSet.block.default.VARIABLE,
+                outerLine: RoCodeStatic.colorSet.block.darken.VARIABLE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1291,8 +1291,8 @@ module.exports = {
                         value: null,
                         menuName: 'lists',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.VARIABLE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.VARIABLE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Block',
@@ -1313,7 +1313,7 @@ module.exports = {
                 events: {
                     dataAdd: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.addRef('_variableRefs', block);
                             }
@@ -1321,7 +1321,7 @@ module.exports = {
                     ],
                     dataDestroy: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.removeRef('_variableRefs', block);
                             }
@@ -1368,9 +1368,9 @@ module.exports = {
                 func(sprite, script) {
                     const listId = script.getField('LIST', script);
                     const [data, index] = script.getValues(['DATA', 'INDEX'], script);
-                    const list = Entry.variableContainer.getList(listId, sprite);
+                    const list = RoCode.variableContainer.getList(listId, sprite);
                     const array = list.getArray();
-                    if (!array || !Entry.Utils.isNumber(index) || index > array.length) {
+                    if (!array || !RoCode.Utils.isNumber(index) || index > array.length) {
                         throw new Error('can not insert value to array');
                     }
 
@@ -1401,8 +1401,8 @@ module.exports = {
                                     value: null,
                                     menuName: 'lists',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.VARIABLE,
-                                    converter: Entry.block.converters.returnRawStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.VARIABLE,
+                                    converter: RoCode.block.converters.returnRawStringKey,
                                 },
                                 {
                                     type: 'Block',
@@ -1419,8 +1419,8 @@ module.exports = {
                 },
             },
             length_of_list: {
-                color: EntryStatic.colorSet.block.default.VARIABLE,
-                outerLine: EntryStatic.colorSet.block.darken.VARIABLE,
+                color: RoCodeStatic.colorSet.block.default.VARIABLE,
+                outerLine: RoCodeStatic.colorSet.block.darken.VARIABLE,
                 fontColor: '#fff',
                 skeleton: 'basic_string_field',
                 statements: [],
@@ -1435,8 +1435,8 @@ module.exports = {
                         value: null,
                         menuName: 'lists',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.VARIABLE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.VARIABLE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Text',
@@ -1447,7 +1447,7 @@ module.exports = {
                 events: {
                     dataAdd: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.addRef('_variableRefs', block);
                             }
@@ -1455,7 +1455,7 @@ module.exports = {
                     ],
                     dataDestroy: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.removeRef('_variableRefs', block);
                             }
@@ -1477,7 +1477,7 @@ module.exports = {
                 isNotFor: ['listNotExist'],
                 func(sprite, script) {
                     const listId = script.getField('LIST', script);
-                    const list = Entry.variableContainer.getList(listId, sprite);
+                    const list = RoCode.variableContainer.getList(listId, sprite);
                     return list.getArray().length;
                 },
                 syntax: {
@@ -1494,8 +1494,8 @@ module.exports = {
                                     value: null,
                                     menuName: 'lists',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.VARIABLE,
-                                    converter: Entry.block.converters.returnRawStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.VARIABLE,
+                                    converter: RoCode.block.converters.returnRawStringKey,
                                 },
                             ],
                         },
@@ -1503,8 +1503,8 @@ module.exports = {
                 },
             },
             is_included_in_list: {
-                color: EntryStatic.colorSet.block.default.VARIABLE,
-                outerLine: EntryStatic.colorSet.block.darken.VARIABLE,
+                color: RoCodeStatic.colorSet.block.default.VARIABLE,
+                outerLine: RoCodeStatic.colorSet.block.darken.VARIABLE,
                 fontColor: '#fff',
                 skeleton: 'basic_boolean_field',
                 statements: [],
@@ -1519,8 +1519,8 @@ module.exports = {
                         value: null,
                         menuName: 'lists',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.VARIABLE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.VARIABLE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Text',
@@ -1540,7 +1540,7 @@ module.exports = {
                 events: {
                     dataAdd: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.addRef('_variableRefs', block);
                             }
@@ -1548,7 +1548,7 @@ module.exports = {
                     ],
                     dataDestroy: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.removeRef('_variableRefs', block);
                             }
@@ -1590,7 +1590,7 @@ module.exports = {
                 func(sprite, script) {
                     const listId = script.getField('LIST', script);
                     const data = script.getStringValue('DATA', script);
-                    const list = Entry.variableContainer.getList(listId, sprite);
+                    const list = RoCode.variableContainer.getList(listId, sprite);
                     if (!list) {
                         return false;
                     }
@@ -1617,8 +1617,8 @@ module.exports = {
                                     value: null,
                                     menuName: 'lists',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.VARIABLE,
-                                    converter: Entry.block.converters.returnRawStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.VARIABLE,
+                                    converter: RoCode.block.converters.returnRawStringKey,
                                 },
                                 undefined,
                                 {
@@ -1631,8 +1631,8 @@ module.exports = {
                 },
             },
             show_list: {
-                color: EntryStatic.colorSet.block.default.VARIABLE,
-                outerLine: EntryStatic.colorSet.block.darken.VARIABLE,
+                color: RoCodeStatic.colorSet.block.default.VARIABLE,
+                outerLine: RoCodeStatic.colorSet.block.darken.VARIABLE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1641,8 +1641,8 @@ module.exports = {
                         value: null,
                         menuName: 'lists',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.VARIABLE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.VARIABLE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -1653,7 +1653,7 @@ module.exports = {
                 events: {
                     dataAdd: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.addRef('_variableRefs', block);
                             }
@@ -1661,7 +1661,7 @@ module.exports = {
                     ],
                     dataDestroy: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.removeRef('_variableRefs', block);
                             }
@@ -1683,7 +1683,7 @@ module.exports = {
                 isNotFor: ['listNotExist'],
                 func(sprite, script) {
                     const listId = script.getField('LIST', script);
-                    const list = Entry.variableContainer.getList(listId);
+                    const list = RoCode.variableContainer.getList(listId);
 
                     list.setVisible(true);
                     return script.callReturn();
@@ -1692,15 +1692,15 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.show_list(%1)',
+                            syntax: 'RoCode.show_list(%1)',
                             textParams: [
                                 {
                                     type: 'DropdownDynamic',
                                     value: null,
                                     menuName: 'lists',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.VARIABLE,
-                                    converter: Entry.block.converters.returnStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.VARIABLE,
+                                    converter: RoCode.block.converters.returnStringKey,
                                 },
                             ],
                         },
@@ -1708,8 +1708,8 @@ module.exports = {
                 },
             },
             hide_list: {
-                color: EntryStatic.colorSet.block.default.VARIABLE,
-                outerLine: EntryStatic.colorSet.block.darken.VARIABLE,
+                color: RoCodeStatic.colorSet.block.default.VARIABLE,
+                outerLine: RoCodeStatic.colorSet.block.darken.VARIABLE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1718,8 +1718,8 @@ module.exports = {
                         value: null,
                         menuName: 'lists',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.VARIABLE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.VARIABLE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Indicator',
@@ -1730,7 +1730,7 @@ module.exports = {
                 events: {
                     dataAdd: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.addRef('_variableRefs', block);
                             }
@@ -1738,7 +1738,7 @@ module.exports = {
                     ],
                     dataDestroy: [
                         function(block) {
-                            const vc = Entry.variableContainer;
+                            const vc = RoCode.variableContainer;
                             if (vc) {
                                 vc.removeRef('_variableRefs', block);
                             }
@@ -1760,7 +1760,7 @@ module.exports = {
                 isNotFor: ['listNotExist'],
                 func(sprite, script) {
                     const listId = script.getField('LIST', script);
-                    const list = Entry.variableContainer.getList(listId);
+                    const list = RoCode.variableContainer.getList(listId);
 
                     list.setVisible(false);
                     return script.callReturn();
@@ -1769,15 +1769,15 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.hide_list(%1)',
+                            syntax: 'RoCode.hide_list(%1)',
                             textParams: [
                                 {
                                     type: 'DropdownDynamic',
                                     value: null,
                                     menuName: 'lists',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.VARIABLE,
-                                    converter: Entry.block.converters.returnStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.VARIABLE,
+                                    converter: RoCode.block.converters.returnStringKey,
                                 },
                             ],
                         },

@@ -1,4 +1,4 @@
-class EntryStateManager {
+class RoCodeStateManager {
     constructor() {
         this.undoStack_ = [];
         this.redoStack_ = [];
@@ -7,16 +7,16 @@ class EntryStateManager {
         this.isRestore = false;
         this._isRedoing = false;
         this.isIgnore = false;
-        Entry.addEventListener('cancelLastCommand', (e) => {
+        RoCode.addEventListener('cancelLastCommand', (e) => {
             this.cancelLastCommand();
         });
-        Entry.addEventListener('saveWorkspace', (e) => {
+        RoCode.addEventListener('saveWorkspace', (e) => {
             this.addStamp();
         });
-        Entry.addEventListener('undo', (e) => {
+        RoCode.addEventListener('undo', (e) => {
             this.undo();
         });
-        Entry.addEventListener('redo', (e) => {
+        RoCode.addEventListener('redo', (e) => {
             this.redo();
         });
     }
@@ -29,8 +29,8 @@ class EntryStateManager {
         if (this.isIgnoring()) {
             return;
         }
-        const state = new Entry.State();
-        Entry.State.prototype.constructor.apply(state, Array.prototype.slice.call(arguments));
+        const state = new RoCode.State();
+        RoCode.State.prototype.constructor.apply(state, Array.prototype.slice.call(arguments));
 
         if (this.isRestoring()) {
             this.redoStack_.push(state);
@@ -40,11 +40,11 @@ class EntryStateManager {
                 this.redoStack_ = [];
             }
         }
-        if (Entry.reporter) {
-            Entry.reporter.report(state);
+        if (RoCode.reporter) {
+            RoCode.reporter.report(state);
         }
-        if (Entry.creationChangedEvent) {
-            Entry.creationChangedEvent.notify();
+        if (RoCode.creationChangedEvent) {
+            RoCode.creationChangedEvent.notify();
         }
         return state;
     }
@@ -54,8 +54,8 @@ class EntryStateManager {
             return;
         }
         this.undoStack_.pop();
-        if (Entry.creationChangedEvent) {
-            Entry.creationChangedEvent.notify();
+        if (RoCode.creationChangedEvent) {
+            RoCode.creationChangedEvent.notify();
         }
     }
 
@@ -116,11 +116,11 @@ class EntryStateManager {
             }
         }
         this.endRestore();
-        if (Entry.disposeEvent) {
-            Entry.disposeEvent.notify();
+        if (RoCode.disposeEvent) {
+            RoCode.disposeEvent.notify();
         }
-        if (Entry.creationChangedEvent) {
-            Entry.creationChangedEvent.notify();
+        if (RoCode.creationChangedEvent) {
+            RoCode.creationChangedEvent.notify();
         }
     }
 
@@ -149,8 +149,8 @@ class EntryStateManager {
             }
         }
         this._isRedoing = false;
-        if (Entry.creationChangedEvent) {
-            Entry.creationChangedEvent.notify();
+        if (RoCode.creationChangedEvent) {
+            RoCode.creationChangedEvent.notify();
         }
     }
 
@@ -196,18 +196,18 @@ class EntryStateManager {
     }
 
     canUndo() {
-        return this.undoStack_.length > 0 && Entry.engine.isState('stop');
+        return this.undoStack_.length > 0 && RoCode.engine.isState('stop');
     }
 
     canRedo() {
-        return this.redoStack_.length > 0 && Entry.engine.isState('stop');
+        return this.redoStack_.length > 0 && RoCode.engine.isState('stop');
     }
 
     /**
      * mark state which one saved
      */
     addStamp() {
-        this.stamp = Entry.generateHash();
+        this.stamp = RoCode.generateHash();
         if (this.undoStack_.length) {
             this.undoStack_[this.undoStack_.length - 1].stamp = this.stamp;
         }
@@ -228,8 +228,8 @@ class EntryStateManager {
      * @param {String} activityType
      */
     addActivity(activityType) {
-        if (Entry.reporter) {
-            Entry.reporter.report(new Entry.State(activityType));
+        if (RoCode.reporter) {
+            RoCode.reporter.report(new RoCode.State(activityType));
         }
     }
 
@@ -253,10 +253,10 @@ class EntryStateManager {
             this.redoStack_.pop();
         }
 
-        if (Entry.creationChangedEvent) {
-            Entry.creationChangedEvent.notify();
+        if (RoCode.creationChangedEvent) {
+            RoCode.creationChangedEvent.notify();
         }
     }
 }
 
-Entry.StateManager = EntryStateManager;
+RoCode.StateManager = RoCodeStateManager;

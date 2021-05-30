@@ -18,19 +18,19 @@ export class PIXIFontLoadHandler {
         if ((window as any).fontLoaded) {
             this._fontLoaded = true;
         } else {
-            Entry.addEventListener(LOADED, this._handleFontLoaded);
+            RoCode.addEventListener(LOADED, this._handleFontLoaded);
         }
     }
 
     private _handleFontLoaded() {
         this._fontLoaded = true;
-        Entry.removeEventListener(LOADED, this._handleFontLoaded);
+        RoCode.removeEventListener(LOADED, this._handleFontLoaded);
         TextMetrics.clearMetrics(null);
         this._items.forEach((text: any) => {
             //updateText() 는 private 함수이지만, override 했으므로, 호출하겠음.
             text.updateText(false);
         });
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
         this._items = null;
     }
 

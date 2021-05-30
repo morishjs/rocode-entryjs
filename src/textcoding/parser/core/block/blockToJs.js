@@ -3,7 +3,7 @@
  */
 'use strict';
 
-Entry.BlockToJsParser = function(syntax, parentParser) {
+RoCode.BlockToJsParser = function(syntax, parentParser) {
     this._type = 'BlockToJsParser';
     this.syntax = syntax;
 
@@ -16,9 +16,9 @@ Entry.BlockToJsParser = function(syntax, parentParser) {
 (function(p) {
     p.Code = function(code, parseMode) {
         this._parseMode = parseMode;
-        /*if (code instanceof Entry.Thread)
+        /*if (code instanceof RoCode.Thread)
             return this.Thread(code);*/
-        if (code instanceof Entry.Block) return this.Block(code);
+        if (code instanceof RoCode.Block) return this.Block(code);
 
         var textCode = '',
             threads = code._data;
@@ -32,7 +32,7 @@ Entry.BlockToJsParser = function(syntax, parentParser) {
     };
 
     p.Thread = function(thread) {
-        if (thread instanceof Entry.Block) return this.Block(thread);
+        if (thread instanceof RoCode.Block) return this.Block(thread);
         var code = '',
             blocks = thread.getBlocks();
 
@@ -40,16 +40,16 @@ Entry.BlockToJsParser = function(syntax, parentParser) {
             var block = blocks[i];
             if (i != blocks.length - 1) {
                 var block = this.Block(block);
-                if (this._parseMode == Entry.Parser.PARSE_GENERAL) {
+                if (this._parseMode == RoCode.Parser.PARSE_GENERAL) {
                     code += block + '\n';
-                } else if (this._parseMode == Entry.Parser.PARSE_SYNTAX) {
+                } else if (this._parseMode == RoCode.Parser.PARSE_SYNTAX) {
                     code = block + '\n';
                 }
             } else {
                 var block = this.Block(block);
-                if (this._parseMode == Entry.Parser.PARSE_GENERAL) {
+                if (this._parseMode == RoCode.Parser.PARSE_GENERAL) {
                     code += block;
-                } else if (this._parseMode == Entry.Parser.PARSE_SYNTAX) {
+                } else if (this._parseMode == RoCode.Parser.PARSE_SYNTAX) {
                     code = block;
                 }
             }
@@ -124,7 +124,7 @@ Entry.BlockToJsParser = function(syntax, parentParser) {
 
         if (!notParenthesis) result += '();';
 
-        result = Entry.TextCodingUtil.jsAdjustSyntax(block, result);
+        result = RoCode.TextCodingUtil.jsAdjustSyntax(block, result);
 
         return result;
 
@@ -267,12 +267,12 @@ Entry.BlockToJsParser = function(syntax, parentParser) {
     };
 
     p.DropdownDynamic = function(dataParam, schemaParam) {
-        var object = Entry.playground.object;
+        var object = RoCode.playground.object;
 
         if (dataParam == 'null') {
             dataParam = 'none';
         } else {
-            dataParam = Entry.TextCodingUtil.dropdownDynamicValueConvertor(
+            dataParam = RoCode.TextCodingUtil.dropdownDynamicValueConvertor(
                 dataParam,
                 schemaParam
             );
@@ -282,8 +282,8 @@ Entry.BlockToJsParser = function(syntax, parentParser) {
     };
 
     p.searchSyntax = function(datum) {
-        if (datum instanceof Entry.BlockView) datum = datum.block;
-        return this._parentParser.parse(datum, Entry.Parser.PARSE_SYNTAX);
+        if (datum instanceof RoCode.BlockView) datum = datum.block;
+        return this._parentParser.parse(datum, RoCode.Parser.PARSE_SYNTAX);
     };
 
     p.getAssistScope = function() {
@@ -297,4 +297,4 @@ Entry.BlockToJsParser = function(syntax, parentParser) {
         this._assist = assist;
         return assist;
     };
-})(Entry.BlockToJsParser.prototype);
+})(RoCode.BlockToJsParser.prototype);

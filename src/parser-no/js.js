@@ -3,7 +3,7 @@
  */
 'use strict';
 
-Entry.JSParser = function(syntax) {
+RoCode.JSParser = function(syntax) {
     this.syntax = syntax;
 
     this.scopeChain = [];
@@ -651,4 +651,4 @@ Entry.JSParser = function(syntax) {
             };
         }
     };
-})(Entry.JSParser.prototype);
+})(RoCode.JSParser.prototype);

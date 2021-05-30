@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Neobot = {
+RoCode.Neobot = {
     id: '5.1',
     name: 'neobot',
     url: 'http://www.neobot.co.kr',
@@ -12,10 +12,10 @@ Entry.Neobot = {
     LOCAL_MAP: ['IN1', 'IN2', 'IN3', 'IR', 'BAT'],
     REMOTE_MAP: ['OUT1', 'OUT2', 'OUT3', 'DCR', 'DCL', 'SND', 'FND', 'OPT'],
     setZero: function() {
-        for (var port in Entry.Neobot.REMOTE_MAP) {
-            Entry.hw.sendQueue[Entry.Neobot.REMOTE_MAP[port]] = 0;
+        for (var port in RoCode.Neobot.REMOTE_MAP) {
+            RoCode.hw.sendQueue[RoCode.Neobot.REMOTE_MAP[port]] = 0;
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     monitorTemplate: {
         imgPath: 'hw/neobot.png',
@@ -41,7 +41,7 @@ Entry.Neobot = {
     },
 };
 
-Entry.Neobot.setLanguage = function() {
+RoCode.Neobot.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -434,7 +434,7 @@ Entry.Neobot.setLanguage = function() {
     };
 };
 
-Entry.Neobot.blockMenuBlocks = [
+RoCode.Neobot.blockMenuBlocks = [
     // class sensor
     'neobot_sensor_value',
     'neobot_sensor_connect_external',
@@ -470,12 +470,12 @@ Entry.Neobot.blockMenuBlocks = [
     'neobot_play_note_with_sensor',
 ];
 
-Entry.Neobot.getBlocks = function() {
+RoCode.Neobot.getBlocks = function() {
     return {
         //region neobot 네오봇
         neobot_sensor_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -492,8 +492,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -508,15 +508,15 @@ Entry.Neobot.getBlocks = function() {
             isNotFor: ['neobot'],
             func: function(sprite, script) {
                 var port = script.getStringField('PORT');
-                return Entry.hw.portData[port];
+                return RoCode.hw.portData[port];
             },
             syntax: { js: [], py: ['Neobot.sensor_value(%1)'] },
         },
 
         // un-used. use if required pluggable block.
         neobot_compare_symbol: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -532,8 +532,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '>',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -552,8 +552,8 @@ Entry.Neobot.getBlocks = function() {
         },
 
         neobot_sensor_connect_external: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -567,8 +567,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -579,8 +579,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -595,13 +595,13 @@ Entry.Neobot.getBlocks = function() {
             isNotFor: ['neobot'],
             func: function(sprite, script) {
                 var port = script.getStringField('PORT');
-                return Entry.hw.portData[port];
+                return RoCode.hw.portData[port];
             },
         },
 
         neobot_sensor_convert_scale: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -615,8 +615,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -669,7 +669,7 @@ Entry.Neobot.getBlocks = function() {
             isNotFor: ['neobot'],
             func: function(sprite, script) {
                 var port = script.getStringField('PORT');
-                var value = Entry.hw.portData[port];
+                var value = RoCode.hw.portData[port];
                 var omin = script.getNumberValue('OMIN', script);
                 var omax = script.getNumberValue('OMAX', script);
                 var min = script.getNumberValue('MIN', script);
@@ -698,8 +698,8 @@ Entry.Neobot.getBlocks = function() {
         },
 
         neobot_decision_sensor_is_over: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -713,8 +713,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -727,8 +727,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '>',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -749,9 +749,9 @@ Entry.Neobot.getBlocks = function() {
             isNotFor: ['neobot'],
             func: function(sprite, script) {
                 var sensorTemp = script.getStringField('SENSOR');
-                var sensor = Entry.hw.portData[sensorTemp];
+                var sensor = RoCode.hw.portData[sensorTemp];
                 var symbol = script.getStringField('SYMBOL');
-                var value = Entry.parseNumber(script.getStringValue('VALUE'));
+                var value = RoCode.parseNumber(script.getStringValue('VALUE'));
 
                 if (symbol == '=') {
                     if (sensor == value) return true;
@@ -774,8 +774,8 @@ Entry.Neobot.getBlocks = function() {
         },
 
         neobot_decision_equal_with_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -792,8 +792,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -806,8 +806,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -823,7 +823,7 @@ Entry.Neobot.getBlocks = function() {
             isNotFor: ['neobot'],
             func: function(sprite, script) {
                 var sensorTemp = script.getStringField('SENSOR');
-                var sensor = Entry.hw.portData[sensorTemp];
+                var sensor = RoCode.hw.portData[sensorTemp];
                 var color = script.getNumberField('COLOR');
 
                 if (sensor >= 10 && sensor <= 50) {
@@ -844,11 +844,11 @@ Entry.Neobot.getBlocks = function() {
                 }
                 return false;
             },
-            syntax: { js: [], py: ['Entry.neobot_equal_check()'] },
+            syntax: { js: [], py: ['RoCode.neobot_equal_check()'] },
         },
         neobot_remote_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#FFFFFF',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -871,8 +871,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -887,7 +887,7 @@ Entry.Neobot.getBlocks = function() {
             isNotFor: ['neobot'],
             func: function(sprite, script) {
                 var key = script.getNumberField('KEY');
-                var value = Entry.hw.portData['IR'];
+                var value = RoCode.hw.portData['IR'];
                 if (key >= 5 && key <= 8) key -= 4;
                 if (key == value) {
                     return true;
@@ -898,8 +898,8 @@ Entry.Neobot.getBlocks = function() {
         },
 
         get_motor_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -925,8 +925,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '5',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -942,8 +942,8 @@ Entry.Neobot.getBlocks = function() {
             syntax: { js: [], py: ['%1get_motor_speed#'] },
         },
         neobot_left_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -955,8 +955,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '16',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -987,7 +987,7 @@ Entry.Neobot.getBlocks = function() {
             class: 'neobot_motor',
             isNotFor: ['neobot'],
             func: function(sprite, script) {
-                var speed = Entry.parseNumber(script.getStringValue('SPEED'));
+                var speed = RoCode.parseNumber(script.getStringValue('SPEED'));
                 var direction = script.getNumberField('DIRECTION');
 
                 // added 210324
@@ -995,14 +995,14 @@ Entry.Neobot.getBlocks = function() {
                 speed = Math.max(speed, 0);
                 speed = Math.min(speed, 15);
 
-                Entry.hw.sendQueue['DCL'] = direction + speed;
+                RoCode.hw.sendQueue['DCL'] = direction + speed;
                 return script.callReturn();
             },
             syntax: { js: [], py: ['Neobot.turn_left(%1, %2)'] },
         },
         neobot_stop_left_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1020,14 +1020,14 @@ Entry.Neobot.getBlocks = function() {
             class: 'neobot_motor',
             isNotFor: ['neobot'],
             func: function(sprite, script) {
-                Entry.hw.sendQueue['DCL'] = 0;
+                RoCode.hw.sendQueue['DCL'] = 0;
                 return script.callReturn();
             },
             syntax: { js: [], py: ['Neobot.stop_left()'] },
         },
         neobot_right_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1039,8 +1039,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '16',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1071,7 +1071,7 @@ Entry.Neobot.getBlocks = function() {
             class: 'neobot_motor',
             isNotFor: ['neobot'],
             func: function(sprite, script) {
-                var speed = Entry.parseNumber(script.getStringValue('SPEED'));
+                var speed = RoCode.parseNumber(script.getStringValue('SPEED'));
                 var direction = script.getNumberField('DIRECTION');
 
                 // added 210324
@@ -1079,14 +1079,14 @@ Entry.Neobot.getBlocks = function() {
                 speed = Math.max(speed, 0);
                 speed = Math.min(speed, 15);
 
-                Entry.hw.sendQueue['DCR'] = speed + direction;
+                RoCode.hw.sendQueue['DCR'] = speed + direction;
                 return script.callReturn();
             },
             syntax: { js: [], py: ['Neobot.turn_right(%1, %2)'] },
         },
         neobot_stop_right_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1104,14 +1104,14 @@ Entry.Neobot.getBlocks = function() {
             class: 'neobot_motor',
             isNotFor: ['neobot'],
             func: function(sprite, script) {
-                Entry.hw.sendQueue['DCR'] = 0;
+                RoCode.hw.sendQueue['DCR'] = 0;
                 return script.callReturn();
             },
             syntax: { js: [], py: ['Neobot.stop_right()'] },
         },
         neobot_both_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1123,8 +1123,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '16',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1138,8 +1138,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '16',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1177,9 +1177,9 @@ Entry.Neobot.getBlocks = function() {
             class: 'neobot_motor',
             isNotFor: ['neobot'],
             func: function(sprite, script) {
-                var speed_left = Entry.parseNumber(script.getStringValue('SPEED_LEFT'));
+                var speed_left = RoCode.parseNumber(script.getStringValue('SPEED_LEFT'));
                 var direction_left = script.getNumberField('DIRECTION_LEFT');
-                var speed_right = Entry.parseNumber(script.getStringValue('SPEED_RIGHT'));
+                var speed_right = RoCode.parseNumber(script.getStringValue('SPEED_RIGHT'));
                 var direction_right = script.getNumberField('DIRECTION_RIGHT');
 
                 // added 210324
@@ -1191,14 +1191,14 @@ Entry.Neobot.getBlocks = function() {
                 speed_right = Math.max(speed_right, 0);
                 speed_right = Math.min(speed_right, 15);
 
-                Entry.hw.sendQueue['DCL'] = speed_left + direction_left;
-                Entry.hw.sendQueue['DCR'] = speed_right + direction_right;
+                RoCode.hw.sendQueue['DCL'] = speed_left + direction_left;
+                RoCode.hw.sendQueue['DCR'] = speed_right + direction_right;
                 return script.callReturn();
             },
         },
         neobot_all_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1210,8 +1210,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1233,8 +1233,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1263,10 +1263,10 @@ Entry.Neobot.getBlocks = function() {
             class: 'neobot_motor',
             isNotFor: ['neobot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 if (!script.isStart) {
-                    var speed = Entry.parseNumber(script.getStringValue('SPEED'));
+                    var speed = RoCode.parseNumber(script.getStringValue('SPEED'));
                     var direction = script.getNumberField('DIRECTION');
                     var duration = script.getNumberField('DURATION');
 
@@ -1277,12 +1277,12 @@ Entry.Neobot.getBlocks = function() {
 
                     switch (direction) {
                         case 1:
-                            Entry.hw.sendQueue['DCL'] = 0x10 + speed;
-                            Entry.hw.sendQueue['DCR'] = 0x10 + speed;
+                            RoCode.hw.sendQueue['DCL'] = 0x10 + speed;
+                            RoCode.hw.sendQueue['DCR'] = 0x10 + speed;
                             break;
                         case 2:
-                            Entry.hw.sendQueue['DCL'] = 0x20 + speed;
-                            Entry.hw.sendQueue['DCR'] = 0x20 + speed;
+                            RoCode.hw.sendQueue['DCL'] = 0x20 + speed;
+                            RoCode.hw.sendQueue['DCR'] = 0x20 + speed;
                             break;
                     }
 
@@ -1299,17 +1299,17 @@ Entry.Neobot.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.hw.sendQueue['DCL'] = 0;
-                    Entry.hw.sendQueue['DCR'] = 0;
-                    Entry.engine.isContinue = false;
+                    RoCode.hw.sendQueue['DCL'] = 0;
+                    RoCode.hw.sendQueue['DCR'] = 0;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         // removed by cky 190423
         /*neobot_motor_with_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1322,8 +1322,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1342,8 +1342,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1381,7 +1381,7 @@ Entry.Neobot.getBlocks = function() {
                 var min = script.getNumberValue('MIN_VALUE', script);
                 var max = script.getNumberValue('MAX_VALUE', script);
                 var motor = script.getNumberField('MOTOR', script);
-                var sensorValue =  Entry.hw.portData[port];
+                var sensorValue =  RoCode.hw.portData[port];
                 var sectionUnit = (max - min) / 15;
                 var value = 0;
 
@@ -1401,21 +1401,21 @@ Entry.Neobot.getBlocks = function() {
 
                 switch (motor) {
                     case 1:
-                    Entry.hw.sendQueue['DCL'] = 0x10 + value;
-                    Entry.hw.sendQueue['DCR'] = 0x10 + value;
+                    RoCode.hw.sendQueue['DCL'] = 0x10 + value;
+                    RoCode.hw.sendQueue['DCR'] = 0x10 + value;
                     break;
                     case 2:
-                    Entry.hw.sendQueue['DCL'] = 0x10 + value;
+                    RoCode.hw.sendQueue['DCL'] = 0x10 + value;
                     break;
                     case 3:
-                    Entry.hw.sendQueue['DCR'] = 0x10 + value;
+                    RoCode.hw.sendQueue['DCR'] = 0x10 + value;
                     break;
                 }
             },
         },*/
         neobot_stop_all_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1433,15 +1433,15 @@ Entry.Neobot.getBlocks = function() {
             class: 'neobot_motor',
             isNotFor: ['neobot'],
             func: function(sprite, script) {
-                Entry.hw.sendQueue['DCL'] = 0;
-                Entry.hw.sendQueue['DCR'] = 0;
+                RoCode.hw.sendQueue['DCL'] = 0;
+                RoCode.hw.sendQueue['DCR'] = 0;
                 return script.callReturn();
             },
             syntax: { js: [], py: ['Neobot.run_motor(%1, %2, %3, %4)'] },
         },
         neobot_robot: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1456,8 +1456,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1479,24 +1479,24 @@ Entry.Neobot.getBlocks = function() {
                 var move = script.getNumberField('MOVE');
                 switch (move) {
                     case 1:
-                        Entry.hw.sendQueue['DCL'] = 0x10 + 10;
-                        Entry.hw.sendQueue['DCR'] = 0x10 + 10;
+                        RoCode.hw.sendQueue['DCL'] = 0x10 + 10;
+                        RoCode.hw.sendQueue['DCR'] = 0x10 + 10;
                         break;
                     case 2:
-                        Entry.hw.sendQueue['DCL'] = 0x20 + 10;
-                        Entry.hw.sendQueue['DCR'] = 0x20 + 10;
+                        RoCode.hw.sendQueue['DCL'] = 0x20 + 10;
+                        RoCode.hw.sendQueue['DCR'] = 0x20 + 10;
                         break;
                     case 3:
-                        Entry.hw.sendQueue['DCL'] = 0x20 + 5;
-                        Entry.hw.sendQueue['DCR'] = 0x10 + 5;
+                        RoCode.hw.sendQueue['DCL'] = 0x20 + 5;
+                        RoCode.hw.sendQueue['DCR'] = 0x10 + 5;
                         break;
                     case 4:
-                        Entry.hw.sendQueue['DCL'] = 0x10 + 5;
-                        Entry.hw.sendQueue['DCR'] = 0x20 + 5;
+                        RoCode.hw.sendQueue['DCL'] = 0x10 + 5;
+                        RoCode.hw.sendQueue['DCR'] = 0x20 + 5;
                         break;
                     case 5:
-                        Entry.hw.sendQueue['DCL'] = 0;
-                        Entry.hw.sendQueue['DCR'] = 0;
+                        RoCode.hw.sendQueue['DCL'] = 0;
+                        RoCode.hw.sendQueue['DCR'] = 0;
                         break;
                 }
                 return script.callReturn();
@@ -1504,8 +1504,8 @@ Entry.Neobot.getBlocks = function() {
         },
 
         neobot_output_led_type1: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1518,8 +1518,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1537,8 +1537,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '255',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1556,8 +1556,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1583,7 +1583,7 @@ Entry.Neobot.getBlocks = function() {
                     var value = script.getNumberField('VALUE', script);
                     var duration = script.getNumberField('DURATION', script);
 
-                    Entry.hw.sendQueue[port] = value;
+                    RoCode.hw.sendQueue[port] = value;
                     if (duration == 0) {
                         return script.callReturn();
                     }
@@ -1591,7 +1591,7 @@ Entry.Neobot.getBlocks = function() {
                     script.isStart = true;
                     script.timeFlag = 1;
                     setTimeout(function() {
-                        Entry.hw.sendQueue[port] = 0;
+                        RoCode.hw.sendQueue[port] = 0;
                         script.timeFlag = 0;
                     }, duration * 1000);
                     return script;
@@ -1600,14 +1600,14 @@ Entry.Neobot.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         neobot_output_led_on: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1620,8 +1620,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1641,13 +1641,13 @@ Entry.Neobot.getBlocks = function() {
             isNotFor: ['neobot'],
             func: function(sprite, script) {
                 var port = script.getStringField('PORT', script);
-                Entry.hw.sendQueue[port] = 255;
+                RoCode.hw.sendQueue[port] = 255;
                 return script.callReturn();
             },
         },
         neobot_output_led_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1660,8 +1660,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1682,13 +1682,13 @@ Entry.Neobot.getBlocks = function() {
             func: function(sprite, script) {
                 var port = script.getStringField('PORT', script);
                 var option = port;
-                Entry.hw.sendQueue[port] = 0;
+                RoCode.hw.sendQueue[port] = 0;
                 return script.callReturn();
             },
         },
         neobot_set_output: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1701,8 +1701,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1741,15 +1741,15 @@ Entry.Neobot.getBlocks = function() {
                 } else if (value > 255) {
                     value = 255;
                 }
-                Entry.hw.sendQueue[port] = value;
+                RoCode.hw.sendQueue[port] = value;
                 return script.callReturn();
             },
         },
 
         // class note
         neobot_play_note_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1772,8 +1772,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1787,8 +1787,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1800,8 +1800,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1822,7 +1822,7 @@ Entry.Neobot.getBlocks = function() {
             class: 'neobot_note',
             isNotFor: ['neobot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 if (!script.isStart) {
                     var note = script.getNumberField('NOTE', script);
@@ -1845,16 +1845,16 @@ Entry.Neobot.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.hw.sendQueue['SND'] = 0;
-                    Entry.engine.isContinue = false;
+                    RoCode.hw.sendQueue['SND'] = 0;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: ['Neobot.play_note(%1, %2, %3)'] },
         },
         neobot_play_note_with_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1869,8 +1869,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: 'IN1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1911,10 +1911,10 @@ Entry.Neobot.getBlocks = function() {
             class: 'neobot_note',
             isNotFor: ['neobot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
 
                 var port = script.getStringField('PORT', script);
-                var value = Entry.hw.portData[port];
+                var value = RoCode.hw.portData[port];
                 var omin = script.getNumberValue('MIN_VALUE', script);
                 var omax = script.getNumberValue('MAX_VALUE', script);
                 var min = 0;
@@ -1956,8 +1956,8 @@ Entry.Neobot.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.hw.sendQueue['SND'] = 0;
-                    Entry.engine.isContinue = false;
+                    RoCode.hw.sendQueue['SND'] = 0;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1969,8 +1969,8 @@ Entry.Neobot.getBlocks = function() {
 
         // class servo
         get_servo_degree: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -2017,8 +2017,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '90',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2034,8 +2034,8 @@ Entry.Neobot.getBlocks = function() {
             syntax: { js: [], py: ['%1get_servo_degree#'] },
         },
         neobot_servo_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2048,8 +2048,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2071,23 +2071,23 @@ Entry.Neobot.getBlocks = function() {
                 if (!script.isStart) {
                     var port = script.getStringField('PORT', script);
                     if (port == 'ALL') {
-                        Entry.hw.sendQueue['OUT1'] = 0xBA;
-                        Entry.hw.sendQueue['OUT2'] = 0xBA;
+                        RoCode.hw.sendQueue['OUT1'] = 0xBA;
+                        RoCode.hw.sendQueue['OUT2'] = 0xBA;
 
                         script.isStart = true;
                         script.timeFlag = 1;
                         setTimeout(function() {
-                            Entry.hw.sendQueue['OUT1'] = 0x01;
-                            Entry.hw.sendQueue['OUT2'] = 0x01;
+                            RoCode.hw.sendQueue['OUT1'] = 0x01;
+                            RoCode.hw.sendQueue['OUT2'] = 0x01;
                             script.timeFlag = 0;
                         }, 200);
                     } else {
-                        Entry.hw.sendQueue[port] = 0xBA;
+                        RoCode.hw.sendQueue[port] = 0xBA;
 
                         script.isStart = true;
                         script.timeFlag = 1;
                         setTimeout(function() {
-                            Entry.hw.sendQueue[port] = 0x01;
+                            RoCode.hw.sendQueue[port] = 0x01;
                             script.timeFlag = 0;
                         }, 200);
                     }
@@ -2097,7 +2097,7 @@ Entry.Neobot.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2105,8 +2105,8 @@ Entry.Neobot.getBlocks = function() {
 
         // integrated by cky 191205 from neobot_servo_turn_typeX
         neobot_servo_change_degree: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2123,8 +2123,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2134,8 +2134,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2153,8 +2153,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2186,7 +2186,7 @@ Entry.Neobot.getBlocks = function() {
             isNotFor: ['neobot'],
             func: function(sprite, script) {
                 if (!script.isStart) {
-                    var degree = Entry.parseNumber(script.getStringValue('DEGREE'));
+                    var degree = RoCode.parseNumber(script.getStringValue('DEGREE'));
                     var port = script.getStringField('PORT', script);
                     var direction = script.getNumberField('DIRECTION');
                     var speed = script.getNumberField('SPEED');
@@ -2194,12 +2194,12 @@ Entry.Neobot.getBlocks = function() {
                     if (port == 'ALL') {
                         switch (direction) {
                             case 1:
-                                Entry.hw.sendQueue['OUT1'] = 0xBC;
-                                Entry.hw.sendQueue['OUT2'] = 0xBC;
+                                RoCode.hw.sendQueue['OUT1'] = 0xBC;
+                                RoCode.hw.sendQueue['OUT2'] = 0xBC;
                                 break;
                             case 2:
-                                Entry.hw.sendQueue['OUT1'] = 0xBD;
-                                Entry.hw.sendQueue['OUT2'] = 0xBD;
+                                RoCode.hw.sendQueue['OUT1'] = 0xBD;
+                                RoCode.hw.sendQueue['OUT2'] = 0xBD;
                                 break;
                         }
 
@@ -2207,8 +2207,8 @@ Entry.Neobot.getBlocks = function() {
                         script.timeFlag = 1;
                         setTimeout(function() {
                             // for speed
-                            Entry.hw.sendQueue['OUT1'] = 0xfa - speed;
-                            Entry.hw.sendQueue['OUT2'] = 0xfa - speed;
+                            RoCode.hw.sendQueue['OUT1'] = 0xfa - speed;
+                            RoCode.hw.sendQueue['OUT2'] = 0xfa - speed;
                             setTimeout(function() {
                                 // for degree
                                 if (degree > 180) {
@@ -2219,18 +2219,18 @@ Entry.Neobot.getBlocks = function() {
                                 }
                                 degree = degree + 0x01;
                                 degree *= 1;
-                                Entry.hw.sendQueue['OUT1'] = degree;
-                                Entry.hw.sendQueue['OUT2'] = degree;
+                                RoCode.hw.sendQueue['OUT1'] = degree;
+                                RoCode.hw.sendQueue['OUT2'] = degree;
                                 script.timeFlag = 0;
                             }, 200);
                         }, 200);
                     } else {
                         switch (direction) {
                             case 1:
-                                Entry.hw.sendQueue[port] = 0xBC;
+                                RoCode.hw.sendQueue[port] = 0xBC;
                                 break;
                             case 2:
-                                Entry.hw.sendQueue[port] = 0xBD;
+                                RoCode.hw.sendQueue[port] = 0xBD;
                                 break;
                         }
 
@@ -2238,7 +2238,7 @@ Entry.Neobot.getBlocks = function() {
                         script.timeFlag = 1;
                         setTimeout(function() {
                             // for speed
-                            Entry.hw.sendQueue[port] = 0xfa - speed;
+                            RoCode.hw.sendQueue[port] = 0xfa - speed;
                             setTimeout(function() {
                                 // for degree
                                 if (degree > 180) {
@@ -2249,7 +2249,7 @@ Entry.Neobot.getBlocks = function() {
                                 }
                                 degree = degree + 0x01;
                                 degree *= 1;
-                                Entry.hw.sendQueue[port] = degree;
+                                RoCode.hw.sendQueue[port] = degree;
                                 script.timeFlag = 0;
                             }, 200);
                         }, 200);
@@ -2261,14 +2261,14 @@ Entry.Neobot.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         neobot_servo_rotate: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2281,8 +2281,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2292,8 +2292,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2311,8 +2311,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: '9',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2340,21 +2340,21 @@ Entry.Neobot.getBlocks = function() {
                 if (port == 'ALL') {
                     switch (direction) {
                         case 1:
-                            Entry.hw.sendQueue['OUT1'] = 0xC0 + (speed + 0x01);
-                            Entry.hw.sendQueue['OUT2'] = 0xC0 + (speed + 0x01);
+                            RoCode.hw.sendQueue['OUT1'] = 0xC0 + (speed + 0x01);
+                            RoCode.hw.sendQueue['OUT2'] = 0xC0 + (speed + 0x01);
                             break;
                         case 2:
-                            Entry.hw.sendQueue['OUT1'] = 0xD0 + (speed + 0x01);
-                            Entry.hw.sendQueue['OUT2'] = 0xD0 + (speed + 0x01);
+                            RoCode.hw.sendQueue['OUT1'] = 0xD0 + (speed + 0x01);
+                            RoCode.hw.sendQueue['OUT2'] = 0xD0 + (speed + 0x01);
                             break;
                     }
                 } else {
                     switch (direction) {
                         case 1:
-                            Entry.hw.sendQueue[port] = 0xC0 + (speed + 0x01);
+                            RoCode.hw.sendQueue[port] = 0xC0 + (speed + 0x01);
                             break;
                         case 2:
-                            Entry.hw.sendQueue[port] = 0xD0 + (speed + 0x01);
+                            RoCode.hw.sendQueue[port] = 0xD0 + (speed + 0x01);
                             break;
                     }
                 }
@@ -2362,8 +2362,8 @@ Entry.Neobot.getBlocks = function() {
             },
         },
         neobot_servo_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2376,8 +2376,8 @@ Entry.Neobot.getBlocks = function() {
                     ],
                     value: 'OUT1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2398,10 +2398,10 @@ Entry.Neobot.getBlocks = function() {
             func: function(sprite, script) {
                 var port = script.getStringField('PORT', script);
                 if (port == 'ALL') {
-                    Entry.hw.sendQueue['OUT1'] = 0xfe;
-                    Entry.hw.sendQueue['OUT2'] = 0xfe;
+                    RoCode.hw.sendQueue['OUT1'] = 0xfe;
+                    RoCode.hw.sendQueue['OUT2'] = 0xfe;
                 } else {
-                    Entry.hw.sendQueue[port] = 0xfe;
+                    RoCode.hw.sendQueue[port] = 0xfe;
                 }
                 return script.callReturn();
             },
@@ -2409,8 +2409,8 @@ Entry.Neobot.getBlocks = function() {
 
         /*   // deprecated by cky 191205
           neobot_servo_turn_type1: {
-              color: EntryStatic.colorSet.block.default.HARDWARE,
-              outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+              color: RoCodeStatic.colorSet.block.default.HARDWARE,
+              outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
               skeleton: 'basic',
               statements: [],
               params: [
@@ -2419,8 +2419,8 @@ Entry.Neobot.getBlocks = function() {
                       options: [['OUT1', 'OUT1'], ['OUT2', 'OUT2'], ['OUT3', 'OUT3']],
                       value: 'OUT1',
                       fontSize: 11,
-                      bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                      arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                      bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                      arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                   },
                   {
                       type: 'Dropdown',
@@ -2430,8 +2430,8 @@ Entry.Neobot.getBlocks = function() {
                       ],
                       value: '1',
                       fontSize: 11,
-                      bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                      arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                      bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                      arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                   },
                   {
                       type: 'Block',
@@ -2468,10 +2468,10 @@ Entry.Neobot.getBlocks = function() {
 
                       switch (direction) {
                           case 1:
-                          Entry.hw.sendQueue[port] = 0xBC;
+                          RoCode.hw.sendQueue[port] = 0xBC;
                           break;
                           case 2:
-                          Entry.hw.sendQueue[port] = 0xBD;
+                          RoCode.hw.sendQueue[port] = 0xBD;
                           break;
                       }
 
@@ -2485,7 +2485,7 @@ Entry.Neobot.getBlocks = function() {
                               value = 0;
                           }
                           value = value + 1;
-                          Entry.hw.sendQueue[port] = value;
+                          RoCode.hw.sendQueue[port] = value;
                           setTimeout(function() {
                               script.timeFlag = 0;
                           }, 1000);
@@ -2496,15 +2496,15 @@ Entry.Neobot.getBlocks = function() {
                   } else {
                       delete script.timeFlag;
                       delete script.isStart;
-                      Entry.engine.isContinue = false;
+                      RoCode.engine.isContinue = false;
                       return script.callReturn();
                   }
               },
           },
           // deprecated by cky 191205
           neobot_servo_turn_type2: {
-              color: EntryStatic.colorSet.block.default.HARDWARE,
-              outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+              color: RoCodeStatic.colorSet.block.default.HARDWARE,
+              outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
               skeleton: 'basic',
               statements: [],
               params: [
@@ -2513,8 +2513,8 @@ Entry.Neobot.getBlocks = function() {
                       options: [['OUT1', 'OUT1'], ['OUT2', 'OUT2'], ['OUT3', 'OUT3']],
                       value: 'OUT1',
                       fontSize: 11,
-                      bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                      arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                      bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                      arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                   },
                   {
                       type: 'Block',
@@ -2553,7 +2553,7 @@ Entry.Neobot.getBlocks = function() {
                           value = 0x00;
                       }
                       value = value + 0x01;
-                      Entry.hw.sendQueue[port] = value;
+                      RoCode.hw.sendQueue[port] = value;
                       script.isStart = true;
                       script.timeFlag = 1;
                       setTimeout(function() {
@@ -2565,7 +2565,7 @@ Entry.Neobot.getBlocks = function() {
                   } else {
                       delete script.timeFlag;
                       delete script.isStart;
-                      Entry.engine.isContinue = false;
+                      RoCode.engine.isContinue = false;
                       return script.callReturn();
                   }
               },
@@ -2573,8 +2573,8 @@ Entry.Neobot.getBlocks = function() {
 
           // deprecated by cky 191205
           neobot_servo_turn_type4: {
-              color: EntryStatic.colorSet.block.default.HARDWARE,
-              outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+              color: RoCodeStatic.colorSet.block.default.HARDWARE,
+              outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
               skeleton: 'basic',
               statements: [],
               params: [
@@ -2583,8 +2583,8 @@ Entry.Neobot.getBlocks = function() {
                       options: [['OUT1', 'OUT1'], ['OUT2', 'OUT2'], ['OUT3', 'OUT3']],
                       value: 'OUT1',
                       fontSize: 11,
-                      bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                      arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                      bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                      arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                   },
                   {
                       type: 'Dropdown',
@@ -2602,8 +2602,8 @@ Entry.Neobot.getBlocks = function() {
                       ],
                       value: '0',
                       fontSize: 11,
-                      bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                      arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                      bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                      arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                   },
                   {
                       type: 'Indicator',
@@ -2630,7 +2630,7 @@ Entry.Neobot.getBlocks = function() {
                   if (!script.isStart) {
                       var port = script.getStringField('PORT', script);
                       var level = script.getNumberField('LEVEL');
-                      Entry.hw.sendQueue[port] = 0xFA - level;
+                      RoCode.hw.sendQueue[port] = 0xFA - level;
                       script.isStart = true;
                       script.timeFlag = 1;
                       setTimeout(function() {
@@ -2642,7 +2642,7 @@ Entry.Neobot.getBlocks = function() {
                   } else {
                       delete script.timeFlag;
                       delete script.isStart;
-                      Entry.engine.isContinue = false;
+                      RoCode.engine.isContinue = false;
                       return script.callReturn();
                   }
               },
@@ -2650,8 +2650,8 @@ Entry.Neobot.getBlocks = function() {
 
           // deprecated by cky 191205
           neobot_servo_turn_type5: {
-              color: EntryStatic.colorSet.block.default.HARDWARE,
-              outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+              color: RoCodeStatic.colorSet.block.default.HARDWARE,
+              outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
               skeleton: 'basic',
               statements: [],
               params: [
@@ -2660,8 +2660,8 @@ Entry.Neobot.getBlocks = function() {
                       options: [['OUT1', 'OUT1'], ['OUT2', 'OUT2'], ['OUT3', 'OUT3']],
                       value: 'OUT1',
                       fontSize: 11,
-                      bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                      arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                      bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                      arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                   },
                   {
                       type: 'Dropdown',
@@ -2671,8 +2671,8 @@ Entry.Neobot.getBlocks = function() {
                       ],
                       value: '1',
                       fontSize: 11,
-                      bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                      arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                      bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                      arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                   },
                   {
                       type: 'Dropdown',
@@ -2690,8 +2690,8 @@ Entry.Neobot.getBlocks = function() {
                       ],
                       value: '0',
                       fontSize: 11,
-                      bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                      arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                      bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                      arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                   },
                   {
                       type: 'Indicator',
@@ -2724,10 +2724,10 @@ Entry.Neobot.getBlocks = function() {
 
                       switch (direction) {
                           case 1:
-                              Entry.hw.sendQueue[port] = 0xCA - level;
+                              RoCode.hw.sendQueue[port] = 0xCA - level;
                               break;
                           case 2:
-                              Entry.hw.sendQueue[port] = 0xDA - level;
+                              RoCode.hw.sendQueue[port] = 0xDA - level;
                               break;
                       }
 
@@ -2742,7 +2742,7 @@ Entry.Neobot.getBlocks = function() {
                   } else {
                       delete script.timeFlag;
                       delete script.isStart;
-                      Entry.engine.isContinue = false;
+                      RoCode.engine.isContinue = false;
                       return script.callReturn();
                   }
               },
@@ -2750,8 +2750,8 @@ Entry.Neobot.getBlocks = function() {
 
           // deprecated by cky 191205
           neobot_servo_mode_manual: {
-              color: EntryStatic.colorSet.block.default.HARDWARE,
-              outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+              color: RoCodeStatic.colorSet.block.default.HARDWARE,
+              outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
               skeleton: 'basic',
               statements: [],
               params: [
@@ -2760,8 +2760,8 @@ Entry.Neobot.getBlocks = function() {
                       options: [['OUT1', 'OUT1'], ['OUT2', 'OUT2'], ['OUT3', 'OUT3']],
                       value: 'OUT1',
                       fontSize: 11,
-                      bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                      arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                      bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                      arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                   },
                   {
                       type: 'Indicator',
@@ -2786,7 +2786,7 @@ Entry.Neobot.getBlocks = function() {
                   if (!script.isStart) {
                       var port = script.getStringField('PORT', script);
 
-                      Entry.hw.sendQueue[port] = 0x00;
+                      RoCode.hw.sendQueue[port] = 0x00;
                       script.isStart = true;
                       script.timeFlag = 1;
                       setTimeout(function() {
@@ -2798,7 +2798,7 @@ Entry.Neobot.getBlocks = function() {
                   } else {
                       delete script.timeFlag;
                       delete script.isStart;
-                      Entry.engine.isContinue = false;
+                      RoCode.engine.isContinue = false;
                       return script.callReturn();
                   }
               },
@@ -2808,4 +2808,4 @@ Entry.Neobot.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Neobot;
+module.exports = RoCode.Neobot;

@@ -701,7 +701,7 @@ AlbertSchoolRobot.prototype.moveForwardSecs = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -727,7 +727,7 @@ AlbertSchoolRobot.prototype.moveBackwardSecs = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -766,7 +766,7 @@ AlbertSchoolRobot.prototype.turnSecs = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -930,7 +930,7 @@ AlbertSchoolRobot.prototype.moveToOnBoard = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -959,7 +959,7 @@ AlbertSchoolRobot.prototype.setOrientationToOnBoard = function(script) {
     } else {
         delete script.isStart;
         delete script.isMoving;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -1086,7 +1086,7 @@ AlbertSchoolRobot.prototype.beep = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -1229,7 +1229,7 @@ AlbertSchoolRobot.prototype.playNoteBeat = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         self.motoring.note = 0;
         return script.callReturn();
     }
@@ -1267,7 +1267,7 @@ AlbertSchoolRobot.prototype.restBeat = function(script) {
     } else {
         delete script.isStart;
         delete script.isPlaying;
-        Entry.engine.isContinue = false;
+        RoCode.engine.isContinue = false;
         return script.callReturn();
     }
 };
@@ -1300,19 +1300,19 @@ AlbertSchoolRobot.prototype.changeTempo = function(script) {
     return script.callReturn();
 };
 
-Entry.Albert = {
+RoCode.Albert = {
     robot: undefined,
     getRobot() {
-        if (Entry.Albert.robot == undefined) Entry.Albert.robot = new AlbertSchoolRobot(0);
-        Entry.Albert.robot.setMotoring(Entry.hw.sendQueue);
-        return Entry.Albert.robot;
+        if (RoCode.Albert.robot == undefined) RoCode.Albert.robot = new AlbertSchoolRobot(0);
+        RoCode.Albert.robot.setMotoring(RoCode.hw.sendQueue);
+        return RoCode.Albert.robot;
     },
     setZero() {
-        if (Entry.Albert.robot) Entry.Albert.robot.setZero();
-        Entry.hw.update();
+        if (RoCode.Albert.robot) RoCode.Albert.robot.setZero();
+        RoCode.hw.update();
     },
     afterReceive(pd) {
-        var robot = Entry.Albert.getRobot();
+        var robot = RoCode.Albert.getRobot();
         if (robot) robot.afterReceive(pd);
     },
     id: '2.5',
@@ -1437,7 +1437,7 @@ Entry.Albert = {
     },
 };
 
-Entry.Albert.setLanguage = () => ({
+RoCode.Albert.setLanguage = () => ({
     ko: {
         template: {
             albert_value: '%1',
@@ -1969,7 +1969,7 @@ Entry.Albert.setLanguage = () => ({
     },
 });
 
-Entry.Albert.blockMenuBlocks = [
+RoCode.Albert.blockMenuBlocks = [
     'albert_value',
     'albert_hand_found',
     'albert_is_oid_value',
@@ -2000,11 +2000,11 @@ Entry.Albert.blockMenuBlocks = [
     'albert_set_tempo_to',
 ];
 
-Entry.Albert.getBlocks = function() {
+RoCode.Albert.getBlocks = function() {
     return {
         albert_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -2027,8 +2027,8 @@ Entry.Albert.getBlocks = function() {
                     ],
                     value: 'leftProximity',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2042,7 +2042,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_sensor',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 if (robot) return robot.getValue(script);
             },
             syntax: {
@@ -2071,9 +2071,9 @@ Entry.Albert.getBlocks = function() {
                                 ],
                                 value: 'leftProximity',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2081,8 +2081,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_hand_found: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -2095,7 +2095,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_sensor',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.checkHandFound(script) : false;
             },
             syntax: {
@@ -2109,8 +2109,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_is_oid_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -2123,8 +2123,8 @@ Entry.Albert.getBlocks = function() {
                     ],
                     value: 'FRONT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2149,7 +2149,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_sensor',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.checkOid(script) : false;
             },
             syntax: {
@@ -2166,9 +2166,9 @@ Entry.Albert.getBlocks = function() {
                                 ],
                                 value: 'FRONT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -2181,8 +2181,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_boolean: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -2202,8 +2202,8 @@ Entry.Albert.getBlocks = function() {
                     ],
                     value: 'TILT_FORWARD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2217,7 +2217,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_sensor',
             isNotFor: ['albert'],
             func(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.checkBoolean(script) : false;
             },
             syntax: {
@@ -2242,9 +2242,9 @@ Entry.Albert.getBlocks = function() {
                                 ],
                                 value: 'TILT_FORWARD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2252,8 +2252,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_move_forward_for_secs: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2284,7 +2284,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_wheel',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.moveForwardSecs(script) : script;
             },
             syntax: {
@@ -2303,8 +2303,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_move_backward_for_secs: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2335,7 +2335,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_wheel',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.moveBackwardSecs(script) : script;
             },
             syntax: {
@@ -2354,8 +2354,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_turn_for_secs: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2367,8 +2367,8 @@ Entry.Albert.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2400,7 +2400,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_wheel',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.turnSecs(script) : script;
             },
             syntax: {
@@ -2417,9 +2417,9 @@ Entry.Albert.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -2431,8 +2431,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_change_both_wheels_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2472,7 +2472,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_wheel',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.changeWheels(script) : script;
             },
             syntax: {
@@ -2495,8 +2495,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_set_both_wheels_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2536,7 +2536,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_wheel',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.setWheels(script) : script;
             },
             syntax: {
@@ -2559,8 +2559,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_change_wheel_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2573,8 +2573,8 @@ Entry.Albert.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2605,7 +2605,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_wheel',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.changeWheel(script) : script;
             },
             syntax: {
@@ -2623,9 +2623,9 @@ Entry.Albert.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -2637,8 +2637,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_set_wheel_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2651,8 +2651,8 @@ Entry.Albert.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2683,7 +2683,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_wheel',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.setWheel(script) : script;
             },
             syntax: {
@@ -2701,9 +2701,9 @@ Entry.Albert.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -2715,8 +2715,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2735,7 +2735,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_wheel',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.stop(script) : script;
             },
             syntax: {
@@ -2748,8 +2748,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_set_pad_size_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2790,7 +2790,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_wheel',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.setBoardSize(script) : script;
             },
             syntax: {
@@ -2813,8 +2813,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_move_to_x_y_on_board: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2826,8 +2826,8 @@ Entry.Albert.getBlocks = function() {
                     ],
                     value: 'FORWARD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2867,7 +2867,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_wheel',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.moveToOnBoard(script) : script;
             },
             syntax: {
@@ -2885,9 +2885,9 @@ Entry.Albert.getBlocks = function() {
                                 ],
                                 value: 'FORWARD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -2903,8 +2903,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_set_orientation_on_board: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2935,7 +2935,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_wheel',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.setOrientationToOnBoard(script) : script;
             },
             syntax: {
@@ -2955,8 +2955,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_set_eye_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2969,8 +2969,8 @@ Entry.Albert.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2985,8 +2985,8 @@ Entry.Albert.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3006,7 +3006,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_led',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.setEye(script) : script;
             },
             syntax: {
@@ -3024,9 +3024,9 @@ Entry.Albert.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3041,9 +3041,9 @@ Entry.Albert.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -3051,8 +3051,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_clear_eye: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3065,8 +3065,8 @@ Entry.Albert.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3085,7 +3085,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_led',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.clearEye(script) : script;
             },
             syntax: {
@@ -3103,9 +3103,9 @@ Entry.Albert.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -3113,8 +3113,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_body_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3126,8 +3126,8 @@ Entry.Albert.getBlocks = function() {
                     ],
                     value: 'ON',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3146,7 +3146,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_led',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.turnBodyLed(script) : script;
             },
             syntax: {
@@ -3163,9 +3163,9 @@ Entry.Albert.getBlocks = function() {
                                 ],
                                 value: 'ON',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -3173,8 +3173,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_front_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3186,8 +3186,8 @@ Entry.Albert.getBlocks = function() {
                     ],
                     value: 'ON',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3206,7 +3206,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_led',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.turnFrontLed(script) : script;
             },
             syntax: {
@@ -3223,9 +3223,9 @@ Entry.Albert.getBlocks = function() {
                                 ],
                                 value: 'ON',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -3233,8 +3233,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_beep: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3252,7 +3252,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_buzzer',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.beep(script) : script;
             },
             syntax: {
@@ -3265,8 +3265,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_change_buzzer_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3297,7 +3297,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_buzzer',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.changeBuzzer(script) : script;
             },
             syntax: {
@@ -3316,8 +3316,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_set_buzzer_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3348,7 +3348,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_buzzer',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.setBuzzer(script) : script;
             },
             syntax: {
@@ -3367,8 +3367,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_clear_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3386,7 +3386,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_buzzer',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.clearBuzzer(script) : script;
             },
             syntax: {
@@ -3400,8 +3400,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_play_note: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3423,8 +3423,8 @@ Entry.Albert.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -3439,8 +3439,8 @@ Entry.Albert.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3460,7 +3460,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_buzzer',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.playNote(script) : script;
             },
             syntax: {
@@ -3487,9 +3487,9 @@ Entry.Albert.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3504,9 +3504,9 @@ Entry.Albert.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -3514,8 +3514,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_play_note_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3537,8 +3537,8 @@ Entry.Albert.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -3553,8 +3553,8 @@ Entry.Albert.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3587,7 +3587,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_buzzer',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.playNoteBeat(script) : script;
             },
             syntax: {
@@ -3614,9 +3614,9 @@ Entry.Albert.getBlocks = function() {
                                 ],
                                 value: '4',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -3631,9 +3631,9 @@ Entry.Albert.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             {
                                 type: 'Block',
@@ -3645,8 +3645,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_rest_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3677,7 +3677,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_buzzer',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.restBeat(script) : script;
             },
             syntax: {
@@ -3696,8 +3696,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_change_tempo_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3728,7 +3728,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_buzzer',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.changeTempo(script) : script;
             },
             syntax: {
@@ -3747,8 +3747,8 @@ Entry.Albert.getBlocks = function() {
             },
         },
         albert_set_tempo_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3779,7 +3779,7 @@ Entry.Albert.getBlocks = function() {
             class: 'albert_buzzer',
             isNotFor: ['albert'],
             func: function(sprite, script) {
-                var robot = Entry.Albert.getRobot();
+                var robot = RoCode.Albert.getRobot();
                 return robot ? robot.setTempo(script) : script;
             },
             syntax: {
@@ -3800,4 +3800,4 @@ Entry.Albert.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Albert;
+module.exports = RoCode.Albert;

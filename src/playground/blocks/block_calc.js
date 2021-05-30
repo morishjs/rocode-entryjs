@@ -2,8 +2,8 @@ module.exports = {
     getBlocks() {
         return {
             calc_basic: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -22,7 +22,7 @@ module.exports = {
                         ],
                         value: 'PLUS',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.CALC,
+                        bgColor: RoCodeStatic.colorSet.block.darken.CALC,
                         noArrow: true,
                     },
                     {
@@ -132,10 +132,10 @@ module.exports = {
                     if (operator === 'PLUS') {
                         const leftStringValue = script.getValue('LEFTHAND', script);
                         const rightStringValue = script.getValue('RIGHTHAND', script);
-                        if (!Entry.Utils.isNumber(leftStringValue)) {
+                        if (!RoCode.Utils.isNumber(leftStringValue)) {
                             leftValue = leftStringValue;
                         }
-                        if (!Entry.Utils.isNumber(rightStringValue)) {
+                        if (!RoCode.Utils.isNumber(rightStringValue)) {
                             rightValue = rightStringValue;
                         }
                         if (typeof leftValue === 'number' && typeof rightValue === 'number') {
@@ -180,7 +180,7 @@ module.exports = {
                                     value: 'PLUS',
                                     fontSize: 11,
                                     noArrow: true,
-                                    converter: Entry.block.converters.returnOperator,
+                                    converter: RoCode.block.converters.returnOperator,
                                     paramType: 'operator',
                                 },
                                 {
@@ -193,8 +193,8 @@ module.exports = {
                 },
             },
             calc_rand: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -268,8 +268,8 @@ module.exports = {
                     const rightValue = script.getStringValue('RIGHTHAND', script);
                     const left = Math.min(leftValue, rightValue);
                     const right = Math.max(leftValue, rightValue);
-                    const isLeftFloat = Entry.isFloat(leftValue);
-                    const isRightFloat = Entry.isFloat(rightValue);
+                    const isLeftFloat = RoCode.isFloat(leftValue);
+                    const isRightFloat = RoCode.isFloat(rightValue);
                     if (isRightFloat || isLeftFloat) {
                         return (Math.random() * (right - left) + left).toFixed(2);
                     } else {
@@ -321,8 +321,8 @@ module.exports = {
                 },
             },
             coordinate_mouse: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -339,8 +339,8 @@ module.exports = {
                         ],
                         value: 'x',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.CALC,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.CALC,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Text',
@@ -365,16 +365,16 @@ module.exports = {
                 func(sprite, script) {
                     const targetCoordinate = script.getField('VALUE', script);
                     if (targetCoordinate === 'x') {
-                        return Number(Entry.stage.mouseCoordinate.x);
+                        return Number(RoCode.stage.mouseCoordinate.x);
                     } else {
-                        return Number(Entry.stage.mouseCoordinate.y);
+                        return Number(RoCode.stage.mouseCoordinate.y);
                     }
                 },
                 syntax: {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.value_of_mouse_pointer(%2)',
+                            syntax: 'RoCode.value_of_mouse_pointer(%2)',
                             blockType: 'param',
                             textParams: [
                                 {
@@ -390,9 +390,9 @@ module.exports = {
                                     ],
                                     value: 'x',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.CALC,
-                                    converter: Entry.block.converters.returnStringKey,
-                                    codeMap: 'Entry.CodeMap.Entry.coordinate_mouse[1]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.CALC,
+                                    converter: RoCode.block.converters.returnStringKey,
+                                    codeMap: 'RoCode.CodeMap.RoCode.coordinate_mouse[1]',
                                 },
                                 {
                                     type: 'Text',
@@ -405,8 +405,8 @@ module.exports = {
                 },
             },
             coordinate_object: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -420,8 +420,8 @@ module.exports = {
                         value: null,
                         menuName: 'spritesWithSelf',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.CALC,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.CALC,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Text',
@@ -441,8 +441,8 @@ module.exports = {
                         ],
                         value: 'x',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.CALC,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.CALC,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                 ],
                 events: {},
@@ -466,7 +466,7 @@ module.exports = {
                     if (targetId === 'self') {
                         targetEntity = sprite;
                     } else {
-                        targetEntity = Entry.container.getEntity(targetId);
+                        targetEntity = RoCode.container.getEntity(targetId);
                     }
 
                     const targetCoordinate = script.getField('COORDINATE', script);
@@ -498,7 +498,7 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.value_of_object(%2, %4)',
+                            syntax: 'RoCode.value_of_object(%2, %4)',
                             blockType: 'param',
                             textParams: [
                                 undefined,
@@ -507,9 +507,9 @@ module.exports = {
                                     value: null,
                                     menuName: 'spritesWithSelf',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.CALC,
-                                    converter: Entry.block.converters.returnObjectOrStringValue,
-                                    codeMap: 'Entry.CodeMap.Entry.coordinate_object[1]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.CALC,
+                                    converter: RoCode.block.converters.returnObjectOrStringValue,
+                                    codeMap: 'RoCode.CodeMap.RoCode.coordinate_object[1]',
                                 },
                                 undefined,
                                 {
@@ -525,9 +525,9 @@ module.exports = {
                                     ],
                                     value: 'x',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.CALC,
-                                    converter: Entry.block.converters.returnStringValue,
-                                    codeMap: 'Entry.CodeMap.Entry.coordinate_object[3]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.CALC,
+                                    converter: RoCode.block.converters.returnStringValue,
+                                    codeMap: 'RoCode.CodeMap.RoCode.coordinate_object[3]',
                                 },
                             ],
                         },
@@ -535,8 +535,8 @@ module.exports = {
                 },
             },
             get_sound_volume: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -559,21 +559,21 @@ module.exports = {
                 class: 'calc',
                 isNotFor: [],
                 func() {
-                    return Entry.Utils.getVolume() * 100;
+                    return RoCode.Utils.getVolume() * 100;
                 },
                 syntax: {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.value_of_sound_volume()',
+                            syntax: 'RoCode.value_of_sound_volume()',
                             blockType: 'param',
                         },
                     ],
                 },
             },
             quotient_and_mod: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -610,8 +610,8 @@ module.exports = {
                         ],
                         value: 'QUOTIENT',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.CALC,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.CALC,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                 ],
                 events: {},
@@ -694,8 +694,8 @@ module.exports = {
                                     ],
                                     value: 'QUOTIENT',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.CALC,
-                                    converter: Entry.block.converters.returnStringValue,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.CALC,
+                                    converter: RoCode.block.converters.returnStringValue,
                                 },
                             ],
                         },
@@ -724,8 +724,8 @@ module.exports = {
                                     ],
                                     value: 'QUOTIENT',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.CALC,
-                                    converter: Entry.block.converters.returnStringValue,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.CALC,
+                                    converter: RoCode.block.converters.returnStringValue,
                                 },
                             ],
                         },
@@ -733,8 +733,8 @@ module.exports = {
                 },
             },
             calc_operation: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -775,8 +775,8 @@ module.exports = {
                         ],
                         value: 'square',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.CALC,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.CALC,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                 ],
                 events: {},
@@ -824,7 +824,7 @@ module.exports = {
                     }
 
                     if (needToConvertList.indexOf(operator) > -1) {
-                        value = Entry.toRadian(value);
+                        value = RoCode.toRadian(value);
                     }
 
                     let returnVal = 0;
@@ -833,7 +833,7 @@ module.exports = {
                             returnVal = value * value;
                             break;
                         case 'factorial':
-                            returnVal = Entry.factorial(value);
+                            returnVal = RoCode.factorial(value);
                             break;
                         case 'root':
                             returnVal = Math.sqrt(value);
@@ -847,7 +847,7 @@ module.exports = {
                         case 'asin':
                         case 'acos':
                         case 'atan':
-                            returnVal = Entry.toDegrees(Math[operator](value));
+                            returnVal = RoCode.toDegrees(Math[operator](value));
                             break;
                         case 'unnatural': {
                             returnVal = new BigNumber(value).minus(Math.floor(value));
@@ -1111,8 +1111,8 @@ module.exports = {
                 },
             },
             get_project_timer_value: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -1130,15 +1130,15 @@ module.exports = {
                 events: {
                     viewAdd: [
                         function() {
-                            if (Entry.engine) {
-                                Entry.engine.showProjectTimer();
+                            if (RoCode.engine) {
+                                RoCode.engine.showProjectTimer();
                             }
                         },
                     ],
                     viewDestroy: [
                         function(block, notIncludeSelf) {
-                            if (Entry.engine) {
-                                Entry.engine.hideProjectTimer(block, notIncludeSelf);
+                            if (RoCode.engine) {
+                                RoCode.engine.hideProjectTimer(block, notIncludeSelf);
                             }
                         },
                     ],
@@ -1150,21 +1150,21 @@ module.exports = {
                 class: 'calc_timer',
                 isNotFor: [],
                 func() {
-                    return Entry.engine.projectTimer.getValue();
+                    return RoCode.engine.projectTimer.getValue();
                 },
                 syntax: {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.value_of_timer()',
+                            syntax: 'RoCode.value_of_timer()',
                             blockType: 'param',
                         },
                     ],
                 },
             },
             choose_project_timer_action: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1182,8 +1182,8 @@ module.exports = {
                         ],
                         value: 'START',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.CALC,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.CALC,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Text',
@@ -1199,15 +1199,15 @@ module.exports = {
                 events: {
                     viewAdd: [
                         function() {
-                            if (Entry.engine) {
-                                Entry.engine.showProjectTimer();
+                            if (RoCode.engine) {
+                                RoCode.engine.showProjectTimer();
                             }
                         },
                     ],
                     dataDestroy: [
                         function(block) {
-                            if (Entry.engine) {
-                                Entry.engine.hideProjectTimer(block);
+                            if (RoCode.engine) {
+                                RoCode.engine.hideProjectTimer(block);
                             }
                         },
                     ],
@@ -1226,7 +1226,7 @@ module.exports = {
                 class: 'calc_timer',
                 isNotFor: [],
                 func(sprite, script) {
-                    const engine = Entry.engine;
+                    const engine = RoCode.engine;
                     const timer = engine.projectTimer;
                     const isPaused = timer.isPaused;
                     const isInit = timer.isInit;
@@ -1262,12 +1262,12 @@ module.exports = {
                     py: [
                         {
                             template: '%1 %2 %3',
-                            syntax: 'Entry.timer(%2)',
+                            syntax: 'RoCode.timer(%2)',
                             textParams: [
                                 {
                                     type: 'Text',
-                                    text: 'Entry.timer(',
-                                    color: EntryStatic.colorSet.common.WHITE,
+                                    text: 'RoCode.timer(',
+                                    color: RoCodeStatic.colorSet.common.WHITE,
                                 },
                                 {
                                     type: 'Dropdown',
@@ -1287,14 +1287,14 @@ module.exports = {
                                     ],
                                     value: 'START',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.CALC,
-                                    converter: Entry.block.converters.returnStringValueLowerCase,
-                                    codeMap: 'Entry.CodeMap.Entry.choose_project_timer_action[1]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.CALC,
+                                    converter: RoCode.block.converters.returnStringValueLowerCase,
+                                    codeMap: 'RoCode.CodeMap.RoCode.choose_project_timer_action[1]',
                                 },
                                 {
                                     type: 'Text',
                                     text: ')',
-                                    color: EntryStatic.colorSet.common.WHITE,
+                                    color: RoCodeStatic.colorSet.common.WHITE,
                                 },
                             ],
                         },
@@ -1302,8 +1302,8 @@ module.exports = {
                 },
             },
             set_visible_project_timer: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1320,8 +1320,8 @@ module.exports = {
                         ],
                         value: 'SHOW',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.CALC,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.CALC,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Text',
@@ -1337,15 +1337,15 @@ module.exports = {
                 events: {
                     viewAdd: [
                         function() {
-                            if (Entry.engine) {
-                                Entry.engine.showProjectTimer();
+                            if (RoCode.engine) {
+                                RoCode.engine.showProjectTimer();
                             }
                         },
                     ],
                     viewDestroy: [
                         function(block, notIncludeSelf) {
-                            if (Entry.engine) {
-                                Entry.engine.hideProjectTimer(block, notIncludeSelf);
+                            if (RoCode.engine) {
+                                RoCode.engine.hideProjectTimer(block, notIncludeSelf);
                             }
                         },
                     ],
@@ -1365,7 +1365,7 @@ module.exports = {
                 isNotFor: [],
                 func(sprite, script) {
                     const action = script.getField('ACTION');
-                    const timer = Entry.engine.projectTimer;
+                    const timer = RoCode.engine.projectTimer;
                     if (action === 'SHOW') {
                         timer.setVisible(true);
                     } else {
@@ -1379,12 +1379,12 @@ module.exports = {
                     py: [
                         {
                             template: '%1 %2 %3',
-                            syntax: 'Entry.timer_view(%2)',
+                            syntax: 'RoCode.timer_view(%2)',
                             textParams: [
                                 {
                                     type: 'Text',
-                                    text: 'Entry.timer_view(',
-                                    color: EntryStatic.colorSet.common.WHITE,
+                                    text: 'RoCode.timer_view(',
+                                    color: RoCodeStatic.colorSet.common.WHITE,
                                 },
                                 {
                                     type: 'Dropdown',
@@ -1394,14 +1394,14 @@ module.exports = {
                                     ],
                                     value: 'SHOW',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.CALC,
-                                    converter: Entry.block.converters.returnStringValueLowerCase,
-                                    codeMap: 'Entry.CodeMap.Entry.set_visible_project_timer[1]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.CALC,
+                                    converter: RoCode.block.converters.returnStringValueLowerCase,
+                                    codeMap: 'RoCode.CodeMap.RoCode.set_visible_project_timer[1]',
                                 },
                                 {
                                     type: 'Text',
                                     text: ')',
-                                    color: EntryStatic.colorSet.common.WHITE,
+                                    color: RoCodeStatic.colorSet.common.WHITE,
                                 },
                             ],
                         },
@@ -1409,8 +1409,8 @@ module.exports = {
                 },
             },
             get_date: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -1431,8 +1431,8 @@ module.exports = {
                         ],
                         value: 'YEAR',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.CALC,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.CALC,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Text',
@@ -1475,7 +1475,7 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.value_of_current_time(%2)',
+                            syntax: 'RoCode.value_of_current_time(%2)',
                             blockType: 'param',
                             textParams: [
                                 undefined,
@@ -1491,9 +1491,9 @@ module.exports = {
                                     ],
                                     value: 'YEAR',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.CALC,
-                                    converter: Entry.block.converters.returnStringValueLowerCase,
-                                    codeMap: 'Entry.CodeMap.Entry.get_date[1]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.CALC,
+                                    converter: RoCode.block.converters.returnStringValueLowerCase,
+                                    codeMap: 'RoCode.CodeMap.RoCode.get_date[1]',
                                 },
                             ],
                         },
@@ -1501,8 +1501,8 @@ module.exports = {
                 },
             },
             distance_something: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -1516,8 +1516,8 @@ module.exports = {
                         value: null,
                         menuName: 'spritesWithMouse',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.CALC,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.CALC,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Text',
@@ -1542,13 +1542,13 @@ module.exports = {
                 func(sprite, script) {
                     const targetId = script.getField('VALUE', script);
                     if (targetId === 'mouse') {
-                        const mousePos = Entry.stage.mouseCoordinate;
+                        const mousePos = RoCode.stage.mouseCoordinate;
                         return Math.sqrt(
                             Math.pow(sprite.getX() - mousePos.x, 2) +
                                 Math.pow(sprite.getY() - mousePos.y, 2)
                         );
                     } else {
-                        const targetEntity = Entry.container.getEntity(targetId);
+                        const targetEntity = RoCode.container.getEntity(targetId);
                         return Math.sqrt(
                             Math.pow(sprite.getX() - targetEntity.getX(), 2) +
                                 Math.pow(sprite.getY() - targetEntity.getY(), 2)
@@ -1559,7 +1559,7 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.value_of_distance_to(%2)',
+                            syntax: 'RoCode.value_of_distance_to(%2)',
                             blockType: 'param',
                             textParams: [
                                 undefined,
@@ -1568,9 +1568,9 @@ module.exports = {
                                     value: null,
                                     menuName: 'spritesWithMouse',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.CALC,
-                                    converter: Entry.block.converters.returnStringKey,
-                                    codeMap: 'Entry.CodeMap.Entry.distance_something[1]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.CALC,
+                                    converter: RoCode.block.converters.returnStringKey,
+                                    codeMap: 'RoCode.CodeMap.RoCode.distance_something[1]',
                                 },
                             ],
                         },
@@ -1578,8 +1578,8 @@ module.exports = {
                 },
             },
             get_sound_duration: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -1593,8 +1593,8 @@ module.exports = {
                         value: null,
                         menuName: 'sounds',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.CALC,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.CALC,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Text',
@@ -1630,7 +1630,7 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.value_of_sound_length_of(%2)',
+                            syntax: 'RoCode.value_of_sound_length_of(%2)',
                             blockType: 'param',
                             textParams: [
                                 undefined,
@@ -1639,8 +1639,8 @@ module.exports = {
                                     value: null,
                                     menuName: 'sounds',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.CALC,
-                                    converter: Entry.block.converters.returnStringKey,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.CALC,
+                                    converter: RoCode.block.converters.returnStringKey,
                                 },
                             ],
                         },
@@ -1648,9 +1648,9 @@ module.exports = {
                 },
             },
             get_user_name: {
-                color: EntryStatic.colorSet.block.default.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
                 fontColor: '#FFF',
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [],
@@ -1668,15 +1668,15 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.value_of_username()',
+                            syntax: 'RoCode.value_of_username()',
                             blockType: 'param',
                         },
                     ],
                 },
             },
             length_of_string: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -1701,7 +1701,7 @@ module.exports = {
                         null,
                         {
                             type: 'text',
-                            params: [Lang.Blocks.entry],
+                            params: [Lang.Blocks.RoCode],
                         },
                         null,
                     ],
@@ -1738,8 +1738,8 @@ module.exports = {
                 },
             },
             combine_something: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -1778,7 +1778,7 @@ module.exports = {
                         null,
                         {
                             type: 'text',
-                            params: [Lang.Blocks.entry],
+                            params: [Lang.Blocks.RoCode],
                         },
                         null,
                     ],
@@ -1824,8 +1824,8 @@ module.exports = {
                 },
             },
             char_at: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -1861,7 +1861,7 @@ module.exports = {
                         null,
                         {
                             type: 'text',
-                            params: [Lang.Blocks.hi_entry],
+                            params: [Lang.Blocks.hi_RoCode],
                         },
                         null,
                         {
@@ -1941,8 +1941,8 @@ module.exports = {
                 },
             },
             substring: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -1988,7 +1988,7 @@ module.exports = {
                         null,
                         {
                             type: 'text',
-                            params: [Lang.Blocks.hi_entry],
+                            params: [Lang.Blocks.hi_RoCode],
                         },
                         null,
                         {
@@ -2073,8 +2073,8 @@ module.exports = {
                 },
             },
             index_of_string: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -2108,12 +2108,12 @@ module.exports = {
                         null,
                         {
                             type: 'text',
-                            params: [Lang.Blocks.hi_entry],
+                            params: [Lang.Blocks.hi_RoCode],
                         },
                         null,
                         {
                             type: 'text',
-                            params: [Lang.Blocks.entry],
+                            params: [Lang.Blocks.RoCode],
                         },
                         null,
                     ],
@@ -2158,8 +2158,8 @@ module.exports = {
                 },
             },
             replace_string: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -2202,7 +2202,7 @@ module.exports = {
                         null,
                         {
                             type: 'text',
-                            params: [Lang.Blocks.hi_entry],
+                            params: [Lang.Blocks.hi_RoCode],
                         },
                         null,
                         {
@@ -2269,8 +2269,8 @@ module.exports = {
                 },
             },
             change_string_case: {
-                color: EntryStatic.colorSet.block.default.CALC,
-                outerLine: EntryStatic.colorSet.block.darken.CALC,
+                color: RoCodeStatic.colorSet.block.default.CALC,
+                outerLine: RoCodeStatic.colorSet.block.darken.CALC,
                 skeleton: 'basic_string_field',
                 statements: [],
                 params: [
@@ -2296,8 +2296,8 @@ module.exports = {
                         ],
                         value: 'toUpperCase',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.CALC,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.CALC,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Text',
@@ -2311,7 +2311,7 @@ module.exports = {
                         null,
                         {
                             type: 'text',
-                            params: ['Hello Entry!'],
+                            params: ['Hello RoCode!'],
                         },
                         null,
                         null,
@@ -2365,8 +2365,8 @@ module.exports = {
                                     ],
                                     value: 'toUpperCase',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.CALC,
-                                    converter: Entry.block.converters.returnStringValue,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.CALC,
+                                    converter: RoCode.block.converters.returnStringValue,
                                 },
                             ],
                         },
@@ -2389,8 +2389,8 @@ module.exports = {
                                     ],
                                     value: 'toUpperCase',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.CALC,
-                                    converter: Entry.block.converters.returnStringValue,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.CALC,
+                                    converter: RoCode.block.converters.returnStringValue,
                                 },
                             ],
                         },

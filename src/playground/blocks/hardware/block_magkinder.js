@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.MagKinder = {
+RoCode.MagKinder = {
     id: '37.1',
     name: 'magkinder',
     url: 'https://www.magkinder.com',
@@ -43,7 +43,7 @@ Entry.MagKinder = {
     }
 };
 
-Entry.MagKinder.setLanguage = function() {
+RoCode.MagKinder.setLanguage = function() {
     return{
         ko: {
             template: {
@@ -117,7 +117,7 @@ Entry.MagKinder.setLanguage = function() {
                 magkinder_list_green: 'green',
                 magkinder_list_yellow: 'yellow',
                 magkinder_list_purple: 'purple',
-                magkinder_list_white: 'white',                
+                magkinder_list_white: 'white',
                 magkinder_list_4_octave_C: '4 octave C',
                 magkinder_list_4_octave_D: '4 octave D',
                 magkinder_list_4_octave_E: '4 octave E',
@@ -158,7 +158,7 @@ Entry.MagKinder.setLanguage = function() {
     };
 };
 
-Entry.MagKinder.blockMenuBlocks = [
+RoCode.MagKinder.blockMenuBlocks = [
     'magkinder_received_bottomSensor_block',
     'magkinder_received_cardSensor_block',
     'magkinder_received_frontSensor_block',
@@ -174,12 +174,12 @@ Entry.MagKinder.blockMenuBlocks = [
     //'magkinder_transmit_modeSetting_block',
 ];
 
-Entry.MagKinder.getBlocks = function() {
+RoCode.MagKinder.getBlocks = function() {
     return {
-        // region MagKinder 맥킨더        
+        // region MagKinder 맥킨더
         magkinder_list_bottomSensor_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -194,8 +194,8 @@ Entry.MagKinder.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -210,8 +210,8 @@ Entry.MagKinder.getBlocks = function() {
             }
         },
         magkinder_list_cardSensor_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -225,8 +225,8 @@ Entry.MagKinder.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -241,8 +241,8 @@ Entry.MagKinder.getBlocks = function() {
             }
         },
         magkinder_list_frontSensor_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -255,8 +255,8 @@ Entry.MagKinder.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -271,8 +271,8 @@ Entry.MagKinder.getBlocks = function() {
             }
         },
         magkinder_list_toggle_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -285,8 +285,8 @@ Entry.MagKinder.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -301,8 +301,8 @@ Entry.MagKinder.getBlocks = function() {
             }
         },
         magkinder_list_motionMove_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -315,8 +315,8 @@ Entry.MagKinder.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -331,8 +331,8 @@ Entry.MagKinder.getBlocks = function() {
             }
         },
         magkinder_list_motionTurn_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -345,8 +345,8 @@ Entry.MagKinder.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -361,8 +361,8 @@ Entry.MagKinder.getBlocks = function() {
             }
         },
         magkinder_list_wheelSpeed_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -376,8 +376,8 @@ Entry.MagKinder.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -392,8 +392,8 @@ Entry.MagKinder.getBlocks = function() {
             }
         },
         magkinder_list_color_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -406,13 +406,13 @@ Entry.MagKinder.getBlocks = function() {
                         [Lang.template.magkinder_list_blue, '2'],
                         [Lang.template.magkinder_list_green, '3'],
                         [Lang.template.magkinder_list_yellow, '4'],
-                        [Lang.template.magkinder_list_purple, '5'],                        
+                        [Lang.template.magkinder_list_purple, '5'],
                         [Lang.template.magkinder_list_white, '6'],
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -427,8 +427,8 @@ Entry.MagKinder.getBlocks = function() {
             }
         },
         magkinder_list_soundVolume_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -447,8 +447,8 @@ Entry.MagKinder.getBlocks = function() {
                     ],
                     value: '7',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -463,8 +463,8 @@ Entry.MagKinder.getBlocks = function() {
             }
         },
         magkinder_list_speak_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -512,8 +512,8 @@ Entry.MagKinder.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -528,8 +528,8 @@ Entry.MagKinder.getBlocks = function() {
             }
         },
         magkinder_list_scale_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -555,8 +555,8 @@ Entry.MagKinder.getBlocks = function() {
                     ],
                     value: '22',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -571,8 +571,8 @@ Entry.MagKinder.getBlocks = function() {
             }
         },
         magkinder_list_modeSetting_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -590,8 +590,8 @@ Entry.MagKinder.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -606,8 +606,8 @@ Entry.MagKinder.getBlocks = function() {
             }
         },
         magkinder_received_bottomSensor_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -635,7 +635,7 @@ Entry.MagKinder.getBlocks = function() {
             isNotFor: ['magkinder'],
             func: function(sprite, script) {
                 var select = script.getNumberValue('BOTTOM_SENSOR');
-                var received = Entry.hw.portData;
+                var received = RoCode.hw.portData;
                 var data = 0;
 
                 switch(select)
@@ -646,12 +646,12 @@ Entry.MagKinder.getBlocks = function() {
                     case 3: data = received.bottom.rightSide; break;
                 }
 
-                return data; 
+                return data;
             },
         },
         magkinder_received_cardSensor_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -679,7 +679,7 @@ Entry.MagKinder.getBlocks = function() {
             isNotFor: ['magkinder'],
             func: function(sprite, script) {
                 var select = script.getNumberValue('CARD_SENSOR');
-                var received = Entry.hw.portData;
+                var received = RoCode.hw.portData;
                 var data = 0;
 
                 switch(select)
@@ -689,12 +689,12 @@ Entry.MagKinder.getBlocks = function() {
                     case 2: data = received.card.right; break;
                 }
 
-                return data; 
+                return data;
             },
         },
         magkinder_received_frontSensor_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             statements: [],
@@ -722,7 +722,7 @@ Entry.MagKinder.getBlocks = function() {
             isNotFor: ['magkinder'],
             func: function(sprite, script) {
                 var select = script.getNumberValue('CARD_SENSOR');
-                var received = Entry.hw.portData;
+                var received = RoCode.hw.portData;
                 var data = 0;
 
                 switch(select)
@@ -731,12 +731,12 @@ Entry.MagKinder.getBlocks = function() {
                     case 1: data = received.front.right; break;
                 }
 
-                return data; 
+                return data;
             },
         },
         magkinder_transmit_autoSensor_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -777,9 +777,9 @@ Entry.MagKinder.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.MagKinder.removeTimeout(timer);
-                    }, Entry.MagKinder.delayTime);
-                    Entry.MagKinder.timeouts.push(timer);
+                        RoCode.MagKinder.removeTimeout(timer);
+                    }, RoCode.MagKinder.delayTime);
+                    RoCode.MagKinder.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1)
@@ -788,8 +788,8 @@ Entry.MagKinder.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['TRANSMIT'] = {};
-                    Entry.hw.sendQueue['TRANSMIT'][Entry.MagKinder.array.AutoSensing] = {
+                    RoCode.hw.sendQueue['TRANSMIT'] = {};
+                    RoCode.hw.sendQueue['TRANSMIT'][RoCode.MagKinder.array.AutoSensing] = {
                         Toggle: data,
                         Time: new Date().getTime(),
                     };
@@ -798,8 +798,8 @@ Entry.MagKinder.getBlocks = function() {
             },
         },
         magkinder_transmit_moveStop_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -830,9 +830,9 @@ Entry.MagKinder.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.MagKinder.removeTimeout(timer);
-                    }, Entry.MagKinder.delayTime);
-                    Entry.MagKinder.timeouts.push(timer);
+                        RoCode.MagKinder.removeTimeout(timer);
+                    }, RoCode.MagKinder.delayTime);
+                    RoCode.MagKinder.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1)
@@ -841,8 +841,8 @@ Entry.MagKinder.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['TRANSMIT'] = {};
-                    Entry.hw.sendQueue['TRANSMIT'][Entry.MagKinder.array.Stop] = {
+                    RoCode.hw.sendQueue['TRANSMIT'] = {};
+                    RoCode.hw.sendQueue['TRANSMIT'][RoCode.MagKinder.array.Stop] = {
                         Time: new Date().getTime(),
                     };
                     return script.callReturn();
@@ -850,8 +850,8 @@ Entry.MagKinder.getBlocks = function() {
             },
         },
         magkinder_transmit_move_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -903,9 +903,9 @@ Entry.MagKinder.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.MagKinder.removeTimeout(timer);
-                    }, Entry.MagKinder.delayTime);
-                    Entry.MagKinder.timeouts.push(timer);
+                        RoCode.MagKinder.removeTimeout(timer);
+                    }, RoCode.MagKinder.delayTime);
+                    RoCode.MagKinder.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1)
@@ -914,8 +914,8 @@ Entry.MagKinder.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['TRANSMIT'] = {};
-                    Entry.hw.sendQueue['TRANSMIT'][Entry.MagKinder.array.Move] = {
+                    RoCode.hw.sendQueue['TRANSMIT'] = {};
+                    RoCode.hw.sendQueue['TRANSMIT'][RoCode.MagKinder.array.Move] = {
                     	Direction: direction,
                     	Distance: distance,
                         Time: new Date().getTime(),
@@ -925,8 +925,8 @@ Entry.MagKinder.getBlocks = function() {
             },
         },
         magkinder_transmit_turn_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -978,9 +978,9 @@ Entry.MagKinder.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.MagKinder.removeTimeout(timer);
-                    }, Entry.MagKinder.delayTime);
-                    Entry.MagKinder.timeouts.push(timer);
+                        RoCode.MagKinder.removeTimeout(timer);
+                    }, RoCode.MagKinder.delayTime);
+                    RoCode.MagKinder.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1)
@@ -989,8 +989,8 @@ Entry.MagKinder.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['TRANSMIT'] = {};
-                    Entry.hw.sendQueue['TRANSMIT'][Entry.MagKinder.array.Turn] = {
+                    RoCode.hw.sendQueue['TRANSMIT'] = {};
+                    RoCode.hw.sendQueue['TRANSMIT'][RoCode.MagKinder.array.Turn] = {
                     	Direction: direction,
                     	Angle: angle,
                         Time: new Date().getTime(),
@@ -1000,8 +1000,8 @@ Entry.MagKinder.getBlocks = function() {
             },
         },
         magkinder_transmit_wheelSpeed_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1056,9 +1056,9 @@ Entry.MagKinder.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.MagKinder.removeTimeout(timer);
-                    }, Entry.MagKinder.delayTime);
-                    Entry.MagKinder.timeouts.push(timer);
+                        RoCode.MagKinder.removeTimeout(timer);
+                    }, RoCode.MagKinder.delayTime);
+                    RoCode.MagKinder.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1)
@@ -1067,8 +1067,8 @@ Entry.MagKinder.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['TRANSMIT'] = {};
-                    Entry.hw.sendQueue['TRANSMIT'][Entry.MagKinder.array.WheelSpeed] = {
+                    RoCode.hw.sendQueue['TRANSMIT'] = {};
+                    RoCode.hw.sendQueue['TRANSMIT'][RoCode.MagKinder.array.WheelSpeed] = {
                     	Wheel: wheel,
                     	Speed: speed,
                         Time: new Date().getTime(),
@@ -1078,8 +1078,8 @@ Entry.MagKinder.getBlocks = function() {
             },
         },
         magkinder_transmit_eyeLED_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1121,9 +1121,9 @@ Entry.MagKinder.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.MagKinder.removeTimeout(timer);
-                    }, Entry.MagKinder.delayTime);
-                    Entry.MagKinder.timeouts.push(timer);
+                        RoCode.MagKinder.removeTimeout(timer);
+                    }, RoCode.MagKinder.delayTime);
+                    RoCode.MagKinder.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1)
@@ -1132,8 +1132,8 @@ Entry.MagKinder.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['TRANSMIT'] = {};
-                    Entry.hw.sendQueue['TRANSMIT'][Entry.MagKinder.array.LED] = {
+                    RoCode.hw.sendQueue['TRANSMIT'] = {};
+                    RoCode.hw.sendQueue['TRANSMIT'][RoCode.MagKinder.array.LED] = {
                     	Color: color,
                         Time: new Date().getTime(),
                     };
@@ -1142,8 +1142,8 @@ Entry.MagKinder.getBlocks = function() {
             },
         },
         magkinder_transmit_volumm_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1184,9 +1184,9 @@ Entry.MagKinder.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.MagKinder.removeTimeout(timer);
-                    }, Entry.MagKinder.delayTime);
-                    Entry.MagKinder.timeouts.push(timer);
+                        RoCode.MagKinder.removeTimeout(timer);
+                    }, RoCode.MagKinder.delayTime);
+                    RoCode.MagKinder.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1)
@@ -1195,8 +1195,8 @@ Entry.MagKinder.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['TRANSMIT'] = {};
-                    Entry.hw.sendQueue['TRANSMIT'][Entry.MagKinder.array.Volume] = {
+                    RoCode.hw.sendQueue['TRANSMIT'] = {};
+                    RoCode.hw.sendQueue['TRANSMIT'][RoCode.MagKinder.array.Volume] = {
                     	Volume: volume,
                         Time: new Date().getTime(),
                     };
@@ -1205,8 +1205,8 @@ Entry.MagKinder.getBlocks = function() {
             },
         },
         magkinder_transmit_speak_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1247,9 +1247,9 @@ Entry.MagKinder.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.MagKinder.removeTimeout(timer);
-                    }, Entry.MagKinder.delayTime);
-                    Entry.MagKinder.timeouts.push(timer);
+                        RoCode.MagKinder.removeTimeout(timer);
+                    }, RoCode.MagKinder.delayTime);
+                    RoCode.MagKinder.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1)
@@ -1258,8 +1258,8 @@ Entry.MagKinder.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['TRANSMIT'] = {};
-                    Entry.hw.sendQueue['TRANSMIT'][Entry.MagKinder.array.Speak] = {
+                    RoCode.hw.sendQueue['TRANSMIT'] = {};
+                    RoCode.hw.sendQueue['TRANSMIT'][RoCode.MagKinder.array.Speak] = {
                     	Speak: speak,
                         Time: new Date().getTime(),
                     };
@@ -1268,8 +1268,8 @@ Entry.MagKinder.getBlocks = function() {
             },
         },
         magkinder_transmit_scale_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1310,9 +1310,9 @@ Entry.MagKinder.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.MagKinder.removeTimeout(timer);
-                    }, Entry.MagKinder.delayTime);
-                    Entry.MagKinder.timeouts.push(timer);
+                        RoCode.MagKinder.removeTimeout(timer);
+                    }, RoCode.MagKinder.delayTime);
+                    RoCode.MagKinder.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1)
@@ -1321,8 +1321,8 @@ Entry.MagKinder.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['TRANSMIT'] = {};
-                    Entry.hw.sendQueue['TRANSMIT'][Entry.MagKinder.array.Scale] = {
+                    RoCode.hw.sendQueue['TRANSMIT'] = {};
+                    RoCode.hw.sendQueue['TRANSMIT'][RoCode.MagKinder.array.Scale] = {
                         Scale: scale,
                         Time: new Date().getTime(),
                     };
@@ -1331,8 +1331,8 @@ Entry.MagKinder.getBlocks = function() {
             },
         },
         magkinder_transmit_modeSetting_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             statements: [],
@@ -1373,9 +1373,9 @@ Entry.MagKinder.getBlocks = function() {
                     script.timeFlag = 1;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.MagKinder.removeTimeout(timer);
-                    }, Entry.MagKinder.delayTime);
-                    Entry.MagKinder.timeouts.push(timer);
+                        RoCode.MagKinder.removeTimeout(timer);
+                    }, RoCode.MagKinder.delayTime);
+                    RoCode.MagKinder.timeouts.push(timer);
                     return script;
                 }
                 else if(script.timeFlag == 1)
@@ -1384,8 +1384,8 @@ Entry.MagKinder.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['TRANSMIT'] = {};
-                    Entry.hw.sendQueue['TRANSMIT'][Entry.MagKinder.array.Mode] = {
+                    RoCode.hw.sendQueue['TRANSMIT'] = {};
+                    RoCode.hw.sendQueue['TRANSMIT'][RoCode.MagKinder.array.Mode] = {
                         Mode: mode,
                         Time: new Date().getTime(),
                     };
@@ -1397,4 +1397,4 @@ Entry.MagKinder.getBlocks = function() {
     };
 };
 
-module.exports = Entry.MagKinder
+module.exports = RoCode.MagKinder

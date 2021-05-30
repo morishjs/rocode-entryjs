@@ -1,4 +1,4 @@
-Entry.skeleton.basic = {
+RoCode.skeleton.basic = {
     executable: true,
     path(blockView) {
         let width = blockView.contentWidth;
@@ -42,11 +42,11 @@ Entry.skeleton.basic = {
     },
 };
 
-Entry.skeleton.basic_without_next = {
+RoCode.skeleton.basic_without_next = {
     executable: true,
     outerLine: '#13bf68',
-    box: Entry.skeleton.basic.box,
-    contentPos: Entry.skeleton.basic.contentPos,
+    box: RoCode.skeleton.basic.box,
+    contentPos: RoCode.skeleton.basic.contentPos,
     path(blockView) {
         let width = blockView.contentWidth;
         let height = blockView.contentHeight;

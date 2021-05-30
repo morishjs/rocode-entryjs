@@ -1,6 +1,6 @@
 import debounce from 'lodash/debounce';
 
-Entry.Tooltip = function(data, opts) {
+RoCode.Tooltip = function(data, opts) {
     this.init(data, opts);
 };
 
@@ -34,7 +34,7 @@ Entry.Tooltip = function(data, opts) {
 
         this._resizeEventFunc = debounce(this.alignTooltips.bind(this, 200));
 
-        Entry.addEventListener('windowResized', this._resizeEventFunc);
+        RoCode.addEventListener('windowResized', this._resizeEventFunc);
     };
 
     p.render = function() {
@@ -51,7 +51,7 @@ Entry.Tooltip = function(data, opts) {
 
         const datum = this.data[0].targetDom;
         if (datum && typeof datum !== 'string' && datum.length) {
-            this.opts.restrict && this.opts.dimmed && Entry.Curtain.show(datum.get(0));
+            this.opts.restrict && this.opts.dimmed && RoCode.Curtain.show(datum.get(0));
             this.renderTooltips();
             this._rendered = true;
             if (this.opts.restrict) {
@@ -64,7 +64,7 @@ Entry.Tooltip = function(data, opts) {
         this.data.map((d) => {
             let findedDom = d.target;
             if (d.target instanceof Array) {
-                findedDom = Entry.getDom(d.target);
+                findedDom = RoCode.getDom(d.target);
             }
             const targetDom = $(findedDom);
             if (targetDom.length) {
@@ -75,13 +75,13 @@ Entry.Tooltip = function(data, opts) {
 
     p.renderBG = function() {
         if (this.opts.restrict) {
-            this._bg = Entry.Dom('div', {
+            this._bg = RoCode.Dom('div', {
                 classes: [],
                 parent: $(document.body),
             });
         } else {
-            this._bg = Entry.Dom('div', {
-                classes: ['entryDimmed', 'entryTooltipBG'],
+            this._bg = RoCode.Dom('div', {
+                classes: ['RoCodeDimmed', 'RoCodeTooltipBG'],
                 parent: $(document.body),
             });
 
@@ -99,19 +99,19 @@ Entry.Tooltip = function(data, opts) {
         }
 
         this.data.map(this._alignTooltip.bind(this));
-        this.opts.dimmed && Entry.Curtain.align();
+        this.opts.dimmed && RoCode.Curtain.align();
     };
 
     p._renderTooltip = function(data) {
         if (!data.content) {
             return;
         }
-        const tooltipWrapper = Entry.Dom('div', {
-            classes: ['entryTooltipWrapper'],
+        const tooltipWrapper = RoCode.Dom('div', {
+            classes: ['RoCodeTooltipWrapper'],
             parent: $(document.body),
         });
-        const tooltipDom = Entry.Dom('div', {
-            classes: ['entryTooltip', data.direction, data.style],
+        const tooltipDom = RoCode.Dom('div', {
+            classes: ['RoCodeTooltip', data.direction, data.style],
             parent: tooltipWrapper,
         });
 
@@ -121,7 +121,7 @@ Entry.Tooltip = function(data, opts) {
 
         tooltipDom.bind('mousedown', (e) => {
             e.stopPropagation();
-            setTimeout(() => Entry.disposeEvent.notify(undefined, true), 150);
+            setTimeout(() => RoCode.disposeEvent.notify(undefined, true), 150);
         });
         tooltipDom.bind('mouseup', (e) => {
             e.stopPropagation();
@@ -217,8 +217,8 @@ Entry.Tooltip = function(data, opts) {
     };
 
     p.renderIndicator = function(left, top) {
-        const indicator = Entry.Dom('div', {
-            classes: ['entryTooltipIndicator'],
+        const indicator = RoCode.Dom('div', {
+            classes: ['RoCodeTooltipIndicator'],
             parent: $(document.body),
         });
         indicator.html('<div></div><div></div><div></div>');
@@ -232,8 +232,8 @@ Entry.Tooltip = function(data, opts) {
             this._bg.remove();
         }
         if (this.opts.restrict) {
-            Entry.Utils.allowAction();
-            this.opts.dimmed && Entry.Curtain.hide();
+            RoCode.Utils.allowAction();
+            this.opts.dimmed && RoCode.Curtain.hide();
         }
         while (this._tooltips.length) {
             this._tooltips.pop().remove();
@@ -244,7 +244,7 @@ Entry.Tooltip = function(data, opts) {
         if (this.opts.callBack) {
             this.opts.callBack.call(this, e);
         }
-        Entry.removeEventListener('windowResized', this._resizeEventFunc);
+        RoCode.removeEventListener('windowResized', this._resizeEventFunc);
     };
 
     p.restrictAction = function() {
@@ -252,7 +252,7 @@ Entry.Tooltip = function(data, opts) {
         if (this._noDispose && this.opts.callBack) {
             this.opts.callBack.call(this);
         }
-        Entry.Utils.restrictAction(doms, this.dispose.bind(this), this._noDispose);
+        RoCode.Utils.restrictAction(doms, this.dispose.bind(this), this._noDispose);
     };
 
     p.fadeOut = function() {
@@ -268,4 +268,4 @@ Entry.Tooltip = function(data, opts) {
     p.isFaded = function() {
         return this._faded;
     };
-})(Entry.Tooltip.prototype);
+})(RoCode.Tooltip.prototype);

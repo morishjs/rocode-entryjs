@@ -10,7 +10,7 @@ import isObject from 'lodash/isObject';
  *   - disconnect : 이전 disconnectHardware 와 동일
  */
 
-type EntryHardwareSocketMessage = {
+type RoCodeHardwareSocketMessage = {
     action: string;
     data: any;
 };
@@ -25,9 +25,9 @@ export default class {
         socket.on('message', this._onAction.bind(this));
     }
 
-    _onAction(message: EntryHardwareSocketMessage) {
+    _onAction(message: RoCodeHardwareSocketMessage) {
         // 객체 구조가 이모양인건 기존 호환성때문.
-        // 정리해서 이쁘게 만들도록 하자 (entry-hw-server 수정필요)
+        // 정리해서 이쁘게 만들도록 하자 (RoCode-hw-server 수정필요)
         const { data } = message;
         const { action, data: payload } = data;
         switch (action) {

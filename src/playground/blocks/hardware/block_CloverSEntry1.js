@@ -50,18 +50,18 @@
 
 
 
-Entry.CloverSEntry1 = {
+RoCode.CloverSRoCode1 = {
     id: '38.1',
-    name: 'CloverSEntry1',
+    name: 'CloverSRoCode1',
     url: 'http://www.edu-rabbit.com',
-    imageName: 'CloverSEntry1.png',
+    imageName: 'CloverSRoCode1.png',
     title: {
         ko: '에듀래빗_클로버',
         en: 'Edurabbit_Clover',
     },
     setZero: function() {
-        if (!Entry.hw.sendQueue.SET && !Entry.hw.sendQueue.SET_CLOVER && !Entry.hw.sendQueue.GET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET && !RoCode.hw.sendQueue.SET_CLOVER && !RoCode.hw.sendQueue.GET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
                 GET_CLOVER: {},
@@ -72,9 +72,9 @@ Entry.CloverSEntry1 = {
         {            
             var self = this;
             
-            if(Entry.hw.sendQueue.SET)
+            if(RoCode.hw.sendQueue.SET)
             {
-                var keySet = Object.keys(Entry.hw.sendQueue.SET);
+                var keySet = Object.keys(RoCode.hw.sendQueue.SET);
                 var keyInt = null;
                 keySet.forEach(function(key) 
                 {
@@ -83,27 +83,27 @@ Entry.CloverSEntry1 = {
                     {
                         case self.pinMaps.Digital_Port0 :                                  
                         case self.pinMaps.Digital_Port1 :                                  
-                            Entry.hw.sendQueue.SET[key].data = 1;
+                            RoCode.hw.sendQueue.SET[key].data = 1;
                             break;
                         case self.pinMaps.Digital_Port2 :                                  
                         case self.pinMaps.Digital_Port3 :                                  
                         case self.pinMaps.Digital_Port4 :                                  
                         case self.pinMaps.Digital_Port5 :                                  
                         case self.pinMaps.Digital_Port6 :                                  
-                            Entry.hw.sendQueue.SET[key].data = 0;
+                            RoCode.hw.sendQueue.SET[key].data = 0;
                             break;
                         
                         default :
-                            Entry.hw.sendQueue.SET[key].data = 0xFF;
+                            RoCode.hw.sendQueue.SET[key].data = 0xFF;
                             break;
                     }
-                    Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                    RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
                 });
             }
             
-            if(Entry.hw.sendQueue.GET)
+            if(RoCode.hw.sendQueue.GET)
             {
-                var keySet = Object.keys(Entry.hw.sendQueue.GET);
+                var keySet = Object.keys(RoCode.hw.sendQueue.GET);
                 var keyInt = null;
                 keySet.forEach(function(key) 
                 {
@@ -111,61 +111,61 @@ Entry.CloverSEntry1 = {
                     switch(keyInt)
                     {
                         case self.sensorTypes.ULTRASONIC :
-                            Entry.hw.sendQueue.GET[key].port = [self.pinMaps.Ultrasonic_TRIG, self.pinMaps.Ultrasonic_ECHO];
-                            Entry.hw.sendQueue.GET[key].data = 1;
+                            RoCode.hw.sendQueue.GET[key].port = [self.pinMaps.Ultrasonic_TRIG, self.pinMaps.Ultrasonic_ECHO];
+                            RoCode.hw.sendQueue.GET[key].data = 1;
                             break;
                     }
-                    Entry.hw.sendQueue.GET[key].time = new Date().getTime();
+                    RoCode.hw.sendQueue.GET[key].time = new Date().getTime();
                 });
             }
 
-            if(Entry.hw.sendQueue.SET_CLOVER)
+            if(RoCode.hw.sendQueue.SET_CLOVER)
             {
-                var keySet = Object.keys(Entry.hw.sendQueue.SET_CLOVER);
+                var keySet = Object.keys(RoCode.hw.sendQueue.SET_CLOVER);
                 var keyInt = null;
                 keySet.forEach(function(key) 
                 {
                     keyInt = parseInt(key);
                     if(key == 0)  
                     {
-                        Entry.hw.sendQueue.SET_CLOVER[key].data = 0;
+                        RoCode.hw.sendQueue.SET_CLOVER[key].data = 0;
                     }
                     else if (key <= 80)  
                     {
-                        Entry.hw.sendQueue.SET_CLOVER[key].data = 1;
+                        RoCode.hw.sendQueue.SET_CLOVER[key].data = 1;
                     }
                     else if (key <= 100)  
                     {
-                        Entry.hw.sendQueue.SET_CLOVER[key].data = 0;
+                        RoCode.hw.sendQueue.SET_CLOVER[key].data = 0;
                     }
                     else if(key == 101)  
                     {
-                        Entry.hw.sendQueue.SET_CLOVER[key].data = 0;
+                        RoCode.hw.sendQueue.SET_CLOVER[key].data = 0;
                     }
-                    Entry.hw.sendQueue.SET_CLOVER[key].time = new Date().getTime();
+                    RoCode.hw.sendQueue.SET_CLOVER[key].time = new Date().getTime();
                 });
             }
             
-            if(Entry.hw.sendQueue.GET_CLOVER)
+            if(RoCode.hw.sendQueue.GET_CLOVER)
             {
-                var keySet = Object.keys(Entry.hw.sendQueue.GET_CLOVER);
+                var keySet = Object.keys(RoCode.hw.sendQueue.GET_CLOVER);
                 var keyInt = null;
                 keySet.forEach(function(key) 
                 {
                     keyInt = parseInt(key);
-                    Entry.hw.sendQueue.GET_CLOVER[key].time = new Date().getTime();
+                    RoCode.hw.sendQueue.GET_CLOVER[key].time = new Date().getTime();
                 });
             }
         }
            
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     
     
     
     
 	monitorTemplate: { 
-        imgPath: 'hw/CloverSEntry1.png',                        
+        imgPath: 'hw/CloverSRoCode1.png',                        
         width: 420,
         height: 420,
         listPorts: {  
@@ -316,48 +316,48 @@ Entry.CloverSEntry1 = {
 };
 
 
-Entry.CloverSEntry1.blockMenuBlocks = [
+RoCode.CloverSRoCode1.blockMenuBlocks = [
     
-    'CloverSEntry1_set_digital',
-    'CloverSEntry1_set_digital1',
-    'CloverSEntry1_set_tone',
-    'CloverSEntry1_set_servo',
-    'CloverSEntry1_set_motor',
-    'CloverSEntry1_set_rgb',
-    'CloverSEntry1_set_fnd',
-    'CloverSEntry1_clover_set_led',
-    'CloverSEntry1_get_digital',
-    'CloverSEntry1_get_digital_servo',
-    'CloverSEntry1_get_analog_value',
-    'CloverSEntry1_get_analog_value_map',
-    'CloverSEntry1_get_ultrasonic_value',
-    'CloverSEntry1_get_cds_value',
-    'CloverSEntry1_get_temp_value',
-    'CloverSEntry1_clover_get_sw',
+    'CloverSRoCode1_set_digital',
+    'CloverSRoCode1_set_digital1',
+    'CloverSRoCode1_set_tone',
+    'CloverSRoCode1_set_servo',
+    'CloverSRoCode1_set_motor',
+    'CloverSRoCode1_set_rgb',
+    'CloverSRoCode1_set_fnd',
+    'CloverSRoCode1_clover_set_led',
+    'CloverSRoCode1_get_digital',
+    'CloverSRoCode1_get_digital_servo',
+    'CloverSRoCode1_get_analog_value',
+    'CloverSRoCode1_get_analog_value_map',
+    'CloverSRoCode1_get_ultrasonic_value',
+    'CloverSRoCode1_get_cds_value',
+    'CloverSRoCode1_get_temp_value',
+    'CloverSRoCode1_clover_get_sw',
 ];
 
 
-Entry.CloverSEntry1.setLanguage = () => {
+RoCode.CloverSRoCode1.setLanguage = () => {
 	return {
 		ko: {
 			template: 
             {
-				CloverSEntry1_set_digital :          '%1 을 %2 %3',  
-                CloverSEntry1_set_digital1 :         '%1 을 %2 %3',
-                CloverSEntry1_set_tone :             '부저를  %1 %2 음으로 %3초 연주하기 %4',
-                CloverSEntry1_set_servo :            '%1 번 서보모터를 %2 의 각도로 정하기 %3',
-                CloverSEntry1_set_motor :            '%1 모터를 %2 으로 %3 회전 속도로 정하기 %4',
-                CloverSEntry1_set_fnd :              '클로버 숫자표시기(FND)에 %1 출력하기 %2',
-                CloverSEntry1_clover_set_led :       '클로버 LED %1 을 %2 %3',
-                CloverSEntry1_get_digital :          '스위치 %1 번 값',
-                CloverSEntry1_get_digital_servo :    '디지털 %1 번 값',
-                CloverSEntry1_get_analog_value :     '아날로그 %1 번 센서값',
-                CloverSEntry1_get_analog_value_map : '아날로그 %1 번 값의 범위를 %2 ~ %3 에서 %4 ~ %5 로 바꾼값',
-                CloverSEntry1_get_ultrasonic_value : '초음파센서 센서값',
-                CloverSEntry1_get_cds_value :        '조도센서 센서값',
-                CloverSEntry1_get_temp_value :       '온도센서 센서값',
-                CloverSEntry1_clover_get_sw :        '클로버 버튼 %1 번 값',
-                CloverSEntry1_set_rgb :              '컬러LED를 빨강%1 초록%2 파랑%3 밝기%4로 켜기 %5',
+				CloverSRoCode1_set_digital :          '%1 을 %2 %3',  
+                CloverSRoCode1_set_digital1 :         '%1 을 %2 %3',
+                CloverSRoCode1_set_tone :             '부저를  %1 %2 음으로 %3초 연주하기 %4',
+                CloverSRoCode1_set_servo :            '%1 번 서보모터를 %2 의 각도로 정하기 %3',
+                CloverSRoCode1_set_motor :            '%1 모터를 %2 으로 %3 회전 속도로 정하기 %4',
+                CloverSRoCode1_set_fnd :              '클로버 숫자표시기(FND)에 %1 출력하기 %2',
+                CloverSRoCode1_clover_set_led :       '클로버 LED %1 을 %2 %3',
+                CloverSRoCode1_get_digital :          '스위치 %1 번 값',
+                CloverSRoCode1_get_digital_servo :    '디지털 %1 번 값',
+                CloverSRoCode1_get_analog_value :     '아날로그 %1 번 센서값',
+                CloverSRoCode1_get_analog_value_map : '아날로그 %1 번 값의 범위를 %2 ~ %3 에서 %4 ~ %5 로 바꾼값',
+                CloverSRoCode1_get_ultrasonic_value : '초음파센서 센서값',
+                CloverSRoCode1_get_cds_value :        '조도센서 센서값',
+                CloverSRoCode1_get_temp_value :       '온도센서 센서값',
+                CloverSRoCode1_clover_get_sw :        '클로버 버튼 %1 번 값',
+                CloverSRoCode1_set_rgb :              '컬러LED를 빨강%1 초록%2 파랑%3 밝기%4로 켜기 %5',
 			}
 		},
 		
@@ -381,14 +381,14 @@ Entry.CloverSEntry1.setLanguage = () => {
 	}
 };
 
-Entry.CloverSEntry1.getBlocks = function() {
+RoCode.CloverSRoCode1.getBlocks = function() {
     return {
         
         
-        CloverSEntry1_set_digital: 
+        CloverSRoCode1_set_digital: 
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: 
@@ -401,8 +401,8 @@ Entry.CloverSEntry1.getBlocks = function() {
                         ["파랑색",  this.pinMaps.Digital_Port1],
 					],
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -412,8 +412,8 @@ Entry.CloverSEntry1.getBlocks = function() {
                         ["끈다",1]
 					],
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                      type: 'Indicator',
@@ -429,22 +429,22 @@ Entry.CloverSEntry1.getBlocks = function() {
                 0,
                 null,
                 ],
-                type: 'CloverSEntry1_set_digital',
+                type: 'CloverSRoCode1_set_digital',
             },
             paramsKeyMap: {
                 PORT: 0,
                 VALUE: 1,
             },
             class: 'setBlock',
-            isNotFor: ['CloverSEntry1'],
+            isNotFor: ['CloverSRoCode1'],
             func: function(sprite, script)
             {
                 
                 
                 
-                var self = Entry.CloverSEntry1;
+                var self = RoCode.CloverSRoCode1;
                 
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getField('PORT', script);
                 var value = script.getField('VALUE', script);
                 
@@ -462,10 +462,10 @@ Entry.CloverSEntry1.getBlocks = function() {
         
         
         
-        CloverSEntry1_set_digital1: 
+        CloverSRoCode1_set_digital1: 
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: 
@@ -481,8 +481,8 @@ Entry.CloverSEntry1.getBlocks = function() {
                         ["디지털10", this.pinMaps.Digital_Port6],
 					],
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -492,8 +492,8 @@ Entry.CloverSEntry1.getBlocks = function() {
                         ["LOW",0]
 					],
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                      type: 'Indicator',
@@ -509,22 +509,22 @@ Entry.CloverSEntry1.getBlocks = function() {
                 0,
                 null,
                 ],
-                type: 'CloverSEntry1_set_digital1',
+                type: 'CloverSRoCode1_set_digital1',
             },
             paramsKeyMap: {
                 PORT: 0,
                 VALUE: 1,
             },
             class: 'setBlock',
-            isNotFor: ['CloverSEntry1'],
+            isNotFor: ['CloverSRoCode1'],
             func: function(sprite, script)
             {
                 
                 
                 
-                var self = Entry.CloverSEntry1;
+                var self = RoCode.CloverSRoCode1;
                 
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getField('PORT', script);
                 var value = script.getField('VALUE', script);
                 
@@ -542,10 +542,10 @@ Entry.CloverSEntry1.getBlocks = function() {
          
          
         
-        CloverSEntry1_tone_list:
+        CloverSRoCode1_tone_list:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -570,8 +570,8 @@ Entry.CloverSEntry1.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -589,9 +589,9 @@ Entry.CloverSEntry1.getBlocks = function() {
         
         
         
-        CloverSEntry1_tone_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+        CloverSRoCode1_tone_value: {
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -605,10 +605,10 @@ Entry.CloverSEntry1.getBlocks = function() {
             def: {
                 params: [
                     {
-                        type: 'CloverSEntry1_tone_list',
+                        type: 'CloverSRoCode1_tone_list',
                     },
                 ],
-                type: 'CloverSEntry1_tone_value',
+                type: 'CloverSRoCode1_tone_value',
             },
             paramsKeyMap: {
                 NOTE: 0,
@@ -621,9 +621,9 @@ Entry.CloverSEntry1.getBlocks = function() {
         
         
         
-        CloverSEntry1_octave_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+        CloverSRoCode1_octave_list: {
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -640,8 +640,8 @@ Entry.CloverSEntry1.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -659,9 +659,9 @@ Entry.CloverSEntry1.getBlocks = function() {
         
         
         
-        CloverSEntry1_set_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+        CloverSRoCode1_set_tone: {
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -687,10 +687,10 @@ Entry.CloverSEntry1.getBlocks = function() {
             def: {
                 params: [
                     {
-                        type: 'CloverSEntry1_tone_list',
+                        type: 'CloverSRoCode1_tone_list',
                     },
                     {
-                        type: 'CloverSEntry1_octave_list',
+                        type: 'CloverSRoCode1_octave_list',
                     },
                     {
                         type: 'text',
@@ -698,7 +698,7 @@ Entry.CloverSEntry1.getBlocks = function() {
                     },
                     null,
                 ],
-                type: 'CloverSEntry1_set_tone',
+                type: 'CloverSRoCode1_set_tone',
             },
             paramsKeyMap: {
                 NOTE: 0,
@@ -706,20 +706,20 @@ Entry.CloverSEntry1.getBlocks = function() {
                 DURATION: 2,
             },
             class: 'setBlock',
-            isNotFor: ['CloverSEntry1'],
+            isNotFor: ['CloverSRoCode1'],
             func: function(sprite, script) {
                 
                 
                 
-                var self = Entry.CloverSEntry1;
+                var self = RoCode.CloverSRoCode1;
                 
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = self.pinMaps.BUZZ;
                 
                 if (!script.isStart)
                 {
                     var note = script.getValue('NOTE', script);
-                    if (!Entry.Utils.isNumber(note)) note = Entry.CloverSEntry1.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note)) note = RoCode.CloverSRoCode1.toneTable[note];
 
                     if (note < 0) {
                         note = 0;
@@ -739,7 +739,7 @@ Entry.CloverSEntry1.getBlocks = function() {
 
                     if (duration === 0) {
                         sq['SET'][port] = {
-                            type: Entry.CloverSEntry1.sensorTypes.TONE,
+                            type: RoCode.CloverSRoCode1.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -756,7 +756,7 @@ Entry.CloverSEntry1.getBlocks = function() {
                     var value = 0;
 
                     if (note != 0) {
-                        value = Entry.CloverSEntry1.toneMap[note][octave];
+                        value = RoCode.CloverSRoCode1.toneMap[note][octave];
                     }
 
                     duration = duration * 1000;
@@ -764,7 +764,7 @@ Entry.CloverSEntry1.getBlocks = function() {
                     script.timeFlag = 1;
 
                     sq['SET'][port] = {
-                        type: Entry.CloverSEntry1.sensorTypes.TONE,
+                        type: RoCode.CloverSRoCode1.sensorTypes.TONE,
                         data: {
                             value: value,
                             duration: duration,
@@ -786,11 +786,11 @@ Entry.CloverSEntry1.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
                     sq['SET'][port] = {
-                        type: Entry.CloverSEntry1.sensorTypes.TONE,
+                        type: RoCode.CloverSRoCode1.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
                 return null;
@@ -801,9 +801,9 @@ Entry.CloverSEntry1.getBlocks = function() {
         
         
         
-        CloverSEntry1_set_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+        CloverSRoCode1_set_servo: {
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -818,8 +818,8 @@ Entry.CloverSEntry1.getBlocks = function() {
                         ['5', this.pinMaps.Digital_Port6],
 					],
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -839,22 +839,22 @@ Entry.CloverSEntry1.getBlocks = function() {
                     90,
                     null,
                 ],
-                type: 'CloverSEntry1_set_servo',
+                type: 'CloverSRoCode1_set_servo',
             },
             paramsKeyMap: {
                 PORT: 0,
                 VALUE: 1,
             },
             class: 'setBlock',
-            isNotFor: ['CloverSEntry1'],
+            isNotFor: ['CloverSRoCode1'],
             func: function(sprite, script) {
                 
                 
                 
               
-                var self = Entry.CloverSEntry1;
+                var self = RoCode.CloverSRoCode1;
                 
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getField('PORT', script);
                 var value = script.getNumberValue('VALUE', script);
                 
@@ -878,9 +878,9 @@ Entry.CloverSEntry1.getBlocks = function() {
         
         
         
-        CloverSEntry1_set_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+        CloverSRoCode1_set_motor: {
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -892,8 +892,8 @@ Entry.CloverSEntry1.getBlocks = function() {
                         ['오른쪽', 1],
 					],
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -903,8 +903,8 @@ Entry.CloverSEntry1.getBlocks = function() {
                         ['뒤', 1],
 					],
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -927,7 +927,7 @@ Entry.CloverSEntry1.getBlocks = function() {
                     },
                     null,
                 ],
-                type: 'CloverSEntry1_set_motor',
+                type: 'CloverSRoCode1_set_motor',
             },
             paramsKeyMap: {
                 MOTOR_ANGLE: 0,
@@ -935,7 +935,7 @@ Entry.CloverSEntry1.getBlocks = function() {
                 MOTOR_SPEED: 2,
             },
             class: 'setBlock',
-            isNotFor: ['CloverSEntry1'],
+            isNotFor: ['CloverSRoCode1'],
             func: function(sprite, script) {
                 
                 var angle = script.getField('MOTOR_ANGLE', script);
@@ -952,15 +952,15 @@ Entry.CloverSEntry1.getBlocks = function() {
                     speed = 254;
                 }
                 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
                 
                 if(angle == 0)
                 {
-                    Entry.hw.sendQueue['SET'][0] = 
+                    RoCode.hw.sendQueue['SET'][0] = 
                     {
-                        type: Entry.CloverSEntry1.sensorTypes.MOTOR_L,
+                        type: RoCode.CloverSRoCode1.sensorTypes.MOTOR_L,
                         data: {
                             direction: direction,
                             speed: speed,
@@ -970,9 +970,9 @@ Entry.CloverSEntry1.getBlocks = function() {
                 }
                 else
                 {
-                    Entry.hw.sendQueue['SET'][1] = 
+                    RoCode.hw.sendQueue['SET'][1] = 
                     {
-                        type: Entry.CloverSEntry1.sensorTypes.MOTOR_R,
+                        type: RoCode.CloverSRoCode1.sensorTypes.MOTOR_R,
                         data: {
                             direction: direction,
                             speed: speed,
@@ -994,10 +994,10 @@ Entry.CloverSEntry1.getBlocks = function() {
         
         
         
-        CloverSEntry1_set_fnd: 
+        CloverSRoCode1_set_fnd: 
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: 
@@ -1007,8 +1007,8 @@ Entry.CloverSEntry1.getBlocks = function() {
                     accept: 'string',
                     
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                      type: 'Indicator',
@@ -1023,21 +1023,21 @@ Entry.CloverSEntry1.getBlocks = function() {
                 0,
                 null,
                 ],
-                type: 'CloverSEntry1_set_fnd',
+                type: 'CloverSRoCode1_set_fnd',
             },
             paramsKeyMap: {
                 VALUE: 0,
             },
             class: 'setBlock',
-            isNotFor: ['CloverSEntry1'],
+            isNotFor: ['CloverSRoCode1'],
             func: function(sprite, script)
             {
                 
                 
                 
-                var self = Entry.CloverSEntry1;
+                var self = RoCode.CloverSRoCode1;
                 
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = 0; 
                 var value = script.getNumberValue('VALUE', script);
                 
@@ -1055,10 +1055,10 @@ Entry.CloverSEntry1.getBlocks = function() {
         
         
         
-        CloverSEntry1_set_rgb: 
+        CloverSRoCode1_set_rgb: 
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: 
@@ -1068,32 +1068,32 @@ Entry.CloverSEntry1.getBlocks = function() {
                     accept: 'string',
                     
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
                     accept: 'string',
                     
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
                     accept: 'string',
                     
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
                     accept: 'string',
                     
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                      type: 'Indicator',
@@ -1111,7 +1111,7 @@ Entry.CloverSEntry1.getBlocks = function() {
                 10,
                 null,
                 ],
-                type: 'CloverSEntry1_set_rgb',
+                type: 'CloverSRoCode1_set_rgb',
             },
             paramsKeyMap: {
                 COLOR_R: 0,
@@ -1120,18 +1120,18 @@ Entry.CloverSEntry1.getBlocks = function() {
                 COLOR_W: 3,
             },
             class: 'setBlock',
-            isNotFor: ['CloverSEntry1'],
+            isNotFor: ['CloverSRoCode1'],
             func: function(sprite, script)
             {
                 
                 
                 
-                var self = Entry.CloverSEntry1;
+                var self = RoCode.CloverSRoCode1;
                 var color_r = script.getNumberValue('COLOR_R', script);
                 var color_g = script.getNumberValue('COLOR_G', script);
                 var color_b = script.getNumberValue('COLOR_B', script);
                 var color_w = script.getNumberValue('COLOR_W', script);
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = 101;  
                 var value;
                 
@@ -1165,9 +1165,9 @@ Entry.CloverSEntry1.getBlocks = function() {
         
         
         
-        CloverSEntry1_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+        CloverSRoCode1_get_digital: {
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -1179,8 +1179,8 @@ Entry.CloverSEntry1.getBlocks = function() {
                         ['2', this.pinMaps.SW2],
 					],
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1188,20 +1188,20 @@ Entry.CloverSEntry1.getBlocks = function() {
                 params: [
                     this.pinMaps.SW1,
                 ],
-                type: 'CloverSEntry1_get_digital',
+                type: 'CloverSRoCode1_get_digital',
             },
             paramsKeyMap: {
                 PORT: 0,
             },
             class: 'getBlock',
-            isNotFor: ['CloverSEntry1'],
+            isNotFor: ['CloverSRoCode1'],
             func: function(sprite, script) {
                 var port = script.getField('PORT', script);
-                var DIGITAL = Entry.hw.portData.DIGITAL;
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.CloverSEntry1.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue['GET'][RoCode.CloverSRoCode1.sensorTypes.DIGITAL] = {
                     port: port,
                     time: new Date().getTime(),
                 };
@@ -1216,10 +1216,10 @@ Entry.CloverSEntry1.getBlocks = function() {
         
         
         
-        CloverSEntry1_get_digital_servo: 
+        CloverSRoCode1_get_digital_servo: 
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -1234,8 +1234,8 @@ Entry.CloverSEntry1.getBlocks = function() {
                         ["10", 10],
 					],
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1243,21 +1243,21 @@ Entry.CloverSEntry1.getBlocks = function() {
                 params: [
                     3,
                 ],
-                type: 'CloverSEntry1_get_digital_servo',
+                type: 'CloverSRoCode1_get_digital_servo',
             },
             paramsKeyMap: {
                 PORT: 0,
             },
             class: 'getBlock',
-            isNotFor: ['CloverSEntry1'],
+            isNotFor: ['CloverSRoCode1'],
             func: function(sprite, script) {
                 var port = script.getField('PORT', script);
-                var DIGITAL = Entry.hw.portData.DIGITAL;
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
                 
-                Entry.hw.sendQueue['GET'][Entry.CloverSEntry1.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue['GET'][RoCode.CloverSRoCode1.sensorTypes.DIGITAL] = {
                     port: port,
                     time: new Date().getTime(),
                 };
@@ -1271,10 +1271,10 @@ Entry.CloverSEntry1.getBlocks = function() {
         
         
         
-        CloverSEntry1_get_analog_value: 
+        CloverSRoCode1_get_analog_value: 
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1288,23 +1288,23 @@ Entry.CloverSEntry1.getBlocks = function() {
 					],
                     value : 0,
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
             def: {
                 params: [ null ],
-                type: 'CloverSEntry1_get_analog_value',
+                type: 'CloverSRoCode1_get_analog_value',
             },
             paramsKeyMap: {
                 PORT: 0,
             },
             class: 'getBlock',
-            isNotFor: ['CloverSEntry1'],
+            isNotFor: ['CloverSRoCode1'],
             func: function(sprite, script) {
                 var port = script.getField('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
 
                 return ANALOG[port];
             },
@@ -1314,10 +1314,10 @@ Entry.CloverSEntry1.getBlocks = function() {
             
 
         
-        CloverSEntry1_get_analog_value_map:
+        CloverSRoCode1_get_analog_value_map:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1330,8 +1330,8 @@ Entry.CloverSEntry1.getBlocks = function() {
                         ["2", 1],
 					],
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     
                 },
                 {
@@ -1372,7 +1372,7 @@ Entry.CloverSEntry1.getBlocks = function() {
                         params: ['100'],
                     },
                 ],
-                type: 'CloverSEntry1_get_analog_value_map',
+                type: 'CloverSRoCode1_get_analog_value_map',
             },
             paramsKeyMap: {
                 PORT: 0,
@@ -1382,10 +1382,10 @@ Entry.CloverSEntry1.getBlocks = function() {
                 VALUE5: 4,
             },
             class: 'getBlock',
-            isNotFor: ['CloverSEntry1'],
+            isNotFor: ['CloverSRoCode1'],
             func: function(sprite, script) {
                 var port = script.getField('PORT', script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var value2 = script.getNumberValue('VALUE2', script);
                 var value3 = script.getNumberValue('VALUE3', script);
                 var value4 = script.getNumberValue('VALUE4', script);
@@ -1438,9 +1438,9 @@ Entry.CloverSEntry1.getBlocks = function() {
         
         
         
-        CloverSEntry1_get_ultrasonic_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+        CloverSRoCode1_get_ultrasonic_value: {
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1450,32 +1450,32 @@ Entry.CloverSEntry1.getBlocks = function() {
             def: {
                 params: [
                 ],
-                type: 'CloverSEntry1_get_ultrasonic_value',
+                type: 'CloverSRoCode1_get_ultrasonic_value',
             },
             paramsKeyMap: {
             },
             class: 'getBlock',
-            isNotFor: ['CloverSEntry1'],
+            isNotFor: ['CloverSRoCode1'],
             func: function(sprite, script) {
-                var port1 = Entry.CloverSEntry1.pinMaps.Ultrasonic_TRIG;
-                var port2 = Entry.CloverSEntry1.pinMaps.Ultrasonic_ECHO;
+                var port1 = RoCode.CloverSRoCode1.pinMaps.Ultrasonic_TRIG;
+                var port2 = RoCode.CloverSRoCode1.pinMaps.Ultrasonic_ECHO;
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][port1];
-                delete Entry.hw.sendQueue['SET'][port2];
+                delete RoCode.hw.sendQueue['SET'][port1];
+                delete RoCode.hw.sendQueue['SET'][port2];
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.CloverSEntry1.sensorTypes.ULTRASONIC] = {
+                RoCode.hw.sendQueue['GET'][RoCode.CloverSRoCode1.sensorTypes.ULTRASONIC] = {
                     port: [port1, port2],
                     data : 0,
                     time: new Date().getTime(),
                 };
                 
-                return Entry.hw.portData.ULTRASONIC;
+                return RoCode.hw.portData.ULTRASONIC;
             },
             syntax: { js: [], py: [] },
         },
@@ -1483,9 +1483,9 @@ Entry.CloverSEntry1.getBlocks = function() {
         
         
         
-        CloverSEntry1_get_cds_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+        CloverSRoCode1_get_cds_value: {
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1495,20 +1495,20 @@ Entry.CloverSEntry1.getBlocks = function() {
             def: {
                 params: [
                 ],
-                type: 'CloverSEntry1_get_cds_value',
+                type: 'CloverSRoCode1_get_cds_value',
             },
             paramsKeyMap: {
             },
             class: 'getBlock',
-            isNotFor: ['CloverSEntry1'],
+            isNotFor: ['CloverSRoCode1'],
             func: function(sprite, script) {
                 
                 
                 
-                var self = Entry.CloverSEntry1;
+                var self = RoCode.CloverSRoCode1;
                 
                 var port = self.pinMaps.CDS;
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 
                 return ANALOG[port];
             },
@@ -1518,9 +1518,9 @@ Entry.CloverSEntry1.getBlocks = function() {
         
         
         
-        CloverSEntry1_get_temp_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+        CloverSRoCode1_get_temp_value: {
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1530,20 +1530,20 @@ Entry.CloverSEntry1.getBlocks = function() {
             def: {
                 params: [
                 ],
-                type: 'CloverSEntry1_get_temp_value',
+                type: 'CloverSRoCode1_get_temp_value',
             },
             paramsKeyMap: {
             },
             class: 'getBlock',
-            isNotFor: ['CloverSEntry1'],
+            isNotFor: ['CloverSRoCode1'],
             func: function(sprite, script) {
                 
                 
                 
-                var self = Entry.CloverSEntry1;
+                var self = RoCode.CloverSRoCode1;
                 
                 var port = self.pinMaps.CDS;
-                var temp = Entry.hw.portData.TEMP;
+                var temp = RoCode.hw.portData.TEMP;
                 
                 return temp;
             },
@@ -1553,10 +1553,10 @@ Entry.CloverSEntry1.getBlocks = function() {
         
         
         
-        CloverSEntry1_clover_set_led: 
+        CloverSRoCode1_clover_set_led: 
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: 
@@ -1575,8 +1575,8 @@ Entry.CloverSEntry1.getBlocks = function() {
                         ["8",  8],
 					],
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1586,8 +1586,8 @@ Entry.CloverSEntry1.getBlocks = function() {
                         ["끈다",1]
 					],
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                      type: 'Indicator',
@@ -1603,22 +1603,22 @@ Entry.CloverSEntry1.getBlocks = function() {
                 0,
                 null,
                 ],
-                type: 'CloverSEntry1_clover_set_led',
+                type: 'CloverSRoCode1_clover_set_led',
             },
             paramsKeyMap: {
                 NUM : 0,
                 VALUE: 1,
             },
             class: 'setBlock',
-            isNotFor: ['CloverSEntry1'],
+            isNotFor: ['CloverSRoCode1'],
             func: function(sprite, script)
             {
                 
                 
                 
-                var self = Entry.CloverSEntry1;
+                var self = RoCode.CloverSRoCode1;
                 
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port;
                 var id = self.CloverMaps.MODULE1; 
                 var num = script.getField('NUM', script);
@@ -1674,9 +1674,9 @@ Entry.CloverSEntry1.getBlocks = function() {
         
         
         
-        CloverSEntry1_clover_get_sw: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+        CloverSRoCode1_clover_get_sw: {
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -1694,8 +1694,8 @@ Entry.CloverSEntry1.getBlocks = function() {
                         ["8",  8],
 					],
                     fontSize: 12,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1703,30 +1703,30 @@ Entry.CloverSEntry1.getBlocks = function() {
                 params: [
                     1,
                 ],
-                type: 'CloverSEntry1_clover_get_sw',
+                type: 'CloverSRoCode1_clover_get_sw',
             },
             paramsKeyMap: {
                 PORT: 0,
             },
             class: 'getBlock',
-            isNotFor: ['CloverSEntry1'],
+            isNotFor: ['CloverSRoCode1'],
             func: function(sprite, script) {
                 
                 
                 
                 
-                var self = Entry.CloverSEntry1;
+                var self = RoCode.CloverSRoCode1;
                 
                 var port = self.CloverMaps.MODULE0;
                 var num = script.getField('PORT', script) - 1;
                 var id = self.CloverMaps.MODULE0 - port + 1;
-                var CLOVER = Entry.hw.portData.CLOVER;
+                var CLOVER = RoCode.hw.portData.CLOVER;
                 var value;
                                 
-                if (!Entry.hw.sendQueue['GET_CLOVER']) {
-                    Entry.hw.sendQueue['GET_CLOVER'] = {};
+                if (!RoCode.hw.sendQueue['GET_CLOVER']) {
+                    RoCode.hw.sendQueue['GET_CLOVER'] = {};
                 }
-                Entry.hw.sendQueue['GET_CLOVER'][Entry.CloverSEntry1.sensorTypes.CLOVER_SW] = {
+                RoCode.hw.sendQueue['GET_CLOVER'][RoCode.CloverSRoCode1.sensorTypes.CLOVER_SW] = {
                     port: port,
                     data: 0,
                     time: new Date().getTime(),
@@ -1745,6 +1745,6 @@ Entry.CloverSEntry1.getBlocks = function() {
     };
 };
 
-module.exports = Entry.CloverSEntry1;
+module.exports = RoCode.CloverSRoCode1;
 
 

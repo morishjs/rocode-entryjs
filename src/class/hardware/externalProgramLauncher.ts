@@ -77,10 +77,10 @@ class ExternalProgramLauncher {
             $(window).one('blur', () => {
                 isInstalled = true;
             });
-            Entry.dispatchEvent('workspaceUnbindUnload', true);
+            RoCode.dispatchEvent('workspaceUnbindUnload', true);
             location.assign(encodeURI(customUrl));
             setTimeout(() => {
-                Entry.dispatchEvent('workspaceBindUnload', true);
+                RoCode.dispatchEvent('workspaceBindUnload', true);
             }, 100);
             setTimeout(() => {
                 if (isInstalled === false) {
@@ -125,7 +125,7 @@ class ExternalProgramLauncher {
     private init(schemeUrl: string, callback: (programInstalled: boolean) => void) {
         const settings = this.getLoadingViewStyle();
 
-        this.loadingView = window.open('/views/hwLoading.html', 'entry_hw_launcher', settings);
+        this.loadingView = window.open('/views/hwLoading.html', 'RoCode_hw_launcher', settings);
         let fnInterval: NodeJS.Timeout = undefined;
         fnInterval = setTimeout(() => {
             this.runViewer(schemeUrl, callback);
@@ -136,7 +136,7 @@ class ExternalProgramLauncher {
     private runViewer(schemeUrl: string, callback: (programInstalled: boolean) => void) {
         this.loadingView.document.write(
             // eslint-disable-next-line max-len
-            `<iframe src='${schemeUrl}' onload='opener.Entry.hw.programLauncher.set()' style='display:none;width:0;height:0'></iframe>`
+            `<iframe src='${schemeUrl}' onload='opener.RoCode.hw.programLauncher.set()' style='display:none;width:0;height:0'></iframe>`
         );
         let tryCounter = 0;
         const programNotInstalled = false;

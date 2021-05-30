@@ -3,7 +3,7 @@
  */
 'use strict';
 
-Entry.Parser = function(mode, syntax, cm) {
+RoCode.Parser = function(mode, syntax, cm) {
     this._mode = mode; // maze ai workspace
     this.syntax = {};
     this.codeMirror = cm;
@@ -22,7 +22,7 @@ Entry.Parser = function(mode, syntax, cm) {
 
     switch (this._lang) {
         case 'js':
-            this._parser = new Entry.JSParser(this.syntax);
+            this._parser = new RoCode.JSParser(this.syntax);
 
             var syntax = this.syntax;
 
@@ -54,7 +54,7 @@ Entry.Parser = function(mode, syntax, cm) {
 
             break;
         case 'block':
-            this._parser = new Entry.BlockParser(this.syntax);
+            this._parser = new RoCode.BlockParser(this.syntax);
             break;
     }
 };
@@ -101,7 +101,7 @@ Entry.Parser = function(mode, syntax, cm) {
                             );
                         }
 
-                        Entry.toast.alert('Error', error.message);
+                        RoCode.toast.alert('Error', error.message);
                     }
                     result = [];
                 }
@@ -153,11 +153,11 @@ Entry.Parser = function(mode, syntax, cm) {
     };
 
     p.mappingSyntax = function(mode) {
-        var types = Object.keys(Entry.block);
+        var types = Object.keys(RoCode.block);
 
         for (var i = 0; i < types.length; i++) {
             var type = types[i];
-            var block = Entry.block[type];
+            var block = RoCode.block[type];
             if (block.mode === mode && this.availableCode.indexOf(type) > -1) {
                 var syntaxArray = block.syntax;
                 if (!syntaxArray) continue;
@@ -192,7 +192,7 @@ Entry.Parser = function(mode, syntax, cm) {
             });
         });
 
-        if (playerCode instanceof Entry.Code) {
+        if (playerCode instanceof RoCode.Code) {
             var blocks = playerCode.getBlockList();
             blocks.forEach(function(item) {
                 if (
@@ -216,4 +216,4 @@ Entry.Parser = function(mode, syntax, cm) {
 
         this.availableCode = this.availableCode.concat(availableList);
     };
-})(Entry.Parser.prototype);
+})(RoCode.Parser.prototype);

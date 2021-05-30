@@ -1,4 +1,4 @@
-Entry.skeleton.basic_event = {
+RoCode.skeleton.basic_event = {
     executable: true,
     path(blockView) {
         let width = blockView.contentWidth + 20;

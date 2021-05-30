@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Hasseam = {
+RoCode.Hasseam = {
     id: '1.11',
     name: 'hasseam',
     url: 'http://www.hanibot.com',
@@ -10,24 +10,24 @@ Entry.Hasseam = {
         en: 'Hasseam Board',
     },
     setZero: function() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 SET: {},
             };
         } else {
-            var keySet = Object.keys(Entry.hw.sendQueue.SET);
+            var keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach(function(key) {
-                if(Entry.hw.sendQueue.SET[key].type==Entry.Hasseam.sensorTypes.DCMOTOR){
-                    Entry.hw.sendQueue.SET[key].data.value1=0;
-                    Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                if(RoCode.hw.sendQueue.SET[key].type==RoCode.Hasseam.sensorTypes.DCMOTOR){
+                    RoCode.hw.sendQueue.SET[key].data.value1=0;
+                    RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
                 }else{
-                    Entry.hw.sendQueue.SET[key].data = 0;
-                    Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                    RoCode.hw.sendQueue.SET[key].data = 0;
+                    RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
                 }
             });
         }
-        Entry.hw.sendQueue.GET={};
-        Entry.hw.update();
+        RoCode.hw.sendQueue.GET={};
+        RoCode.hw.update();
     },
     sensorTypes: {
         ALIVE: 0,
@@ -80,7 +80,7 @@ Entry.Hasseam = {
     lowList: ['low', '0', 'off'],
     BlockState: {},
 };
-Entry.Hasseam.setLanguage = function() {
+RoCode.Hasseam.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -148,7 +148,7 @@ Entry.Hasseam.setLanguage = function() {
         },
     };
 };
-Entry.Hasseam.blockMenuBlocks = [
+RoCode.Hasseam.blockMenuBlocks = [
     'hasseam_get_analog_value',
     'hasseam_get_analog_mapping',
     'hasseam_get_digital_bluetooth',
@@ -166,12 +166,12 @@ Entry.Hasseam.blockMenuBlocks = [
     'hasseam_module_digital_bluetooth',
     'hasseam_module_digital_oled',
 ];
-Entry.Hasseam.getBlocks = function() {
+RoCode.Hasseam.getBlocks = function() {
     return {
         //region hasseam 한쌤보드
         hasseam_list_analog_basic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -188,8 +188,8 @@ Entry.Hasseam.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -204,8 +204,8 @@ Entry.Hasseam.getBlocks = function() {
             },
         },
         hasseam_list_pullup_setting: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -218,8 +218,8 @@ Entry.Hasseam.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -234,8 +234,8 @@ Entry.Hasseam.getBlocks = function() {
             },
         },
         hasseam_list_digital_basic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -260,8 +260,8 @@ Entry.Hasseam.getBlocks = function() {
                     ],
                     value: '10',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -276,8 +276,8 @@ Entry.Hasseam.getBlocks = function() {
             },
         },
         hasseam_list_digital_octave: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -296,8 +296,8 @@ Entry.Hasseam.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -312,8 +312,8 @@ Entry.Hasseam.getBlocks = function() {
             },
         },
         hasseam_list_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -330,8 +330,8 @@ Entry.Hasseam.getBlocks = function() {
                     ],
                     value: '11',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -346,8 +346,8 @@ Entry.Hasseam.getBlocks = function() {
             },
         },
         hasseam_list_digital_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -360,8 +360,8 @@ Entry.Hasseam.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -376,8 +376,8 @@ Entry.Hasseam.getBlocks = function() {
             },
         },
         hasseam_list_digital_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -401,8 +401,8 @@ Entry.Hasseam.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -417,8 +417,8 @@ Entry.Hasseam.getBlocks = function() {
             },
         },
         hasseam_list_digital_lcd: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -431,8 +431,8 @@ Entry.Hasseam.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -447,8 +447,8 @@ Entry.Hasseam.getBlocks = function() {
             },
         },
         hasseam_list_digital_dcmotor_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -461,8 +461,8 @@ Entry.Hasseam.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -477,8 +477,8 @@ Entry.Hasseam.getBlocks = function() {
             },
         },
         hasseam_list_digital_btData_select: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -491,8 +491,8 @@ Entry.Hasseam.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -507,8 +507,8 @@ Entry.Hasseam.getBlocks = function() {
             },
         },
         hasseam_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.hasseam_get_analog_value,
@@ -545,14 +545,14 @@ Entry.Hasseam.getBlocks = function() {
             func: function(sprite, script) {
                 var port = script.getValue('PORT', script);
                 var opr = script.getNumberValue('OPERATOR');
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
 
                 if (port[0] === 'A') port = port.substring(1);
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.Hasseam.sensorTypes.ANALOG] = {
+                RoCode.hw.sendQueue['GET'][RoCode.Hasseam.sensorTypes.ANALOG] = {
                     port: port,
                     data: opr,
                     time: new Date().getTime(),
@@ -563,8 +563,8 @@ Entry.Hasseam.getBlocks = function() {
             syntax: { js: [], py: ['hasseam.get_analog_value(%1 %2)'] },
         },
         hasseam_get_analog_mapping: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.hasseam_get_analog_mapping,
@@ -638,7 +638,7 @@ Entry.Hasseam.getBlocks = function() {
                 var port = script.getValue('PORT', script);
                 var opr = script.getNumberValue('OPERATOR');
                 var result = 0;
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var value2 = script.getNumberValue('VALUE2', script);
                 var value3 = script.getNumberValue('VALUE3', script);
                 var value4 = script.getNumberValue('VALUE4', script);
@@ -664,13 +664,13 @@ Entry.Hasseam.getBlocks = function() {
                 result = Math.min(value5, result);
                 result = Math.max(value4, result);
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                if(Entry.hw.sendQueue.SET[port]){
-                    return Entry.hw.sendQueue.SET[port].data;
+                if(RoCode.hw.sendQueue.SET[port]){
+                    return RoCode.hw.sendQueue.SET[port].data;
                 }else{
-                    Entry.hw.sendQueue['GET'][Entry.Hasseam.sensorTypes.DIGITAL] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.Hasseam.sensorTypes.DIGITAL] = {
                         port: port,
                         data: opr,
                         time: new Date().getTime(),
@@ -685,8 +685,8 @@ Entry.Hasseam.getBlocks = function() {
             },
         },
         hasseam_get_digital_bluetooth: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.hasseam_get_digital_bluetooth,
@@ -705,15 +705,15 @@ Entry.Hasseam.getBlocks = function() {
             isNotFor: ['hasseam'],
             func: function(sprite, script) {
                 var port = 2;
-                var getString = Entry.hw.portData.READ_BLUETOOTH;
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                var getString = RoCode.hw.portData.READ_BLUETOOTH;
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][port];
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                delete RoCode.hw.sendQueue['SET'][port];
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.Hasseam.sensorTypes.READ_BLUETOOTH] = {
+                RoCode.hw.sendQueue['GET'][RoCode.Hasseam.sensorTypes.READ_BLUETOOTH] = {
                     port: port,
                     time: new Date().getTime(),
                 };
@@ -723,8 +723,8 @@ Entry.Hasseam.getBlocks = function() {
             syntax: { js: [], py: ['hasseam.get_digital_bluetooth()'] },
         },
         hasseam_get_digital_ultrasonic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.hasseam_get_digital_ultrasonic,
@@ -763,20 +763,20 @@ Entry.Hasseam.getBlocks = function() {
                 var port1 = script.getNumberValue('PORT1');
                 var port2 = script.getNumberValue('PORT2');
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                delete Entry.hw.sendQueue['SET'][port1];
-                delete Entry.hw.sendQueue['SET'][port2];
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                delete RoCode.hw.sendQueue['SET'][port1];
+                delete RoCode.hw.sendQueue['SET'][port2];
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.Hasseam.sensorTypes.ULTRASONIC] = {
+                RoCode.hw.sendQueue['GET'][RoCode.Hasseam.sensorTypes.ULTRASONIC] = {
                     port: [port1, port2],
                     time: new Date().getTime(),
                 };
 
-                return Entry.hw.portData.ULTRASONIC || 0;
+                return RoCode.hw.portData.ULTRASONIC || 0;
             },
             syntax: {
                 js: [],
@@ -784,8 +784,8 @@ Entry.Hasseam.getBlocks = function() {
             },
         },
         hasseam_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -824,15 +824,15 @@ Entry.Hasseam.getBlocks = function() {
                 var port = script.getNumberValue('PORT');
                 var opr = script.getNumberValue('OPERATOR');
                 //"down = 0" or "up = 2"
-                var DIGITAL = Entry.hw.portData.DIGITAL;
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                if(Entry.hw.sendQueue.SET[port]){
-                    return Entry.hw.sendQueue.SET[port].data;
+                if(RoCode.hw.sendQueue.SET[port]){
+                    return RoCode.hw.sendQueue.SET[port].data;
                 }else{
-                    Entry.hw.sendQueue['GET'][Entry.Hasseam.sensorTypes.DIGITAL] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.Hasseam.sensorTypes.DIGITAL] = {
                         port: port,
                         data: opr,
                         time: new Date().getTime(),
@@ -843,8 +843,8 @@ Entry.Hasseam.getBlocks = function() {
             syntax: { js: [], py: ['hasseam.get_digital(%1,%2)'] },
         },
         hasseam_get_digital_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -881,15 +881,15 @@ Entry.Hasseam.getBlocks = function() {
             func: function(sprite, script) {
                 var port = script.getNumberValue('PORT');
                 var opr = script.getNumberValue('OPERATOR');
-                var DIGITAL = Entry.hw.portData.DIGITAL;
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                if(Entry.hw.sendQueue.SET[port]){
-                    return Entry.hw.sendQueue.SET[port].data;
+                if(RoCode.hw.sendQueue.SET[port]){
+                    return RoCode.hw.sendQueue.SET[port].data;
                 }else{
-                    Entry.hw.sendQueue['GET'][Entry.Hasseam.sensorTypes.DIGITAL] = {
+                    RoCode.hw.sendQueue['GET'][RoCode.Hasseam.sensorTypes.DIGITAL] = {
                         port: port,
                         data: opr,
                         time: new Date().getTime(),
@@ -901,8 +901,8 @@ Entry.Hasseam.getBlocks = function() {
             syntax: { js: [], py: ['hasseam.get_digital_toggle(%1 %2)'] },
         },
         hasseam_get_digital_pir: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -929,12 +929,12 @@ Entry.Hasseam.getBlocks = function() {
             isNotFor: ['hasseam'],
             func: function(sprite, script) {
                 var port = script.getNumberValue('PORT');
-                var DIGITAL = Entry.hw.portData.DIGITAL;
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
 
-                if (!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if (!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.Hasseam.sensorTypes.PIR] = {
+                RoCode.hw.sendQueue['GET'][RoCode.Hasseam.sensorTypes.PIR] = {
                     port: port,
                     time: new Date().getTime(),
                 };
@@ -944,8 +944,8 @@ Entry.Hasseam.getBlocks = function() {
             syntax: { js: [], py: ['hasseam.get_digital_pir(%1)'] },
         },
         hasseam_set_digital_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -991,18 +991,18 @@ Entry.Hasseam.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.Hasseam.highList.indexOf(value) > -1) {
+                if (RoCode.Hasseam.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.Hasseam.lowList.indexOf(value) > -1) {
+                } else if (RoCode.Hasseam.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.Hasseam.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.Hasseam.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1012,8 +1012,8 @@ Entry.Hasseam.getBlocks = function() {
             syntax: { js: [], py: ['hasseam.set_digital_toggle(%1, %2)'] },
         },
         hasseam_set_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1060,11 +1060,11 @@ Entry.Hasseam.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.min(value, 255);
                 value = Math.max(value, 0);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.Hasseam.sensorTypes.PWM,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.Hasseam.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1074,8 +1074,8 @@ Entry.Hasseam.getBlocks = function() {
             syntax: { js: [], py: ['hasseam.set_digital_pwm(%1, %2)'] },
         },
         hasseam_set_digital_rgbled: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1145,11 +1145,11 @@ Entry.Hasseam.getBlocks = function() {
                     value[i] = Math.min(value[i], 200);
                     value[i] = Math.max(value[i], 0);
                 }
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.Hasseam.sensorTypes.RGBLED,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.Hasseam.sensorTypes.RGBLED,
                     data: {
                         redValue: value[0],
                         greenValue: value[1],
@@ -1163,8 +1163,8 @@ Entry.Hasseam.getBlocks = function() {
             syntax: { js: [], py: ['hasseam.set_digital_pwm(%1, %2)'] },
         },
         hasseam_set_digital_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1210,11 +1210,11 @@ Entry.Hasseam.getBlocks = function() {
                 value = Math.min(value, 180);
                 value = Math.max(value, 0);
 
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.Hasseam.sensorTypes.SERVO,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.Hasseam.sensorTypes.SERVO,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1224,8 +1224,8 @@ Entry.Hasseam.getBlocks = function() {
             syntax: { js: [], py: ['hasseam.set_digital_servo(%1, %2)'] },
         },
         hasseam_set_digital_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1289,8 +1289,8 @@ Entry.Hasseam.getBlocks = function() {
 
                 if (!script.isStart) {
                     var note = script.getValue('NOTE');
-                    if (!Entry.Utils.isNumber(note)) {
-                        note = Entry.Hasseam.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note)) {
+                        note = RoCode.Hasseam.toneTable[note];
                     }
                     if (note < 0) {
                         note = 0;
@@ -1300,12 +1300,12 @@ Entry.Hasseam.getBlocks = function() {
                     if (duration < 0) {
                         duration = 0;
                     }
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     if (duration === 0) {
-                        Entry.hw.sendQueue['SET'][port] = {
-                            type: Entry.Hasseam.sensorTypes.TONE,
+                        RoCode.hw.sendQueue['SET'][port] = {
+                            type: RoCode.Hasseam.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -1317,15 +1317,15 @@ Entry.Hasseam.getBlocks = function() {
                         octave = 8;
                     }
                     if (note != 0) {
-                        value = Entry.Hasseam.toneMap[note][octave];
+                        value = RoCode.Hasseam.toneMap[note][octave];
                     }
 
                     duration = duration * 1000;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.Hasseam.sensorTypes.TONE,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.Hasseam.sensorTypes.TONE,
                         data: {
                             value: value,
                             duration: duration,
@@ -1342,12 +1342,12 @@ Entry.Hasseam.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.Hasseam.sensorTypes.TONE,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.Hasseam.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1357,8 +1357,8 @@ Entry.Hasseam.getBlocks = function() {
             },
         },
         hasseam_set_digital_dcmotor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1424,11 +1424,11 @@ Entry.Hasseam.getBlocks = function() {
                 speedValue = Math.round(speedValue);
                 speedValue = Math.min(speedValue, 255);
                 speedValue = Math.max(speedValue, 0);
-                if (!Entry.hw.sendQueue['SET']) {
-                    Entry.hw.sendQueue['SET'] = {};
+                if (!RoCode.hw.sendQueue['SET']) {
+                    RoCode.hw.sendQueue['SET'] = {};
                 }
-                Entry.hw.sendQueue['SET'][port] = {
-                    type: Entry.Hasseam.sensorTypes.DCMOTOR,
+                RoCode.hw.sendQueue['SET'][port] = {
+                    type: RoCode.Hasseam.sensorTypes.DCMOTOR,
                     data: {
                         port0: directionPort,
                         port1: speedPort,
@@ -1443,8 +1443,8 @@ Entry.Hasseam.getBlocks = function() {
             syntax: { js: [], py: ['hasseam.set_digital_dcmotor(%1, %2, %3, %4)'] },
         },
         hasseam_module_digital_lcd: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             template: Lang.template.hasseam_module_digital_lcd,
@@ -1472,7 +1472,7 @@ Entry.Hasseam.getBlocks = function() {
                     },
                     {
                         type: 'text',
-                        params: ['My Entry!!'],
+                        params: ['My RoCode!!'],
                     },
                     null,
                 ],
@@ -1501,17 +1501,17 @@ Entry.Hasseam.getBlocks = function() {
                         text[0] = string;
                     }
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = 60 / fps * 50;
 
-                    Entry.hw.sendQueue['SET'][line] = {
-                        type: Entry.Hasseam.sensorTypes.LCD,
+                    RoCode.hw.sendQueue['SET'][line] = {
+                        type: RoCode.Hasseam.sensorTypes.LCD,
                         data: {
                             text0: text[0],
                             text1: text[1],
@@ -1542,15 +1542,15 @@ Entry.Hasseam.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: ['hasseam.module_digital_lcd(%1, %2)'] },
         },
         hasseam_module_digital_oled: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1587,7 +1587,7 @@ Entry.Hasseam.getBlocks = function() {
                     },
                     {
                         type: 'text',
-                        params: ['My Entry!!'],
+                        params: ['My RoCode!!'],
                     },
                     null,
                 ],
@@ -1618,13 +1618,13 @@ Entry.Hasseam.getBlocks = function() {
                     } else {
                         text[0] = string;
                     }
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = 60 / fps * 50;
 
                     coodinate_x = Math.min(coodinate_x, 127);
@@ -1632,8 +1632,8 @@ Entry.Hasseam.getBlocks = function() {
                     coodinate_y = Math.min(coodinate_y, 63);
                     coodinate_y = Math.max(coodinate_y, 0);
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.Hasseam.sensorTypes.OLED,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.Hasseam.sensorTypes.OLED,
                         data: {
                             value0: coodinate_x,
                             value1: coodinate_y,
@@ -1666,15 +1666,15 @@ Entry.Hasseam.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: ['hasseam.Module_digital_oled(%1, %2, %3)'] },
         },
         hasseam_module_digital_bluetooth: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             template: Lang.template.hasseam_module_digital_bluetooth,
@@ -1695,7 +1695,7 @@ Entry.Hasseam.getBlocks = function() {
                 params: [
                     {
                         type: 'text',
-                        params: ['My Entry!!'],
+                        params: ['My RoCode!!'],
                     },
                     null,
                 ],
@@ -1719,17 +1719,17 @@ Entry.Hasseam.getBlocks = function() {
                     } else {
                         text[0] = string;
                     }
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
+                    var fps = RoCode.FPS || 60;
                     var timeValue = 60 / fps * 50;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.Hasseam.sensorTypes.WRITE_BLUETOOTH,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.Hasseam.sensorTypes.WRITE_BLUETOOTH,
                         data: {
                             text0: text[0],
                             text1: text[1],
@@ -1760,7 +1760,7 @@ Entry.Hasseam.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1770,4 +1770,4 @@ Entry.Hasseam.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Hasseam;
+module.exports = RoCode.Hasseam;

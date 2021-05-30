@@ -6,8 +6,8 @@
 /*
  *
  */
-Entry.BlockExtension = function(content, blockView) {
+RoCode.BlockExtension = function(content, blockView) {
 };
 
 (function(p) {
-})(Entry.BlockExtension.prototype);
+})(RoCode.BlockExtension.prototype);

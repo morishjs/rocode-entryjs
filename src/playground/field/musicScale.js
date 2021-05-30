@@ -1,12 +1,12 @@
-import { MusicScale } from '@entrylabs/tool';
+import { MusicScale } from '@RoCodelabs/tool';
 
-Entry.FieldMusicScale = class FieldMusicScale extends Entry.Field {
+RoCode.FieldMusicScale = class FieldMusicScale extends RoCode.Field {
     constructor(content, blockView, index) {
         super(content, blockView, index);
         this._block = blockView.block;
         this._blockView = blockView;
 
-        this.box = new Entry.BoxModel();
+        this.box = new RoCode.BoxModel();
 
         this.svgGroup = null;
 
@@ -17,7 +17,7 @@ Entry.FieldMusicScale = class FieldMusicScale extends Entry.Field {
         let { arrowColor } = content;
         const { deletable, emphasized } = this._block;
 
-        if (deletable === Entry.Block.DELETABLE_FALSE_LIGHTEN || emphasized) {
+        if (deletable === RoCode.Block.DELETABLE_FALSE_LIGHTEN || emphasized) {
             arrowColor = blockView._fillColor;
         }
 
@@ -44,7 +44,7 @@ Entry.FieldMusicScale = class FieldMusicScale extends Entry.Field {
 
         if (!this.svgGroup) {
             this.svgGroup = blockView.contentSvgGroup.elem('g', {
-                class: 'entry-field-music-scale',
+                class: 'RoCode-field-music-scale',
             });
         }
 
@@ -81,7 +81,7 @@ Entry.FieldMusicScale = class FieldMusicScale extends Entry.Field {
                 fill: this._textColor,
                 'font-size': `${+that._font_size}px`,
                 'font-weight': 'bold',
-                'font-family': EntryStatic.fontFamily || 'NanumGothic',
+                'font-family': RoCodeStatic.fontFamily || 'NanumGothic',
             });
         }
 
@@ -134,7 +134,7 @@ Entry.FieldMusicScale = class FieldMusicScale extends Entry.Field {
                 this._selectBlockView();
             };
         }
-        this.disposeEvent = Entry.disposeEvent.attach(this, action);
+        this.disposeEvent = RoCode.disposeEvent.attach(this, action);
     }
 
     getArrow() {
@@ -147,8 +147,8 @@ Entry.FieldMusicScale = class FieldMusicScale extends Entry.Field {
     }
 
     renderOptions(neighborFields) {
-        this.optionGroup = Entry.Dom('div', {
-            class: 'entry-widget-music-scale',
+        this.optionGroup = RoCode.Dom('div', {
+            class: 'RoCode-widget-music-scale',
             parent: $('body'),
         });
         const currentValue = this.getValue();

@@ -1,12 +1,12 @@
 'use strict';
 
-Entry.LiterallycanvasPainter = class LiterallycanvasPainter {
+RoCode.LiterallycanvasPainter = class LiterallycanvasPainter {
     constructor(view) {
         this.view = view;
-        this.baseUrl = Entry.painterBaseUrl;
+        this.baseUrl = RoCode.painterBaseUrl;
 
         this.file = {
-            id: Entry.generateHash(),
+            id: RoCode.generateHash(),
             name: '새그림',
             modified: false,
             mode: 'new', // new or edit
@@ -14,9 +14,9 @@ Entry.LiterallycanvasPainter = class LiterallycanvasPainter {
 
         this._keyboardEvents = [];
 
-        Entry.addEventListener('pictureImport', this.addPicture.bind(this));
-        Entry.addEventListener('run', this.detachKeyboardEvents.bind(this));
-        Entry.addEventListener('stop', this.attachKeyboardEvents.bind(this));
+        RoCode.addEventListener('pictureImport', this.addPicture.bind(this));
+        RoCode.addEventListener('run', this.detachKeyboardEvents.bind(this));
+        RoCode.addEventListener('stop', this.attachKeyboardEvents.bind(this));
 
         //dropdown header dispose
         $('body').on('mouseup', '.active li', () => {
@@ -64,11 +64,11 @@ Entry.LiterallycanvasPainter = class LiterallycanvasPainter {
 
         const watchFunc = function(e) {
             if (e && ((e.shape && !e.opts && e.shape.isPass) || (e.opts && e.opts.isPass))) {
-                Entry.do('processPicture', e, that.lc);
+                RoCode.do('processPicture', e, that.lc);
             } else {
-                Entry.do('editPicture', e, that.lc);
+                RoCode.do('editPicture', e, that.lc);
             }
-            if (Entry.stage.selectedObject) {
+            if (RoCode.stage.selectedObject) {
                 that.file.modified = true;
             }
         };
@@ -102,7 +102,7 @@ Entry.LiterallycanvasPainter = class LiterallycanvasPainter {
     changePicture(picture = {}) {
         if (this.file && this.file.id === picture.id) {
             if (!this.file.isUpdate) {
-                Entry.stage.updateObject();
+                RoCode.stage.updateObject();
                 this.file.isUpdate = true;
             }
             return;
@@ -115,11 +115,11 @@ Entry.LiterallycanvasPainter = class LiterallycanvasPainter {
 
             this.isConfirm = true;
             let wasRun = false;
-            if (Entry.engine.state === 'run') {
-                Entry.engine.toggleStop();
+            if (RoCode.engine.state === 'run') {
+                RoCode.engine.toggleStop();
                 wasRun = true;
             }
-            entrylms.confirm(Lang.Menus.save_modified_shape).then((result) => {
+            RoCodelms.confirm(Lang.Menus.save_modified_shape).then((result) => {
                 this.isConfirm = false;
                 if (result === true) {
                     this.fileSave(true);
@@ -130,11 +130,11 @@ Entry.LiterallycanvasPainter = class LiterallycanvasPainter {
                 if (!wasRun) {
                     this.afterModified(picture);
                 } else {
-                    Entry.playground.injectPicture();
+                    RoCode.playground.injectPicture();
                 }
             });
         }
-        Entry.stage.updateObject();
+        RoCode.stage.updateObject();
         this.file.isUpdate = true;
     }
 
@@ -144,18 +144,18 @@ Entry.LiterallycanvasPainter = class LiterallycanvasPainter {
         this.lc.clear(false);
 
         if (picture.id) {
-            file.id = picture.id || Entry.generateHash();
+            file.id = picture.id || RoCode.generateHash();
             file.name = picture.name;
             file.mode = 'edit';
             file.objectId = picture.objectId;
 
             this.addPicture(picture, true);
         } else {
-            file.id = Entry.generateHash();
+            file.id = RoCode.generateHash();
         }
         // INFO: picture 변경시마다 undoStack 리셋
         this.lc.undoStack = [];
-        Entry.stateManager.removeAllPictureCommand();
+        RoCode.stateManager.removeAllPictureCommand();
     }
 
     getImageSrc(picture) {
@@ -165,7 +165,7 @@ Entry.LiterallycanvasPainter = class LiterallycanvasPainter {
         }
 
         const { imageType = 'png', filename } = picture || {};
-        return `${Entry.defaultPath}/uploads/${filename.substring(0, 2)}/${filename.substring(
+        return `${RoCode.defaultPath}/uploads/${filename.substring(0, 2)}/${filename.substring(
             2,
             4
         )}/image/${filename}.${imageType}`;
@@ -178,7 +178,7 @@ Entry.LiterallycanvasPainter = class LiterallycanvasPainter {
             image.src = picture.fileurl;
         } else {
             // deprecated
-            image.src = `${Entry.defaultPath}/uploads/${picture.filename.substring(
+            image.src = `${RoCode.defaultPath}/uploads/${picture.filename.substring(
                 0,
                 2
             )}/${picture.filename.substring(2, 4)}/image/${picture.filename}.png`;
@@ -243,13 +243,13 @@ Entry.LiterallycanvasPainter = class LiterallycanvasPainter {
     }
 
     fileSave(taskParam) {
-        if (!Entry.stage.selectedObject) {
+        if (!RoCode.stage.selectedObject) {
             return;
         }
         this.lc.trigger('dispose');
         const dataURL = this.lc.getImage().toDataURL();
         this.file_ = JSON.parse(JSON.stringify(this.file));
-        Entry.dispatchEvent('saveCanvasImage', {
+        RoCode.dispatchEvent('saveCanvasImage', {
             file: this.file_,
             image: dataURL,
             task: taskParam,
@@ -260,7 +260,7 @@ Entry.LiterallycanvasPainter = class LiterallycanvasPainter {
     }
 
     newPicture() {
-        if (!Entry.stage.selectedObject) {
+        if (!RoCode.stage.selectedObject) {
             return;
         }
         const newPicture = {
@@ -269,19 +269,19 @@ Entry.LiterallycanvasPainter = class LiterallycanvasPainter {
                 width: 1,
             },
             //filename: "_1x1",
-            fileurl: `${Entry.mediaFilePath}_1x1.png`,
+            fileurl: `${RoCode.mediaFilePath}_1x1.png`,
             name: Lang.Painter.new_picture,
         };
 
-        newPicture.id = Entry.generateHash();
+        newPicture.id = RoCode.generateHash();
         if (this.file && this.file.objectId) {
             newPicture.objectId = this.file.objectId;
         }
-        Entry.playground.addPicture(newPicture, true);
+        RoCode.playground.addPicture(newPicture, true);
     }
 
     _keyboardPressControl(e) {
-        if (!this.isShow || Entry.Utils.isInInput(e)) {
+        if (!this.isShow || RoCode.Utils.isInInput(e)) {
             return;
         }
 
@@ -310,7 +310,7 @@ Entry.LiterallycanvasPainter = class LiterallycanvasPainter {
     }
 
     _keyboardUpControl(e) {
-        if (!this.isShow || Entry.Utils.isInInput(e)) {
+        if (!this.isShow || RoCode.Utils.isInInput(e)) {
             return;
         }
 
@@ -318,7 +318,7 @@ Entry.LiterallycanvasPainter = class LiterallycanvasPainter {
     }
 
     toggleFullscreen(isFullscreen) {
-        const { painter = {}, pictureView_ } = Entry.playground;
+        const { painter = {}, pictureView_ } = RoCode.playground;
         const { view = {} } = painter;
         const $view = $(view);
         if ((isFullscreen !== true && $view.hasClass('fullscreen')) || isFullscreen === false) {
@@ -344,101 +344,101 @@ Entry.LiterallycanvasPainter = class LiterallycanvasPainter {
     initTopBar() {
         const painter = this;
 
-        const ce = Entry.createElement;
+        const ce = RoCode.createElement;
 
         const painterTop = ce(document.getElementById('canvas-top-menu'));
-        painterTop.addClass('entryPlaygroundPainterTop');
-        painterTop.addClass('entryPainterTop');
+        painterTop.addClass('RoCodePlaygroundPainterTop');
+        painterTop.addClass('RoCodePainterTop');
 
-        const painterTopFullscreenButton = ce('div', 'entryPainterTopFullscreenButton');
+        const painterTopFullscreenButton = ce('div', 'RoCodePainterTopFullscreenButton');
         painterTopFullscreenButton.setAttribute('title', Lang.Painter.fullscreen);
         painterTopFullscreenButton.setAttribute('alt', Lang.Painter.fullscreen);
-        painterTopFullscreenButton.addClass('entryPlaygroundPainterFullscreenButton');
+        painterTopFullscreenButton.addClass('RoCodePlaygroundPainterFullscreenButton');
         painterTopFullscreenButton.bindOnClick(() => {
             this.toggleFullscreen();
         });
         this.fullscreenButton = painterTopFullscreenButton;
         painterTop.appendChild(painterTopFullscreenButton);
 
-        const painterTopMenu = ce('nav', 'entryPainterTopMenu');
-        painterTopMenu.addClass('entryPlaygroundPainterTopMenu');
+        const painterTopMenu = ce('nav', 'RoCodePainterTopMenu');
+        painterTopMenu.addClass('RoCodePlaygroundPainterTopMenu');
         painterTop.appendChild(painterTopMenu);
 
-        const painterTopMenuFileNew = ce('div', 'entryPainterTopMenuFileNew');
+        const painterTopMenuFileNew = ce('div', 'RoCodePainterTopMenuFileNew');
         painterTopMenuFileNew.bindOnClick(painter.newPicture.bind(this));
-        painterTopMenuFileNew.addClass('entryPlaygroundPainterTopMenuFileNew');
+        painterTopMenuFileNew.addClass('RoCodePlaygroundPainterTopMenuFileNew');
         painterTopMenuFileNew.innerHTML = Lang.Painter.new_picture;
         painterTopMenu.appendChild(painterTopMenuFileNew);
 
-        const painterTopMenuFile = ce('div', 'entryPainterTopMenuFile');
-        painterTopMenuFile.addClass('entryPlaygroundPainterTopMenuFile painterTopHeader');
+        const painterTopMenuFile = ce('div', 'RoCodePainterTopMenuFile');
+        painterTopMenuFile.addClass('RoCodePlaygroundPainterTopMenuFile painterTopHeader');
         painterTopMenuFile.innerHTML = Lang.Painter.file;
         const painterTopMenuFileDropdown = ce('div');
 
-        painterTopMenuFileDropdown.addClass('entryPlaygroundPainterTopMenuFileDropdown');
+        painterTopMenuFileDropdown.addClass('RoCodePlaygroundPainterTopMenuFileDropdown');
         painterTopMenu.appendChild(painterTopMenuFile);
         painterTopMenuFile.appendChild(painterTopMenuFileDropdown);
 
-        const painterTopMenuEdit = ce('div', 'entryPainterTopMenuEdit');
-        painterTopMenuEdit.addClass('entryPlaygroundPainterTopMenuEdit painterTopHeader');
+        const painterTopMenuEdit = ce('div', 'RoCodePainterTopMenuEdit');
+        painterTopMenuEdit.addClass('RoCodePlaygroundPainterTopMenuEdit painterTopHeader');
         painterTopMenuEdit.innerHTML = Lang.Painter.edit;
         painterTopMenu.appendChild(painterTopMenuEdit);
 
-        const painterTopMenuFileSave = ce('div', 'entryPainterTopMenuFileSave');
+        const painterTopMenuFileSave = ce('div', 'RoCodePainterTopMenuFileSave');
         painterTopMenuFileSave.bindOnClick(() => {
             painter.fileSave(false);
         });
-        painterTopMenuFileSave.addClass('entryPainterTopMenuFileSave');
+        painterTopMenuFileSave.addClass('RoCodePainterTopMenuFileSave');
         painterTopMenuFileSave.innerHTML = Lang.Painter.painter_file_save;
         painterTopMenuFileDropdown.appendChild(painterTopMenuFileSave);
 
-        const painterTopMenuFileSaveAsLink = ce('div', 'entryPainterTopMenuFileSaveAs');
+        const painterTopMenuFileSaveAsLink = ce('div', 'RoCodePainterTopMenuFileSaveAs');
         painterTopMenuFileSaveAsLink.bindOnClick(() => {
             painter.file.mode = 'new';
             painter.fileSave(false);
         });
-        painterTopMenuFileSaveAsLink.addClass('entryPlaygroundPainterTopMenuFileSaveAs');
+        painterTopMenuFileSaveAsLink.addClass('RoCodePlaygroundPainterTopMenuFileSaveAs');
         painterTopMenuFileSaveAsLink.innerHTML = Lang.Painter.painter_file_saveas;
         painterTopMenuFileDropdown.appendChild(painterTopMenuFileSaveAsLink);
 
         const painterTopMenuEditDropdown = ce('div');
-        painterTopMenuEditDropdown.addClass('entryPlaygroundPainterTopMenuEditDropdown');
+        painterTopMenuEditDropdown.addClass('RoCodePlaygroundPainterTopMenuEditDropdown');
         painterTopMenuEdit.appendChild(painterTopMenuEditDropdown);
 
-        const painterTopMenuEditImport = ce('div', 'entryPainterTopMenuEditImport');
+        const painterTopMenuEditImport = ce('div', 'RoCodePainterTopMenuEditImport');
         painterTopMenuEditImport.bindOnClick(() => {
-            Entry.dispatchEvent('openPictureImport');
+            RoCode.dispatchEvent('openPictureImport');
         });
-        painterTopMenuEditImport.addClass('entryPainterTopMenuEditImport');
+        painterTopMenuEditImport.addClass('RoCodePainterTopMenuEditImport');
         painterTopMenuEditImport.innerHTML = Lang.Painter.get_file;
         painterTopMenuEditDropdown.appendChild(painterTopMenuEditImport);
 
-        const painterTopMenuEditCopy = ce('div', 'entryPainterTopMenuEditCopy');
+        const painterTopMenuEditCopy = ce('div', 'RoCodePainterTopMenuEditCopy');
         painterTopMenuEditCopy.bindOnClick(() => {
             painter.copy();
         });
-        painterTopMenuEditCopy.addClass('entryPlaygroundPainterTopMenuEditCopy');
+        painterTopMenuEditCopy.addClass('RoCodePlaygroundPainterTopMenuEditCopy');
         painterTopMenuEditCopy.innerHTML = Lang.Painter.copy_file;
         painterTopMenuEditDropdown.appendChild(painterTopMenuEditCopy);
 
-        const painterTopMenuEditCut = ce('div', 'entryPainterTopMenuEditCut');
+        const painterTopMenuEditCut = ce('div', 'RoCodePainterTopMenuEditCut');
         painterTopMenuEditCut.bindOnClick(() => {
             painter.cut();
         });
-        painterTopMenuEditCut.addClass('entryPlaygroundPainterTopMenuEditCut');
+        painterTopMenuEditCut.addClass('RoCodePlaygroundPainterTopMenuEditCut');
         painterTopMenuEditCut.innerHTML = Lang.Painter.cut_picture;
         painterTopMenuEditDropdown.appendChild(painterTopMenuEditCut);
 
-        const painterTopMenuEditPaste = ce('div', 'entryPainterTopMenuEditPaste');
+        const painterTopMenuEditPaste = ce('div', 'RoCodePainterTopMenuEditPaste');
         painterTopMenuEditPaste.bindOnClick(() => {
             painter.paste();
         });
-        painterTopMenuEditPaste.addClass('entryPlaygroundPainterTopMenuEditPaste');
+        painterTopMenuEditPaste.addClass('RoCodePlaygroundPainterTopMenuEditPaste');
         painterTopMenuEditPaste.innerHTML = Lang.Painter.paste_picture;
         painterTopMenuEditDropdown.appendChild(painterTopMenuEditPaste);
 
-        const painterTopMenuEditEraseAll = ce('div', 'entryPainterTopMenuEditEraseAll');
-        painterTopMenuEditEraseAll.addClass('entryPlaygroundPainterTopMenuEditEraseAll');
+        const painterTopMenuEditEraseAll = ce('div', 'RoCodePainterTopMenuEditEraseAll');
+        painterTopMenuEditEraseAll.addClass('RoCodePlaygroundPainterTopMenuEditEraseAll');
         painterTopMenuEditEraseAll.innerHTML = Lang.Painter.remove_all;
         painterTopMenuEditEraseAll.bindOnClick(() => {
             painter.lc.clear();
@@ -453,15 +453,15 @@ Entry.LiterallycanvasPainter = class LiterallycanvasPainter {
             $(painterTopMenuEdit).removeClass('active');
         });
 
-        const painterTopStageXY = ce('div', 'entryPainterTopStageXY');
-        const entryPainterTopStageXYLabel = ce('span', 'entryPainterTopStageXYLabel');
-        this.painterTopStageXY = entryPainterTopStageXYLabel;
-        painterTopStageXY.addClass('entryPlaygroundPainterTopStageXY');
-        entryPainterTopStageXYLabel.addClass('entryPainterTopStageXYLabel');
-        painterTopStageXY.appendChild(entryPainterTopStageXYLabel);
+        const painterTopStageXY = ce('div', 'RoCodePainterTopStageXY');
+        const RoCodePainterTopStageXYLabel = ce('span', 'RoCodePainterTopStageXYLabel');
+        this.painterTopStageXY = RoCodePainterTopStageXYLabel;
+        painterTopStageXY.addClass('RoCodePlaygroundPainterTopStageXY');
+        RoCodePainterTopStageXYLabel.addClass('RoCodePainterTopStageXYLabel');
+        painterTopStageXY.appendChild(RoCodePainterTopStageXYLabel);
         painterTop.appendChild(painterTopStageXY);
 
-        Entry.addEventListener('pictureSelected', this.changePicture.bind(this));
+        RoCode.addEventListener('pictureSelected', this.changePicture.bind(this));
 
         function menuClickEvent(e) {
             $(painterTopMenuFile).removeClass('active');
@@ -482,10 +482,10 @@ Entry.LiterallycanvasPainter = class LiterallycanvasPainter {
 
         const events = this._keyboardEvents;
 
-        let evt = Entry.keyPressed;
+        let evt = RoCode.keyPressed;
         evt && events.push(evt.attach(this, this._keyboardPressControl));
 
-        evt = Entry.keyUpped;
+        evt = RoCode.keyUpped;
         evt && events.push(evt.attach(this, this._keyboardUpControl));
     }
 

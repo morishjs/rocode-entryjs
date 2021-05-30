@@ -4,7 +4,7 @@ const DelayTime = 0;
 let LmotorSpeed = 0;
 let RmotorSpeed = 0;
 
-Entry.krc = {
+RoCode.krc = {
     id: '3A.2',
     name: 'KRC',
     url: 'http://www.kairobot.co.kr/',
@@ -16,19 +16,19 @@ Entry.krc = {
 
     setZero: () => {
         //  하드웨어 초기화 로직
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            const keySet = Object.keys(Entry.hw.sendQueue.SET);
+            const keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach((key) => {
-                Entry.hw.sendQueue.SET[parseInt(key, 10)].data = 0;
-                Entry.hw.sendQueue.SET[parseInt(key, 10)].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[parseInt(key, 10)].data = 0;
+                RoCode.hw.sendQueue.SET[parseInt(key, 10)].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
         LmotorSpeed = 0;
         RmotorSpeed = 0;
     },
@@ -51,7 +51,7 @@ Entry.krc = {
     BlockState: {},
 };
 
-Entry.krc.blockMenuBlocks = [
+RoCode.krc.blockMenuBlocks = [
     /// 하드웨어 블록 등록 , 여기에 등록된 블록이 순서대로 나열되며 설정한 이름으로 화면에 보임
     'KrcBuzzerOnOff',
     // 스피커 삐 소리
@@ -75,7 +75,7 @@ Entry.krc.blockMenuBlocks = [
     'KrcGetAnalogMapping',
 ];
 
-Entry.krc.setLanguage = function() {
+RoCode.krc.setLanguage = function() {
     // 블록 이름  번역
     return {
         ko: {
@@ -135,11 +135,11 @@ Entry.krc.setLanguage = function() {
     };
 };
 
-Entry.krc.getBlocks = function() {
+RoCode.krc.getBlocks = function() {
     return {
         KrcDigitalPortOnOffList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -153,8 +153,8 @@ Entry.krc.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -169,8 +169,8 @@ Entry.krc.getBlocks = function() {
             },
         },
         KrcBacklightOnoffList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -184,8 +184,8 @@ Entry.krc.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -201,8 +201,8 @@ Entry.krc.getBlocks = function() {
         },
 
         KrcDigitalPortList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -230,8 +230,8 @@ Entry.krc.getBlocks = function() {
                     ],
                     value: '9',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -246,8 +246,8 @@ Entry.krc.getBlocks = function() {
             },
         },
         KrcServoPortList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -266,8 +266,8 @@ Entry.krc.getBlocks = function() {
                     ],
                     value: '1', // 기본 표시값
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -283,8 +283,8 @@ Entry.krc.getBlocks = function() {
         },
 
         KrcAllOnOffList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -298,8 +298,8 @@ Entry.krc.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -314,8 +314,8 @@ Entry.krc.getBlocks = function() {
             },
         },
         KrcAnalogPortList: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -335,8 +335,8 @@ Entry.krc.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -353,8 +353,8 @@ Entry.krc.getBlocks = function() {
 
         // 1. 삐소리
         KrcBuzzerOnOff: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -393,13 +393,13 @@ Entry.krc.getBlocks = function() {
                 //698;   // 음 주파수
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
                     if (duration === 0) {
                         // 음 길이가 0 이면
-                        Entry.hw.sendQueue.SET[parseInt(port, 10)] = {
-                            type: Entry.krc.sensorTypes.TONE,
+                        RoCode.hw.sendQueue.SET[parseInt(port, 10)] = {
+                            type: RoCode.krc.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -414,8 +414,8 @@ Entry.krc.getBlocks = function() {
                     script.timeFlag = 1;
                     // 시간플래그 셋
 
-                    Entry.hw.sendQueue.SET[parseInt(port, 10)] = {
-                        type: Entry.krc.sensorTypes.TONE,
+                    RoCode.hw.sendQueue.SET[parseInt(port, 10)] = {
+                        type: RoCode.krc.sensorTypes.TONE,
                         data: {
                             value: value2,
                             duration: duration / 10,
@@ -432,12 +432,12 @@ Entry.krc.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.hw.sendQueue.SET[parseInt(port, 10)] = {
-                        type: Entry.krc.sensorTypes.TONE,
+                    RoCode.hw.sendQueue.SET[parseInt(port, 10)] = {
+                        type: RoCode.krc.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -446,8 +446,8 @@ Entry.krc.getBlocks = function() {
 
         // 3. DC 모터 속도 정하기
         KrcSetMotorSpeed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -498,11 +498,11 @@ Entry.krc.getBlocks = function() {
 
                 if (!(LmotorSpeed === lspeed) || !(RmotorSpeed === rspeed)) {
                     if (!script.isStart) {
-                        if (!Entry.hw.sendQueue.SET) {
-                            Entry.hw.sendQueue.SET = {};
+                        if (!RoCode.hw.sendQueue.SET) {
+                            RoCode.hw.sendQueue.SET = {};
                         }
-                        Entry.hw.sendQueue.SET[parseInt(port, 10)] = {
-                            type: Entry.krc.sensorTypes.MOTOR,
+                        RoCode.hw.sendQueue.SET[parseInt(port, 10)] = {
+                            type: RoCode.krc.sensorTypes.MOTOR,
                             data: [lspeed, rspeed],
                             time: new Date().getTime(),
                         };
@@ -522,7 +522,7 @@ Entry.krc.getBlocks = function() {
                         // 설정 시간이 지나면 출력 리셋
                         delete script.timeFlag;
                         delete script.isStart;
-                        Entry.engine.isContinue = false;
+                        RoCode.engine.isContinue = false;
                         return script.callReturn();
                     }
                 } else {
@@ -534,8 +534,8 @@ Entry.krc.getBlocks = function() {
 
         // 4. DC 모터 정지하기
         KrcMotorStop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -563,11 +563,11 @@ Entry.krc.getBlocks = function() {
                 const rspeed = 0;
 
                 if (!(LmotorSpeed === 0) || !(RmotorSpeed === 0)) {
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
-                    Entry.hw.sendQueue.SET[parseInt(port, 10)] = {
-                        type: Entry.krc.sensorTypes.MOTOR,
+                    RoCode.hw.sendQueue.SET[parseInt(port, 10)] = {
+                        type: RoCode.krc.sensorTypes.MOTOR,
                         data: [lspeed, rspeed],
                         time: new Date().getTime(),
                     };
@@ -582,8 +582,8 @@ Entry.krc.getBlocks = function() {
 
         // 5.  서보 모터 각도 설정하기
         KrcSetServo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -645,11 +645,11 @@ Entry.krc.getBlocks = function() {
                 speed *= speed * 255;
                 //angle += 1;
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[parseInt(port, 10)] = {
-                    type: Entry.krc.sensorTypes.SERVO,
+                RoCode.hw.sendQueue.SET[parseInt(port, 10)] = {
+                    type: RoCode.krc.sensorTypes.SERVO,
                     data: [angle, speed],
                     time: new Date().getTime(),
                 };
@@ -660,8 +660,8 @@ Entry.krc.getBlocks = function() {
 
         // 10. 디지털  출력
         KrcDigitalOnOff: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -703,11 +703,11 @@ Entry.krc.getBlocks = function() {
                 const port = script.getNumberValue('PORT');
                 const value = script.getNumberValue('VALUE');
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[parseInt(port, 10)] = {
-                    type: Entry.krc.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue.SET[parseInt(port, 10)] = {
+                    type: RoCode.krc.sensorTypes.DIGITAL,
                     /// 출력 디바이스
                     data: value,
                     time: new Date().getTime(),
@@ -719,8 +719,8 @@ Entry.krc.getBlocks = function() {
 
         // 11. 디지털입력
         KrcGetDgitalValue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             //basic_boolean_field
@@ -749,22 +749,22 @@ Entry.krc.getBlocks = function() {
             func: (sprite, script) => {
                 const port = script.getNumberValue('PORT');
 
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
-                Entry.hw.sendQueue.GET[Entry.krc.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue.GET[RoCode.krc.sensorTypes.DIGITAL] = {
                     port: port,
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.DIGITAL[parseInt(port)];
+                return RoCode.hw.portData.DIGITAL[parseInt(port)];
             },
             syntax: { js: [], py: [] },
         },
 
         // 12. 아날로그 읽기
         KrcGetAnalogValue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.KrcGetAnalogValue,
@@ -795,7 +795,7 @@ Entry.krc.getBlocks = function() {
             isNotFor: ['KRC'],
             func: (sprite, script) => {
                 const BtnIndex = script.getNumberValue('PORT');
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
 
                 return ANALOG[parseInt(BtnIndex)];
             },
@@ -804,8 +804,8 @@ Entry.krc.getBlocks = function() {
 
         // 15. 초음파 센서 값
         KrcGetUsonicValue: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.KrcGetUsonicValue,
@@ -837,7 +837,7 @@ Entry.krc.getBlocks = function() {
             isNotFor: ['KRC'],
             func: (sprite, script) => {
                 const BtnIndex = script.getNumberValue('PORT');
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 return (ANALOG[parseInt(BtnIndex)] * 4 * 3) / 10;
             },
             syntax: { js: [], py: [] },
@@ -845,8 +845,8 @@ Entry.krc.getBlocks = function() {
 
         // 21. LCD글자출력
         KrcSetLcdString: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -896,7 +896,7 @@ Entry.krc.getBlocks = function() {
             class: 'krc_LV5',
             isNotFor: ['KRC'],
             func: (sprite, script) => {
-                //var sq = Entry.hw.sendQueue;
+                //var sq = RoCode.hw.sendQueue;
                 const line2 = script.getValue('LINE', script);
                 const column2 = script.getValue('COLUMN', script);
                 const string = script.getValue('STRING', script);
@@ -906,26 +906,26 @@ Entry.krc.getBlocks = function() {
                 if (!script.isStart) {
                     if (typeof string === 'string') {
                         for (let i = 0; i < string.length; i++) {
-                            buf = Entry.memaker.toByte(string[parseInt(i, 10)]);
+                            buf = RoCode.memaker.toByte(string[parseInt(i, 10)]);
                             text[parseInt(i, 10)] = buf;
-                            //text[i] = Entry.memaker.toByte(string[i]);
-                            //text.i = Entry.memaker.toByte(string.i);
+                            //text[i] = RoCode.memaker.toByte(string[i]);
+                            //text.i = RoCode.memaker.toByte(string.i);
                         }
                     } else {
                         text[0] = string;
                     }
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    //var fps = Entry.FPS || 60;
+                    //var fps = RoCode.FPS || 60;
                     // var timeValue = 60 / fps * 50;
 
-                    Entry.hw.sendQueue.SET[3] = {
-                        type: Entry.krc.sensorTypes.LCD_SET,
+                    RoCode.hw.sendQueue.SET[3] = {
+                        type: RoCode.krc.sensorTypes.LCD_SET,
                         data: {
                             line: line2,
                             column: column2,
@@ -952,7 +952,7 @@ Entry.krc.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = true;
+                    RoCode.engine.isContinue = true;
                     return script.callReturn();
                 }
             },
@@ -961,8 +961,8 @@ Entry.krc.getBlocks = function() {
 
         // . LCD 백라이트
         KrcSetLcdBacklight: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -995,11 +995,11 @@ Entry.krc.getBlocks = function() {
             func: (sprite, script) => {
                 const value = script.getNumberValue('VALUE');
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[1] = {
-                    type: Entry.krc.sensorTypes.LCD_SET,
+                RoCode.hw.sendQueue.SET[1] = {
+                    type: RoCode.krc.sensorTypes.LCD_SET,
                     data: [value, 1, 1],
                     time: new Date().getTime(),
                 };
@@ -1010,8 +1010,8 @@ Entry.krc.getBlocks = function() {
 
         // 23. LCD 지우기
         KrcSetLcdClear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1032,11 +1032,11 @@ Entry.krc.getBlocks = function() {
             func: (sprite, script) => {
                 //var port = 0;
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[4] = {
-                    type: Entry.krc.sensorTypes.LCD_SET,
+                RoCode.hw.sendQueue.SET[4] = {
+                    type: RoCode.krc.sensorTypes.LCD_SET,
                     data: [4, 4, 4],
                     time: new Date().getTime(),
                 };
@@ -1046,8 +1046,8 @@ Entry.krc.getBlocks = function() {
         },
         // 3. 소리/빛/가변저항 - 2) mapping 값
         KrcGetAnalogMapping: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.KrcGetAnalogMapping,
@@ -1138,4 +1138,4 @@ Entry.krc.getBlocks = function() {
         },
     };
 };
-module.exports = Entry.krc;
+module.exports = RoCode.krc;

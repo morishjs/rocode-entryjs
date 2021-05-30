@@ -13,7 +13,7 @@
  *  장치와 연관된 변수 및 함수 정의
  ***************************************************************************************/
 
-Entry.byrobot_dronefighter_drive = {
+RoCode.byrobot_dronefighter_drive = {
     id: 'F.2',
     name: 'byrobot_dronefighter_drive',
     url: 'http://www.byrobot.co.kr/',
@@ -38,7 +38,7 @@ Entry.byrobot_dronefighter_drive = {
         }
     },
 
-    // Entry 좌측 하단 하드웨어 모니터 화면에 표시하는 속성
+    // RoCode 좌측 하단 하드웨어 모니터 화면에 표시하는 속성
     // listPorts와 ports 두 곳 동시에 동일한 속성을 표시할 수는 없음
     monitorTemplate: {
         imgPath: 'hw/byrobot_dronefighter_drive.png', // 배경 이미지
@@ -56,7 +56,7 @@ Entry.byrobot_dronefighter_drive = {
             attitude_yaw:                   {name: Lang.Blocks.byrobot_dronefighter_drone_attitude_yaw,         type: 'input', pos: { x: 0, y: 0 }},
             irmessage_irdata:               {name: Lang.Blocks.byrobot_dronefighter_drone_irmessage,            type: 'input', pos: { x: 0, y: 0 }},
             // */
-            
+
             state_modeVehicle:              {name: 'Vehicle Mode',              type: 'input',  pos: { x: 0, y: 0 }},
             state_modeDrive:                {name: 'Drive Mode',                type: 'input',  pos: { x: 0, y: 0 }},
             state_battery:                  {name: 'Battery',                   type: 'input',  pos: { x: 0, y: 0 }},
@@ -76,8 +76,8 @@ Entry.byrobot_dronefighter_drive = {
             joystick_right_command:         {name: 'Right Joystick Command',    type: 'input',  pos: { x: 0, y: 0 }},
             button_button:                  {name: 'Button',                    type: 'input',  pos: { x: 0, y: 0 }},
             button_event:                   {name: 'Button Event',              type: 'input',  pos: { x: 0, y: 0 }},
-            entryhw_countTransferReserved:  {name: 'Transfer Buffer',           type: 'output', pos: { x: 0, y: 0 }},
-            
+            RoCodehw_countTransferReserved:  {name: 'Transfer Buffer',           type: 'output', pos: { x: 0, y: 0 }},
+
         },
 
         // 모니터 화면 지정 위치와 선으로 연결하여 표시하는 값
@@ -94,7 +94,7 @@ Entry.byrobot_dronefighter_drive = {
             script.isStart = true;
             script.timeFlag = 1;
 
-            var fps = Entry.FPS || 60;
+            var fps = RoCode.FPS || 60;
             var timeValue = 60 / fps * ms;
 
             setTimeout(function() {
@@ -107,7 +107,7 @@ Entry.byrobot_dronefighter_drive = {
         } else {
             delete script.timeFlag;
             delete script.isStart;
-            Entry.engine.isContinue = false;
+            RoCode.engine.isContinue = false;
             return 'Finish';
         }
     },
@@ -123,30 +123,30 @@ Entry.byrobot_dronefighter_drive = {
         brightness = Math.min(brightness, 255);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', target);
-        Entry.hw.setDigitalPortValue('light_manual_flags', flags);
-        Entry.hw.setDigitalPortValue('light_manual_brightness', brightness);
+        RoCode.hw.setDigitalPortValue('target', target);
+        RoCode.hw.setDigitalPortValue('light_manual_flags', flags);
+        RoCode.hw.setDigitalPortValue('light_manual_brightness', brightness);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['light_manual_flags'];
-        delete Entry.hw.sendQueue['light_manual_brightness'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['light_manual_flags'];
+        delete RoCode.hw.sendQueue['light_manual_brightness'];
     },
 
     transferBuzzer: function(mode, value, time) {
         // 전송
-        Entry.hw.setDigitalPortValue('target', 0x11);
-        Entry.hw.setDigitalPortValue('buzzer_mode', mode);
-        Entry.hw.setDigitalPortValue('buzzer_value', value);
-        Entry.hw.setDigitalPortValue('buzzer_time', time);
+        RoCode.hw.setDigitalPortValue('target', 0x11);
+        RoCode.hw.setDigitalPortValue('buzzer_mode', mode);
+        RoCode.hw.setDigitalPortValue('buzzer_value', value);
+        RoCode.hw.setDigitalPortValue('buzzer_time', time);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['buzzer_mode'];
-        delete Entry.hw.sendQueue['buzzer_value'];
-        delete Entry.hw.sendQueue['buzzer_time'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['buzzer_mode'];
+        delete RoCode.hw.sendQueue['buzzer_value'];
+        delete RoCode.hw.sendQueue['buzzer_time'];
     },
 
     transferVibrator: function(mode, timeOn, timeOff, timeRun) {
@@ -157,19 +157,19 @@ Entry.byrobot_dronefighter_drive = {
         timeOff = Math.min(timeOff, 60000);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', 0x11);
-        Entry.hw.setDigitalPortValue('vibrator_mode', mode);
-        Entry.hw.setDigitalPortValue('vibrator_on', timeOn);
-        Entry.hw.setDigitalPortValue('vibrator_off', timeOff);
-        Entry.hw.setDigitalPortValue('vibrator_total', timeRun);
+        RoCode.hw.setDigitalPortValue('target', 0x11);
+        RoCode.hw.setDigitalPortValue('vibrator_mode', mode);
+        RoCode.hw.setDigitalPortValue('vibrator_on', timeOn);
+        RoCode.hw.setDigitalPortValue('vibrator_off', timeOff);
+        RoCode.hw.setDigitalPortValue('vibrator_total', timeRun);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['vibrator_mode'];
-        delete Entry.hw.sendQueue['vibrator_on'];
-        delete Entry.hw.sendQueue['vibrator_off'];
-        delete Entry.hw.sendQueue['vibrator_total'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['vibrator_mode'];
+        delete RoCode.hw.sendQueue['vibrator_on'];
+        delete RoCode.hw.sendQueue['vibrator_off'];
+        delete RoCode.hw.sendQueue['vibrator_total'];
     },
 
     transferIrMessage: function(irmessage) {
@@ -178,13 +178,13 @@ Entry.byrobot_dronefighter_drive = {
         irmessage = Math.min(irmessage, 127);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', 0x10);
-        Entry.hw.setDigitalPortValue('irmessage_data', irmessage);
+        RoCode.hw.setDigitalPortValue('target', 0x10);
+        RoCode.hw.setDigitalPortValue('irmessage_data', irmessage);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['irmessage_data'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['irmessage_data'];
     },
 
     transferMotorSingle: function(motorIndex, motorDirection, motorSpeed) {
@@ -193,30 +193,30 @@ Entry.byrobot_dronefighter_drive = {
         motorSpeed = Math.min(motorSpeed, 4096);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', 0x10);
-        Entry.hw.setDigitalPortValue('motorsingle_target', motorIndex);
-        Entry.hw.setDigitalPortValue('motorsingle_direction', motorDirection);
-        Entry.hw.setDigitalPortValue('motorsingle_value', motorSpeed);
+        RoCode.hw.setDigitalPortValue('target', 0x10);
+        RoCode.hw.setDigitalPortValue('motorsingle_target', motorIndex);
+        RoCode.hw.setDigitalPortValue('motorsingle_direction', motorDirection);
+        RoCode.hw.setDigitalPortValue('motorsingle_value', motorSpeed);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['motorsingle_target'];
-        delete Entry.hw.sendQueue['motorsingle_direction'];
-        delete Entry.hw.sendQueue['motorsingle_value'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['motorsingle_target'];
+        delete RoCode.hw.sendQueue['motorsingle_direction'];
+        delete RoCode.hw.sendQueue['motorsingle_value'];
     },
 
     transferCommand: function(target, command, option) {
         // 전송
-        Entry.hw.setDigitalPortValue('target', target);
-        Entry.hw.setDigitalPortValue('command_command', command);
-        Entry.hw.setDigitalPortValue('command_option', option);
+        RoCode.hw.setDigitalPortValue('target', target);
+        RoCode.hw.setDigitalPortValue('command_command', command);
+        RoCode.hw.setDigitalPortValue('command_option', option);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['command_command'];
-        delete Entry.hw.sendQueue['command_option'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['command_command'];
+        delete RoCode.hw.sendQueue['command_option'];
     },
 
     transferControlDouble: function(wheel, accel) {
@@ -227,15 +227,15 @@ Entry.byrobot_dronefighter_drive = {
         accel = Math.min(accel, 100);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', 0x10);
-        Entry.hw.setDigitalPortValue('control_wheel', wheel);
-        Entry.hw.setDigitalPortValue('control_accel', accel);
+        RoCode.hw.setDigitalPortValue('target', 0x10);
+        RoCode.hw.setDigitalPortValue('control_wheel', wheel);
+        RoCode.hw.setDigitalPortValue('control_accel', accel);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['control_wheel'];
-        delete Entry.hw.sendQueue['control_accel'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['control_wheel'];
+        delete RoCode.hw.sendQueue['control_accel'];
     },
 
     transferControlQuad: function(roll, pitch, yaw, throttle) {
@@ -250,26 +250,26 @@ Entry.byrobot_dronefighter_drive = {
         throttle = Math.min(throttle, 100);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', 0x10);
-        Entry.hw.setDigitalPortValue('control_roll', roll);
-        Entry.hw.setDigitalPortValue('control_pitch', pitch);
-        Entry.hw.setDigitalPortValue('control_yaw', yaw);
-        Entry.hw.setDigitalPortValue('control_throttle', throttle);
+        RoCode.hw.setDigitalPortValue('target', 0x10);
+        RoCode.hw.setDigitalPortValue('control_roll', roll);
+        RoCode.hw.setDigitalPortValue('control_pitch', pitch);
+        RoCode.hw.setDigitalPortValue('control_yaw', yaw);
+        RoCode.hw.setDigitalPortValue('control_throttle', throttle);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['control_roll'];
-        delete Entry.hw.sendQueue['control_pitch'];
-        delete Entry.hw.sendQueue['control_yaw'];
-        delete Entry.hw.sendQueue['control_throttle'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['control_roll'];
+        delete RoCode.hw.sendQueue['control_pitch'];
+        delete RoCode.hw.sendQueue['control_yaw'];
+        delete RoCode.hw.sendQueue['control_throttle'];
     },
 
     // functions for block
 
     // 데이터 읽기
     getData: function(script, device) {
-        return Entry.hw.portData[device];
+        return RoCode.hw.portData[device];
     },
 
     // LED 수동 설정
@@ -587,13 +587,13 @@ Entry.byrobot_dronefighter_drive = {
                     }
 
                     // 전송
-                    Entry.hw.setDigitalPortValue('target', 0x10);
-                    Entry.hw.setDigitalPortValue(controlTarget, value);
+                    RoCode.hw.setDigitalPortValue('target', 0x10);
+                    RoCode.hw.setDigitalPortValue(controlTarget, value);
 
-                    Entry.hw.update();
+                    RoCode.hw.update();
 
-                    delete Entry.hw.sendQueue['target'];
-                    delete Entry.hw.sendQueue[controlTarget];
+                    delete RoCode.hw.sendQueue['target'];
+                    delete RoCode.hw.sendQueue[controlTarget];
                 }
                 return script;
 
@@ -605,13 +605,13 @@ Entry.byrobot_dronefighter_drive = {
                     // 블럭을 빠져나갈 때 변경했던 값을 초기화
 
                     // 전송
-                    Entry.hw.setDigitalPortValue('target', 0x10);
-                    Entry.hw.setDigitalPortValue(controlTarget, 0);
+                    RoCode.hw.setDigitalPortValue('target', 0x10);
+                    RoCode.hw.setDigitalPortValue(controlTarget, 0);
 
-                    Entry.hw.update();
+                    RoCode.hw.update();
 
-                    delete Entry.hw.sendQueue['target'];
-                    delete Entry.hw.sendQueue[controlTarget];
+                    delete RoCode.hw.sendQueue['target'];
+                    delete RoCode.hw.sendQueue[controlTarget];
                 }
                 return script.callReturn();
 
@@ -650,8 +650,8 @@ Entry.byrobot_dronefighter_drive = {
 /***************************************************************************************
  *  언어 적용
  ***************************************************************************************/
-// 
-Entry.byrobot_dronefighter_drive.setLanguage = function ()
+//
+RoCode.byrobot_dronefighter_drive.setLanguage = function ()
 {
     return {
         ko: {
@@ -700,7 +700,7 @@ Entry.byrobot_dronefighter_drive.setLanguage = function ()
                 "byrobot_dronefighter_controller_button_bottom_left": "왼쪽 둥근 버튼",
                 "byrobot_dronefighter_controller_button_bottom_right": "오른쪽 둥근 버튼",
                 "byrobot_dronefighter_controller_button_bottom_left_right": "양쪽 둥근 버튼",
-                "byrobot_dronefighter_entryhw_count_transfer_reserved": "전송 예약된 데이터 수",
+                "byrobot_dronefighter_RoCodehw_count_transfer_reserved": "전송 예약된 데이터 수",
                 "byrobot_dronefighter_common_roll": "Roll",
                 "byrobot_dronefighter_common_pitch": "Pitch",
                 "byrobot_dronefighter_common_yaw": "Yaw",
@@ -914,7 +914,7 @@ Entry.byrobot_dronefighter_drive.setLanguage = function ()
                 "byrobot_dronefighter_controller_button_bottom_left": "left round button",
                 "byrobot_dronefighter_controller_button_bottom_right": "right round button",
                 "byrobot_dronefighter_controller_button_bottom_left_right": "both round button",
-                "byrobot_dronefighter_entryhw_count_transfer_reserved": "reserved data blocks",
+                "byrobot_dronefighter_RoCodehw_count_transfer_reserved": "reserved data blocks",
                 "byrobot_dronefighter_common_roll": "roll",
                 "byrobot_dronefighter_common_pitch": "pitch",
                 "byrobot_dronefighter_common_yaw": "yaw",
@@ -1045,7 +1045,7 @@ Entry.byrobot_dronefighter_drive.setLanguage = function ()
                 "byrobot_dronefighter_drive_controller_vibrator_delay": "vibration %1 second on, %2 second off for %3 seconds %4",
                 "byrobot_dronefighter_drive_controller_vibrator_reserve": "reserve vibration %1 second on, %2 second off for %3 seconds %4",
             },
-            
+
             Helper: {
 
             }
@@ -1057,7 +1057,7 @@ Entry.byrobot_dronefighter_drive.setLanguage = function ()
 /***************************************************************************************
  *  엔트리에 등록할 블록들의 이름
  ***************************************************************************************/
-Entry.byrobot_dronefighter_drive.blockMenuBlocks = [
+RoCode.byrobot_dronefighter_drive.blockMenuBlocks = [
     'byrobot_dronefighter_drive_drone_value_attitude',
     'byrobot_dronefighter_drive_drone_value_etc',
     'byrobot_dronefighter_drive_controller_value_button',
@@ -1096,13 +1096,13 @@ Entry.byrobot_dronefighter_drive.blockMenuBlocks = [
 /***************************************************************************************
  *  엔트리 블록 상세
  ***************************************************************************************/
-Entry.byrobot_dronefighter_drive.getBlocks = function() {
+RoCode.byrobot_dronefighter_drive.getBlocks = function() {
     return {
         //region byrobot 바이로봇
         /* BYROBOT DroneFighter Drive Start */
         byrobot_dronefighter_drive_drone_value_attitude: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -1115,8 +1115,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     ],
                     value: 'attitude_roll', // 초기 선택항목 지정
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1130,14 +1130,14 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             class: 'byrobot_dronefighter_drive_monitor', // 같은 이름인 객체들이 그룹으로 형성됨
             isNotFor: ['byrobot_dronefighter_drive'],
             func: function(sprite, script) {
-                var read = Entry.hw.portData;
+                var read = RoCode.hw.portData;
                 var device = script.getField('DEVICE'); // paramsKeyMap에 정의된 이름 사용
                 return read[device];
             },
         },
         byrobot_dronefighter_drive_drone_value_etc: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -1157,8 +1157,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     ],
                     value: 'irmessage_irdata', // 초기 선택항목 지정
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1172,14 +1172,14 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             class: 'byrobot_dronefighter_drive_monitor', // 같은 이름인 객체들이 그룹으로 형성됨
             isNotFor: ['byrobot_dronefighter_drive'],
             func: function(sprite, script) {
-                var read = Entry.hw.portData;
+                var read = RoCode.hw.portData;
                 var device = script.getField('DEVICE'); // paramsKeyMap에 정의된 이름 사용
                 return read[device];
             },
         },
         byrobot_dronefighter_drive_controller_value_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -1194,8 +1194,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     ],
                     value: 'button_button', // 초기 선택항목 지정
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1209,14 +1209,14 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             class: 'byrobot_dronefighter_drive_monitor', // 같은 이름인 객체들이 그룹으로 형성됨
             isNotFor: ['byrobot_dronefighter_drive'],
             func: function(sprite, script) {
-                var read = Entry.hw.portData;
+                var read = RoCode.hw.portData;
                 var device = script.getField('DEVICE'); // paramsKeyMap에 정의된 이름 사용
                 return read[device];
             },
         },
         byrobot_dronefighter_drive_controller_value_joystick: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -1266,8 +1266,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     ],
                     value: 'joystick_left_x', // 초기 선택항목 지정
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1281,14 +1281,14 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             class: 'byrobot_dronefighter_drive_monitor', // 같은 이름인 객체들이 그룹으로 형성됨
             isNotFor: ['byrobot_dronefighter_drive'],
             func: function(sprite, script) {
-                var read = Entry.hw.portData;
+                var read = RoCode.hw.portData;
                 var device = script.getField('DEVICE'); // paramsKeyMap에 정의된 이름 사용
                 return read[device];
             },
         },
         byrobot_dronefighter_drive_controller_if_button_press: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -1314,8 +1314,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1329,7 +1329,7 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             class: 'byrobot_dronefighter_drive_boolean_input',
             isNotFor: ['byrobot_dronefighter_drive'],
             func: function(sprite, script) {
-                var read = Entry.hw.portData;
+                var read = RoCode.hw.portData;
                 var button = 'button_button'; // paramsKeyMap에 정의된 이름 사용
                 var buttonevent = 'button_event'; // paramsKeyMap에 정의된 이름 사용
 
@@ -1340,8 +1340,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         byrobot_dronefighter_drive_controller_if_joystick_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -1354,8 +1354,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     ],
                     value: 'joystick_left_direction',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1392,8 +1392,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     ],
                     value: '34',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1408,7 +1408,7 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             class: 'byrobot_dronefighter_drive_boolean_input',
             isNotFor: ['byrobot_dronefighter_drive'],
             func: function(sprite, script) {
-                var read = Entry.hw.portData;
+                var read = RoCode.hw.portData;
 
                 var device = script.getField('DEVICE'); // paramsKeyMap에 정의된 이름 사용
 
@@ -1417,8 +1417,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             },
         },
         byrobot_dronefighter_drive_drone_control_car_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1437,12 +1437,12 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             class: 'byrobot_dronefighter_drive_control_drive',
             isNotFor: ['byrobot_dronefighter_drive'],
             func: function(sprite, script) {
-                return Entry.byrobot_dronefighter_drive.sendStop(script);
+                return RoCode.byrobot_dronefighter_drive.sendStop(script);
             },
         },
         byrobot_dronefighter_drive_drone_control_double_one: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1460,8 +1460,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     ],
                     value: 'control_accel',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1495,7 +1495,7 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                 var controlTarget = script.getField('CONTROLTARGET');
                 var value = parseInt(script.getNumberValue('VALUE', script));
 
-                return Entry.byrobot_dronefighter_drive.sendControlDoubleSingle(
+                return RoCode.byrobot_dronefighter_drive.sendControlDoubleSingle(
                     script,
                     controlTarget,
                     value,
@@ -1505,8 +1505,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             },
         },
         byrobot_dronefighter_drive_drone_control_double_one_delay: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1524,8 +1524,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     ],
                     value: 'control_accel',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1569,7 +1569,7 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                 var value = parseInt(script.getNumberValue('VALUE', script));
                 var time = parseInt(script.getNumberValue('TIME', script) * 1000);
 
-                return Entry.byrobot_dronefighter_drive.sendControlDoubleSingle(
+                return RoCode.byrobot_dronefighter_drive.sendControlDoubleSingle(
                     script,
                     controlTarget,
                     value,
@@ -1579,8 +1579,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             },
         },
         byrobot_dronefighter_drive_drone_control_double: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1622,7 +1622,7 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             func: function(sprite, script) {
                 var wheel = parseInt(script.getNumberValue('WHEEL', script));
                 var accel = parseInt(script.getNumberValue('ACCEL', script));
-                return Entry.byrobot_dronefighter_drive.sendControlDouble(
+                return RoCode.byrobot_dronefighter_drive.sendControlDouble(
                     script,
                     wheel,
                     accel,
@@ -1632,8 +1632,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             },
         },
         byrobot_dronefighter_drive_drone_motor_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1652,12 +1652,12 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             class: 'byrobot_dronefighter_drive_motor',
             isNotFor: ['byrobot_dronefighter_drive'],
             func: function(sprite, script) {
-                return Entry.byrobot_dronefighter_drive.sendStop(script);
+                return RoCode.byrobot_dronefighter_drive.sendStop(script);
             },
         },
         byrobot_dronefighter_drive_drone_motorsingle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1666,8 +1666,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     options: [['1', '0'], ['2', '1'], ['3', '2'], ['4', '3']],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1702,7 +1702,7 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                 var motorDirection = 1;
                 var motorSpeed = parseInt(script.getNumberValue('MOTORSPEED', script));
 
-                return Entry.byrobot_dronefighter_drive.setMotorSingle(
+                return RoCode.byrobot_dronefighter_drive.setMotorSingle(
                     script,
                     motorIndex,
                     motorDirection,
@@ -1711,8 +1711,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             },
         },
         byrobot_dronefighter_drive_drone_motorsingle_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1756,7 +1756,7 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                 var motorDirection = 1;
                 var motorSpeed = parseInt(script.getNumberValue('MOTORSPEED', script));
 
-                return Entry.byrobot_dronefighter_drive.setMotorSingle(
+                return RoCode.byrobot_dronefighter_drive.setMotorSingle(
                     script,
                     motorIndex,
                     motorDirection,
@@ -1765,8 +1765,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             },
         },
         byrobot_dronefighter_drive_drone_irmessage: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1798,12 +1798,12 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             isNotFor: ['byrobot_dronefighter_drive'],
             func: function(sprite, script) {
                 var irmessage = script.getNumberValue('IRMESSAGE', script);
-                return Entry.byrobot_dronefighter_drive.sendIrMessage(script, irmessage);
+                return RoCode.byrobot_dronefighter_drive.sendIrMessage(script, irmessage);
             },
         },
         byrobot_dronefighter_drive_controller_light_manual_single_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1822,12 +1822,12 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             class: 'byrobot_dronefighter_drive_controller_light',
             isNotFor: ['byrobot_dronefighter_drive'],
             func: function(sprite, script) {
-                return Entry.byrobot_dronefighter_drive.setLightManual(script, 0x11, 0xff, 0);
+                return RoCode.byrobot_dronefighter_drive.setLightManual(script, 0x11, 0xff, 0);
             },
         },
         byrobot_dronefighter_drive_controller_light_manual_single: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1846,8 +1846,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1861,8 +1861,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     ],
                     value: '220',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1884,7 +1884,7 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             func: function(sprite, script) {
                 var flags = parseInt(script.getField('FLAGS'));
                 var brightness = parseInt(script.getField('BRIGHTNESS'));
-                return Entry.byrobot_dronefighter_drive.setLightManual(
+                return RoCode.byrobot_dronefighter_drive.setLightManual(
                     script,
                     0x11,
                     flags,
@@ -1893,8 +1893,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             },
         },
         byrobot_dronefighter_drive_controller_light_manual_single_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1936,7 +1936,7 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             func: function(sprite, script) {
                 const flags      = parseInt(script.getStringValue('FLAGS'));
                 const brightness = script.getNumberValue('BRIGHTNESS');
-                return Entry.byrobot_dronefighter_drive.setLightManual(
+                return RoCode.byrobot_dronefighter_drive.setLightManual(
                     script,
                     0x11,
                     flags,
@@ -1945,8 +1945,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             },
         },
         byrobot_dronefighter_drive_drone_light_manual_single_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1965,12 +1965,12 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             class: 'byrobot_dronefighter_drive_drone_light',
             isNotFor: ['byrobot_dronefighter_drive'],
             func: function(sprite, script) {
-                return Entry.byrobot_dronefighter_drive.setLightManual(script, 0x10, 0xff, 0);
+                return RoCode.byrobot_dronefighter_drive.setLightManual(script, 0x10, 0xff, 0);
             },
         },
         byrobot_dronefighter_drive_drone_light_manual_single: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1987,8 +1987,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2002,8 +2002,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     ],
                     value: '220',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2025,7 +2025,7 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             func: function(sprite, script) {
                 var flags = parseInt(script.getField('FLAGS'));
                 var brightness = parseInt(script.getField('BRIGHTNESS'));
-                return Entry.byrobot_dronefighter_drive.setLightManual(
+                return RoCode.byrobot_dronefighter_drive.setLightManual(
                     script,
                     0x10,
                     flags,
@@ -2034,8 +2034,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             },
         },
         byrobot_dronefighter_drive_drone_light_manual_single_input: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2077,7 +2077,7 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             func: function(sprite, script) {
                 const flags      = parseInt(script.getStringValue('FLAGS'));
                 const brightness = script.getNumberValue('BRIGHTNESS');
-                return Entry.byrobot_dronefighter_drive.setLightManual(
+                return RoCode.byrobot_dronefighter_drive.setLightManual(
                     script,
                     0x10,
                     flags,
@@ -2086,8 +2086,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             },
         },
         byrobot_dronefighter_drive_controller_buzzer_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2106,12 +2106,12 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             class: 'byrobot_dronefighter_drive_buzzer',
             isNotFor: ['byrobot_dronefighter_drive'],
             func: function(sprite, script) {
-                return Entry.byrobot_dronefighter_drive.setBuzzerStop(script);
+                return RoCode.byrobot_dronefighter_drive.setBuzzerStop(script);
             },
         },
         byrobot_dronefighter_drive_controller_buzzer_scale: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2120,8 +2120,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     options: [['4', '3'], ['5', '4'], ['6', '5'], ['7', '6'], ['8', '7']],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2142,8 +2142,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2167,14 +2167,14 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                 var scale = parseInt(script.getField('SCALE'));
 
                 if (scale == -1)
-                    return Entry.byrobot_dronefighter_drive.setBuzzerMute(
+                    return RoCode.byrobot_dronefighter_drive.setBuzzerMute(
                         script,
                         60000,
                         false,
                         true
                     );
                 else
-                    return Entry.byrobot_dronefighter_drive.setBuzzerScale(
+                    return RoCode.byrobot_dronefighter_drive.setBuzzerScale(
                         script,
                         octave,
                         scale,
@@ -2185,8 +2185,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             },
         },
         byrobot_dronefighter_drive_controller_buzzer_scale_delay: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2195,8 +2195,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     options: [['4', '3'], ['5', '4'], ['6', '5'], ['7', '6'], ['8', '7']],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2217,8 +2217,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2256,9 +2256,9 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                 var time = parseInt(script.getNumberValue('TIME') * 1000);
 
                 if (scale == -1)
-                    return Entry.byrobot_dronefighter_drive.setBuzzerMute(script, time, true, true);
+                    return RoCode.byrobot_dronefighter_drive.setBuzzerMute(script, time, true, true);
                 else
-                    return Entry.byrobot_dronefighter_drive.setBuzzerScale(
+                    return RoCode.byrobot_dronefighter_drive.setBuzzerScale(
                         script,
                         octave,
                         scale,
@@ -2269,8 +2269,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             },
         },
         byrobot_dronefighter_drive_controller_buzzer_scale_reserve: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2279,8 +2279,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     options: [['4', '3'], ['5', '4'], ['6', '5'], ['7', '6'], ['8', '7']],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2301,8 +2301,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2340,14 +2340,14 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                 var time = parseInt(script.getNumberValue('TIME') * 1000);
 
                 if (scale == -1)
-                    return Entry.byrobot_dronefighter_drive.setBuzzerMute(
+                    return RoCode.byrobot_dronefighter_drive.setBuzzerMute(
                         script,
                         time,
                         false,
                         false
                     );
                 else
-                    return Entry.byrobot_dronefighter_drive.setBuzzerScale(
+                    return RoCode.byrobot_dronefighter_drive.setBuzzerScale(
                         script,
                         octave,
                         scale,
@@ -2358,8 +2358,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             },
         },
         byrobot_dronefighter_drive_controller_buzzer_hz: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2391,12 +2391,12 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             isNotFor: ['byrobot_dronefighter_drive'],
             func: function(sprite, script) {
                 var hz = parseInt(script.getNumberValue('HZ', script));
-                return Entry.byrobot_dronefighter_drive.setBuzzerHz(script, hz, 60000, false, true);
+                return RoCode.byrobot_dronefighter_drive.setBuzzerHz(script, hz, 60000, false, true);
             },
         },
         byrobot_dronefighter_drive_controller_buzzer_hz_delay: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2438,12 +2438,12 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             func: function(sprite, script) {
                 var hz = parseInt(script.getNumberValue('HZ', script));
                 var time = parseInt(script.getNumberValue('TIME') * 1000);
-                return Entry.byrobot_dronefighter_drive.setBuzzerHz(script, hz, time, true, true);
+                return RoCode.byrobot_dronefighter_drive.setBuzzerHz(script, hz, time, true, true);
             },
         },
         byrobot_dronefighter_drive_controller_buzzer_hz_reserve: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2485,12 +2485,12 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             func: function(sprite, script) {
                 var hz = parseInt(script.getNumberValue('HZ', script));
                 var time = parseInt(script.getNumberValue('TIME') * 1000);
-                return Entry.byrobot_dronefighter_drive.setBuzzerHz(script, hz, time, false, false);
+                return RoCode.byrobot_dronefighter_drive.setBuzzerHz(script, hz, time, false, false);
             },
         },
         byrobot_dronefighter_drive_controller_vibrator_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2509,12 +2509,12 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             class: 'byrobot_dronefighter_drive_vibrator',
             isNotFor: ['byrobot_dronefighter_drive'],
             func: function(sprite, script) {
-                return Entry.byrobot_dronefighter_drive.setVibratorStop(script);
+                return RoCode.byrobot_dronefighter_drive.setVibratorStop(script);
             },
         },
         byrobot_dronefighter_drive_controller_vibrator_on_delay: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2546,7 +2546,7 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             isNotFor: ['byrobot_dronefighter_drive'],
             func: function(sprite, script) {
                 var timeOn = parseInt(script.getNumberValue('TIMEON') * 1000);
-                return Entry.byrobot_dronefighter_drive.setVibrator(
+                return RoCode.byrobot_dronefighter_drive.setVibrator(
                     script,
                     timeOn,
                     0,
@@ -2557,8 +2557,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             },
         },
         byrobot_dronefighter_drive_controller_vibrator_on_reserve: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2590,7 +2590,7 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             isNotFor: ['byrobot_dronefighter_drive'],
             func: function(sprite, script) {
                 var timeOn = parseInt(script.getNumberValue('TIMEON') * 1000);
-                return Entry.byrobot_dronefighter_drive.setVibrator(
+                return RoCode.byrobot_dronefighter_drive.setVibrator(
                     script,
                     timeOn,
                     0,
@@ -2601,8 +2601,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             },
         },
         byrobot_dronefighter_drive_controller_vibrator_delay: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2654,7 +2654,7 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                 var timeOn = parseInt(script.getNumberValue('TIMEON') * 1000);
                 var timeOff = parseInt(script.getNumberValue('TIMEOFF') * 1000);
                 var timeRun = parseInt(script.getNumberValue('TIMERUN') * 1000);
-                return Entry.byrobot_dronefighter_drive.setVibrator(
+                return RoCode.byrobot_dronefighter_drive.setVibrator(
                     script,
                     timeOn,
                     timeOff,
@@ -2665,8 +2665,8 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
             },
         },
         byrobot_dronefighter_drive_controller_vibrator_reserve: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2718,7 +2718,7 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
                 var timeOn = parseInt(script.getNumberValue('TIMEON') * 1000);
                 var timeOff = parseInt(script.getNumberValue('TIMEOFF') * 1000);
                 var timeRun = parseInt(script.getNumberValue('TIMERUN') * 1000);
-                return Entry.byrobot_dronefighter_drive.setVibrator(
+                return RoCode.byrobot_dronefighter_drive.setVibrator(
                     script,
                     timeOn,
                     timeOff,
@@ -2733,4 +2733,4 @@ Entry.byrobot_dronefighter_drive.getBlocks = function() {
     };
 };
 
-module.exports = Entry.byrobot_dronefighter_drive;
+module.exports = RoCode.byrobot_dronefighter_drive;

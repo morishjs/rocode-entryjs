@@ -7,31 +7,31 @@ let rgbled_r = [];
 let rgbled_g = [];
 let rgbled_b = [];
 
-Entry.ssboard_nano = {
+RoCode.ssboard_nano = {
     id: '3D.2',
     name: 'ssboard_nano',
     url: 'http://www.ssmaker.co.kr/',
     imageName: 'ssboard_nano.png',
     title: {
-        'ko': '상상보드 나노', 
+        'ko': '상상보드 나노',
         'en': 'ssboard_nano'
     },
 
     setZero: () => {
         ///  하드웨어 초기화 로직
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            var keySet = Object.keys(Entry.hw.sendQueue.SET);
+            var keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach((key) => {
-                Entry.hw.sendQueue.SET[parseInt(key, 10)].data = 0;
-                Entry.hw.sendQueue.SET[parseInt(key, 10)].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[parseInt(key, 10)].data = 0;
+                RoCode.hw.sendQueue.SET[parseInt(key, 10)].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
         lmotor_speed = 0;
         rmotor_speed = 0;
         for (var i = 0; i < 255; i++) {
@@ -90,15 +90,15 @@ Entry.ssboard_nano = {
         '11': [58, 117, 233, 466, 932, 1865, 3729, 7459],
         '12': [62, 123, 247, 494, 988, 1976, 3951, 7902],
     },
-    BlockState: {},	
+    BlockState: {},
 };
 
-Entry.ssboard_nano.blockMenuBlocks = [
+RoCode.ssboard_nano.blockMenuBlocks = [
     /// 하드웨어 블록 등록 , 여기에 등록된 블록이 순서대로 나열되며 설정한 이름으로 화면에 보임
     'ssboard_nano_buzzer_onoff',			            // 스피커 삐 소리
     'ssboard_nano_set_digital_buzzer',               // 스피커 멜로디
     'ssboard_nano_set_motor_speed',                  // DC모터 속도제어
-  //  'ssboard_nano_motor_stop',            // DC모터 정지하기	
+  //  'ssboard_nano_motor_stop',            // DC모터 정지하기
     'ssboard_nano_set_servo',                        // 서보모터 제어
 
     'ssboard_nano_set_rgbled_onoff',                // rgb led로 지정색 제어
@@ -125,34 +125,34 @@ Entry.ssboard_nano.blockMenuBlocks = [
 
 	'ssboard_nano_get_analog_mapping',
 
-		
+
 ];
 
-Entry.ssboard_nano.setLanguage = function() {    // 블록 이름  번역
+RoCode.ssboard_nano.setLanguage = function() {    // 블록 이름  번역
     return {
         ko: {
             template: {
-                ssboard_nano_buzzer_onoff: '스피커 삐 소리 %1 초 연주 %2',				
-                ssboard_nano_set_digital_buzzer: '스피커음계 %1 옥타브 %2 음 %3 초 연주 %4',	
-                ssboard_nano_set_motor_speed: 'DC모터 왼쪽 속도%1 오른쪽 속도%2 으로 정하기 %3', 
-                ssboard_nano_motor_stop: 'DC모터 정지하기 %1',	
-                ssboard_nano_set_servo: '서보모터 %1번 핀 각도 %2 %3',		
+                ssboard_nano_buzzer_onoff: '스피커 삐 소리 %1 초 연주 %2',
+                ssboard_nano_set_digital_buzzer: '스피커음계 %1 옥타브 %2 음 %3 초 연주 %4',
+                ssboard_nano_set_motor_speed: 'DC모터 왼쪽 속도%1 오른쪽 속도%2 으로 정하기 %3',
+                ssboard_nano_motor_stop: 'DC모터 정지하기 %1',
+                ssboard_nano_set_servo: '서보모터 %1번 핀 각도 %2 %3',
 
-                ssboard_nano_set_rgbled_onoff: 'RGB LED %1 번째 색깔 %2 %3',	
-                ssboard_nano_rgbled_seting: 'RGB LED %1핀에 %2개  밝기%3  %4',   
+                ssboard_nano_set_rgbled_onoff: 'RGB LED %1 번째 색깔 %2 %3',
+                ssboard_nano_rgbled_seting: 'RGB LED %1핀에 %2개  밝기%3  %4',
                 ssboard_nano_set_rgbled_value: 'RGB LED %1번째  빨강%2 초록%3 파랑%4 %5',
                 ssboard_nano_rgbled_all_onoff: 'RGB LED  %1 %2',
 
-                ssboard_nano_digital_onoff: '디지털 %1 핀 %2 %3',         
-                ssboard_nano_get_digital_value: '디지털 %1 핀 읽기',				
+                ssboard_nano_digital_onoff: '디지털 %1 핀 %2 %3',
+                ssboard_nano_get_digital_value: '디지털 %1 핀 읽기',
                 ssboard_nano_get_analog_value: '아날로그 %1 핀 읽기',
-                ssboard_nano_set_pwm: 'PWM %1 핀에 %2 %3',	
+                ssboard_nano_set_pwm: 'PWM %1 핀에 %2 %3',
 
-                ssboard_nano_set_ultrasonic: '초음파센서 설정 트리거 %1 핀, 에코 %2 핀 으로 연결 %3',	
-                ssboard_nano_get_usonic_value: '초음파센서 값 읽기',	
-                ssboard_nano_set_temp: '온도센서 %1 핀에 연결 %2',	
-                ssboard_nano_get_temp_value: '온도센서 값 읽기',	
-                ssboard_nano_set_i2c: 'I2C포트  %1 연결 %2',	
+                ssboard_nano_set_ultrasonic: '초음파센서 설정 트리거 %1 핀, 에코 %2 핀 으로 연결 %3',
+                ssboard_nano_get_usonic_value: '초음파센서 값 읽기',
+                ssboard_nano_set_temp: '온도센서 %1 핀에 연결 %2',
+                ssboard_nano_get_temp_value: '온도센서 값 읽기',
+                ssboard_nano_set_i2c: 'I2C포트  %1 연결 %2',
                 ssboard_nano_get_color_value: '컬러센서 %1 값 읽기',
                 ssboard_nano_get_gyro_value: '자이로센서 %1 값 읽기',
 
@@ -161,7 +161,7 @@ Entry.ssboard_nano.setLanguage = function() {    // 블록 이름  번역
                 ssboard_nano_set_lcd_clear: 'lcd 지우기 %1',
 
 
-                ssboard_nano_get_analog_mapping: ' %1 값 %2 ~ %3 에서 %4 ~ %5 으로 변환값', 
+                ssboard_nano_get_analog_mapping: ' %1 값 %2 ~ %3 에서 %4 ~ %5 으로 변환값',
             },
             Blocks: {
                 On_block: '켜짐(HIGH, 5V)',
@@ -180,37 +180,37 @@ Entry.ssboard_nano.setLanguage = function() {    // 블록 이름  번역
         },
         en: {
             template: {
-                ssboard_nano_buzzer_onoff: 'Speakers Beep %1 Playing Second %2',				
-                ssboard_nano_set_digital_buzzer: 'Speakers  %1 Octave %2 Play %3 seconds %4',	
-                ssboard_nano_set_motor_speed: 'Set DC motor left speed %1  right speed %2 %3', 	
-                ssboard_nano_motor_stop: 'Stop DC Motor %1',	
-                ssboard_nano_set_servo: 'Servo motor %1 pin angle %2 movement %3',		
+                ssboard_nano_buzzer_onoff: 'Speakers Beep %1 Playing Second %2',
+                ssboard_nano_set_digital_buzzer: 'Speakers  %1 Octave %2 Play %3 seconds %4',
+                ssboard_nano_set_motor_speed: 'Set DC motor left speed %1  right speed %2 %3',
+                ssboard_nano_motor_stop: 'Stop DC Motor %1',
+                ssboard_nano_set_servo: 'Servo motor %1 pin angle %2 movement %3',
 
-                ssboard_nano_set_rgbled_onoff: 'RGB LED %1 First Color %2 %3',		
+                ssboard_nano_set_rgbled_onoff: 'RGB LED %1 First Color %2 %3',
                 ssboard_nano_rgbled_seting: 'Setting %2 brightness %3 on RGB LED %1 pin %4',
                 ssboard_nano_set_rgbled_value: 'RGB LED %1 st Red %2 Green %3 Blue %4',
-                ssboard_nano_rgbled_all_onoff: 'RGB LED %1 %2',		
+                ssboard_nano_rgbled_all_onoff: 'RGB LED %1 %2',
 
-                ssboard_nano_digital_onoff: 'Setting up digital %1 pin %2 %3',	
-                ssboard_nano_get_digital_value: 'Read digital %1 pins',				
+                ssboard_nano_digital_onoff: 'Setting up digital %1 pin %2 %3',
+                ssboard_nano_get_digital_value: 'Read digital %1 pins',
                 ssboard_nano_get_analog_value: 'Analog %1 pin read',
-                ssboard_nano_set_pwm: 'Send %2 to pin %1 %3',		
+                ssboard_nano_set_pwm: 'Send %2 to pin %1 %3',
 
-                ssboard_nano_set_ultrasonic: 'Connecting to the ultrasonic sensor setting trigger %1 pin, echo %2 pin %3',		
-                ssboard_nano_get_usonic_value: 'Reading ultrasonic sensor values',		
-                ssboard_nano_set_temp: 'Connecting to the temperature sensor %1 pin %2',		
-                ssboard_nano_get_temp_value: 'Reading temperature sensor values',		
-                ssboard_nano_set_i2c: 'Connect I2Cport %1 %2',		
+                ssboard_nano_set_ultrasonic: 'Connecting to the ultrasonic sensor setting trigger %1 pin, echo %2 pin %3',
+                ssboard_nano_get_usonic_value: 'Reading ultrasonic sensor values',
+                ssboard_nano_set_temp: 'Connecting to the temperature sensor %1 pin %2',
+                ssboard_nano_get_temp_value: 'Reading temperature sensor values',
+                ssboard_nano_set_i2c: 'Connect I2Cport %1 %2',
                 ssboard_nano_get_color_value: 'Reading the color sensor %1 value',
                 ssboard_nano_get_gyro_value: 'Read gyro sensor %1 value',
 
-                ssboard_nano_set_lcd_string: 'lcd Display %3 on line %1 and line %2 %4',		
-                ssboard_nano_set_lcd_init: 'setting lcd : I2C address 0x%1 , horizontal line number %2 , vertical line number %3 %4',	
-                ssboard_nano_set_lcd_clear: 'Clear lcd %1',		
+                ssboard_nano_set_lcd_string: 'lcd Display %3 on line %1 and line %2 %4',
+                ssboard_nano_set_lcd_init: 'setting lcd : I2C address 0x%1 , horizontal line number %2 , vertical line number %3 %4',
+                ssboard_nano_set_lcd_clear: 'Clear lcd %1',
 
-				
-                ssboard_nano_get_analog_mapping: '%1 value %2 to %3 ; to %4 to %5 conversion value ',	
-								
+
+                ssboard_nano_get_analog_mapping: '%1 value %2 to %3 ; to %4 to %5 conversion value ',
+
             },
             Blocks: {
                 On_block: 'On(HIGH, 5V)',
@@ -231,11 +231,11 @@ Entry.ssboard_nano.setLanguage = function() {    // 블록 이름  번역
 };
 
 
-Entry.ssboard_nano.getBlocks = function() {
+RoCode.ssboard_nano.getBlocks = function() {
     return {
         ssboard_nano_digital_port_onoff_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -246,11 +246,11 @@ Entry.ssboard_nano.getBlocks = function() {
                     options: [
                         [Lang.Blocks.On_block, '1'],
                         [Lang.Blocks.Off_block, '0'],
-                    ],					
+                    ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -263,11 +263,11 @@ Entry.ssboard_nano.getBlocks = function() {
             func: (sprite, script) => {
                 return script.getField('PORT');
             },
-        },	
-        
+        },
+
         ssboard_nano_list_digital_octave: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,	
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -286,8 +286,8 @@ Entry.ssboard_nano.getBlocks = function() {
                     ],
                     value: '5',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -301,11 +301,11 @@ Entry.ssboard_nano.getBlocks = function() {
                 return script.getField('OCTAVE');
             },
         },
-		
+
         ssboard_nano_list_digital_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,	
-            fontColor: '#fff',	
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
+            fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -329,8 +329,8 @@ Entry.ssboard_nano.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -345,9 +345,9 @@ Entry.ssboard_nano.getBlocks = function() {
             },
         },
         ssboard_nano_digital_port_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,			
-            fontColor: '#fff',			
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
+            fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -372,9 +372,9 @@ Entry.ssboard_nano.getBlocks = function() {
                     ],
                     value: '3',       // 기본 표시값
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                    arrowColor: EntryStatic.ARROW_COLOR_HW,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                    arrowColor: RoCodeStatic.ARROW_COLOR_HW,
                 },
             ],
             events: {},
@@ -389,9 +389,9 @@ Entry.ssboard_nano.getBlocks = function() {
             },
         },
         ssboard_nano_digital_out_port_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,			
-            fontColor: '#fff',			
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
+            fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -409,9 +409,9 @@ Entry.ssboard_nano.getBlocks = function() {
                      ],
                     value: '3',       // 기본 표시값
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                    arrowColor: EntryStatic.ARROW_COLOR_HW,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                    arrowColor: RoCodeStatic.ARROW_COLOR_HW,
                 },
             ],
             events: {},
@@ -426,11 +426,11 @@ Entry.ssboard_nano.getBlocks = function() {
             },
         },
 
-        ssboard_nano_pwn_port_list: 
+        ssboard_nano_pwn_port_list:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,	
-            fontColor: '#fff',			
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
+            fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -443,9 +443,9 @@ Entry.ssboard_nano.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                    arrowColor: EntryStatic.ARROW_COLOR_HW,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                    arrowColor: RoCodeStatic.ARROW_COLOR_HW,
                 },
             ],
             events: {},
@@ -459,11 +459,11 @@ Entry.ssboard_nano.getBlocks = function() {
                 return script.getStringField('PWMPORT');
             },
         },
-        ssboard_nano_lcd_add_list: 
+        ssboard_nano_lcd_add_list:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,	
-            fontColor: '#fff',			
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
+            fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -476,9 +476,9 @@ Entry.ssboard_nano.getBlocks = function() {
                     ],
                     value: '39',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                    arrowColor: EntryStatic.ARROW_COLOR_HW,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                    arrowColor: RoCodeStatic.ARROW_COLOR_HW,
                 },
             ],
             events: {},
@@ -492,11 +492,11 @@ Entry.ssboard_nano.getBlocks = function() {
                 return script.getStringField('LCDADD');
             },
         },
-        ssboard_nano_i2c_sen_list: 
+        ssboard_nano_i2c_sen_list:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,	
-            fontColor: '#fff',			
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
+            fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -509,9 +509,9 @@ Entry.ssboard_nano.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                    arrowColor: EntryStatic.ARROW_COLOR_HW,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                    arrowColor: RoCodeStatic.ARROW_COLOR_HW,
                 },
             ],
             events: {},
@@ -527,8 +527,8 @@ Entry.ssboard_nano.getBlocks = function() {
         },
 
         ssboard_nano_all_onoff_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,	
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -539,11 +539,11 @@ Entry.ssboard_nano.getBlocks = function() {
                     options: [
                         [Lang.Blocks.AllOff_block, '2'],
                         [Lang.Blocks.AllOn_block, '3'],
-                    ],					
+                    ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -558,9 +558,9 @@ Entry.ssboard_nano.getBlocks = function() {
             },
         },
         ssboard_nano_analog_port_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,			
-            fontColor: '#fff',			
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
+            fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -574,8 +574,8 @@ Entry.ssboard_nano.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -592,9 +592,9 @@ Entry.ssboard_nano.getBlocks = function() {
 
 
         ssboard_nano_ultrasonic_port_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
-            fontColor: '#fff',	
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
+            fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -608,8 +608,8 @@ Entry.ssboard_nano.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -625,9 +625,9 @@ Entry.ssboard_nano.getBlocks = function() {
         },
 
         ssboard_nano_analog_rgb_color_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,		
-            fontColor: '#fff',			
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
+            fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -642,12 +642,12 @@ Entry.ssboard_nano.getBlocks = function() {
                         [Lang.Blocks.RGB_skyblue, '4'],
                         [Lang.Blocks.RGB_yellow, '5'],
                         [Lang.Blocks.RGB_purple, '6'],
-                        [Lang.Blocks.RGB_off, '7'],						
+                        [Lang.Blocks.RGB_off, '7'],
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -665,8 +665,8 @@ Entry.ssboard_nano.getBlocks = function() {
 
 		// 1. 삐소리
         ssboard_nano_buzzer_onoff: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,	
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -699,18 +699,18 @@ Entry.ssboard_nano.getBlocks = function() {
             isNotFor: ['ssboard_nano'],
             func: (sprite, script) => {
                 const port = 10;
-                let duration = script.getNumberValue('VALUE');	// 길이	
+                let duration = script.getNumberValue('VALUE');	// 길이
                 //var octave = 5;    // 옥타브
                 const value = 2400;//698;   // 음 주파수
                 //var mode = 1;
 
                 if (!script.isStart) {
-                    if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                     }
                     if (duration == 0) {// 음 길이가 0 이면
-	                    Entry.hw.sendQueue.SET[port] = {
-                            type: Entry.ssboard_nano.sensorTypes.TONE,
+	                    RoCode.hw.sendQueue.SET[port] = {
+                            type: RoCode.ssboard_nano.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -722,9 +722,9 @@ Entry.ssboard_nano.getBlocks = function() {
                     script.isStart = true;  // 출력 시작 플래그 셋
                     script.timeFlag = 1;    // 시간플래그 셋
 
-                    Entry.hw.sendQueue.SET[port] = {
-                        type: Entry.ssboard_nano.sensorTypes.TONE,
-                        data: 
+                    RoCode.hw.sendQueue.SET[port] = {
+                        type: RoCode.ssboard_nano.sensorTypes.TONE,
+                        data:
                         {
                             value: value,
                             duration: duration / 10,
@@ -739,29 +739,29 @@ Entry.ssboard_nano.getBlocks = function() {
 
                 } else if (script.timeFlag == 1) {
                     return script;
-                } 
+                }
 				else    // 설정 시간이 지나면 출력 리셋
 				{
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.hw.sendQueue.SET[port] = 
+                    RoCode.hw.sendQueue.SET[port] =
 					{
-                        type: Entry.ssboard_nano.sensorTypes.TONE,
+                        type: RoCode.ssboard_nano.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
-            				
+
             },
             syntax: { js: [], py: [] },
         },
-		
+
 		// 2) 옥타브/음/초 동안 연주
         ssboard_nano_set_digital_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,			
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -789,7 +789,7 @@ Entry.ssboard_nano.getBlocks = function() {
             def: {
                 params: [
                     {
-                        type: 'ssboard_nano_list_digital_octave',						
+                        type: 'ssboard_nano_list_digital_octave',
                     },
                     {
                         type: 'ssboard_nano_list_digital_tone',
@@ -803,7 +803,7 @@ Entry.ssboard_nano.getBlocks = function() {
                 type: 'ssboard_nano_set_digital_buzzer',
             },
             paramsKeyMap: {
-                OCTAVE: 0,				
+                OCTAVE: 0,
                 NOTE: 1,
                 DURATION: 2,
             },
@@ -817,41 +817,41 @@ Entry.ssboard_nano.getBlocks = function() {
 
                 if (!script.isStart) {
                     var note = script.getValue('NOTE');
-                    if (!Entry.Utils.isNumber(note)) {
-                        note = Entry.ssboard_nano.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note)) {
+                        note = RoCode.ssboard_nano.toneTable[note];
                     }
                     if (note < 0) note = 0;
                     else if (note > 12) note = 12;
 
                     if (duration < 0) duration = 0;
-					
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
-					
+
                     if (duration == 0) {
-                        Entry.hw.sendQueue.SET[port] = 
+                        RoCode.hw.sendQueue.SET[port] =
 						{
-                            type: Entry.ssboard_nano.sensorTypes.TONE,
+                            type: RoCode.ssboard_nano.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
                         return script.callReturn();
                     }
-					
+
                     if (octave < 0) octave = 0;
                     else if (octave > 8) octave = 8;
-                    if (note != 0) value = Entry.ssboard_nano.toneMap[note][octave];
+                    if (note != 0) value = RoCode.ssboard_nano.toneMap[note][octave];
                     if(duration > 300)
                         duration = 300;
                     duration = duration * 1000;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue.SET[port] = 
+                    RoCode.hw.sendQueue.SET[port] =
 					{
-                        type: Entry.ssboard_nano.sensorTypes.TONE,
-                        data: 
+                        type: RoCode.ssboard_nano.sensorTypes.TONE,
+                        data:
 						{
                             value: value,
                             duration: duration / 10,
@@ -868,23 +868,23 @@ Entry.ssboard_nano.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.hw.sendQueue.SET[port] = 
+                    RoCode.hw.sendQueue.SET[port] =
 					{
-                        type: Entry.ssboard_nano.sensorTypes.TONE,
+                        type: RoCode.ssboard_nano.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
-        
-        // 3. DC 모터 속도 정하기		
+
+        // 3. DC 모터 속도 정하기
         ssboard_nano_set_motor_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
                  statements: [],
@@ -896,7 +896,7 @@ Entry.ssboard_nano.getBlocks = function() {
                 {
                     type: 'Block',
                     accept: 'string',
-                },				
+                },
                 {
                     type: 'Indicator',
                     img: 'block_icon/hardware_icon.svg',
@@ -913,7 +913,7 @@ Entry.ssboard_nano.getBlocks = function() {
                     {
                         type: 'number',
                         params: ['0'],
-                    },				
+                    },
                     null,
                 ],
                 type: 'ssboard_nano_set_motor_speed',
@@ -928,22 +928,22 @@ Entry.ssboard_nano.getBlocks = function() {
                 let lspeed = script.getNumberValue('LSPEED', script);
                 let rspeed = script.getNumberValue('RSPEED', script);
                 const port = 3;
-                		
+
                 lspeed = Math.min(100, lspeed);
-                lspeed = Math.max(-100, lspeed);		
+                lspeed = Math.max(-100, lspeed);
                 rspeed = Math.min(100, rspeed);
-                rspeed = Math.max(-100, rspeed);		
-                
+                rspeed = Math.max(-100, rspeed);
+
                 if(!(lmotor_speed == lspeed) || !(rmotor_speed == rspeed))
                 {
-                    if (!script.isStart) 
+                    if (!script.isStart)
                     {
-                        if (!Entry.hw.sendQueue.SET) {
-                            Entry.hw.sendQueue.SET = {};
+                        if (!RoCode.hw.sendQueue.SET) {
+                            RoCode.hw.sendQueue.SET = {};
                         }
-                        Entry.hw.sendQueue.SET[port] = 
+                        RoCode.hw.sendQueue.SET[port] =
                         {
-                            type: Entry.ssboard_nano.sensorTypes.MOTOR,
+                            type: RoCode.ssboard_nano.sensorTypes.MOTOR,
                             data: [lspeed, rspeed],
                             time: new Date().getTime(),
                         };
@@ -956,15 +956,15 @@ Entry.ssboard_nano.getBlocks = function() {
                         }, delay_time );
                         return script;
                     }
-                    else if (script.timeFlag == 1) 
+                    else if (script.timeFlag == 1)
                     {
                         return script;
-                    } 
+                    }
                     else    // 설정 시간이 지나면 출력 리셋
                     {
                         delete script.timeFlag;
                         delete script.isStart;
-                        Entry.engine.isContinue = false;
+                        RoCode.engine.isContinue = false;
                         return script.callReturn();
                     }
                 }
@@ -973,12 +973,12 @@ Entry.ssboard_nano.getBlocks = function() {
             },
             syntax: { js: [], py: [] },
         },
-		
-		// 4. DC 모터 정지하기		
-        ssboard_nano_motor_stop: 
+
+		// 4. DC 모터 정지하기
+        ssboard_nano_motor_stop:
         {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1006,14 +1006,14 @@ Entry.ssboard_nano.getBlocks = function() {
 				//port += 2;
 				const lspeed = 0;
                 const rspeed = 0;
-                
+
                 if(!(lmotor_speed == 0) || !(rmotor_speed == 0)) {
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
-                    Entry.hw.sendQueue.SET[port] = 
+                    RoCode.hw.sendQueue.SET[port] =
                     {
-                        type: Entry.ssboard_nano.sensorTypes.MOTOR,
+                        type: RoCode.ssboard_nano.sensorTypes.MOTOR,
                         data: [lspeed, rspeed],
                         time: new Date().getTime(),
                     };
@@ -1026,10 +1026,10 @@ Entry.ssboard_nano.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
 
-        // 5.  서보 모터 각도 설정하기		
+        // 5.  서보 모터 각도 설정하기
         ssboard_nano_set_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1041,7 +1041,7 @@ Entry.ssboard_nano.getBlocks = function() {
                 {
                     type: 'Block',
                     accept: 'string',
-                },				
+                },
                 {
                     type: 'Indicator',
                     img: 'block_icon/hardware_icon.svg',
@@ -1057,12 +1057,12 @@ Entry.ssboard_nano.getBlocks = function() {
                     {
                         type: 'number',
                         params: ['0'],
-                    },				
+                    },
                     null,
                 ],
                 type: 'ssboard_nano_set_servo',
             },
-            paramsKeyMap: 
+            paramsKeyMap:
             {
                 PORT: 0,
                 ANGLE: 1,
@@ -1072,17 +1072,17 @@ Entry.ssboard_nano.getBlocks = function() {
             func: (sprite, script) => {
                 const port = script.getNumberValue('PORT', script);
                 let angle = script.getNumberValue('ANGLE', script);
-				
+
                 angle = Math.min(180, angle);
                 angle = Math.max(0, angle);
                 angle += 1;
-				
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port] = 
+                RoCode.hw.sendQueue.SET[port] =
                 {
-                    type: Entry.ssboard_nano.sensorTypes.SERVO,
+                    type: RoCode.ssboard_nano.sensorTypes.SERVO,
                     data: angle,
                     time: new Date().getTime(),
                 };
@@ -1094,8 +1094,8 @@ Entry.ssboard_nano.getBlocks = function() {
 
         // 6. RGBLED  색상 설정 및 show
         ssboard_nano_set_rgbled_onoff: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1134,7 +1134,7 @@ Entry.ssboard_nano.getBlocks = function() {
             },
             class: 'ssboard_nano_LV2',
             isNotFor: ['ssboard_nano'],
-            func: (sprite, script) => {	
+            func: (sprite, script) => {
                 const port = script.getNumberValue('LEDNUM');
                 const color = script.getNumberValue('COLOR', script);
                 const ledmode = 1;
@@ -1142,32 +1142,32 @@ Entry.ssboard_nano.getBlocks = function() {
 
                 switch(color) {
                         case 0: 	rLED = 255; gLED = 0; bLED = 0;		// Red
-                                    break;				
+                                    break;
                         case 1: 	rLED = 0; gLED = 0; bLED = 255;		// Blue
-                                    break;					
+                                    break;
                         case 2: 	rLED = 0; gLED = 255;	bLED = 0;	// Lime
-                                    break;					
+                                    break;
                         case 3: 	rLED = 255; gLED = 255; bLED = 255;	// white
-                                    break;					
+                                    break;
                         case 4: 	rLED = 0; gLED = 255; bLED = 255;	// Cyan
                                     break;
                         case 5: 	rLED = 255; gLED = 255; bLED = 0;	// Yellow
-                                    break;					
+                                    break;
 						case 6: 	rLED = 255; gLED = 0;	bLED = 255;	// Magenta
                                     break;
                         case 7: 	rLED = 0; gLED = 0;	bLED = 0;	    // 끄기
                                     break;
 				}
-                
-                
+
+
                 if(!(rgbled_r[port] == rLED) || !(rgbled_g[port] == gLED) || !(rgbled_b[port] == bLED)) {
                     if (!script.isStart) {
-                        if (!Entry.hw.sendQueue.SET) {
-                            Entry.hw.sendQueue.SET = {};
+                        if (!RoCode.hw.sendQueue.SET) {
+                            RoCode.hw.sendQueue.SET = {};
                         }
-                        Entry.hw.sendQueue.SET[port] = {  // port 를 
-                            type: Entry.ssboard_nano.sensorTypes.RGBLED,
-                            data: {			
+                        RoCode.hw.sendQueue.SET[port] = {  // port 를
+                            type: RoCode.ssboard_nano.sensorTypes.RGBLED,
+                            data: {
                                 r: rLED,
                                 g: gLED,
                                 b: bLED,
@@ -1189,7 +1189,7 @@ Entry.ssboard_nano.getBlocks = function() {
                     } else {// 설정 시간이 지나면 출력 리셋
                         delete script.timeFlag;
                         delete script.isStart;
-                        Entry.engine.isContinue = false;
+                        RoCode.engine.isContinue = false;
                         return script.callReturn();
                     }
                 } else
@@ -1200,8 +1200,8 @@ Entry.ssboard_nano.getBlocks = function() {
 
         // 7. rgb led 연결 설정
         ssboard_nano_rgbled_seting: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1217,7 +1217,7 @@ Entry.ssboard_nano.getBlocks = function() {
                 {
                     type: 'Block',
                     accept: 'string',
-                },								
+                },
                 {
                     type: 'Indicator',
                     img: 'block_icon/hardware_icon.svg',
@@ -1228,7 +1228,7 @@ Entry.ssboard_nano.getBlocks = function() {
             def: {
                 params: [
                     {
-                        type: 'ssboard_nano_digital_out_port_list', 
+                        type: 'ssboard_nano_digital_out_port_list',
                         params: ['4'],
                     },
                     {
@@ -1238,7 +1238,7 @@ Entry.ssboard_nano.getBlocks = function() {
                     {
                         type: 'number',
                         params: ['255'],
-                    },				
+                    },
                     null,
                 ],
                 type: 'ssboard_nano_rgbled_seting',
@@ -1257,11 +1257,11 @@ Entry.ssboard_nano.getBlocks = function() {
                 const bLED = script.getNumberValue('VALUE1', script);  // 밝기
                 const ledmode = 4;  // 핀번호설정
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port] = {
-                    type: Entry.ssboard_nano.sensorTypes.RGBLED,
+                RoCode.hw.sendQueue.SET[port] = {
+                    type: RoCode.ssboard_nano.sensorTypes.RGBLED,
                     data: {
                         r: rLED,
                         g: gLED,
@@ -1274,11 +1274,11 @@ Entry.ssboard_nano.getBlocks = function() {
             },
             syntax: { js: [], py: [] },
         },
-		
+
 		// 8. RGBLED 색상설정
         ssboard_nano_set_rgbled_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1294,11 +1294,11 @@ Entry.ssboard_nano.getBlocks = function() {
                 {
                     type: 'Block',
                     accept: 'string',
-                },				
+                },
                 {
                     type: 'Block',
                     accept: 'string',
-                },				
+                },
                 {
                     type: 'Indicator',
                     img: 'block_icon/hardware_icon.svg',
@@ -1319,11 +1319,11 @@ Entry.ssboard_nano.getBlocks = function() {
                     {
                         type: 'number',
                         params: ['0'],
-                    },				
+                    },
                     {
                         type: 'number',
                         params: ['0'],
-                    },	
+                    },
                     null,
                 ],
                 type: 'ssboard_nano_set_rgbled_value',
@@ -1345,11 +1345,11 @@ Entry.ssboard_nano.getBlocks = function() {
 
                 if(!(rgbled_r[port] == rLED) || !(rgbled_g[port] == gLED) || !(rgbled_b[port] == bLED)) {
                     if (!script.isStart) {
-                        if (!Entry.hw.sendQueue.SET) {
-                            Entry.hw.sendQueue.SET = {};
+                        if (!RoCode.hw.sendQueue.SET) {
+                            RoCode.hw.sendQueue.SET = {};
                         }
-                        Entry.hw.sendQueue.SET[port] = {
-                            type: Entry.ssboard_nano.sensorTypes.RGBLED,
+                        RoCode.hw.sendQueue.SET[port] = {
+                            type: RoCode.ssboard_nano.sensorTypes.RGBLED,
                             data: {
                                 r: rLED,
                                 g: gLED,
@@ -1358,7 +1358,7 @@ Entry.ssboard_nano.getBlocks = function() {
                             },
                             time: new Date().getTime(),
                         };
-                        
+
                         script.isStart = true;  // 출력 시작 플래그 셋
                         script.timeFlag = 1;    // 시간플래그 셋
                         setTimeout(() => {
@@ -1373,7 +1373,7 @@ Entry.ssboard_nano.getBlocks = function() {
                         rgbled_b[port] = bLED;
                         delete script.timeFlag;
                         delete script.isStart;
-                        Entry.engine.isContinue = false;
+                        RoCode.engine.isContinue = false;
                         return script.callReturn();
                     }
                 }
@@ -1382,11 +1382,11 @@ Entry.ssboard_nano.getBlocks = function() {
             },
             syntax: { js: [], py: [] },
         },
-        
+
 		// 9. RGBLED 끄기, SHOW
         ssboard_nano_rgbled_all_onoff: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1406,7 +1406,7 @@ Entry.ssboard_nano.getBlocks = function() {
                 params: [
                     {
                         type: 'ssboard_nano_all_onoff_list',
-                    },			
+                    },
                     null,
                 ],
                 type: 'ssboard_nano_rgbled_all_onoff',
@@ -1428,11 +1428,11 @@ Entry.ssboard_nano.getBlocks = function() {
                     }
                 }
 				if (!script.isStart) {
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
-                    Entry.hw.sendQueue.SET[port] = {
-                        type: Entry.ssboard_nano.sensorTypes.RGBLEDSHOW,
+                    RoCode.hw.sendQueue.SET[port] = {
+                        type: RoCode.ssboard_nano.sensorTypes.RGBLEDSHOW,
                         data: {
                             mode: ledmode,
                         },
@@ -1449,7 +1449,7 @@ Entry.ssboard_nano.getBlocks = function() {
                 } else {// 설정 시간이 지나면 출력 리셋
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1458,8 +1458,8 @@ Entry.ssboard_nano.getBlocks = function() {
 
         // 10. 디지털  출력
         ssboard_nano_digital_onoff: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1471,7 +1471,7 @@ Entry.ssboard_nano.getBlocks = function() {
                 {
                     type: 'Block',
                     accept: 'string',
-                },				
+                },
                 {
                     type: 'Indicator',
                     img: 'block_icon/hardware_icon.svg',
@@ -1482,11 +1482,11 @@ Entry.ssboard_nano.getBlocks = function() {
             def: {
                 params: [
                     {
-                        type: 'ssboard_nano_digital_out_port_list',      
+                        type: 'ssboard_nano_digital_out_port_list',
                     },
                     {
                         type: 'ssboard_nano_digital_port_onoff_list',
-                    },					
+                    },
                     null,
                 ],
                 type: 'ssboard_nano_digital_onoff',
@@ -1500,25 +1500,25 @@ Entry.ssboard_nano.getBlocks = function() {
            func: (sprite, script) => {
                 const port = script.getNumberValue('PORT');
                 const value = script.getNumberValue('VALUE');
-				
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port] = {
-                    type: Entry.ssboard_nano.sensorTypes.DIGITAL,    /// 출력 디바이스
+                RoCode.hw.sendQueue.SET[port] = {
+                    type: RoCode.ssboard_nano.sensorTypes.DIGITAL,    /// 출력 디바이스
                     data: value,
                     time: new Date().getTime(),
                 };
-                return script.callReturn();				
+                return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
 
-		
-		// 11. 디지털입력		
+
+		// 11. 디지털입력
         ssboard_nano_get_digital_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -1543,26 +1543,26 @@ Entry.ssboard_nano.getBlocks = function() {
             },
             class: 'ssboard_nano_LV3',
             isNotFor: ['ssboard_nano'],
-            func: (sprite, script) => {		
+            func: (sprite, script) => {
                 const port = script.getNumberValue('PORT');
-                const DIGITAL = Entry.hw.portData.DIGITAL;
+                const DIGITAL = RoCode.hw.portData.DIGITAL;
 
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
-                Entry.hw.sendQueue.GET[Entry.ssboard_nano.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue.GET[RoCode.ssboard_nano.sensorTypes.DIGITAL] = {
                     port: port,
                     time: new Date().getTime(),
                 };
                 return DIGITAL[port];
             },
             syntax: { js: [], py: [] },
-        },	
+        },
 
         // 12. 아날로그 읽기
         ssboard_nano_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,			
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.ssboard_nano_get_analog_value,
@@ -1575,14 +1575,14 @@ Entry.ssboard_nano.getBlocks = function() {
                 {
                     type: 'Block',
                     accept: 'string',
-                },				
+                },
             ],
             events: {},
             def: {
                 params: [
                     {
                         type: 'ssboard_nano_analog_port_list',
-                    },				
+                    },
                 ],
                 type: 'ssboard_nano_get_analog_value',
             },
@@ -1593,18 +1593,18 @@ Entry.ssboard_nano.getBlocks = function() {
             class: 'ssboard_nano_LV3',
             isNotFor: ['ssboard_nano'],
             func: (sprite, script) => {
-                const btn_index = script.getNumberValue('PORT');				
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const btn_index = script.getNumberValue('PORT');
+                const ANALOG = RoCode.hw.portData.ANALOG;
 
                 return ANALOG[btn_index];
             },
             syntax: { js: [], py: [] },
         },
 
-        // 13.  PWM 제어 	
+        // 13.  PWM 제어
         ssboard_nano_set_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1616,7 +1616,7 @@ Entry.ssboard_nano.getBlocks = function() {
                 {
                     type: 'Block',
                     accept: 'string',
-                },				
+                },
                 {
                     type: 'Indicator',
                     img: 'block_icon/hardware_icon.svg',
@@ -1628,11 +1628,11 @@ Entry.ssboard_nano.getBlocks = function() {
                 params: [
                     {
                         type: 'ssboard_nano_pwn_port_list',
-                    },			
+                    },
                     {
                         type: 'number',
 						params: ['0'],
-                    },		
+                    },
                     null,
                 ],
                 type: 'ssboard_nano_set_pwm',
@@ -1646,16 +1646,16 @@ Entry.ssboard_nano.getBlocks = function() {
             func: (sprite, script) => {
                 const port = script.getNumberValue('PORT', script);
                 let angle = script.getNumberValue('ANGLE', script);
-                
+
                 angle = Math.min(180, angle);
                 angle = Math.max(0, angle);
-				
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port] = 
+                RoCode.hw.sendQueue.SET[port] =
                 {
-                    type: Entry.ssboard_nano.sensorTypes.PWM,
+                    type: RoCode.ssboard_nano.sensorTypes.PWM,
                     data: angle,
                     time: new Date().getTime(),
                 };
@@ -1666,8 +1666,8 @@ Entry.ssboard_nano.getBlocks = function() {
 
         // 14. 초음파센서 설정
         ssboard_nano_set_ultrasonic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1679,7 +1679,7 @@ Entry.ssboard_nano.getBlocks = function() {
                 {
                     type: 'Block',
                     accept: 'string',
-                },				
+                },
                 {
                     type: 'Indicator',
                     img: 'block_icon/hardware_icon.svg',
@@ -1692,11 +1692,11 @@ Entry.ssboard_nano.getBlocks = function() {
                     {
                         type: 'ssboard_nano_digital_out_port_list',
                         params: ['13'],
-                    },			
+                    },
                     {
                         type: 'ssboard_nano_digital_out_port_list',
                         params: ['5'],
-                    },		
+                    },
                     null,
                 ],
                 type: 'ssboard_nano_set_ultrasonic',
@@ -1713,13 +1713,13 @@ Entry.ssboard_nano.getBlocks = function() {
 				//var mode = 2;
                 const port = trig;
 
-				
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port] = 
+                RoCode.hw.sendQueue.SET[port] =
                 {
-                    type: Entry.ssboard_nano.sensorTypes.USONIC,
+                    type: RoCode.ssboard_nano.sensorTypes.USONIC,
                     data: echo,
                     time: new Date().getTime(),
                 };
@@ -1728,10 +1728,10 @@ Entry.ssboard_nano.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
 
-        // 15. 초음파 센서 값		
+        // 15. 초음파 센서 값
         ssboard_nano_get_usonic_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.ssboard_nano_get_usonic_value,
@@ -1755,15 +1755,15 @@ Entry.ssboard_nano.getBlocks = function() {
             class: 'ssboard_nano_LV4',
             isNotFor: ['ssboard_nano'],
             func: (sprite, script) => {
-                return Entry.hw.portData.USONIC;// || 0;
+                return RoCode.hw.portData.USONIC;// || 0;
             },
             syntax: { js: [], py: [] },
         },
 
         //16. 온도센서 연결핀 설정
         ssboard_nano_set_temp: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1771,7 +1771,7 @@ Entry.ssboard_nano.getBlocks = function() {
                 {
                     type: 'Block',
                     accept: 'string',
-                },			
+                },
                 {
                     type: 'Indicator',
                     img: 'block_icon/hardware_icon.svg',
@@ -1784,7 +1784,7 @@ Entry.ssboard_nano.getBlocks = function() {
                     {
                         type: 'ssboard_nano_digital_out_port_list',
                         params: ['14'],
-                    },			
+                    },
                     null,
                 ],
                 type: 'ssboard_nano_set_temp',
@@ -1798,13 +1798,13 @@ Entry.ssboard_nano.getBlocks = function() {
                 const sensor = script.getNumberValue('SENSOR', script);
                 const port = sensor;
 
-				
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port] = 
+                RoCode.hw.sendQueue.SET[port] =
                 {
-                    type: Entry.ssboard_nano.sensorTypes.TEMP,
+                    type: RoCode.ssboard_nano.sensorTypes.TEMP,
                     data: sensor,
                     time: new Date().getTime(),
                 };
@@ -1815,8 +1815,8 @@ Entry.ssboard_nano.getBlocks = function() {
 
         // 17. 온도센서값 읽기
         ssboard_nano_get_temp_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.ssboard_nano_get_temp_value,
@@ -1840,16 +1840,16 @@ Entry.ssboard_nano.getBlocks = function() {
             class: 'ssboard_nano_LV4',
             isNotFor: ['ssboard_nano'],
             func: (sprite, script) => {
- 
-                return Entry.hw.portData.TEMP;// || 0;
+
+                return RoCode.hw.portData.TEMP;// || 0;
             },
             syntax: { js: [], py: [] },
         },
 
         // 18. i2c포트 센서연결 설정
         ssboard_nano_set_i2c: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1857,7 +1857,7 @@ Entry.ssboard_nano.getBlocks = function() {
                 {
                     type: 'Block',
                     accept: 'string',
-                },			
+                },
                 {
                     type: 'Indicator',
                     img: 'block_icon/hardware_icon.svg',
@@ -1870,7 +1870,7 @@ Entry.ssboard_nano.getBlocks = function() {
                     {
                         type: 'ssboard_nano_i2c_sen_list',
                         params: ['1'],
-                    },			
+                    },
                     null,
                 ],
                 type: 'ssboard_nano_set_i2c',
@@ -1884,13 +1884,13 @@ Entry.ssboard_nano.getBlocks = function() {
                 const sensor = script.getNumberValue('SENSOR', script);
                 const port = sensor;
 
-				
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port] = 
+                RoCode.hw.sendQueue.SET[port] =
                 {
-                    type: Entry.ssboard_nano.sensorTypes.I2C_SET,
+                    type: RoCode.ssboard_nano.sensorTypes.I2C_SET,
                     data: sensor,
                     time: new Date().getTime(),
                 };
@@ -1901,8 +1901,8 @@ Entry.ssboard_nano.getBlocks = function() {
 
         // 19. 컬러센서값
         ssboard_nano_get_color_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,	
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.ssboard_nano_get_color_value,
@@ -1916,10 +1916,10 @@ Entry.ssboard_nano.getBlocks = function() {
                         ['B', '3']
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 }
-				
+
             ],
             events: {},
             def: {
@@ -1932,18 +1932,18 @@ Entry.ssboard_nano.getBlocks = function() {
             class: 'ssboard_nano_LV4',
             isNotFor: ['ssboard_nano'],
             func: (sprite, script) => {
-                var btn_index = script.getField('COLOR');				
+                var btn_index = script.getField('COLOR');
 
-                return Entry.hw.portData.COLOR_SEN[btn_index-1];
+                return RoCode.hw.portData.COLOR_SEN[btn_index-1];
             },
-           
+
             syntax: { js: [], py: [] },
         },
 
         // 20. 자이로센서값
         ssboard_nano_get_gyro_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,	
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.ssboard_nano_get_gyro_value,
@@ -1960,10 +1960,10 @@ Entry.ssboard_nano.getBlocks = function() {
                         ['acc Z', '6']
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 }
-				
+
             ],
             events: {},
             def: {
@@ -1976,18 +1976,18 @@ Entry.ssboard_nano.getBlocks = function() {
             class: 'ssboard_nano_LV4',
             isNotFor: ['ssboard_nano'],
             func: (sprite, script) => {
-                const btn_index = script.getField('GYRO');				
+                const btn_index = script.getField('GYRO');
 
-                return Entry.hw.portData.GYRO_SEN[btn_index-1];
+                return RoCode.hw.portData.GYRO_SEN[btn_index-1];
             },
-           
+
             syntax: { js: [], py: [] },
         },
 
         // 21. LCD글자출력
         ssboard_nano_set_lcd_string: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1995,15 +1995,15 @@ Entry.ssboard_nano.getBlocks = function() {
                 {
                     type: 'Block',
                     accept: 'string',
-                },	
+                },
                 {
                     type: 'Block',
                     accept: 'string',
-                },	
+                },
                 {
                     type: 'Block',
                     accept: 'string',
-                },							
+                },
                 {
                     type: 'Indicator',
                     img: 'block_icon/hardware_icon.svg',
@@ -2022,7 +2022,7 @@ Entry.ssboard_nano.getBlocks = function() {
                         params: ['0'],
                     },
                     {
-                        type: 'text', 
+                        type: 'text',
                         params: ['ssmaker.co.kr'],
                     },
                     null,
@@ -2037,7 +2037,7 @@ Entry.ssboard_nano.getBlocks = function() {
             class: 'ssboard_nano_LV5',
             isNotFor: ['ssboard_nano'],
             func: (sprite, script) => {
-                // var sq = Entry.hw.sendQueue;
+                // var sq = RoCode.hw.sendQueue;
                 const line = script.getValue('LINE', script);
                 const column = script.getValue('COLUMN', script);
                 const string = script.getValue('STRING', script);
@@ -2047,29 +2047,29 @@ Entry.ssboard_nano.getBlocks = function() {
                 if (!script.isStart) {
                     if (typeof string === 'string') {
                         for (var i = 0; i < string.length; i++) {
-                            buf = Entry.memaker.toByte(string[parseInt(i, 10)]);
+                            buf = RoCode.memaker.toByte(string[parseInt(i, 10)]);
                             text[parseInt(i, 10)] = buf;
                         }
                     } else if (typeof string === 'number') {
                         var num_to_string = string.toString();
                         for (var i = 0; i < num_to_string.length; i++) {
-                            text[i] = Entry.memaker.toByte(num_to_string[i]);
+                            text[i] = RoCode.memaker.toByte(num_to_string[i]);
                         }
                     } else {
                         text[0] = string;
                     }
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue.SET = {};
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue.SET = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    //var fps = Entry.FPS || 60;
+                    //var fps = RoCode.FPS || 60;
                    // var timeValue = 60 / fps * 50;
 
-                    Entry.hw.sendQueue.SET[3] = {
-                        type: Entry.ssboard_nano.sensorTypes.LCD_SET,
+                    RoCode.hw.sendQueue.SET[3] = {
+                        type: RoCode.ssboard_nano.sensorTypes.LCD_SET,
                         data: {
                             line: line,
                             column: column,
@@ -2106,18 +2106,18 @@ Entry.ssboard_nano.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = true;
+                    RoCode.engine.isContinue = true;
                     return script.callReturn();
                 }
-                 
+
             },
             syntax: { js: [], py: [] },
         },
 
         // 22. LCD 연결설정
         ssboard_nano_set_lcd_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -2133,7 +2133,7 @@ Entry.ssboard_nano.getBlocks = function() {
                 {
                     type: 'Block',
                     accept: 'string',
-                },								
+                },
                 {
                     type: 'Indicator',
                     img: 'block_icon/hardware_icon.svg',
@@ -2144,7 +2144,7 @@ Entry.ssboard_nano.getBlocks = function() {
             def: {
                 params: [
                     {
-                        type: 'ssboard_nano_lcd_add_list', 
+                        type: 'ssboard_nano_lcd_add_list',
                         params: ['39'],
                     },
                     {
@@ -2154,7 +2154,7 @@ Entry.ssboard_nano.getBlocks = function() {
                     {
                         type: 'number',
                         params: ['2'],
-                    },				
+                    },
                     null,
                 ],
                 type: 'ssboard_nano_set_lcd_init',
@@ -2172,11 +2172,11 @@ Entry.ssboard_nano.getBlocks = function() {
                 const y_line = script.getNumberValue('Y_LINE', script);  // 세로 줄수
                 const x_line = script.getNumberValue('X_LINE', script);  // 가로 줄수
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[1] = {
-                    type: Entry.ssboard_nano.sensorTypes.LCD_SET,
+                RoCode.hw.sendQueue.SET[1] = {
+                    type: RoCode.ssboard_nano.sensorTypes.LCD_SET,
                     data: [
                         lcd_add,
                         y_line,
@@ -2187,11 +2187,11 @@ Entry.ssboard_nano.getBlocks = function() {
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
-        },	
+        },
         // 23. LCD 지우기
         ssboard_nano_set_lcd_clear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,	
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -2215,11 +2215,11 @@ Entry.ssboard_nano.getBlocks = function() {
             func: (sprite, script) => {
                 //var port = 0;
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[4] = {
-                    type: Entry.ssboard_nano.sensorTypes.LCD_SET,
+                RoCode.hw.sendQueue.SET[4] = {
+                    type: RoCode.ssboard_nano.sensorTypes.LCD_SET,
                     data: [4, 4, 4,],
                     time: new Date().getTime(),
                 };
@@ -2227,10 +2227,10 @@ Entry.ssboard_nano.getBlocks = function() {
             },
             syntax: { js: [], py: [] },
         },
-		// 3. 소리/빛/가변저항 - 2) mapping 값			
+		// 3. 소리/빛/가변저항 - 2) mapping 값
         ssboard_nano_get_analog_mapping: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             template: Lang.template.ssboard_nano_get_analog_mapping,
@@ -2263,7 +2263,7 @@ Entry.ssboard_nano.getBlocks = function() {
                     {
                         type: 'number',
                         params: ['0'],
-                    },					
+                    },
                     {
                         type: 'number',
                         params: ['0'],
@@ -2293,7 +2293,7 @@ Entry.ssboard_nano.getBlocks = function() {
             class: 'ssboard_nano_ANA',
             isNotFor: ['ssboard_nano'],
             func: (sprite, script) => {
-                let result = script.getNumberValue('IDATA', script);				
+                let result = script.getNumberValue('IDATA', script);
                 let value2 = script.getNumberValue('VALUE2', script);
                 let value3 = script.getNumberValue('VALUE3', script);
                 let value4 = script.getNumberValue('VALUE4', script);
@@ -2321,4 +2321,4 @@ Entry.ssboard_nano.getBlocks = function() {
         },
     };
 };
-module.exports = Entry.ssboard_nano;
+module.exports = RoCode.ssboard_nano;

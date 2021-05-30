@@ -1,9 +1,9 @@
 'use strict';
 
-Entry.Chocopi = {
+RoCode.Chocopi = {
     id: '14.1',
     name: 'chocopi',
-    url: 'http://chocopi.org/entry/',
+    url: 'http://chocopi.org/RoCode/',
     imageName: 'chocopi.png',
     title: {
         ko: '초코파이보드',
@@ -39,12 +39,12 @@ Entry.Chocopi = {
         ['BLE8', 15],
     ],
     dataHandler: function(data) {
-        if (!Entry.hw.sendQueue.data) {
+        if (!RoCode.hw.sendQueue.data) {
             this.connected = true;
-            Entry.hw.sendQueue.init = true;
-            Entry.hw.update();
-            delete Entry.hw.sendQueue.init;
-            Entry.hw.sendQueue.data = {};
+            RoCode.hw.sendQueue.init = true;
+            RoCode.hw.update();
+            delete RoCode.hw.sendQueue.init;
+            RoCode.hw.sendQueue.data = {};
         }
         if (data['d']) {
             for (var i in data['d']) {
@@ -54,7 +54,7 @@ Entry.Chocopi = {
         if (data['ev']) {
             for (var i in data['ev']) {
                 this.ev[i] = data['ev'][i];
-                Entry.engine.fireEvent(this.blocks[i].name + '14');
+                RoCode.engine.fireEvent(this.blocks[i].name + '14');
             }
         }
         if (data['bl']) {
@@ -62,7 +62,7 @@ Entry.Chocopi = {
         }
     },
 };
-Entry.Chocopi.blockMenuBlocks = [
+RoCode.Chocopi.blockMenuBlocks = [
     'chocopi_sensor',
     'chocopi_touch_event',
     'chocopi_touch_status',
@@ -79,12 +79,12 @@ Entry.Chocopi.blockMenuBlocks = [
     'chocopi_servo_motor',
     'chocopi_map_range',
 ];
-Entry.Chocopi.getBlocks = function() {
+RoCode.Chocopi.getBlocks = function() {
     return {
         //region chocopi 초코파이
         chocopi_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -111,8 +111,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -126,8 +126,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 'temp',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [], type: 'chocopi_sensor' },
@@ -135,16 +135,16 @@ Entry.Chocopi.getBlocks = function() {
             class: 'chocopi_sensor',
             isNotFor: ['chocopi'],
             func: function(sprite, script) {
-                var port = Entry.Chocopi.getport(8, script.getField('port'));
+                var port = RoCode.Chocopi.getport(8, script.getField('port'));
                 var name = script.getField('sensor');
                 if (port == -1) return 0;
-                return Entry.Chocopi.p[port][name];
+                return RoCode.Chocopi.p[port][name];
             },
             syntax: { js: [], py: ['Chocopi.sensor(%1, %2)'] },
         },
         chocopi_touch_event: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_event',
             statements: [],
@@ -177,8 +177,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -198,8 +198,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -209,8 +209,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [], type: 'chocopi_touch_event' },
@@ -219,12 +219,12 @@ Entry.Chocopi.getBlocks = function() {
             isNotFor: ['chocopi'],
             event: 'touch14',
             func: function(sprite, script) {
-                var port = Entry.Chocopi.getport(9, script.getField('port'));
+                var port = RoCode.Chocopi.getport(9, script.getField('port'));
                 if (port == -1) return this.die();
                 var id = script.getField('id');
                 var status = script.getField('status');
-                var ev = Entry.Chocopi.ev[port];
-                if (((ev.id >> id) & 1) != 1 || ((Entry.Chocopi.p[port].ts >> id) & 1) != status) {
+                var ev = RoCode.Chocopi.ev[port];
+                if (((ev.id >> id) & 1) != 1 || ((RoCode.Chocopi.p[port].ts >> id) & 1) != status) {
                     return this.die();
                 }
                 return script.callReturn();
@@ -232,8 +232,8 @@ Entry.Chocopi.getBlocks = function() {
             syntax: { js: [], py: ['def on_chocopi_touch(%2, %3, %4 ):'] },
         },
         chocopi_touch_status: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -260,8 +260,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -281,8 +281,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [], type: 'chocopi_touch_status' },
@@ -290,17 +290,17 @@ Entry.Chocopi.getBlocks = function() {
             class: 'chocopi_touch',
             isNotFor: ['chocopi'],
             func: function(sprite, script) {
-                var port = Entry.Chocopi.getport(9, script.getField('port'));
+                var port = RoCode.Chocopi.getport(9, script.getField('port'));
                 var sensor = script.getField('sensor');
                 if (port == -1) return false;
-                if (!Entry.Chocopi.p[port]) Entry.Chocopi.p[port] = { ts: 0, tv: [] };
-                return (Entry.Chocopi.p[port].ts & (1 << sensor)) > 0;
+                if (!RoCode.Chocopi.p[port]) RoCode.Chocopi.p[port] = { ts: 0, tv: [] };
+                return (RoCode.Chocopi.p[port].ts & (1 << sensor)) > 0;
             },
             syntax: { js: [], py: ['Chocopi.touchStatus(%1, %2)'] },
         },
         chocopi_touch_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -327,8 +327,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -348,8 +348,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [], type: 'chocopi_touch_value' },
@@ -357,17 +357,17 @@ Entry.Chocopi.getBlocks = function() {
             class: 'chocopi_touch',
             isNotFor: ['chocopi'],
             func: function(sprite, script) {
-                var port = Entry.Chocopi.getport(9, script.getField('port'));
+                var port = RoCode.Chocopi.getport(9, script.getField('port'));
                 if (port == -1) return false;
                 var sensor = script.getField('sensor');
-                if (!Entry.Chocopi.p[port]) Entry.Chocopi.p[port] = { ts: 0, tv: [] };
-                return Entry.Chocopi.p[port].tv[sensor];
+                if (!RoCode.Chocopi.p[port]) RoCode.Chocopi.p[port] = { ts: 0, tv: [] };
+                return RoCode.Chocopi.p[port].tv[sensor];
             },
             syntax: { js: [], py: ['Chocopi.touchValue(%1, %2)'] },
         },
         chocopi_control_event: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_event',
             statements: [],
@@ -400,8 +400,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -413,8 +413,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -424,8 +424,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [], type: 'chocopi_control_event' },
@@ -434,11 +434,11 @@ Entry.Chocopi.getBlocks = function() {
             isNotFor: ['chocopi'],
             event: 'control14',
             func: function(sprite, script) {
-                var port = Entry.Chocopi.getport(10, script.getField('port'));
+                var port = RoCode.Chocopi.getport(10, script.getField('port'));
                 if (port == -1) return this.die();
                 var id = script.getField('id');
                 var status = script.getField('status');
-                var ev = Entry.Chocopi.ev[port];
+                var ev = RoCode.Chocopi.ev[port];
                 if (((ev.id >> (4 - id)) & 1) != 1 || ev.btn[id] != status) {
                     return this.die();
                 }
@@ -450,8 +450,8 @@ Entry.Chocopi.getBlocks = function() {
             },
         },
         chocopi_control_joystick: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -478,8 +478,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -490,8 +490,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [null], type: 'chocopi_control_joystick' },
@@ -499,17 +499,17 @@ Entry.Chocopi.getBlocks = function() {
             class: 'chocopi_control',
             isNotFor: ['chocopi'],
             func: function(sprite, script) {
-                var port = Entry.Chocopi.getport(10, script.getField('port'));
+                var port = RoCode.Chocopi.getport(10, script.getField('port'));
                 if (port == -1) return false;
                 var sensor = script.getField('sensor');
-                if (!Entry.Chocopi.p[port]) Entry.Chocopi.p[port] = { xyp: [] };
-                return Entry.Chocopi.p[port].xyp[sensor];
+                if (!RoCode.Chocopi.p[port]) RoCode.Chocopi.p[port] = { xyp: [] };
+                return RoCode.Chocopi.p[port].xyp[sensor];
             },
             syntax: { js: [], py: ['Chocopi.joystick(%1, %2)'] },
         },
         chocopi_control_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -536,8 +536,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -549,8 +549,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [null], type: 'chocopi_control_button' },
@@ -558,17 +558,17 @@ Entry.Chocopi.getBlocks = function() {
             class: 'chocopi_control',
             isNotFor: ['chocopi'],
             func: function(sprite, script) {
-                var port = Entry.Chocopi.getport(10, script.getField('port'));
+                var port = RoCode.Chocopi.getport(10, script.getField('port'));
                 if (port == -1) return false;
                 var sensor = script.getField('sensor');
-                if (!Entry.Chocopi.ev[port]) return 0;
-                return Entry.Chocopi.ev[port].btn[sensor];
+                if (!RoCode.Chocopi.ev[port]) return 0;
+                return RoCode.Chocopi.ev[port].btn[sensor];
             },
             syntax: { js: [], py: ['Chocopi.button(%1, %2)'] },
         },
         chocopi_motion_photogate_time: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -595,8 +595,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -606,8 +606,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -617,8 +617,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [null], type: 'chocopi_motion_photogate_time' },
@@ -626,18 +626,18 @@ Entry.Chocopi.getBlocks = function() {
             class: 'chocopi_motion',
             isNotFor: ['chocopi'],
             func: function(sprite, script) {
-                var port = Entry.Chocopi.getport(11, script.getField('port'));
+                var port = RoCode.Chocopi.getport(11, script.getField('port'));
                 if (port == -1) return 0;
                 var sensor = script.getField('sensor');
                 var action = script.getField('action');
-                if (!Entry.Chocopi.ev[port]) return 0;
-                return Entry.Chocopi.ev[port].time[sensor][action];
+                if (!RoCode.Chocopi.ev[port]) return 0;
+                return RoCode.Chocopi.ev[port].time[sensor][action];
             },
             syntax: { js: [], py: ['Chocopi.photogateTime(%1, %2, %3)'] },
         },
         chocopi_motion_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -664,8 +664,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -685,8 +685,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [null], type: 'chocopi_motion_value' },
@@ -694,11 +694,11 @@ Entry.Chocopi.getBlocks = function() {
             class: 'chocopi_motion',
             isNotFor: ['chocopi'],
             func: function(sprite, script) {
-                var port = Entry.Chocopi.getport(11, script.getField('port'));
+                var port = RoCode.Chocopi.getport(11, script.getField('port'));
                 if (port == -1) return 0;
                 var sensor = script.getField('sensor');
-                if (!Entry.Chocopi.p[port]) Entry.Chocopi.p[port] = { s: [] };
-                var v = Entry.Chocopi.p[port].s;
+                if (!RoCode.Chocopi.p[port]) RoCode.Chocopi.p[port] = { s: [] };
+                var v = RoCode.Chocopi.p[port].s;
                 if (sensor < 9) return v[sensor];
                 switch (sensor) {
                     case 9:
@@ -714,8 +714,8 @@ Entry.Chocopi.getBlocks = function() {
         },
 
         chocopi_motion_photogate_status: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -742,8 +742,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -753,8 +753,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [null], type: 'chocopi_motion_photogate_status' },
@@ -762,17 +762,17 @@ Entry.Chocopi.getBlocks = function() {
             class: 'chocopi_motion',
             isNotFor: ['chocopi'],
             func: function(sprite, script) {
-                var port = Entry.Chocopi.getport(11, script.getField('port'));
+                var port = RoCode.Chocopi.getport(11, script.getField('port'));
                 if (port == -1) return 0;
                 var sensor = script.getField('sensor');
-                if (!Entry.Chocopi.ev[port]) return 0;
-                return Entry.Chocopi.ev[port].pg[sensor];
+                if (!RoCode.Chocopi.ev[port]) return 0;
+                return RoCode.Chocopi.ev[port].pg[sensor];
             },
             syntax: { js: [], py: ['Chocopi.motionPhotogateStatus(%1, %2)'] },
         },
         chocopi_motion_photogate_event: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_event',
             statements: [],
@@ -805,8 +805,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -826,8 +826,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -837,8 +837,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: { params: [], type: 'chocopi_motion_photogate_event' },
@@ -847,11 +847,11 @@ Entry.Chocopi.getBlocks = function() {
             isNotFor: ['chocopi'],
             event: 'motion14',
             func: function(sprite, script) {
-                var port = Entry.Chocopi.getport(11, script.getField('port'));
+                var port = RoCode.Chocopi.getport(11, script.getField('port'));
                 if (port == -1) return this.die();
                 var id = script.getField('id');
                 var status = script.getField('status');
-                if (Entry.Chocopi.ev[port].pg[id] != status) {
+                if (RoCode.Chocopi.ev[port].pg[id] != status) {
                     return this.die();
                 }
 
@@ -860,8 +860,8 @@ Entry.Chocopi.getBlocks = function() {
             syntax: { js: [], py: ['def on_chocopi_photogate(%2, %3, %4 ):'] },
         },
         chocopi_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -888,8 +888,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 { type: 'Block', accept: 'string' },
@@ -915,23 +915,23 @@ Entry.Chocopi.getBlocks = function() {
             class: 'chocopi_output',
             isNotFor: ['chocopi'],
             func: function(sprite, script) {
-                var port = Entry.Chocopi.getport(12, script.getField('port'));
+                var port = RoCode.Chocopi.getport(12, script.getField('port'));
                 if (port == -1) return script.callReturn();
                 var l = script.getNumberValue('l');
                 var r = script.getNumberValue('r');
                 var g = script.getNumberValue('g');
                 var b = script.getNumberValue('b');
-                if (!Entry.hw.sendQueue.data) Entry.hw.sendQueue.data = {};
-                Entry.hw.sendQueue.data[port] = [l, r, g, b];
-                Entry.hw.update();
-                delete Entry.hw.sendQueue.data[port];
+                if (!RoCode.hw.sendQueue.data) RoCode.hw.sendQueue.data = {};
+                RoCode.hw.sendQueue.data[port] = [l, r, g, b];
+                RoCode.hw.update();
+                delete RoCode.hw.sendQueue.data[port];
                 return script.callReturn();
             },
             syntax: { js: [], py: ['Chocopi.LED(%1, %2, %3, %4, %5)'] },
         },
         chocopi_dc_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -958,8 +958,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -969,8 +969,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 {
@@ -981,8 +981,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -998,22 +998,22 @@ Entry.Chocopi.getBlocks = function() {
             class: 'chocopi_output',
             isNotFor: ['chocopi'],
             func: function(sprite, script) {
-                var port = Entry.Chocopi.getport(14, script.getField('port'));
+                var port = RoCode.Chocopi.getport(14, script.getField('port'));
                 if (port == -1) return script.callReturn();
                 var id = script.getField('id');
                 var s = script.getNumberValue('power');
                 var d = script.getField('direction');
-                if (!Entry.hw.sendQueue.data) Entry.hw.sendQueue.data = {};
-                Entry.hw.sendQueue.data[port] = [id, s, d];
-                Entry.hw.update();
-                delete Entry.hw.sendQueue.data[port];
+                if (!RoCode.hw.sendQueue.data) RoCode.hw.sendQueue.data = {};
+                RoCode.hw.sendQueue.data[port] = [id, s, d];
+                RoCode.hw.update();
+                delete RoCode.hw.sendQueue.data[port];
                 return script.callReturn();
             },
             syntax: { js: [], py: ['Chocopi.DCmotor(%1, %2, %3, %4)'] },
         },
         chocopi_servo_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1040,8 +1040,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1053,8 +1053,8 @@ Entry.Chocopi.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 { type: 'Block', accept: 'string' },
                 {
@@ -1071,21 +1071,21 @@ Entry.Chocopi.getBlocks = function() {
             class: 'chocopi_output',
             isNotFor: ['chocopi'],
             func: function(sprite, script) {
-                var port = Entry.Chocopi.getport(15, script.getField('port'));
+                var port = RoCode.Chocopi.getport(15, script.getField('port'));
                 if (port == -1) return script.callReturn();
                 var id = script.getField('id');
                 var a = script.getNumberValue('angle');
-                if (!Entry.hw.sendQueue.data) Entry.hw.sendQueue.data = {};
-                Entry.hw.sendQueue.data[port] = [id, a];
-                Entry.hw.update();
-                delete Entry.hw.sendQueue.data[port];
+                if (!RoCode.hw.sendQueue.data) RoCode.hw.sendQueue.data = {};
+                RoCode.hw.sendQueue.data[port] = [id, a];
+                RoCode.hw.update();
+                delete RoCode.hw.sendQueue.data[port];
                 return script.callReturn();
             },
             syntax: { js: [], py: ['Chocopi.servo(%1, %2, %3)'] },
         },
         chocopi_map_range: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1123,7 +1123,7 @@ Entry.Chocopi.getBlocks = function() {
     };
 };
 
-Entry.Chocopi.setLanguage = function() {
+RoCode.Chocopi.setLanguage = function() {
     return {
         ko: {
             // ko.js에 작성하던 내용
@@ -1281,4 +1281,4 @@ Entry.Chocopi.setLanguage = function() {
     };
 };
 
-module.exports = Entry.Chocopi;
+module.exports = RoCode.Chocopi;

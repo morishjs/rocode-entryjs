@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.UglyBot = {
+RoCode.UglyBot = {
     Cmd: {
         CMD_GOLDENKEY0: 0,
         CMD_GOLDENKEY1: 1,
@@ -42,7 +42,7 @@ Entry.UglyBot = {
         SENSOR_PHOTO: 17,
     },
     setZero() {
-        Entry.hw.sendQueue.CMD = [
+        RoCode.hw.sendQueue.CMD = [
             0x26,
             0xa8,
             0x14,
@@ -64,7 +64,7 @@ Entry.UglyBot = {
             0x00,
             0x00,
         ];
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     id: '1D.3',
     name: 'UglyBot',
@@ -182,7 +182,7 @@ Entry.UglyBot = {
     },
 };
 
-Entry.UglyBot.setLanguage = function() {
+RoCode.UglyBot.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -287,7 +287,7 @@ Entry.UglyBot.setLanguage = function() {
     };
 };
 
-Entry.UglyBot.blockMenuBlocks = [
+RoCode.UglyBot.blockMenuBlocks = [
     'uglybot_led',
     'uglybot_buzzer',
     'uglybot_motor',
@@ -304,7 +304,7 @@ Entry.UglyBot.blockMenuBlocks = [
     'uglybot_illum',
 ];
 
-Entry.UglyBot.getBlocks = function() {
+RoCode.UglyBot.getBlocks = function() {
     let noteID = 1;
     let moveID = 1;
     let rotID = 1;
@@ -312,8 +312,8 @@ Entry.UglyBot.getBlocks = function() {
     return {
         //region UglyBot
         uglybot_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -325,8 +325,8 @@ Entry.UglyBot.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -336,8 +336,8 @@ Entry.UglyBot.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -358,8 +358,8 @@ Entry.UglyBot.getBlocks = function() {
             isNotFor: ['UglyBot'],
 
             func(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined') {
-                    Entry.hw.sendQueue.CMD = [
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined') {
+                    RoCode.hw.sendQueue.CMD = [
                         0x26,
                         0xa8,
                         0x14,
@@ -382,24 +382,24 @@ Entry.UglyBot.getBlocks = function() {
                         0x00,
                     ];
                 }
-                const cmd = Entry.hw.sendQueue.CMD;
+                const cmd = RoCode.hw.sendQueue.CMD;
                 const what = script.getNumberValue('LED_WHAT', script);
                 const act = script.getNumberValue('LED_ACTION', script);
                 if (act == 0) {
-                    cmd[Entry.UglyBot.Cmd.CMD_LED] |= 0x01 << what;
+                    cmd[RoCode.UglyBot.Cmd.CMD_LED] |= 0x01 << what;
                 } else {
-                    cmd[Entry.UglyBot.Cmd.CMD_LED] &= ~(0x01 << what);
+                    cmd[RoCode.UglyBot.Cmd.CMD_LED] &= ~(0x01 << what);
                 }
-                cmd[Entry.UglyBot.Cmd.CMD_LED] |= 0x10;
-                Entry.hw.update();
+                cmd[RoCode.UglyBot.Cmd.CMD_LED] |= 0x10;
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
 
         uglybot_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -416,8 +416,8 @@ Entry.UglyBot.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -432,8 +432,8 @@ Entry.UglyBot.getBlocks = function() {
                     ],
                     value: 10,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -454,8 +454,8 @@ Entry.UglyBot.getBlocks = function() {
             isNotFor: ['UglyBot'],
 
             func(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined') {
-                    Entry.hw.sendQueue.CMD = [
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined') {
+                    RoCode.hw.sendQueue.CMD = [
                         0x26,
                         0xa8,
                         0x14,
@@ -478,22 +478,22 @@ Entry.UglyBot.getBlocks = function() {
                         0x00,
                     ];
                 }
-                const cmd = Entry.hw.sendQueue.CMD;
+                const cmd = RoCode.hw.sendQueue.CMD;
                 const note = script.getNumberValue('BUZZER_NOTE', script);
                 const delay = script.getNumberValue('BUZZER_DELAY', script);
 
-                cmd[Entry.UglyBot.Cmd.CMD_BUZZER_TUNE] = note | (noteID << 4);
-                cmd[Entry.UglyBot.Cmd.CMD_BUZZER_DELAY] = delay;
+                cmd[RoCode.UglyBot.Cmd.CMD_BUZZER_TUNE] = note | (noteID << 4);
+                cmd[RoCode.UglyBot.Cmd.CMD_BUZZER_DELAY] = delay;
                 noteID = (noteID + 1) & 0x0f;
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
 
         uglybot_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -505,8 +505,8 @@ Entry.UglyBot.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -533,8 +533,8 @@ Entry.UglyBot.getBlocks = function() {
             isNotFor: ['UglyBot'],
 
             func(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined') {
-                    Entry.hw.sendQueue.CMD = [
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined') {
+                    RoCode.hw.sendQueue.CMD = [
                         0x26,
                         0xa8,
                         0x14,
@@ -557,7 +557,7 @@ Entry.UglyBot.getBlocks = function() {
                         0x00,
                     ];
                 }
-                const cmd = Entry.hw.sendQueue.CMD;
+                const cmd = RoCode.hw.sendQueue.CMD;
                 const what = script.getNumberValue('MOTOR_WHAT', script);
                 let speed = script.getNumberValue('MOTOR_SPEED', script);
                 if (speed > 100) {
@@ -565,17 +565,17 @@ Entry.UglyBot.getBlocks = function() {
                 } else if (speed < -100) {
                     speed = -100;
                 }
-                cmd[Entry.UglyBot.Cmd.CMD_MOTOR_RIGHT + what] = speed;
+                cmd[RoCode.UglyBot.Cmd.CMD_MOTOR_RIGHT + what] = speed;
                 //console.log("%d %d", 	what, speed);
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
 
         uglybot_move: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -587,8 +587,8 @@ Entry.UglyBot.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -615,8 +615,8 @@ Entry.UglyBot.getBlocks = function() {
             isNotFor: ['UglyBot'],
 
             func(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined') {
-                    Entry.hw.sendQueue.CMD = [
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined') {
+                    RoCode.hw.sendQueue.CMD = [
                         0x26,
                         0xa8,
                         0x14,
@@ -639,7 +639,7 @@ Entry.UglyBot.getBlocks = function() {
                         0x00,
                     ];
                 }
-                const cmd = Entry.hw.sendQueue.CMD;
+                const cmd = RoCode.hw.sendQueue.CMD;
                 const direction = script.getNumberValue('MOVE_DIRECTION', script);
                 let distance = script.getNumberValue('MOVE_DISTANCE', script);
                 distance = direction == 1 ? -1 * distance : distance;
@@ -648,20 +648,20 @@ Entry.UglyBot.getBlocks = function() {
                 } else if (distance < -1000) {
                     distance = -1000;
                 }
-                cmd[Entry.UglyBot.Cmd.CMD_MOVE_LOW] = distance & 0xff;
-                cmd[Entry.UglyBot.Cmd.CMD_MOVE_HIGH] = (distance >> 8) & 0x0f;
-                cmd[Entry.UglyBot.Cmd.CMD_MOVE_HIGH] |= moveID << 4;
+                cmd[RoCode.UglyBot.Cmd.CMD_MOVE_LOW] = distance & 0xff;
+                cmd[RoCode.UglyBot.Cmd.CMD_MOVE_HIGH] = (distance >> 8) & 0x0f;
+                cmd[RoCode.UglyBot.Cmd.CMD_MOVE_HIGH] |= moveID << 4;
                 moveID = (moveID + 1) & 0x0f;
                 //console.log("distance:%d moveID:%d", 	distance, moveID);
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
 
         uglybot_rotation: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -673,8 +673,8 @@ Entry.UglyBot.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -701,8 +701,8 @@ Entry.UglyBot.getBlocks = function() {
             isNotFor: ['UglyBot'],
 
             func(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined') {
-                    Entry.hw.sendQueue.CMD = [
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined') {
+                    RoCode.hw.sendQueue.CMD = [
                         0x26,
                         0xa8,
                         0x14,
@@ -725,27 +725,27 @@ Entry.UglyBot.getBlocks = function() {
                         0x00,
                     ];
                 }
-                const cmd = Entry.hw.sendQueue.CMD;
+                const cmd = RoCode.hw.sendQueue.CMD;
                 const direction = script.getNumberValue('ROT_DIRECTION', script);
                 let degree = script.getNumberValue('ROT_DEGREE', script);
                 degree = direction == 1 ? -1 * degree : degree;
                 degree = degree > 1000 ? 1000 : degree;
                 degree = degree < -1000 ? -1000 : degree;
 
-                cmd[Entry.UglyBot.Cmd.CMD_ROT_LOW] = degree & 0xff;
-                cmd[Entry.UglyBot.Cmd.CMD_ROT_HIGH] = (degree >> 8) & 0x0f;
-                cmd[Entry.UglyBot.Cmd.CMD_ROT_HIGH] |= rotID << 4;
+                cmd[RoCode.UglyBot.Cmd.CMD_ROT_LOW] = degree & 0xff;
+                cmd[RoCode.UglyBot.Cmd.CMD_ROT_HIGH] = (degree >> 8) & 0x0f;
+                cmd[RoCode.UglyBot.Cmd.CMD_ROT_HIGH] |= rotID << 4;
                 rotID = (rotID + 1) & 0x0f;
                 //console.log("degree:%d rotID:%d", 	degree, rotID);
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
 
         uglybot_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -757,8 +757,8 @@ Entry.UglyBot.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -785,8 +785,8 @@ Entry.UglyBot.getBlocks = function() {
             isNotFor: ['UglyBot'],
 
             func(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined') {
-                    Entry.hw.sendQueue.CMD = [
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined') {
+                    RoCode.hw.sendQueue.CMD = [
                         0x26,
                         0xa8,
                         0x14,
@@ -809,22 +809,22 @@ Entry.UglyBot.getBlocks = function() {
                         0x00,
                     ];
                 }
-                const cmd = Entry.hw.sendQueue.CMD;
+                const cmd = RoCode.hw.sendQueue.CMD;
                 const what = script.getNumberValue('SERVO_WHAT', script);
                 let degree = script.getNumberValue('SERVO_DEGREE', script);
                 degree = degree < -90 ? -90 : degree;
                 degree = degree > 90 ? 90 : degree;
-                cmd[Entry.UglyBot.Cmd.CMD_SERVO1 + what] = degree & 0xff;
+                cmd[RoCode.UglyBot.Cmd.CMD_SERVO1 + what] = degree & 0xff;
                 //console.log("servo what:%d degree:%d", 	what, degree);
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
 
         uglybot_irpin: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -837,8 +837,8 @@ Entry.UglyBot.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -848,8 +848,8 @@ Entry.UglyBot.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -870,8 +870,8 @@ Entry.UglyBot.getBlocks = function() {
             isNotFor: ['UglyBot'],
 
             func(sprite, script) {
-                if (typeof Entry.hw.sendQueue.CMD == 'undefined') {
-                    Entry.hw.sendQueue.CMD = [
+                if (typeof RoCode.hw.sendQueue.CMD == 'undefined') {
+                    RoCode.hw.sendQueue.CMD = [
                         0x26,
                         0xa8,
                         0x14,
@@ -894,23 +894,23 @@ Entry.UglyBot.getBlocks = function() {
                         0x00,
                     ];
                 }
-                const cmd = Entry.hw.sendQueue.CMD;
+                const cmd = RoCode.hw.sendQueue.CMD;
                 const what = script.getNumberValue('IRPIN_WHAT', script);
                 const act = script.getNumberValue('IRPIN_ACT', script);
                 if (act == 0) {
-                    cmd[Entry.UglyBot.Cmd.CMD_IRPIN] |= 0x01 << what;
+                    cmd[RoCode.UglyBot.Cmd.CMD_IRPIN] |= 0x01 << what;
                 } else {
-                    cmd[Entry.UglyBot.Cmd.CMD_IRPIN] &= ~(0x01 << what);
+                    cmd[RoCode.UglyBot.Cmd.CMD_IRPIN] &= ~(0x01 << what);
                 }
-                Entry.hw.update();
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
 
         uglybot_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -923,18 +923,18 @@ Entry.UglyBot.getBlocks = function() {
             class: 'UglyBot_Sensor',
             isNotFor: ['UglyBot'],
             func(sprite, script) {
-                let sensorData = Entry.hw.portData.CMD;
+                let sensorData = RoCode.hw.portData.CMD;
                 sensorData = sensorData[0] == 0x26 ? sensorData : oldSensorData;
                 oldSensorData = sensorData;
                 //console.log("%d %d", sensorData[6], sensorData[7]);
-                return sensorData[Entry.UglyBot.Sensor.SENSOR_BUTTON];
+                return sensorData[RoCode.UglyBot.Sensor.SENSOR_BUTTON];
             },
             syntax: { js: [], py: [] },
         },
 
         uglybot_ir: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -948,8 +948,8 @@ Entry.UglyBot.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -963,19 +963,19 @@ Entry.UglyBot.getBlocks = function() {
             class: 'UglyBot_Sensor',
             isNotFor: ['UglyBot'],
             func(sprite, script) {
-                let sensorData = Entry.hw.portData.CMD;
+                let sensorData = RoCode.hw.portData.CMD;
                 const pos = script.getNumberValue('IR_POS', script);
                 sensorData = sensorData[0] == 0x26 ? sensorData : oldSensorData;
                 oldSensorData = sensorData;
                 //console.log("%d %d %d", sensorData[8], sensorData[9], sensorData[10]);
-                return sensorData[Entry.UglyBot.Sensor.SENSOR_IR_LEFT + pos];
+                return sensorData[RoCode.UglyBot.Sensor.SENSOR_IR_LEFT + pos];
             },
             syntax: { js: [], py: [] },
         },
 
         uglybot_ultrasonic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -988,18 +988,18 @@ Entry.UglyBot.getBlocks = function() {
             class: 'UglyBot_Sensor',
             isNotFor: ['UglyBot'],
             func(sprite, script) {
-                let sensorData = Entry.hw.portData.CMD;
+                let sensorData = RoCode.hw.portData.CMD;
                 sensorData = sensorData[0] == 0x26 ? sensorData : oldSensorData;
                 oldSensorData = sensorData;
                 //console.log("%d", sensorData[11]);
-                return sensorData[Entry.UglyBot.Sensor.SENSOR_ULTRASONIC];
+                return sensorData[RoCode.UglyBot.Sensor.SENSOR_ULTRASONIC];
             },
             syntax: { js: [], py: [] },
         },
 
         uglybot_joystick: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1012,8 +1012,8 @@ Entry.UglyBot.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1027,21 +1027,21 @@ Entry.UglyBot.getBlocks = function() {
             class: 'UglyBot_Sensor',
             isNotFor: ['UglyBot'],
             func(sprite, script) {
-                let sensorData = Entry.hw.portData.CMD;
-                const exBoardType = sensorData[Entry.UglyBot.Sensor.ENSOR_EXBOARDTYPE];
+                let sensorData = RoCode.hw.portData.CMD;
+                const exBoardType = sensorData[RoCode.UglyBot.Sensor.ENSOR_EXBOARDTYPE];
                 const what = script.getNumberValue('JOYSTICK_WHAT', script);
                 sensorData = sensorData[0] == 0x26 ? sensorData : oldSensorData;
                 oldSensorData = sensorData;
                 //console.log("%d %d", sensorData[12], sensorData[13]);
                 if (exBoardType == 4) {
                     if (what == 1) {
-                        return sensorData[Entry.UglyBot.Sensor.SENSOR_JOYSTICK_TB];
+                        return sensorData[RoCode.UglyBot.Sensor.SENSOR_JOYSTICK_TB];
                     } else {
-                        const aa = sensorData[Entry.UglyBot.Sensor.SENSOR_JOYSTICK_LR];
+                        const aa = sensorData[RoCode.UglyBot.Sensor.SENSOR_JOYSTICK_LR];
                         return aa < 127 ? aa : aa - 256;
                     }
                 } else {
-                    const aa = sensorData[Entry.UglyBot.Sensor.SENSOR_JOYSTICK_LR + what];
+                    const aa = sensorData[RoCode.UglyBot.Sensor.SENSOR_JOYSTICK_LR + what];
                     return aa < 127 ? aa : aa - 256;
                 }
             },
@@ -1049,8 +1049,8 @@ Entry.UglyBot.getBlocks = function() {
         },
 
         uglybot_tilt: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1063,8 +1063,8 @@ Entry.UglyBot.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1078,20 +1078,20 @@ Entry.UglyBot.getBlocks = function() {
             class: 'UglyBot_Sensor',
             isNotFor: ['UglyBot'],
             func(sprite, script) {
-                let sensorData = Entry.hw.portData.CMD;
+                let sensorData = RoCode.hw.portData.CMD;
                 const what = script.getNumberValue('GYRO_WHAT', script);
                 sensorData = sensorData[0] == 0x26 ? sensorData : oldSensorData;
                 oldSensorData = sensorData;
                 //console.log("%d %d", sensorData[14], sensorData[15]);
-                const aa = sensorData[Entry.UglyBot.Sensor.SENSOR_GYRO_LR + what];
+                const aa = sensorData[RoCode.UglyBot.Sensor.SENSOR_GYRO_LR + what];
                 return aa < 127 ? aa : aa - 256;
             },
             syntax: { js: [], py: [] },
         },
 
         uglybot_sound: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1104,19 +1104,19 @@ Entry.UglyBot.getBlocks = function() {
             class: 'UglyBot_Sensor',
             isNotFor: ['UglyBot'],
             func(sprite, script) {
-                let sensorData = Entry.hw.portData.CMD;
+                let sensorData = RoCode.hw.portData.CMD;
                 sensorData = sensorData[0] == 0x26 ? sensorData : oldSensorData;
                 oldSensorData = sensorData;
                 //console.log("%d", sensorData[16]);
-                const aa = sensorData[Entry.UglyBot.Sensor.SENSOR_SOUND];
+                const aa = sensorData[RoCode.UglyBot.Sensor.SENSOR_SOUND];
                 return aa < 128 ? aa : aa - 256;
             },
             syntax: { js: [], py: [] },
         },
 
         uglybot_illum: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1129,15 +1129,15 @@ Entry.UglyBot.getBlocks = function() {
             class: 'UglyBot_Sensor',
             isNotFor: ['UglyBot'],
             func(sprite, script) {
-                let sensorData = Entry.hw.portData.CMD;
+                let sensorData = RoCode.hw.portData.CMD;
                 sensorData = sensorData[0] == 0x26 ? sensorData : oldSensorData;
                 oldSensorData = sensorData;
                 //console.log("%d", sensorData[17]);
-                return sensorData[Entry.UglyBot.Sensor.SENSOR_PHOTO];
+                return sensorData[RoCode.UglyBot.Sensor.SENSOR_PHOTO];
             },
             syntax: { js: [], py: [] },
         },
     };
 };
 
-module.exports = Entry.UglyBot;
+module.exports = RoCode.UglyBot;

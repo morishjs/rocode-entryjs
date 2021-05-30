@@ -6,17 +6,17 @@
 /*
  *
  */
-Entry.Mutator = function() {};
+RoCode.Mutator = function() {};
 
 (function(m) {
     m.mutate = function(blockType, schemaDiff, changeData) {
-        var blockSchema = Entry.block[blockType];
+        var blockSchema = RoCode.block[blockType];
         if (blockSchema.changeEvent === undefined)
-            blockSchema.changeEvent = new Entry.Event();
+            blockSchema.changeEvent = new RoCode.Event();
         if (blockSchema.paramsBackupEvent === undefined)
-            blockSchema.paramsBackupEvent = new Entry.Event();
+            blockSchema.paramsBackupEvent = new RoCode.Event();
         if (blockSchema.destroyParamsBackupEvent === undefined)
-            blockSchema.destroyParamsBackupEvent = new Entry.Event();
+            blockSchema.destroyParamsBackupEvent = new RoCode.Event();
 
         //statements params template
         blockSchema.template = schemaDiff.template;
@@ -24,6 +24,6 @@ Entry.Mutator = function() {};
 
         blockSchema.changeEvent.notify(1, changeData);
     };
-})(Entry.Mutator);
+})(RoCode.Mutator);
 
-(function(p) {})(Entry.Mutator.prototype);
+(function(p) {})(RoCode.Mutator.prototype);

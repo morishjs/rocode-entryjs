@@ -1,4 +1,4 @@
-Entry.skeleton.basic_button = {
+RoCode.skeleton.basic_button = {
     path() {
         return `m 6 0
             h 150

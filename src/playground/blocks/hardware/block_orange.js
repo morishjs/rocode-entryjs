@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Orange = {
+RoCode.Orange = {
     id: '1.E',
     name: 'Orange',
     url: 'https://www.kocoafab.cc/',
@@ -10,19 +10,19 @@ Entry.Orange = {
         en: 'Orange board',
     },
     setZero() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            const keySet = Object.keys(Entry.hw.sendQueue.SET);
+            const keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach((key) => {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     sensorTypes: {
         ALIVE: 0,
@@ -384,7 +384,7 @@ Entry.Orange = {
     BlockState: {},
 };
 
-Entry.Orange.setLanguage = function() {
+RoCode.Orange.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -441,7 +441,7 @@ Entry.Orange.setLanguage = function() {
     };
 };
 
-Entry.Orange.blockMenuBlocks = [
+RoCode.Orange.blockMenuBlocks = [
     'orange_get_analog_value',
     'orange_get_analog_value_map',
     'orange_get_ultrasonic_value',
@@ -467,11 +467,11 @@ Entry.Orange.blockMenuBlocks = [
 ];
 
 //region arduinoExt 아두이노 확장모드
-Entry.Orange.getBlocks = function() {
+RoCode.Orange.getBlocks = function() {
     return {
         orange_analog_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -488,8 +488,8 @@ Entry.Orange.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -521,10 +521,10 @@ Entry.Orange.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                converter: Entry.block.converters.returnStringKey,
-                                codeMap: 'Entry.CodeMap.Arduino.orange_analog_list[0]',
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringKey,
+                                codeMap: 'RoCode.CodeMap.Arduino.orange_analog_list[0]',
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'orange_analog_list',
@@ -533,8 +533,8 @@ Entry.Orange.getBlocks = function() {
             },
         },
         orange_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -561,7 +561,7 @@ Entry.Orange.getBlocks = function() {
             isNotFor: ['Orange'],
             func(sprite, script) {
                 let port = script.getValue('PORT', script);
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 if (port[0] === 'A') {
                     port = port.substring(1);
                 }
@@ -584,8 +584,8 @@ Entry.Orange.getBlocks = function() {
             },
         },
         orange_get_analog_value_map: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -657,7 +657,7 @@ Entry.Orange.getBlocks = function() {
             isNotFor: ['Orange'],
             func(sprite, script) {
                 let result = script.getValue('PORT', script);
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 let value2 = script.getNumberValue('VALUE2', script);
                 let value3 = script.getNumberValue('VALUE3', script);
                 let value4 = script.getNumberValue('VALUE4', script);
@@ -667,8 +667,8 @@ Entry.Orange.getBlocks = function() {
                 let isFloat = false;
 
                 if (
-                    (Entry.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
-                    (Entry.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
+                    (RoCode.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
+                    (RoCode.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
                 ) {
                     isFloat = true;
                 }
@@ -730,8 +730,8 @@ Entry.Orange.getBlocks = function() {
             },
         },
         orange_get_ultrasonic_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -771,20 +771,20 @@ Entry.Orange.getBlocks = function() {
                 const port1 = script.getNumberValue('PORT1', script);
                 const port2 = script.getNumberValue('PORT2', script);
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                delete Entry.hw.sendQueue.SET[port1];
-                delete Entry.hw.sendQueue.SET[port2];
+                delete RoCode.hw.sendQueue.SET[port1];
+                delete RoCode.hw.sendQueue.SET[port2];
 
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
-                Entry.hw.sendQueue.GET[Entry.Orange.sensorTypes.ULTRASONIC] = {
+                RoCode.hw.sendQueue.GET[RoCode.Orange.sensorTypes.ULTRASONIC] = {
                     port: [port1, port2],
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.ULTRASONIC || 0;
+                return RoCode.hw.portData.ULTRASONIC || 0;
             },
             syntax: {
                 js: [],
@@ -807,8 +807,8 @@ Entry.Orange.getBlocks = function() {
             },
         },
         orange_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             params: [
@@ -834,21 +834,21 @@ Entry.Orange.getBlocks = function() {
             class: 'OrangeGet',
             isNotFor: ['Orange'],
             func(sprite, script) {
-                const { hwModule = {} } = Entry.hw;
+                const { hwModule = {} } = RoCode.hw;
                 const { name } = hwModule;
                 if (name === 'Orange' || name === 'ArduinoNano') {
                     const port = script.getNumberValue('PORT', script);
-                    const DIGITAL = Entry.hw.portData.DIGITAL;
-                    if (!Entry.hw.sendQueue.GET) {
-                        Entry.hw.sendQueue.GET = {};
+                    const DIGITAL = RoCode.hw.portData.DIGITAL;
+                    if (!RoCode.hw.sendQueue.GET) {
+                        RoCode.hw.sendQueue.GET = {};
                     }
-                    Entry.hw.sendQueue.GET[Entry.Orange.sensorTypes.DIGITAL] = {
+                    RoCode.hw.sendQueue.GET[RoCode.Orange.sensorTypes.DIGITAL] = {
                         port,
                         time: new Date().getTime(),
                     };
                     return DIGITAL ? DIGITAL[port] || 0 : 0;
                 } else {
-                    return Entry.block.arduino_get_digital_value.func(sprite, script);
+                    return RoCode.block.arduino_get_digital_value.func(sprite, script);
                 }
             },
             syntax: {
@@ -868,8 +868,8 @@ Entry.Orange.getBlocks = function() {
             },
         },
         arduino_get_digital_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -878,8 +878,8 @@ Entry.Orange.getBlocks = function() {
                     options: [[Lang.Blocks.ARDUINO_on, 'on'], [Lang.Blocks.ARDUINO_off, 'off']],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -906,10 +906,10 @@ Entry.Orange.getBlocks = function() {
                                 ],
                                 value: 'on',
                                 fontSize: 11,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValueUpperCase,
-                                codeMap: 'Entry.CodeMap.Arduino.arduino_get_digital_toggle[0]',
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValueUpperCase,
+                                codeMap: 'RoCode.CodeMap.Arduino.arduino_get_digital_toggle[0]',
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
                             },
                         ],
                         keyOption: 'arduino_get_digital_toggle',
@@ -918,8 +918,8 @@ Entry.Orange.getBlocks = function() {
             },
         },
         orange_toggle_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -966,18 +966,18 @@ Entry.Orange.getBlocks = function() {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
                 }
-                if (Entry.Orange.highList.indexOf(value) > -1) {
+                if (RoCode.Orange.highList.indexOf(value) > -1) {
                     value = 255;
-                } else if (Entry.Orange.lowList.indexOf(value) > -1) {
+                } else if (RoCode.Orange.lowList.indexOf(value) > -1) {
                     value = 0;
                 } else {
                     throw new Error();
                 }
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port] = {
-                    type: Entry.Orange.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue.SET[port] = {
+                    type: RoCode.Orange.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1003,8 +1003,8 @@ Entry.Orange.getBlocks = function() {
             },
         },
         orange_digital_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1050,11 +1050,11 @@ Entry.Orange.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port] = {
-                    type: Entry.Orange.sensorTypes.PWM,
+                RoCode.hw.sendQueue.SET[port] = {
+                    type: RoCode.Orange.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1080,8 +1080,8 @@ Entry.Orange.getBlocks = function() {
             },
         },
         orange_tone_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1105,8 +1105,8 @@ Entry.Orange.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1144,9 +1144,9 @@ Entry.Orange.getBlocks = function() {
                                 ],
                                 value: 'C',
                                 fontSize: 11,
-                                converter: Entry.block.converters.returnStringValueUpperCase,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValueUpperCase,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'orange_tone_list',
@@ -1155,8 +1155,8 @@ Entry.Orange.getBlocks = function() {
             },
         },
         orange_tone_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1192,8 +1192,8 @@ Entry.Orange.getBlocks = function() {
             },
         },
         orange_octave_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1210,8 +1210,8 @@ Entry.Orange.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1235,8 +1235,8 @@ Entry.Orange.getBlocks = function() {
             },
         },
         orange_set_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1295,13 +1295,13 @@ Entry.Orange.getBlocks = function() {
             class: 'Orange',
             isNotFor: ['Orange'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = script.getNumberValue('PORT', script);
 
                 if (!script.isStart) {
                     let note = script.getValue('NOTE', script);
-                    if (!Entry.Utils.isNumber(note)) {
-                        note = Entry.Orange.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note)) {
+                        note = RoCode.Orange.toneTable[note];
                     }
 
                     if (note < 0) {
@@ -1322,7 +1322,7 @@ Entry.Orange.getBlocks = function() {
 
                     if (duration === 0) {
                         sq.SET[port] = {
-                            type: Entry.Orange.sensorTypes.TONE,
+                            type: RoCode.Orange.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -1339,7 +1339,7 @@ Entry.Orange.getBlocks = function() {
                     let value = 0;
 
                     if (note != 0) {
-                        value = Entry.Orange.toneMap[note][octave];
+                        value = RoCode.Orange.toneMap[note][octave];
                     }
 
                     duration = duration * 1000;
@@ -1347,7 +1347,7 @@ Entry.Orange.getBlocks = function() {
                     script.timeFlag = 1;
 
                     sq.SET[port] = {
-                        type: Entry.Orange.sensorTypes.TONE,
+                        type: RoCode.Orange.sensorTypes.TONE,
                         data: {
                             value,
                             duration,
@@ -1365,11 +1365,11 @@ Entry.Orange.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
                     sq.SET[port] = {
-                        type: Entry.Orange.sensorTypes.TONE,
+                        type: RoCode.Orange.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1402,8 +1402,8 @@ Entry.Orange.getBlocks = function() {
         },
 		
 		orange_set_noTone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1435,7 +1435,7 @@ Entry.Orange.getBlocks = function() {
             class: 'Orange',
             isNotFor: ['Orange'],
             func(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
 
 				if (!script.isStart) 
@@ -1444,12 +1444,12 @@ Entry.Orange.getBlocks = function() {
 						sq.SET = {};
 					}
 					
-					var duration = Entry.Orange.duration.TIME_100ms;
+					var duration = RoCode.Orange.duration.TIME_100ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 					
 					sq.SET[port] = {
-							type: Entry.Orange.sensorTypes.NOTONE,
+							type: RoCode.Orange.sensorTypes.NOTONE,
 							data: port,
 							time: new Date().getTime(),
 					};
@@ -1467,7 +1467,7 @@ Entry.Orange.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1482,8 +1482,8 @@ Entry.Orange.getBlocks = function() {
         },
 		
         orange_set_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1521,7 +1521,7 @@ Entry.Orange.getBlocks = function() {
             class: 'Orange',
             isNotFor: ['Orange'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = script.getNumberValue('PORT', script);
                 let value = script.getNumberValue('VALUE', script);
                 value = Math.min(180, value);
@@ -1531,7 +1531,7 @@ Entry.Orange.getBlocks = function() {
                     sq.SET = {};
                 }
                 sq.SET[port] = {
-                    type: Entry.Orange.sensorTypes.SERVO_PIN,
+                    type: RoCode.Orange.sensorTypes.SERVO_PIN,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1560,8 +1560,8 @@ Entry.Orange.getBlocks = function() {
 		
 		
 		orange_set_neopixelinit: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1603,7 +1603,7 @@ Entry.Orange.getBlocks = function() {
             class: 'other',
             isNotFor: ['Orange'],
             func(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
                 var value = script.getNumberValue('NUM', script);
 
@@ -1613,12 +1613,12 @@ Entry.Orange.getBlocks = function() {
 						sq.SET = {};
 					}
 					
-					var duration = Entry.Orange.duration.TIME_200ms;
+					var duration = RoCode.Orange.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1; 
 					
 					sq.SET[port] = {
-							type: Entry.Orange.sensorTypes.NEOPIXELINIT,
+							type: RoCode.Orange.sensorTypes.NEOPIXELINIT,
 							data: value,
 							time: new Date().getTime(),
 					};
@@ -1636,7 +1636,7 @@ Entry.Orange.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 } 
             },
@@ -1650,8 +1650,8 @@ Entry.Orange.getBlocks = function() {
             },
         },
 		orange_set_neopixel: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1723,7 +1723,7 @@ Entry.Orange.getBlocks = function() {
             class: 'other',
             isNotFor: ['Orange'],
             func(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
                 var num = script.getNumberValue('NUM', script);
 				var r = script.getNumberValue('RED', script);
@@ -1736,12 +1736,12 @@ Entry.Orange.getBlocks = function() {
 						sq.SET = {};
 					}
 					
-					var duration = Entry.Orange.duration.TIME_10ms;
+					var duration = RoCode.Orange.duration.TIME_10ms;
 						script.isStart = true;
 						script.timeFlag = 1;
 					
 					sq.SET[num] = {
-						type: Entry.Orange.sensorTypes.NEOPIXELCOLOR,
+						type: RoCode.Orange.sensorTypes.NEOPIXELCOLOR,
 						data: {
 								port: port,
 								num: num,
@@ -1765,7 +1765,7 @@ Entry.Orange.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1789,8 +1789,8 @@ Entry.Orange.getBlocks = function() {
             },
         },
 		orange_set_dht_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1822,7 +1822,7 @@ Entry.Orange.getBlocks = function() {
             class: 'dht',
             isNotFor: ['Orange'],
             func(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
 
 				if (!script.isStart) 
@@ -1831,12 +1831,12 @@ Entry.Orange.getBlocks = function() {
 						sq.SET = {};
 					}
 					
-					var duration = Entry.Orange.duration.TIME_500ms;
+					var duration = RoCode.Orange.duration.TIME_500ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 					
 					sq.SET[port] = {
-							type: Entry.Orange.sensorTypes.DHTINIT,
+							type: RoCode.Orange.sensorTypes.DHTINIT,
 							data: port,
 							time: new Date().getTime(),
 					};
@@ -1854,7 +1854,7 @@ Entry.Orange.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -1868,8 +1868,8 @@ Entry.Orange.getBlocks = function() {
             },
         },
 		orange_get_dht_temp_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1895,20 +1895,20 @@ Entry.Orange.getBlocks = function() {
             func(sprite, script) {
                 const temp = script.getNumberValue('TEMP', script);
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                delete Entry.hw.sendQueue.SET[temp];
+                delete RoCode.hw.sendQueue.SET[temp];
 
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
 				
-                Entry.hw.sendQueue.GET[Entry.Orange.sensorTypes.DHTTEMP] = {
+                RoCode.hw.sendQueue.GET[RoCode.Orange.sensorTypes.DHTTEMP] = {
                     port: temp,
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.DHTTEMP || 0;
+                return RoCode.hw.portData.DHTTEMP || 0;
             },
             syntax: {
                 js: [],
@@ -1921,8 +1921,8 @@ Entry.Orange.getBlocks = function() {
         },
 		
 		orange_get_dht_humi_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1948,20 +1948,20 @@ Entry.Orange.getBlocks = function() {
             func(sprite, script) {
                 const humi = script.getNumberValue('HUMI', script);
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                delete Entry.hw.sendQueue.SET[humi];
+                delete RoCode.hw.sendQueue.SET[humi];
 
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
 				
-                Entry.hw.sendQueue.GET[Entry.Orange.sensorTypes.DHTHUMI] = {
+                RoCode.hw.sendQueue.GET[RoCode.Orange.sensorTypes.DHTHUMI] = {
                     port: humi,
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.DHTHUMI || 0;
+                return RoCode.hw.portData.DHTHUMI || 0;
             },
             syntax: {
                 js: [],
@@ -1974,8 +1974,8 @@ Entry.Orange.getBlocks = function() {
         },
 		
 		orange_set_pmsensor_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2017,7 +2017,7 @@ Entry.Orange.getBlocks = function() {
             class: 'pmsensor',
             isNotFor: ['Orange'],
             func(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
 				var port1 = script.getNumberValue('PORT1', script);
 
@@ -2027,12 +2027,12 @@ Entry.Orange.getBlocks = function() {
 						sq.SET = {};
 					}
 					
-					var duration = Entry.Orange.duration.TIME_200ms;
+					var duration = RoCode.Orange.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 					
 					sq.SET[port] = {
-							type: Entry.Orange.sensorTypes.PMINIT,
+							type: RoCode.Orange.sensorTypes.PMINIT,
 							data: port1,
 							time: new Date().getTime(),
 					};
@@ -2050,7 +2050,7 @@ Entry.Orange.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2064,8 +2064,8 @@ Entry.Orange.getBlocks = function() {
             },
         },
 		orange_get_pmsensor_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -2077,8 +2077,8 @@ Entry.Orange.getBlocks = function() {
 						[ "PM2.5", '1' ],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2097,20 +2097,20 @@ Entry.Orange.getBlocks = function() {
             func(sprite, script) {
                 const cat = script.getNumberValue('CAT', script);
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                delete Entry.hw.sendQueue.SET[cat];
+                delete RoCode.hw.sendQueue.SET[cat];
 
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
 				
-                Entry.hw.sendQueue.GET[Entry.Orange.sensorTypes.PMVALUE] = {
+                RoCode.hw.sendQueue.GET[RoCode.Orange.sensorTypes.PMVALUE] = {
                     port: cat,
                     time: new Date().getTime(),
                 };
-                return Entry.hw.portData.PMVALUE || 0;
+                return RoCode.hw.portData.PMVALUE || 0;
             },
             syntax: {
                 js: [],
@@ -2122,8 +2122,8 @@ Entry.Orange.getBlocks = function() {
             },
         },
 		orange_get_lcd_row: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -2135,8 +2135,8 @@ Entry.Orange.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2163,8 +2163,8 @@ Entry.Orange.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'orange_get_lcd_row',
@@ -2174,8 +2174,8 @@ Entry.Orange.getBlocks = function() {
         },
 		
 		orange_get_lcd_col: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -2201,8 +2201,8 @@ Entry.Orange.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2243,8 +2243,8 @@ Entry.Orange.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'orange_get_lcd_col',
@@ -2254,8 +2254,8 @@ Entry.Orange.getBlocks = function() {
         },
 		
 		orange_set_I2CLCD_init: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2297,7 +2297,7 @@ Entry.Orange.getBlocks = function() {
             class: 'LCD',
             isNotFor: ['Orange'],
             func(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
 				var port1 = script.getNumberValue('PORT1', script);
 
@@ -2307,12 +2307,12 @@ Entry.Orange.getBlocks = function() {
 						sq.SET = {};
 					}
 					
-					var duration = Entry.Orange.duration.TIME_200ms;
+					var duration = RoCode.Orange.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 					
 					sq.SET[port] = {
-							type: Entry.Orange.sensorTypes.LCDINIT,
+							type: RoCode.Orange.sensorTypes.LCDINIT,
 							data: port1,
 							time: new Date().getTime(),
 					};
@@ -2330,7 +2330,7 @@ Entry.Orange.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2345,8 +2345,8 @@ Entry.Orange.getBlocks = function() {
         },
 		
 		orange_set_I2CLCD_print: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2399,7 +2399,7 @@ Entry.Orange.getBlocks = function() {
             class: 'LCD',
             isNotFor: ['Orange'],
             func(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('ROW', script);
 				var col = script.getNumberValue('COL', script);
 				var string = script.getValue('STRING', script);
@@ -2410,7 +2410,7 @@ Entry.Orange.getBlocks = function() {
 					if (typeof string === 'string') 
                     {
                         for (var i = 0; i < string.length; i++) {
-                            text[i] = Entry.Orange.toByte(string[i]);
+                            text[i] = RoCode.Orange.toByte(string[i]);
                         }
                     }
                     else if (typeof string === 'number') 
@@ -2419,7 +2419,7 @@ Entry.Orange.getBlocks = function() {
                         //console.log(string);
                         var num_to_string = string.toString();
                         for (var i = 0; i < num_to_string.length; i++) {
-                            text[i] = Entry.Orange.toByte(num_to_string[i]);
+                            text[i] = RoCode.Orange.toByte(num_to_string[i]);
                         }
                         //console.log("num_to_string");
                         //console.log(num_to_string);
@@ -2435,12 +2435,12 @@ Entry.Orange.getBlocks = function() {
 						sq.SET = {};
 					}
 					
-					var duration = Entry.Orange.duration.TIME_500ms;
+					var duration = RoCode.Orange.duration.TIME_500ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 					
 					sq.SET['15'] = {
-							type: Entry.Orange.sensorTypes.LCD,
+							type: RoCode.Orange.sensorTypes.LCD,
 							data: {
 								row: port,
 								col: col,
@@ -2477,7 +2477,7 @@ Entry.Orange.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2492,8 +2492,8 @@ Entry.Orange.getBlocks = function() {
         },
 		
 		orange_set_I2CLCD_clear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2535,7 +2535,7 @@ Entry.Orange.getBlocks = function() {
             class: 'LCD',
             isNotFor: ['Orange'],
             func(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var port = script.getNumberValue('PORT', script);
 				var port1 = script.getNumberValue('PORT1', script);
 
@@ -2545,12 +2545,12 @@ Entry.Orange.getBlocks = function() {
 						sq.SET = {};
 					}
 					
-					var duration = Entry.Orange.duration.TIME_200ms;
+					var duration = RoCode.Orange.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 					
 					sq.SET[port] = {
-							type: Entry.Orange.sensorTypes.LCDCLEAR,
+							type: RoCode.Orange.sensorTypes.LCDCLEAR,
 							data: port1,
 							time: new Date().getTime(),
 					};
@@ -2568,7 +2568,7 @@ Entry.Orange.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2583,8 +2583,8 @@ Entry.Orange.getBlocks = function() {
         },
 		
 		orange_set_I2CLCD_emoticon: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2607,8 +2607,8 @@ Entry.Orange.getBlocks = function() {
 						[ "하트", '4' ],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 					},
                 {
                     type: 'Indicator',
@@ -2641,7 +2641,7 @@ Entry.Orange.getBlocks = function() {
             class: 'LCD',
             isNotFor: ['Orange'],
             func(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var row = script.getNumberValue('ROW', script);
 				var col = script.getNumberValue('COL', script);
 				var emoticon = script.getValue('EMOTICON', script);
@@ -2652,12 +2652,12 @@ Entry.Orange.getBlocks = function() {
 						sq.SET = {};
 					}
 					
-					var duration = Entry.Orange.duration.TIME_200ms;
+					var duration = RoCode.Orange.duration.TIME_200ms;
                     script.isStart = true;
                     script.timeFlag = 1;
 					
 					sq.SET['15'] = {
-							type: Entry.Orange.sensorTypes.LCDEMOTICON,
+							type: RoCode.Orange.sensorTypes.LCDEMOTICON,
 							data: {
 								row: row,
 								col: col,
@@ -2679,7 +2679,7 @@ Entry.Orange.getBlocks = function() {
                     delete script.timeFlag;
                     delete script.isStart;
 
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2696,4 +2696,4 @@ Entry.Orange.getBlocks = function() {
 };
 //endregion arduinoExt 아두이노 확장모드
 
-module.exports = Entry.Orange;
+module.exports = RoCode.Orange;

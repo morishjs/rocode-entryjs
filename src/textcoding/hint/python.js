@@ -6,17 +6,17 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
 // Distributed under an MIT license: http://codemirror.net/LICENSE
 //
-Entry.PyHint = function(syntax) {
+RoCode.PyHint = function(syntax) {
     this.setSyntax(syntax);
     this.lastHW = null;
 
-    this._blockMenu = Entry.getMainWS().blockMenu;
+    this._blockMenu = RoCode.getMainWS().blockMenu;
 
     CodeMirror.registerHelper('hint', 'python', this.pythonHint.bind(this));
 
     var hwFunc = function(e) {
-        if (Entry.hw.hwModule) {
-            var name = Entry.hw.hwModule.name;
+        if (RoCode.hw.hwModule) {
+            var name = RoCode.hw.hwModule.name;
             name = name[0].toUpperCase() + name.slice(1);
             if (name === 'ArduinoExt') this.addScope('Arduino', 'Ext');
             else this.addScope(name);
@@ -27,9 +27,9 @@ Entry.PyHint = function(syntax) {
         }
     }.bind(this);
 
-    Entry.addEventListener('hwChanged', hwFunc);
+    RoCode.addEventListener('hwChanged', hwFunc);
 
-    if (Entry.hw.hwModule) hwFunc();
+    if (RoCode.hw.hwModule) hwFunc();
 };
 
 (function(p) {
@@ -107,7 +107,7 @@ Entry.PyHint = function(syntax) {
                         lastToken.string
                     );
                 else if (
-                    Entry.variableContainer.getListByName(variableToken.string)
+                    RoCode.variableContainer.getListByName(variableToken.string)
                 ) {
                     searchResult = this.fuzzySearch(
                         this.getScope('%2'),
@@ -160,7 +160,7 @@ Entry.PyHint = function(syntax) {
             syntax = this.syntax[name];
             var keys = Object.keys(syntax);
             keys = keys.filter(function(k) {
-                var blockSyntax = Entry.block[syntax[k].key];
+                var blockSyntax = RoCode.block[syntax[k].key];
                 if (
                     name === 'Arduino' &&
                     (extName === 'Ext') !==
@@ -185,7 +185,7 @@ Entry.PyHint = function(syntax) {
             var keys = Object.keys(syntax);
             keys = keys.filter(function(k) {
                 return (
-                    k.indexOf('#') < 0 && !Entry.block[syntax[k].key].deprecated
+                    k.indexOf('#') < 0 && !RoCode.block[syntax[k].key].deprecated
                 );
             });
             keys = keys.map(function(k) {
@@ -209,7 +209,7 @@ Entry.PyHint = function(syntax) {
     p.fuzzySearch = function(arr, start, options) {
         options = options || {};
         options.escapeLetter = '#';
-        var result = Entry.Utils.fuzzy.filter(start, arr, options).slice(0, 20);
+        var result = RoCode.Utils.fuzzy.filter(start, arr, options).slice(0, 20);
         result = result.map(function(o) {
             return o.original;
         });
@@ -256,7 +256,7 @@ Entry.PyHint = function(syntax) {
 
         cm.replaceRange(text, self.from, self.to);
         cm.setCursor({ line: self.from.line, ch: ch });
-        Entry.helper.renderBlock(data.syntax.key);
+        RoCode.helper.renderBlock(data.syntax.key);
     };
 
     p.setSyntax = function(syntax) {
@@ -275,7 +275,7 @@ Entry.PyHint = function(syntax) {
             } else if (key.substr(0, 2) === 'if') this.scope._global.push(key);
             else if (key.substr(0, 5) === 'while') this.scope._global.push(key);
         }
-        this.addScope('Entry');
+        this.addScope('RoCode');
         this.addScope('random');
         this.addScope('math');
         this.addScope('%2', '_list');
@@ -287,7 +287,7 @@ Entry.PyHint = function(syntax) {
         var blockType = blockSyntax.key;
         if (
             blockSyntax.isDefault &&
-            Entry.playground.mainWorkspace.blockMenu.getThreadByBlockKey(
+            RoCode.playground.mainWorkspace.blockMenu.getThreadByBlockKey(
                 blockType
             )
         ) {
@@ -304,4 +304,4 @@ Entry.PyHint = function(syntax) {
             ];
         }
     };
-})(Entry.PyHint.prototype);
+})(RoCode.PyHint.prototype);

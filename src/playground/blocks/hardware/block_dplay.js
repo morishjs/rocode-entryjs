@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.dplay = {
+RoCode.dplay = {
     id: '1.5',
     name: 'dplay',
     url: 'http://dplay.cc',
@@ -12,7 +12,7 @@ Entry.dplay = {
     vel_value: 255,
     Left_value: 255,
     Right_value: 255,
-    setZero: Entry.Arduino.setZero,
+    setZero: RoCode.Arduino.setZero,
     timeouts: [],
     removeTimeout: function(id) {
         clearTimeout(id);
@@ -128,7 +128,7 @@ Entry.dplay = {
         mode: 'both',
     },
 };
-Entry.dplay.blockMenuBlocks = [
+RoCode.dplay.blockMenuBlocks = [
     //dplay
     'dplay_get_number_sensor_value',
     'dplay_get_value',
@@ -153,7 +153,7 @@ Entry.dplay.blockMenuBlocks = [
     'dplay_robot_stop',
 ];
 
-Entry.dplay.setLangauge = function() {
+RoCode.dplay.setLangauge = function() {
     return {
         ko: {
             template: {
@@ -225,7 +225,7 @@ Entry.dplay.setLangauge = function() {
         },
     };
 };
-Entry.dplay.getBlocks = function() {
+RoCode.dplay.getBlocks = function() {
     return {
         //region dplay 디플레이
         dplay_get_number_sensor_value: {
@@ -291,7 +291,7 @@ Entry.dplay.getBlocks = function() {
             class: 'dplay_get',
             func: function(sprite, script) {
                 var signal = script.getValue('VALUE', script);
-                return Entry.hw.getAnalogPortValue(signal[1]);
+                return RoCode.hw.getAnalogPortValue(signal[1]);
             },
             syntax: { js: [], py: ['Dplay.gas_sensor_value(%1)'] },
         },
@@ -332,8 +332,8 @@ Entry.dplay.getBlocks = function() {
             syntax: { js: [], py: ['Dplay.convert_scale(%1, %2, %3, %4, %5)'] },
         },
         dplay_get_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#FFF',
             skeleton: 'basic_string_field',
             statements: [],
@@ -355,8 +355,8 @@ Entry.dplay.getBlocks = function() {
                     ],
                     value: 'INFR',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -378,7 +378,7 @@ Entry.dplay.getBlocks = function() {
             isNotFor: ['dplay'],
             func: function(sprite, script) {
                 var signal = script.getValue('VALUE', script);
-                return Entry.hw.getAnalogPortValue(signal[1]);
+                return RoCode.hw.getAnalogPortValue(signal[1]);
             },
             syntax: { js: [], py: ['Dplay.value(%1, %2)'] },
         },
@@ -397,8 +397,8 @@ Entry.dplay.getBlocks = function() {
             syntax: { js: [], py: ['Dplay.digital_value(%1)'] },
         },
         dplay_get_switch_status: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#FFF',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -412,8 +412,8 @@ Entry.dplay.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -423,8 +423,8 @@ Entry.dplay.getBlocks = function() {
                     ],
                     value: 'ON',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -444,14 +444,14 @@ Entry.dplay.getBlocks = function() {
                 if (port1 == '2') port = 2;
                 else if (port1 == '4') port = 4;
                 var value1 = script.getField('STATUS');
-                if (value1 == 'ON') return Entry.hw.getDigitalPortValue(port) == 1 ? 1 : 0;
-                else return Entry.hw.getDigitalPortValue(port) == 0 ? 1 : 0;
+                if (value1 == 'ON') return RoCode.hw.getDigitalPortValue(port) == 1 ? 1 : 0;
+                else return RoCode.hw.getDigitalPortValue(port) == 0 ? 1 : 0;
             },
             syntax: { js: [], py: ['Dplay.switch_status(%1, %2)'] },
         },
         dplay_get_tilt: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#FFF',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -465,8 +465,8 @@ Entry.dplay.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -476,8 +476,8 @@ Entry.dplay.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -497,8 +497,8 @@ Entry.dplay.getBlocks = function() {
                 if (port1 == '2') port = 2;
                 else if (port1 == '4') port = 4;
                 var value1 = script.getField('STATUS');
-                if (value1 == 'LIGHT') return Entry.hw.getDigitalPortValue(port) == 1 ? 1 : 0;
-                else return Entry.hw.getDigitalPortValue(port) == 0 ? 1 : 0;
+                if (value1 == 'LIGHT') return RoCode.hw.getDigitalPortValue(port) == 1 ? 1 : 0;
+                else return RoCode.hw.getDigitalPortValue(port) == 0 ? 1 : 0;
             },
             syntax: { js: [], py: ['Dplay.tilt(%1, %2)'] },
         },
@@ -538,8 +538,8 @@ Entry.dplay.getBlocks = function() {
             syntax: { js: [], py: ['Dplay.toggle_pwm(%1, %2)'] },
         },
         dplay_select_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#FFF',
             skeleton: 'basic',
             statements: [],
@@ -555,8 +555,8 @@ Entry.dplay.getBlocks = function() {
                     ],
                     value: '7',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -566,8 +566,8 @@ Entry.dplay.getBlocks = function() {
                     ],
                     value: 'ON',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -595,14 +595,14 @@ Entry.dplay.getBlocks = function() {
                 else if (port1 == '13') port = 13;
                 var operator = script.getField('OPERATOR');
                 var value = operator == 'ON' ? 255 : 0;
-                Entry.hw.setDigitalPortValue(port, value);
+                RoCode.hw.setDigitalPortValue(port, value);
                 return script.callReturn();
             },
             syntax: { js: [], py: ['Dplay.select_led(%1, %2)'] },
         },
         dplay_DCmotor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#FFF',
             skeleton: 'basic',
             statements: [],
@@ -617,8 +617,8 @@ Entry.dplay.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -629,8 +629,8 @@ Entry.dplay.getBlocks = function() {
                     ],
                     value: 'FRONT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -667,7 +667,7 @@ Entry.dplay.getBlocks = function() {
                     port3 = 11;
                     port4 = 6;
                 }
-                var temp = Entry.dplay.vel_value;
+                var temp = RoCode.dplay.vel_value;
                 var operator = script.getField('OPERATOR');
                 var value1 = 0;
                 var value2 = 0;
@@ -683,17 +683,17 @@ Entry.dplay.getBlocks = function() {
                     value1 = 0;
                     value2 = 0;
                 }
-                Entry.hw.setDigitalPortValue(port1, value2);
-                Entry.hw.setDigitalPortValue(port2, value1);
-                Entry.hw.setDigitalPortValue(port3, value2);
-                Entry.hw.setDigitalPortValue(port4, value1);
+                RoCode.hw.setDigitalPortValue(port1, value2);
+                RoCode.hw.setDigitalPortValue(port2, value1);
+                RoCode.hw.setDigitalPortValue(port3, value2);
+                RoCode.hw.setDigitalPortValue(port4, value1);
                 return script.callReturn();
             },
             syntax: { js: [], py: ['Dplay.dc_motor(%1, %2)'] },
         },
         dplay_DCmotor_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#FFF',
             skeleton: 'basic',
             statements: [],
@@ -708,8 +708,8 @@ Entry.dplay.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -766,19 +766,19 @@ Entry.dplay.getBlocks = function() {
                 if (operator == 0) {
                     value1 = 0;
                     value2 = 0;
-                    Entry.dplay.vel_value = value2;
+                    RoCode.dplay.vel_value = value2;
                 } else if (operator > 0) {
                     result = operator + 155;
                     result = Math.round(result);
                     value1 = 0;
                     value2 = result;
-                    Entry.dplay.vel_value = value2;
+                    RoCode.dplay.vel_value = value2;
                 } else if (operator < 0) {
                     result = operator - 155;
                     result = Math.round(result);
                     value1 = -result;
                     value2 = 0;
-                    Entry.dplay.vel_value = value1;
+                    RoCode.dplay.vel_value = value1;
                 }
                 if (!script.isStart) {
                     script.isStart = true;
@@ -786,32 +786,32 @@ Entry.dplay.getBlocks = function() {
                     var timeValue = 50;
                     var timer = setTimeout(function() {
                         script.timeFlag = 2;
-                        Entry.dplay.removeTimeout(timer);
+                        RoCode.dplay.removeTimeout(timer);
                     }, timeValue);
-                    Entry.dplay.timeouts.push(timer);
+                    RoCode.dplay.timeouts.push(timer);
                     return script;
                 } else if (script.timeFlag == 1) {
-                    Entry.hw.setDigitalPortValue(3, 0);
-                    Entry.hw.setDigitalPortValue(5, 0);
-                    Entry.hw.setDigitalPortValue(6, 0);
-                    Entry.hw.setDigitalPortValue(11, 0);
+                    RoCode.hw.setDigitalPortValue(3, 0);
+                    RoCode.hw.setDigitalPortValue(5, 0);
+                    RoCode.hw.setDigitalPortValue(6, 0);
+                    RoCode.hw.setDigitalPortValue(11, 0);
                     return script;
                 } else if (script.timeFlag == 2) {
-                    Entry.hw.setDigitalPortValue(port1, value1);
-                    Entry.hw.setDigitalPortValue(port2, value2);
-                    Entry.hw.setDigitalPortValue(port3, value1);
-                    Entry.hw.setDigitalPortValue(port4, value2);
+                    RoCode.hw.setDigitalPortValue(port1, value1);
+                    RoCode.hw.setDigitalPortValue(port2, value2);
+                    RoCode.hw.setDigitalPortValue(port3, value1);
+                    RoCode.hw.setDigitalPortValue(port4, value2);
                     delete script.isStart;
                     delete script.timeFlag;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: ['Dplay.dc_motor_speed(%1, %2)'] },
         },
         dplay_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#FFF',
             skeleton: 'basic',
             statements: [],
@@ -836,8 +836,8 @@ Entry.dplay.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -848,8 +848,8 @@ Entry.dplay.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -891,36 +891,36 @@ Entry.dplay.getBlocks = function() {
                     var timeValue = (beat * 60 * 1000) / tempo;
                     script.isStart = true;
                     script.timeFlag = 1;
-                    if (note == 100) Entry.hw.setDigitalPortValue(10, 100);
-                    else Entry.hw.setDigitalPortValue(10, note_go);
+                    if (note == 100) RoCode.hw.setDigitalPortValue(10, 100);
+                    else RoCode.hw.setDigitalPortValue(10, note_go);
                     if (timeValue > 100) {
                         var timer1 = setTimeout(function() {
-                            Entry.hw.setDigitalPortValue(10, 100);
-                            Entry.dplay.removeTimeout(timer1);
+                            RoCode.hw.setDigitalPortValue(10, 100);
+                            RoCode.dplay.removeTimeout(timer1);
                         }, timeValue - 100);
-                        Entry.dplay.timeouts.push(timer1);
+                        RoCode.dplay.timeouts.push(timer1);
                     }
                     var timer2 = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.dplay.removeTimeout(timer2);
+                        RoCode.dplay.removeTimeout(timer2);
                     }, timeValue);
-                    Entry.dplay.timeouts.push(timer2);
+                    RoCode.dplay.timeouts.push(timer2);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
                 } else {
-                    Entry.hw.setDigitalPortValue(10, 100);
+                    RoCode.hw.setDigitalPortValue(10, 100);
                     delete script.isStart;
                     delete script.timeFlag;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: ['Dplay.buzzer(%1, %2, %3)'] },
         },
         dplay_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#FFF',
             skeleton: 'basic',
             statements: [],
@@ -958,14 +958,14 @@ Entry.dplay.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 1);
                 value = Math.min(value, 179);
-                Entry.hw.setDigitalPortValue(9, value);
+                RoCode.hw.setDigitalPortValue(9, value);
                 return script.callReturn();
             },
             syntax: { js: [], py: ['Dplay.servo(%1)'] },
         },
         dplay_Robot_run: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#FFF',
             skeleton: 'basic',
             statements: [],
@@ -981,8 +981,8 @@ Entry.dplay.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1010,8 +1010,8 @@ Entry.dplay.getBlocks = function() {
                 var value2 = 0;
                 var value3 = 0;
                 var value4 = 0;
-                var temp_Left = Entry.dplay.Left_value;
-                var temp_Right = Entry.dplay.Right_value;
+                var temp_Left = RoCode.dplay.Left_value;
+                var temp_Right = RoCode.dplay.Right_value;
                 if (port == '1') {
                     value1 = 0;
                     value2 = temp_Left;
@@ -1033,17 +1033,17 @@ Entry.dplay.getBlocks = function() {
                     value3 = temp_Right;
                     value4 = 0;
                 }
-                Entry.hw.setDigitalPortValue(port1, value1);
-                Entry.hw.setDigitalPortValue(port2, value2);
-                Entry.hw.setDigitalPortValue(port3, value3);
-                Entry.hw.setDigitalPortValue(port4, value4);
+                RoCode.hw.setDigitalPortValue(port1, value1);
+                RoCode.hw.setDigitalPortValue(port2, value2);
+                RoCode.hw.setDigitalPortValue(port3, value3);
+                RoCode.hw.setDigitalPortValue(port4, value4);
                 return script.callReturn();
             },
             syntax: { js: [], py: ['Dplay.robot_run(%1)'] },
         },
         dplay_Robot_run_sec: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#FFF',
             skeleton: 'basic',
             statements: [],
@@ -1063,8 +1063,8 @@ Entry.dplay.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1099,8 +1099,8 @@ Entry.dplay.getBlocks = function() {
                 var value2 = 0;
                 var value3 = 0;
                 var value4 = 0;
-                var temp_Left = Entry.dplay.Left_value;
-                var temp_Right = Entry.dplay.Right_value;
+                var temp_Left = RoCode.dplay.Left_value;
+                var temp_Right = RoCode.dplay.Right_value;
                 var port = script.getField('PORT');
                 if (!script.isStart) {
                     script.isStart = true;
@@ -1108,9 +1108,9 @@ Entry.dplay.getBlocks = function() {
                     var timeValue = script.getNumberValue('VALUE') * 1000;
                     var timer = setTimeout(function() {
                         script.timeFlag = 0;
-                        Entry.dplay.removeTimeout(timer);
+                        RoCode.dplay.removeTimeout(timer);
                     }, timeValue);
-                    Entry.dplay.timeouts.push(timer);
+                    RoCode.dplay.timeouts.push(timer);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (port == '1') {
@@ -1134,15 +1134,15 @@ Entry.dplay.getBlocks = function() {
                         value3 = temp_Right;
                         value4 = 0;
                     }
-                    Entry.hw.setDigitalPortValue(port1, value1);
-                    Entry.hw.setDigitalPortValue(port2, value2);
-                    Entry.hw.setDigitalPortValue(port3, value3);
-                    Entry.hw.setDigitalPortValue(port4, value4);
+                    RoCode.hw.setDigitalPortValue(port1, value1);
+                    RoCode.hw.setDigitalPortValue(port2, value2);
+                    RoCode.hw.setDigitalPortValue(port3, value3);
+                    RoCode.hw.setDigitalPortValue(port4, value4);
                     return script;
                 } else {
                     delete script.isStart;
                     delete script.timeFlag;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     value1 = 0;
                     value2 = 0;
                     value3 = 0;
@@ -1153,8 +1153,8 @@ Entry.dplay.getBlocks = function() {
             syntax: { js: [], py: ['Dplay.robot_run_sec(%1, %2)'] },
         },
         dplay_robot_speed_sel: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#FFF',
             skeleton: 'basic',
             statements: [],
@@ -1169,8 +1169,8 @@ Entry.dplay.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1222,17 +1222,17 @@ Entry.dplay.getBlocks = function() {
                         result = Math.round(result);
                         value1 = 0;
                         value2 = result;
-                        Entry.dplay.Left_value = value2;
+                        RoCode.dplay.Left_value = value2;
                     } else if (operator < 0) {
                         result = operator - 155;
                         result = Math.round(result);
                         value1 = -result;
                         value2 = 0;
-                        Entry.dplay.Left_value = value1;
+                        RoCode.dplay.Left_value = value1;
                     } else if (operator == 0) {
                         value1 = 0;
                         value2 = 0;
-                        Entry.dplay.Left_value = 0;
+                        RoCode.dplay.Left_value = 0;
                     }
                 }
                 if (port == '2') {
@@ -1243,17 +1243,17 @@ Entry.dplay.getBlocks = function() {
                         result = Math.round(result);
                         value3 = 0;
                         value4 = result;
-                        Entry.dplay.Right_value = value4;
+                        RoCode.dplay.Right_value = value4;
                     } else if (operator < 0) {
                         result = operator - 155;
                         result = Math.round(result);
                         value3 = -result;
                         value4 = 0;
-                        Entry.dplay.Right_value = value3;
+                        RoCode.dplay.Right_value = value3;
                     } else if (operator == 0) {
                         value3 = 0;
                         value4 = 0;
-                        Entry.dplay.Right_value = value3;
+                        RoCode.dplay.Right_value = value3;
                     }
                 }
                 if (port == '3') {
@@ -1268,8 +1268,8 @@ Entry.dplay.getBlocks = function() {
                         value2 = result;
                         value3 = 0;
                         value4 = result;
-                        Entry.dplay.Left_value = value2;
-                        Entry.dplay.Right_value = value4;
+                        RoCode.dplay.Left_value = value2;
+                        RoCode.dplay.Right_value = value4;
                     } else if (operator < 0) {
                         result = operator - 155;
                         result = Math.round(result);
@@ -1277,15 +1277,15 @@ Entry.dplay.getBlocks = function() {
                         value2 = 0;
                         value3 = -result;
                         value4 = 0;
-                        Entry.dplay.Left_value = value1;
-                        Entry.dplay.Right_value = value3;
+                        RoCode.dplay.Left_value = value1;
+                        RoCode.dplay.Right_value = value3;
                     } else if (operator == 0) {
                         value1 = 0;
                         value2 = 0;
                         value3 = 0;
                         value4 = 0;
-                        Entry.dplay.Left_value = 0;
-                        Entry.dplay.Right_value = 0;
+                        RoCode.dplay.Left_value = 0;
+                        RoCode.dplay.Right_value = 0;
                     }
                 }
                 if (!script.isStart) {
@@ -1294,31 +1294,31 @@ Entry.dplay.getBlocks = function() {
                     var timeValue = 50;
                     var timer = setTimeout(function() {
                         script.timeFlag = 2;
-                        Entry.dplay.removeTimeout(timer);
+                        RoCode.dplay.removeTimeout(timer);
                     }, timeValue);
-                    Entry.dplay.timeouts.push(timer);
+                    RoCode.dplay.timeouts.push(timer);
                     return script;
                 } else if (script.timeFlag == 1) {
-                    Entry.hw.setDigitalPortValue(3, 0);
-                    Entry.hw.setDigitalPortValue(5, 0);
-                    Entry.hw.setDigitalPortValue(6, 0);
-                    Entry.hw.setDigitalPortValue(11, 0);
+                    RoCode.hw.setDigitalPortValue(3, 0);
+                    RoCode.hw.setDigitalPortValue(5, 0);
+                    RoCode.hw.setDigitalPortValue(6, 0);
+                    RoCode.hw.setDigitalPortValue(11, 0);
                     return script;
                 } else if (script.timeFlag == 2) {
-                    Entry.hw.setDigitalPortValue(port1, value1);
-                    Entry.hw.setDigitalPortValue(port2, value2);
-                    Entry.hw.setDigitalPortValue(port3, value4);
-                    Entry.hw.setDigitalPortValue(port4, value3);
+                    RoCode.hw.setDigitalPortValue(port1, value1);
+                    RoCode.hw.setDigitalPortValue(port2, value2);
+                    RoCode.hw.setDigitalPortValue(port3, value4);
+                    RoCode.hw.setDigitalPortValue(port4, value3);
                     delete script.isStart;
                     delete script.timeFlag;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         dplay_robot_speed_set: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#FFF',
             skeleton: 'basic',
             statements: [],
@@ -1378,17 +1378,17 @@ Entry.dplay.getBlocks = function() {
                     result_L = Math.round(result_L);
                     value1 = 0;
                     value2 = result_L;
-                    Entry.dplay.Left_value = value2;
+                    RoCode.dplay.Left_value = value2;
                 } else if (value_L < 0) {
                     result_L = value_L - 155;
                     result_L = Math.round(result_L);
                     value1 = -result_L;
                     value2 = 0;
-                    Entry.dplay.Left_value = value1;
+                    RoCode.dplay.Left_value = value1;
                 } else if (value_L == 0) {
                     value1 = 0;
                     value2 = 0;
-                    Entry.dplay.Left_value = 0;
+                    RoCode.dplay.Left_value = 0;
                 }
                 var value_R = script.getNumberValue('R_VALUE', script);
                 value_R = Math.max(value_R, -100);
@@ -1398,17 +1398,17 @@ Entry.dplay.getBlocks = function() {
                     result_R = Math.round(result_R);
                     value3 = 0;
                     value4 = result_R;
-                    Entry.dplay.Right_value = value4;
+                    RoCode.dplay.Right_value = value4;
                 } else if (value_R < 0) {
                     result_R = value_R - 155;
                     result_R = Math.round(result_R);
                     value3 = -result_R;
                     value4 = 0;
-                    Entry.dplay.Right_value = value3;
+                    RoCode.dplay.Right_value = value3;
                 } else if (value_R == 0) {
                     value3 = 0;
                     value4 = 0;
-                    Entry.dplay.Right_value = 0;
+                    RoCode.dplay.Right_value = 0;
                 }
                 if (!script.isStart) {
                     script.isStart = true;
@@ -1416,32 +1416,32 @@ Entry.dplay.getBlocks = function() {
                     var timeValue = 50;
                     var timer = setTimeout(function() {
                         script.timeFlag = 2;
-                        Entry.dplay.removeTimeout(timer);
+                        RoCode.dplay.removeTimeout(timer);
                     }, timeValue);
-                    Entry.dplay.timeouts.push(timer);
+                    RoCode.dplay.timeouts.push(timer);
                     return script;
                 } else if (script.timeFlag == 1) {
-                    Entry.hw.setDigitalPortValue(3, 0);
-                    Entry.hw.setDigitalPortValue(5, 0);
-                    Entry.hw.setDigitalPortValue(6, 0);
-                    Entry.hw.setDigitalPortValue(11, 0);
+                    RoCode.hw.setDigitalPortValue(3, 0);
+                    RoCode.hw.setDigitalPortValue(5, 0);
+                    RoCode.hw.setDigitalPortValue(6, 0);
+                    RoCode.hw.setDigitalPortValue(11, 0);
                     return script;
                 } else if (script.timeFlag == 2) {
-                    Entry.hw.setDigitalPortValue(port1, value1);
-                    Entry.hw.setDigitalPortValue(port2, value2);
-                    Entry.hw.setDigitalPortValue(port3, value4);
-                    Entry.hw.setDigitalPortValue(port4, value3);
+                    RoCode.hw.setDigitalPortValue(port1, value1);
+                    RoCode.hw.setDigitalPortValue(port2, value2);
+                    RoCode.hw.setDigitalPortValue(port3, value4);
+                    RoCode.hw.setDigitalPortValue(port4, value3);
                     delete script.isStart;
                     delete script.timeFlag;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: ['Dplay.robot_speed_sel(%1, %2)'] },
         },
         dplay_robot_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#FFF',
             skeleton: 'basic',
             statements: [],
@@ -1468,10 +1468,10 @@ Entry.dplay.getBlocks = function() {
                 var port4 = 11;
                 var value1 = 0;
                 var value2 = 0;
-                Entry.hw.setDigitalPortValue(port1, value1);
-                Entry.hw.setDigitalPortValue(port2, value2);
-                Entry.hw.setDigitalPortValue(port4, value1);
-                Entry.hw.setDigitalPortValue(port3, value2);
+                RoCode.hw.setDigitalPortValue(port1, value1);
+                RoCode.hw.setDigitalPortValue(port2, value2);
+                RoCode.hw.setDigitalPortValue(port4, value1);
+                RoCode.hw.setDigitalPortValue(port3, value2);
                 return script.callReturn();
             },
             syntax: { js: [], py: ['Dplay.robot_stop()'] },
@@ -1480,4 +1480,4 @@ Entry.dplay.getBlocks = function() {
     };
 };
 
-module.exports = Entry.dplay;
+module.exports = RoCode.dplay;

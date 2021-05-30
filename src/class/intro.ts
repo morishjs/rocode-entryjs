@@ -1,15 +1,15 @@
 /**
  * 프로퍼티 패널쪽에서 프로젝트의 속성을 보여주는 뷰를 담당
- * @use entry-lms
+ * @use RoCode-lms
  */
-class EntryIntro implements IEntry.Intro {
+class RoCodeIntro implements IRoCode.Intro {
     public modes: any = {};
     public selected: any = undefined;
     private view_?: any;
 
     generateView(introView: any) {
         this.view_ = introView;
-        this.view_.addClass('entryPlaygroundIntro');
+        this.view_.addClass('RoCodePlaygroundIntro');
     }
 
     setView(view: any) {
@@ -28,5 +28,5 @@ class EntryIntro implements IEntry.Intro {
     }
 }
 
-export default EntryIntro;
-Entry.Intro = EntryIntro;
+export default RoCodeIntro;
+RoCode.Intro = RoCodeIntro;

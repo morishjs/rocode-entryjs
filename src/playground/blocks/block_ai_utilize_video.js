@@ -1,8 +1,8 @@
 import VideoUtils from '../../util/videoUtils';
 import clamp from 'lodash/clamp';
 
-Entry.VideoUtils = VideoUtils;
-Entry.AI_UTILIZE_BLOCK.video = {
+RoCode.VideoUtils = VideoUtils;
+RoCode.AI_UTILIZE_BLOCK.video = {
     name: 'video',
     imageName: 'video.svg',
     title: {
@@ -16,11 +16,11 @@ Entry.AI_UTILIZE_BLOCK.video = {
     isInitialized: false,
     async init() {
         await VideoUtils.initialize();
-        Entry.AI_UTILIZE_BLOCK.video.isInitialized = true;
+        RoCode.AI_UTILIZE_BLOCK.video.isInitialized = true;
     },
 };
 
-Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
+RoCode.AI_UTILIZE_BLOCK.video.getBlocks = function() {
     const params = {
         getCommonIndicator() {
             return {
@@ -34,8 +34,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
                 type: 'DropdownDynamic',
                 menuName: 'connectedCameras',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
         },
         getNumbers() {
@@ -49,8 +49,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
                 ],
                 value: 0,
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
         },
         getOnOff() {
@@ -62,8 +62,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
                 ],
                 value: 'on',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
         },
         getVideoFlipOptions() {
@@ -75,8 +75,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
                 ],
                 value: 'hflip',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
         },
         getAiModelOptions() {
@@ -89,8 +89,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
                 ],
                 value: 'pose',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
         },
         getSwitchOptions() {
@@ -102,8 +102,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
                 ],
                 value: 'on',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
         },
         getFaceInfoOptions() {
@@ -116,8 +116,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
                 ],
                 value: 'gender',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
         },
         getFaceCoords() {
@@ -134,8 +134,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
                 ],
                 value: 45,
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
         },
         getBodyCoords() {
@@ -163,8 +163,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
                 ],
                 value: 0,
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
         },
         getCoordXYOptions() {
@@ -176,8 +176,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
                 ],
                 value: 'x',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
         },
         getObjectList() {
@@ -267,20 +267,20 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
                 ],
                 value: 'person',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
         },
     };
     return {
         video_title: {
             skeleton: 'basic_text',
-            color: EntryStatic.colorSet.common.TRANSPARENT,
+            color: RoCodeStatic.colorSet.common.TRANSPARENT,
             params: [
                 {
                     type: 'Text',
                     text: Lang.template.video_title_text,
-                    color: EntryStatic.colorSet.common.TEXT,
+                    color: RoCodeStatic.colorSet.common.TEXT,
                     align: 'center',
                 },
             ],
@@ -292,8 +292,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
             events: {},
         },
         video_change_cam: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic',
             statements: [],
             params: [params.getCameraOrder(), params.getCommonIndicator()],
@@ -316,8 +316,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
             },
         },
         video_check_webcam: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [],
@@ -339,8 +339,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
             },
         },
         video_draw_webcam: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic',
             statements: [],
             params: [params.getOnOff(), params.getCommonIndicator()],
@@ -367,8 +367,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
             },
         },
         video_set_camera_opacity_option: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -409,8 +409,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
             },
         },
         video_flip_camera: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic',
             statements: [],
             params: [params.getVideoFlipOptions(), params.getCommonIndicator()],
@@ -437,8 +437,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
             },
         },
         video_toggle_model: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -470,8 +470,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
             },
         },
         video_toggle_ind: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic',
             statements: [],
             params: [params.getAiModelOptions(), params.getOnOff(), params.getCommonIndicator()],
@@ -503,8 +503,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
             },
         },
         video_number_detect: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [params.getAiModelOptions()],
@@ -537,8 +537,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
             },
         },
         video_object_detected: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [params.getObjectList()],
@@ -572,8 +572,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
         },
         // 원래는 video_is_model_detected 로 나가야 하나, 해당 부분에 있어서 기존 하위 호환성때문에... 이름을 못바꿈...
         video_is_model_loaded: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [params.getAiModelOptions()],
@@ -607,8 +607,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
             },
         },
         video_detected_face_info: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [params.getNumbers(), params.getFaceInfoOptions()],
@@ -661,8 +661,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
             },
         },
         video_motion_value: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -674,8 +674,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
                     ],
                     value: 'self',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                    arrowColor: EntryStatic.colorSet.common.WHITE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                    arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 },
                 {
                     type: 'Dropdown',
@@ -686,8 +686,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
                     ],
                     value: 'total',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                    arrowColor: EntryStatic.colorSet.common.WHITE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                    arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 },
             ],
             events: {},
@@ -744,8 +744,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
             },
         },
         video_face_part_coord: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [params.getNumbers(), params.getFaceCoords(), params.getCoordXYOptions()],
@@ -803,8 +803,8 @@ Entry.AI_UTILIZE_BLOCK.video.getBlocks = function() {
             },
         },
         video_body_part_coord: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [params.getNumbers(), params.getBodyCoords(), params.getCoordXYOptions()],

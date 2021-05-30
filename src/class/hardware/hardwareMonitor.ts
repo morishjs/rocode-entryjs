@@ -3,7 +3,7 @@ const hwMonitorSvgTemplate =
     'version="1.1" xmlns="http://www.w3.org/2000/svg"></svg>';
 
 export default class HardwareMonitor {
-    private _hwModule: EntryHardwareBlockModule;
+    private _hwModule: RoCodeHardwareBlockModule;
     private snap: any;
     private _svgGroup: any;
     private _portMap: any;
@@ -17,15 +17,15 @@ export default class HardwareMonitor {
     private listsnap: any;
     private _rect: any;
 
-    private svgDom = Entry.Dom($(hwMonitorSvgTemplate));
+    private svgDom = RoCode.Dom($(hwMonitorSvgTemplate));
     private changeOffset = 0; // 0 : off 1: on
     private scale = 0.5;
     private _listPortViews: any = {};
 
-    constructor(hwModule: EntryHardwareBlockModule) {
+    constructor(hwModule: RoCodeHardwareBlockModule) {
         this._hwModule = hwModule;
 
-        Entry.addEventListener('windowResized', () => {
+        RoCode.addEventListener('windowResized', () => {
             const mode = this._hwModule.monitorTemplate.mode;
             if (mode == 'both') {
                 this.resize();
@@ -38,13 +38,13 @@ export default class HardwareMonitor {
                 this.resize();
             }
         });
-        Entry.addEventListener('hwModeChange', () => {
+        RoCode.addEventListener('hwModeChange', () => {
             this.changeMode();
         });
     }
 
     initView() {
-        this.svgDom = Entry.Dom($(hwMonitorSvgTemplate));
+        this.svgDom = RoCode.Dom($(hwMonitorSvgTemplate));
     }
 
     generateViewByMode() {
@@ -66,7 +66,7 @@ export default class HardwareMonitor {
     }
 
     generateView() {
-        this.snap = Entry.SVG('hwMonitor');
+        this.snap = RoCode.SVG('hwMonitor');
         this._svgGroup = this.snap.elem('g');
         this._portMap = {
             n: [],
@@ -78,7 +78,7 @@ export default class HardwareMonitor {
 
         const imgObj = {
             href: monitorTemplate.imgPath
-                ? Entry.mediaFilePath + monitorTemplate.imgPath
+                ? RoCode.mediaFilePath + monitorTemplate.imgPath
                 : undefined,
             x: -monitorTemplate.width / 2,
             y: -monitorTemplate.height / 2,
@@ -160,7 +160,7 @@ export default class HardwareMonitor {
         }
     }
 
-    setHwModule(hwModule: EntryHardwareBlockModule) {
+    setHwModule(hwModule: RoCodeHardwareBlockModule) {
         this._hwModule = hwModule;
     }
 
@@ -201,7 +201,7 @@ export default class HardwareMonitor {
         };
         this._svglistGroup = null;
 
-        this.listsnap = Entry.SVG('hwMonitor');
+        this.listsnap = RoCode.SVG('hwMonitor');
         this._svglistGroup = this.listsnap.elem('g');
         const monitorTemplate = this._template;
         const ports = monitorTemplate.listPorts;

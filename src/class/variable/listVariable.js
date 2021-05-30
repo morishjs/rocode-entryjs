@@ -8,7 +8,7 @@ class ListVariable extends Variable {
     }
 
     constructor(variable) {
-        Entry.assert(variable.variableType === 'list', 'Invalid variable type given');
+        RoCode.assert(variable.variableType === 'list', 'Invalid variable type given');
         super(variable);
         this.array_ = variable.array ? variable.array : [];
 
@@ -47,11 +47,11 @@ class ListVariable extends Variable {
             this.titleView_.y = this.BORDER + 11;
         }
         this.view_.addChild(this.titleView_);
-        const { stage_list_resize_handle } = EntryStatic.images || {};
+        const { stage_list_resize_handle } = RoCodeStatic.images || {};
         this.resizeHandle_ = GEHelper.newSpriteWithCallback(
-            stage_list_resize_handle || `${Entry.mediaFilePath}stage_list_resize_handle.png`,
+            stage_list_resize_handle || `${RoCode.mediaFilePath}stage_list_resize_handle.png`,
             () => {
-                Entry.requestUpdate = true;
+                RoCode.requestUpdate = true;
             }
         );
         this.resizeHandle_.mouseEnabled = true;
@@ -67,7 +67,7 @@ class ListVariable extends Variable {
         });
 
         this.resizeHandle_.on(GEDragHelper.types.DOWN, function(evt) {
-            // if(Entry.type != 'workspace') return;
+            // if(RoCode.type != 'workspace') return;
             this.list.isResizing = true;
             this.offset = {
                 x: evt.stageX * 0.75 - this.list.getWidth(),
@@ -76,7 +76,7 @@ class ListVariable extends Variable {
             this.parent.cursor = 'nwse-resize';
         });
         this.resizeHandle_.on(GEDragHelper.types.MOVE, function(evt) {
-            // if(Entry.type != 'workspace') return;
+            // if(RoCode.type != 'workspace') return;
             this.list.setWidth(evt.stageX * 0.75 - this.offset.x);
             this.list.setHeight(evt.stageY * 0.75 - this.offset.y);
             this.list.updateView();
@@ -87,7 +87,7 @@ class ListVariable extends Variable {
         });
 
         this.view_.on(GEDragHelper.types.DOWN, function(evt) {
-            if (Entry.type !== 'workspace' || this.variable.isResizing) {
+            if (RoCode.type !== 'workspace' || this.variable.isResizing) {
                 return;
             }
             this.offset = {
@@ -103,7 +103,7 @@ class ListVariable extends Variable {
         });
 
         this.view_.on(GEDragHelper.types.MOVE, function(evt) {
-            if (Entry.type !== 'workspace' || this.variable.isResizing) {
+            if (RoCode.type !== 'workspace' || this.variable.isResizing) {
                 return;
             }
             this.variable.setX(evt.stageX * 0.75 - 240 + this.offset.x);
@@ -123,12 +123,12 @@ class ListVariable extends Variable {
 
         this.scrollButton_.list = this;
         this.scrollButton_.on(GEDragHelper.types.DOWN, function(evt) {
-            // if(Entry.type != 'workspace') return;
+            // if(RoCode.type != 'workspace') return;
             this.list.isResizing = true;
             this.offsetY = evt.stageY - this.y / 0.75;
         });
         this.scrollButton_.on(GEDragHelper.types.MOVE, function(evt) {
-            // if(Entry.type != 'workspace') return;
+            // if(RoCode.type != 'workspace') return;
 
             const stageY = evt.stageY;
             let yPos = (stageY - this.offsetY) * 0.75;
@@ -148,13 +148,13 @@ class ListVariable extends Variable {
             this.setX(this.getX());
             this.setY(this.getY());
         } else {
-            const listLength = Entry.variableContainer.lists_.length;
+            const listLength = RoCode.variableContainer.lists_.length;
             this.setX(-Math.floor((listLength % 24) / 6) * 110 + 120);
             this.setY(variableIndex * 24 + 20 - 135 - Math.floor(listLength / 6) * 145);
         }
 
         this.setVisible(this.isVisible());
-        Entry.stage.loadVariable(this);
+        RoCode.stage.loadVariable(this);
     }
 
     getArray() {
@@ -174,7 +174,7 @@ class ListVariable extends Variable {
         if (!this.isRealTime_) {
             this.array_ = array;
             this.updateView();
-            Entry.requestUpdateTwice = true;
+            RoCode.requestUpdateTwice = true;
         } else {
             return new Promise(async (resolve, reject) => {
                 try {
@@ -320,7 +320,7 @@ class ListVariable extends Variable {
 
             let name = this.getName();
             if (this.object_) {
-                const obj = Entry.container.getObject(this.object_);
+                const obj = RoCode.container.getObject(this.object_);
                 if (obj) {
                     name = `${obj.name}:${name}`;
                 }
@@ -339,7 +339,7 @@ class ListVariable extends Variable {
             } else {
                 this.titleView_.x = this.width_ / 2 + 3;
             }
-            const colorSet = EntryStatic.colorSet.canvas || {};
+            const colorSet = RoCodeStatic.colorSet.canvas || {};
             this.rect_.graphics
                 .clear()
                 .f('#ffffff')
@@ -396,8 +396,8 @@ class ListVariable extends Variable {
             ) {
                 this.elementView = this._createListElementView(wrapperWidth + 14);
                 if (
-                    Entry.getMainWS() &&
-                    Entry.getMainWS().getMode() === Entry.Workspace.MODE_VIMBOARD
+                    RoCode.getMainWS() &&
+                    RoCode.getMainWS().getMode() === RoCode.Workspace.MODE_VIMBOARD
                 ) {
                     this.elementView.indexView.text = i;
                 } else {
@@ -446,13 +446,13 @@ class ListVariable extends Variable {
             }
         }
 
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     _createListElementView(wrapperWidth) {
         const elementView = GEHelper.newContainer();
         const indexView = GEHelper.textHelper.newText('', this.FONT, '#000000', 'middle');
-        const colorSet = EntryStatic.colorSet.canvas || {};
+        const colorSet = RoCodeStatic.colorSet.canvas || {};
         if (GEHelper.isWebGL) {
             indexView.y = this.GL_LIST_POS.INDEX_Y;
         } else {

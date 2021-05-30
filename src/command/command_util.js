@@ -1,10 +1,10 @@
 'use strict';
 
-const COMMAND_TYPES = Entry.STATIC.COMMAND_TYPES;
+const COMMAND_TYPES = RoCode.STATIC.COMMAND_TYPES;
 
 const obj = {
     createTooltip(title, content, target, callback, option = {}) {
-        return new Entry.Tooltip(
+        return new RoCode.Tooltip(
             [
                 {
                     title,
@@ -26,7 +26,7 @@ const obj = {
         return [];
     },
     getExpectedData(name, defaultValue) {
-        const expected = (Entry.expectedAction || []).concat();
+        const expected = (RoCode.expectedAction || []).concat();
         if (!name || _.isEmpty(expected)) {
             return defaultValue;
         }
@@ -42,14 +42,14 @@ const obj = {
     },
 };
 
-Entry.Command[COMMAND_TYPES.dismissModal] = {
+RoCode.Command[COMMAND_TYPES.dismissModal] = {
     do() {
-        Entry.dispatchEvent('dismissModal');
+        RoCode.dispatchEvent('dismissModal');
     },
     state: obj.returnEmptyArr,
     log: obj.returnEmptyArr,
     undo: 'dismissModal',
-    recordable: Entry.STATIC.RECORDABLE.SKIP,
+    recordable: RoCode.STATIC.RECORDABLE.SKIP,
     validate: false,
     dom: [],
 };

@@ -15,17 +15,17 @@ const STATUS = {
 
 export default class LearningView {
     constructor({ name = 'model name', status = STATUS.NO_MODEL, value = 0} = {}) {
-        this.id = Entry.generateHash(); 
+        this.id = RoCode.generateHash();
         this.visible = true;
         this.value = value;
-        const fontFamily = EntryStatic.fontFamily || 'NanumGothic';
+        const fontFamily = RoCodeStatic.fontFamily || 'NanumGothic';
         this.BORDER = 6;
         this.FONT = `10pt ${fontFamily}`;
         this.VALUE_FONT = `9pt ${fontFamily}`;
         this.name = name;
         this.status = status;
         this.generateView();
-        Entry.addEventListener('stop', () => {
+        RoCode.addEventListener('stop', () => {
             this.view_.visible = true;
             this.visible = true;
             this.setValue(0);
@@ -69,7 +69,7 @@ export default class LearningView {
         return this.value;
     }
     destroy() {
-        Entry.stage.removeVariable(this);
+        RoCode.stage.removeVariable(this);
     }
     setStatus(status) {
         this.status = status;
@@ -96,9 +96,9 @@ export default class LearningView {
         }
         this.view_.addChild(this.textView_);
         this.statusView = GEHelper.textHelper.newText(
-            Lang.AiLearning[`model_status_${this.status}`], 
-            this.FONT, 
-            '#000000', 
+            Lang.AiLearning[`model_status_${this.status}`],
+            this.FONT,
+            '#000000',
             'alphabetic'
         );
         this.statusView.x = 4;
@@ -110,7 +110,7 @@ export default class LearningView {
         this.view_.addChild(this.statusView);
 
         this.view_.on(GEDragHelper.types.DOWN, function(evt) {
-            if (Entry.type !== 'workspace') {
+            if (RoCode.type !== 'workspace') {
                 return;
             }
             this.offset = {
@@ -120,7 +120,7 @@ export default class LearningView {
         });
 
         this.view_.on(GEDragHelper.types.MOVE, function(evt) {
-            if (Entry.type !== 'workspace') {
+            if (RoCode.type !== 'workspace') {
                 return;
             }
             this.variable.setX(evt.stageX * 0.75 - 240 + this.offset.x);
@@ -149,7 +149,7 @@ export default class LearningView {
                 .rr(6, 28, visibleValue, 5, 2);
         }
         this.view_.addChild(this.valueBar);
-        const variableLength = Entry.variableContainer.variables_.length;
+        const variableLength = RoCode.variableContainer.variables_.length;
         if (this.getX() && this.getY()) {
             this.setX(this.getX());
             this.setY(this.getY());
@@ -159,14 +159,14 @@ export default class LearningView {
         }
 
         this.setVisible(this.isVisible());
-        Entry.stage.loadVariable(this);
+        RoCode.stage.loadVariable(this);
     }
 
     updateView() {
         if (!this.view_) {
             return;
         }
-        
+
         if (this.isVisible()) {
             this._adjustSingleViewPosition();
             const oldContent = this.textView_.text;
@@ -189,7 +189,7 @@ export default class LearningView {
             }
 
             let width = this._nameWidth + 35;
-            const colorSet = EntryStatic.colorSet.canvas || {};
+            const colorSet = RoCodeStatic.colorSet.canvas || {};
             width = Math.max(width, 90);
             this.rect_.graphics
                 .clear()
@@ -197,7 +197,7 @@ export default class LearningView {
                 .ss(1, 2, 0)
                 .s(colorSet.border || '#aac5d5')
                 .rr(0, -14, width, 54, 4);
-            
+
             width = this._nameWidth + 26;
             width = Math.max(width, 90);
             this.maxWidth = width - 16;
@@ -216,10 +216,10 @@ export default class LearningView {
                     .ss(1)
                     .rr(6, 28, visibleValue, 5, 2);
             }
-            
+
 
         }
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     _adjustSingleViewPosition() {

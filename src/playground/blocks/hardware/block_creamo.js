@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Creamo = {
+RoCode.Creamo = {
     id: '20.1',
     name: 'creamo',
     url: 'http://www.creamo.co.kr',
@@ -10,12 +10,12 @@ Entry.Creamo = {
         ko: '크리모',
     },
     setZero: function() {
-        Entry.hw.sendQueue.readablePorts = [];
+        RoCode.hw.sendQueue.readablePorts = [];
         for (var port = 0; port < 20; port++) {
-            Entry.hw.sendQueue[port] = 0;
-            Entry.hw.sendQueue.readablePorts.push(port);
+            RoCode.hw.sendQueue[port] = 0;
+            RoCode.hw.sendQueue.readablePorts.push(port);
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     //수정
     sensorTypes: {
@@ -130,14 +130,14 @@ Entry.Creamo = {
         mode: 'both',
     },
 };
-Entry.Creamo.blockMenuBlocks = [
+RoCode.Creamo.blockMenuBlocks = [
     //creamo
     'creamo_toggle_led',
     'creamo_get_number_sensor_value',
     'creamo_toggle_pwm',
     'creamo_toggle_motor',
 ];
-Entry.Creamo.setLanguage = function() {
+RoCode.Creamo.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -176,7 +176,7 @@ Entry.Creamo.setLanguage = function() {
     };
 };
 
-Entry.Creamo.getBlocks = function() {
+RoCode.Creamo.getBlocks = function() {
     return {
         //region creamo
         creamo_get_number_sensor_value: {
@@ -194,8 +194,8 @@ Entry.Creamo.getBlocks = function() {
             syntax: { js: [], py: ['creamo.get_number_sensor_value(%1)'] },
         },
         creamo_get_port_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -208,8 +208,8 @@ Entry.Creamo.getBlocks = function() {
                     ],
                     value: '7',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -237,8 +237,8 @@ Entry.Creamo.getBlocks = function() {
                                 ],
                                 value: '7',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'arduino_get_port_number',
@@ -281,8 +281,8 @@ Entry.Creamo.getBlocks = function() {
             syntax: { js: [], py: ['creamo.toggle_led(%1)'] },
         },
         creamo_motor_port_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -294,8 +294,8 @@ Entry.Creamo.getBlocks = function() {
                     ],
                     value: '6',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -322,7 +322,7 @@ Entry.Creamo.getBlocks = function() {
                                 ],
                                 value: '6',
                                 fontSize: 11,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'arduino_get_port_number',
@@ -331,8 +331,8 @@ Entry.Creamo.getBlocks = function() {
             },
         },
         creamo_toggle_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -373,7 +373,7 @@ Entry.Creamo.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                Entry.hw.setDigitalPortValue(port, value);
+                RoCode.hw.setDigitalPortValue(port, value);
                 return script.callReturn();
             },
             syntax: {
@@ -396,8 +396,8 @@ Entry.Creamo.getBlocks = function() {
             },
         },
         creamo_get_pwm_port_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -410,8 +410,8 @@ Entry.Creamo.getBlocks = function() {
                     ],
                     value: '5',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -439,9 +439,9 @@ Entry.Creamo.getBlocks = function() {
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                         keyOption: 'arduino_get_pwm_port_number',
@@ -453,4 +453,4 @@ Entry.Creamo.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Creamo;
+module.exports = RoCode.Creamo;

@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.coconut = {
+RoCode.coconut = {
     PORT_MAP: {
         leftFloorValue: 0,
         rightFloorValue: 0,
@@ -15,9 +15,9 @@ Entry.coconut = {
         extA3: 0,
     },
     setZero: function() {
-        var sq = Entry.hw.sendQueue;
+        var sq = RoCode.hw.sendQueue;
         sq.msgValue = [0xff, 0x55, 0x02, 0x00, 0x04];
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     lineTracerModeId: 0,
     lineTracerStateId: -1,
@@ -956,7 +956,7 @@ Entry.coconut = {
         mode: 'both',
     },
 };
-Entry.coconut.setLanguage = function() {
+RoCode.coconut.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -1241,7 +1241,7 @@ Entry.coconut.setLanguage = function() {
         },
     };
 };
-Entry.coconut.blockMenuBlocks = [
+RoCode.coconut.blockMenuBlocks = [
     'coconut_move_motor',
     'coconut_turn_motor',
     'coconut_stop_motor',
@@ -1285,12 +1285,12 @@ Entry.coconut.blockMenuBlocks = [
     'coconut_outcds_sensor',
     'coconut_servomotor_angle',
 ];
-Entry.coconut.getBlocks = function() {
+RoCode.coconut.getBlocks = function() {
     return {
         //region coconut 코코넛
         coconut_move_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1302,8 +1302,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1323,19 +1323,19 @@ Entry.coconut.getBlocks = function() {
             isNotFor: ['coconut'],
 
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 //앞으로 가기
                 var dist = script.getField('DIST', script);
                 var move = parseInt(dist);
-                var arrMsg = Entry.coconut.moveMotor(move);
+                var arrMsg = RoCode.coconut.moveMotor(move);
                 //var arrMsg = ["0xff","0x55","0x05","0x00","0x01","0x07","0x00","0x01"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -1346,7 +1346,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -1358,8 +1358,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         coconut_turn_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1371,8 +1371,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1391,19 +1391,19 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_wheel',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var dist = script.getField('DIST');
                 var move = parseInt(dist);
-                var arrMsg = Entry.coconut.turnMotor(move); //왼쪽, 오른쪽으로 가기
+                var arrMsg = RoCode.coconut.turnMotor(move); //왼쪽, 오른쪽으로 가기
                 //var arrMsg = ["0xff","0x55","0x06","0x00","0x02","0x1a","0x00","0x02","0x3c"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -1414,7 +1414,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -1426,8 +1426,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         coconut_stop_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1446,17 +1446,17 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_wheel',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
-                var arrMsg = Entry.coconut.stopMotor(); //모터정지
+                var arrMsg = RoCode.coconut.stopMotor(); //모터정지
                 //var arrMsg = ["0xff","0x55","0x04","0x00","0x02","0x1a","0x01"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -1467,7 +1467,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -1479,8 +1479,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_move_for_secs: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1492,8 +1492,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1523,13 +1523,13 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_wheel',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var dist = script.getField('DIST', script);
                 var move = parseInt(dist);
                 var time = script.getNumberValue('VALUE');
-                var arrMsg = Entry.coconut.moveGoTime(move, time); //앞으로 1초동안 움직이기
+                var arrMsg = RoCode.coconut.moveGoTime(move, time); //앞으로 1초동안 움직이기
                 //var arrMsg = ["0xff","0x55","0x08","0x00","0x02","0x1a","0x03","0x03","0x3c","0xe8","0x03"];
 
                 var now = Date();
@@ -1537,7 +1537,7 @@ Entry.coconut.getBlocks = function() {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -1548,7 +1548,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log(now + ' : rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -1560,8 +1560,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_turn_for_secs: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1573,8 +1573,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1604,20 +1604,20 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_wheel',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var dist = script.getField('DIST', script);
                 var move = parseInt(dist);
                 var time = script.getNumberValue('VALUE');
-                var arrMsg = Entry.coconut.moveGoTime(move, time); //왼쪽으로 1초동안 돌기
+                var arrMsg = RoCode.coconut.moveGoTime(move, time); //왼쪽으로 1초동안 돌기
                 //var arrMsg = ["0xff","0x55","0x08","0x00","0x02","0x1a","0x03","0x01","0x3c","0xe8","0x03"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -1628,7 +1628,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -1640,8 +1640,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         coconut_turn_to_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1653,8 +1653,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1669,8 +1669,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1690,20 +1690,20 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_wheel',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var dist1 = script.getField('DIST', script);
                 var dist2 = script.getField('COLOR', script);
                 var move = parseInt(dist1);
                 var color = parseInt(dist2);
-                var arrMsg = Entry.coconut.moveMotorColor(move, color); //왼쪽으로 회전하는 동안 빨간색 LED켜기
+                var arrMsg = RoCode.coconut.moveMotorColor(move, color); //왼쪽으로 회전하는 동안 빨간색 LED켜기
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -1714,7 +1714,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -1726,8 +1726,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_move_outmotor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1741,8 +1741,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1772,20 +1772,20 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_wheel',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var dist1 = script.getField('DIST', script);
                 var move = parseInt(dist1);
                 var speed = script.getNumberValue('VALUE');
-                var arrMsg = Entry.coconut.moveExtMotor(move, speed); //외부모터 앞으로 움직이기
+                var arrMsg = RoCode.coconut.moveExtMotor(move, speed); //외부모터 앞으로 움직이기
                 //var arrMsg = ["0xff","0x55","0x06","0x00","0x02","0x1a","0x07","0x03","0x3c"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -1796,7 +1796,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -1808,8 +1808,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_set_led_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1822,8 +1822,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1838,8 +1838,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1860,21 +1860,21 @@ Entry.coconut.getBlocks = function() {
             isNotFor: ['coconut'],
 
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var now = new Date();
                 var dist1 = script.getField('DIST', script);
                 var dist2 = script.getField('COLOR', script);
                 var dir = parseInt(dist1);
                 var color = parseInt(dist2);
-                var arrMsg = Entry.coconut.rgbOn(dir, color); //왼쪽 LED 빨간색으로 켜기
+                var arrMsg = RoCode.coconut.rgbOn(dir, color); //왼쪽 LED 빨간색으로 켜기
                 //var arrMsg = ["0xff","0x55","0x06","0x00","0x02","0x19","0x00","0x01","0x02"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -1885,7 +1885,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log(now + ' : rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -1898,8 +1898,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_clear_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1912,8 +1912,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1932,19 +1932,19 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var dist1 = script.getField('DIST', script);
                 var dir = parseInt(dist1);
-                var arrMsg = Entry.coconut.rgbOff(dir); //왼쪽LED 끄기
+                var arrMsg = RoCode.coconut.rgbOff(dir); //왼쪽LED 끄기
                 //var arrMsg = ["0xff","0x55","0x06","0x00","0x02","0x19","0x01","0x01","0x00"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -1955,7 +1955,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -1966,8 +1966,8 @@ Entry.coconut.getBlocks = function() {
             },
         },
         coconut_set_led_clear: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1980,8 +1980,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1996,8 +1996,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2017,21 +2017,21 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var dist1 = script.getField('DIST', script);
                 var dist2 = script.getField('COLOR', script);
                 var dir = parseInt(dist1);
                 var color = parseInt(dist2);
-                var arrMsg = Entry.coconut.rgbOffColor(dir, color); //왼쪽 LED 빨간색 끄기
+                var arrMsg = RoCode.coconut.rgbOffColor(dir, color); //왼쪽 LED 빨간색 끄기
                 //var arrMsg = ["0xff","0x55","0x06","0x00","0x02","0x19","0x01","0x01","0x02"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -2042,7 +2042,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -2054,8 +2054,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_set_led_time: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2068,8 +2068,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: 'Left',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2084,8 +2084,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2117,21 +2117,21 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var dist1 = script.getField('DIST', script);
                 var dist2 = script.getField('COLOR', script);
                 var time = script.getNumberValue('VALUE');
                 var color = parseInt(dist2);
-                var arrMsg = Entry.coconut.ledOnTime(dist1, color, time); //왼쪽 LED 빨간색으로 1초동안 켜기
+                var arrMsg = RoCode.coconut.ledOnTime(dist1, color, time); //왼쪽 LED 빨간색으로 1초동안 켜기
                 //var arrMsg = ["0xff","0x55","0x08","0x00","0x02","0x19","0x03","0x01","0x02","0xe8","0x03"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -2142,7 +2142,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -2154,8 +2154,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_beep: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2173,17 +2173,17 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_buzzer',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
-                var arrMsg = Entry.coconut.beep(); //버저 켜기
+                var arrMsg = RoCode.coconut.beep(); //버저 켜기
                 //var arrMsg = ["0xff","0x55","0x08","0x00","0x02","0x03","0x00","0x06","0x01","0xf4","0x01"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -2194,7 +2194,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -2206,8 +2206,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_buzzer_time: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2237,18 +2237,18 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_buzzer',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var time = script.getNumberValue('VALUE');
-                var arrMsg = Entry.coconut.playBuzzerTime(time); //버저음을 1초동안 소리내기
+                var arrMsg = RoCode.coconut.playBuzzerTime(time); //버저음을 1초동안 소리내기
                 //var arrMsg = ["0xff","0x55","0x08","0x00","0x02","0x03","0x00","0x06","0x01","0xe8","0x03"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -2259,7 +2259,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -2271,8 +2271,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_buzzer_set_hz: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2311,19 +2311,19 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_buzzer',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var hz = script.getNumberValue('HZ');
                 var time = script.getNumberValue('TIME');
-                var arrMsg = Entry.coconut.playBuzzerFreq(hz, time); //버저음 1000hz를 1초동안 소리내기
+                var arrMsg = RoCode.coconut.playBuzzerFreq(hz, time); //버저음 1000hz를 1초동안 소리내기
                 //var arrMsg = ["0xff","0x55","0x08","0x00","0x02","0x03","0x00","0x2c","0x01","0xe8","0x03"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -2334,7 +2334,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -2346,8 +2346,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_clear_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2365,17 +2365,17 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_buzzer',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
-                var arrMsg = Entry.coconut.buzzerOff(); //버저 끄기
+                var arrMsg = RoCode.coconut.buzzerOff(); //버저 끄기
                 //var arrMsg = ["0xff","0x55","0x08","0x00","0x02","0x03","0x00","0x00","0x00","0x00","0x00"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -2386,7 +2386,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -2398,8 +2398,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_play_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2416,8 +2416,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: 'NOTE_C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2429,8 +2429,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2441,8 +2441,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2461,8 +2461,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '500',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2484,8 +2484,8 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_buzzer',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var dist1 = script.getField('NOTE', script);
                 var dist2 = script.getField('OCTAVE', script);
@@ -2495,14 +2495,14 @@ Entry.coconut.getBlocks = function() {
                 var octave = parseInt(dist2);
                 var semi = dist3;
                 var beat = parseInt(dist4);
-                var arrMsg = Entry.coconut.playNote(note, octave, semi, beat); //(도)(3)(-)음을 2분음표 박자로 연주하기
+                var arrMsg = RoCode.coconut.playNote(note, octave, semi, beat); //(도)(3)(-)음을 2분음표 박자로 연주하기
                 //var arrMsg = ["0xff","0x55","0x09","0x00","0x02","0x03","0x04","0x43","0x03","0x2d","0xf4","0x01"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -2513,7 +2513,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -2525,8 +2525,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_rest_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2542,8 +2542,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '500',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2562,19 +2562,19 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_buzzer',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var dist = script.getField('BEAT', script);
                 var beat = parseInt(dist);
-                var arrMsg = Entry.coconut.restBeat(dist); //2분 쉼표 동안 쉬기
+                var arrMsg = RoCode.coconut.restBeat(dist); //2분 쉼표 동안 쉬기
                 //var arrMsg = ["0xff","0x55","0x08","0x00","0x02","0x03","0x01","0x00","0x00","0xf4","0x01"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -2585,7 +2585,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -2597,8 +2597,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_play_buzzer_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2615,8 +2615,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: 'NOTE_C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2628,8 +2628,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2640,8 +2640,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2660,8 +2660,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '500',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2672,8 +2672,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2688,8 +2688,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2713,8 +2713,8 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_buzzer',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var dist1 = script.getField('NOTE', script);
                 var dist2 = script.getField('OCTAVE', script);
@@ -2728,7 +2728,7 @@ Entry.coconut.getBlocks = function() {
                 var beat = parseInt(dist4);
                 var dir = parseInt(dist5);
                 var color = parseInt(dist6);
-                var arrMsg = Entry.coconut.playNoteColor(note, octave, semi, beat, dir, color);
+                var arrMsg = RoCode.coconut.playNoteColor(note, octave, semi, beat, dir, color);
                 //도 4 - 음을 2분음표 박자로 연주하는 동안 왼쪽 LED 빨간색 켜기
                 //var arrMsg = ["0xff","0x55","0x0b","0x00","0x02","0x03","0x05","0x43","0x04","0x2d","0xf4","0x01","0x01","0x02"];
 
@@ -2736,7 +2736,7 @@ Entry.coconut.getBlocks = function() {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -2747,7 +2747,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -2759,8 +2759,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_play_midi: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2775,8 +2775,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2795,19 +2795,19 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_buzzer',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 //반짝반짝 작은별 연주하기
                 var value = script.getField('VALUE');
                 var num = parseInt(value);
-                var arrMsg = Entry.coconut.playMelody(num);
+                var arrMsg = RoCode.coconut.playMelody(num);
                 //var arrMsg = ["0xff","0x55","0x05","0x00","0x01","0x07","0x00","0x01"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -2818,7 +2818,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -2831,8 +2831,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_floor_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -2845,8 +2845,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2860,8 +2860,8 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_sensor',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var dir = script.getField('DIR');
                 if (dir == '1') {
                     return pd.leftFloorValue;
@@ -2872,8 +2872,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_floor_sensing: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -2887,8 +2887,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2898,8 +2898,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2914,8 +2914,8 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_sensor',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var dir = script.getField('DIR');
                 var det = script.getField('DET');
                 if (dir == '0') {
@@ -2959,8 +2959,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_following_line: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2979,18 +2979,18 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_wheel',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 //선 따라가기
 
-                var arrMsg = Entry.coconut.followLine();
+                var arrMsg = RoCode.coconut.followLine();
                 //var arrMsg = ["0xff","0x55","0x05","0x00","0x02","0x07","0x03","0x3c"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -3001,7 +3001,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -3013,8 +3013,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_front_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -3027,8 +3027,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -3042,8 +3042,8 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_sensor',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var dir = script.getField('DIR');
                 if (dir == '1') {
                     return pd.leftProximityValue;
@@ -3054,8 +3054,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_front_sensing: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -3069,8 +3069,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -3080,8 +3080,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -3096,8 +3096,8 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_sensor',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var dir = script.getField('DIR');
                 var det = script.getField('DET');
                 if (dir == '0') {
@@ -3141,8 +3141,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_obstruct_sensing: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -3156,8 +3156,8 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_sensor',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 if (pd.BothProximityDetection > 0) {
                     return true;
                 }
@@ -3166,8 +3166,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_avoid_mode: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3188,17 +3188,17 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_sensor',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
-                var arrMsg = Entry.coconut.avoidMode(); //어보이드 모드
+                var arrMsg = RoCode.coconut.avoidMode(); //어보이드 모드
                 //var arrMsg = ["0xff","0x55","0x04","0x00","0x02","0x05","0x03"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -3209,7 +3209,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -3221,8 +3221,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_dotmatrix_set: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3234,8 +3234,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -3252,8 +3252,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
 
                 {
@@ -3271,8 +3271,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3293,8 +3293,8 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var row = script.getField('ROW');
                 var col = script.getField('COL');
@@ -3302,14 +3302,14 @@ Entry.coconut.getBlocks = function() {
                 var row = parseInt(row);
                 var col = parseInt(col);
                 var button = parseInt(button);
-                var arrMsg = Entry.coconut.ledMatrixOn(button, row, col); //도트매트릭스 켜짐 1줄 1칸
+                var arrMsg = RoCode.coconut.ledMatrixOn(button, row, col); //도트매트릭스 켜짐 1줄 1칸
                 //var arrMsg = ["0xff","0x55","0x07","0x00","0x02","0x1b","0x00","0x01","0x01","0x01"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -3320,7 +3320,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -3332,8 +3332,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_dotmatrix_on: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3352,17 +3352,17 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
-                var arrMsg = Entry.coconut.ledMatrixOnAll(); //도트매트릭스 모두 켜기
+                var arrMsg = RoCode.coconut.ledMatrixOnAll(); //도트매트릭스 모두 켜기
                 //var arrMsg = ["0xff","0x55","0x05","0x00","0x01","0x07","0x00","0x01"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -3373,7 +3373,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -3385,8 +3385,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_dotmatrix_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3405,17 +3405,17 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
-                var arrMsg = Entry.coconut.ledMatrixClear(); //도트매트릭스 모두 끄기
+                var arrMsg = RoCode.coconut.ledMatrixClear(); //도트매트릭스 모두 끄기
                 //var arrMsg = ["0xff","0x55","0x04","0x00","0x02","0x1b","0x05"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -3426,7 +3426,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -3438,8 +3438,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_dotmatrix_num: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3459,8 +3459,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3485,19 +3485,19 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value = script.getField('VALUE');
                 var num = parseInt(value);
-                var arrMsg = Entry.coconut.showLedMatrix(num); //도트매트릭스 숫자 1표시
+                var arrMsg = RoCode.coconut.showLedMatrix(num); //도트매트릭스 숫자 1표시
                 //var arrMsg = ["0xff","0x55","0x05","0x00","0x02","0x1b","0x01","0x01"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -3508,7 +3508,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -3520,8 +3520,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_dotmatrix_small_eng: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3557,8 +3557,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3577,19 +3577,19 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value = script.getField('VALUE');
                 var num = parseInt(value);
-                var arrMsg = Entry.coconut.showLedMatrixSmall(num); //도트매트릭스 소문자 a표시
+                var arrMsg = RoCode.coconut.showLedMatrixSmall(num); //도트매트릭스 소문자 a표시
                 //var arrMsg = ["0xff","0x55","0x05","0x00","0x02","0x1b","0x02","0x00"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -3600,7 +3600,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -3612,8 +3612,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_dotmatrix_big_eng: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3649,8 +3649,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3669,19 +3669,19 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value = script.getField('VALUE');
                 var num = parseInt(value);
-                var arrMsg = Entry.coconut.showLedMatrixLarge(num); //도트매트릭스 대문자 A표시
+                var arrMsg = RoCode.coconut.showLedMatrixLarge(num); //도트매트릭스 대문자 A표시
                 //var arrMsg = ["0xff","0x55","0x05","0x00","0x02","0x1b","0x03","0x00"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -3692,7 +3692,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -3704,8 +3704,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_dotmatrix_kor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3729,8 +3729,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3749,19 +3749,19 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value = script.getField('VALUE');
                 var num = parseInt(value);
-                var arrMsg = Entry.coconut.showLedMatrixKorean(num); //도트매트릭스 한글 가 표시
+                var arrMsg = RoCode.coconut.showLedMatrixKorean(num); //도트매트릭스 한글 가 표시
                 //var arrMsg = ["0xff","0x55","0x05","0x00","0x02","0x1b","0x04","0x00"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -3772,7 +3772,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -3784,8 +3784,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_light_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -3799,15 +3799,15 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_sensor',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 return pd.light;
             },
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_tmp_senser: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -3821,15 +3821,15 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 return pd.temp;
             },
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_ac_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -3843,8 +3843,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -3858,8 +3858,8 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var xyz = script.getField('XYZ');
 
                 if (xyz == '1') {
@@ -3873,8 +3873,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_outled_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3890,8 +3890,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3921,19 +3921,19 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var pin = script.getNumberField('PIN');
                 var time = script.getNumberValue('TIME');
-                var arrMsg = Entry.coconut.extLedOn(pin, time); //외부 LED 설정 D4 0.5초동안 켜기
+                var arrMsg = RoCode.coconut.extLedOn(pin, time); //외부 LED 설정 D4 0.5초동안 켜기
                 //var arrMsg = ["0xff","0x55","0x06","0x00","0x02","0x2c","0x04","0xf4","0x01"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -3944,7 +3944,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -3956,8 +3956,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_outspk_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3969,8 +3969,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '10',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -4009,20 +4009,20 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var pin = script.getNumberField('PIN');
                 var hz = script.getNumberValue('HZ');
                 var time = script.getNumberValue('TIME');
-                var arrMsg = Entry.coconut.playSpeaker(pin, hz, time); //외부 스피커 설정 D10 100hz로 0.5초 동안 소리내기
+                var arrMsg = RoCode.coconut.playSpeaker(pin, hz, time); //외부 스피커 설정 D10 100hz로 0.5초 동안 소리내기
                 //var arrMsg = ["0xff","0x55","0x08","0x00","0x02","0x29","0x10","0x64","0x00","0xf4","0x01"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -4033,7 +4033,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -4045,8 +4045,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_outspk_sensor_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4058,8 +4058,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '10',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -4078,18 +4078,18 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var pin = script.getNumberField('PIN');
-                var arrMsg = Entry.coconut.stopSpeaker(pin); //외부스피커 D10 끄기
+                var arrMsg = RoCode.coconut.stopSpeaker(pin); //외부스피커 D10 끄기
                 //var arrMsg = ["0xff","0x55","0x08","0x00","0x02","0x29","0x10","0x00","0x00","0x00","0x00"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -4100,7 +4100,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -4112,8 +4112,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_outinfrared_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -4126,8 +4126,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '16',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -4141,8 +4141,8 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
                 var pin = script.getNumberField('PIN');
 
                 if (pin == '16') {
@@ -4154,8 +4154,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_outcds_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -4168,8 +4168,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '16',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -4183,8 +4183,8 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var pin = script.getNumberField('PIN');
                 if (pin == '16') {
@@ -4196,8 +4196,8 @@ Entry.coconut.getBlocks = function() {
             syntax: { js: [], py: ['coconut.turn_for_secs(%1, %2)'] },
         },
         coconut_servomotor_angle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -4213,8 +4213,8 @@ Entry.coconut.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -4244,19 +4244,19 @@ Entry.coconut.getBlocks = function() {
             class: 'coconut_led',
             isNotFor: ['coconut'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var pin = script.getNumberField('PIN');
                 var angle = script.getNumberValue('ANGLE');
-                var arrMsg = Entry.coconut.runExtServo(pin, angle); //서보모터 연결 D4 각도 90
+                var arrMsg = RoCode.coconut.runExtServo(pin, angle); //서보모터 연결 D4 각도 90
                 //var arrMsg = ["0xff","0x55","0x05","0x00","0x02","0x43","0x04","0x5a"];
 
                 if (!script.isStart) {
                     script.isStart = true;
                     script.timeFlag = 1;
                     pd.msgStatus = 'start';
-                    Entry.coconut.insertQueue(arrMsg, sq);
+                    RoCode.coconut.insertQueue(arrMsg, sq);
                     return script;
                 } else if (script.timeFlag == 1) {
                     if (pd.msgStatus == 'end') {
@@ -4267,7 +4267,7 @@ Entry.coconut.getBlocks = function() {
                     } else {
                         console.log('rev = waiting');
                     }
-                    Entry.coconut.clearQueue(sq);
+                    RoCode.coconut.clearQueue(sq);
                     return script;
                 } else {
                     delete script.isStart;
@@ -4282,4 +4282,4 @@ Entry.coconut.getBlocks = function() {
     };
 };
 
-module.exports = Entry.coconut;
+module.exports = RoCode.coconut;

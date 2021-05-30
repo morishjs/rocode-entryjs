@@ -144,7 +144,7 @@ import * as PIXI from 'pixi.js';
 
         // create the hidden input element
         self._hiddenInput = document.createElement('input');
-        self._hiddenInput.className = 'entryCanvasHiddenInput';
+        self._hiddenInput.className = 'RoCodeCanvasHiddenInput';
         self._hiddenInput.type = 'text';
         self._hiddenInput.style.position = 'absolute';
         self._hiddenInput.style.opacity = 0;
@@ -881,7 +881,7 @@ import * as PIXI from 'pixi.js';
                 // enter key
                 e.preventDefault();
                 self._onsubmit(e, self);
-                //Entry.dispatchEvent('canvasInputComplete');
+                //RoCode.dispatchEvent('canvasInputComplete');
             } else if (keyCode === 9) {
                 // tab key
                 e.preventDefault();
@@ -920,7 +920,7 @@ import * as PIXI from 'pixi.js';
                 delete this._isFirstClick;
                 return;
             }
-            const roundRect = Entry.stage.canvas.canvas.getBoundingClientRect();
+            const roundRect = RoCode.stage.canvas.canvas.getBoundingClientRect();
             const x = ((e.x - roundRect.left) / roundRect.width - 0.5) * 480;
             const y = ((e.y - roundRect.top) / roundRect.height - 0.5) * -270;
 
@@ -990,9 +990,9 @@ import * as PIXI from 'pixi.js';
          * @param  {CanvasInput} self
          */
         mousedown(e, self) {
-            e = Entry.Utils.convertMouseEvent(e);
-            const roundRect = Entry.stage.getBoundRect();
-            const scrollPos = Entry.Utils.getScrollPos();
+            e = RoCode.Utils.convertMouseEvent(e);
+            const roundRect = RoCode.stage.getBoundRect();
+            const scrollPos = RoCode.Utils.getScrollPos();
             const x = ((e.pageX - roundRect.left - scrollPos.left) / roundRect.width - 0.5) * 480;
             const y = ((e.pageY - roundRect.top - scrollPos.top) / roundRect.height - 0.5) * -270;
 
@@ -1002,7 +1002,7 @@ import * as PIXI from 'pixi.js';
             // setup the 'click' event
             self._mouseDown = isOver;
 
-            const inputField = Entry.stage.inputField;
+            const inputField = RoCode.stage.inputField;
             if (isOver && !inputField._isHidden) {
                 self._hasFocus = true;
                 setTimeout(() => {
@@ -1042,7 +1042,7 @@ import * as PIXI from 'pixi.js';
             //     return;
             // self.render();
             // self.click(e,self);
-            // var roundRect = Entry.stage.canvas.canvas.getBoundingClientRect();
+            // var roundRect = RoCode.stage.canvas.canvas.getBoundingClientRect();
             // var x = ((e.clientX - roundRect.left) / roundRect.width - 0.5) * 480;
             // var y = ((e.clientY - roundRect.top) / roundRect.height - 0.5) * -270;
         },
@@ -1237,7 +1237,7 @@ import * as PIXI from 'pixi.js';
                 //     self._ctx.drawImage(self._renderCanvas, self._x, self._y);
                 // }
                 self._pixiView.texture.update();
-                Entry.requestUpdate = true;
+                RoCode.requestUpdate = true;
                 return self;
             });
         },
@@ -1372,7 +1372,7 @@ import * as PIXI from 'pixi.js';
             self._shadowCanvas.setAttribute('height', self._height + self._padding * 2);
 
             // clear the main canvas
-            //do nothing. entryjs will control main canvas.
+            //do nothing. RoCodejs will control main canvas.
             // if (self._ctx) {
             //     self._ctx.clearRect(self._x, self._y, oldW, oldH);
             // }

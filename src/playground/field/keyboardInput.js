@@ -2,10 +2,10 @@
  */
 'use strict';
 
-import { Dropdown } from '@entrylabs/tool';
-import EntryEvent from '@entrylabs/event';
+import { Dropdown } from '@RoCodelabs/tool';
+import RoCodeEvent from '@RoCodelabs/event';
 
-Entry.FieldKeyboard = class FieldDropdown extends Entry.Field {
+RoCode.FieldKeyboard = class FieldDropdown extends RoCode.Field {
     constructor(content, blockView, index, renderMode, i, isDynamic) {
         super();
         if (isDynamic) {
@@ -14,7 +14,7 @@ Entry.FieldKeyboard = class FieldDropdown extends Entry.Field {
         this._block = blockView.block;
         this._blockView = blockView;
 
-        this.box = new Entry.BoxModel();
+        this.box = new RoCode.BoxModel();
 
         this.svgGroup = null;
 
@@ -25,7 +25,7 @@ Entry.FieldKeyboard = class FieldDropdown extends Entry.Field {
         let { arrowColor } = content;
         const { deletable, emphasized } = this._block;
 
-        if (deletable === Entry.Block.DELETABLE_FALSE_LIGHTEN || emphasized) {
+        if (deletable === RoCode.Block.DELETABLE_FALSE_LIGHTEN || emphasized) {
             arrowColor = blockView._fillColor;
         }
 
@@ -54,7 +54,7 @@ Entry.FieldKeyboard = class FieldDropdown extends Entry.Field {
 
         if (!this.svgGroup) {
             this.svgGroup = blockView.contentSvgGroup.elem('g', {
-                class: 'entry-field-dropdown',
+                class: 'RoCode-field-dropdown',
             });
         }
 
@@ -83,7 +83,7 @@ Entry.FieldKeyboard = class FieldDropdown extends Entry.Field {
                 fill: this._textColor,
                 'font-size': `${+that._font_size}px`,
                 'font-weight': 'bold',
-                'font-family': EntryStatic.fontFamily || 'NanumGothic',
+                'font-family': RoCodeStatic.fontFamily || 'NanumGothic',
             });
         }
 
@@ -103,7 +103,7 @@ Entry.FieldKeyboard = class FieldDropdown extends Entry.Field {
             });
         }
 
-        if (this instanceof Entry.FieldDropdownDynamic) {
+        if (this instanceof RoCode.FieldDropdownDynamic) {
             this._updateValue();
         }
 
@@ -138,7 +138,7 @@ Entry.FieldKeyboard = class FieldDropdown extends Entry.Field {
             height: CONTENT_HEIGHT,
         });
 
-        this.keyboardEvent = new EntryEvent(document);
+        this.keyboardEvent = new RoCodeEvent(document);
     }
 
     resize() {
@@ -172,12 +172,12 @@ Entry.FieldKeyboard = class FieldDropdown extends Entry.Field {
                 this._selectBlockView();
             };
         }
-        this.disposeEvent = Entry.disposeEvent.attach(this, action);
+        this.disposeEvent = RoCode.disposeEvent.attach(this, action);
     }
 
     renderOptions() {
-        this.optionGroup = Entry.Dom('div', {
-            class: 'entry-widget-dropdown',
+        this.optionGroup = RoCode.Dom('div', {
+            class: 'RoCode-widget-dropdown',
             parent: $('body'),
         });
         const { options = [] } = this._contents;
@@ -207,12 +207,12 @@ Entry.FieldKeyboard = class FieldDropdown extends Entry.Field {
     keyboardControl = (e) => {
         e?.stopPropagation();
         e?.preventDefault();
-        let value = Entry.Utils.inputToKeycode(e);
+        let value = RoCode.Utils.inputToKeycode(e);
         if (!value) {
             return;
         }
 
-        const text = Entry.getKeyCodeMap()[value];
+        const text = RoCode.getKeyCodeMap()[value];
         if (text !== undefined) {
             this.destroyOption();
             this.applyValue(value, false, true);

@@ -4,7 +4,7 @@ const _set = require('lodash/set');
 const _get = require('lodash/get');
 const _merge = require('lodash/merge');
 
-Entry.Davinci = new class Davinci {
+RoCode.Davinci = new class Davinci {
     constructor() {
 	    this.id = '2D.1';
         this.url = 'http://www.dasanbooks.com';
@@ -26,16 +26,16 @@ Entry.Davinci = new class Davinci {
         if (key.length === 1) {
             key += ((Math.random() * 16) | 0).toString(16);
         }
-        return Entry.generateHash() + key;
+        return RoCode.generateHash() + key;
     }
 
     setZero() {
-        Entry.hw.sendQueue = {
+        RoCode.hw.sendQueue = {
             [this.getHashKey()]: {
                 type: 'RST',
             },
         };
-        Entry.hw.update();
+        RoCode.hw.update();
         this.blockIds = {};
         this.isExecBlock = false;
         this.execTimeFlag = false;
@@ -73,10 +73,10 @@ Entry.Davinci = new class Davinci {
             scope.timeFlag = 1;
             this.nowBlockId = blockId;
             this.blockIds[blockId] = false;
-            _merge(Entry.hw.sendQueue, {
+            _merge(RoCode.hw.sendQueue, {
                 [blockId]: data,
             });
-            Entry.hw.update();
+            RoCode.hw.update();
             setTimeout(() => {
                 scope.timeFlag = 0;
             });
@@ -87,7 +87,7 @@ Entry.Davinci = new class Davinci {
             this.execTimeFlag = 0;
             this.execTimeFlag = undefined;
             this.isExecBlock = false;
-            Entry.engine.isContinue = false;
+            RoCode.engine.isContinue = false;
             return true;
         }
         return false;
@@ -96,7 +96,7 @@ Entry.Davinci = new class Davinci {
     postCallReturn(args) {
         const { script } = args;
         if (!this.asyncFlowControl(args, script)) {
-            return Entry.STATIC.BREAK;
+            return RoCode.STATIC.BREAK;
         }
     }
 
@@ -109,7 +109,7 @@ Entry.Davinci = new class Davinci {
         if (value) {
             return value;
         } else if (!this.asyncFlowControl(args, scope)) {
-            throw new Entry.Utils.AsyncError();
+            throw new RoCode.Utils.AsyncError();
         }
     }
 
@@ -122,14 +122,14 @@ Entry.Davinci = new class Davinci {
     afterReceive({ blockId = '', RADIO }) {
         if (blockId in this.blockIds) {
             this.blockIds[blockId] = true;
-        } else if (RADIO && Entry.engine.isState('run') && RADIO.time > this.radioTime) {
+        } else if (RADIO && RoCode.engine.isState('run') && RADIO.time > this.radioTime) {
             this.radioTime = RADIO.time;
-            Entry.engine.fireEvent('DavinciRadioReceive');
+            RoCode.engine.fireEvent('DavinciRadioReceive');
         }
     }
 }();
 
-Entry.Davinci.blockMenuBlocks = [
+RoCode.Davinci.blockMenuBlocks = [
     'davinci_led_toggle',
     'davinci_get_led',
     'davinci_show_string',
@@ -150,11 +150,11 @@ Entry.Davinci.blockMenuBlocks = [
     'davinci_set_bpm',
 ];
 
-Entry.Davinci.getBlocks = function() {
+RoCode.Davinci.getBlocks = function() {
     return {
         davinci_led_toggle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: 'LED의 X:%1 Y:%2 %3 %4',
@@ -164,8 +164,8 @@ Entry.Davinci.getBlocks = function() {
                     options: [['1', '0'], ['2', '1'], ['3', '2'], ['4', '3'], ['5', '4']],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -179,16 +179,16 @@ Entry.Davinci.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [['켜기', '0'], ['끄기', '1'], ['반전', '2']],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -212,7 +212,7 @@ Entry.Davinci.getBlocks = function() {
                 const value = script.getField('VALUE');
                 let x = script.getField('X');
                 let y = script.getField('Y');
-                
+
                 const data = {
                     type: 'SET_LED',
                     data: {
@@ -221,15 +221,15 @@ Entry.Davinci.getBlocks = function() {
                         value,
                     },
                 };
-                return Entry.Davinci.postCallReturn({
+                return RoCode.Davinci.postCallReturn({
                     script,
                     data,
                 });
             },
         },
         davinci_get_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -240,8 +240,8 @@ Entry.Davinci.getBlocks = function() {
                     options: [['1', '0'], ['2', '1'], ['3', '2'], ['4', '3'], ['5', '4']],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -255,8 +255,8 @@ Entry.Davinci.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -281,13 +281,13 @@ Entry.Davinci.getBlocks = function() {
                         y,
                     },
                 };
-                let returnData = Entry.Davinci.checkValue({
+                let returnData = RoCode.Davinci.checkValue({
                     script,
                     data,
                     key: `LED.${x}.${y}`,
                 });
                 if (!returnData) {
-                    returnData = _get(Entry.hw.portData, ['LED']);
+                    returnData = _get(RoCode.hw.portData, ['LED']);
                     const { executor } = script;
                     const { scope } = executor;
                     if (!scope.cacheValue) {
@@ -299,8 +299,8 @@ Entry.Davinci.getBlocks = function() {
             },
         },
         davinci_show_string: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: '%1 출력하기 %2',
@@ -342,15 +342,15 @@ Entry.Davinci.getBlocks = function() {
                         value,
                     },
                 };
-                return Entry.Davinci.postCallReturn({
+                return RoCode.Davinci.postCallReturn({
                     script,
                     data,
                 });
             },
         },
         davinci_show_image: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: '%1 이모티콘 출력하기 %2',
@@ -379,8 +379,8 @@ Entry.Davinci.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -405,15 +405,15 @@ Entry.Davinci.getBlocks = function() {
                         value,
                     },
                 };
-                return Entry.Davinci.postCallReturn({
+                return RoCode.Davinci.postCallReturn({
                     script,
                     data,
                 });
             },
         },
         davinci_set_analog: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: '아날로그 핀 %1번을 %2으로 설정 %3',
@@ -423,8 +423,8 @@ Entry.Davinci.getBlocks = function() {
                     options: [['1번', 0], ['2번', 1], ['3번', 2], ['4번', 3]],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -469,15 +469,15 @@ Entry.Davinci.getBlocks = function() {
                         value,
                     },
                 };
-                return Entry.Davinci.postCallReturn({
+                return RoCode.Davinci.postCallReturn({
                     script,
                     data,
                 });
             },
         },
         davinci_set_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: '디지털 핀 %1번을 %2 %3',
@@ -487,16 +487,16 @@ Entry.Davinci.getBlocks = function() {
                     options: [['1번', 0], ['2번', 1], ['3번', 2], ['4번', 3]],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [['켜기', '0'], ['끄기', '1'], ['반전', '2']],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -525,15 +525,15 @@ Entry.Davinci.getBlocks = function() {
                         value,
                     },
                 };
-                return Entry.Davinci.postCallReturn({
+                return RoCode.Davinci.postCallReturn({
                     script,
                     data,
                 });
             },
         },
         davinci_get_analog: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -544,8 +544,8 @@ Entry.Davinci.getBlocks = function() {
                     options: [['1번', 0], ['2번', 1], ['3번', 2], ['4번', 3]],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -565,13 +565,13 @@ Entry.Davinci.getBlocks = function() {
                         value,
                     },
                 };
-                let returnData = Entry.Davinci.checkValue({
+                let returnData = RoCode.Davinci.checkValue({
                     script,
                     data,
                     key: `GET_ANALOG.${value}`,
                 });
                 if (!returnData) {
-                    returnData = _get(Entry.hw.portData, ['GET_ANALOG']);
+                    returnData = _get(RoCode.hw.portData, ['GET_ANALOG']);
                     const { executor } = script;
                     const { scope } = executor;
                     if (!scope.cacheValue) {
@@ -583,8 +583,8 @@ Entry.Davinci.getBlocks = function() {
             },
         },
         davinci_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -595,8 +595,8 @@ Entry.Davinci.getBlocks = function() {
                     options: [['1번', 0], ['2번', 1], ['3번', 2], ['4번', 3]],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -616,13 +616,13 @@ Entry.Davinci.getBlocks = function() {
                         value,
                     },
                 };
-                let returnData = Entry.Davinci.checkValue({
+                let returnData = RoCode.Davinci.checkValue({
                     script,
                     data,
                     key: `GET_DIGITAL.${value}`,
                 });
                 if (!returnData) {
-                    returnData = _get(Entry.hw.portData, ['GET_DIGITAL']);
+                    returnData = _get(RoCode.hw.portData, ['GET_DIGITAL']);
                     const { executor } = script;
                     const { scope } = executor;
                     if (!scope.cacheValue) {
@@ -634,8 +634,8 @@ Entry.Davinci.getBlocks = function() {
             },
         },
         davinci_get_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -646,8 +646,8 @@ Entry.Davinci.getBlocks = function() {
                     options: [['A', 10], ['B', 11], ['A + B', 12]],
                     value: 10,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -667,13 +667,13 @@ Entry.Davinci.getBlocks = function() {
                         value,
                     },
                 };
-                let returnData = Entry.Davinci.checkValue({
+                let returnData = RoCode.Davinci.checkValue({
                     script,
                     data,
                     key: `GET_BUTTON.${value}`,
                 });
                 if (!returnData) {
-                    returnData = _get(Entry.hw.portData, ['GET_BUTTON']);
+                    returnData = _get(RoCode.hw.portData, ['GET_BUTTON']);
                     const { executor } = script;
                     const { scope } = executor;
                     if (!scope.cacheValue) {
@@ -686,8 +686,8 @@ Entry.Davinci.getBlocks = function() {
             },
         },
         davinci_get_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -703,8 +703,8 @@ Entry.Davinci.getBlocks = function() {
                     ],
                     value: 'temperature',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -724,13 +724,13 @@ Entry.Davinci.getBlocks = function() {
                         value,
                     },
                 };
-                let returnData = Entry.Davinci.checkValue({
+                let returnData = RoCode.Davinci.checkValue({
                     script,
                     data,
                     key: `GET_SENSOR.${value}`,
                 });
                 if (!returnData) {
-                    returnData = _get(Entry.hw.portData, ['GET_SENSOR']);
+                    returnData = _get(RoCode.hw.portData, ['GET_SENSOR']);
                     const { executor } = script;
                     const { scope } = executor;
                     if (!scope.cacheValue) {
@@ -742,8 +742,8 @@ Entry.Davinci.getBlocks = function() {
             },
         },
         davinci_get_accelerometer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -758,8 +758,8 @@ Entry.Davinci.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -779,13 +779,13 @@ Entry.Davinci.getBlocks = function() {
                         value,
                     },
                 };
-                let returnData = Entry.Davinci.checkValue({
+                let returnData = RoCode.Davinci.checkValue({
                     script,
                     data,
                     key: `GET_ACCELEROMETER.${value}`,
                 });
                 if (!returnData) {
-                    returnData = _get(Entry.hw.portData, ['GET_ACCELEROMETER']);
+                    returnData = _get(RoCode.hw.portData, ['GET_ACCELEROMETER']);
                     const { executor } = script;
                     const { scope } = executor;
                     if (!scope.cacheValue) {
@@ -801,8 +801,8 @@ Entry.Davinci.getBlocks = function() {
             },
         },
         davinci_get_gyro: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -817,8 +817,8 @@ Entry.Davinci.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -838,13 +838,13 @@ Entry.Davinci.getBlocks = function() {
                         value,
                     },
                 };
-                let returnData = Entry.Davinci.checkValue({
+                let returnData = RoCode.Davinci.checkValue({
                     script,
                     data,
                     key: `GET_GYRO.${value}`,
                 });
                 if (!returnData) {
-                    returnData = _get(Entry.hw.portData, ['GET_GYRO']);
+                    returnData = _get(RoCode.hw.portData, ['GET_GYRO']);
                     const { executor } = script;
                     const { scope } = executor;
                     if (!scope.cacheValue) {
@@ -860,8 +860,8 @@ Entry.Davinci.getBlocks = function() {
             },
         },
         davinci_get_magnet: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -876,8 +876,8 @@ Entry.Davinci.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -897,13 +897,13 @@ Entry.Davinci.getBlocks = function() {
                         value,
                     },
                 };
-                let returnData = Entry.Davinci.checkValue({
+                let returnData = RoCode.Davinci.checkValue({
                     script,
                     data,
                     key: `GET_MAGNET.${value}`,
                 });
                 if (!returnData) {
-                    returnData = _get(Entry.hw.portData, ['GET_MAGNET']);
+                    returnData = _get(RoCode.hw.portData, ['GET_MAGNET']);
                     const { executor } = script;
                     const { scope } = executor;
                     if (!scope.cacheValue) {
@@ -919,8 +919,8 @@ Entry.Davinci.getBlocks = function() {
             },
         },
         davinci_play_note: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             statements: [],
@@ -968,8 +968,8 @@ Entry.Davinci.getBlocks = function() {
                     ],
                     value: 8,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -985,8 +985,8 @@ Entry.Davinci.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1014,15 +1014,15 @@ Entry.Davinci.getBlocks = function() {
                         beat,
                     },
                 };
-                return Entry.Davinci.postCallReturn({
+                return RoCode.Davinci.postCallReturn({
                     script,
                     data,
                 });
             },
         },
         davinci_play_melody: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             statements: [],
@@ -1042,8 +1042,8 @@ Entry.Davinci.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1068,15 +1068,15 @@ Entry.Davinci.getBlocks = function() {
                         melody,
                     },
                 };
-                return Entry.Davinci.postCallReturn({
+                return RoCode.Davinci.postCallReturn({
                     script,
                     data,
                 });
             },
         },
         davinci_change_bpm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             statements: [],
@@ -1116,15 +1116,15 @@ Entry.Davinci.getBlocks = function() {
                         value,
                     },
                 };
-                return Entry.Davinci.postCallReturn({
+                return RoCode.Davinci.postCallReturn({
                     script,
                     data,
                 });
             },
         },
         davinci_set_bpm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#ffffff',
             skeleton: 'basic',
             statements: [],
@@ -1164,7 +1164,7 @@ Entry.Davinci.getBlocks = function() {
                         value,
                     },
                 };
-                return Entry.Davinci.postCallReturn({
+                return RoCode.Davinci.postCallReturn({
                     script,
                     data,
                 });
@@ -1173,4 +1173,4 @@ Entry.Davinci.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Davinci;
+module.exports = RoCode.Davinci;

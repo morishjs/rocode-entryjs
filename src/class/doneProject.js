@@ -2,7 +2,7 @@
 
 require('../util/static');
 
-Entry.DoneProject = class DoneProject {
+RoCode.DoneProject = class DoneProject {
     constructor(id) {
         this.generateView(id);
     }
@@ -11,24 +11,24 @@ Entry.DoneProject = class DoneProject {
     }
 
     generateView(doneProject) {
-        // this.youtubeTab.removeClass('entryRemove');
+        // this.youtubeTab.removeClass('RoCodeRemove');
 
-        const doneContainer = Entry.createElement('div');
-        doneContainer.addClass('entryContainerDoneWorkspace');
-        // var parentcontainer = document.getElementById('entryContainerWorkspaceId');
+        const doneContainer = RoCode.createElement('div');
+        doneContainer.addClass('RoCodeContainerDoneWorkspace');
+        // var parentcontainer = document.getElementById('RoCodeContainerWorkspaceId');
 
         this.doneContainer = doneContainer;
         const view = this.doneContainer;
         // var width = parentcontainer.offsetWidth;
 
         const url = '/api/iframe/project/';
-        const iframe = Entry.createElement('iframe');
+        const iframe = RoCode.createElement('iframe');
         iframe.setAttribute('id', 'doneProjectframe');
         iframe.setAttribute('frameborder', 0);
         iframe.setAttribute('src', url + doneProject);
         this.doneProjectFrame = iframe;
         this.doneContainer.appendChild(iframe);
-        doneContainer.addClass('entryRemove');
+        doneContainer.addClass('RoCodeRemove');
     }
 
     getView() {

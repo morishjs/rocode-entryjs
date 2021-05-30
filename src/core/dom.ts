@@ -1,8 +1,8 @@
 type HandleableClickEvent = JQuery.ClickEvent & { handled: boolean };
 
-const createEntryDom: EntryDomConstructor = function(tag, options) {
+const createRoCodeDom: RoCodeDomConstructor = function(tag, options) {
     const tagRegex = /<(\w+)>/;
-    let dom: EntryDom;
+    let dom: RoCodeDom;
 
     if (tag instanceof HTMLElement) {
         dom = $(tag);
@@ -58,5 +58,5 @@ const createEntryDom: EntryDomConstructor = function(tag, options) {
     return dom;
 };
 
-export default createEntryDom;
-Entry.Dom = createEntryDom;
+export default createRoCodeDom;
+RoCode.Dom = createRoCodeDom;

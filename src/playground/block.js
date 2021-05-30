@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Block = class Block {
+RoCode.Block = class Block {
     schema = {
         id: null,
         x: 0,
@@ -11,7 +11,7 @@ Entry.Block = class Block {
         view: null,
         thread: null,
         movable: null,
-        deletable: Entry.Block.DELETABLE_TRUE,
+        deletable: RoCode.Block.DELETABLE_TRUE,
         emphasized: false,
         readOnly: null,
         copyable: true,
@@ -21,7 +21,7 @@ Entry.Block = class Block {
 
     constructor(block, thread) {
         const that = this;
-        Entry.Model(this, false);
+        RoCode.Model(this, false);
         this._schema = null;
         this.defaultType = block.defaultType;
 
@@ -35,9 +35,9 @@ Entry.Block = class Block {
         const category = block.category;
         if (category) {
             this.category = category;
-            const entryBlock = Entry.block[this.type];
-            if (entryBlock) {
-                entryBlock.isFor = [`category_${category}`];
+            const RoCodeBlock = RoCode.block[this.type];
+            if (RoCodeBlock) {
+                RoCodeBlock.isFor = [`category_${category}`];
             }
         }
 
@@ -58,9 +58,9 @@ Entry.Block = class Block {
 
         const board = code.board;
         if (
-            Entry.getMainWS() &&
-            Entry.isTextMode &&
-            (!board || (board && board.constructor !== Entry.BlockMenu))
+            RoCode.getMainWS() &&
+            RoCode.isTextMode &&
+            (!board || (board && board.constructor !== RoCode.BlockMenu))
         ) {
             (this.events.viewAdd || []).forEach((fn) => {
                 if (_.isFunction(fn)) {
@@ -80,7 +80,7 @@ Entry.Block = class Block {
 
     load(block) {
         if (!block.id) {
-            block.id = Entry.Utils.generateId();
+            block.id = RoCode.Utils.generateId();
         }
 
         this.set(block);
@@ -108,7 +108,7 @@ Entry.Block = class Block {
                     case 'insert': {
                         const startPos = changeData.startPos;
                         const endPos = changeData.endPos;
-                        const schemaParams = Entry.block[this.type].params;
+                        const schemaParams = RoCode.block[this.type].params;
                         params = new Array(schemaParams.length);
 
                         for (let i = 0; i < startPos; i++) {
@@ -126,7 +126,7 @@ Entry.Block = class Block {
         }
 
         params.forEach((p) => {
-            if (p instanceof Entry.Block) {
+            if (p instanceof RoCode.Block) {
                 p.destroyView();
             }
         });
@@ -147,7 +147,7 @@ Entry.Block = class Block {
 
     loadSchema() {
         const that = this;
-        this._schema = Entry.block[this.type];
+        this._schema = RoCode.block[this.type];
 
         if (!this._schema) {
             return;
@@ -210,7 +210,7 @@ Entry.Block = class Block {
                         params: [value],
                     };
                 }
-                value = new Entry.Block(value, this.thread);
+                value = new RoCode.Block(value, this.thread);
             }
 
             if (paramInjected) {
@@ -225,7 +225,7 @@ Entry.Block = class Block {
             this.statements.splice(
                 i,
                 1,
-                new Entry.Thread(this.statements[i], that.getCode(), this)
+                new RoCode.Thread(this.statements[i], that.getCode(), this)
             );
         }
 
@@ -280,18 +280,18 @@ Entry.Block = class Block {
         board = board || this.getCode().view.board;
         if (!this.view) {
             this.set({
-                view: new Entry.BlockView(this, board, mode),
+                view: new RoCode.BlockView(this, board, mode),
             });
             this._updatePos();
         }
         if (this.comment) {
             const comment = this.comment;
-            if (comment instanceof Entry.Comment) {
+            if (comment instanceof RoCode.Comment) {
                 if (!comment.svgGroup) {
                     comment.createComment(board, comment.toJSON());
                 }
             } else {
-                this.connectComment(new Entry.Comment(comment, board, this));
+                this.connectComment(new RoCode.Comment(comment, board, this));
             }
         }
     }
@@ -302,7 +302,7 @@ Entry.Block = class Block {
     }
 
     clone(thread) {
-        return new Entry.Block(this.toJSON(true), thread);
+        return new RoCode.Block(this.toJSON(true), thread);
     }
 
     toJSON(isNew, excludeData = [], option = {}) {
@@ -315,11 +315,11 @@ Entry.Block = class Block {
         }
 
         json.params = json.params.map((p, i) => {
-            if (p instanceof Entry.Block) {
+            if (p instanceof RoCode.Block) {
                 return p.toJSON(isNew, excludeData, option);
             } else if (
                 option.captureDynamic &&
-                view.getParam(i) instanceof Entry.FieldDropdownDynamic
+                view.getParam(i) instanceof RoCode.FieldDropdownDynamic
             ) {
                 return view.getParam(i).getTextValue();
             } else {
@@ -334,7 +334,7 @@ Entry.Block = class Block {
 
         if (this._backupParams) {
             json._backupParams = this._backupParams.map(function(p) {
-                if (p instanceof Entry.Block) {
+                if (p instanceof RoCode.Block) {
                     return p.toJSON();
                 } else {
                     return p;
@@ -344,7 +344,7 @@ Entry.Block = class Block {
 
         if (this._comment) {
             let comment = this._comment;
-            if (this._comment instanceof Entry.Comment) {
+            if (this._comment instanceof RoCode.Comment) {
                 comment = this._comment.toJSON();
                 delete comment.id;
             }
@@ -387,8 +387,8 @@ Entry.Block = class Block {
         const params = this.params || [];
         for (let i = 0; i < params.length; i++) {
             const param = params[i];
-            if (param instanceof Entry.Block) {
-                param.doNotSplice = !(param.thread instanceof Entry.FieldOutput);
+            if (param instanceof RoCode.Block) {
+                param.doNotSplice = !(param.thread instanceof RoCode.FieldOutput);
                 param.destroy(animate);
             }
         }
@@ -419,10 +419,10 @@ Entry.Block = class Block {
                         if (thread.view) {
                             const parent = thread.view.getParent();
                             const pConstructor = parent.constructor;
-                            if (pConstructor === Entry.FieldStatement) {
+                            if (pConstructor === RoCode.FieldStatement) {
                                 nextBlockView && nextBlockView.bindPrev(parent);
                                 parent.insertTopBlock(nextBlock);
-                            } else if (pConstructor === Entry.FieldStatement) {
+                            } else if (pConstructor === RoCode.FieldStatement) {
                                 nextBlock.replace(parent._valueBlock);
                             } else {
                                 nextBlockView && nextBlockView._toGlobalCoordinate();
@@ -457,9 +457,9 @@ Entry.Block = class Block {
 
         const board = this.getCode().board;
         if (
-            Entry.getMainWS() &&
-            Entry.isTextMode &&
-            (!board || (board && board.constructor !== Entry.BlockMenu))
+            RoCode.getMainWS() &&
+            RoCode.isTextMode &&
+            (!board || (board && board.constructor !== RoCode.BlockMenu))
         ) {
             events = events.concat(this.events.viewDestroy || []);
         }
@@ -506,7 +506,7 @@ Entry.Block = class Block {
 
     isDeletable() {
         const deletable = this.deletable;
-        return deletable === Entry.Block.DELETABLE_TRUE || deletable === true;
+        return deletable === RoCode.Block.DELETABLE_TRUE || deletable === true;
     }
 
     isReadOnly() {
@@ -563,7 +563,7 @@ Entry.Block = class Block {
     copy() {
         const thread = this.getThread();
         const cloned = [];
-        if (thread instanceof Entry.Thread) {
+        if (thread instanceof RoCode.Thread) {
             const index = thread.getBlocks().indexOf(this);
             const json = thread.toJSON(true, index);
             for (let i = 0; i < json.length; i++) {
@@ -577,13 +577,13 @@ Entry.Block = class Block {
         const block = cloned[0];
         block.x = x + 15;
         block.y = y + 15;
-        block.id = Entry.Utils.generateId();
+        block.id = RoCode.Utils.generateId();
 
         return cloned;
     }
 
     copyToClipboard() {
-        Entry.clipboard = this.copy();
+        RoCode.clipboard = this.copy();
     }
 
     separate(count, index) {
@@ -596,7 +596,7 @@ Entry.Block = class Block {
 
     insert(targetBlock) {
         const blocks = this.thread.cut(this);
-        if (targetBlock instanceof Entry.Thread) {
+        if (targetBlock instanceof RoCode.Thread) {
             targetBlock.insertByBlock(null, blocks);
         } else {
             targetBlock.insertAfter(blocks);
@@ -633,7 +633,7 @@ Entry.Block = class Block {
 
     getPrevOutputBlock() {
         const thread = this.thread;
-        if (thread instanceof Entry.FieldOutput) {
+        if (thread instanceof RoCode.FieldOutput) {
             return thread._block;
         }
         return null;
@@ -674,7 +674,7 @@ Entry.Block = class Block {
         if (!this.view) {
             return null;
         }
-        const skeleton = Entry.skeleton[this._schema.skeleton];
+        const skeleton = RoCode.skeleton[this._schema.skeleton];
 
         if (!skeleton.magnets) {
             return null;
@@ -744,7 +744,7 @@ Entry.Block = class Block {
 
         return [...this.params, ...this.statements].reduce((blocks, value) => {
             const constructor = value && value.constructor;
-            if (constructor !== Entry.Block && constructor !== Entry.Thread) {
+            if (constructor !== RoCode.Block && constructor !== RoCode.Thread) {
                 return blocks;
             }
 
@@ -779,14 +779,14 @@ Entry.Block = class Block {
         }
         for (let i = 0; i < this.params.length; i++) {
             const param = this.params[i];
-            if (param instanceof Entry.Block) {
+            if (param instanceof RoCode.Block) {
                 if (!param.isSameParamWith(target.params[i])) {
                     return false;
                 }
             } else {
                 let l = this.params[i];
                 let r = target.params[i];
-                //entry-js로 변경되며서 null로 오던 것이 undefined로 와서 맞춰 줌.
+                //RoCode-js로 변경되며서 null로 오던 것이 undefined로 와서 맞춰 줌.
                 if (l === undefined) l = null;
                 l = typeof l === 'number' ? `${l}` : l;
                 r = typeof r === 'number' ? `${r}` : r;
@@ -854,11 +854,11 @@ Entry.Block = class Block {
             if (!parent) {
                 //field block
                 block = thread._block;
-            } else if (parent instanceof Entry.Code) {
+            } else if (parent instanceof RoCode.Code) {
                 //thread
                 block = thread.getFirstBlock();
                 break;
-            } else if (parent instanceof Entry.Block) {
+            } else if (parent instanceof RoCode.Block) {
                 //statement
                 block = thread.parent;
             } else {
@@ -882,9 +882,9 @@ Entry.Block = class Block {
     }
 };
 
-Entry.Block.MAGNET_RANGE = 10;
-Entry.Block.MAGNET_OFFSET = 0.4;
+RoCode.Block.MAGNET_RANGE = 10;
+RoCode.Block.MAGNET_OFFSET = 0.4;
 
-Entry.Block.DELETABLE_TRUE = 1;
-Entry.Block.DELETABLE_FALSE = 2;
-Entry.Block.DELETABLE_FALSE_LIGHTEN = 3;
+RoCode.Block.DELETABLE_TRUE = 1;
+RoCode.Block.DELETABLE_FALSE = 2;
+RoCode.Block.DELETABLE_FALSE_LIGHTEN = 3;

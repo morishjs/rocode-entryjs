@@ -154,7 +154,7 @@ function getInitialCodeMap() {
     };
 }
 
-Entry.AI_UTILIZE_BLOCK.translate = {
+RoCode.AI_UTILIZE_BLOCK.translate = {
     name: 'translate',
     imageName: 'papago.png',
     sponserText: 'Powered by Naver',
@@ -171,8 +171,8 @@ Entry.AI_UTILIZE_BLOCK.translate = {
         if (this.isInitialized) {
             return;
         }
-        Entry.AI_UTILIZE_BLOCK.translate.delayKey = Entry.projectId;
-        Entry.AI_UTILIZE_BLOCK.translate.isInitialized = true;
+        RoCode.AI_UTILIZE_BLOCK.translate.delayKey = RoCode.projectId;
+        RoCode.AI_UTILIZE_BLOCK.translate.isInitialized = true;
     },
     api: '/api/expansionBlock/papago/',
     sponsor: 'papagoNaver',
@@ -185,7 +185,7 @@ Entry.AI_UTILIZE_BLOCK.translate = {
     apiType: 'nsmt',
 };
 
-Entry.AI_UTILIZE_BLOCK.translate.getBlocks = function() {
+RoCode.AI_UTILIZE_BLOCK.translate.getBlocks = function() {
     const params = {
         getType(isPython) {
             const param = {
@@ -196,11 +196,11 @@ Entry.AI_UTILIZE_BLOCK.translate.getBlocks = function() {
                 ],
                 value: 'dictionary',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
@@ -233,12 +233,12 @@ Entry.AI_UTILIZE_BLOCK.translate.getBlocks = function() {
                 options,
                 value,
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 dropdownSync: 'translate',
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
@@ -260,8 +260,8 @@ Entry.AI_UTILIZE_BLOCK.translate.getBlocks = function() {
                 },
                 needDeepCopy: true,
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.AI_UTILIZE,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 defaultValue: (value, options) => {
                     if(options.length) {
                         return options[0][1]
@@ -270,22 +270,22 @@ Entry.AI_UTILIZE_BLOCK.translate.getBlocks = function() {
                 },
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
     };
     const getProjectId = function() {
-        if (Entry.projectId) {
-            Entry.AI_UTILIZE_BLOCK.translate.delayKey = Entry.projectId;
+        if (RoCode.projectId) {
+            RoCode.AI_UTILIZE_BLOCK.translate.delayKey = RoCode.projectId;
         }
 
-        if (Entry.AI_UTILIZE_BLOCK.translate.delayKey) {
-            return Entry.AI_UTILIZE_BLOCK.translate.delayKey;
+        if (RoCode.AI_UTILIZE_BLOCK.translate.delayKey) {
+            return RoCode.AI_UTILIZE_BLOCK.translate.delayKey;
         }
 
-        Entry.AI_UTILIZE_BLOCK.translate.delayKey = _.uniqueId(Entry.generateHash());
-        return Entry.AI_UTILIZE_BLOCK.translate.delayKey;
+        RoCode.AI_UTILIZE_BLOCK.translate.delayKey = _.uniqueId(RoCode.generateHash());
+        return RoCode.AI_UTILIZE_BLOCK.translate.delayKey;
     };
 
     const translate = (params, type, defaultValue) => {
@@ -294,7 +294,7 @@ Entry.AI_UTILIZE_BLOCK.translate.getBlocks = function() {
         return new PromiseManager()
             .Promise((resolve) => {
                 callApi(key, {
-                    url: `${Entry.AI_UTILIZE_BLOCK.translate.api}translate/${type}`,
+                    url: `${RoCode.AI_UTILIZE_BLOCK.translate.api}translate/${type}`,
                     params,
                 })
                     .then((result) => {
@@ -313,7 +313,7 @@ Entry.AI_UTILIZE_BLOCK.translate.getBlocks = function() {
         return new PromiseManager()
             .Promise((resolve) => {
                 callApi(`translate-detect-${query}`, {
-                    url: `${Entry.AI_UTILIZE_BLOCK.translate.api}dect/langs`,
+                    url: `${RoCode.AI_UTILIZE_BLOCK.translate.api}dect/langs`,
                     params: { query, projectId: getProjectId() },
                 })
                     .then((result) => {
@@ -355,12 +355,12 @@ Entry.AI_UTILIZE_BLOCK.translate.getBlocks = function() {
     return {
         translate_title: {
             skeleton: 'basic_text',
-            color: EntryStatic.colorSet.common.TRANSPARENT,
+            color: RoCodeStatic.colorSet.common.TRANSPARENT,
             params: [
                 {
                     type: 'Text',
                     text: Lang.template.translate_title_text,
-                    color: EntryStatic.colorSet.common.TEXT,
+                    color: RoCodeStatic.colorSet.common.TEXT,
                     align: 'center',
                 },
             ],
@@ -372,8 +372,8 @@ Entry.AI_UTILIZE_BLOCK.translate.getBlocks = function() {
             events: {},
         },
         get_translated_string: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -390,7 +390,7 @@ Entry.AI_UTILIZE_BLOCK.translate.getBlocks = function() {
                     params.getSourceLang().value,
                     {
                         type: 'text',
-                        params: [Lang.Blocks.entry],
+                        params: [Lang.Blocks.RoCode],
                     },
                     null,
                 ],
@@ -413,7 +413,7 @@ Entry.AI_UTILIZE_BLOCK.translate.getBlocks = function() {
                     return textObj.message;
                 }
 
-                const type = Entry.AI_UTILIZE_BLOCK.translate.apiType;
+                const type = RoCode.AI_UTILIZE_BLOCK.translate.apiType;
                 const params = {
                     text: textObj.message,
                     target: script.getField('TARGET', script),
@@ -445,8 +445,8 @@ Entry.AI_UTILIZE_BLOCK.translate.getBlocks = function() {
             },
         },
         check_language: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -460,7 +460,7 @@ Entry.AI_UTILIZE_BLOCK.translate.getBlocks = function() {
                 params: [
                     {
                         type: 'text',
-                        params: [Lang.Blocks.entry],
+                        params: [Lang.Blocks.RoCode],
                     },
                 ],
                 type: 'check_language',

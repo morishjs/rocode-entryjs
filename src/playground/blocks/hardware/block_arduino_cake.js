@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.ArduinoCake = {
+RoCode.ArduinoCake = {
     id: ['40.1'],
     name: 'ArduinoCake',
     url: 'http://www.arduino.cc/',
@@ -10,19 +10,19 @@ Entry.ArduinoCake = {
         en: 'Arduino Cake',
     },
     setZero() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            const keySet = Object.keys(Entry.hw.sendQueue.SET);
+            const keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach((key) => {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     sensorTypes: {
         ALIVE: 0,
@@ -69,7 +69,7 @@ Entry.ArduinoCake = {
     BlockState: {},
 };
 
-Entry.ArduinoCake.setLanguage = function() {
+RoCode.ArduinoCake.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -98,7 +98,7 @@ Entry.ArduinoCake.setLanguage = function() {
     };
 };
 
-Entry.ArduinoCake.blockMenuBlocks = [
+RoCode.ArduinoCake.blockMenuBlocks = [
     'arduino_cake_get_analog_value',
     'arduino_cake_get_analog_value_map',
     'arduino_cake_get_ultrasonic_value',
@@ -109,12 +109,12 @@ Entry.ArduinoCake.blockMenuBlocks = [
     'arduino_cake_set_tone',
 ];
 
-Entry.ArduinoCake.getBlocks = function() {
+RoCode.ArduinoCake.getBlocks = function() {
     return {
         //region arduinoCake 아두이노 나노
         arduino_cake_analog_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -133,8 +133,8 @@ Entry.ArduinoCake.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -168,10 +168,10 @@ Entry.ArduinoCake.getBlocks = function() {
                                 ],
                                 value: '2',
                                 fontSize: 11,
-                                converter: Entry.block.converters.returnStringKey,
-                                codeMap: 'Entry.CodeMap.Arduino.arduino_cake_analog_list[0]',
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringKey,
+                                codeMap: 'RoCode.CodeMap.Arduino.arduino_cake_analog_list[0]',
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'arduino_cake_analog_list',
@@ -181,8 +181,8 @@ Entry.ArduinoCake.getBlocks = function() {
         },
 
         arduino_cake_digital_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -190,28 +190,28 @@ Entry.ArduinoCake.getBlocks = function() {
                 {
                     type: 'Dropdown',
                     options: [
-                        ['pinBD', '10'], 
-                        ['pinA1', '16'], 
-                        ['pinA2', '17'], 
-                        ['pinB1', '14'], 
+                        ['pinBD', '10'],
+                        ['pinA1', '16'],
+                        ['pinA2', '17'],
+                        ['pinB1', '14'],
                         ['pinB2', '15'],
-                        ['pinB3', '2'], 
+                        ['pinB3', '2'],
                         ['pinB4', '9'],
-                        ['pinC1', '3'], 
+                        ['pinC1', '3'],
                         ['pinC2', '12'],
-                        ['pinC3', '11'], 
+                        ['pinC3', '11'],
                         ['pinC4', '13'],
-                        ['pinC5', '5'], 
+                        ['pinC5', '5'],
                         ['pinC6', '4'],
-                        ['pinC7', '6'], 
+                        ['pinC7', '6'],
                         ['pinC8', '7'],
-                        ['pinSD', '18'], 
+                        ['pinSD', '18'],
                         ['pinSC', '19'],
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -234,30 +234,30 @@ Entry.ArduinoCake.getBlocks = function() {
                             {
                                 type: 'Dropdown',
                                 options: [
-                                    ['pinBD', '10'], 
-                                    ['pinA1', '16'], 
-                                    ['pinA2', '17'], 
-                                    ['pinB1', '14'], 
+                                    ['pinBD', '10'],
+                                    ['pinA1', '16'],
+                                    ['pinA2', '17'],
+                                    ['pinB1', '14'],
                                     ['pinB2', '15'],
-                                    ['pinB3', '2'], 
+                                    ['pinB3', '2'],
                                     ['pinB4', '9'],
-                                    ['pinC1', '3'], 
+                                    ['pinC1', '3'],
                                     ['pinC2', '12'],
-                                    ['pinC3', '11'], 
+                                    ['pinC3', '11'],
                                     ['pinC4', '13'],
-                                    ['pinC5', '5'], 
+                                    ['pinC5', '5'],
                                     ['pinC6', '4'],
-                                    ['pinC7', '6'], 
+                                    ['pinC7', '6'],
                                     ['pinC8', '7'],
-                                    ['pinSD', '18'], 
+                                    ['pinSD', '18'],
                                     ['pinSC', '19'],
                                 ],
                                 value: '3',
                                 fontSize: 11,
-                                converter: Entry.block.converters.returnStringKey,
-                                codeMap: 'Entry.CodeMap.Arduino.arduino_cake_digital_list[0]',
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringKey,
+                                codeMap: 'RoCode.CodeMap.Arduino.arduino_cake_digital_list[0]',
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'arduino_cake_digital_list',
@@ -265,10 +265,10 @@ Entry.ArduinoCake.getBlocks = function() {
                 ],
             },
         },
-        
+
         arduino_cake_pwm_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -278,15 +278,15 @@ Entry.ArduinoCake.getBlocks = function() {
                     options: [
                         ['pinBD', '10'],
                         ['pinB4', '9'],
-                        ['pinC1', '3'], 
+                        ['pinC1', '3'],
                         ['pinC3', '11'],
-                        ['pinC5', '5'], 
+                        ['pinC5', '5'],
                         ['pinC6', '4'],
                     ],
                     value: '10',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -311,17 +311,17 @@ Entry.ArduinoCake.getBlocks = function() {
                                 options: [
                                     ['pinBD', '10'],
                                     ['pinB4', '9'],
-                                    ['pinC1', '3'], 
+                                    ['pinC1', '3'],
                                     ['pinC3', '11'],
-                                    ['pinC5', '5'], 
+                                    ['pinC5', '5'],
                                     ['pinC6', '4'],
                                 ],
                                 value: '10',
                                 fontSize: 11,
-                                converter: Entry.block.converters.returnStringKey,
-                                codeMap: 'Entry.CodeMap.Arduino.arduino_cake_pwm_list[0]',
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringKey,
+                                codeMap: 'RoCode.CodeMap.Arduino.arduino_cake_pwm_list[0]',
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'arduino_cake_pwm_list',
@@ -329,10 +329,10 @@ Entry.ArduinoCake.getBlocks = function() {
                 ],
             },
         },
-        
+
         arduino_cake_buz_list: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -344,8 +344,8 @@ Entry.ArduinoCake.getBlocks = function() {
                     ],
                     value: '8',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -372,10 +372,10 @@ Entry.ArduinoCake.getBlocks = function() {
                                 ],
                                 value: '8',
                                 fontSize: 11,
-                                converter: Entry.block.converters.returnStringKey,
-                                codeMap: 'Entry.CodeMap.Arduino.arduino_cake_pwm_list[0]',
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringKey,
+                                codeMap: 'RoCode.CodeMap.Arduino.arduino_cake_pwm_list[0]',
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'arduino_cake_buz_list',
@@ -383,8 +383,8 @@ Entry.ArduinoCake.getBlocks = function() {
                 ],
             },
         },
-        
-        
+
+
         arduino_cake_get_analog_value: {
             parent: 'arduino_ext_get_analog_value',
             template: Lang.template.arduino_ext_get_analog_value,
@@ -551,4 +551,4 @@ Entry.ArduinoCake.getBlocks = function() {
     };
 };
 
-module.exports = Entry.ArduinoCake;
+module.exports = RoCode.ArduinoCake;

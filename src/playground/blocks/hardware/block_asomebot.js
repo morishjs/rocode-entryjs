@@ -19,7 +19,7 @@ function random_str(count) {
     return text;
 }
 
-Entry.AsomeBot = {
+RoCode.AsomeBot = {
     id: '32.1',
     name: 'AsomeBot',
     url: 'http://www.asomeit.com/',
@@ -29,26 +29,26 @@ Entry.AsomeBot = {
         en: 'AsomeBot',
     },
     setZero: function() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            var keySet = Object.keys(Entry.hw.sendQueue.SET);
+            var keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach(function(key) {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     getHashKey: function() {
         let key = new Date().getSeconds().toString(16);
         if (key.length === 1) {
             key += ((Math.random() * 16) | 0).toString(16);
         }
-        return Entry.generateHash() + key;
+        return RoCode.generateHash() + key;
     },
     asyncFlowControl: function({ script, data }, scope) {
         if (!this.isExecBlock && !scope.isStart) {
@@ -58,10 +58,10 @@ Entry.AsomeBot = {
             scope.timeFlag = 1;
             this.nowBlockId = blockId;
             this.blockIds[blockId] = false;
-            _merge(Entry.hw.sendQueue, {
+            _merge(RoCode.hw.sendQueue, {
                 [blockId]: data,
             });
-            Entry.hw.update();
+            RoCode.hw.update();
             setTimeout(() => {
                 scope.timeFlag = 0;
             });
@@ -72,7 +72,7 @@ Entry.AsomeBot = {
             this.execTimeFlag = 0;
             this.execTimeFlag = undefined;
             this.isExecBlock = false;
-            Entry.engine.isContinue = false;
+            RoCode.engine.isContinue = false;
             return true;
         }
         return false;
@@ -80,12 +80,12 @@ Entry.AsomeBot = {
     postCallReturn: function(args) {
         const { script } = args;
         if (!this.asyncFlowControl(args, script)) {
-            return Entry.STATIC.BREAK;
+            return RoCode.STATIC.BREAK;
         }
     },
 };
 
-Entry.AsomeBot.setLanguage = function() {
+RoCode.AsomeBot.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -186,7 +186,7 @@ Entry.AsomeBot.setLanguage = function() {
     };
 };
 
-Entry.AsomeBot.blockMenuBlocks = [
+RoCode.AsomeBot.blockMenuBlocks = [
     'asomebot_toggle_led',
     'asomebot_get_ultrasonic_value',
 
@@ -230,13 +230,13 @@ Entry.AsomeBot.blockMenuBlocks = [
     'internet_send_msg',
 ];
 
-Entry.AsomeBot.getBlocks = function() {
+RoCode.AsomeBot.getBlocks = function() {
     return {
         // Basic
         asomebot_toggle_led: {
             template: Lang.template.asomebot_toggle_led,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -267,8 +267,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Basic',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value = script.getValue('VALUE');
 
@@ -300,8 +300,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_get_ultrasonic_value: {
             template: Lang.template.asomebot_get_ultrasonic_value,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -320,8 +320,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Basic',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 if (!sprite.old_tick) {
                     sprite.old_tick = new Date().getTime() - 1000;
@@ -342,8 +342,8 @@ Entry.AsomeBot.getBlocks = function() {
         // Buzzer
         asomebot_buzzer_open: {
             template: Lang.template.asomebot_buzzer_open,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -361,8 +361,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Buzzer',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 if (!script.is_started) {
                     script.is_started = true;
@@ -384,8 +384,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_buzzer_note: {
             template: Lang.template.asomebot_buzzer_note,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -426,8 +426,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Buzzer',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value1 = script.getValue('VALUE1');
                 var value2 = parseInt(parseFloat(script.getValue('VALUE2')) * 1000);
@@ -452,8 +452,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_buzzer_tone: {
             template: Lang.template.asomebot_buzzer_tone,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -495,8 +495,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Buzzer',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value1 = script.getValue('VALUE1');
                 var value2 = parseInt(parseFloat(script.getValue('VALUE2')) * 1000);
@@ -521,8 +521,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_buzzer_close: {
             template: Lang.template.asomebot_buzzer_close,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -540,8 +540,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Buzzer',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 if (!script.is_started) {
                     script.is_started = true;
@@ -566,8 +566,8 @@ Entry.AsomeBot.getBlocks = function() {
         // Moving
         asomebot_align: {
             template: Lang.template.asomebot_align,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -629,8 +629,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Moving',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value1 = script.getValue('VALUE1');
                 var value2 = script.getValue('VALUE2');
@@ -663,8 +663,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_home: {
             template: Lang.template.asomebot_home,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -682,8 +682,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Moving',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 if (!script.is_started) {
                     script.is_started = true;
@@ -705,8 +705,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_angle: {
             template: Lang.template.asomebot_angle,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -758,8 +758,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Moving',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value1 = script.getValue('VALUE1');
                 var value2 = script.getValue('VALUE2');
@@ -790,8 +790,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_forward: {
             template: Lang.template.asomebot_forward,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -809,8 +809,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Moving',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 if (!script.is_started) {
                     script.is_started = true;
@@ -832,8 +832,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_backward: {
             template: Lang.template.asomebot_backward,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -851,8 +851,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Moving',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 if (!script.is_started) {
                     script.is_started = true;
@@ -874,8 +874,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_turn_left: {
             template: Lang.template.asomebot_turn_left,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -893,8 +893,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Moving',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 if (!script.is_started) {
                     script.is_started = true;
@@ -916,8 +916,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_turn_right: {
             template: Lang.template.asomebot_turn_right,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -935,8 +935,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Moving',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 if (!script.is_started) {
                     script.is_started = true;
@@ -958,8 +958,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_forward2: {
             template: Lang.template.asomebot_forward2,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1001,8 +1001,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Moving',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value1 = script.getValue('VALUE1');
                 var value2 = script.getValue('VALUE2');
@@ -1027,8 +1027,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_backward2: {
             template: Lang.template.asomebot_backward2,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1070,8 +1070,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Moving',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value1 = script.getValue('VALUE1');
                 var value2 = script.getValue('VALUE2');
@@ -1096,8 +1096,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_turn_left2: {
             template: Lang.template.asomebot_turn_left2,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1129,8 +1129,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Moving',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value1 = script.getValue('VALUE1');
 
@@ -1154,8 +1154,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_turn_right2: {
             template: Lang.template.asomebot_turn_right2,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1187,8 +1187,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Moving',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value1 = script.getValue('VALUE1');
 
@@ -1214,8 +1214,8 @@ Entry.AsomeBot.getBlocks = function() {
         // Dancing
         asomebot_mouse: {
             template: Lang.template.asomebot_mouse,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1227,8 +1227,8 @@ Entry.AsomeBot.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1247,8 +1247,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Dancing',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value = script.getStringField('VALUE');
 
@@ -1272,8 +1272,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_flap: {
             template: Lang.template.asomebot_flap,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1291,8 +1291,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Dancing',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 if (!script.is_started) {
                     script.is_started = true;
@@ -1314,8 +1314,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_warigari: {
             template: Lang.template.asomebot_warigari,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1333,8 +1333,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Dancing',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 if (!script.is_started) {
                     script.is_started = true;
@@ -1356,8 +1356,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_tock: {
             template: Lang.template.asomebot_tock,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1369,8 +1369,8 @@ Entry.AsomeBot.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1389,8 +1389,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Dancing',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value = script.getStringField('VALUE');
 
@@ -1414,8 +1414,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_tick_tock: {
             template: Lang.template.asomebot_tick_tock,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1433,8 +1433,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Dancing',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 if (!script.is_started) {
                     script.is_started = true;
@@ -1456,8 +1456,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_wiggle: {
             template: Lang.template.asomebot_wiggle,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1475,8 +1475,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Dancing',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 if (!script.is_started) {
                     script.is_started = true;
@@ -1498,8 +1498,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_swing2: {
             template: Lang.template.asomebot_swing2,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1517,8 +1517,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Dancing',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 if (!script.is_started) {
                     script.is_started = true;
@@ -1540,8 +1540,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_ballet: {
             template: Lang.template.asomebot_ballet,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1559,8 +1559,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Dancing',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 if (!script.is_started) {
                     script.is_started = true;
@@ -1582,8 +1582,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_yaho: {
             template: Lang.template.asomebot_yaho,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1601,8 +1601,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Dancing',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 if (!script.is_started) {
                     script.is_started = true;
@@ -1624,8 +1624,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_swing: {
             template: Lang.template.asomebot_swing,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1637,8 +1637,8 @@ Entry.AsomeBot.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1657,8 +1657,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Dancing',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value = script.getStringField('VALUE');
 
@@ -1686,8 +1686,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         asomebot_moonwalk: {
             template: Lang.template.asomebot_moonwalk,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1705,8 +1705,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Dancing',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 if (!script.is_started) {
                     script.is_started = true;
@@ -1730,8 +1730,8 @@ Entry.AsomeBot.getBlocks = function() {
         // Internet
         internet_connect: {
             template: Lang.template.internet_connect,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1771,8 +1771,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Internet',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value1 = script.getStringValue('VALUE1');
                 var value2 = script.getStringValue('VALUE2');
@@ -1801,8 +1801,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         internet_open_ap: {
             template: Lang.template.internet_open_ap,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1833,8 +1833,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Internet',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value = script.getStringValue('VALUE');
 
@@ -1858,8 +1858,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         internet_open_udp: {
             template: Lang.template.internet_open_udp,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1891,8 +1891,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Internet',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value = script.getValue('VALUE');
 
@@ -1916,8 +1916,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         internet_udp_msg: {
             template: Lang.template.internet_udp_msg,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1936,8 +1936,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Internet',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 if (!sprite.old_tick) {
                     sprite.old_id = '';
@@ -1962,8 +1962,8 @@ Entry.AsomeBot.getBlocks = function() {
         },
         internet_send_msg: {
             template: Lang.template.internet_send_msg,
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2003,8 +2003,8 @@ Entry.AsomeBot.getBlocks = function() {
             class: 'Internet',
             isNotFor: ['AsomeBot'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
-                var pd = Entry.hw.portData;
+                var sq = RoCode.hw.sendQueue;
+                var pd = RoCode.hw.portData;
 
                 var value1 = script.getStringValue('VALUE1');
                 var value2 = script.getStringValue('VALUE2');
@@ -2034,4 +2034,4 @@ Entry.AsomeBot.getBlocks = function() {
     };
 };
 
-module.exports = Entry.AsomeBot;
+module.exports = RoCode.AsomeBot;

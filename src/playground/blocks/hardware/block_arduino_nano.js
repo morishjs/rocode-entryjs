@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.ArduinoNano = {
+RoCode.ArduinoNano = {
     id: ['1.10', '1A.1'],
     name: 'ArduinoNano',
     url: 'http://www.arduino.cc/',
@@ -10,19 +10,19 @@ Entry.ArduinoNano = {
         en: 'Arduino Nano',
     },
     setZero() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            const keySet = Object.keys(Entry.hw.sendQueue.SET);
+            const keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach((key) => {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     sensorTypes: {
         ALIVE: 0,
@@ -69,7 +69,7 @@ Entry.ArduinoNano = {
     BlockState: {},
 };
 
-Entry.ArduinoNano.setLanguage = function() {
+RoCode.ArduinoNano.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -101,7 +101,7 @@ Entry.ArduinoNano.setLanguage = function() {
     };
 };
 
-Entry.ArduinoNano.blockMenuBlocks = [
+RoCode.ArduinoNano.blockMenuBlocks = [
     'arduino_nano_get_analog_value',
     'arduino_nano_get_analog_value_map',
     'arduino_nano_get_ultrasonic_value',
@@ -112,7 +112,7 @@ Entry.ArduinoNano.blockMenuBlocks = [
     'arduino_nano_set_tone',
 ];
 
-Entry.ArduinoNano.getBlocks = function() {
+RoCode.ArduinoNano.getBlocks = function() {
     return {
         //region arduinoNano 아두이노 나노
         arduino_nano_analog_list: {
@@ -132,8 +132,8 @@ Entry.ArduinoNano.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             syntax: undefined,
@@ -303,4 +303,4 @@ Entry.ArduinoNano.getBlocks = function() {
     };
 };
 
-module.exports = Entry.ArduinoNano;
+module.exports = RoCode.ArduinoNano;

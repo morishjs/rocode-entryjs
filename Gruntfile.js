@@ -26,7 +26,7 @@ module.exports = function(grunt) {
             },
             development: {
                 files: {
-                    'dist/entry.css': 'src/css/*.less',
+                    'dist/RoCode.css': 'src/css/*.less',
                 },
             },
         },
@@ -52,8 +52,8 @@ module.exports = function(grunt) {
                     'node_modules/createjs-easeljs/lib/easeljs-0.8.2.min.js',
                     'node_modules/createjs-soundjs/lib/soundjs-0.6.2.min.js',
                     'node_modules/createjs-preloadjs/lib/preloadjs-0.6.2.min.js',
-                    'dist/entry.js',
-                    'src/workspace/block_entry.js',
+                    'dist/RoCode.js',
+                    'src/workspace/block_RoCode.js',
                 ],
             },
             unit: {
@@ -66,7 +66,7 @@ module.exports = function(grunt) {
                 compilerFile: ClosureCompiler.COMPILER_PATH,
                 checkModified: true,
                 compilerOpts: {
-                    create_source_map: 'entry.js.map',
+                    create_source_map: 'RoCode.js.map',
                     compilation_level: 'SIMPLE_OPTIMIZATIONS',
                     language_in: 'ECMASCRIPT5',
                     language_out: 'ECMASCRIPT5',
@@ -74,8 +74,8 @@ module.exports = function(grunt) {
                 },
             },
             targetName: {
-                src: ['src/entry.js', 'src/**/*.js', '!src/workspace/block_entry.js'],
-                dest: 'dist/entry.js',
+                src: ['src/RoCode.js', 'src/**/*.js', '!src/workspace/block_RoCode.js'],
+                dest: 'dist/RoCode.js',
             },
             dist: {
                 options: {
@@ -86,8 +86,8 @@ module.exports = function(grunt) {
                     },
                 },
                 expand: false,
-                src: ['src/entry.js', 'src/**/*.js'],
-                dest: 'dist/entry.min.js',
+                src: ['src/RoCode.js', 'src/**/*.js'],
+                dest: 'dist/RoCode.min.js',
                 ext: '.min.js',
             },
         },

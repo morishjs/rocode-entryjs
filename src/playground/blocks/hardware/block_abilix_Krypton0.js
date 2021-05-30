@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Krypton0 = {
+RoCode.Krypton0 = {
     SENSOR_PORT_MAP: {
         '1': undefined,
         '2': undefined,
@@ -34,16 +34,16 @@ Entry.Krypton0 = {
 
     setZero() {
         Object.keys(this.SENSOR_PORT_MAP).forEach((port) => {
-            Entry.hw.sendQueue[port] = {
-                type: Entry.Krypton0.deviceTypes.NONE,
+            RoCode.hw.sendQueue[port] = {
+                type: RoCode.Krypton0.deviceTypes.NONE,
                 port_values: 0,
             };
         });
-        Entry.hw.sendQueue.LMOTOR = 0;
-        Entry.hw.sendQueue.RMOTOR = 0;
-        Entry.hw.sendQueue.INTERSND = 'none';
+        RoCode.hw.sendQueue.LMOTOR = 0;
+        RoCode.hw.sendQueue.RMOTOR = 0;
+        RoCode.hw.sendQueue.INTERSND = 'none';
 
-        Entry.hw.update();
+        RoCode.hw.update();
     },
 
     abilix_controller: {
@@ -75,7 +75,7 @@ Entry.Krypton0 = {
     },
 };
 
-Entry.Krypton0.setLanguage = function() {
+RoCode.Krypton0.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -116,7 +116,7 @@ Entry.Krypton0.setLanguage = function() {
     };
 };
 
-Entry.Krypton0.blockMenuBlocks = [
+RoCode.Krypton0.blockMenuBlocks = [
     'Krypton0_turnon_motor',
     'Krypton0_move_to_direction_during_secs',
 
@@ -133,7 +133,7 @@ Entry.Krypton0.blockMenuBlocks = [
     'Krypton0_turnon_led',
 ];
 
-Entry.Krypton0.getBlocks = function() {
+RoCode.Krypton0.getBlocks = function() {
     return {
         //region Krypton0
         //*************************************************************************
@@ -143,8 +143,8 @@ Entry.Krypton0.getBlocks = function() {
         //               "Motors move to %1 as %2 speed %3"
         //*************************************************************************/
         Krypton0_turnon_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -156,8 +156,8 @@ Entry.Krypton0.getBlocks = function() {
                     ],
                     value: '앞',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -191,12 +191,12 @@ Entry.Krypton0.getBlocks = function() {
                 const direction = script.getStringField('DIRECTION', script);
                 let speedValue = script.getNumberValue('VALUE_SPD');
                 if (direction == 'Forward') {
-                    speedValue = Entry.Krypton0.abilix_controller.check_max_speed(speedValue);
+                    speedValue = RoCode.Krypton0.abilix_controller.check_max_speed(speedValue);
                 } else {
-                    speedValue = Entry.Krypton0.abilix_controller.check_max_speed(speedValue * -1);
+                    speedValue = RoCode.Krypton0.abilix_controller.check_max_speed(speedValue * -1);
                 }
-                Entry.hw.sendQueue.LMOTOR = speedValue;
-                Entry.hw.sendQueue.RMOTOR = speedValue;
+                RoCode.hw.sendQueue.LMOTOR = speedValue;
+                RoCode.hw.sendQueue.RMOTOR = speedValue;
                 return script.callReturn();
             },
         },
@@ -208,8 +208,8 @@ Entry.Krypton0.getBlocks = function() {
         //               "Motors move to %1 during %2 sec %3"
         //*************************************************************************/
         Krypton0_move_to_direction_during_secs: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -221,8 +221,8 @@ Entry.Krypton0.getBlocks = function() {
                     ],
                     value: '앞',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -258,28 +258,28 @@ Entry.Krypton0.getBlocks = function() {
                     script.isStart = true;
                     script.timeFlag = 1;
                     if (direction == 'Forward') {
-                        Entry.hw.sendQueue.LMOTOR = 30;
-                        Entry.hw.sendQueue.RMOTOR = 30;
+                        RoCode.hw.sendQueue.LMOTOR = 30;
+                        RoCode.hw.sendQueue.RMOTOR = 30;
                     } else {
-                        Entry.hw.sendQueue.LMOTOR = -30;
-                        Entry.hw.sendQueue.RMOTOR = -30;
+                        RoCode.hw.sendQueue.LMOTOR = -30;
+                        RoCode.hw.sendQueue.RMOTOR = -30;
                     }
 
                     const timeValue = script.getNumberValue('VALUE_SEC') * 1000;
                     const timer = setTimeout(() => {
                         script.timeFlag = 0;
-                        Entry.Krypton0.removeTimeout(timer);
+                        RoCode.Krypton0.removeTimeout(timer);
                     }, timeValue);
-                    Entry.Krypton0.timeouts.push(timer);
+                    RoCode.Krypton0.timeouts.push(timer);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
                 } else {
                     delete script.isStart;
                     delete script.timeFlag;
-                    Entry.engine.isContinue = false;
-                    Entry.hw.sendQueue.LMOTOR = 0;
-                    Entry.hw.sendQueue.RMOTOR = 0;
+                    RoCode.engine.isContinue = false;
+                    RoCode.hw.sendQueue.LMOTOR = 0;
+                    RoCode.hw.sendQueue.RMOTOR = 0;
                     return script.callReturn();
                 }
             },
@@ -292,8 +292,8 @@ Entry.Krypton0.getBlocks = function() {
         //               "Stop Motors %1"
         //*************************************************************************/
         Krypton0_turnoff_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -311,8 +311,8 @@ Entry.Krypton0.getBlocks = function() {
             class: 'Krypton0_motor_control',
             isNotFor: ['ABILIX Krypton 0 for School'],
             func(sprite, script) {
-                Entry.hw.sendQueue.LMOTOR = 0;
-                Entry.hw.sendQueue.RMOTOR = 0;
+                RoCode.hw.sendQueue.LMOTOR = 0;
+                RoCode.hw.sendQueue.RMOTOR = 0;
                 return script.callReturn();
             },
         },
@@ -324,8 +324,8 @@ Entry.Krypton0.getBlocks = function() {
         //               "Motors go to %1 during %2 secs %3"
         //*************************************************************************/
         Krypton0_change_direction_during_secs: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -337,8 +337,8 @@ Entry.Krypton0.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -373,27 +373,27 @@ Entry.Krypton0.getBlocks = function() {
                     script.timeFlag = 1;
                     const direction = script.getField('DIRECTION', script);
                     if (direction == 'LEFT') {
-                        Entry.hw.sendQueue.LMOTOR = -30;
-                        Entry.hw.sendQueue.RMOTOR = 30;
+                        RoCode.hw.sendQueue.LMOTOR = -30;
+                        RoCode.hw.sendQueue.RMOTOR = 30;
                     } else {
-                        Entry.hw.sendQueue.LMOTOR = 30;
-                        Entry.hw.sendQueue.RMOTOR = -30;
+                        RoCode.hw.sendQueue.LMOTOR = 30;
+                        RoCode.hw.sendQueue.RMOTOR = -30;
                     }
                     const timeValue = script.getNumberValue('VALUE') * 1000;
                     const timer = setTimeout(() => {
                         script.timeFlag = 0;
-                        Entry.Krypton0.removeTimeout(timer);
+                        RoCode.Krypton0.removeTimeout(timer);
                     }, timeValue);
-                    Entry.Krypton0.timeouts.push(timer);
+                    RoCode.Krypton0.timeouts.push(timer);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
                 } else {
                     delete script.isStart;
                     delete script.timeFlag;
-                    Entry.engine.isContinue = false;
-                    Entry.hw.sendQueue.LMOTOR = 0;
-                    Entry.hw.sendQueue.RMOTOR = 0;
+                    RoCode.engine.isContinue = false;
+                    RoCode.hw.sendQueue.LMOTOR = 0;
+                    RoCode.hw.sendQueue.RMOTOR = 0;
                     return script.callReturn();
                 }
             },
@@ -406,8 +406,8 @@ Entry.Krypton0.getBlocks = function() {
         //               "Motor change from speed of %1 to %2 %3"
         //*************************************************************************/
         Krypton0_change_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -420,8 +420,8 @@ Entry.Krypton0.getBlocks = function() {
                     ],
                     value: 'BOTH',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -454,22 +454,22 @@ Entry.Krypton0.getBlocks = function() {
                 const direction = script.getField('DIRECTION');
                 const value = script.getNumberValue('VALUE');
                 if (direction == 'A') {
-                    Entry.hw.sendQueue.LMOTOR = value;
-                    if (Entry.hw.sendQueue.RMOTOR != undefined) {
-                        Entry.hw.sendQueue.RMOTOR = Entry.hw.sendQueue.RMOTOR;
+                    RoCode.hw.sendQueue.LMOTOR = value;
+                    if (RoCode.hw.sendQueue.RMOTOR != undefined) {
+                        RoCode.hw.sendQueue.RMOTOR = RoCode.hw.sendQueue.RMOTOR;
                     } else {
-                        Entry.hw.sendQueue.RMOTOR = 0;
+                        RoCode.hw.sendQueue.RMOTOR = 0;
                     }
                 } else if (direction == 'B') {
-                    Entry.hw.sendQueue.RMOTOR = value;
-                    if (Entry.hw.sendQueue.LMOTOR != undefined) {
-                        Entry.hw.sendQueue.LMOTOR = Entry.hw.sendQueue.LMOTOR;
+                    RoCode.hw.sendQueue.RMOTOR = value;
+                    if (RoCode.hw.sendQueue.LMOTOR != undefined) {
+                        RoCode.hw.sendQueue.LMOTOR = RoCode.hw.sendQueue.LMOTOR;
                     } else {
-                        Entry.hw.sendQueue.LMOTOR = 0;
+                        RoCode.hw.sendQueue.LMOTOR = 0;
                     }
                 } else {
-                    Entry.hw.sendQueue.LMOTOR = value;
-                    Entry.hw.sendQueue.RMOTOR = value;
+                    RoCode.hw.sendQueue.LMOTOR = value;
+                    RoCode.hw.sendQueue.RMOTOR = value;
                 }
                 return script.callReturn();
             },
@@ -482,8 +482,8 @@ Entry.Krypton0.getBlocks = function() {
         //               "Kripton play %1 audio %2"
         //*************************************************************************/
         Krypton0_play_sound: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -497,8 +497,8 @@ Entry.Krypton0.getBlocks = function() {
                     ],
                     value: 'hello',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -521,21 +521,21 @@ Entry.Krypton0.getBlocks = function() {
                     script.isStart = true;
                     script.timeFlag = 1;
                     const audiofile = script.getField('SOUND_VALUE', script);
-                    Entry.hw.sendQueue.INTERSND = audiofile;
+                    RoCode.hw.sendQueue.INTERSND = audiofile;
                     const timeValue = 500;
                     const timer = setTimeout(() => {
                         script.timeFlag = 0;
-                        Entry.Krypton0.removeTimeout(timer);
+                        RoCode.Krypton0.removeTimeout(timer);
                     }, timeValue);
-                    Entry.Krypton0.timeouts.push(timer);
+                    RoCode.Krypton0.timeouts.push(timer);
                     return script;
                 } else if (script.timeFlag == 1) {
                     return script;
                 } else {
                     delete script.isStart;
                     delete script.timeFlag;
-                    Entry.engine.isContinue = false;
-                    Entry.hw.sendQueue.INTERSND = 'none';
+                    RoCode.engine.isContinue = false;
+                    RoCode.hw.sendQueue.INTERSND = 'none';
                     return script.callReturn();
                 }
             },
@@ -549,8 +549,8 @@ Entry.Krypton0.getBlocks = function() {
         //               "Port %1 read sensor %2 value"
         //*************************************************************************/
         Krypton0_get_sensor_data: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -564,8 +564,8 @@ Entry.Krypton0.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -578,8 +578,8 @@ Entry.Krypton0.getBlocks = function() {
                     ],
                     value: 'GRAY_INFRARED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -601,34 +601,34 @@ Entry.Krypton0.getBlocks = function() {
 
                 switch (port) {
                     case '1':
-                        portdata = Entry.hw.getDigitalPortValue('1');
+                        portdata = RoCode.hw.getDigitalPortValue('1');
                         break;
                     case '2':
-                        portdata = Entry.hw.getDigitalPortValue('2');
+                        portdata = RoCode.hw.getDigitalPortValue('2');
                         break;
                     case '3':
-                        portdata = Entry.hw.getDigitalPortValue('3');
+                        portdata = RoCode.hw.getDigitalPortValue('3');
                         break;
                     case '4':
-                        portdata = Entry.hw.getDigitalPortValue('4');
+                        portdata = RoCode.hw.getDigitalPortValue('4');
                         break;
                 }
 
                 switch (dev) {
                     case 'GRAY_INFRARED':
-                        devtype = Entry.Krypton0.deviceTypes.GRAY_INFRARED;
+                        devtype = RoCode.Krypton0.deviceTypes.GRAY_INFRARED;
                         break;
                     case 'LIGHT':
-                        devtype = Entry.Krypton0.deviceTypes.LIGHT;
+                        devtype = RoCode.Krypton0.deviceTypes.LIGHT;
                         break;
                     case 'MICROPHONE':
-                        devtype = Entry.Krypton0.deviceTypes.MICROPHONE;
+                        devtype = RoCode.Krypton0.deviceTypes.MICROPHONE;
                         break;
                     case 'LED':
-                        devtype = Entry.Krypton0.deviceTypes.LED;
+                        devtype = RoCode.Krypton0.deviceTypes.LED;
                         break;
                     case 'BUTTON':
-                        devtype = Entry.Krypton0.deviceTypes.BUTTON;
+                        devtype = RoCode.Krypton0.deviceTypes.BUTTON;
                         break;
                     default:
                         break;
@@ -650,8 +650,8 @@ Entry.Krypton0.getBlocks = function() {
         //               "Port %1 of Button is pressed? %2"
         //*************************************************************************/
         Krypton0_button_pressed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -666,8 +666,8 @@ Entry.Krypton0.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -687,24 +687,24 @@ Entry.Krypton0.getBlocks = function() {
             isNotFor: ['ABILIX Krypton 0 for School'],
             func(sprite, script) {
                 const port = script.getField('PORT');
-                let portdata = Entry.hw.getDigitalPortValue(port);
+                let portdata = RoCode.hw.getDigitalPortValue(port);
 
                 switch (port) {
                     case '1':
-                        portdata = Entry.hw.getDigitalPortValue('1');
+                        portdata = RoCode.hw.getDigitalPortValue('1');
                         break;
                     case '2':
-                        portdata = Entry.hw.getDigitalPortValue('2');
+                        portdata = RoCode.hw.getDigitalPortValue('2');
                         break;
                     case '3':
-                        portdata = Entry.hw.getDigitalPortValue('3');
+                        portdata = RoCode.hw.getDigitalPortValue('3');
                         break;
                     case '4':
-                        portdata = Entry.hw.getDigitalPortValue('4');
+                        portdata = RoCode.hw.getDigitalPortValue('4');
                         break;
                 }
 
-                if (portdata.type == Entry.Krypton0.deviceTypes.BUTTON) {
+                if (portdata.type == RoCode.Krypton0.deviceTypes.BUTTON) {
                     if (portdata.port_values == 1) {
                         console.log('Krypton0_button_pressed');
                         return true;
@@ -724,8 +724,8 @@ Entry.Krypton0.getBlocks = function() {
         //               "Port %1 of LED Turn %2 %3"
         //*************************************************************************/
         Krypton0_turnon_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -740,8 +740,8 @@ Entry.Krypton0.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -751,8 +751,8 @@ Entry.Krypton0.getBlocks = function() {
                     ],
                     value: 'ON',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -782,8 +782,8 @@ Entry.Krypton0.getBlocks = function() {
                     portvalue = 1;
                 }
 
-                Entry.hw.sendQueue[port] = {
-                    type: Entry.Krypton0.deviceTypes.LED,
+                RoCode.hw.sendQueue[port] = {
+                    type: RoCode.Krypton0.deviceTypes.LED,
                     port_values: portvalue,
                 };
                 return script.callReturn();
@@ -793,4 +793,4 @@ Entry.Krypton0.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Krypton0;
+module.exports = RoCode.Krypton0;

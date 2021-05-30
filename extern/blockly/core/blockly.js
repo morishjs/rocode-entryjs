@@ -211,10 +211,10 @@ Blockly.DRAG_RADIUS = 5;
 Blockly.SNAP_RADIUS = 15;
 
 /**
- * Maximum misalignment between connections for them to snap together for Entry workspace.
+ * Maximum misalignment between connections for them to snap together for RoCode workspace.
  * @const
  */
-Blockly.SNAP_RADIUS_ENTRY = 25;
+Blockly.SNAP_RADIUS_RoCode = 25;
 
 /**
  * Delay in ms between trigger and bumping unconnected block out of alignment.
@@ -437,8 +437,8 @@ Blockly.onKeyDown_ = function(e) {
         if (!(Blockly.primitiveTypes.indexOf(blockType) > -1 &&
               block.getParent()))
             block.dispose(true, true);
-            if (typeof(Entry) == "object")
-                Entry.dispatchEvent("entryBlocklyChanged");
+            if (typeof(RoCode) == "object")
+                RoCode.dispatchEvent("RoCodeBlocklyChanged");
       }
     } finally {
       // Stop the browser from going back to the previous page.
@@ -460,10 +460,10 @@ Blockly.onKeyDown_ = function(e) {
         block.dispose(true, true);
       }
     }
-    //target is Entry.Func workspace
-    if (typeof(Entry) == 'object' && Entry.Func && Entry.Func.workspace &&
+    //target is RoCode.Func workspace
+    if (typeof(RoCode) == 'object' && RoCode.Func && RoCode.Func.workspace &&
         block && block.isDeletable() &&
-        (block.workspace == Entry.Func.workspace)) {
+        (block.workspace == RoCode.Func.workspace)) {
         Blockly.hideChaff();
         if (e.keyCode == 67) {
             // 'c' for copy.
@@ -477,13 +477,13 @@ Blockly.onKeyDown_ = function(e) {
     if (e.keyCode == 86) {
       // 'v' for paste.
       if (Blockly.clipboard_) {
-          if (!Entry || !Entry.Func || !Entry.Func.workspace || !Entry.Func.workspace.visible ) {
+          if (!RoCode || !RoCode.Func || !RoCode.Func.workspace || !RoCode.Func.workspace.visible ) {
             Blockly.mainWorkspace.paste(Blockly.clipboard_);
           }
           else {
             var xmlBlock = Blockly.clipboard_;
             xmlBlock.setAttribute('isForFunc', 'true');
-            Entry.Func.workspace.paste(xmlBlock);
+            RoCode.Func.workspace.paste(xmlBlock);
           }
       }
     }
@@ -565,9 +565,9 @@ Blockly.showContextMenu_ = function(xy) {
         enabled: true,
         callback: function() {
             var xmlBlock = Blockly.clipboard_;
-            if (typeof(Entry) === "object" && Entry && Entry.Func && Entry.Func.workspace && Entry.Func.workspace.visible) {
+            if (typeof(RoCode) === "object" && RoCode && RoCode.Func && RoCode.Func.workspace && RoCode.Func.workspace.visible) {
                 xmlBlock.setAttribute('isForFunc', 'true');
-                Entry.Func.workspace.paste(xmlBlock);
+                RoCode.Func.workspace.paste(xmlBlock);
             } else if (typeof(Ntry) === "object" && Ntry && Ntry.Func && Ntry.Func.workspace && Ntry.Func.workspace.visible) {
                 xmlBlock.setAttribute('isForFunc', 'true');
                 //Ntry.Func.workspace.paste(xmlBlock);
@@ -575,8 +575,8 @@ Blockly.showContextMenu_ = function(xy) {
                 Blockly.mainWorkspace.paste(Blockly.clipboard_);
             }
 
-            if (typeof(Entry) == "object") {
-                Entry.dispatchEvent("entryBlocklyChanged");
+            if (typeof(RoCode) == "object") {
+                RoCode.dispatchEvent("RoCodeBlocklyChanged");
             }
             /*
             if (typeof(Ntry) == "object") {
@@ -591,8 +591,8 @@ Blockly.showContextMenu_ = function(xy) {
         callback: function() {
             var total;
 
-            if (typeof(Entry) === "object" && Entry && Entry.Func && Entry.Func.workspace && Entry.Func.workspace.visible) {
-                total = Entry.Func.workspace.getAllBlocks();
+            if (typeof(RoCode) === "object" && RoCode && RoCode.Func && RoCode.Func.workspace && RoCode.Func.workspace.visible) {
+                total = RoCode.Func.workspace.getAllBlocks();
             } else if (typeof(Ntry) === "object" && Ntry && Ntry.Func && Ntry.Func.workspace && Ntry.Func.workspace.visible) {
                 //total = Ntry.Func.workspace.getAllBlocks();
             } else {
@@ -604,8 +604,8 @@ Blockly.showContextMenu_ = function(xy) {
                     total[i].dispose();
             }
 
-            if (typeof(Entry) == "object") {
-              Entry.dispatchEvent("entryBlocklyChanged");
+            if (typeof(RoCode) == "object") {
+              RoCode.dispatchEvent("RoCodeBlocklyChanged");
             }
             /*
             if (typeof(Ntry) == "object") {
@@ -623,10 +623,10 @@ Blockly.showContextMenu_ = function(xy) {
         enabled: true,
         callback: function() {
             Blockly.mainWorkspace.organizeBlocks();
-            if (typeof(Entry) == "object")
-              Entry.dispatchEvent("entryBlocklyChanged");
+            if (typeof(RoCode) == "object")
+              RoCode.dispatchEvent("RoCodeBlocklyChanged");
             if (typeof(Ntry) == "object")
-              Entry.dispatchEvent("ntryBlocklyChanged");
+              RoCode.dispatchEvent("ntryBlocklyChanged");
         }
     }
 

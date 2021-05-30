@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.ConnectionRipple = {};
+RoCode.ConnectionRipple = {};
 
 (function(cr) {
     cr.createDom = function(blockView) {
@@ -46,4 +46,4 @@ Entry.ConnectionRipple = {};
             }, 10);
         }
     };
-})(Entry.ConnectionRipple);
+})(RoCode.ConnectionRipple);

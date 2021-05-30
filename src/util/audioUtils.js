@@ -12,7 +12,7 @@ const STATUS_CODE = {
 };
 
 const getVoiceServerAddress = () => ({
-    hostname: Entry.baseUrl,
+    hostname: RoCode.baseUrl,
     path: '/vc',
 });
 
@@ -42,7 +42,7 @@ class AudioUtils {
             // is MIC present in browser
             this.isRecording = false;
             this.stopRecord();
-            throw new Entry.Utils.IncompatibleError('IncompatibleError', [
+            throw new RoCode.Utils.IncompatibleError('IncompatibleError', [
                 Lang.Workspace.check_microphone_error,
             ]);
         }
@@ -56,7 +56,7 @@ class AudioUtils {
         if (!this.isAudioSupport) {
             this.isRecording = false;
             this.stopRecord();
-            throw new Entry.Utils.IncompatibleError();
+            throw new RoCode.Utils.IncompatibleError();
         }
     }
 
@@ -67,7 +67,7 @@ class AudioUtils {
         this.incompatBrowserChecker();
         const mediaStream = await this.getMediaStream();
         try {
-            Entry.addEventListener('beforeStop', () => {
+            RoCode.addEventListener('beforeStop', () => {
                 this.improperStop();
             });
 
@@ -151,7 +151,7 @@ class AudioUtils {
             this._stopMediaRecorder();
             this._mediaRecorder.start();
             this.startedRecording = true;
-            Entry.engine.toggleAudioShadePanel();
+            RoCode.engine.toggleAudioShadePanel();
             this._socketClient.on('message', (e) => {
                 switch (e) {
                     case STATUS_CODE.CONNECTED:
@@ -190,9 +190,9 @@ class AudioUtils {
         if (!this.isInitialized || !this.isRecording) {
             return;
         }
-        Entry.dispatchEvent('audioRecordProcessing');
+        RoCode.dispatchEvent('audioRecordProcessing');
         if (this.startedRecording) {
-            Entry.engine.toggleAudioProgressPanel();
+            RoCode.engine.toggleAudioProgressPanel();
         }
         this.startedRecording = false;
 
@@ -290,5 +290,5 @@ class AudioUtils {
     };
 }
 
-//Entry 네임스페이스에는 존재하지 않으므로 외부에서 사용할 수 없다.
+//RoCode 네임스페이스에는 존재하지 않으므로 외부에서 사용할 수 없다.
 export default new AudioUtils();

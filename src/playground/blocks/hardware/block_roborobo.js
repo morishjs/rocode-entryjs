@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Roborobo_Roduino = {
+RoCode.Roborobo_Roduino = {
     id: '10.1',
     name: 'roborobo_roduino',
     url: 'http://www.roborobo.co.kr',
@@ -18,18 +18,18 @@ Entry.Roborobo_Roduino = {
         SONAR: 11,
     },
     setZero: function() {
-        Entry.hw.sendQueue.colorPin = 0;
-        Entry.hw.sendQueue.digitalPinMode = [];
-        Entry.hw.sendQueue.preDigitalPinMode = [];
-        Entry.hw.sendQueue.stopSend = false;
+        RoCode.hw.sendQueue.colorPin = 0;
+        RoCode.hw.sendQueue.digitalPinMode = [];
+        RoCode.hw.sendQueue.preDigitalPinMode = [];
+        RoCode.hw.sendQueue.stopSend = false;
 
         for (var port = 0; port < 14; port++) {
-            Entry.hw.sendQueue[port] = 0;
-            Entry.hw.sendQueue.preDigitalPinMode[port] = -2;
-            Entry.hw.sendQueue.digitalPinMode[port] = -1;
+            RoCode.hw.sendQueue[port] = 0;
+            RoCode.hw.sendQueue.preDigitalPinMode[port] = -2;
+            RoCode.hw.sendQueue.digitalPinMode[port] = -1;
         }
         this.ColorPin = [0, 0, 0];
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     ColorPin: [0, 0, 0],
 
@@ -164,7 +164,7 @@ Entry.Roborobo_Roduino = {
     },
 };
 
-Entry.Roborobo_Roduino.setLanguage = function() {
+RoCode.Roborobo_Roduino.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -269,7 +269,7 @@ Entry.Roborobo_Roduino.setLanguage = function() {
     };
 };
 
-Entry.Roborobo_SchoolKit = {
+RoCode.Roborobo_SchoolKit = {
     id: '10.2',
     name: 'roborobo_schoolkit',
     url: 'http://www.roborobo.co.kr',
@@ -292,15 +292,15 @@ Entry.Roborobo_SchoolKit = {
         cds: 10,
     },
     setZero: function() {
-        Entry.hw.sendQueue.digitalPinMode = [];
-        Entry.hw.sendQueue.previousValue = [];
+        RoCode.hw.sendQueue.digitalPinMode = [];
+        RoCode.hw.sendQueue.previousValue = [];
 
         for (var port = 0; port < 14; port++) {
-            Entry.hw.sendQueue[port] = 0;
-            Entry.hw.sendQueue.digitalPinMode[port] = 0;
-            Entry.hw.sendQueue.previousValue[port] = -1;
+            RoCode.hw.sendQueue[port] = 0;
+            RoCode.hw.sendQueue.digitalPinMode[port] = 0;
+            RoCode.hw.sendQueue.previousValue[port] = -1;
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     monitorTemplate: {
         imgPath: 'hw/roborobo_schoolkit.png',
@@ -369,7 +369,7 @@ Entry.Roborobo_SchoolKit = {
     },
 };
 
-Entry.Roborobo_RoE = {
+RoCode.Roborobo_RoE = {
     id: '48.1',
     name: 'roborobo_roe',
     url: 'http://www.roborobo.co.kr',
@@ -379,11 +379,11 @@ Entry.Roborobo_RoE = {
         en: 'Ro-E',
     },
     setZero: function() {
-        Entry.hw.sendQueue['LED'] = 0;
-        Entry.hw.sendQueue['Melody'] = [0, 0, 0];   //[octave, note, duration]
-        Entry.hw.sendQueue['LeftMotor'] = [0, 0];   //[direction, value]
-        Entry.hw.sendQueue['RightMotor'] = [0, 0];  //[direction, value]
-        Entry.hw.update();
+        RoCode.hw.sendQueue['LED'] = 0;
+        RoCode.hw.sendQueue['Melody'] = [0, 0, 0];   //[octave, note, duration]
+        RoCode.hw.sendQueue['LeftMotor'] = [0, 0];   //[direction, value]
+        RoCode.hw.sendQueue['RightMotor'] = [0, 0];  //[direction, value]
+        RoCode.hw.update();
     },
     motorDiretion: {
         STOP: 0,
@@ -433,7 +433,7 @@ Entry.Roborobo_RoE = {
     },
 };
 
-Entry.Roborobo_Roduino.blockMenuBlocks = [
+RoCode.Roborobo_Roduino.blockMenuBlocks = [
     'roduino_on_block',
     'roduino_off_block',
     'roduino_get_sensor_analog_value',
@@ -448,12 +448,12 @@ Entry.Roborobo_Roduino.blockMenuBlocks = [
     'roduino_set_pwm_value',
 ];
 
-Entry.Roborobo_Roduino.getBlocks = function() {
+RoCode.Roborobo_Roduino.getBlocks = function() {
     return {
         //region roduino 로두이노
         roduino_on_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -480,8 +480,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             },
         },
         roduino_off_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -508,8 +508,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             },
         },
         roduino_get_analog_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -525,8 +525,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -557,8 +557,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'roduino_get_analog_number',
@@ -567,8 +567,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             },
         },
         roduino_get_port_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -585,8 +585,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -618,8 +618,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                                 ],
                                 value: '2',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'roduino_get_port_number',
@@ -628,8 +628,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             },
         },
         roduino_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -655,7 +655,7 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             isNotFor: ['roborobo_roduino'],
             func: function(sprite, script) {
                 var signal = script.getValue('VALUE', script);
-                return Entry.hw.getAnalogPortValue(signal);
+                return RoCode.hw.getAnalogPortValue(signal);
             },
             syntax: {
                 js: [],
@@ -674,8 +674,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             },
         },
         roduino_get_digital_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -701,8 +701,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             isNotFor: ['roborobo_roduino'],
             func: function(sprite, script) {
                 var signal = script.getNumberValue('VALUE', script);
-                if (!Entry.hw.sendQueue.digitalPinMode) {
-                    Entry.hw.sendQueue.digitalPinMode = [
+                if (!RoCode.hw.sendQueue.digitalPinMode) {
+                    RoCode.hw.sendQueue.digitalPinMode = [
                         -1,
                         -1,
                         -1,
@@ -719,10 +719,10 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                         -1,
                     ];
                 }
-                Entry.hw.sendQueue.digitalPinMode[signal] =
-                    Entry.Roborobo_Roduino.INSTRUCTION.INPUT;
-                Entry.hw.update();
-                return Entry.hw.getDigitalPortValue(signal);
+                RoCode.hw.sendQueue.digitalPinMode[signal] =
+                    RoCode.Roborobo_Roduino.INSTRUCTION.INPUT;
+                RoCode.hw.update();
+                return RoCode.hw.getDigitalPortValue(signal);
             },
             syntax: {
                 js: [],
@@ -741,8 +741,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             },
         },
         roduino_get_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -757,8 +757,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                     ],
                     value: 'red',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -775,9 +775,9 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                 var flag = 0;
                 var signal = script.getField('VALUE', script);
                 var value = [
-                    Entry.hw.portData[Entry.Roborobo_Roduino.ColorPin[0]],
-                    Entry.hw.portData[Entry.Roborobo_Roduino.ColorPin[1]],
-                    Entry.hw.portData[Entry.Roborobo_Roduino.ColorPin[2]],
+                    RoCode.hw.portData[RoCode.Roborobo_Roduino.ColorPin[0]],
+                    RoCode.hw.portData[RoCode.Roborobo_Roduino.ColorPin[1]],
+                    RoCode.hw.portData[RoCode.Roborobo_Roduino.ColorPin[2]],
                 ];
 
                 switch (signal) {
@@ -820,9 +820,9 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                                 ],
                                 value: 'red',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -830,8 +830,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             },
         },
         roduino_get_sensor_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -848,8 +848,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                     ],
                     value: 'temperature',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -875,7 +875,7 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             func: function(sprite, script) {
                 var sensor = script.getField('SENSOR');
                 var signal = script.getNumberValue('VALUE');
-                var readData = Entry.hw.getAnalogPortValue(signal);
+                var readData = RoCode.hw.getAnalogPortValue(signal);
                 var data = 0;
                 switch (sensor) {
                     case 'temperature':
@@ -933,9 +933,9 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                                 ],
                                 value: 'temperature',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -947,8 +947,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             },
         },
         roduino_get_sensor_digital_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -958,8 +958,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                     options: [[Lang.Blocks.roborobo_get_ultrasonic, 'ultrasonic']],
                     value: 'ultrasonic',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -987,8 +987,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                 var signal = script.getNumberValue('VALUE', script);
                 switch (sensor) {
                     case 'ultrasonic':
-                        if (!Entry.hw.sendQueue.digitalPinMode) {
-                            Entry.hw.sendQueue.digitalPinMode = [
+                        if (!RoCode.hw.sendQueue.digitalPinMode) {
+                            RoCode.hw.sendQueue.digitalPinMode = [
                                 -1,
                                 -1,
                                 -1,
@@ -1005,12 +1005,12 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                                 -1,
                             ];
                         }
-                        Entry.hw.sendQueue.digitalPinMode[signal] =
-                            Entry.Roborobo_Roduino.INSTRUCTION.SONAR;
-                        Entry.hw.update();
+                        RoCode.hw.sendQueue.digitalPinMode[signal] =
+                            RoCode.Roborobo_Roduino.INSTRUCTION.SONAR;
+                        RoCode.hw.update();
                         break;
                 }
-                return Entry.hw.getDigitalPortValue(signal);
+                return RoCode.hw.getDigitalPortValue(signal);
             },
             syntax: {
                 js: [],
@@ -1023,9 +1023,9 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                                 options: [[Lang.Blocks.roborobo_get_ultrasonic, 'ultrasonic']],
                                 value: 'ultrasonic',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -1037,8 +1037,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             },
         },
         roduino_set_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1054,8 +1054,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1084,8 +1084,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                 var pin = script.getNumberValue('VALUE', script);
                 var operator = script.getField('OPERATOR');
                 var value = operator == 'on' ? 1 : 0;
-                if (!Entry.hw.sendQueue.digitalPinMode) {
-                    Entry.hw.sendQueue.digitalPinMode = [
+                if (!RoCode.hw.sendQueue.digitalPinMode) {
+                    RoCode.hw.sendQueue.digitalPinMode = [
                         -1,
                         -1,
                         -1,
@@ -1102,9 +1102,9 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                         -1,
                     ];
                 }
-                Entry.hw.sendQueue.digitalPinMode[pin] = Entry.Roborobo_Roduino.INSTRUCTION.OUTPUT;
+                RoCode.hw.sendQueue.digitalPinMode[pin] = RoCode.Roborobo_Roduino.INSTRUCTION.OUTPUT;
 
-                Entry.hw.setDigitalPortValue(pin, value);
+                RoCode.hw.setDigitalPortValue(pin, value);
                 return script.callReturn();
             },
             syntax: {
@@ -1125,9 +1125,9 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                                 ],
                                 value: 'on',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1135,8 +1135,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             },
         },
         roduino_get_pwm_port_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1150,8 +1150,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                     ],
                     value: 3,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1179,8 +1179,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                                 ],
                                 value: 3,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'roduino_get_pwm_port_number',
@@ -1189,8 +1189,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             },
         },
         roduino_get_pwm_output_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1217,8 +1217,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1259,8 +1259,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                                 ],
                                 value: '0',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'roduino_get_pwm_output_value',
@@ -1269,8 +1269,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             },
         },
         roduino_set_pwm_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1311,8 +1311,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                 var pin = script.getNumberValue('PIN', script);
                 var value = script.getNumberValue('VALUE');
 
-                if (!Entry.hw.sendQueue.digitalPinMode) {
-                    Entry.hw.sendQueue.digitalPinMode = [
+                if (!RoCode.hw.sendQueue.digitalPinMode) {
+                    RoCode.hw.sendQueue.digitalPinMode = [
                         -1,
                         -1,
                         -1,
@@ -1330,9 +1330,9 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                     ];
                 }
 
-                Entry.hw.sendQueue.digitalPinMode[pin] = Entry.Roborobo_Roduino.INSTRUCTION.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[pin] = RoCode.Roborobo_Roduino.INSTRUCTION.PWM;
 
-                Entry.hw.setDigitalPortValue(pin, value);
+                RoCode.hw.setDigitalPortValue(pin, value);
                 return script.callReturn();
             },
             syntax: {
@@ -1355,8 +1355,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             },
         },
         roduino_get_servo_port_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -1370,8 +1370,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                     ],
                     value: 3,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1400,8 +1400,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                                 ],
                                 value: 3,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'roduino_get_servo_port_number',
@@ -1410,8 +1410,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             },
         },
         roduino_set_servo_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1453,8 +1453,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                 var pin = script.getNumberValue('PIN', script);
                 var value = script.getNumberValue('VALUE');
 
-                if (!Entry.hw.sendQueue.digitalPinMode) {
-                    Entry.hw.sendQueue.digitalPinMode = [
+                if (!RoCode.hw.sendQueue.digitalPinMode) {
+                    RoCode.hw.sendQueue.digitalPinMode = [
                         -1,
                         -1,
                         -1,
@@ -1472,7 +1472,7 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                     ];
                 }
 
-                Entry.hw.sendQueue.digitalPinMode[pin] = Entry.Roborobo_Roduino.INSTRUCTION.SERVO;
+                RoCode.hw.sendQueue.digitalPinMode[pin] = RoCode.Roborobo_Roduino.INSTRUCTION.SERVO;
 
                 if (value < 0) {
                     value = 0;
@@ -1480,7 +1480,7 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                     value = 180;
                 }
 
-                Entry.hw.setDigitalPortValue(pin, value);
+                RoCode.hw.setDigitalPortValue(pin, value);
                 return script.callReturn();
             },
             syntax: {
@@ -1503,8 +1503,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             },
         },
         roduino_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1516,8 +1516,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                     ],
                     value: 'motor1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1528,8 +1528,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                     ],
                     value: 'cw',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1575,8 +1575,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                     value2 = 0;
                 }
 
-                if (!Entry.hw.sendQueue.digitalPinMode) {
-                    Entry.hw.sendQueue.digitalPinMode = [
+                if (!RoCode.hw.sendQueue.digitalPinMode) {
+                    RoCode.hw.sendQueue.digitalPinMode = [
                         -1,
                         -1,
                         -1,
@@ -1593,12 +1593,12 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                         -1,
                     ];
                 }
-                Entry.hw.sendQueue.digitalPinMode[pin1] = Entry.Roborobo_Roduino.INSTRUCTION.OUTPUT;
-                Entry.hw.sendQueue.digitalPinMode[pin2] = Entry.Roborobo_Roduino.INSTRUCTION.OUTPUT;
+                RoCode.hw.sendQueue.digitalPinMode[pin1] = RoCode.Roborobo_Roduino.INSTRUCTION.OUTPUT;
+                RoCode.hw.sendQueue.digitalPinMode[pin2] = RoCode.Roborobo_Roduino.INSTRUCTION.OUTPUT;
 
-                Entry.hw.setDigitalPortValue(pin1, value1);
-                Entry.hw.setDigitalPortValue(pin2, value2);
-                Entry.hw.update();
+                RoCode.hw.setDigitalPortValue(pin1, value1);
+                RoCode.hw.setDigitalPortValue(pin2, value2);
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: {
@@ -1615,9 +1615,9 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                                 ],
                                 value: 'motor1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -1628,9 +1628,9 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                                 ],
                                 value: 'cw',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1638,8 +1638,8 @@ Entry.Roborobo_Roduino.getBlocks = function() {
             },
         },
         roduino_set_color_pin: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1692,9 +1692,9 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                 var greenPin = script.getNumberValue('GREEN', script);
                 var bluePin = script.getNumberValue('BLUE', script);
 
-                Entry.Roborobo_Roduino.ColorPin = [redPin, greenPin, bluePin];
-                if (!Entry.hw.sendQueue.digitalPinMode) {
-                    Entry.hw.sendQueue.digitalPinMode = [
+                RoCode.Roborobo_Roduino.ColorPin = [redPin, greenPin, bluePin];
+                if (!RoCode.hw.sendQueue.digitalPinMode) {
+                    RoCode.hw.sendQueue.digitalPinMode = [
                         -1,
                         -1,
                         -1,
@@ -1711,13 +1711,13 @@ Entry.Roborobo_Roduino.getBlocks = function() {
                         -1,
                     ];
                 }
-                Entry.hw.sendQueue.digitalPinMode[redPin] =
-                    Entry.Roborobo_Roduino.INSTRUCTION.INPUT;
-                Entry.hw.sendQueue.digitalPinMode[greenPin] =
-                    Entry.Roborobo_Roduino.INSTRUCTION.INPUT;
-                Entry.hw.sendQueue.digitalPinMode[bluePin] =
-                    Entry.Roborobo_Roduino.INSTRUCTION.INPUT;
-                Entry.hw.update();
+                RoCode.hw.sendQueue.digitalPinMode[redPin] =
+                    RoCode.Roborobo_Roduino.INSTRUCTION.INPUT;
+                RoCode.hw.sendQueue.digitalPinMode[greenPin] =
+                    RoCode.Roborobo_Roduino.INSTRUCTION.INPUT;
+                RoCode.hw.sendQueue.digitalPinMode[bluePin] =
+                    RoCode.Roborobo_Roduino.INSTRUCTION.INPUT;
+                RoCode.hw.update();
                 return script.callReturn();
             },
             syntax: {
@@ -1729,7 +1729,7 @@ Entry.Roborobo_Roduino.getBlocks = function() {
     };
 };
 
-Entry.Roborobo_SchoolKit.setLanguage = function() {
+RoCode.Roborobo_SchoolKit.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -1760,7 +1760,7 @@ Entry.Roborobo_SchoolKit.setLanguage = function() {
     };
 };
 
-Entry.Roborobo_SchoolKit.blockMenuBlocks = [
+RoCode.Roborobo_SchoolKit.blockMenuBlocks = [
     'schoolkit_on_block',
     'schoolkit_off_block',
     'schoolkit_get_input_value',
@@ -1769,12 +1769,12 @@ Entry.Roborobo_SchoolKit.blockMenuBlocks = [
     'schoolkit_set_servo_value',
 ];
 
-Entry.Roborobo_SchoolKit.getBlocks = function() {
+RoCode.Roborobo_SchoolKit.getBlocks = function() {
     return {
         //region schoolkit 스쿨키트
         schoolkit_on_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1801,8 +1801,8 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
             },
         },
         schoolkit_off_block: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1829,8 +1829,8 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
             },
         },
         schoolkit_get_out_port_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -1845,8 +1845,8 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
                     ],
                     value: 2,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1876,9 +1876,9 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
                                 ],
                                 value: 2,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         keyOption: 'schoolkit_get_out_port_number',
@@ -1887,8 +1887,8 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
             },
         },
         schoolkit_get_servo_port_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -1901,8 +1901,8 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
                     ],
                     value: 2,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1930,9 +1930,9 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
                                 ],
                                 value: 2,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         keyOption: 'schoolkit_get_servo_port_number',
@@ -1941,8 +1941,8 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
             },
         },
         schoolkit_get_in_port_number: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -1959,8 +1959,8 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
                     ],
                     value: 7,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1992,9 +1992,9 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
                                 ],
                                 value: 7,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         keyOption: 'schoolkit_get_in_port_number',
@@ -2003,8 +2003,8 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
             },
         },
         schoolkit_set_output: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2020,8 +2020,8 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
                     ],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2051,12 +2051,12 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
                 var operator = script.getField('OPERATOR');
                 var value = operator == 'on' ? 1 : 0;
 
-                if (!Entry.hw.sendQueue.digitalPinMode) {
-                    Entry.hw.sendQueue.digitalPinMode = {};
+                if (!RoCode.hw.sendQueue.digitalPinMode) {
+                    RoCode.hw.sendQueue.digitalPinMode = {};
                 }
 
-                Entry.hw.sendQueue.digitalPinMode[pin] = Entry.Roborobo_SchoolKit.pinMode.OUTPUT;
-                Entry.hw.sendQueue[pin] = value;
+                RoCode.hw.sendQueue.digitalPinMode[pin] = RoCode.Roborobo_SchoolKit.pinMode.OUTPUT;
+                RoCode.hw.sendQueue[pin] = value;
                 return script.callReturn();
             },
             syntax: {
@@ -2077,9 +2077,9 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
                                 ],
                                 value: 'on',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2087,8 +2087,8 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
             },
         },
         schoolkit_get_input_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -2114,7 +2114,7 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
             isNotFor: ['roborobo_schoolkit'],
             func: function(sprite, script) {
                 var signal = script.getNumberValue('VALUE', script);
-                return Entry.hw.portData[signal - 7];
+                return RoCode.hw.portData[signal - 7];
             },
             syntax: {
                 js: [],
@@ -2132,8 +2132,8 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
             },
         },
         schoolkit_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2145,8 +2145,8 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
                     ],
                     value: 'motor1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2170,8 +2170,8 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
                     ],
                     value: '45',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2182,8 +2182,8 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
                     ],
                     value: 'cw',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2221,18 +2221,18 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
                     value = 0;
                 }
 
-                if (!Entry.hw.sendQueue.digitalPinMode) {
-                    Entry.hw.sendQueue.digitalPinMode = {};
+                if (!RoCode.hw.sendQueue.digitalPinMode) {
+                    RoCode.hw.sendQueue.digitalPinMode = {};
                 }
 
-                Entry.hw.sendQueue.digitalPinMode[pin] = Entry.Roborobo_SchoolKit.pinMode.PWM;
-                Entry.hw.sendQueue.digitalPinMode[pin + 7] = Entry.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[pin] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
+                RoCode.hw.sendQueue.digitalPinMode[pin + 7] = RoCode.Roborobo_SchoolKit.pinMode.PWM;
                 if (operator == 'cw') {
-                    Entry.hw.sendQueue[pin] = value;
+                    RoCode.hw.sendQueue[pin] = value;
                 } else if (operator == 'ccw') {
-                    Entry.hw.sendQueue[pin] = -value;
+                    RoCode.hw.sendQueue[pin] = -value;
                 } else if (operator == 'stop') {
-                    Entry.hw.sendQueue[pin] = 0x00;
+                    RoCode.hw.sendQueue[pin] = 0x00;
                 }
                 return script.callReturn();
             },
@@ -2250,9 +2250,9 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
                                 ],
                                 value: 'motor1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2276,8 +2276,8 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
                                 ],
                                 value: '45',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                             {
                                 type: 'Dropdown',
@@ -2288,9 +2288,9 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
                                 ],
                                 value: 'cw',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2298,8 +2298,8 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
             },
         },
         schoolkit_set_servo_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2341,17 +2341,17 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
                 var pin = script.getNumberValue('PIN', script);
                 var value = script.getNumberValue('VALUE');
 
-                if (!Entry.hw.sendQueue.digitalPinMode) {
-                    Entry.hw.sendQueue.digitalPinMode = {};
+                if (!RoCode.hw.sendQueue.digitalPinMode) {
+                    RoCode.hw.sendQueue.digitalPinMode = {};
                 }
-                Entry.hw.sendQueue.digitalPinMode[pin] = Entry.Roborobo_SchoolKit.pinMode.SERVO;
+                RoCode.hw.sendQueue.digitalPinMode[pin] = RoCode.Roborobo_SchoolKit.pinMode.SERVO;
 
                 if (value < 0) {
                     value = 0;
                 } else if (value > 180) {
                     value = 180;
                 }
-                Entry.hw.sendQueue[pin] = value;
+                RoCode.hw.sendQueue[pin] = value;
                 return script.callReturn();
             },
             syntax: {
@@ -2377,7 +2377,7 @@ Entry.Roborobo_SchoolKit.getBlocks = function() {
     };
 };
 
-Entry.Roborobo_RoE.setLanguage = function() {
+RoCode.Roborobo_RoE.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -2500,7 +2500,7 @@ Entry.Roborobo_RoE.setLanguage = function() {
     };
 };
 
-Entry.Roborobo_RoE.blockMenuBlocks = [
+RoCode.Roborobo_RoE.blockMenuBlocks = [
     'roe_set_led',
     'roe_set_led_off',
     'roe_set_motor',
@@ -2511,12 +2511,12 @@ Entry.Roborobo_RoE.blockMenuBlocks = [
     'roe_get_input_color',
 ];
 
-Entry.Roborobo_RoE.getBlocks = function() {
+RoCode.Roborobo_RoE.getBlocks = function() {
     return {
         //region roe 로이
         roe_led_color_dropdown: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -2536,8 +2536,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2572,9 +2572,9 @@ Entry.Roborobo_RoE.getBlocks = function() {
                                 ],
                                 value: 1,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         keyOption: 'roe_led_color_dropdown',
@@ -2583,8 +2583,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
             },
         },
         roe_melody_dropdown: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -2601,8 +2601,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2634,8 +2634,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
                                 ],
                                 value: 1,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                             },
                         ],
                         keyOption: 'roe_melody_dropdown',
@@ -2644,8 +2644,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
             },
         },
         roe_motor_dropdown: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -2658,8 +2658,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2687,9 +2687,9 @@ Entry.Roborobo_RoE.getBlocks = function() {
                                 ],
                                 value: 1,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         keyOption: 'roe_motor_dropdown',
@@ -2698,8 +2698,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
             },
         },
         roe_movement_dropdown: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -2714,8 +2714,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2745,9 +2745,9 @@ Entry.Roborobo_RoE.getBlocks = function() {
                                 ],
                                 value: 1,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         keyOption: 'roe_movement_dropdown',
@@ -2756,8 +2756,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
             },
         },
         roe_detect_dropdown: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -2769,8 +2769,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2797,9 +2797,9 @@ Entry.Roborobo_RoE.getBlocks = function() {
                                 ],
                                 value: 1,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         keyOption: 'roe_detect_dropdown',
@@ -2808,8 +2808,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
             },
         },
         roe_color_select_dropdown: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -2822,8 +2822,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2851,9 +2851,9 @@ Entry.Roborobo_RoE.getBlocks = function() {
                                 ],
                                 value: 1,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         keyOption: 'roe_color_select_dropdown',
@@ -2862,8 +2862,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
             },
         },
         roe_color_color_dropdown: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -2885,8 +2885,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -2923,9 +2923,9 @@ Entry.Roborobo_RoE.getBlocks = function() {
                                 ],
                                 value: 1,
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                         keyOption: 'roe_color_color_dropdown',
@@ -2934,8 +2934,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
             },
         },
         roe_set_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -2967,7 +2967,7 @@ Entry.Roborobo_RoE.getBlocks = function() {
             isNotFor: ['roborobo_roe'],
             func: function(sprite, script) {
                 var color = script.getNumberValue('VALUE', script);
-                Entry.hw.sendQueue['LED'] = color;
+                RoCode.hw.sendQueue['LED'] = color;
             },
             syntax: {
                 js: [],
@@ -2988,8 +2988,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
             },
         },
         roe_set_led_off: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -3011,7 +3011,7 @@ Entry.Roborobo_RoE.getBlocks = function() {
             class: 'roe_set',
             isNotFor: ['roborobo_roe'],
             func: function(sprite, script) {
-                Entry.hw.sendQueue['LED'] = 0;
+                RoCode.hw.sendQueue['LED'] = 0;
             },
             syntax: {
                 js: [],
@@ -3019,8 +3019,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
             },
         },
         roe_set_melody: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -3034,8 +3034,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
                         ['7', '7'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -3093,7 +3093,7 @@ Entry.Roborobo_RoE.getBlocks = function() {
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['Melody'] = [octave, note, duration];
+                    RoCode.hw.sendQueue['Melody'] = [octave, note, duration];
 
                     setTimeout(function() {
                         script.timeFlag = 0;
@@ -3123,8 +3123,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
             },
         },
         roe_set_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3156,20 +3156,20 @@ Entry.Roborobo_RoE.getBlocks = function() {
             func: function(sprite, script) {
                 var op = script.getNumberValue('OPERATOR', script);
                 if(op == 1) {
-                    Entry.hw.sendQueue['LeftMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CCW, 0 ];
-                    Entry.hw.sendQueue['RightMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CW, 0 ];
+                    RoCode.hw.sendQueue['LeftMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CCW, 0 ];
+                    RoCode.hw.sendQueue['RightMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CW, 0 ];
                 } else if (op == 2) {
-                    Entry.hw.sendQueue['LeftMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CW, 0] ;
-                    Entry.hw.sendQueue['RightMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CCW, 0 ];
+                    RoCode.hw.sendQueue['LeftMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CW, 0] ;
+                    RoCode.hw.sendQueue['RightMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CCW, 0 ];
                 } else if (op == 3) {
-                    Entry.hw.sendQueue['LeftMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CW, 0 ];
-                    Entry.hw.sendQueue['RightMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CW, 0 ];
+                    RoCode.hw.sendQueue['LeftMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CW, 0 ];
+                    RoCode.hw.sendQueue['RightMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CW, 0 ];
                 } else if (op == 4) {
-                    Entry.hw.sendQueue['LeftMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CCW, 0 ];
-                    Entry.hw.sendQueue['RightMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CCW, 0 ];
+                    RoCode.hw.sendQueue['LeftMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CCW, 0 ];
+                    RoCode.hw.sendQueue['RightMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CCW, 0 ];
                 } else if (op == 5) {
-                    Entry.hw.sendQueue['LeftMotor'] = [ Entry.Roborobo_RoE.motorDiretion.STOP, 0 ];
-                    Entry.hw.sendQueue['RightMotor'] = [ Entry.Roborobo_RoE.motorDiretion.STOP,0 ];
+                    RoCode.hw.sendQueue['LeftMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.STOP, 0 ];
+                    RoCode.hw.sendQueue['RightMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.STOP,0 ];
                 }
             },
             syntax: {
@@ -3187,8 +3187,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
             },
         },
         roe_set_motor_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3244,44 +3244,44 @@ Entry.Roborobo_RoE.getBlocks = function() {
 
                 if(motor == 1) {
                     if(op == 1) {
-                        Entry.hw.sendQueue['LeftMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CCW, value ];
-                        Entry.hw.sendQueue['RightMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CW, value ];
+                        RoCode.hw.sendQueue['LeftMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CCW, value ];
+                        RoCode.hw.sendQueue['RightMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CW, value ];
                     } else if (op == 2) {
-                        Entry.hw.sendQueue['LeftMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CW, value ] ;
-                        Entry.hw.sendQueue['RightMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CCW, value ];
+                        RoCode.hw.sendQueue['LeftMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CW, value ] ;
+                        RoCode.hw.sendQueue['RightMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CCW, value ];
                     } else if (op == 3) {
-                        Entry.hw.sendQueue['LeftMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CW, value ];
-                        Entry.hw.sendQueue['RightMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CW, value ];
+                        RoCode.hw.sendQueue['LeftMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CW, value ];
+                        RoCode.hw.sendQueue['RightMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CW, value ];
                     } else if (op == 4) {
-                        Entry.hw.sendQueue['LeftMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CCW, value ];
-                        Entry.hw.sendQueue['RightMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CCW, value ];
+                        RoCode.hw.sendQueue['LeftMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CCW, value ];
+                        RoCode.hw.sendQueue['RightMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CCW, value ];
                     } else if (op == 5) {
-                        Entry.hw.sendQueue['LeftMotor'] = [ Entry.Roborobo_RoE.motorDiretion.STOP, value ];
-                        Entry.hw.sendQueue['RightMotor'] = [ Entry.Roborobo_RoE.motorDiretion.STOP, value ];
+                        RoCode.hw.sendQueue['LeftMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.STOP, value ];
+                        RoCode.hw.sendQueue['RightMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.STOP, value ];
                     }
                 } else if (motor == 2) {
                     if(op == 1) {
-                        Entry.hw.sendQueue['LeftMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CCW, value ];
+                        RoCode.hw.sendQueue['LeftMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CCW, value ];
                     } else if (op == 2) {
-                        Entry.hw.sendQueue['LeftMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CW, value ] ;
+                        RoCode.hw.sendQueue['LeftMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CW, value ] ;
                     } else if (op == 3) {
-                        Entry.hw.sendQueue['LeftMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CW, value ];
+                        RoCode.hw.sendQueue['LeftMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CW, value ];
                     } else if (op == 4) {
-                        Entry.hw.sendQueue['LeftMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CCW, value ];
+                        RoCode.hw.sendQueue['LeftMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CCW, value ];
                     } else if (op == 5) {
-                        Entry.hw.sendQueue['LeftMotor'] = [ Entry.Roborobo_RoE.motorDiretion.STOP, value ];
+                        RoCode.hw.sendQueue['LeftMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.STOP, value ];
                     }
                 } else if (motor == 3) {
                     if(op == 1) {
-                        Entry.hw.sendQueue['RightMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CW, value ];
+                        RoCode.hw.sendQueue['RightMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CW, value ];
                     } else if (op == 2) {
-                        Entry.hw.sendQueue['RightMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CCW, value ];
+                        RoCode.hw.sendQueue['RightMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CCW, value ];
                     } else if (op == 3) {
-                        Entry.hw.sendQueue['RightMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CW, value ];
+                        RoCode.hw.sendQueue['RightMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CW, value ];
                     } else if (op == 4) {
-                        Entry.hw.sendQueue['RightMotor'] = [ Entry.Roborobo_RoE.motorDiretion.CCW, value ];
+                        RoCode.hw.sendQueue['RightMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.CCW, value ];
                     } else if (op == 5) {
-                        Entry.hw.sendQueue['RightMotor'] = [ Entry.Roborobo_RoE.motorDiretion.STOP, value ];
+                        RoCode.hw.sendQueue['RightMotor'] = [ RoCode.Roborobo_RoE.motorDiretion.STOP, value ];
                     }
                 }
             },
@@ -3304,8 +3304,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
             },
         },
         roe_get_input_switch: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -3337,7 +3337,7 @@ Entry.Roborobo_RoE.getBlocks = function() {
             isNotFor: ['roborobo_roe'],
             func: function(sprite, script) {
                 var detect = script.getNumberValue('DETECT', script);
-                var value = Entry.hw.portData['Switch'];
+                var value = RoCode.hw.portData['Switch'];
                 // console.log('Switch Value : ' + value);
                 return detect == value ? true : false;
             },
@@ -3347,8 +3347,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
             },
         },
         roe_get_input_ir: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -3380,7 +3380,7 @@ Entry.Roborobo_RoE.getBlocks = function() {
             isNotFor: ['roborobo_roe'],
             func: function(sprite, script) {
                 var detect = script.getNumberValue('DETECT', script);
-                var value = Entry.hw.portData['IR'];
+                var value = RoCode.hw.portData['IR'];
                 // console.log('IR Value : ' + value);
                 return detect == value ? true : false;
             },
@@ -3390,8 +3390,8 @@ Entry.Roborobo_RoE.getBlocks = function() {
             },
         },
         roe_get_input_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -3433,9 +3433,9 @@ Entry.Roborobo_RoE.getBlocks = function() {
                 var result = false;
                 var sensor = script.getNumberValue('SENSOR', script);
                 var color = script.getNumberValue('COLOR', script);
-                var left = Entry.hw.portData['LeftColor'];
-                var right = Entry.hw.portData['RightColor'];
-                
+                var left = RoCode.hw.portData['LeftColor'];
+                var right = RoCode.hw.portData['RightColor'];
+
                 if(sensor == 1) {
                     if(left == color && right == color) {
                         result = true;
@@ -3456,4 +3456,4 @@ Entry.Roborobo_RoE.getBlocks = function() {
     };
 };
 
-module.exports = [Entry.Roborobo_Roduino, Entry.Roborobo_SchoolKit, Entry.Roborobo_RoE];
+module.exports = [RoCode.Roborobo_Roduino, RoCode.Roborobo_SchoolKit, RoCode.Roborobo_RoE];

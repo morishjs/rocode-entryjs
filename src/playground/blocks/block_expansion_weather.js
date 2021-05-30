@@ -1,7 +1,7 @@
 'use strict';
 const { getStateOptions, getCityOptions } = require('../../util/location');
 
-Entry.Expansion_Weather = {
+RoCode.Expansion_Weather = {
     name: 'weather',
     imageName: 'weather.png',
     title: {
@@ -14,7 +14,7 @@ Entry.Expansion_Weather = {
     descriptionKey: 'Msgs.expansion_weather_description',
 };
 
-Entry.Expansion_Weather.getBlocks = function() {
+RoCode.Expansion_Weather.getBlocks = function() {
     const params = {
         getDate(isPython = false) {
             const param = {
@@ -31,11 +31,11 @@ Entry.Expansion_Weather.getBlocks = function() {
                 ],
                 value: 'today',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.EXPANSION,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.EXPANSION,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
@@ -45,12 +45,12 @@ Entry.Expansion_Weather.getBlocks = function() {
                 options: getStateOptions(),
                 value: 'Seoul',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.EXPANSION,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.EXPANSION,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 dropdownSync: 'weather',
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
@@ -67,8 +67,8 @@ Entry.Expansion_Weather.getBlocks = function() {
                 },
                 needDeepCopy: true,
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.EXPANSION,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.EXPANSION,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 defaultValue: (value, options) => {
                     if (options.length) {
                         return options[0][1];
@@ -77,7 +77,7 @@ Entry.Expansion_Weather.getBlocks = function() {
                 },
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
@@ -95,11 +95,11 @@ Entry.Expansion_Weather.getBlocks = function() {
                 ],
                 value: 'sunny',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.EXPANSION,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.EXPANSION,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
@@ -114,11 +114,11 @@ Entry.Expansion_Weather.getBlocks = function() {
                 ],
                 value: 'good',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.EXPANSION,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.EXPANSION,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
@@ -138,11 +138,11 @@ Entry.Expansion_Weather.getBlocks = function() {
                 ],
                 value: 'the_lowest_temperature',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.EXPANSION,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.EXPANSION,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
@@ -155,11 +155,11 @@ Entry.Expansion_Weather.getBlocks = function() {
                 ],
                 value: 'temperature',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.EXPANSION,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.EXPANSION,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
@@ -178,11 +178,11 @@ Entry.Expansion_Weather.getBlocks = function() {
                 ],
                 value: '00',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.EXPANSION,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.EXPANSION,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringOrNumberByValue;
+                param.converter = RoCode.block.converters.returnStringOrNumberByValue;
             }
             return param;
         },
@@ -195,12 +195,12 @@ Entry.Expansion_Weather.getBlocks = function() {
     return {
         weather_title: {
             skeleton: 'basic_text',
-            color: EntryStatic.colorSet.common.TRANSPARENT,
+            color: RoCodeStatic.colorSet.common.TRANSPARENT,
             params: [
                 {
                     type: 'Text',
                     text: Lang.template.weather_title_text,
-                    color: EntryStatic.colorSet.common.TEXT,
+                    color: RoCodeStatic.colorSet.common.TEXT,
                     align: 'center',
                 },
             ],
@@ -212,8 +212,8 @@ Entry.Expansion_Weather.getBlocks = function() {
             events: {},
         },
         check_city_weather: {
-            color: EntryStatic.colorSet.block.default.EXPANSION,
-            outerLine: EntryStatic.colorSet.block.darken.EXPANSION,
+            color: RoCodeStatic.colorSet.block.default.EXPANSION,
+            outerLine: RoCodeStatic.colorSet.block.darken.EXPANSION,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
@@ -249,13 +249,13 @@ Entry.Expansion_Weather.getBlocks = function() {
                     parent: script.getField('LOCATION', script),
                     sub: script.getField('SUBLOCATION', script),
                 };
-                const apiResult = await Entry.EXPANSION_BLOCK.weather.getData(
+                const apiResult = await RoCode.EXPANSION_BLOCK.weather.getData(
                     'week',
                     location,
                     script.getField('DATE', script)
                 );
 
-                return Entry.EXPANSION_BLOCK.weather.checkWeather(
+                return RoCode.EXPANSION_BLOCK.weather.checkWeather(
                     apiResult.sky_code,
                     script.getField('WEATHER', script)
                 );
@@ -344,8 +344,8 @@ Entry.Expansion_Weather.getBlocks = function() {
             },
         },
         check_city_finedust: {
-            color: EntryStatic.colorSet.block.default.EXPANSION,
-            outerLine: EntryStatic.colorSet.block.darken.EXPANSION,
+            color: RoCodeStatic.colorSet.block.default.EXPANSION,
+            outerLine: RoCodeStatic.colorSet.block.darken.EXPANSION,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [params.getLocation(), params.getSubLocation(), params.getFineDust()],
@@ -370,12 +370,12 @@ Entry.Expansion_Weather.getBlocks = function() {
                     parent: script.getField('LOCATION', script),
                     sub: script.getField('SUBLOCATION', script),
                 };
-                const apiResult = await Entry.EXPANSION_BLOCK.weather.getData(
+                const apiResult = await RoCode.EXPANSION_BLOCK.weather.getData(
                     'now',
                     location,
                     null
                 );
-                return Entry.EXPANSION_BLOCK.weather.checkFineDust(
+                return RoCode.EXPANSION_BLOCK.weather.checkFineDust(
                     apiResult.pm10,
                     script.getField('FINEDUST', script)
                 );
@@ -427,8 +427,8 @@ Entry.Expansion_Weather.getBlocks = function() {
             },
         },
         get_city_weather_data: {
-            color: EntryStatic.colorSet.block.default.EXPANSION,
-            outerLine: EntryStatic.colorSet.block.darken.EXPANSION,
+            color: RoCodeStatic.colorSet.block.default.EXPANSION,
+            outerLine: RoCodeStatic.colorSet.block.darken.EXPANSION,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -464,14 +464,14 @@ Entry.Expansion_Weather.getBlocks = function() {
                     parent: script.getField('LOCATION', script),
                     sub: script.getField('SUBLOCATION', script),
                 };
-                const apiResult = await Entry.EXPANSION_BLOCK.weather.getData(
+                const apiResult = await RoCode.EXPANSION_BLOCK.weather.getData(
                     'week',
                     location,
                     script.getField('DATE', script)
                 );
 
                 const type =
-                    Entry.EXPANSION_BLOCK.weather.propertyMap[script.getField('TYPE', script)];
+                    RoCode.EXPANSION_BLOCK.weather.propertyMap[script.getField('TYPE', script)];
                 return apiResult[type];
             },
             syntax: {
@@ -547,8 +547,8 @@ Entry.Expansion_Weather.getBlocks = function() {
             },
         },
         get_current_city_weather_data: {
-            color: EntryStatic.colorSet.block.default.EXPANSION,
-            outerLine: EntryStatic.colorSet.block.darken.EXPANSION,
+            color: RoCodeStatic.colorSet.block.default.EXPANSION,
+            outerLine: RoCodeStatic.colorSet.block.darken.EXPANSION,
             skeleton: 'basic_string_field',
             statements: [],
             params: [params.getLocation(), params.getSubLocation(), params.getNowWeatherElement()],
@@ -574,10 +574,10 @@ Entry.Expansion_Weather.getBlocks = function() {
                     sub: script.getField('SUBLOCATION', script),
                 };
                 const type =
-                    Entry.EXPANSION_BLOCK.weather.propertyMap[script.getField('TYPE', script)];
+                    RoCode.EXPANSION_BLOCK.weather.propertyMap[script.getField('TYPE', script)];
 
                 return new Promise((resolve) => {
-                    Entry.EXPANSION_BLOCK.weather
+                    RoCode.EXPANSION_BLOCK.weather
                         .getData('now', location, null)
                         .then((data) => resolve(data[type]));
                 });
@@ -609,8 +609,8 @@ Entry.Expansion_Weather.getBlocks = function() {
             },
         },
         get_today_city_temperature: {
-            color: EntryStatic.colorSet.block.default.EXPANSION,
-            outerLine: EntryStatic.colorSet.block.darken.EXPANSION,
+            color: RoCodeStatic.colorSet.block.default.EXPANSION,
+            outerLine: RoCodeStatic.colorSet.block.darken.EXPANSION,
             skeleton: 'basic_string_field',
             statements: [],
             params: [params.getLocation(), params.getSubLocation(), params.getTime()],
@@ -635,7 +635,7 @@ Entry.Expansion_Weather.getBlocks = function() {
                     parent: script.getField('LOCATION', script),
                     sub: script.getField('SUBLOCATION', script),
                 };
-                const date = Entry.EXPANSION_BLOCK.weather.date
+                const date = RoCode.EXPANSION_BLOCK.weather.date
                     .toISOString()
                     .slice(0, 10)
                     .replace(/-/g, '');
@@ -644,7 +644,7 @@ Entry.Expansion_Weather.getBlocks = function() {
                 if (time == '00') {
                     time = '03';
                 }
-                const apiResult = await Entry.EXPANSION_BLOCK.weather.getData(
+                const apiResult = await RoCode.EXPANSION_BLOCK.weather.getData(
                     'hour',
                     location,
                     date + pad2(time - (time % 3))
@@ -670,8 +670,8 @@ Entry.Expansion_Weather.getBlocks = function() {
 
         //시군구 추가로 인한 legacy code 기존 블럭유지를 위해 필요.
         check_weather: {
-            color: EntryStatic.colorSet.block.default.EXPANSION,
-            outerLine: EntryStatic.colorSet.block.darken.EXPANSION,
+            color: RoCodeStatic.colorSet.block.default.EXPANSION,
+            outerLine: RoCodeStatic.colorSet.block.darken.EXPANSION,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [params.getDate(), params.getLocation(), params.getSky()],
@@ -692,12 +692,12 @@ Entry.Expansion_Weather.getBlocks = function() {
             class: 'weather_legacy',
             isNotFor: ['weather_legacy'],
             async func(sprite, script) {
-                const apiResult = await Entry.EXPANSION_BLOCK.weather.getData(
+                const apiResult = await RoCode.EXPANSION_BLOCK.weather.getData(
                     'week',
                     script.getField('LOCATION', script),
                     script.getField('DATE', script)
                 );
-                return Entry.EXPANSION_BLOCK.weather.checkWeather(
+                return RoCode.EXPANSION_BLOCK.weather.checkWeather(
                     apiResult.sky_code,
                     script.getField('WEATHER', script)
                 );
@@ -779,8 +779,8 @@ Entry.Expansion_Weather.getBlocks = function() {
             },
         },
         check_finedust: {
-            color: EntryStatic.colorSet.block.default.EXPANSION,
-            outerLine: EntryStatic.colorSet.block.darken.EXPANSION,
+            color: RoCodeStatic.colorSet.block.default.EXPANSION,
+            outerLine: RoCodeStatic.colorSet.block.darken.EXPANSION,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [params.getLocation(), params.getFineDust()],
@@ -800,12 +800,12 @@ Entry.Expansion_Weather.getBlocks = function() {
             class: 'weather_legacy',
             isNotFor: ['weather_legacy'],
             async func(sprite, script) {
-                const apiResult = await Entry.EXPANSION_BLOCK.weather.getData(
+                const apiResult = await RoCode.EXPANSION_BLOCK.weather.getData(
                     'now',
                     script.getField('LOCATION', script),
                     null
                 );
-                return Entry.EXPANSION_BLOCK.weather.checkFineDust(
+                return RoCode.EXPANSION_BLOCK.weather.checkFineDust(
                     apiResult.pm10,
                     script.getField('FINEDUST', script)
                 );
@@ -841,8 +841,8 @@ Entry.Expansion_Weather.getBlocks = function() {
             },
         },
         get_weather_data: {
-            color: EntryStatic.colorSet.block.default.EXPANSION,
-            outerLine: EntryStatic.colorSet.block.darken.EXPANSION,
+            color: RoCodeStatic.colorSet.block.default.EXPANSION,
+            outerLine: RoCodeStatic.colorSet.block.darken.EXPANSION,
             skeleton: 'basic_string_field',
             statements: [],
             params: [params.getDate(), params.getLocation(), params.getWeatherElements()],
@@ -867,13 +867,13 @@ Entry.Expansion_Weather.getBlocks = function() {
             class: 'weather_legacy',
             isNotFor: ['weather_legacy'],
             async func(sprite, script) {
-                const apiResult = await Entry.EXPANSION_BLOCK.weather.getData(
+                const apiResult = await RoCode.EXPANSION_BLOCK.weather.getData(
                     'week',
                     script.getField('LOCATION', script),
                     script.getField('DATE', script)
                 );
                 const type =
-                    Entry.EXPANSION_BLOCK.weather.propertyMap[script.getField('TYPE', script)];
+                    RoCode.EXPANSION_BLOCK.weather.propertyMap[script.getField('TYPE', script)];
                 return apiResult[type];
             },
             syntax: {
@@ -943,8 +943,8 @@ Entry.Expansion_Weather.getBlocks = function() {
             },
         },
         get_current_weather_data: {
-            color: EntryStatic.colorSet.block.default.EXPANSION,
-            outerLine: EntryStatic.colorSet.block.darken.EXPANSION,
+            color: RoCodeStatic.colorSet.block.default.EXPANSION,
+            outerLine: RoCodeStatic.colorSet.block.darken.EXPANSION,
             skeleton: 'basic_string_field',
             statements: [],
             params: [params.getLocation(), params.getNowWeatherElement()],
@@ -964,13 +964,13 @@ Entry.Expansion_Weather.getBlocks = function() {
             class: 'weather_legacy',
             isNotFor: ['weather_legacy'],
             async func(sprite, script) {
-                const apiResult = await Entry.EXPANSION_BLOCK.weather.getData(
+                const apiResult = await RoCode.EXPANSION_BLOCK.weather.getData(
                     'now',
                     script.getField('LOCATION', script),
                     null
                 );
                 const type =
-                    Entry.EXPANSION_BLOCK.weather.propertyMap[script.getField('TYPE', script)];
+                    RoCode.EXPANSION_BLOCK.weather.propertyMap[script.getField('TYPE', script)];
 
                 return apiResult[type];
             },
@@ -993,8 +993,8 @@ Entry.Expansion_Weather.getBlocks = function() {
             },
         },
         get_today_temperature: {
-            color: EntryStatic.colorSet.block.default.EXPANSION,
-            outerLine: EntryStatic.colorSet.block.darken.EXPANSION,
+            color: RoCodeStatic.colorSet.block.default.EXPANSION,
+            outerLine: RoCodeStatic.colorSet.block.darken.EXPANSION,
             skeleton: 'basic_string_field',
             statements: [],
             params: [params.getLocation(), params.getTime()],
@@ -1014,7 +1014,7 @@ Entry.Expansion_Weather.getBlocks = function() {
             class: 'weather_legacy',
             isNotFor: ['weather_legacy'],
             async func(sprite, script) {
-                const date = Entry.EXPANSION_BLOCK.weather.date
+                const date = RoCode.EXPANSION_BLOCK.weather.date
                     .toISOString()
                     .slice(0, 10)
                     .replace(/-/g, '');
@@ -1023,7 +1023,7 @@ Entry.Expansion_Weather.getBlocks = function() {
                 if (time == '00') {
                     time = '03';
                 }
-                const apiResult = await Entry.EXPANSION_BLOCK.weather.getData(
+                const apiResult = await RoCode.EXPANSION_BLOCK.weather.getData(
                     'hour',
                     script.getField('LOCATION', script),
                     date + pad2(time - (time % 3))

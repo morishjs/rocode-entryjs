@@ -2,8 +2,8 @@
 
 import DataTable from '../class/DataTable';
 
-if (typeof global.Entry !== 'object') {
-    global.Entry = {};
+if (typeof global.RoCode !== 'object') {
+    global.RoCode = {};
 }
 
 if (typeof exports === 'object') {
@@ -11,13 +11,13 @@ if (typeof exports === 'object') {
     const Lang = require('../../extern/lang/ko.js').Lang;
     global.Lang = Lang;
     /* IGNORE_WEBPACK:END */
-    if (typeof EntryStatic !== 'object') {
-        global.EntryStatic = {};
+    if (typeof RoCodeStatic !== 'object') {
+        global.RoCodeStatic = {};
     }
 }
 
-if (!Entry.block) {
-    Entry.block = {};
+if (!RoCode.block) {
+    RoCode.block = {};
 }
 
 function getConverters() {
@@ -39,7 +39,7 @@ function getConverters() {
         };
 
         code = map[value] || code || value;
-        if (!Entry.Utils.isNumber(code)) {
+        if (!RoCode.Utils.isNumber(code)) {
             return code;
         } else {
             return '"()"'.replace('"()"', code);
@@ -55,7 +55,7 @@ function getConverters() {
             key = 'mouse';
         }
 
-        const name = Entry.TextCodingUtil.dropdownDynamicIdToNameConvertor(value, this.menuName);
+        const name = RoCode.TextCodingUtil.dropdownDynamicIdToNameConvertor(value, this.menuName);
         if (name) {
             key = name;
         }
@@ -82,7 +82,7 @@ function getConverters() {
         if (value === 'mouse') {
             key = value;
         }
-        const name = Entry.TextCodingUtil.dropdownDynamicIdToNameConvertor(value, this.menuName);
+        const name = RoCode.TextCodingUtil.dropdownDynamicIdToNameConvertor(value, this.menuName);
         if (name) {
             key = name;
         }
@@ -142,7 +142,7 @@ function getConverters() {
     };
 
     c.returnStringOrNumberByValue = function(key, value) {
-        if (!Entry.Utils.isNumber(value)) {
+        if (!RoCode.Utils.isNumber(value)) {
             value = value.replace(/\"/gi, '');
             return '"()"'.replace('()', value);
         } else {
@@ -151,8 +151,8 @@ function getConverters() {
     };
 
     c.returnObjectOrStringValue = function(key, value) {
-        if (Entry.container && Entry.container.getObject(value)) {
-            const objectName = Entry.container.getObject(value).name;
+        if (RoCode.container && RoCode.container.getObject(value)) {
+            const objectName = RoCode.container.getObject(value).name;
             return '"()"'.replace('()', objectName);
         } else {
             if (this.codeMap) {
@@ -243,13 +243,13 @@ function getBlocks() {
     return {
         aiUtilizeModelTrainButton: {
             skeleton: 'basic_button',
-            color: EntryStatic.colorSet.common.BUTTON_BACKGROUND,
+            color: RoCodeStatic.colorSet.common.BUTTON_BACKGROUND,
             isNotFor: ['functionInit'],
             params: [
                 {
                     type: 'Text',
                     text: Lang.template.load_ai_utilize_train_block,
-                    color: EntryStatic.colorSet.common.BUTTON,
+                    color: RoCodeStatic.colorSet.common.BUTTON,
                     align: 'center',
                 },
             ],
@@ -259,20 +259,20 @@ function getBlocks() {
             events: {
                 mousedown: [
                     function() {
-                        Entry.aiLearning.openManager();
+                        RoCode.aiLearning.openManager();
                     },
                 ],
             },
         },
         aiUtilizeBlockAddButton: {
             skeleton: 'basic_button',
-            color: EntryStatic.colorSet.common.BUTTON_BACKGROUND,
+            color: RoCodeStatic.colorSet.common.BUTTON_BACKGROUND,
             isNotFor: ['functionInit'],
             params: [
                 {
                     type: 'Text',
                     text: Lang.template.load_ai_utilize_block,
-                    color: EntryStatic.colorSet.common.BUTTON,
+                    color: RoCodeStatic.colorSet.common.BUTTON,
                     align: 'center',
                 },
             ],
@@ -282,20 +282,20 @@ function getBlocks() {
             events: {
                 mousedown: [
                     function() {
-                        Entry.do('playgroundClickAddAIUtilizeBlock');
+                        RoCode.do('playgroundClickAddAIUtilizeBlock');
                     },
                 ],
             },
         },
         expansionBlockAddButton: {
             skeleton: 'basic_button',
-            color: EntryStatic.colorSet.common.BUTTON_BACKGROUND,
+            color: RoCodeStatic.colorSet.common.BUTTON_BACKGROUND,
             isNotFor: ['functionInit'],
             params: [
                 {
                     type: 'Text',
                     text: Lang.template.load_expansion_block,
-                    color: EntryStatic.colorSet.common.BUTTON,
+                    color: RoCodeStatic.colorSet.common.BUTTON,
                     align: 'center',
                 },
             ],
@@ -305,7 +305,7 @@ function getBlocks() {
             events: {
                 mousedown: [
                     function() {
-                        Entry.do('playgroundClickAddExpansionBlock');
+                        RoCode.do('playgroundClickAddExpansionBlock');
                     },
                 ],
             },
@@ -313,13 +313,13 @@ function getBlocks() {
         //region hardware 하드웨어 기본
         arduino_noti_light: {
             skeleton: 'basic_text_light',
-            color: EntryStatic.colorSet.common.TRANSPARENT,
+            color: RoCodeStatic.colorSet.common.TRANSPARENT,
             template: '%1',
             params: [
                 {
                     type: 'Text',
                     text: Lang.Blocks.arduino_noti_text_light,
-                    color: EntryStatic.colorSet.common.BUTTON,
+                    color: RoCodeStatic.colorSet.common.BUTTON,
                     align: 'center',
                 },
             ],
@@ -332,13 +332,13 @@ function getBlocks() {
         },
         arduino_noti: {
             skeleton: 'basic_text',
-            color: EntryStatic.colorSet.common.TRANSPARENT,
+            color: RoCodeStatic.colorSet.common.TRANSPARENT,
             template: '%1',
             params: [
                 {
                     type: 'Text',
                     text: Lang.Blocks.arduino_noti_text,
-                    color: EntryStatic.colorSet.common.BUTTON,
+                    color: RoCodeStatic.colorSet.common.BUTTON,
                     align: 'center',
                 },
             ],
@@ -357,20 +357,20 @@ function getBlocks() {
                 },
             },
             isNotFor: ['arduinoDisconnected'],
-            color: EntryStatic.colorSet.common.TRANSPARENT,
+            color: RoCodeStatic.colorSet.common.TRANSPARENT,
             class: 'arduino_default',
             params: [
                 {
                     type: 'Text',
                     text: Lang.Blocks.ARDUINO_download_connector,
-                    color: EntryStatic.colorSet.common.TEXT,
+                    color: RoCodeStatic.colorSet.common.TEXT,
                     align: 'center',
                 },
             ],
             events: {
                 mousedown: [
                     function() {
-                        Entry.hw.downloadConnector();
+                        RoCode.hw.downloadConnector();
                     },
                 ],
             },
@@ -383,20 +383,20 @@ function getBlocks() {
         //         },
         //     },
         //     isNotFor: ['arduinoDisconnected'],
-        //     color: EntryStatic.colorSet.common.TRANSPARENT,
+        //     color: RoCodeStatic.colorSet.common.TRANSPARENT,
         //     class: 'arduino_default',
         //     params: [
         //         {
         //             type: 'Text',
         //             text: Lang.Blocks.download_guide,
-        //             color: EntryStatic.colorSet.common.TEXT,
+        //             color: RoCodeStatic.colorSet.common.TEXT,
         //             align: 'center',
         //         },
         //     ],
         //     events: {
         //         mousedown: [
         //             function() {
-        //                 Entry.hw.downloadGuide();
+        //                 RoCode.hw.downloadGuide();
         //             },
         //         ],
         //     },
@@ -409,12 +409,12 @@ function getBlocks() {
                 },
             },
             isNotFor: ['arduinoDisconnected'],
-            color: EntryStatic.colorSet.common.TRANSPARENT,
+            color: RoCodeStatic.colorSet.common.TRANSPARENT,
             params: [
                 {
                     type: 'Text',
                     text: Lang.Blocks.ARDUINO_download_source,
-                    color: EntryStatic.colorSet.common.TEXT,
+                    color: RoCodeStatic.colorSet.common.TEXT,
                     align: 'center',
                 },
             ],
@@ -422,20 +422,20 @@ function getBlocks() {
             events: {
                 mousedown: [
                     function() {
-                        Entry.hw.downloadSource();
+                        RoCode.hw.downloadSource();
                     },
                 ],
             },
         },
         arduino_connected: {
             skeleton: 'basic_button',
-            color: EntryStatic.colorSet.common.BUTTON_BACKGROUND,
+            color: RoCodeStatic.colorSet.common.BUTTON_BACKGROUND,
             isNotFor: ['arduinoConnected'],
             params: [
                 {
                     type: 'Text',
                     text: Lang.Blocks.ARDUINO_connected,
-                    color: EntryStatic.colorSet.common.BUTTON,
+                    color: RoCodeStatic.colorSet.common.BUTTON,
                     align: 'center',
                 },
             ],
@@ -443,7 +443,7 @@ function getBlocks() {
         },
         arduino_connect: {
             skeleton: 'basic_text',
-            color: EntryStatic.colorSet.common.TRANSPARENT,
+            color: RoCodeStatic.colorSet.common.TRANSPARENT,
             template: '%1',
             isNotFor: ['arduinoConnect'],
             class: 'arduino_default',
@@ -451,7 +451,7 @@ function getBlocks() {
                 {
                     type: 'Text',
                     text: Lang.Blocks.ARDUINO_connect,
-                    color: EntryStatic.colorSet.common.TEXT,
+                    color: RoCodeStatic.colorSet.common.TEXT,
                     align: 'center',
                 },
             ],
@@ -459,13 +459,13 @@ function getBlocks() {
         },
         arduino_reconnect: {
             skeleton: 'basic_button',
-            color: EntryStatic.colorSet.common.BUTTON_BACKGROUND,
+            color: RoCodeStatic.colorSet.common.BUTTON_BACKGROUND,
             isNotFor: ['arduinoDisconnected'],
             params: [
                 {
                     type: 'Text',
                     text: Lang.Blocks.ARDUINO_reconnect,
-                    color: EntryStatic.colorSet.common.BUTTON,
+                    color: RoCodeStatic.colorSet.common.BUTTON,
                     align: 'center',
                 },
             ],
@@ -473,42 +473,42 @@ function getBlocks() {
             events: {
                 mousedown: [
                     function() {
-                        Entry.hw.retryConnect();
+                        RoCode.hw.retryConnect();
                     },
                 ],
             },
         },
         robot_reconnect: {
             skeleton: 'basic_button',
-            color: EntryStatic.colorSet.common.BUTTON_BACKGROUND,
+            color: RoCodeStatic.colorSet.common.BUTTON_BACKGROUND,
             isNotFor: ['arduinoDisconnected'],
             template: '%1',
             params: [
                 {
                     type: 'Text',
                     text: Lang.Blocks.ROBOT_reconnect,
-                    color: EntryStatic.colorSet.common.BUTTON,
+                    color: RoCodeStatic.colorSet.common.BUTTON,
                     align: 'center',
                 },
             ],
             events: {
                 mousedown: [
                     function() {
-                        Entry.hw.retryConnect();
+                        RoCode.hw.retryConnect();
                     },
                 ],
             },
         },
         arduino_open: {
             skeleton: 'basic_button',
-            color: EntryStatic.colorSet.common.BUTTON_BACKGROUND,
+            color: RoCodeStatic.colorSet.common.BUTTON_BACKGROUND,
             isNotFor: ['arduinoDisconnected'],
             template: '%1',
             params: [
                 {
                     type: 'Text',
                     text: Lang.Blocks.ARDUINO_open_connector,
-                    color: EntryStatic.colorSet.common.BUTTON,
+                    color: RoCodeStatic.colorSet.common.BUTTON,
                     align: 'center',
                 },
             ],
@@ -516,21 +516,21 @@ function getBlocks() {
             events: {
                 mousedown: [
                     function() {
-                        Entry.hw.openHardwareProgram();
+                        RoCode.hw.openHardwareProgram();
                     },
                 ],
             },
         },
         arduino_cloud_pc_open: {
             skeleton: 'basic_button',
-            color: EntryStatic.colorSet.common.BUTTON_BACKGROUND,
+            color: RoCodeStatic.colorSet.common.BUTTON_BACKGROUND,
             isNotFor: ['arduinoConnect', 'arduinoConnected'],
             template: '%1',
             params: [
                 {
                     type: 'Text',
                     text: Lang.Blocks.ARDUINO_cloud_pc_connector,
-                    color: EntryStatic.colorSet.common.BUTTON,
+                    color: RoCodeStatic.colorSet.common.BUTTON,
                     align: 'center',
                 },
             ],
@@ -538,7 +538,7 @@ function getBlocks() {
             events: {
                 mousedown: [
                     function() {
-                        Entry.hw.openHardwareProgram();
+                        RoCode.hw.openHardwareProgram();
                     },
                 ],
             },
@@ -546,7 +546,7 @@ function getBlocks() {
         //endregion hardware 하드웨어 기본
         //region basic 기본블록
         change_opacity: {
-            color: EntryStatic.colorSet.block.default.BRUSH,
+            color: RoCodeStatic.colorSet.block.default.BRUSH,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -580,10 +580,10 @@ function getBlocks() {
                 let opacity = script.getNumberValue('VALUE', script);
 
                 if (!sprite.brush || !sprite.shapes.length) {
-                    Entry.setBasicBrush(sprite);
+                    RoCode.setBasicBrush(sprite);
                     sprite.brush.stop = true;
                 }
-                opacity = Entry.adjustValueWithMaxMin(sprite.brush.opacity + opacity, 0, 100);
+                opacity = RoCode.adjustValueWithMaxMin(sprite.brush.opacity + opacity, 0, 100);
 
                 if (sprite.brush) {
                     sprite.brush.opacity = opacity;
@@ -600,7 +600,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         set_opacity: {
-            color: EntryStatic.colorSet.block.default.BRUSH,
+            color: RoCodeStatic.colorSet.block.default.BRUSH,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -634,12 +634,12 @@ function getBlocks() {
                 const opacity = script.getNumberValue('VALUE', script);
 
                 if (!sprite.brush || !sprite.shapes.length) {
-                    Entry.setBasicBrush(sprite);
+                    RoCode.setBasicBrush(sprite);
                     sprite.brush.stop = true;
                 }
 
                 if (sprite.brush) {
-                    sprite.brush.opacity = Entry.adjustValueWithMaxMin(opacity, 0, 100);
+                    sprite.brush.opacity = RoCode.adjustValueWithMaxMin(opacity, 0, 100);
                     sprite.brush.endStroke();
                     const rgb = sprite.brush.rgb;
                     sprite.brush.beginStroke(
@@ -653,7 +653,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         number: {
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -682,7 +682,7 @@ function getBlocks() {
                         textParams: [
                             {
                                 type: 'TextInput',
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -690,7 +690,7 @@ function getBlocks() {
             },
         },
         angle: {
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -720,7 +720,7 @@ function getBlocks() {
                         textParams: [
                             {
                                 type: 'Angle',
-                                converter: Entry.block.converters.returnRawNumberValueByKey,
+                                converter: RoCode.block.converters.returnRawNumberValueByKey,
                             },
                         ],
                     },
@@ -728,7 +728,7 @@ function getBlocks() {
             },
         },
         get_x_coordinate: {
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -751,7 +751,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         get_y_coordinate: {
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -774,7 +774,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         get_angle: {
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -794,7 +794,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         get_rotation_direction: {
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -829,7 +829,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         calc_plus: {
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -863,7 +863,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         calc_minus: {
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -897,7 +897,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         calc_times: {
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -931,7 +931,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         calc_divide: {
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -965,7 +965,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         calc_mod: {
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -1015,10 +1015,10 @@ function getBlocks() {
                 const rightValue = script.getNumberValue('RIGHTHAND', script);
                 return leftValue % rightValue;
             },
-            syntax: { js: [], py: ['Entry.get_remainder(%1, %3)'] },
+            syntax: { js: [], py: ['RoCode.get_remainder(%1, %3)'] },
         },
         calc_share: {
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -1071,7 +1071,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         reset_project_timer: {
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1084,15 +1084,15 @@ function getBlocks() {
             events: {
                 viewAdd: [
                     function() {
-                        if (Entry.engine) {
-                            Entry.engine.showProjectTimer();
+                        if (RoCode.engine) {
+                            RoCode.engine.showProjectTimer();
                         }
                     },
                 ],
                 viewDestroy: [
                     function(block, notIncludeSelf) {
-                        if (Entry.engine) {
-                            Entry.engine.hideProjectTimer(block, notIncludeSelf);
+                        if (RoCode.engine) {
+                            RoCode.engine.hideProjectTimer(block, notIncludeSelf);
                         }
                     },
                 ],
@@ -1104,13 +1104,13 @@ function getBlocks() {
             class: 'calc_timer',
             isNotFor: [],
             func(sprite, script) {
-                Entry.engine.updateProjectTimer(0);
+                RoCode.engine.updateProjectTimer(0);
                 return script.callReturn();
             },
             syntax: { js: [], py: [''] },
         },
         set_visible_project_timer: {
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1127,7 +1127,7 @@ function getBlocks() {
                     ],
                     value: 'SHOW',
                     fontSize: 11,
-                    arrowColor: EntryStatic.colorSet.arrow.default.CALC,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.CALC,
                 },
                 {
                     type: 'Text',
@@ -1143,15 +1143,15 @@ function getBlocks() {
             events: {
                 viewAdd: [
                     function() {
-                        if (Entry.engine) {
-                            Entry.engine.showProjectTimer();
+                        if (RoCode.engine) {
+                            RoCode.engine.showProjectTimer();
                         }
                     },
                 ],
                 viewDestroy: [
                     function(block, notIncludeSelf) {
-                        if (Entry.engine) {
-                            Entry.engine.hideProjectTimer(block, notIncludeSelf);
+                        if (RoCode.engine) {
+                            RoCode.engine.hideProjectTimer(block, notIncludeSelf);
                         }
                     },
                 ],
@@ -1171,7 +1171,7 @@ function getBlocks() {
             isNotFor: [],
             func(sprite, script) {
                 const action = script.getField('ACTION');
-                const timer = Entry.engine.projectTimer;
+                const timer = RoCode.engine.projectTimer;
                 if (action === 'SHOW') {
                     timer.setVisible(true);
                 } else {
@@ -1185,11 +1185,11 @@ function getBlocks() {
                 py: [
                     {
                         template: '%1 %2 %3',
-                        syntax: 'Entry.timer_view(%2)',
+                        syntax: 'RoCode.timer_view(%2)',
                         textParams: [
                             {
                                 type: 'Text',
-                                text: 'Entry.timer_view(',
+                                text: 'RoCode.timer_view(',
                                 color: '#000',
                             },
                             {
@@ -1200,9 +1200,9 @@ function getBlocks() {
                                 ],
                                 value: 'SHOW',
                                 fontSize: 11,
-                                arrowColor: EntryStatic.colorSet.arrow.default.CALC,
-                                converter: Entry.block.converters.returnStringValueLowerCase,
-                                codeMap: 'Entry.CodeMap.Entry.set_visible_project_timer[1]',
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.CALC,
+                                converter: RoCode.block.converters.returnStringValueLowerCase,
+                                codeMap: 'RoCode.CodeMap.RoCode.set_visible_project_timer[1]',
                             },
                             {
                                 type: 'Text',
@@ -1215,7 +1215,7 @@ function getBlocks() {
             },
         },
         timer_variable: {
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -1235,12 +1235,12 @@ function getBlocks() {
                 params: [null, null],
             },
             func(sprite, script) {
-                return Entry.container.inputValue.getValue();
+                return RoCode.container.inputValue.getValue();
             },
             syntax: { js: [], py: [''] },
         },
         stop_run: {
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1255,7 +1255,7 @@ function getBlocks() {
                 params: [null],
             },
             func(sprite, script) {
-                return Entry.engine.toggleStop();
+                return RoCode.engine.toggleStop();
             },
             syntax: { js: [], py: [''] },
         },
@@ -1287,7 +1287,7 @@ function getBlocks() {
         function_field_string: {
             skeleton: 'basic_param',
             isNotFor: ['functionEdit'],
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             params: [
                 {
                     type: 'Block',
@@ -1317,7 +1317,7 @@ function getBlocks() {
         function_field_boolean: {
             skeleton: 'basic_param',
             isNotFor: ['functionEdit'],
-            color: EntryStatic.colorSet.block.default.JUDGE,
+            color: RoCodeStatic.colorSet.block.default.JUDGE,
             params: [
                 {
                     type: 'Block',
@@ -1346,14 +1346,14 @@ function getBlocks() {
         },
         function_param_string: {
             skeleton: 'basic_string_field',
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             fontColor: '#000',
             template: '%1 %2',
             events: {
                 viewAdd: [
                     function() {
-                        if (Entry.Func.isEdit) {
-                            Entry.Func.refreshMenuCode();
+                        if (RoCode.Func.isEdit) {
+                            RoCode.Func.refreshMenuCode();
                         }
                     },
                 ],
@@ -1367,13 +1367,13 @@ function getBlocks() {
         },
         function_param_boolean: {
             skeleton: 'basic_boolean_field',
-            color: EntryStatic.colorSet.block.default.JUDGE,
+            color: RoCodeStatic.colorSet.block.default.JUDGE,
             template: '%1 %2',
             events: {
                 viewAdd: [
                     function() {
-                        if (Entry.Func.isEdit) {
-                            Entry.Func.refreshMenuCode();
+                        if (RoCode.Func.isEdit) {
+                            RoCode.Func.refreshMenuCode();
                         }
                     },
                 ],
@@ -1387,8 +1387,8 @@ function getBlocks() {
         },
         function_create: {
             skeleton: 'basic_create',
-            color: EntryStatic.colorSet.block.default.FUNC,
-            outerLine: EntryStatic.colorSet.block.darken.FUNC,
+            color: RoCodeStatic.colorSet.block.default.FUNC,
+            outerLine: RoCodeStatic.colorSet.block.darken.FUNC,
             event: 'funcDef',
             params: [
                 {
@@ -1422,8 +1422,8 @@ function getBlocks() {
         },
         function_general: {
             skeleton: 'basic',
-            color: EntryStatic.colorSet.block.default.FUNC,
-            outerLine: EntryStatic.colorSet.block.darken.FUNC,
+            color: RoCodeStatic.colorSet.block.default.FUNC,
+            outerLine: RoCodeStatic.colorSet.block.darken.FUNC,
             params: [
                 {
                     type: 'Indicator',
@@ -1434,7 +1434,7 @@ function getBlocks() {
             events: {
                 dataAdd: [
                     function(block) {
-                        const vc = Entry.variableContainer;
+                        const vc = RoCode.variableContainer;
                         if (vc) {
                             vc.addRef('_functionRefs', block);
                         }
@@ -1442,7 +1442,7 @@ function getBlocks() {
                 ],
                 dataDestroy: [
                     function(block) {
-                        const vc = Entry.variableContainer;
+                        const vc = RoCode.variableContainer;
                         if (vc) {
                             vc.removeRef('_functionRefs', block);
                         }
@@ -1451,32 +1451,32 @@ function getBlocks() {
                 dblclick: [
                     function(blockView) {
                         const mode = blockView.getBoard().workspace.getMode();
-                        if (mode !== Entry.Workspace.MODE_BOARD) {
+                        if (mode !== RoCode.Workspace.MODE_BOARD) {
                             return;
                         }
-                        if (Entry.type !== 'workspace') {
+                        if (RoCode.type !== 'workspace') {
                             return;
                         }
                         const block = blockView.block;
                         const id = block.getFuncId();
-                        Entry.do('funcEditStart', id);
+                        RoCode.do('funcEditStart', id);
                     },
                 ],
             },
             func(entity) {
                 if (!this.initiated) {
                     this.initiated = true;
-                    Entry.callStackLength++;
+                    RoCode.callStackLength++;
 
-                    if (Entry.callStackLength > Entry.Executor.MAXIMUM_CALLSTACK) {
-                        Entry.toast.alert(
+                    if (RoCode.callStackLength > RoCode.Executor.MAXIMUM_CALLSTACK) {
+                        RoCode.toast.alert(
                             Lang.Workspace.RecursiveCallWarningTitle,
                             Lang.Workspace.RecursiveCallWarningContent
                         );
                         throw new Error();
                     }
 
-                    const func = Entry.variableContainer.getFunction(this.block.getFuncId());
+                    const func = RoCode.variableContainer.getFunction(this.block.getFuncId());
                     this.funcCode = func.content;
                     this.funcExecutor = this.funcCode.raiseEvent('funcDef', entity)[0];
                     this.funcExecutor.register.params = this.getParams();
@@ -1487,17 +1487,17 @@ function getBlocks() {
                 this.funcExecutor.execute();
                 if (!this.funcExecutor.isEnd()) {
                     this.funcCode.removeExecutor(this.funcExecutor);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 }
 
-                Entry.callStackLength--;
+                RoCode.callStackLength--;
             },
             syntax: { js: [], py: [''] },
         },
         //endregion basic 기본블록
         //region basic 기본
         change_to_nth_shape: {
-            color: EntryStatic.colorSet.block.default.LOOKS,
+            color: RoCodeStatic.colorSet.block.default.LOOKS,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1532,7 +1532,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         set_effect_volume: {
-            color: EntryStatic.colorSet.block.default.LOOKS,
+            color: RoCodeStatic.colorSet.block.default.LOOKS,
             skeleton: 'basic',
             statements: [],
             deprecated: true,
@@ -1597,10 +1597,10 @@ function getBlocks() {
                 sprite.applyFilter(true, [effectName]);
                 return script.callReturn();
             },
-            syntax: { js: [], py: ['Entry.set_effect_volume(%1, %2)'] },
+            syntax: { js: [], py: ['RoCode.set_effect_volume(%1, %2)'] },
         },
         set_effect: {
-            color: EntryStatic.colorSet.block.default.LOOKS,
+            color: RoCodeStatic.colorSet.block.default.LOOKS,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1664,10 +1664,10 @@ function getBlocks() {
                 sprite.applyFilter(true, [effectName]);
                 return script.callReturn();
             },
-            syntax: { js: [], py: ['Entry.set_effect(%1, %2)'] },
+            syntax: { js: [], py: ['RoCode.set_effect(%1, %2)'] },
         },
         change_scale_percent: {
-            color: EntryStatic.colorSet.block.default.LOOKS,
+            color: RoCodeStatic.colorSet.block.default.LOOKS,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1706,7 +1706,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         set_scale_percent: {
-            color: EntryStatic.colorSet.block.default.LOOKS,
+            color: RoCodeStatic.colorSet.block.default.LOOKS,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1746,7 +1746,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         set_object_order: {
-            color: EntryStatic.colorSet.block.default.LOOKS,
+            color: RoCodeStatic.colorSet.block.default.LOOKS,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1774,7 +1774,7 @@ function getBlocks() {
             isNotFor: [],
             func(sprite, script) {
                 const targetIndex = script.getField('VALUE', script);
-                const currentIndex = Entry.container.getCurrentObjects().indexOf(sprite.parent);
+                const currentIndex = RoCode.container.getCurrentObjects().indexOf(sprite.parent);
 
                 if (currentIndex > -1) {
                     return script.callReturn();
@@ -1785,8 +1785,8 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         get_pictures: {
-            color: EntryStatic.colorSet.block.default.LOOKS,
-            outerLine: EntryStatic.colorSet.block.darken.LOOKS,
+            color: RoCodeStatic.colorSet.block.default.LOOKS,
+            outerLine: RoCodeStatic.colorSet.block.darken.LOOKS,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -1796,8 +1796,8 @@ function getBlocks() {
                     menuName: 'pictures',
                     // defaultValue: 'null',
                     fontSize: 10,
-                    bgColor: EntryStatic.colorSet.block.darken.LOOKS,
-                    arrowColor: EntryStatic.colorSet.arrow.default.LOOKS,
+                    bgColor: RoCodeStatic.colorSet.block.darken.LOOKS,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.LOOKS,
                 },
             ],
             events: {},
@@ -1822,8 +1822,8 @@ function getBlocks() {
                                 value: null,
                                 menuName: 'pictures',
                                 fontSize: 11,
-                                arrowColor: EntryStatic.colorSet.arrow.default.LOOKS,
-                                converter: Entry.block.converters.returnStringKey,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.LOOKS,
+                                converter: RoCode.block.converters.returnStringKey,
                             },
                         ],
                     },
@@ -1831,8 +1831,8 @@ function getBlocks() {
             },
         },
         get_table_fields: {
-            color: EntryStatic.colorSet.block.default.ANALYSIS,
-            outerLine: EntryStatic.colorSet.block.darken.ANALYSIS,
+            color: RoCodeStatic.colorSet.block.default.ANALYSIS,
+            outerLine: RoCodeStatic.colorSet.block.darken.ANALYSIS,
             template: '%1  ',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1850,8 +1850,8 @@ function getBlocks() {
                     },
                     needDeepCopy: true,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.ANALYSIS,
-                    arrowColor: EntryStatic.colorSet.common.WHITE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.ANALYSIS,
+                    arrowColor: RoCodeStatic.colorSet.common.WHITE,
                     defaultValue: (value, options) => {
                         if (options.length) {
                             return options[0][1];
@@ -1883,8 +1883,8 @@ function getBlocks() {
                                 value: null,
                                 menuName: 'fields',
                                 fontSize: 11,
-                                arrowColor: EntryStatic.colorSet.common.WHITE,
-                                converter: Entry.block.converters.returnStringKey,
+                                arrowColor: RoCodeStatic.colorSet.common.WHITE,
+                                converter: RoCode.block.converters.returnStringKey,
                             },
                         ],
                     },
@@ -1893,7 +1893,7 @@ function getBlocks() {
         },
 
         set_effect_amount: {
-            color: EntryStatic.colorSet.block.default.LOOKS,
+            color: RoCodeStatic.colorSet.block.default.LOOKS,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1955,7 +1955,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         set_entity_effect: {
-            color: EntryStatic.colorSet.block.default.LOOKS,
+            color: RoCodeStatic.colorSet.block.default.LOOKS,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2017,7 +2017,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         rotate_by_angle: {
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2055,7 +2055,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         rotate_by_angle_dropdown: {
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2094,7 +2094,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         see_angle: {
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2132,7 +2132,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         see_direction: {
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2157,7 +2157,7 @@ function getBlocks() {
             },
             func(sprite, script) {
                 const targetId = script.getField('VALUE', script);
-                const targetEntity = Entry.container.getEntity(targetId);
+                const targetEntity = RoCode.container.getEntity(targetId);
                 const deltaX = targetEntity.getX() - sprite.getX();
                 const deltaY = targetEntity.getY() - sprite.getY();
                 if (deltaX >= 0) {
@@ -2170,7 +2170,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         rotate_by_angle_time: {
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2211,7 +2211,7 @@ function getBlocks() {
                     timeValue = script.getNumberValue('VALUE', script);
                     const angleValue = script.getNumberField('VALUE', script);
                     script.isStart = true;
-                    script.frameCount = Math.floor(timeValue * Entry.FPS);
+                    script.frameCount = Math.floor(timeValue * RoCode.FPS);
                     script.dAngle = angleValue / script.frameCount;
                 }
                 if (script.frameCount != 0) {
@@ -2227,7 +2227,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         flip_arrow_horizontal: {
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2248,7 +2248,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         flip_arrow_vertical: {
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2269,7 +2269,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         see_angle_direction: {
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2308,7 +2308,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         rotate_direction: {
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2348,7 +2348,7 @@ function getBlocks() {
         //endregion basic 기본
         //region basic 기본
         sound_something: {
-            color: EntryStatic.colorSet.block.default.SOUND,
+            color: RoCodeStatic.colorSet.block.default.SOUND,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2377,16 +2377,16 @@ function getBlocks() {
             func(sprite, script) {
                 const soundId = script.getField('VALUE', script);
                 const sounds = sprite.parent.sounds;
-                const isExist = Entry.isExist(soundId, 'id', sounds);
+                const isExist = RoCode.isExist(soundId, 'id', sounds);
                 if (isExist) {
-                    Entry.Utils.playSound(soundId);
+                    RoCode.Utils.playSound(soundId);
                 }
                 return script.callReturn();
             },
             syntax: { js: [], py: [''] },
         },
         sound_something_second: {
-            color: EntryStatic.colorSet.block.default.SOUND,
+            color: RoCodeStatic.colorSet.block.default.SOUND,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2428,10 +2428,10 @@ function getBlocks() {
                 const soundId = script.getField('VALUE', script);
                 const timeValue = script.getNumberValue('SECOND', script);
                 const sounds = sprite.parent.sounds;
-                const isExist = Entry.isExist(soundId, 'id', sounds);
+                const isExist = RoCode.isExist(soundId, 'id', sounds);
                 if (isExist) {
-                    const instance = Entry.Utils.playSound(soundId);
-                    Entry.Utils.addSoundInstances(instance);
+                    const instance = RoCode.Utils.playSound(soundId);
+                    RoCode.Utils.addSoundInstances(instance);
                     setTimeout(() => {
                         instance.stop();
                     }, timeValue * 1000);
@@ -2441,7 +2441,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         sound_something_wait: {
-            color: EntryStatic.colorSet.block.default.SOUND,
+            color: RoCodeStatic.colorSet.block.default.SOUND,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2474,10 +2474,10 @@ function getBlocks() {
                     const soundId = script.getField('VALUE', script);
                     const sound = sprite.parent.getSound(soundId);
                     const sounds = sprite.parent.sounds;
-                    const isExist = Entry.isExist(soundId, 'id', sounds);
+                    const isExist = RoCode.isExist(soundId, 'id', sounds);
                     if (isExist) {
-                        const instance = Entry.Utils.playSound(soundId);
-                        Entry.Utils.addSoundInstances(instance);
+                        const instance = RoCode.Utils.playSound(soundId);
+                        RoCode.Utils.addSoundInstances(instance);
                         setTimeout(() => {
                             script.playState = 0;
                         }, sound.duration * 1000);
@@ -2494,7 +2494,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         sound_something_second_wait: {
-            color: EntryStatic.colorSet.block.default.SOUND,
+            color: RoCodeStatic.colorSet.block.default.SOUND,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2538,11 +2538,11 @@ function getBlocks() {
                     script.playState = 1;
                     const soundId = script.getField('VALUE', script);
                     const sounds = sprite.parent.sounds;
-                    const isExist = Entry.isExist(soundId, 'id', sounds);
+                    const isExist = RoCode.isExist(soundId, 'id', sounds);
                     if (isExist) {
-                        const instance = Entry.Utils.playSound(soundId);
+                        const instance = RoCode.Utils.playSound(soundId);
                         const timeValue = script.getNumberValue('SECOND', script);
-                        Entry.Utils.addSoundInstances(instance);
+                        RoCode.Utils.addSoundInstances(instance);
                         setTimeout(() => {
                             instance.stop();
                             script.playState = 0;
@@ -2561,8 +2561,8 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         get_sounds: {
-            color: EntryStatic.colorSet.block.default.SOUND,
-            outerLine: EntryStatic.colorSet.block.darken.SOUND,
+            color: RoCodeStatic.colorSet.block.default.SOUND,
+            outerLine: RoCodeStatic.colorSet.block.darken.SOUND,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -2571,8 +2571,8 @@ function getBlocks() {
                     value: null,
                     menuName: 'sounds',
                     fontSize: 10,
-                    bgColor: EntryStatic.colorSet.block.darken.SOUND,
-                    arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                    bgColor: RoCodeStatic.colorSet.block.darken.SOUND,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                 },
             ],
             events: {},
@@ -2597,8 +2597,8 @@ function getBlocks() {
                                 value: null,
                                 menuName: 'sounds',
                                 fontSize: 11,
-                                arrowColor: EntryStatic.colorSet.arrow.default.SOUND,
-                                converter: Entry.block.converters.returnStringKey,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.SOUND,
+                                converter: RoCode.block.converters.returnStringKey,
                             },
                         ],
                         keyOption: 'get_sounds',
@@ -2607,7 +2607,7 @@ function getBlocks() {
             },
         },
         boolean_comparison: {
-            color: EntryStatic.colorSet.block.default.JUDGE,
+            color: RoCodeStatic.colorSet.block.default.JUDGE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
@@ -2655,7 +2655,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         boolean_equal: {
-            color: EntryStatic.colorSet.block.default.JUDGE,
+            color: RoCodeStatic.colorSet.block.default.JUDGE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
@@ -2702,7 +2702,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         boolean_bigger: {
-            color: EntryStatic.colorSet.block.default.JUDGE,
+            color: RoCodeStatic.colorSet.block.default.JUDGE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
@@ -2749,7 +2749,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         boolean_smaller: {
-            color: EntryStatic.colorSet.block.default.JUDGE,
+            color: RoCodeStatic.colorSet.block.default.JUDGE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
@@ -2796,7 +2796,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         boolean_and: {
-            color: EntryStatic.colorSet.block.default.JUDGE,
+            color: RoCodeStatic.colorSet.block.default.JUDGE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
@@ -2865,7 +2865,7 @@ function getBlocks() {
             },
         },
         boolean_or: {
-            color: EntryStatic.colorSet.block.default.JUDGE,
+            color: RoCodeStatic.colorSet.block.default.JUDGE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
@@ -2926,7 +2926,7 @@ function getBlocks() {
             },
         },
         true_or_false: {
-            color: EntryStatic.colorSet.block.default.JUDGE,
+            color: RoCodeStatic.colorSet.block.default.JUDGE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
@@ -2954,14 +2954,14 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         True: {
-            color: EntryStatic.colorSet.block.default.JUDGE,
+            color: RoCodeStatic.colorSet.block.default.JUDGE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
                 {
                     type: 'Text',
                     text: Lang.Blocks.JUDGEMENT_true,
-                    color: EntryStatic.colorSet.common.WHITE,
+                    color: RoCodeStatic.colorSet.common.WHITE,
                 },
             ],
             events: {},
@@ -2976,14 +2976,14 @@ function getBlocks() {
             syntax: { js: ['Scope', 'true'], py: ['True'] },
         },
         False: {
-            color: EntryStatic.colorSet.block.default.JUDGE,
+            color: RoCodeStatic.colorSet.block.default.JUDGE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
                 {
                     type: 'Text',
                     text: Lang.Blocks.JUDGEMENT_false,
-                    color: EntryStatic.colorSet.common.WHITE,
+                    color: RoCodeStatic.colorSet.common.WHITE,
                 },
             ],
             events: {},
@@ -2998,7 +2998,7 @@ function getBlocks() {
             syntax: { js: [], py: ['False'] },
         },
         press_some_key: {
-            color: EntryStatic.colorSet.block.default.START,
+            color: RoCodeStatic.colorSet.block.default.START,
             skeleton: 'basic_event',
             statements: [],
             params: [
@@ -3050,7 +3050,7 @@ function getBlocks() {
             syntax: { js: [], py: [''] },
         },
         when_some_key_click: {
-            color: EntryStatic.colorSet.block.default.START,
+            color: RoCodeStatic.colorSet.block.default.START,
             skeleton: 'basic_event',
             statements: [],
             params: [
@@ -3072,10 +3072,10 @@ function getBlocks() {
                 return script.callReturn();
             },
             event: 'keyPress',
-            syntax: { js: [], py: ['Entry.on_key_press_down(%1)'] },
+            syntax: { js: [], py: ['RoCode.on_key_press_down(%1)'] },
         },
         text: {
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -3105,7 +3105,7 @@ function getBlocks() {
                         textParams: [
                             {
                                 type: 'TextInput',
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -3113,7 +3113,7 @@ function getBlocks() {
             },
         },
         options_for_list: {
-            color: EntryStatic.colorSet.block.default.VARIABLE,
+            color: RoCodeStatic.colorSet.block.default.VARIABLE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -3144,13 +3144,13 @@ function getBlocks() {
         //region basic 기본
         run: {
             skeleton: 'basic',
-            color: EntryStatic.colorSet.block.default.START,
+            color: RoCodeStatic.colorSet.block.default.START,
             contents: ['this is', 'basic block'],
         },
         mutant: {
             skeleton: 'basic',
             event: 'start',
-            color: EntryStatic.colorSet.block.default.START,
+            color: RoCodeStatic.colorSet.block.default.START,
             params: [],
             changeEvent: {
                 _listeners: [],
@@ -3159,12 +3159,12 @@ function getBlocks() {
         jr_start: {
             skeleton: 'pebble_event',
             event: 'start',
-            color: EntryStatic.colorSet.block.default.START,
+            color: RoCodeStatic.colorSet.block.default.START,
             params: [
                 {
                     type: 'Indicator',
                     img: '../../../img/assets/ntry/bitmap/jr/block_play_image.png',
-                    highlightColor: EntryStatic.colorSet.block.default.START,
+                    highlightColor: RoCodeStatic.colorSet.block.default.START,
                     position: {
                         x: 0,
                         y: 0,
@@ -3213,7 +3213,7 @@ function getBlocks() {
             func() {
                 if (this.repeatCount === undefined) {
                     this.repeatCount = this.block.params[1];
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.repeatCount > 0) {
                     this.repeatCount--;
                     const statement = this.block.statements[0];
@@ -3221,7 +3221,7 @@ function getBlocks() {
                         return;
                     }
                     this.executor.stepInto(statement);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.repeatCount;
                 }
@@ -3234,7 +3234,7 @@ function getBlocks() {
                 {
                     type: 'Indicator',
                     img: '../../../img/assets/ntry/bitmap/jr/block_item_image.png',
-                    highlightColor: EntryStatic.colorSet.common.WHITE,
+                    highlightColor: RoCodeStatic.colorSet.common.WHITE,
                     position: {
                         x: 83,
                         y: 0,
@@ -3252,9 +3252,9 @@ function getBlocks() {
                         self.isAction = false;
                     };
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.GET_ITEM, callBack);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -3268,7 +3268,7 @@ function getBlocks() {
                 {
                     type: 'Indicator',
                     img: '../../../img/assets/ntry/bitmap/cpartyjr/pen.png',
-                    highlightColor: EntryStatic.colorSet.common.WHITE,
+                    highlightColor: RoCodeStatic.colorSet.common.WHITE,
                     position: {
                         x: 83,
                         y: 0,
@@ -3286,9 +3286,9 @@ function getBlocks() {
                         self.isAction = false;
                     };
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.GET_ITEM, callBack);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -3297,7 +3297,7 @@ function getBlocks() {
         },
         jr_north: {
             skeleton: 'pebble_basic',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             params: [
                 {
                     type: 'Indicator',
@@ -3340,9 +3340,9 @@ function getBlocks() {
                     if (actionType) {
                         Ntry.dispatchEvent('unitAction', actionType, callBack);
                     }
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -3351,7 +3351,7 @@ function getBlocks() {
         },
         jr_east: {
             skeleton: 'pebble_basic',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             params: [
                 {
                     type: 'Indicator',
@@ -3397,9 +3397,9 @@ function getBlocks() {
                     if (actionType) {
                         Ntry.dispatchEvent('unitAction', actionType, callBack);
                     }
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -3408,7 +3408,7 @@ function getBlocks() {
         },
         jr_south: {
             skeleton: 'pebble_basic',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             params: [
                 {
                     type: 'Indicator',
@@ -3453,9 +3453,9 @@ function getBlocks() {
                     if (actionType) {
                         Ntry.dispatchEvent('unitAction', actionType, callBack);
                     }
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -3464,7 +3464,7 @@ function getBlocks() {
         },
         jr_west: {
             skeleton: 'pebble_basic',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             params: [
                 {
                     type: 'Indicator',
@@ -3509,9 +3509,9 @@ function getBlocks() {
                     if (actionType) {
                         Ntry.dispatchEvent('unitAction', actionType, callBack);
                     }
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -3521,13 +3521,13 @@ function getBlocks() {
         jr_start_basic: {
             skeleton: 'basic_event',
             event: 'start',
-            color: EntryStatic.colorSet.block.default.START,
+            color: RoCodeStatic.colorSet.block.default.START,
             params: [
                 {
                     type: 'Indicator',
                     boxMultiplier: 2,
                     img: '../../../img/assets/block_icon/start_icon_play.png',
-                    highlightColor: EntryStatic.colorSet.block.default.START,
+                    highlightColor: RoCodeStatic.colorSet.block.default.START,
                     size: 17,
                     position: {
                         x: 0,
@@ -3551,7 +3551,7 @@ function getBlocks() {
         },
         jr_go_straight: {
             skeleton: 'basic',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             params: [
                 {
                     type: 'Image',
@@ -3570,9 +3570,9 @@ function getBlocks() {
                     // turn direction
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.WALK, callBack);
 
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -3582,7 +3582,7 @@ function getBlocks() {
         },
         jr_turn_left: {
             skeleton: 'basic',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             params: [
                 {
                     type: 'Image',
@@ -3602,9 +3602,9 @@ function getBlocks() {
                     // turn direction
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.TURN_LEFT, callBack);
 
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -3614,7 +3614,7 @@ function getBlocks() {
         },
         jr_turn_right: {
             skeleton: 'basic',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             params: [
                 {
                     type: 'Image',
@@ -3634,9 +3634,9 @@ function getBlocks() {
                     // turn direction
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.TURN_RIGHT, callBack);
 
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -3666,9 +3666,9 @@ function getBlocks() {
                     // turn direction
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.GO_SLOW, callBack);
 
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -3678,7 +3678,7 @@ function getBlocks() {
         },
         jr_repeat_until_dest: {
             skeleton: 'basic_loop',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicWhile', 'true'],
             params: [
                 {
@@ -3704,12 +3704,12 @@ function getBlocks() {
                 }
 
                 this.executor.stepInto(statement);
-                return Entry.STATIC.BREAK;
+                return RoCode.STATIC.BREAK;
             },
         },
         jr_if_construction: {
             skeleton: 'basic_loop',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicIf', "front == 'wall'"],
             params: [
                 {
@@ -3766,13 +3766,13 @@ function getBlocks() {
                     return;
                 } else {
                     this.executor.stepInto(statement);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 }
             },
         },
         jr_if_speed: {
             skeleton: 'basic_loop',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicIf', "front == 'hump'"],
             params: [
                 {
@@ -3829,7 +3829,7 @@ function getBlocks() {
                     return;
                 } else {
                     this.executor.stepInto(statement);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 }
             },
         },
@@ -3837,14 +3837,14 @@ function getBlocks() {
             skeleton: 'basic_event',
             mode: 'maze',
             event: 'start',
-            color: EntryStatic.colorSet.block.default.START,
+            color: RoCodeStatic.colorSet.block.default.START,
             syntax: ['Program'],
             params: [
                 {
                     type: 'Indicator',
                     boxMultiplier: 2,
                     img: '../../../img/assets/block_icon/start_icon_play.png',
-                    highlightColor: EntryStatic.colorSet.block.default.START,
+                    highlightColor: RoCodeStatic.colorSet.block.default.START,
                     size: 17,
                     position: {
                         x: 0,
@@ -3886,9 +3886,9 @@ function getBlocks() {
 
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.JUMP, callBack);
 
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -3933,9 +3933,9 @@ function getBlocks() {
                         return;
                     }
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.JUMP, callBack);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -3973,9 +3973,9 @@ function getBlocks() {
                     }
 
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.JUMP, callBack);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -3985,7 +3985,7 @@ function getBlocks() {
         maze_step_for: {
             skeleton: 'basic_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicIteration'],
             params: [
                 {
@@ -4019,7 +4019,7 @@ function getBlocks() {
             func() {
                 if (this.repeatCount === undefined) {
                     this.repeatCount = this.block.params[0];
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.repeatCount > 0) {
                     this.repeatCount--;
                     const statement = this.block.statements[0];
@@ -4027,7 +4027,7 @@ function getBlocks() {
                         return;
                     }
                     this.executor.stepInto(statement);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.repeatCount;
                 }
@@ -4063,7 +4063,7 @@ function getBlocks() {
         maze_repeat_until_1: {
             skeleton: 'basic_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicWhile', 'true'],
             params: [
                 {
@@ -4089,13 +4089,13 @@ function getBlocks() {
                 }
 
                 this.executor.stepInto(statement);
-                return Entry.STATIC.BREAK;
+                return RoCode.STATIC.BREAK;
             },
         },
         maze_repeat_until_2: {
             skeleton: 'basic_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicWhile', 'true'],
             params: [
                 {
@@ -4121,13 +4121,13 @@ function getBlocks() {
                 }
 
                 this.executor.stepInto(statement);
-                return Entry.STATIC.BREAK;
+                return RoCode.STATIC.BREAK;
             },
         },
         maze_step_if_1: {
             skeleton: 'basic_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicIf', "front == 'wall'"],
             params: [
                 {
@@ -4173,7 +4173,7 @@ function getBlocks() {
 
                 if (existEntities.length === 0) {
                     this.executor.stepInto(statement);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 }
 
                 const fitEntities = Ntry.entityManager.find(
@@ -4196,14 +4196,14 @@ function getBlocks() {
                     return;
                 } else {
                     this.executor.stepInto(statement);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 }
             },
         },
         maze_step_if_2: {
             skeleton: 'basic_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicIf', "front == 'bee'"],
             params: [
                 {
@@ -4261,7 +4261,7 @@ function getBlocks() {
                     return;
                 } else {
                     this.executor.stepInto(statement);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 }
             },
         },
@@ -4283,7 +4283,7 @@ function getBlocks() {
 
                     for (const key in codes) {
                         const code = codes[key].components[Ntry.STATIC.CODE].code;
-                        this.funcExecutor = new Entry.Executor(code.getEventMap('define')[0]);
+                        this.funcExecutor = new RoCode.Executor(code.getEventMap('define')[0]);
                     }
                 }
 
@@ -4291,7 +4291,7 @@ function getBlocks() {
                 if (this.funcExecutor.scope.block === null) {
                     return;
                 } else {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 }
             },
         },
@@ -4323,13 +4323,13 @@ function getBlocks() {
                 }
                 this.executor.stepInto(statement);
                 this.executed = true;
-                return Entry.STATIC.BREAK;
+                return RoCode.STATIC.BREAK;
             },
         },
         maze_step_if_3: {
             skeleton: 'basic_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicIf', 'front == banana'],
             params: [
                 {
@@ -4387,14 +4387,14 @@ function getBlocks() {
                     return;
                 } else {
                     this.executor.stepInto(statement);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 }
             },
         },
         maze_step_if_4: {
             skeleton: 'basic_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicIf', 'front == wall'],
             params: [
                 {
@@ -4452,14 +4452,14 @@ function getBlocks() {
                     return;
                 } else {
                     this.executor.stepInto(statement);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 }
             },
         },
         maze_step_move_step: {
             skeleton: 'basic',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             syntax: ['Scope', 'move'],
             params: [
                 {
@@ -4479,9 +4479,9 @@ function getBlocks() {
                     // turn direction
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.WALK, callBack);
 
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -4491,7 +4491,7 @@ function getBlocks() {
         maze_step_rotate_left: {
             skeleton: 'basic',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             syntax: ['Scope', 'left'],
             params: [
                 {
@@ -4512,9 +4512,9 @@ function getBlocks() {
                     // turn direction
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.TURN_LEFT, callBack);
 
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -4524,7 +4524,7 @@ function getBlocks() {
         maze_step_rotate_right: {
             skeleton: 'basic',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             syntax: ['Scope', 'right'],
             params: [
                 {
@@ -4545,9 +4545,9 @@ function getBlocks() {
                     // turn direction
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.TURN_RIGHT, callBack);
 
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -4557,7 +4557,7 @@ function getBlocks() {
         maze_step_forward: {
             skeleton: 'basic',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             syntax: ['Scope', 'move'],
             params: [
                 {
@@ -4577,9 +4577,9 @@ function getBlocks() {
                     // turn direction
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.WALK, callBack);
 
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -4589,7 +4589,7 @@ function getBlocks() {
         maze_turn_right: {
             skeleton: 'basic',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             syntax: ['Scope', 'turn_right'],
             params: [
                 {
@@ -4600,11 +4600,11 @@ function getBlocks() {
             ],
             func() {
                 if (this.isDead) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.executor.register.isTurned) {
                     Ntry.dispatchEvent('startEnemyWalk', false, () => {});
                     this.isDead = true;
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     Ntry.unit.components[Ntry.STATIC.UNIT].direction = Ntry.STATIC.EAST;
                     this.executor.register.isTurned = true;
@@ -4614,7 +4614,7 @@ function getBlocks() {
         maze_turn_left: {
             skeleton: 'basic',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             syntax: ['Scope', 'turn_left'],
             params: [
                 {
@@ -4625,11 +4625,11 @@ function getBlocks() {
             ],
             func() {
                 if (this.isDead) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.executor.register.isTurned) {
                     Ntry.dispatchEvent('startEnemyWalk', false, () => {});
                     this.isDead = true;
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     Ntry.unit.components[Ntry.STATIC.UNIT].direction = Ntry.STATIC.WEST;
                     this.executor.register.isTurned = true;
@@ -4639,7 +4639,7 @@ function getBlocks() {
         maze_step_if_left_monster: {
             skeleton: 'basic_double_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicIf', 'left == monster'],
             params: [
                 {
@@ -4688,7 +4688,7 @@ function getBlocks() {
         maze_step_if_right_monster: {
             skeleton: 'basic_double_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicIf', 'right == monster'],
             params: [
                 {
@@ -4737,7 +4737,7 @@ function getBlocks() {
         maze_step_if_yeti: {
             skeleton: 'basic_double_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicIf', 'front == yeti'],
             params: [
                 {
@@ -4856,9 +4856,9 @@ function getBlocks() {
                     } else {
                         Ntry.dispatchEvent('unitAction', Ntry.STATIC.NOT_FOUND_LADDER, callBack);
                     }
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (script.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete script.isAction;
                     delete script.isContinue;
@@ -4919,7 +4919,7 @@ function getBlocks() {
                         Ntry.dispatchEvent('unitAction', Ntry.STATIC.WRONG_ATTACK_OBSTACLE, () => {
                             script.isAction = false;
                         });
-                        return Entry.STATIC.BREAK;
+                        return RoCode.STATIC.BREAK;
                     }
                     const unitGrid = $.extend(
                         {},
@@ -4939,7 +4939,7 @@ function getBlocks() {
                                 script.isAction = false;
                             }
                         );
-                        return Entry.STATIC.BREAK;
+                        return RoCode.STATIC.BREAK;
                     }
                     const callBack = function() {
                         Ntry.dispatchEvent('playSound', 'dieLupin');
@@ -4948,9 +4948,9 @@ function getBlocks() {
                         });
                     };
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.ATTACK_LUPIN, callBack);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (script.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete script.isAction;
                     delete script.isContinue;
@@ -4996,7 +4996,7 @@ function getBlocks() {
                         Ntry.dispatchEvent('unitAction', Ntry.STATIC.BOTH_SIDE_FAIL, () => {
                             script.isAction = false;
                         });
-                        return Entry.STATIC.BREAK;
+                        return RoCode.STATIC.BREAK;
                     }
                     Ntry.dispatchEvent('destroyObstacle', 1, (state) => {});
                     Ntry.dispatchEvent('destroyObstacle', -1, (state) => {});
@@ -5006,9 +5006,9 @@ function getBlocks() {
                         });
                     };
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.BOTH_SIDE, callBack);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (script.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete script.isAction;
                     delete script.isContinue;
@@ -5091,9 +5091,9 @@ function getBlocks() {
                             script.isAction = false;
                         });
                     }
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (script.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete script.isAction;
                     delete script.isContinue;
@@ -5176,9 +5176,9 @@ function getBlocks() {
                             script.isAction = false;
                         });
                     }
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (script.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete script.isAction;
                     delete script.isContinue;
@@ -5231,7 +5231,7 @@ function getBlocks() {
                                 script.isAction = false;
                             }
                         );
-                        return Entry.STATIC.BREAK;
+                        return RoCode.STATIC.BREAK;
                     }
                     const callBack = function() {
                         Ntry.dispatchEvent('destroyObstacle', 1, (state) => {
@@ -5239,9 +5239,9 @@ function getBlocks() {
                         });
                     };
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.ATTACK_MUSHROOM, callBack);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (script.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete script.isAction;
                     delete script.isContinue;
@@ -5325,9 +5325,9 @@ function getBlocks() {
                             script.isAction = false;
                         });
                     }
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (script.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete script.isAction;
                     delete script.isContinue;
@@ -5367,13 +5367,13 @@ function getBlocks() {
                     const meatEntity = Ntry.checkTileByGrid(unitGrid, Ntry.STATIC.MEAT);
                     if (!meatEntity || meatEntity.components[Ntry.STATIC.ITEM].isEaten) {
                         Ntry.dispatchEvent('unitAction', Ntry.STATIC.NOT_FOUND_MEAT, callBack);
-                        return Entry.STATIC.BREAK;
+                        return RoCode.STATIC.BREAK;
                     }
                     Ntry.dispatchEvent('unlockItem');
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.EAT, callBack);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (script.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete script.isAction;
                     delete script.isContinue;
@@ -5383,7 +5383,7 @@ function getBlocks() {
         maze_rotate_left: {
             skeleton: 'basic',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             syntax: ['Scope', 'left'],
             params: [
                 {
@@ -5404,9 +5404,9 @@ function getBlocks() {
                     // turn direction
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.TURN_LEFT, callBack);
 
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -5416,7 +5416,7 @@ function getBlocks() {
         maze_rotate_right: {
             skeleton: 'basic',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             syntax: ['Scope', 'right'],
             params: [
                 {
@@ -5437,9 +5437,9 @@ function getBlocks() {
                     // turn direction
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.TURN_RIGHT, callBack);
 
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -5498,9 +5498,9 @@ function getBlocks() {
                     // turn direction
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.ATTACK, callback);
 
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -5579,9 +5579,9 @@ function getBlocks() {
                             },
                         });
                     });
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -5669,9 +5669,9 @@ function getBlocks() {
                             },
                         });
                     });
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -5763,9 +5763,9 @@ function getBlocks() {
                             },
                         });
                     });
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -5854,9 +5854,9 @@ function getBlocks() {
                             },
                         });
                     });
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -6002,9 +6002,9 @@ function getBlocks() {
                             })(id, deltaPos, deltaPos2, targetPos, obstacleGrid);
                         }
                     }
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -6064,9 +6064,9 @@ function getBlocks() {
                     // turn direction
                     Ntry.dispatchEvent('unitAction', Ntry.STATIC.ATTACK, callback);
 
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (this.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete this.isAction;
                     delete this.isContinue;
@@ -6076,7 +6076,7 @@ function getBlocks() {
         maze_repeat_until_3: {
             skeleton: 'basic_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicWhile', 'true'],
             params: [
                 {
@@ -6133,7 +6133,7 @@ function getBlocks() {
 
                 if (!isGoal) {
                     this.executor.stepInto(statement);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 }
             },
         },
@@ -6338,7 +6338,7 @@ function getBlocks() {
         maze_radar_check: {
             skeleton: 'basic_boolean_field',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.JUDGE,
+            color: RoCodeStatic.colorSet.block.default.JUDGE,
             params: [
                 {
                     type: 'Dropdown',
@@ -6402,7 +6402,7 @@ function getBlocks() {
         maze_step_if_5: {
             skeleton: 'basic_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicIf', 'front == bee'],
             params: [
                 {
@@ -6460,7 +6460,7 @@ function getBlocks() {
                     return;
                 } else {
                     this.executor.stepInto(statement);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 }
             },
         },
@@ -6468,7 +6468,7 @@ function getBlocks() {
         maze_step_if_6: {
             skeleton: 'basic_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicIf', 'front == bee'],
             params: [
                 {
@@ -6526,7 +6526,7 @@ function getBlocks() {
                     return;
                 } else {
                     this.executor.stepInto(statement);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 }
             },
         },
@@ -6534,7 +6534,7 @@ function getBlocks() {
         maze_step_if_7: {
             skeleton: 'basic_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicIf', 'front == ice'],
             params: [
                 {
@@ -6592,7 +6592,7 @@ function getBlocks() {
                     return;
                 } else {
                     this.executor.stepInto(statement);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 }
             },
         },
@@ -6604,7 +6604,7 @@ function getBlocks() {
         maze_step_if_mushroom: {
             skeleton: 'basic_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicIf', 'front == mushroom'],
             params: [
                 {
@@ -6655,14 +6655,14 @@ function getBlocks() {
                     return;
                 } else {
                     this.executor.stepInto(statement);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 }
             },
         },
         maze_step_if_lupin: {
             skeleton: 'basic_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicIf', 'front == lupin'],
             params: [
                 {
@@ -6713,14 +6713,14 @@ function getBlocks() {
                     return;
                 } else {
                     this.executor.stepInto(statement);
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 }
             },
         },
         maze_step_if_else_road: {
             skeleton: 'basic_double_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             params: [
                 {
                     type: 'Image',
@@ -6779,7 +6779,7 @@ function getBlocks() {
         maze_step_if_else_mushroom: {
             skeleton: 'basic_double_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             params: [
                 {
                     type: 'Image',
@@ -6843,7 +6843,7 @@ function getBlocks() {
         maze_step_if_else_lupin: {
             skeleton: 'basic_double_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             params: [
                 {
                     type: 'Image',
@@ -6907,7 +6907,7 @@ function getBlocks() {
         maze_step_if_else_ladder: {
             skeleton: 'basic_double_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             params: [
                 {
                     type: 'Image',
@@ -6979,7 +6979,7 @@ function getBlocks() {
         test_wrapper: {
             skeleton: 'basic',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.START,
+            color: RoCodeStatic.colorSet.block.default.START,
             params: [
                 {
                     type: 'Block',
@@ -7011,12 +7011,12 @@ function getBlocks() {
         },
         basic_button: {
             skeleton: 'basic_button',
-            color: EntryStatic.colorSet.common.BUTTON_BACKGROUND,
+            color: RoCodeStatic.colorSet.common.BUTTON_BACKGROUND,
             params: [
                 {
                     type: 'Text',
                     text: 'basic button',
-                    color: EntryStatic.colorSet.common.BUTTON,
+                    color: RoCodeStatic.colorSet.common.BUTTON,
                     align: 'center',
                 },
             ],
@@ -7052,7 +7052,7 @@ function getBlocks() {
         ai_move_right: {
             skeleton: 'basic',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             syntax: ['Scope', 'move'],
             params: [
                 {
@@ -7080,9 +7080,9 @@ function getBlocks() {
                         animateValue: 0,
                     });
                     gridComp.x++;
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else if (script.isAction) {
-                    return Entry.STATIC.BREAK;
+                    return RoCode.STATIC.BREAK;
                 } else {
                     delete script.isAction;
                     delete script.isStart;
@@ -7092,7 +7092,7 @@ function getBlocks() {
         ai_move_up: {
             skeleton: 'basic',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             syntax: ['Scope', 'up'],
             params: [
                 {
@@ -7134,7 +7134,7 @@ function getBlocks() {
         ai_move_down: {
             skeleton: 'basic',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.lighten.MOVING,
+            color: RoCodeStatic.colorSet.block.lighten.MOVING,
             syntax: ['Scope', 'down'],
             params: [
                 {
@@ -7176,7 +7176,7 @@ function getBlocks() {
         ai_repeat_until_reach: {
             skeleton: 'basic_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicWhile', 'true'],
             statements: [
                 {
@@ -7202,7 +7202,7 @@ function getBlocks() {
         ai_if_else_1: {
             skeleton: 'basic_double_loop',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             syntax: ['BasicIf', "front == 'stone'"],
             statements: [
                 {
@@ -7241,14 +7241,14 @@ function getBlocks() {
                     index = 0;
                 }
                 this.executor.stepInto(statements[index]);
-                return Entry.STATIC.BREAK;
+                return RoCode.STATIC.BREAK;
             },
         },
         ai_boolean_distance: {
             skeleton: 'basic_boolean_field',
             mode: 'maze',
             color: '#2fc9f0',
-            fontColor: EntryStatic.colorSet.common.WHITE,
+            fontColor: RoCodeStatic.colorSet.common.WHITE,
             syntax: ['Scope', 'radar_%1 %2 %3#'],
             params: [
                 {
@@ -7322,7 +7322,7 @@ function getBlocks() {
         ai_distance_value: {
             skeleton: 'basic_string_field',
             mode: 'maze',
-            color: EntryStatic.colorSet.block.lighten.CALC,
+            color: RoCodeStatic.colorSet.block.lighten.CALC,
             syntax: ['Scope', 'radar_%1#'],
             params: [
                 {
@@ -7357,7 +7357,7 @@ function getBlocks() {
         },
         ai_boolean_object: {
             skeleton: 'basic_boolean_field',
-            fontColor: EntryStatic.colorSet.common.WHITE,
+            fontColor: RoCodeStatic.colorSet.common.WHITE,
             mode: 'maze',
             color: '#2fc9f0',
             syntax: ['Scope', 'object_%1 == %2#'],
@@ -7371,7 +7371,7 @@ function getBlocks() {
                     ],
                     value: 'RIGHT',
                     fontSize: 11,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -7456,7 +7456,7 @@ function getBlocks() {
         ai_boolean_and: {
             color: '#2fc9f0',
             skeleton: 'basic_boolean_field',
-            fontColor: EntryStatic.colorSet.common.WHITE,
+            fontColor: RoCodeStatic.colorSet.common.WHITE,
             statements: [],
             syntax: ['Scope', '%1 && %3#'],
             params: [
@@ -7467,7 +7467,7 @@ function getBlocks() {
                 {
                     type: 'Text',
                     text: Lang.Blocks.JUDGEMENT_boolean_and,
-                    color: EntryStatic.colorSet.common.WHITE,
+                    color: RoCodeStatic.colorSet.common.WHITE,
                 },
                 {
                     type: 'Block',
@@ -7501,7 +7501,7 @@ function getBlocks() {
             isPrimitive: true,
         },
         ai_if_else: {
-            color: EntryStatic.colorSet.block.default.FLOW,
+            color: RoCodeStatic.colorSet.block.default.FLOW,
             skeleton: 'basic_double_loop',
             statements: [
                 {
@@ -7545,8 +7545,8 @@ function getBlocks() {
         //endregion basic 기본
         //region basic 기본
         hidden: {
-            color: EntryStatic.colorSet.block.default.HIDDEN,
-            outerLine: EntryStatic.colorSet.block.darken.HIDDEN,
+            color: RoCodeStatic.colorSet.block.default.HIDDEN,
+            outerLine: RoCodeStatic.colorSet.block.darken.HIDDEN,
             skeleton: 'basic',
             template: '         %1       %2',
             statements: [],
@@ -7577,8 +7577,8 @@ function getBlocks() {
             func() {},
         },
         hidden_event: {
-            color: EntryStatic.colorSet.block.default.HIDDEN,
-            outerLine: EntryStatic.colorSet.block.darken.HIDDEN,
+            color: RoCodeStatic.colorSet.block.default.HIDDEN,
+            outerLine: RoCodeStatic.colorSet.block.darken.HIDDEN,
             skeleton: 'basic_event',
             template: '         %1       ',
             statements: [],
@@ -7609,8 +7609,8 @@ function getBlocks() {
             func() {},
         },
         hidden_loop: {
-            color: EntryStatic.colorSet.block.default.HIDDEN,
-            outerLine: EntryStatic.colorSet.block.darken.HIDDEN,
+            color: RoCodeStatic.colorSet.block.default.HIDDEN,
+            outerLine: RoCodeStatic.colorSet.block.darken.HIDDEN,
             skeleton: 'basic_loop',
             statements: [
                 {
@@ -7642,8 +7642,8 @@ function getBlocks() {
             func() {},
         },
         hidden_loop2: {
-            color: EntryStatic.colorSet.block.default.HIDDEN,
-            outerLine: EntryStatic.colorSet.block.darken.HIDDEN,
+            color: RoCodeStatic.colorSet.block.default.HIDDEN,
+            outerLine: RoCodeStatic.colorSet.block.darken.HIDDEN,
             skeleton: 'basic_loop',
             template: '         %1       ',
             statements: [
@@ -7678,8 +7678,8 @@ function getBlocks() {
             func() {},
         },
         hidden_if_else: {
-            color: EntryStatic.colorSet.block.default.HIDDEN,
-            outerLine: EntryStatic.colorSet.block.darken.HIDDEN,
+            color: RoCodeStatic.colorSet.block.default.HIDDEN,
+            outerLine: RoCodeStatic.colorSet.block.darken.HIDDEN,
             skeleton: 'basic_double_loop',
             template: '         %1       %2%3',
             statements: [
@@ -7717,8 +7717,8 @@ function getBlocks() {
             func() {},
         },
         hidden_if_else2: {
-            color: EntryStatic.colorSet.block.default.HIDDEN,
-            outerLine: EntryStatic.colorSet.block.darken.HIDDEN,
+            color: RoCodeStatic.colorSet.block.default.HIDDEN,
+            outerLine: RoCodeStatic.colorSet.block.darken.HIDDEN,
             skeleton: 'basic_double_loop',
             template: '         %1       %2%3      %4       ',
             statements: [
@@ -7763,11 +7763,11 @@ function getBlocks() {
             func() {},
         },
         hidden_string: {
-            color: EntryStatic.colorSet.block.default.HIDDEN,
-            outerLine: EntryStatic.colorSet.block.darken.HIDDEN,
+            color: RoCodeStatic.colorSet.block.default.HIDDEN,
+            outerLine: RoCodeStatic.colorSet.block.darken.HIDDEN,
             skeleton: 'basic_string_field',
             template: '    %1    ',
-            fontColor: EntryStatic.colorSet.common.WHITE,
+            fontColor: RoCodeStatic.colorSet.common.WHITE,
             statements: [],
             params: [
                 {
@@ -7791,11 +7791,11 @@ function getBlocks() {
             func() {},
         },
         hidden_boolean: {
-            color: EntryStatic.colorSet.block.default.HIDDEN,
-            outerLine: EntryStatic.colorSet.block.darken.HIDDEN,
+            color: RoCodeStatic.colorSet.block.default.HIDDEN,
+            outerLine: RoCodeStatic.colorSet.block.darken.HIDDEN,
             skeleton: 'basic_boolean_field',
             template: '    %1    ',
-            fontColor: EntryStatic.colorSet.common.WHITE,
+            fontColor: RoCodeStatic.colorSet.common.WHITE,
             statements: [],
             params: [
                 {
@@ -7819,7 +7819,7 @@ function getBlocks() {
         //endregion basic 기본
         //region basic 기본
         boolean_shell: {
-            color: EntryStatic.colorSet.block.default.JUDGE,
+            color: RoCodeStatic.colorSet.block.default.JUDGE,
             skeleton: 'basic_boolean_field',
             template: '%1',
             isPrimitive: true,
@@ -7837,30 +7837,30 @@ function getBlocks() {
 }
 
 function inheritBlockSchema() {
-    for (const type in Entry.block) {
-        const block = Entry.block[type];
+    for (const type in RoCode.block) {
+        const block = RoCode.block[type];
         if (!block.isNotFor) {
             block.isNotFor = [];
         }
         if (block.parent) {
             const F = function() {};
-            F.prototype = Entry.block[block.parent];
+            F.prototype = RoCode.block[block.parent];
             const schema = new F();
             schema.syntax = undefined;
             for (const key in block) {
                 schema[key] = block[key];
             }
-            Entry.block[type] = schema;
+            RoCode.block[type] = schema;
         }
     }
 }
 
 function assignBlocks() {
-    Entry.block.converters = getConverters();
-    Entry.block = Object.assign(Entry.block, getBlocks(), blocks.getBlocks());
-    if (EntryStatic.isPracticalCourse) {
-        const practicalCourseBlockModule = require('../playground/block_entry_mini');
-        Object.assign(Entry.block, practicalCourseBlockModule.practicalCourseBlock);
+    RoCode.block.converters = getConverters();
+    RoCode.block = Object.assign(RoCode.block, getBlocks(), blocks.getBlocks());
+    if (RoCodeStatic.isPracticalCourse) {
+        const practicalCourseBlockModule = require('../playground/block_RoCode_mini');
+        Object.assign(RoCode.block, practicalCourseBlockModule.practicalCourseBlock);
         applySetLanguage(practicalCourseBlockModule);
     }
 }
@@ -7875,14 +7875,14 @@ function applySetLanguage(hasSetLanguageObj) {
     }
 }
 
-Entry.reloadBlock = function() {
-    Object.values(Entry.HARDWARE_LIST).forEach(applySetLanguage);
+RoCode.reloadBlock = function() {
+    Object.values(RoCode.HARDWARE_LIST).forEach(applySetLanguage);
     assignBlocks();
     inheritBlockSchema();
 };
-Entry.reloadBlock();
+RoCode.reloadBlock();
 
 if (typeof exports === 'object') {
-    exports.block = Entry.block;
+    exports.block = RoCode.block;
     exports.assignBlocks = assignBlocks;
 }

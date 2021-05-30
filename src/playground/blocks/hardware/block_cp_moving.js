@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.cp_moving = {
+RoCode.cp_moving = {
     id: '3E.1',
     name: 'cp_moving',
     url: 'https://cafe.naver.com/codingpl',
@@ -10,19 +10,19 @@ Entry.cp_moving = {
         ko: 'CP 무빙카',
     },
     setZero() {
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            const keySet = Object.keys(Entry.hw.sendQueue.SET);
+            const keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach((key) => {
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     sensorTypes: {
         ALIVE: 0,
@@ -79,7 +79,7 @@ Entry.cp_moving = {
         RIGHT: [1.0, 0.5],
     },
 };
-Entry.cp_moving.blockMenuBlocks = [
+RoCode.cp_moving.blockMenuBlocks = [
     'cp_moving_get_ultrasonic',
     'cp_moving_get_soil',
     'cp_moving_get_analog_value',
@@ -102,11 +102,11 @@ Entry.cp_moving.blockMenuBlocks = [
     'cp_moving_set_move',
     'cp_moving_stop_move'
 ];
-Entry.cp_moving.getBlocks = function() {
+RoCode.cp_moving.getBlocks = function() {
     return {
         cp_moving_set_vibrator: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -115,8 +115,8 @@ Entry.cp_moving.getBlocks = function() {
                     options: [[Lang.Blocks.cp_moving_set_on, 'on'], [Lang.Blocks.cp_moving_set_off, 'off']],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -137,12 +137,12 @@ Entry.cp_moving.getBlocks = function() {
             func(sprite, script) {
                 const operator = script.getField('OPERATOR');
                 const value = operator == 'on' ? 255 : 0;
-                Entry.hw.setDigitalPortValue(2, value);
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                RoCode.hw.setDigitalPortValue(2, value);
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[2] = {
-                    type: Entry.cp_moving.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue.SET[2] = {
+                    type: RoCode.cp_moving.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -150,8 +150,8 @@ Entry.cp_moving.getBlocks = function() {
             },
         },
         cp_moving_set_fan: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -160,8 +160,8 @@ Entry.cp_moving.getBlocks = function() {
                     options: [[0, 0], [20, 50], [40, 100], [60, 150], [80, 200], [100, 250]],
                     value: 150,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -184,11 +184,11 @@ Entry.cp_moving.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[3] = {
-                    type: Entry.cp_moving.sensorTypes.PWM,
+                RoCode.hw.sendQueue.SET[3] = {
+                    type: RoCode.cp_moving.sensorTypes.PWM,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -196,8 +196,8 @@ Entry.cp_moving.getBlocks = function() {
             },
         },
         cp_moving_set_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -209,16 +209,16 @@ Entry.cp_moving.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [[0, 0], [20, 10], [40, 20], [60, 30], [80, 40], [100, 50]],
                     value: 30,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -228,8 +228,8 @@ Entry.cp_moving.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -268,11 +268,11 @@ Entry.cp_moving.getBlocks = function() {
                     }
                 }
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[0] = {
-                    type: Entry.cp_moving.sensorTypes.MOTOR,
+                RoCode.hw.sendQueue.SET[0] = {
+                    type: RoCode.cp_moving.sensorTypes.MOTOR,
                     data: { s1, s2 },
                     time: new Date().getTime(),
                 };
@@ -280,8 +280,8 @@ Entry.cp_moving.getBlocks = function() {
             },
         },
         cp_moving_stop_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -293,8 +293,8 @@ Entry.cp_moving.getBlocks = function() {
                     ],
                     value: 0,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -322,11 +322,11 @@ Entry.cp_moving.getBlocks = function() {
                     s2 = 0;
                 }
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[0] = {
-                    type: Entry.cp_moving.sensorTypes.MOTOR,
+                RoCode.hw.sendQueue.SET[0] = {
+                    type: RoCode.cp_moving.sensorTypes.MOTOR,
                     data: { s1, s2 },
                     time: new Date().getTime(),
                 };
@@ -334,8 +334,8 @@ Entry.cp_moving.getBlocks = function() {
             },
         },
         cp_moving_set_move: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -344,21 +344,21 @@ Entry.cp_moving.getBlocks = function() {
                     options: [[0, 0], [20, 10], [40, 20], [60, 30], [80, 40], [100, 50]],
                     value: 30,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [
-                        [Lang.Blocks.cp_moving_move_forward, Entry.cp_moving.move.FORWARD],
-                        [Lang.Blocks.cp_moving_move_backward, Entry.cp_moving.move.BACKWARD],
-                        [Lang.Blocks.cp_moving_move_left, Entry.cp_moving.move.LEFT],
-                        [Lang.Blocks.cp_moving_move_right, Entry.cp_moving.move.RIGHT],
+                        [Lang.Blocks.cp_moving_move_forward, RoCode.cp_moving.move.FORWARD],
+                        [Lang.Blocks.cp_moving_move_backward, RoCode.cp_moving.move.BACKWARD],
+                        [Lang.Blocks.cp_moving_move_left, RoCode.cp_moving.move.LEFT],
+                        [Lang.Blocks.cp_moving_move_right, RoCode.cp_moving.move.RIGHT],
                     ],
-                    value: Entry.cp_moving.move.FORWARD,
+                    value: RoCode.cp_moving.move.FORWARD,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -382,20 +382,20 @@ Entry.cp_moving.getBlocks = function() {
                 const speed = script.getField('SPEED', script);
                 let s1 = -speed;
                 let s2 = speed;
-                if (direction == Entry.cp_moving.move.BACKWARD) {
+                if (direction == RoCode.cp_moving.move.BACKWARD) {
                     s1 = speed;
                     s2 = -speed;
-                } else if (direction == Entry.cp_moving.move.LEFT) {
+                } else if (direction == RoCode.cp_moving.move.LEFT) {
                     s1 = speed;
-                } else if (direction == Entry.cp_moving.move.RIGHT) {
+                } else if (direction == RoCode.cp_moving.move.RIGHT) {
                     s2 = -speed;
                 }
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[0] = {
-                    type: Entry.cp_moving.sensorTypes.MOTOR,
+                RoCode.hw.sendQueue.SET[0] = {
+                    type: RoCode.cp_moving.sensorTypes.MOTOR,
                     data: { s1, s2 },
                     time: new Date().getTime(),
                 };
@@ -403,8 +403,8 @@ Entry.cp_moving.getBlocks = function() {
             },
         },
         cp_moving_stop_move: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -423,11 +423,11 @@ Entry.cp_moving.getBlocks = function() {
             class: 'cp_moving',
             isNotFor: ['cp_moving'],
             func(sprite, script) {
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[0] = {
-                    type: Entry.cp_moving.sensorTypes.MOTOR,
+                RoCode.hw.sendQueue.SET[0] = {
+                    type: RoCode.cp_moving.sensorTypes.MOTOR,
                     data: { s1: 0, s2: 0 },
                     time: new Date().getTime(),
                 };
@@ -435,8 +435,8 @@ Entry.cp_moving.getBlocks = function() {
             },
         },
         cp_moving_set_servor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -466,14 +466,14 @@ Entry.cp_moving.getBlocks = function() {
                 value = Math.min(180, value);
                 value = Math.max(0, value);
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue = {
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue = {
                         GET: {},
                         SET: {},
                     };
                 }
-                Entry.hw.sendQueue.SET[11] = {
-                    type: Entry.cp_moving.sensorTypes.SERVO_PIN,
+                RoCode.hw.sendQueue.SET[11] = {
+                    type: RoCode.cp_moving.sensorTypes.SERVO_PIN,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -482,8 +482,8 @@ Entry.cp_moving.getBlocks = function() {
             },
         },
         cp_moving_set_audio_octave: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -505,16 +505,16 @@ Entry.cp_moving.getBlocks = function() {
                     ],
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7]],
                     value: 4,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -528,8 +528,8 @@ Entry.cp_moving.getBlocks = function() {
                     ],
                     value: 250,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -554,10 +554,10 @@ Entry.cp_moving.getBlocks = function() {
                     const note = script.getField('NOTE', script);
                     const octave = script.getField('OCTAVE', script) - 1;
                     const duration = script.getField('DURATION', script);
-                    const value = Entry.cp_moving.toneMap[note][octave];
+                    const value = RoCode.cp_moving.toneMap[note][octave];
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue = {
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue = {
                             GET: {},
                             SET: {},
                         };
@@ -566,8 +566,8 @@ Entry.cp_moving.getBlocks = function() {
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue.SET[8] = {
-                        type: Entry.ArduinoExt.sensorTypes.TONE,
+                    RoCode.hw.sendQueue.SET[8] = {
+                        type: RoCode.ArduinoExt.sensorTypes.TONE,
                         data: {
                             value,
                             duration,
@@ -584,19 +584,19 @@ Entry.cp_moving.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.hw.sendQueue.SET[8] = {
-                        type: Entry.ArduinoExt.sensorTypes.TONE,
+                    RoCode.hw.sendQueue.SET[8] = {
+                        type: RoCode.ArduinoExt.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         cp_moving_set_audio_freq: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -605,16 +605,16 @@ Entry.cp_moving.getBlocks = function() {
                     accept: 'string',
                     value: 3000,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
                     accept: 'string',
                     value: 1,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -637,14 +637,14 @@ Entry.cp_moving.getBlocks = function() {
                 const value = script.getNumberValue('HZ', script);
                 const duration = script.getNumberValue('SECOND', script) * 1000;
 
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue = {
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue = {
                         GET: {},
                         SET: {},
                     };
                 }
-                Entry.hw.sendQueue.SET[8] = {
-                    type: Entry.ArduinoExt.sensorTypes.TONE,
+                RoCode.hw.sendQueue.SET[8] = {
+                    type: RoCode.ArduinoExt.sensorTypes.TONE,
                     data: {
                         value,
                         duration,
@@ -656,8 +656,8 @@ Entry.cp_moving.getBlocks = function() {
             },
         },
         cp_moving_stop_audio: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -673,8 +673,8 @@ Entry.cp_moving.getBlocks = function() {
                     ],
                     value: 250,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -696,8 +696,8 @@ Entry.cp_moving.getBlocks = function() {
                 if (!script.isStart) {
                     const duration = script.getField('DURATION', script);
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue = {
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue = {
                             GET: {},
                             SET: {},
                         };
@@ -706,8 +706,8 @@ Entry.cp_moving.getBlocks = function() {
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue.SET[8] = {
-                        type: Entry.ArduinoExt.sensorTypes.TONE,
+                    RoCode.hw.sendQueue.SET[8] = {
+                        type: RoCode.ArduinoExt.sensorTypes.TONE,
                         data: {
                             value: 0,
                             duration,
@@ -724,19 +724,19 @@ Entry.cp_moving.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.hw.sendQueue.SET[8] = {
-                        type: Entry.ArduinoExt.sensorTypes.TONE,
+                    RoCode.hw.sendQueue.SET[8] = {
+                        type: RoCode.ArduinoExt.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         cp_moving_get_ultrasonic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -750,26 +750,26 @@ Entry.cp_moving.getBlocks = function() {
             class: 'cp_moving',
             isNotFor: ['cp_moving'],
             func(sprite, script) {
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                delete Entry.hw.sendQueue.SET[9];
-                delete Entry.hw.sendQueue.SET[10];
+                delete RoCode.hw.sendQueue.SET[9];
+                delete RoCode.hw.sendQueue.SET[10];
 
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
-                Entry.hw.sendQueue.GET[Entry.cp_moving.sensorTypes.ULTRASONIC] = {
+                RoCode.hw.sendQueue.GET[RoCode.cp_moving.sensorTypes.ULTRASONIC] = {
                     port: [10, 9],
                     time: new Date().getTime(),
                 };
 
-                return Entry.hw.portData.ULTRASONIC || 0;
+                return RoCode.hw.portData.ULTRASONIC || 0;
             },
         },
         cp_moving_get_joystick: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -777,20 +777,20 @@ Entry.cp_moving.getBlocks = function() {
                 {
                     type: 'Dropdown',
                     options: [
-                        [Lang.Blocks.cp_moving_joystick_up, Entry.cp_moving.direction.UP],
-                        [Lang.Blocks.cp_moving_joystick_down, Entry.cp_moving.direction.DOWN],
-                        [Lang.Blocks.cp_moving_joystick_left, Entry.cp_moving.direction.LEFT],
-                        [Lang.Blocks.cp_moving_joystick_right, Entry.cp_moving.direction.RIGHT],
-                        [Lang.Blocks.cp_moving_joystick_left_up, Entry.cp_moving.direction.LEFT_UP],
-                        [Lang.Blocks.cp_moving_joystick_left_down, Entry.cp_moving.direction.LEFT_DOWN],
-                        [Lang.Blocks.cp_moving_joystick_right_up, Entry.cp_moving.direction.RIGHT_UP],
-                        [Lang.Blocks.cp_moving_joystick_right_down, Entry.cp_moving.direction.RIGHT_DOWN],
-                        [Lang.Blocks.cp_moving_joystick_center, Entry.cp_moving.direction.CENTER],
+                        [Lang.Blocks.cp_moving_joystick_up, RoCode.cp_moving.direction.UP],
+                        [Lang.Blocks.cp_moving_joystick_down, RoCode.cp_moving.direction.DOWN],
+                        [Lang.Blocks.cp_moving_joystick_left, RoCode.cp_moving.direction.LEFT],
+                        [Lang.Blocks.cp_moving_joystick_right, RoCode.cp_moving.direction.RIGHT],
+                        [Lang.Blocks.cp_moving_joystick_left_up, RoCode.cp_moving.direction.LEFT_UP],
+                        [Lang.Blocks.cp_moving_joystick_left_down, RoCode.cp_moving.direction.LEFT_DOWN],
+                        [Lang.Blocks.cp_moving_joystick_right_up, RoCode.cp_moving.direction.RIGHT_UP],
+                        [Lang.Blocks.cp_moving_joystick_right_down, RoCode.cp_moving.direction.RIGHT_DOWN],
+                        [Lang.Blocks.cp_moving_joystick_center, RoCode.cp_moving.direction.CENTER],
                     ],
-                    value: Entry.cp_moving.direction.CENTER,
+                    value: RoCode.cp_moving.direction.CENTER,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -805,62 +805,62 @@ Entry.cp_moving.getBlocks = function() {
             isNotFor: ['cp_moving'],
             func(sprite, script) {
                 const direction = script.getField('DIRECTION', script);
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
 
                 const getValue = function(w) {
                     return ANALOG[w] == 0 ? 0 : ANALOG[w] == 1023 ? 2 : 1;
                 };
 
                 if (
-                    direction == Entry.cp_moving.direction.CENTER &&
+                    direction == RoCode.cp_moving.direction.CENTER &&
                     getValue(0) == 1 &&
                     getValue(1) == 1
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.cp_moving.direction.DOWN &&
+                    direction == RoCode.cp_moving.direction.DOWN &&
                     getValue(0) == 1 &&
                     getValue(1) == 2
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.cp_moving.direction.LEFT &&
+                    direction == RoCode.cp_moving.direction.LEFT &&
                     getValue(0) == 0 &&
                     getValue(1) == 1
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.cp_moving.direction.LEFT_DOWN &&
+                    direction == RoCode.cp_moving.direction.LEFT_DOWN &&
                     getValue(0) == 0 &&
                     getValue(1) == 2
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.cp_moving.direction.LEFT_UP &&
+                    direction == RoCode.cp_moving.direction.LEFT_UP &&
                     getValue(0) == 0 &&
                     getValue(1) == 0
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.cp_moving.direction.RIGHT &&
+                    direction == RoCode.cp_moving.direction.RIGHT &&
                     getValue(0) == 2 &&
                     getValue(1) == 1
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.cp_moving.direction.RIGHT_DOWN &&
+                    direction == RoCode.cp_moving.direction.RIGHT_DOWN &&
                     getValue(0) == 2 &&
                     getValue(1) == 2
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.cp_moving.direction.RIGHT_UP &&
+                    direction == RoCode.cp_moving.direction.RIGHT_UP &&
                     getValue(0) == 2 &&
                     getValue(1) == 0
                 ) {
                     return 1;
                 } else if (
-                    direction == Entry.cp_moving.direction.UP &&
+                    direction == RoCode.cp_moving.direction.UP &&
                     getValue(0) == 1 &&
                     getValue(1) == 0
                 ) {
@@ -871,8 +871,8 @@ Entry.cp_moving.getBlocks = function() {
             },
         },
         cp_moving_get_joystick_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [],
@@ -885,13 +885,13 @@ Entry.cp_moving.getBlocks = function() {
             class: 'cp_moving',
             isNotFor: ['cp_moving'],
             func(sprite, script) {
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[1] && ANALOG[2] != 0 : 0;
             },
         },
         cp_moving_get_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
@@ -903,8 +903,8 @@ Entry.cp_moving.getBlocks = function() {
                     ],
                     value: 6,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -919,13 +919,13 @@ Entry.cp_moving.getBlocks = function() {
             isNotFor: ['cp_moving'],
             func(sprite, script) {
                 const which = script.getField('WHICH', script);
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[which] != 0 : 0;
             },
         },
         cp_moving_set_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -934,24 +934,24 @@ Entry.cp_moving.getBlocks = function() {
                     accept: 'string',
                     value: 100,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
                     accept: 'string',
                     value: 100,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
                     accept: 'string',
                     value: 100,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -981,15 +981,15 @@ Entry.cp_moving.getBlocks = function() {
                     g = Math.max(Math.min(g, 255), 0);
                     b = Math.max(Math.min(b, 255), 0);
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue = {
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue = {
                             GET: {},
                             SET: {},
                         };
                     }
 
-                    Entry.hw.sendQueue.SET[13] = {
-                        type: Entry.cp_moving.sensorTypes.LED,
+                    RoCode.hw.sendQueue.SET[13] = {
+                        type: RoCode.cp_moving.sensorTypes.LED,
                         data: {
                             r,
                             g,
@@ -1010,14 +1010,14 @@ Entry.cp_moving.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         cp_moving_set_led_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1034,16 +1034,16 @@ Entry.cp_moving.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
                     accept: 'string',
                     value: 100,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1065,7 +1065,7 @@ Entry.cp_moving.getBlocks = function() {
             func(sprite, script) {
                 if (!script.isStart) {
                     const colorType = script.getField('COLOR', script);
-                    const color = Entry.cp_moving.color[colorType];
+                    const color = RoCode.cp_moving.color[colorType];
                     let brightness = script.getNumberValue('BRIGHTNESS', script);
 
                     brightness = Math.max(Math.min(brightness, 255), 0);
@@ -1077,15 +1077,15 @@ Entry.cp_moving.getBlocks = function() {
                     g = Math.max(Math.min(g, 255), 0);
                     b = Math.max(Math.min(b, 255), 0);
 
-                    if (!Entry.hw.sendQueue.SET) {
-                        Entry.hw.sendQueue = {
+                    if (!RoCode.hw.sendQueue.SET) {
+                        RoCode.hw.sendQueue = {
                             GET: {},
                             SET: {},
                         };
                     }
 
-                    Entry.hw.sendQueue.SET[13] = {
-                        type: Entry.cp_moving.sensorTypes.LED,
+                    RoCode.hw.sendQueue.SET[13] = {
+                        type: RoCode.cp_moving.sensorTypes.LED,
                         data: {
                             r,
                             g,
@@ -1106,14 +1106,14 @@ Entry.cp_moving.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
         },
         cp_moving_stop_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1132,15 +1132,15 @@ Entry.cp_moving.getBlocks = function() {
             class: 'cp_moving',
             isNotFor: ['cp_moving'],
             func(sprite, script) {
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue = {
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue = {
                         GET: {},
                         SET: {},
                     };
                 }
 
-                Entry.hw.sendQueue.SET[13] = {
-                    type: Entry.cp_moving.sensorTypes.LED,
+                RoCode.hw.sendQueue.SET[13] = {
+                    type: RoCode.cp_moving.sensorTypes.LED,
                     data: {
                         r: 0,
                         g: 0,
@@ -1153,8 +1153,8 @@ Entry.cp_moving.getBlocks = function() {
             },
         },
         cp_moving_get_soil: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1168,13 +1168,13 @@ Entry.cp_moving.getBlocks = function() {
             class: 'cp_moving',
             isNotFor: ['cp_moving'],
             func(sprite, script) {
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[3] || 0 : 0;
             },
         },
         cp_moving_get_analog: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1188,13 +1188,13 @@ Entry.cp_moving.getBlocks = function() {
             class: 'cp_moving',
             isNotFor: ['cp_moving'],
             func(sprite, script) {
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[5] || 0 : 0;
             },
         },
         cp_moving_get_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
@@ -1203,8 +1203,8 @@ Entry.cp_moving.getBlocks = function() {
                     options: [[1, 11], [2, 12]],
                     value: 11,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1219,11 +1219,11 @@ Entry.cp_moving.getBlocks = function() {
             isNotFor: ['cp_moving'],
             func(sprite, script) {
                 const port = script.getField('PORT', script);
-                const DIGITAL = Entry.hw.portData.DIGITAL;
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                const DIGITAL = RoCode.hw.portData.DIGITAL;
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
-                Entry.hw.sendQueue.GET[Entry.cp_moving.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue.GET[RoCode.cp_moving.sensorTypes.DIGITAL] = {
                     port,
                     time: new Date().getTime(),
                 };
@@ -1231,8 +1231,8 @@ Entry.cp_moving.getBlocks = function() {
             },
         },
         cp_moving_set_digital: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1241,16 +1241,16 @@ Entry.cp_moving.getBlocks = function() {
                     options: [[11, 11], [12, 12]],
                     value: 11,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [[Lang.Blocks.cp_moving_set_on, 'on'], [Lang.Blocks.cp_moving_set_off, 'off']],
                     value: 'on',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1273,12 +1273,12 @@ Entry.cp_moving.getBlocks = function() {
                 const port = script.getField('PORT', script);
                 const operator = script.getField('OPERATOR');
                 const value = operator == 'on' ? 255 : 0;
-                Entry.hw.setDigitalPortValue(port, value);
-                if (!Entry.hw.sendQueue.SET) {
-                    Entry.hw.sendQueue.SET = {};
+                RoCode.hw.setDigitalPortValue(port, value);
+                if (!RoCode.hw.sendQueue.SET) {
+                    RoCode.hw.sendQueue.SET = {};
                 }
-                Entry.hw.sendQueue.SET[port] = {
-                    type: Entry.cp_moving.sensorTypes.DIGITAL,
+                RoCode.hw.sendQueue.SET[port] = {
+                    type: RoCode.cp_moving.sensorTypes.DIGITAL,
                     data: value,
                     time: new Date().getTime(),
                 };
@@ -1286,8 +1286,8 @@ Entry.cp_moving.getBlocks = function() {
             },
         },
         cp_moving_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1301,13 +1301,13 @@ Entry.cp_moving.getBlocks = function() {
             class: 'cp_moving',
             isNotFor: ['cp_moving'],
             func(sprite, script) {
-                const ANALOG = Entry.hw.portData.ANALOG;
+                const ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG ? ANALOG[4] || 0 : 0;
             },
         },
         cp_moving_get_ir: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
@@ -1316,8 +1316,8 @@ Entry.cp_moving.getBlocks = function() {
                     options: [[Lang.Blocks.cp_moving_ir_left, 11], [Lang.Blocks.cp_moving_ir_right, 12]],
                     value: 11,
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1338,11 +1338,11 @@ Entry.cp_moving.getBlocks = function() {
             isNotFor: ['cp_moving'],
             func(sprite, script) {
                 const port = script.getField('PORT', script);
-                const DIGITAL = Entry.hw.portData.DIGITAL;
-                if (!Entry.hw.sendQueue.GET) {
-                    Entry.hw.sendQueue.GET = {};
+                const DIGITAL = RoCode.hw.portData.DIGITAL;
+                if (!RoCode.hw.sendQueue.GET) {
+                    RoCode.hw.sendQueue.GET = {};
                 }
-                Entry.hw.sendQueue.GET[Entry.cp_moving.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue.GET[RoCode.cp_moving.sensorTypes.DIGITAL] = {
                     port,
                     time: new Date().getTime(),
                 };
@@ -1351,7 +1351,7 @@ Entry.cp_moving.getBlocks = function() {
         }
     };
 };
-Entry.cp_moving.setLanguage = function() {
+RoCode.cp_moving.setLanguage = function() {
     return {
         ko: {
             Blocks: {
@@ -1486,4 +1486,4 @@ Entry.cp_moving.setLanguage = function() {
     };
 };
 
-module.exports = Entry.cp_moving;
+module.exports = RoCode.cp_moving;

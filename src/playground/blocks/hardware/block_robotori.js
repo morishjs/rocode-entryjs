@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.robotori = {
+RoCode.robotori = {
     PORT_MAP: {
         A0: 0,
         A1: 0,
@@ -22,18 +22,18 @@ Entry.robotori = {
         LEFT_MOTOR: 0xff, //default stop
     },
     setZero: function() {
-        //Entry.hw.sendQueue.readablePorts = [];
+        //RoCode.hw.sendQueue.readablePorts = [];
 
-        var portMap = Entry.robotori.PORT_MAP;
-        var sq = Entry.hw.sendQueue;
+        var portMap = RoCode.robotori.PORT_MAP;
+        var sq = RoCode.hw.sendQueue;
         for (var port in portMap) {
             sq[port] = portMap[port];
             //sq[portMap[port] = 0;
 
-            //Entry.hw.sendQueue.readablePorts.push(port);
+            //RoCode.hw.sendQueue.readablePorts.push(port);
         }
-        Entry.hw.update();
-        var Robotori = Entry.robotori;
+        RoCode.hw.update();
+        var Robotori = RoCode.robotori;
     },
     id: 'D.1',
     name: 'robotori',
@@ -61,7 +61,7 @@ Entry.robotori = {
     },
 };
 
-Entry.robotori.setLanguage = function() {
+RoCode.robotori.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -146,7 +146,7 @@ Entry.robotori.setLanguage = function() {
     };
 };
 
-Entry.robotori.blockMenuBlocks = [
+RoCode.robotori.blockMenuBlocks = [
     //robotori Add 20161129 begin
     'robotori_digitalInput',
     'robotori_analogInput',
@@ -157,12 +157,12 @@ Entry.robotori.blockMenuBlocks = [
     //robotori add 20161129 end
 ];
 
-Entry.robotori.getBlocks = function() {
+RoCode.robotori.getBlocks = function() {
     return {
         //region robotori 로보토리
         robotori_digitalInput: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [
@@ -174,8 +174,8 @@ Entry.robotori.getBlocks = function() {
                     ],
                     value: 'D2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -189,14 +189,14 @@ Entry.robotori.getBlocks = function() {
             class: 'robotori_sensor',
             isNotFor: ['robotori'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 return pd[dev];
             },
         },
         robotori_analogInput: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -212,8 +212,8 @@ Entry.robotori.getBlocks = function() {
                     ],
                     value: 'A0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -227,14 +227,14 @@ Entry.robotori.getBlocks = function() {
             class: 'robotori_sensor',
             isNotFor: ['robotori'],
             func: function(sprite, script) {
-                var pd = Entry.hw.portData;
+                var pd = RoCode.hw.portData;
                 var dev = script.getField('DEVICE');
                 return pd[dev];
             },
         },
         robotori_digitalOutput: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -248,8 +248,8 @@ Entry.robotori.getBlocks = function() {
                     ],
                     value: 'D10',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -259,8 +259,8 @@ Entry.robotori.getBlocks = function() {
                     ],
                     value: 'ON',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -280,7 +280,7 @@ Entry.robotori.getBlocks = function() {
             class: 'robotori_sensor',
             isNotFor: ['robotori'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var dev = script.getStringField('DEVICE', script);
                 var value = script.getStringField('VALUE', script);
 
@@ -313,8 +313,8 @@ Entry.robotori.getBlocks = function() {
             },
         },
         robotori_analogOutput: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -327,8 +327,8 @@ Entry.robotori.getBlocks = function() {
                     ],
                     value: 'AOUT5',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -359,7 +359,7 @@ Entry.robotori.getBlocks = function() {
             class: 'robotori_sensor',
             isNotFor: ['robotori'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var dev = script.getStringField('DEVICE', script);
                 var value = script.getNumberValue('VALUE', script);
 
@@ -375,8 +375,8 @@ Entry.robotori.getBlocks = function() {
             },
         },
         robotori_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -407,15 +407,15 @@ Entry.robotori.getBlocks = function() {
             class: 'robotori_motor',
             isNotFor: ['robotori'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 sq.SERVO = script.getNumberValue('SERVO');
 
                 return script.callReturn();
             },
         },
         robotori_dc_direction: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -427,8 +427,8 @@ Entry.robotori.getBlocks = function() {
                     ],
                     value: 'RIGHT_MOTOR',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -439,8 +439,8 @@ Entry.robotori.getBlocks = function() {
                     ],
                     value: 'STOP',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -460,7 +460,7 @@ Entry.robotori.getBlocks = function() {
             class: 'robotori_motor',
             isNotFor: ['robotori'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var dev = script.getStringField('DEVICE', script);
                 var value = script.getStringField('VALUE', script);
                 if (dev == 'RIGHT_MOTOR') {
@@ -488,4 +488,4 @@ Entry.robotori.getBlocks = function() {
     };
 };
 
-module.exports = Entry.robotori;
+module.exports = RoCode.robotori;

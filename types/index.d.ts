@@ -52,25 +52,25 @@ declare interface MediaUtilsInterface {
     compatabilityChecker(): void; // throws error if failed
 }
 
-declare interface EntryDomOptions {
+declare interface RoCodeDomOptions {
     id?: string;
     class?: string;
     classes?: string[];
     text?: string;
     src?: string;
     href?: string;
-    parent?: EntryDom;
+    parent?: RoCodeDom;
 }
 
-declare interface EntryDom extends JQuery {
+declare interface RoCodeDom extends JQuery {
     innerHTML?: string;
     bindOnClick?: (e: any) => this;
 }
 
-declare type EntryDomConstructor = (
+declare type RoCodeDomConstructor = (
     tag: string | HTMLElement | JQuery,
-    options?: EntryDomOptions
-) => EntryDom;
+    options?: RoCodeDomOptions
+) => RoCodeDom;
 
 interface HardwareMessageData extends HardwareModuleId {
     [key: string]: any;
@@ -87,9 +87,9 @@ type WebSocketMessage = {
     type: 'utf8';
 };
 
-declare module IEntry {
+declare module IRoCode {
     export interface Container {
-        resizeEvent: any; // Entry.Event
+        resizeEvent: any; // RoCode.Event
         splitterEnable?: boolean;
 
         getAllObjects(): UnknownAny[];
@@ -136,10 +136,10 @@ declare module IEntry {
         removeView(): void;
     }
 
-    // Entry namespace 에 필요한 객체가 있으면 추가해주세요.
+    // RoCode namespace 에 필요한 객체가 있으면 추가해주세요.
 }
 
-declare type EntryBlock = {
+declare type RoCodeBlock = {
     color: string;
     outerLine?: string;
     skeleton: string;
@@ -167,14 +167,14 @@ declare type EntryBlock = {
 };
 
 // expansion blocks 의 스키마를 따름
-declare interface EntryBlockModule {
+declare interface RoCodeBlockModule {
     name: string;
     title: { [key: string]: string };
     description?: string;
-    getBlocks: () => { [blockName: string]: EntryBlock };
+    getBlocks: () => { [blockName: string]: RoCodeBlock };
 }
 
-declare interface EntryHardwareBlockModule extends EntryBlockModule {
+declare interface RoCodeHardwareBlockModule extends RoCodeBlockModule {
     // 홍보용
     imageName: string;
     url: string;

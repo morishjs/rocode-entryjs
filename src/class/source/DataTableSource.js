@@ -22,7 +22,7 @@ class DataTableSource {
     constructor(source = {}) {
         const {
             name,
-            id = Entry.generateHash(),
+            id = RoCode.generateHash(),
             object = null,
             chart,
             data,
@@ -41,7 +41,7 @@ class DataTableSource {
         this.tab = tab;
         this.updated = new Date(updatedAt);
         // 정지시 data 초기화.
-        Entry.addEventListener('stop', () => {
+        RoCode.addEventListener('stop', () => {
             this.modal = null;
             this.#data.from({
                 ...source,
@@ -258,7 +258,7 @@ class DataTableSource {
         return {
             _id: this.#data._id,
             id: this.#id,
-            project: Entry.projectId,
+            project: RoCode.projectId,
             fields: this.fields,
             name: this.#name,
             object: this.#object,

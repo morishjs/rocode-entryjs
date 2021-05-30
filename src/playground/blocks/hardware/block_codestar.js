@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Codestar = {
+RoCode.Codestar = {
     id: 'B.1',
     name: 'codestar',
     url: 'http://codestar.co.kr',
@@ -10,12 +10,12 @@ Entry.Codestar = {
         en: 'Codestar',
     },
     setZero: function() {
-        Entry.hw.sendQueue.readablePorts = [];
+        RoCode.hw.sendQueue.readablePorts = [];
         for (var port = 0; port < 20; port++) {
-            Entry.hw.sendQueue[port] = 0;
-            Entry.hw.sendQueue.readablePorts.push(port);
+            RoCode.hw.sendQueue[port] = 0;
+            RoCode.hw.sendQueue.readablePorts.push(port);
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     monitorTemplate: {
         imgPath: 'hw/codestar.png',
@@ -75,7 +75,7 @@ Entry.Codestar = {
         mode: 'both',
     },
 };
-Entry.Codestar.blockMenuBlocks = [
+RoCode.Codestar.blockMenuBlocks = [
     'codestar_color_single',
     'codestar_3color',
     'codestar_vibration',
@@ -91,7 +91,7 @@ Entry.Codestar.blockMenuBlocks = [
     'codestar_temperature',
     'codestar_tilt',
 ];
-Entry.Codestar.setLanguage = function() {
+RoCode.Codestar.setLanguage = function() {
     return {
         ko: {
             Menus: {
@@ -105,12 +105,12 @@ Entry.Codestar.setLanguage = function() {
         },
     };
 };
-Entry.Codestar.getBlocks = function() {
+RoCode.Codestar.getBlocks = function() {
     return {
         //region codestar 코드스타
         codestar_color_single: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: '%1 LED %2 %3',
@@ -122,8 +122,8 @@ Entry.Codestar.getBlocks = function() {
                         ['파란색', 8],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -132,8 +132,8 @@ Entry.Codestar.getBlocks = function() {
                         [Lang.Blocks.ARDUINO_off, 'off'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -156,13 +156,13 @@ Entry.Codestar.getBlocks = function() {
                 var port = script.getField('PORT');
                 var onoff = script.getField('ONOFF');
                 var value = onoff == 'on' ? 255 : 0;
-                Entry.hw.setDigitalPortValue(port, value);
+                RoCode.hw.setDigitalPortValue(port, value);
                 return script.callReturn();
             },
         },
         codestar_3color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: '3색 LED %1 밝기 %2 %3',
@@ -175,8 +175,8 @@ Entry.Codestar.getBlocks = function() {
                         ['파란색', 11],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -205,13 +205,13 @@ Entry.Codestar.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 255);
-                Entry.hw.setDigitalPortValue(port, value);
+                RoCode.hw.setDigitalPortValue(port, value);
                 return script.callReturn();
             },
         },
         codestar_vibration: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: '진동모터 %1 %2',
@@ -223,8 +223,8 @@ Entry.Codestar.getBlocks = function() {
                         [Lang.Blocks.ARDUINO_off, 'off'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -246,13 +246,13 @@ Entry.Codestar.getBlocks = function() {
                 var port = 13;
                 var onoff = script.getField('ONOFF');
                 var value = onoff == 'on' ? 255 : 0;
-                Entry.hw.setDigitalPortValue(port, value);
+                RoCode.hw.setDigitalPortValue(port, value);
                 return script.callReturn();
             },
         },
         codestar_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: '부저 톤%1 %2',
@@ -276,8 +276,8 @@ Entry.Codestar.getBlocks = function() {
                         ['F5', 14],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -297,13 +297,13 @@ Entry.Codestar.getBlocks = function() {
             isNotFor: ['codestar'],
             func: function(sprite, script) {
                 var tone = script.getField('TONE');
-                Entry.hw.setDigitalPortValue(15, tone);
+                RoCode.hw.setDigitalPortValue(15, tone);
                 return script.callReturn();
             },
         },
         codestar_buzzer_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: '부저 중지 %1',
@@ -323,13 +323,13 @@ Entry.Codestar.getBlocks = function() {
             class: 'codestar_output_sensor',
             isNotFor: ['codestar'],
             func: function(sprite, script) {
-                Entry.hw.setDigitalPortValue(15, 24);
+                RoCode.hw.setDigitalPortValue(15, 24);
                 return script.callReturn();
             },
         },
         codestar_servo: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: '서보모터 %1 모터값 %2 %3',
@@ -345,8 +345,8 @@ Entry.Codestar.getBlocks = function() {
                         ['D11', 'D11'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -371,7 +371,7 @@ Entry.Codestar.getBlocks = function() {
             isNotFor: ['codestar'],
             func: function(sprite, script) {
                 var value = script.getNumberValue('VALUE');
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 sq.outport = script.getField('PORT');
                 sq.value = 0;
                 if (!isNaN(value)) {
@@ -384,8 +384,8 @@ Entry.Codestar.getBlocks = function() {
             },
         },
         codestar_drive: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: '방향 %1 속도 %2 %3',
@@ -399,8 +399,8 @@ Entry.Codestar.getBlocks = function() {
                         ['오른쪽', '3'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -435,13 +435,13 @@ Entry.Codestar.getBlocks = function() {
                 value = Math.round(value / 30);
                 //if(value == 0) value = 1;
                 var query = (id << 7) + (dir << 5) + value;
-                Entry.hw.setDigitalPortValue(14, query);
+                RoCode.hw.setDigitalPortValue(14, query);
                 return script.callReturn();
             },
         },
         codestar_wheel: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             template: '방향 %1 바퀴속도 %2 %3',
@@ -453,8 +453,8 @@ Entry.Codestar.getBlocks = function() {
                         ['오른쪽', '1'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -492,13 +492,13 @@ Entry.Codestar.getBlocks = function() {
                 value = Math.round(value / 30);
                 //if(value == 0) value = 1;
                 var query = (id << 7) + (dir << 5) + value;
-                Entry.hw.setDigitalPortValue(14, query);
+                RoCode.hw.setDigitalPortValue(14, query);
                 return script.callReturn();
             },
         },
         codestar_light: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -513,12 +513,12 @@ Entry.Codestar.getBlocks = function() {
             class: 'codestar_input_sensor',
             isNotFor: ['codestar'],
             func: function(sprite, script) {
-                return Entry.hw.getAnalogPortValue('6');
+                return RoCode.hw.getAnalogPortValue('6');
             },
         },
         codestar_button: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -533,12 +533,12 @@ Entry.Codestar.getBlocks = function() {
             class: 'codestar_input_sensor',
             isNotFor: ['codestar'],
             func: function(sprite, script) {
-                return Entry.hw.getDigitalPortValue('12');
+                return RoCode.hw.getDigitalPortValue('12');
             },
         },
         codestar_ir: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -553,8 +553,8 @@ Entry.Codestar.getBlocks = function() {
                         ['A7', '7'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -569,12 +569,12 @@ Entry.Codestar.getBlocks = function() {
             isNotFor: ['codestar'],
             func: function(sprite, script) {
                 var port = script.getField('PORT');
-                return Entry.hw.getAnalogPortValue(port);
+                return RoCode.hw.getAnalogPortValue(port);
             },
         },
         codestar_sonar: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -589,12 +589,12 @@ Entry.Codestar.getBlocks = function() {
             class: 'codestar_input_sensor',
             isNotFor: ['codestar'],
             func: function(sprite, script) {
-                return Entry.hw.portData.sonar;
+                return RoCode.hw.portData.sonar;
             },
         },
         codestar_variable_R: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -609,8 +609,8 @@ Entry.Codestar.getBlocks = function() {
                         ['A5', '5'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -625,12 +625,12 @@ Entry.Codestar.getBlocks = function() {
             isNotFor: ['codestar'],
             func: function(sprite, script) {
                 var port = script.getField('PORT');
-                return Entry.hw.getAnalogPortValue(port);
+                return RoCode.hw.getAnalogPortValue(port);
             },
         },
         codestar_mic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -645,12 +645,12 @@ Entry.Codestar.getBlocks = function() {
             class: 'codestar_input_sensor',
             isNotFor: ['codestar'],
             func: function(sprite, script) {
-                return Entry.hw.getAnalogPortValue('2');
+                return RoCode.hw.getAnalogPortValue('2');
             },
         },
         codestar_temperature: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -665,12 +665,12 @@ Entry.Codestar.getBlocks = function() {
             class: 'codestar_input_sensor',
             isNotFor: ['codestar'],
             func: function(sprite, script) {
-                return Entry.hw.portData.temperature;
+                return RoCode.hw.portData.temperature;
             },
         },
         codestar_gyroscope: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -684,8 +684,8 @@ Entry.Codestar.getBlocks = function() {
                         ['z', 'z'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -704,12 +704,12 @@ Entry.Codestar.getBlocks = function() {
             isNotFor: ['codestar'],
             func: function(sprite, script) {
                 var axis = script.getField('AXIS');
-                return Entry.hw.getAnalogPortValue('gyro_' + axis);
+                return RoCode.hw.getAnalogPortValue('gyro_' + axis);
             },
         },
         codestar_geomagnetic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -723,8 +723,8 @@ Entry.Codestar.getBlocks = function() {
                         ['z', 'z'],
                     ],
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -743,12 +743,12 @@ Entry.Codestar.getBlocks = function() {
             isNotFor: ['codestar'],
             func: function(sprite, script) {
                 var axis = script.getField('AXIS');
-                return Entry.hw.getAnalogPortValue('geo_' + axis);
+                return RoCode.hw.getAnalogPortValue('geo_' + axis);
             },
         },
         codestar_irR: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -763,12 +763,12 @@ Entry.Codestar.getBlocks = function() {
             class: 'codestar_input_sensor',
             isNotFor: ['codestar'],
             func: function(sprite, script) {
-                return Entry.hw.getDigitalPortValue('3');
+                return RoCode.hw.getDigitalPortValue('3');
             },
         },
         codestar_tilt: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -783,11 +783,11 @@ Entry.Codestar.getBlocks = function() {
             class: 'codestar_input_sensor',
             isNotFor: ['codestar'],
             func: function(sprite, script) {
-                return Entry.hw.portData.tilt;
+                return RoCode.hw.portData.tilt;
             },
         },
         //endregion codestar 코드스타
     };
 };
 
-module.exports = Entry.Codestar;
+module.exports = RoCode.Codestar;

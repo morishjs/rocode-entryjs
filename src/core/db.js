@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.db = class DB {
+RoCode.db = class DB {
     constructor() {
         this.data = {};
         this.typeMap = {};

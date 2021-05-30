@@ -6,108 +6,108 @@ import _intersection from 'lodash/intersection';
 import _clamp from 'lodash/clamp';
 import FontFaceOnload from 'fontfaceonload';
 import DataTable from '../class/DataTable';
-import entryModuleLoader from '../class/entryModuleLoader';
+import RoCodeModuleLoader from '../class/RoCodeModuleLoader';
 import { bignumber, chain } from 'mathjs';
 
-Entry.Utils = {};
+RoCode.Utils = {};
 
-Entry.TEXT_ALIGN_CENTER = 0;
+RoCode.TEXT_ALIGN_CENTER = 0;
 
-Entry.TEXT_ALIGN_LEFT = 1;
+RoCode.TEXT_ALIGN_LEFT = 1;
 
-Entry.TEXT_ALIGN_RIGHT = 2;
+RoCode.TEXT_ALIGN_RIGHT = 2;
 
-Entry.TEXT_ALIGNS = ['center', 'left', 'right'];
+RoCode.TEXT_ALIGNS = ['center', 'left', 'right'];
 
-Entry.clipboard = null;
+RoCode.clipboard = null;
 
 /**
  * Load project
  * @param {*} project
  */
-Entry.loadProject = function(project) {
+RoCode.loadProject = function(project) {
     if (!project) {
-        project = Entry.getStartProject(Entry.mediaFilePath);
+        project = RoCode.getStartProject(RoCode.mediaFilePath);
     }
     if (this.type === 'workspace') {
-        Entry.stateManager.startIgnore();
+        RoCode.stateManager.startIgnore();
     }
-    Entry.projectId = project._id;
-    Entry.variableContainer.setVariables(Entry.Utils.combineCloudVariable(project));
-    Entry.variableContainer.setMessages(project.messages);
-    Entry.variableContainer.setFunctions(project.functions);
+    RoCode.projectId = project._id;
+    RoCode.variableContainer.setVariables(RoCode.Utils.combineCloudVariable(project));
+    RoCode.variableContainer.setMessages(project.messages);
+    RoCode.variableContainer.setFunctions(project.functions);
     DataTable.setTables(project.tables);
-    Entry.aiLearning.load(project.learning);
-    Entry.scene.addScenes(project.scenes);
-    Entry.stage.initObjectContainers();
-    Entry.container.setObjects(project.objects);
-    Entry.FPS = project.speed ? project.speed : 60;
-    GEHelper.Ticker.setFPS(Entry.FPS);
-    Entry.aiUtilizeBlocks = project.aiUtilizeBlocks || [];
-    if (Entry.aiUtilizeBlocks.length > 0) {
-        for (const type in Entry.AI_UTILIZE_BLOCK_LIST) {
-            if (Entry.aiUtilizeBlocks.indexOf(type) > -1) {
-                Entry.AI_UTILIZE_BLOCK[type].init();
-                if (Entry.type === 'workspace' || Entry.type === 'playground') {
-                    Entry.playground.blockMenu.unbanClass(type);
+    RoCode.aiLearning.load(project.learning);
+    RoCode.scene.addScenes(project.scenes);
+    RoCode.stage.initObjectContainers();
+    RoCode.container.setObjects(project.objects);
+    RoCode.FPS = project.speed ? project.speed : 60;
+    GEHelper.Ticker.setFPS(RoCode.FPS);
+    RoCode.aiUtilizeBlocks = project.aiUtilizeBlocks || [];
+    if (RoCode.aiUtilizeBlocks.length > 0) {
+        for (const type in RoCode.AI_UTILIZE_BLOCK_LIST) {
+            if (RoCode.aiUtilizeBlocks.indexOf(type) > -1) {
+                RoCode.AI_UTILIZE_BLOCK[type].init();
+                if (RoCode.type === 'workspace' || RoCode.type === 'playground') {
+                    RoCode.playground.blockMenu.unbanClass(type);
                 }
             }
         }
     }
 
-    Entry.expansionBlocks = project.expansionBlocks || [];
-    if (Entry.expansionBlocks.length > 0) {
-        for (const type in Entry.EXPANSION_BLOCK_LIST) {
-            if (Entry.expansionBlocks.indexOf(type) > -1) {
-                Entry.EXPANSION_BLOCK[type].init();
-                if (Entry.type === 'workspace' || Entry.type === 'playground') {
-                    Entry.playground.blockMenu.unbanClass(type);
+    RoCode.expansionBlocks = project.expansionBlocks || [];
+    if (RoCode.expansionBlocks.length > 0) {
+        for (const type in RoCode.EXPANSION_BLOCK_LIST) {
+            if (RoCode.expansionBlocks.indexOf(type) > -1) {
+                RoCode.EXPANSION_BLOCK[type].init();
+                if (RoCode.type === 'workspace' || RoCode.type === 'playground') {
+                    RoCode.playground.blockMenu.unbanClass(type);
                 }
             }
         }
     }
 
-    if (!Entry.engine.projectTimer) {
-        Entry.variableContainer.generateTimer();
+    if (!RoCode.engine.projectTimer) {
+        RoCode.variableContainer.generateTimer();
     }
 
-    if (Object.keys(Entry.container.inputValue).length === 0) {
-        Entry.variableContainer.generateAnswer();
+    if (Object.keys(RoCode.container.inputValue).length === 0) {
+        RoCode.variableContainer.generateAnswer();
     }
-    Entry.start();
+    RoCode.start();
     if (this.options.programmingMode) {
         let mode = this.options.programmingMode;
-        if (Entry.Utils.isNumber(mode)) {
+        if (RoCode.Utils.isNumber(mode)) {
             const pMode = mode;
             mode = {};
 
             this.mode = mode;
             if (pMode == 0) {
-                mode.boardType = Entry.Workspace.MODE_BOARD;
+                mode.boardType = RoCode.Workspace.MODE_BOARD;
                 mode.textType = -1;
             } else if (pMode == 1) {
                 // Python in Text Coding
-                mode.boardType = Entry.Workspace.MODE_VIMBOARD;
-                mode.textType = Entry.Vim.TEXT_TYPE_PY;
-                mode.runType = Entry.Vim.WORKSPACE_MODE;
+                mode.boardType = RoCode.Workspace.MODE_VIMBOARD;
+                mode.textType = RoCode.Vim.TEXT_TYPE_PY;
+                mode.runType = RoCode.Vim.WORKSPACE_MODE;
             } else if (pMode == 2) {
                 // Javascript in Text Coding
-                mode.boardType = Entry.Workspace.MODE_VIMBOARD;
-                mode.textType = Entry.Vim.TEXT_TYPE_JS;
-                mode.runType = Entry.Vim.MAZE_MODE;
+                mode.boardType = RoCode.Workspace.MODE_VIMBOARD;
+                mode.textType = RoCode.Vim.TEXT_TYPE_JS;
+                mode.runType = RoCode.Vim.MAZE_MODE;
             }
-            Entry.getMainWS().setMode(mode);
+            RoCode.getMainWS().setMode(mode);
         }
     }
 
-    Entry.Loader.isLoaded() && Entry.Loader.handleLoad();
+    RoCode.Loader.isLoaded() && RoCode.Loader.handleLoad();
 
     if (this.type == 'workspace') {
-        Entry.stateManager.endIgnore();
+        RoCode.stateManager.endIgnore();
     }
 
-    if (project.interface && Entry.options.loadInterface) {
-        Entry.loadInterfaceState(project.interface);
+    if (project.interface && RoCode.options.loadInterface) {
+        RoCode.loadInterfaceState(project.interface);
     }
 
     if (window.parent && window.parent.childIframeLoaded) {
@@ -116,20 +116,20 @@ Entry.loadProject = function(project) {
     return project;
 };
 
-Entry.clearProject = function() {
+RoCode.clearProject = function() {
     try {
-        Entry.stop();
-        Entry.projectId = null;
-        Entry.variableContainer.clear();
-        Entry.container.clear();
-        Entry.scene.clear();
-        Entry.stateManager.clear();
+        RoCode.stop();
+        RoCode.projectId = null;
+        RoCode.variableContainer.clear();
+        RoCode.container.clear();
+        RoCode.scene.clear();
+        RoCode.stateManager.clear();
         DataTable.clear();
         GEHelper.resManager.clearProject();
-        Entry.Loader && (Entry.Loader.loaded = false);
+        RoCode.Loader && (RoCode.Loader.loaded = false);
 
-        if (Entry.type !== 'invisible') {
-            Entry.playground && Entry.playground.changeViewMode('code');
+        if (RoCode.type !== 'invisible') {
+            RoCode.playground && RoCode.playground.changeViewMode('code');
         }
     } catch (e) {
         console.warn('clearProject fail', e);
@@ -140,27 +140,27 @@ Entry.clearProject = function() {
  * Export project
  * @param {?Project} project
  */
-Entry.exportProject = function(project) {
+RoCode.exportProject = function(project) {
     if (!project) {
         project = {};
     }
 
-    if (!Entry.engine.isState('stop')) {
-        Entry.engine.toggleStop();
+    if (!RoCode.engine.isState('stop')) {
+        RoCode.engine.toggleStop();
     }
-    project.objects = Entry.container.toJSON();
+    project.objects = RoCode.container.toJSON();
     const objects = project.objects;
-    project.scenes = Entry.scene.toJSON();
-    project.variables = Entry.variableContainer.getVariableJSON();
-    project.messages = Entry.variableContainer.getMessageJSON();
-    project.functions = Entry.variableContainer.getFunctionJSON();
+    project.scenes = RoCode.scene.toJSON();
+    project.variables = RoCode.variableContainer.getVariableJSON();
+    project.messages = RoCode.variableContainer.getMessageJSON();
+    project.functions = RoCode.variableContainer.getFunctionJSON();
     project.tables = DataTable.getTableJSON();
-    project.speed = Entry.FPS;
-    project.interface = Entry.captureInterfaceState();
-    project.expansionBlocks = Entry.expansionBlocks;
-    project.aiUtilizeBlocks = Entry.aiUtilizeBlocks;
-    project.learning = Entry.aiLearning.toJSON();
-    project.externalModules = entryModuleLoader.moduleList;
+    project.speed = RoCode.FPS;
+    project.interface = RoCode.captureInterfaceState();
+    project.expansionBlocks = RoCode.expansionBlocks;
+    project.aiUtilizeBlocks = RoCode.aiUtilizeBlocks;
+    project.learning = RoCode.aiLearning.toJSON();
+    project.externalModules = RoCodeModuleLoader.moduleList;
 
     if (!objects || !objects.length) {
         return false;
@@ -170,39 +170,39 @@ Entry.exportProject = function(project) {
 };
 
 /**
- * inject blocks to Entry menu.
+ * inject blocks to RoCode menu.
  * Available block is different by object type.
  * @param {!string} objectType
  * @param {!xml} XML
  */
-Entry.setBlock = function(objectType, XML) {
-    Entry.playground.setMenuBlock(objectType, XML);
+RoCode.setBlock = function(objectType, XML) {
+    RoCode.playground.setMenuBlock(objectType, XML);
 };
 
 /**
  * This method is called when window closed;
  * @param {event} e
  */
-Entry.beforeUnload = function(e) {
-    Entry.dispatchEvent('EntryBeforeUnload');
-    Entry.hw.closeConnection();
-    if (Entry.type === 'workspace') {
-        if (localStorage && Entry.interfaceState) {
+RoCode.beforeUnload = function(e) {
+    RoCode.dispatchEvent('RoCodeBeforeUnload');
+    RoCode.hw.closeConnection();
+    if (RoCode.type === 'workspace') {
+        if (localStorage && RoCode.interfaceState) {
             localStorage.setItem(
                 'workspace-interface',
-                JSON.stringify(Entry.captureInterfaceState())
+                JSON.stringify(RoCode.captureInterfaceState())
             );
         }
-        if (!Entry.stateManager.isSaved()) {
+        if (!RoCode.stateManager.isSaved()) {
             return Lang.Workspace.project_changed;
         }
     }
 };
 
-Entry.captureInterfaceState = function() {
-    const interfaceState = JSON.parse(JSON.stringify(Entry.interfaceState));
-    const playground = Entry.playground;
-    if (Entry.type === 'workspace' && playground && playground.object) {
+RoCode.captureInterfaceState = function() {
+    const interfaceState = JSON.parse(JSON.stringify(RoCode.interfaceState));
+    const playground = RoCode.playground;
+    if (RoCode.type === 'workspace' && playground && playground.object) {
         interfaceState.object = playground.object.id;
     }
 
@@ -212,10 +212,10 @@ Entry.captureInterfaceState = function() {
 /**
  * load interface state by localstorage
  */
-Entry.loadInterfaceState = function(interfaceState) {
-    if (Entry.type === 'workspace') {
+RoCode.loadInterfaceState = function(interfaceState) {
+    if (RoCode.type === 'workspace') {
         if (interfaceState) {
-            Entry.container.selectObject(interfaceState.object, true);
+            RoCode.container.selectObject(interfaceState.object, true);
         } else if (localStorage && localStorage.getItem('workspace-interface')) {
             const interfaceModel = localStorage.getItem('workspace-interface');
             interfaceState = JSON.parse(interfaceModel);
@@ -232,25 +232,25 @@ Entry.loadInterfaceState = function(interfaceState) {
 /**
  * @return {Number} return up time time stamp
  */
-Entry.getUpTime = function() {
+RoCode.getUpTime = function() {
     return new Date().getTime() - this.startTime;
 };
 
 /**
  * @param {String} activityType
  */
-Entry.addActivity = function(activityType) {
-    if (Entry.stateManager) {
-        Entry.stateManager.addActivity(activityType);
+RoCode.addActivity = function(activityType) {
+    if (RoCode.stateManager) {
+        RoCode.stateManager.addActivity(activityType);
     }
 };
 
-Entry.startActivityLogging = function() {
-    if (Entry.reporter) {
-        Entry.reporter.start(
-            Entry.projectId,
+RoCode.startActivityLogging = function() {
+    if (RoCode.reporter) {
+        RoCode.reporter.start(
+            RoCode.projectId,
             window.user ? window.user._id : null,
-            Entry.startTime
+            RoCode.startTime
         );
     }
 };
@@ -259,20 +259,20 @@ Entry.startActivityLogging = function() {
  * return activity log
  * @return {object}
  */
-Entry.getActivityLog = function() {
+RoCode.getActivityLog = function() {
     const log = {};
-    if (Entry.stateManager) {
-        log.activityLog = Entry.stateManager.activityLog_;
+    if (RoCode.stateManager) {
+        log.activityLog = RoCode.stateManager.activityLog_;
     }
     return log;
 };
-//block drag mode for Entry.BlockView
-Entry.DRAG_MODE_NONE = 0;
-Entry.DRAG_MODE_MOUSEDOWN = 1;
-Entry.DRAG_MODE_DRAG = 2;
+//block drag mode for RoCode.BlockView
+RoCode.DRAG_MODE_NONE = 0;
+RoCode.DRAG_MODE_MOUSEDOWN = 1;
+RoCode.DRAG_MODE_DRAG = 2;
 
-Entry.cancelObjectEdit = function({ target, type }) {
-    const object = Entry.playground.object;
+RoCode.cancelObjectEdit = function({ target, type }) {
+    const object = RoCode.playground.object;
     if (!object) {
         return;
     }
@@ -285,17 +285,17 @@ Entry.cancelObjectEdit = function({ target, type }) {
     object.editObjectValues(false);
 };
 
-Entry.getMainWS = function() {
+RoCode.getMainWS = function() {
     let ret;
-    if (Entry.mainWorkspace) {
-        ret = Entry.mainWorkspace;
-    } else if (Entry.playground && Entry.playground.mainWorkspace) {
-        ret = Entry.playground.mainWorkspace;
+    if (RoCode.mainWorkspace) {
+        ret = RoCode.mainWorkspace;
+    } else if (RoCode.playground && RoCode.playground.mainWorkspace) {
+        ret = RoCode.playground.mainWorkspace;
     }
     return ret;
 };
 
-Entry.getDom = function(query) {
+RoCode.getDom = function(query) {
     if (!query) {
         return this.view_;
     }
@@ -312,10 +312,10 @@ Entry.getDom = function(query) {
  * Resize element's size.
  * @param {!json} interfaceModel
  */
-Entry.resizeElement = function(interfaceModel) {
+RoCode.resizeElement = function(interfaceModel) {
     // 워크 스페이스에 style width / height 값을 임시로 막음.
     // return;
-    const mainWorkspace = Entry.getMainWS();
+    const mainWorkspace = RoCode.getMainWS();
     if (!mainWorkspace) {
         return;
     }
@@ -324,7 +324,7 @@ Entry.resizeElement = function(interfaceModel) {
         interfaceModel = this.interfaceState;
     }
 
-    if (Entry.type === 'workspace') {
+    if (RoCode.type === 'workspace') {
         const interfaceState = this.interfaceState;
         if (!interfaceModel.canvasWidth && interfaceState.canvasWidth) {
             interfaceModel.canvasWidth = interfaceState.canvasWidth;
@@ -333,8 +333,8 @@ Entry.resizeElement = function(interfaceModel) {
             interfaceModel.menuWidth = interfaceState.menuWidth;
         }
 
-        if (Entry.engine.speedPanelOn) {
-            Entry.engine.toggleSpeedPanel();
+        if (RoCode.engine.speedPanelOn) {
+            RoCode.engine.toggleSpeedPanel();
         }
 
         let canvasSize = interfaceModel.canvasWidth;
@@ -347,10 +347,10 @@ Entry.resizeElement = function(interfaceModel) {
         }
         interfaceModel.canvasWidth = canvasSize;
 
-        const engineContainer = Entry.engine.view_.parentElement;
+        const engineContainer = RoCode.engine.view_.parentElement;
         engineContainer.style.width = `${canvasSize}px`;
-        Entry.engine.view_.style.width = `${canvasSize - 24}px`;
-        Entry.stage.canvas.canvas.style.width = `${canvasSize - 26}px`;
+        RoCode.engine.view_.style.width = `${canvasSize - 24}px`;
+        RoCode.stage.canvas.canvas.style.width = `${canvasSize - 26}px`;
 
         let menuWidth = interfaceModel.menuWidth;
         if (!menuWidth) {
@@ -368,20 +368,20 @@ Entry.resizeElement = function(interfaceModel) {
         $('.blockMenuContainer').css({ width: `${menuWidth + adjust}px` });
         $('.blockMenuContainer>div').css({ width: `${menuWidth + adjust - 2}px` });
         blockMenu.setWidth();
-        $('.entryWorkspaceBoard').css({ left: `${menuWidth - 4}px` });
-        Entry.playground.resizeHandle_.style.left = `${menuWidth - 4}px`;
-        Entry.playground.variableViewWrapper_.style.width = `${menuWidth - 4}px`;
+        $('.RoCodeWorkspaceBoard').css({ left: `${menuWidth - 4}px` });
+        RoCode.playground.resizeHandle_.style.left = `${menuWidth - 4}px`;
+        RoCode.playground.variableViewWrapper_.style.width = `${menuWidth - 4}px`;
 
         this.interfaceState = interfaceModel;
     }
 
-    Entry.windowResized.notify();
+    RoCode.windowResized.notify();
 };
 
 /**
  * override native prototype to add useful method.
  */
-Entry.overridePrototype = function() {
+RoCode.overridePrototype = function() {
     /** modulo include negative number */
     Number.prototype.mod = function(n) {
         try {
@@ -448,7 +448,7 @@ Entry.overridePrototype = function() {
 // INFO: 기존에 사용하던 isNaN에는 숫자 체크의 문자가 있을수 있기때문에 regex로 체크하는 로직으로 변경
 // isNaN 문제는 https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/isNaN
 // 에서 확인.
-Entry.Utils.isNumber = function(num) {
+RoCode.Utils.isNumber = function(num) {
     if (typeof num === 'number') {
         return true;
     }
@@ -459,11 +459,11 @@ Entry.Utils.isNumber = function(num) {
     return false;
 };
 
-Entry.Utils.generateId = function() {
+RoCode.Utils.generateId = function() {
     return `0000${((Math.random() * Math.pow(36, 4)) << 0).toString(36)}`.substr(-4);
 };
 
-Entry.Utils.randomColor = function() {
+RoCode.Utils.randomColor = function() {
     const letters = '0123456789ABCDEF';
     let color = '#';
     for (var i = 0; i < 6; i++) {
@@ -472,7 +472,7 @@ Entry.Utils.randomColor = function() {
     return color;
 };
 
-Entry.Utils.isPointInMatrix = function(matrix, point, offset) {
+RoCode.Utils.isPointInMatrix = function(matrix, point, offset) {
     offset = offset === undefined ? 0 : offset;
     const x = matrix.offsetX ? matrix.x + matrix.offsetX : matrix.x;
     const y = matrix.offsetY ? matrix.y + matrix.offsety : matrix.y;
@@ -484,7 +484,7 @@ Entry.Utils.isPointInMatrix = function(matrix, point, offset) {
     );
 };
 
-Entry.Utils.colorDarken = function(color, factor) {
+RoCode.Utils.colorDarken = function(color, factor) {
     let r;
     let g;
     let b;
@@ -513,24 +513,24 @@ Entry.Utils.colorDarken = function(color, factor) {
     return `#${r}${g}${b}`;
 };
 
-Entry.Utils.colorLighten = function(color, amount) {
+RoCode.Utils.colorLighten = function(color, amount) {
     function clamp01(val) {
         return Math.min(1, Math.max(0, val));
     }
 
     amount = amount === 0 ? 0 : amount || 20;
-    const hsl = Entry.Utils.hexToHsl(color);
+    const hsl = RoCode.Utils.hexToHsl(color);
     hsl.l += amount / 100;
     hsl.l = clamp01(hsl.l);
-    return Entry.Utils.hslToHex(hsl);
+    return RoCode.Utils.hslToHex(hsl);
 };
 
-Entry.Utils.getEmphasizeColor = function(color) {
-    return EntryStatic.colorSet.block.emphasize[color] || color;
+RoCode.Utils.getEmphasizeColor = function(color) {
+    return RoCodeStatic.colorSet.block.emphasize[color] || color;
 };
 
 // Take input from [0, n] and return it as [0, 1]
-Entry.Utils.bound01 = function(n, max) {
+RoCode.Utils.bound01 = function(n, max) {
     function isOnePointZero(n) {
         return typeof n === 'string' && n.indexOf('.') != -1 && parseFloat(n) === 1;
     }
@@ -564,7 +564,7 @@ Entry.Utils.bound01 = function(n, max) {
 // Converts an RGB color value to HSL.
 // *Assumes:* r, g, and b are contained in [0, 255] or [0, 1]
 // *Returns:* { h, s, l } in [0,1]
-Entry.Utils.hexToHsl = function(color) {
+RoCode.Utils.hexToHsl = function(color) {
     let r;
     let g;
     let b;
@@ -578,9 +578,9 @@ Entry.Utils.hexToHsl = function(color) {
         b = parseInt(color.substr(3, 2), 16);
     }
 
-    r = Entry.Utils.bound01(r, 255);
-    g = Entry.Utils.bound01(g, 255);
-    b = Entry.Utils.bound01(b, 255);
+    r = RoCode.Utils.bound01(r, 255);
+    g = RoCode.Utils.bound01(g, 255);
+    b = RoCode.Utils.bound01(b, 255);
 
     const max = Math.max(r, g, b);
     const min = Math.min(r, g, b);
@@ -616,14 +616,14 @@ Entry.Utils.hexToHsl = function(color) {
 // Converts an HSL color value to RGB.
 // *Assumes:* h is contained in [0, 1] or [0, 360] and s and l are contained [0, 1] or [0, 100]
 // *Returns:* { r, g, b } in the set [0, 255]
-Entry.Utils.hslToHex = function(color) {
+RoCode.Utils.hslToHex = function(color) {
     let r;
     let g;
     let b;
 
-    const h = Entry.Utils.bound01(color.h, 360);
-    const s = Entry.Utils.bound01(color.s, 1);
-    const l = Entry.Utils.bound01(color.l, 1);
+    const h = RoCode.Utils.bound01(color.h, 360);
+    const s = RoCode.Utils.bound01(color.s, 1);
+    const l = RoCode.Utils.bound01(color.l, 1);
 
     function hue2rgb(p, q, t) {
         if (t < 0) {
@@ -669,65 +669,65 @@ Entry.Utils.hslToHex = function(color) {
     return `#${hex.join('')}`;
 };
 
-Entry.Utils.setSVGDom = function(SVGDom) {
-    Entry.Utils.SVGDom = SVGDom;
+RoCode.Utils.setSVGDom = function(SVGDom) {
+    RoCode.Utils.SVGDom = SVGDom;
 };
 
-Entry.Utils.bindIOSDeviceWatch = function() {
-    const Agent = Entry.Utils.mobileAgentParser();
+RoCode.Utils.bindIOSDeviceWatch = function() {
+    const Agent = RoCode.Utils.mobileAgentParser();
     if (Agent.apple.device) {
         let lastHeight = window.innerHeight || document.documentElement.clientHeight;
         let lastSVGDomHeight = 0;
-        if (Entry.Utils.SVGDom) {
-            lastSVGDomHeight = Entry.Utils.SVGDom.height();
+        if (RoCode.Utils.SVGDom) {
+            lastSVGDomHeight = RoCode.Utils.SVGDom.height();
         }
 
         setInterval(() => {
             const nowHeight = window.innerHeight || document.documentElement.clientHeight;
             let SVGDomCheck = false;
-            if (Entry.Utils.SVGDom) {
-                const nowSVGDomHeight = Entry.Utils.SVGDom.height();
+            if (RoCode.Utils.SVGDom) {
+                const nowSVGDomHeight = RoCode.Utils.SVGDom.height();
                 SVGDomCheck = lastSVGDomHeight != nowSVGDomHeight;
                 lastSVGDomHeight = nowSVGDomHeight;
             }
             if (lastHeight != nowHeight || SVGDomCheck) {
-                Entry.windowResized.notify();
+                RoCode.windowResized.notify();
             }
             lastHeight = nowHeight;
         }, 1000);
 
         $(window).on('orientationchange', () => {
-            Entry.windowResized.notify();
+            RoCode.windowResized.notify();
         });
 
-        window.addEventListener('pagehide', Entry.beforeUnload);
+        window.addEventListener('pagehide', RoCode.beforeUnload);
     }
 };
 
-Entry.Utils.bindGlobalEvent = function(options) {
+RoCode.Utils.bindGlobalEvent = function(options) {
     const doc = $(document);
     if (options === undefined) {
         options = ['resize', 'mousedown', 'mousemove', 'keydown', 'keyup', 'dispose'];
     }
 
     if (options.indexOf('resize') > -1) {
-        if (Entry.windowReszied) {
+        if (RoCode.windowReszied) {
             $(window).off('resize');
-            Entry.windowReszied.clear();
+            RoCode.windowReszied.clear();
         }
-        Entry.windowResized = new Entry.Event(window);
+        RoCode.windowResized = new RoCode.Event(window);
         $(window).on('resize', (e) => {
-            Entry.windowResized.notify(e);
+            RoCode.windowResized.notify(e);
         });
-        Entry.Utils.bindIOSDeviceWatch();
+        RoCode.Utils.bindIOSDeviceWatch();
     }
 
     if (options.indexOf('mousedown') > -1) {
-        if (Entry.documentMousedown) {
+        if (RoCode.documentMousedown) {
             doc.off('mousedown');
-            Entry.documentMousedown.clear();
+            RoCode.documentMousedown.clear();
         }
-        Entry.documentMousedown = new Entry.Event(window);
+        RoCode.documentMousedown = new RoCode.Event(window);
         doc.on('mousedown', (e) => {
             const selectedBlock = document.querySelector('.selected');
             if (selectedBlock) {
@@ -737,74 +737,74 @@ Entry.Utils.bindGlobalEvent = function(options) {
     }
 
     if (options.indexOf('mousemove') > -1) {
-        if (Entry.documentMousemove) {
+        if (RoCode.documentMousemove) {
             doc.off('touchmove mousemove');
-            Entry.documentMousemove.clear();
+            RoCode.documentMousemove.clear();
         }
 
-        Entry.mouseCoordinate = {};
-        Entry.documentMousemove = new Entry.Event(window);
+        RoCode.mouseCoordinate = {};
+        RoCode.documentMousemove = new RoCode.Event(window);
         doc.on('touchmove mousemove', (e) => {
             if (e.originalEvent && e.originalEvent.touches) {
                 e = e.originalEvent.touches[0];
             }
-            Entry.documentMousemove.notify(e);
-            Entry.mouseCoordinate.x = e.clientX;
-            Entry.mouseCoordinate.y = e.clientY;
+            RoCode.documentMousemove.notify(e);
+            RoCode.mouseCoordinate.x = e.clientX;
+            RoCode.mouseCoordinate.y = e.clientY;
         });
     }
 
     if (options.indexOf('keydown') > -1) {
-        if (Entry.keyPressed) {
+        if (RoCode.keyPressed) {
             doc.off('keydown');
-            Entry.keyPressed.clear();
+            RoCode.keyPressed.clear();
         }
-        Entry.pressedKeys = [];
-        Entry.keyPressed = new Entry.Event(window);
+        RoCode.pressedKeys = [];
+        RoCode.keyPressed = new RoCode.Event(window);
         doc.on('keydown', (e) => {
-            const keyCode = Entry.Utils.inputToKeycode(e);
+            const keyCode = RoCode.Utils.inputToKeycode(e);
             if (!keyCode) {
                 return;
             }
-            if (Entry.pressedKeys.indexOf(keyCode) < 0) {
-                Entry.pressedKeys.push(keyCode);
+            if (RoCode.pressedKeys.indexOf(keyCode) < 0) {
+                RoCode.pressedKeys.push(keyCode);
             }
-            Entry.keyPressed.notify(e);
+            RoCode.keyPressed.notify(e);
         });
     }
 
     if (options.indexOf('keyup') > -1) {
-        if (Entry.keyUpped) {
+        if (RoCode.keyUpped) {
             doc.off('keyup');
-            Entry.keyUpped.clear();
+            RoCode.keyUpped.clear();
         }
-        Entry.keyUpped = new Entry.Event(window);
+        RoCode.keyUpped = new RoCode.Event(window);
         doc.on('keyup', (e) => {
-            const keyCode = Entry.Utils.inputToKeycode(e);
+            const keyCode = RoCode.Utils.inputToKeycode(e);
             if (!keyCode) {
                 return;
             }
-            const index = Entry.pressedKeys.indexOf(keyCode);
+            const index = RoCode.pressedKeys.indexOf(keyCode);
             if (index > -1) {
-                Entry.pressedKeys.splice(index, 1);
+                RoCode.pressedKeys.splice(index, 1);
             }
-            Entry.keyUpped.notify(e);
+            RoCode.keyUpped.notify(e);
         });
     }
 
     if (options.indexOf('dispose') > -1) {
-        if (Entry.disposeEvent) {
-            Entry.disposeEvent.clear();
+        if (RoCode.disposeEvent) {
+            RoCode.disposeEvent.clear();
         }
-        Entry.disposeEvent = new Entry.Event(window);
-        if (Entry.documentMousedown) {
-            Entry.documentMousedown.attach(this, (e) => {
-                Entry.disposeEvent.notify(e);
+        RoCode.disposeEvent = new RoCode.Event(window);
+        if (RoCode.documentMousedown) {
+            RoCode.documentMousedown.attach(this, (e) => {
+                RoCode.disposeEvent.notify(e);
             });
         }
     }
 };
-Entry.Utils.inputToKeycode = (e) => {
+RoCode.Utils.inputToKeycode = (e) => {
     //https://riptutorial.com/jquery/example/21119/originalevent
     const event = e.originalEvent || e;
     let keyCode = event.code == undefined ? event.key : event.code;
@@ -817,15 +817,15 @@ Entry.Utils.inputToKeycode = (e) => {
         keyCode = keyCode.replace('Left', '');
         keyCode = keyCode.replace('Right', '');
     }
-    return Entry.KeyboardCode.codeToKeyCode[keyCode];
+    return RoCode.KeyboardCode.codeToKeyCode[keyCode];
 };
 
-Entry.Utils.makeActivityReporter = function() {
-    Entry.activityReporter = new Entry.ActivityReporter();
-    if (Entry.commander) {
-        Entry.commander.addReporter(Entry.activityReporter);
+RoCode.Utils.makeActivityReporter = function() {
+    RoCode.activityReporter = new RoCode.ActivityReporter();
+    if (RoCode.commander) {
+        RoCode.commander.addReporter(RoCode.activityReporter);
     }
-    return Entry.activityReporter;
+    return RoCode.activityReporter;
 };
 
 /**
@@ -833,7 +833,7 @@ Entry.Utils.makeActivityReporter = function() {
  * @param {!boolean} condition assert condition.
  * @param {?string} message assert message will be shown when assert fail.
  */
-Entry.assert = function(condition, message) {
+RoCode.assert = function(condition, message) {
     if (!condition) {
         throw Error(message || 'Assert failed');
     }
@@ -844,7 +844,7 @@ Entry.assert = function(condition, message) {
  * @param {!string} xmlText
  * @param {xml} doc
  */
-Entry.parseTexttoXML = function(xmlText) {
+RoCode.parseTexttoXML = function(xmlText) {
     let doc;
     if (window.ActiveXObject) {
         doc = new ActiveXObject('Microsoft.XMLDOM');
@@ -860,7 +860,7 @@ Entry.parseTexttoXML = function(xmlText) {
 /**
  * Create html element with some method
  */
-Entry.createElement = function(type, elementId) {
+RoCode.createElement = function(type, elementId) {
     const element = type instanceof HTMLElement ? type : document.createElement(type);
     if (elementId) {
         element.id = elementId;
@@ -873,7 +873,7 @@ Entry.createElement = function(type, elementId) {
  * Generate random hash
  * @return {string}
  */
-Entry.generateHash = function(length = 4) {
+RoCode.generateHash = function(length = 4) {
     return Math.random()
         .toString(36)
         .substr(2, length);
@@ -887,8 +887,8 @@ Entry.generateHash = function(length = 4) {
  * @param {!number} a
  * @param {!number} b
  */
-Entry.addTwoNumber = function(a, b) {
-    if (!Entry.Utils.isNumber(a) || !Entry.Utils.isNumber(b)) {
+RoCode.addTwoNumber = function(a, b) {
+    if (!RoCode.Utils.isNumber(a) || !RoCode.Utils.isNumber(b)) {
         return a + b;
     }
     a += '';
@@ -920,7 +920,7 @@ Entry.addTwoNumber = function(a, b) {
 /*
  * HTML hex colour code to RGB colour value
  */
-Entry.hex2rgb = function(hex) {
+RoCode.hex2rgb = function(hex) {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
         ? {
@@ -934,7 +934,7 @@ Entry.hex2rgb = function(hex) {
 /*
  * RGB colour value to HTML hex colour code
  */
-Entry.rgb2hex = function(r, g, b) {
+RoCode.rgb2hex = function(r, g, b) {
     return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
 };
 
@@ -945,14 +945,14 @@ Entry.rgb2hex = function(r, g, b) {
  * @param {number} b - 0~255 integer
  * @return {number} 0~0xffffff integer
  */
-Entry.rgb2Number = function(r, g, b) {
+RoCode.rgb2Number = function(r, g, b) {
     return (r << 16) + (g << 8) + Number(b);
 };
 
 /*
  * Generate random rgb color object
  */
-Entry.generateRgb = function() {
+RoCode.generateRgb = function() {
     return {
         r: Math.floor(Math.random() * 256),
         g: Math.floor(Math.random() * 256),
@@ -964,7 +964,7 @@ Entry.generateRgb = function() {
  * Adjustment input value by max and min value
  * @param {!Number} value, min, max
  */
-Entry.adjustValueWithMaxMin = function(input, min, max) {
+RoCode.adjustValueWithMaxMin = function(input, min, max) {
     if (input > max) {
         return max;
     } else if (input < min) {
@@ -981,11 +981,11 @@ Entry.adjustValueWithMaxMin = function(input, min, max) {
  * @param {Array} arr
  * @return {boolean} return true when target value exists already
  */
-Entry.isExist = function(targetValue, identifier, arr) {
+RoCode.isExist = function(targetValue, identifier, arr) {
     return !!_.find(arr, { [identifier]: targetValue });
 };
 
-Entry.getColourCodes = function() {
+RoCode.getColourCodes = function() {
     return [
         'transparent',
         '#660000',
@@ -1075,7 +1075,7 @@ Entry.getColourCodes = function() {
  * @param {Element} targetElement
  * @return {boolean} return true when target element remove or not
  */
-Entry.removeElement = function(element) {
+RoCode.removeElement = function(element) {
     if (element && element.parentNode) {
         element.parentNode.removeChild(element);
     }
@@ -1086,17 +1086,17 @@ Entry.removeElement = function(element) {
  * @param {String||Number} value
  * @return {Boolean||Number} arr
  */
-Entry.parseNumber = function(value) {
+RoCode.parseNumber = function(value) {
     if (typeof value === 'string') {
         if (
-            (Entry.Utils.isNumber(value) && value[0] === '0') ||
+            (RoCode.Utils.isNumber(value) && value[0] === '0') ||
             (value[0] === '0' && value[1].toLowerCase() === 'x')
         ) {
             return value;
-        } else if (Entry.Utils.isNumber(value)) {
+        } else if (RoCode.Utils.isNumber(value)) {
             return Number(value);
         }
-    } else if (typeof value === 'number' && Entry.Utils.isNumber(value)) {
+    } else if (typeof value === 'number' && RoCode.Utils.isNumber(value)) {
         return value;
     }
 
@@ -1109,7 +1109,7 @@ Entry.parseNumber = function(value) {
  * @param {!String} dataString
  * @return {Number}
  */
-Entry.countStringLength = function(dataString) {
+RoCode.countStringLength = function(dataString) {
     let p;
     let len = 0;
     for (p = 0; p < dataString.length; p++) {
@@ -1129,7 +1129,7 @@ Entry.countStringLength = function(dataString) {
  * @param {!Number} stringLength
  * @return {String}
  */
-Entry.cutStringByLength = function(dataString, stringLength) {
+RoCode.cutStringByLength = function(dataString, stringLength) {
     let p;
     let len = 0;
     for (p = 0; len < stringLength && p < dataString.length; p++) {
@@ -1148,7 +1148,7 @@ Entry.cutStringByLength = function(dataString, stringLength) {
  * @param {Element} child
  * @return {Boolean}
  */
-Entry.isChild = function(parent, child) {
+RoCode.isChild = function(parent, child) {
     if (!child) {
         while (child.parentNode) {
             if ((child = child.parentNode) == parent) {
@@ -1162,7 +1162,7 @@ Entry.isChild = function(parent, child) {
 /**
  * @param {Element} child
  */
-Entry.launchFullScreen = function(element) {
+RoCode.launchFullScreen = function(element) {
     if (element.requestFullscreen) {
         element.requestFullscreen();
     } else if (element.mozRequestFulScreen) {
@@ -1174,7 +1174,7 @@ Entry.launchFullScreen = function(element) {
     }
 };
 
-Entry.exitFullScreen = function() {
+RoCode.exitFullScreen = function() {
     if (document.exitFullScreen) {
         document.exitFullScreen();
     } else if (document.mozCancelFullScreen) {
@@ -1184,7 +1184,7 @@ Entry.exitFullScreen = function() {
     }
 };
 
-Entry.isPhone = function() {
+RoCode.isPhone = function() {
     return false;
     //if (window.screen.availWidth > 480)
     //return false;
@@ -1192,7 +1192,7 @@ Entry.isPhone = function() {
     //return true;
 };
 
-Entry.getKeyCodeMap = function() {
+RoCode.getKeyCodeMap = function() {
     return {
         '8': 'backspace',
         '9': 'tab',
@@ -1265,7 +1265,7 @@ Entry.getKeyCodeMap = function() {
     };
 };
 
-Entry.checkCollisionRect = function(rectA, rectB) {
+RoCode.checkCollisionRect = function(rectA, rectB) {
     return !(
         rectA.y + rectA.height < rectB.y ||
         rectA.y > rectB.y + rectB.height ||
@@ -1274,17 +1274,17 @@ Entry.checkCollisionRect = function(rectA, rectB) {
     );
 };
 
-Entry.bindAnimationCallback = function(element, func) {
+RoCode.bindAnimationCallback = function(element, func) {
     element.addEventListener('webkitAnimationEnd', func, false);
     element.addEventListener('animationend', func, false);
     element.addEventListener('oanimationend', func, false);
 };
 
-Entry.cloneSimpleObject = function(object) {
+RoCode.cloneSimpleObject = function(object) {
     return _.clone(object);
 };
 
-Entry.computeInputWidth = (function() {
+RoCode.computeInputWidth = (function() {
     let elem;
     const _cache = {};
     return function(value) {
@@ -1297,10 +1297,10 @@ Entry.computeInputWidth = (function() {
         if (cached) {
             return cached;
         } else {
-            elem = elem || document.getElementById('entryInputForComputeWidth');
+            elem = elem || document.getElementById('RoCodeInputForComputeWidth');
             if (!elem) {
                 elem = document.createElement('span');
-                elem.setAttribute('id', 'entryInputForComputeWidth');
+                elem.setAttribute('id', 'RoCodeInputForComputeWidth');
                 elem.className = 'elem-element';
                 document.body.appendChild(elem);
             }
@@ -1316,11 +1316,11 @@ Entry.computeInputWidth = (function() {
     };
 })();
 
-Entry.isArrowOrBackspace = function(keyCode) {
+RoCode.isArrowOrBackspace = function(keyCode) {
     return !!~['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Backspace'].indexOf(keyCode);
 };
 
-Entry.hexStringToBin = function(hexString) {
+RoCode.hexStringToBin = function(hexString) {
     const bytes = [];
     let str;
 
@@ -1333,7 +1333,7 @@ Entry.hexStringToBin = function(hexString) {
 };
 
 //maybe deprecated
-Entry.findObjsByKey = function(arr, keyName, key) {
+RoCode.findObjsByKey = function(arr, keyName, key) {
     const result = [];
     for (let i = 0; i < arr.length; i++) {
         if (arr[i][keyName] == key) {
@@ -1343,15 +1343,15 @@ Entry.findObjsByKey = function(arr, keyName, key) {
     return result;
 };
 
-Entry.factorial = _.memoize((n) => {
+RoCode.factorial = _.memoize((n) => {
     if (n === 0 || n == 1) {
         return 1;
     }
-    return Entry.factorial(n - 1) * n;
+    return RoCode.factorial(n - 1) * n;
 });
 
-Entry.getListRealIndex = function(index, list) {
-    if (!Entry.Utils.isNumber(index)) {
+RoCode.getListRealIndex = function(index, list) {
+    if (!RoCode.Utils.isNumber(index)) {
         switch (index) {
             case 'FIRST':
                 index = 1;
@@ -1367,19 +1367,19 @@ Entry.getListRealIndex = function(index, list) {
     return index;
 };
 
-Entry.toRadian = function(angle) {
+RoCode.toRadian = function(angle) {
     return (angle * Math.PI) / 180;
 };
 
-Entry.toDegrees = function(radians) {
+RoCode.toDegrees = function(radians) {
     return (radians * 180) / Math.PI;
 };
 
-Entry.getPicturesJSON = function(pictures = [], isClone) {
+RoCode.getPicturesJSON = function(pictures = [], isClone) {
     return pictures.reduce((acc, p) => {
         const o = {};
         o._id = p._id;
-        o.id = isClone ? Entry.generateHash() : p.id;
+        o.id = isClone ? RoCode.generateHash() : p.id;
         o.dimension = p.dimension;
         o.filename = p.filename;
         o.fileurl = p.fileurl;
@@ -1391,13 +1391,13 @@ Entry.getPicturesJSON = function(pictures = [], isClone) {
     }, []);
 };
 
-Entry.getSoundsJSON = function(sounds = [], isClone) {
+RoCode.getSoundsJSON = function(sounds = [], isClone) {
     return sounds.reduce((acc, s) => {
         const o = {};
         o._id = s._id;
         o.duration = s.duration;
         o.ext = s.ext;
-        o.id = isClone ? Entry.generateHash() : s.id;
+        o.id = isClone ? RoCode.generateHash() : s.id;
         o.filename = s.filename;
         o.fileurl = s.fileurl;
         o.name = s.name;
@@ -1406,13 +1406,13 @@ Entry.getSoundsJSON = function(sounds = [], isClone) {
     }, []);
 };
 
-Entry.cutDecimal = function(number) {
+RoCode.cutDecimal = function(number) {
     return Math.round(number * 100) / 100;
 };
 
-Entry.getBrowserType = function() {
-    if (Entry.userAgent) {
-        return Entry.userAgent;
+RoCode.getBrowserType = function() {
+    if (RoCode.userAgent) {
+        return RoCode.userAgent;
     }
     const ua = navigator.userAgent;
     let tem;
@@ -1435,11 +1435,11 @@ Entry.getBrowserType = function() {
         M.splice(1, 1, tem[1]);
     }
     const uaResult = M.join(' ');
-    Entry.userAgent = uaResult;
+    RoCode.userAgent = uaResult;
     return uaResult;
 };
 
-Entry.setBasicBrush = function(sprite) {
+RoCode.setBasicBrush = function(sprite) {
     const isWebGL = GEHelper.isWebGL;
     const brush = GEHelper.brushHelper.newBrush();
     if (sprite.brush) {
@@ -1453,13 +1453,13 @@ Entry.setBasicBrush = function(sprite) {
         const opacity = 1 - brush.opacity / 100;
 
         if (isWebGL) {
-            brush.beginStrokeFast(Entry.rgb2Number(rgb.r, rgb.g, rgb.b), opacity);
+            brush.beginStrokeFast(RoCode.rgb2Number(rgb.r, rgb.g, rgb.b), opacity);
         } else {
             brush.beginStroke(`rgba(${rgb.r},${rgb.g},${rgb.b},${opacity})`);
         }
     } else {
         brush.thickness = 1;
-        brush.rgb = Entry.hex2rgb('#ff0000');
+        brush.rgb = RoCode.hex2rgb('#ff0000');
         brush.opacity = 0;
         brush.setStrokeStyle(1);
         if (isWebGL) {
@@ -1473,7 +1473,7 @@ Entry.setBasicBrush = function(sprite) {
     const shape = GEHelper.brushHelper.newShape(brush);
 
     shape.entity = sprite;
-    const selectedObjectContainer = Entry.stage.selectedObjectContainer;
+    const selectedObjectContainer = RoCode.stage.selectedObjectContainer;
     selectedObjectContainer.addChildAt(shape, selectedObjectContainer.getChildIndex(sprite.object));
 
     sprite.brush = brush;
@@ -1481,7 +1481,7 @@ Entry.setBasicBrush = function(sprite) {
     sprite.shapes.push(shape);
 };
 
-Entry.setCloneBrush = function(sprite, parentBrush) {
+RoCode.setCloneBrush = function(sprite, parentBrush) {
     const isWebGL = GEHelper.isWebGL;
     const brush = GEHelper.brushHelper.newBrush();
     brush.thickness = parentBrush.thickness;
@@ -1492,14 +1492,14 @@ Entry.setCloneBrush = function(sprite, parentBrush) {
     const rgb = brush.rgb;
     const opacity = 1 - brush.opacity / 100;
     if (isWebGL) {
-        brush.beginStrokeFast(Entry.rgb2Number(rgb.r, rgb.g, rgb.b), opacity);
+        brush.beginStrokeFast(RoCode.rgb2Number(rgb.r, rgb.g, rgb.b), opacity);
     } else {
         brush.beginStroke(`rgba(${rgb.r},${rgb.g},${rgb.b},${opacity})`);
     }
 
     const shape = GEHelper.brushHelper.newShape(brush);
     shape.entity = sprite;
-    const selectedObjectContainer = Entry.stage.selectedObjectContainer;
+    const selectedObjectContainer = RoCode.stage.selectedObjectContainer;
     selectedObjectContainer.addChildAt(shape, selectedObjectContainer.getChildIndex(sprite.object));
 
     brush.stop = parentBrush.stop;
@@ -1509,15 +1509,15 @@ Entry.setCloneBrush = function(sprite, parentBrush) {
     sprite.shapes.push(shape);
 };
 
-Entry.isFloat = function(num) {
+RoCode.isFloat = function(num) {
     return /\d+\.{1}\d+$/.test(num);
 };
 
-Entry.isInteger = function(value) {
+RoCode.isInteger = function(value) {
     return isFinite(value) && Math.floor(value) == value;
 };
 
-Entry.getStringIndex = function(str) {
+RoCode.getStringIndex = function(str) {
     if (!str) {
         return '';
     }
@@ -1530,7 +1530,7 @@ Entry.getStringIndex = function(str) {
     const len = str.length;
     for (let i = len - 1; i > 0; --i) {
         const ch = str.charAt(i);
-        if (Entry.Utils.isNumber(ch)) {
+        if (RoCode.Utils.isNumber(ch)) {
             num.unshift(ch);
             idx = i;
         } else {
@@ -1546,7 +1546,7 @@ Entry.getStringIndex = function(str) {
     return result;
 };
 
-Entry.getOrderedName = function(str, objects, field) {
+RoCode.getOrderedName = function(str, objects, field) {
     if (!str) {
         return 'untitled';
     }
@@ -1557,19 +1557,19 @@ Entry.getOrderedName = function(str, objects, field) {
         field = 'name';
     }
 
-    const maxNumber = Entry.getOrderedNameNumber(str, objects, field);
-    const source = Entry.getStringIndex(str);
+    const maxNumber = RoCode.getOrderedNameNumber(str, objects, field);
+    const source = RoCode.getStringIndex(str);
     if (maxNumber > 0) {
         return source.string + maxNumber;
     }
     return str;
 };
 
-Entry.getOrderedNameNumber = function(str, objects, field) {
-    const source = Entry.getStringIndex(str);
+RoCode.getOrderedNameNumber = function(str, objects, field) {
+    const source = RoCode.getStringIndex(str);
     let maxNumber = 0;
     for (let i = 0, len = objects.length; i < len; i++) {
-        const target = Entry.getStringIndex(objects[i][field]);
+        const target = RoCode.getStringIndex(objects[i][field]);
         if (source.string === target.string && target.index > maxNumber) {
             maxNumber = target.index;
         }
@@ -1577,18 +1577,18 @@ Entry.getOrderedNameNumber = function(str, objects, field) {
     return maxNumber;
 };
 
-Entry.changeXmlHashId = function(xmlBlock) {
+RoCode.changeXmlHashId = function(xmlBlock) {
     const reg = /function_field/;
     if (reg.test(xmlBlock.getAttribute('type'))) {
         const mutations = xmlBlock.getElementsByTagName('mutation');
         for (let i = 0, len = mutations.length; i < len; i++) {
-            mutations[i].setAttribute('hashid', Entry.generateHash());
+            mutations[i].setAttribute('hashid', RoCode.generateHash());
         }
     }
     return xmlBlock;
 };
 
-Entry.getMaxFloatPoint = function(numbers) {
+RoCode.getMaxFloatPoint = function(numbers) {
     let max = 0;
     for (let i = 0, len = numbers.length; i < len; i++) {
         const n = String(numbers[i]);
@@ -1603,27 +1603,27 @@ Entry.getMaxFloatPoint = function(numbers) {
     return Math.min(max, 20);
 };
 
-Entry.convertToRoundedDecimals = function(value, decimals) {
-    if (!Entry.Utils.isNumber(value) || !this.isFloat(value)) {
+RoCode.convertToRoundedDecimals = function(value, decimals) {
+    if (!RoCode.Utils.isNumber(value) || !this.isFloat(value)) {
         return value;
     } else {
         return Number(`${Math.round(`${value}e${decimals}`)}e-${decimals}`);
     }
 };
 
-Entry.attachEventListener = function(elem, eventType, func) {
+RoCode.attachEventListener = function(elem, eventType, func) {
     setTimeout(() => {
         elem.addEventListener(eventType, func);
     }, 0);
 };
 
-Entry.deAttachEventListener = function(elem, eventType, func) {
+RoCode.deAttachEventListener = function(elem, eventType, func) {
     elem.removeEventListener(eventType, func);
 };
 
-Entry.isEmpty = _.isEmpty;
+RoCode.isEmpty = _.isEmpty;
 
-Entry.Utils.disableContextmenu = function(node) {
+RoCode.Utils.disableContextmenu = function(node) {
     if (!node) {
         return;
     }
@@ -1631,13 +1631,13 @@ Entry.Utils.disableContextmenu = function(node) {
     $(node).on('contextmenu', this.contextPreventFunction);
 };
 
-Entry.Utils.contextPreventFunction = function(e) {
+RoCode.Utils.contextPreventFunction = function(e) {
     e.stopPropagation();
     e.preventDefault();
     return false;
 };
 
-Entry.Utils.enableContextmenu = function(node) {
+RoCode.Utils.enableContextmenu = function(node) {
     if (!node) {
         return;
     }
@@ -1645,15 +1645,15 @@ Entry.Utils.enableContextmenu = function(node) {
     $(node).off('contextmenu', this.contextPreventFunction);
 };
 
-Entry.Utils.isRightButton = function(e) {
+RoCode.Utils.isRightButton = function(e) {
     return e.button == 2 || e.ctrlKey;
 };
 
-Entry.Utils.isTouchEvent = function({ type }) {
+RoCode.Utils.isTouchEvent = function({ type }) {
     return type.toLowerCase().includes('touch');
 };
 
-Entry.Utils.inherit = function(parent, child) {
+RoCode.Utils.inherit = function(parent, child) {
     function F() {}
 
     F.prototype = parent.prototype;
@@ -1661,20 +1661,20 @@ Entry.Utils.inherit = function(parent, child) {
     return child;
 };
 
-Entry.bindAnimationCallbackOnce = function($elem, func) {
+RoCode.bindAnimationCallbackOnce = function($elem, func) {
     $elem.one('webkitAnimationEnd animationendo animationend', func);
 };
 
-Entry.Utils.isInInput = function({ target: { type } }) {
+RoCode.Utils.isInInput = function({ target: { type } }) {
     return type === 'textarea' || type === 'text' || type === 'number';
 };
 
-Entry.Utils.addFilters = function(boardSvgDom, suffix, isOnlyBlock) {
+RoCode.Utils.addFilters = function(boardSvgDom, suffix, isOnlyBlock) {
     const defs = boardSvgDom.elem('defs');
 
     //trashcan filter
     const trashCanFilter = defs.elem('filter', {
-        id: `entryTrashcanFilter_${suffix}`,
+        id: `RoCodeTrashcanFilter_${suffix}`,
     });
     trashCanFilter.elem('feGaussianBlur', {
         in: 'SourceAlpha',
@@ -1707,7 +1707,7 @@ Entry.Utils.addFilters = function(boardSvgDom, suffix, isOnlyBlock) {
     );
 
     const blockSelectFilter = defs.elem('filter', {
-        id: `entryBlockSelectFilter_${suffix}`,
+        id: `RoCodeBlockSelectFilter_${suffix}`,
     });
     blockSelectFilter.elem('feGaussianBlur', {
         id: 'blur',
@@ -1740,7 +1740,7 @@ Entry.Utils.addFilters = function(boardSvgDom, suffix, isOnlyBlock) {
     });
 
     const blockHighlightFilter = defs.elem('filter', {
-        id: `entryBlockHighlightFilter_${suffix}`,
+        id: `RoCodeBlockHighlightFilter_${suffix}`,
     });
     blockHighlightFilter.elem('feOffset', {
         result: 'offOut',
@@ -1756,7 +1756,7 @@ Entry.Utils.addFilters = function(boardSvgDom, suffix, isOnlyBlock) {
     });
 
     defs.elem('filter', {
-        id: `entryBlockDarkenFilter_${suffix}`,
+        id: `RoCodeBlockDarkenFilter_${suffix}`,
     }).elem('feColorMatrix', {
         type: 'matrix',
         values: '.45 0 0 0 0 0 .45 0 0 0 0 0 .45 0 0 0 0 0 1 0',
@@ -1764,7 +1764,7 @@ Entry.Utils.addFilters = function(boardSvgDom, suffix, isOnlyBlock) {
 
     if (!isOnlyBlock) {
         const buttonShadow = defs.elem('filter', {
-            id: 'entryButtonShadowFilter',
+            id: 'RoCodeButtonShadowFilter',
         });
         buttonShadow.elem('feOffset', {
             result: 'offOut',
@@ -1791,7 +1791,7 @@ Entry.Utils.addFilters = function(boardSvgDom, suffix, isOnlyBlock) {
     }
 };
 
-Entry.Utils.addBlockPattern = function(boardSvgDom, suffix) {
+RoCode.Utils.addBlockPattern = function(boardSvgDom, suffix) {
     const pattern = boardSvgDom.elem('pattern', {
         id: `blockHoverPattern_${suffix}`,
         class: 'blockHoverPattern',
@@ -1804,7 +1804,7 @@ Entry.Utils.addBlockPattern = function(boardSvgDom, suffix) {
         style: 'display: none',
     });
 
-    const imagePath = `${Entry.mediaFilePath}block_pattern_(order).svg`;
+    const imagePath = `${RoCode.mediaFilePath}block_pattern_(order).svg`;
     const order = '(order)';
     for (let i = 1; i < 5; i++) {
         pattern.elem('image', {
@@ -1823,14 +1823,14 @@ Entry.Utils.addBlockPattern = function(boardSvgDom, suffix) {
 function handleOptionalBlocksActive(item) {
     const { expansionBlocks = [], aiUtilizeBlocks = [] } = item;
     if (expansionBlocks.length > 0) {
-        Entry.expansion.addExpansionBlocks(expansionBlocks);
+        RoCode.expansion.addExpansionBlocks(expansionBlocks);
     }
     if (aiUtilizeBlocks.length > 0) {
-        Entry.aiUtilize.addAIUtilizeBlocks(aiUtilizeBlocks);
+        RoCode.aiUtilize.addAIUtilizeBlocks(aiUtilizeBlocks);
     }
 }
 
-Entry.Utils.addNewBlock = function(item) {
+RoCode.Utils.addNewBlock = function(item) {
     const {
         script,
         functions,
@@ -1847,46 +1847,46 @@ Entry.Utils.addNewBlock = function(item) {
     }
 
     if (
-        Entry.getMainWS().mode === Entry.Workspace.MODE_VIMBOARD &&
-        (!Entry.TextCodingUtil.canUsePythonVariables(variables) ||
-            !Entry.TextCodingUtil.canUsePythonFunctions(functions))
+        RoCode.getMainWS().mode === RoCode.Workspace.MODE_VIMBOARD &&
+        (!RoCode.TextCodingUtil.canUsePythonVariables(variables) ||
+            !RoCode.TextCodingUtil.canUsePythonFunctions(functions))
     ) {
-        return entrylms.alert(Lang.Menus.object_import_syntax_error);
+        return RoCodelms.alert(Lang.Menus.object_import_syntax_error);
     }
 
     const objectIdMap = {};
     variables.forEach((variable) => {
         const { object } = variable;
         if (object) {
-            variable.object = _.get(Entry, ['container', 'selectedObject', 'id'], '');
+            variable.object = _.get(RoCode, ['container', 'selectedObject', 'id'], '');
         }
     });
     DataTable.setTables(tables);
-    Entry.aiLearning.load(learning);
+    RoCode.aiLearning.load(learning);
     handleOptionalBlocksActive(item);
 
-    Entry.variableContainer.appendMessages(messages);
-    Entry.variableContainer.appendVariables(variables);
-    Entry.variableContainer.appendFunctions(functions);
+    RoCode.variableContainer.appendMessages(messages);
+    RoCode.variableContainer.appendVariables(variables);
+    RoCode.variableContainer.appendFunctions(functions);
     if (!this?.editor?.board?.code) {
-        if (Entry.toast && !(this.objectAlert && Entry.toast.isOpen(this.objectAlert))) {
-            this.objectAlert = Entry.toast.alert(
+        if (RoCode.toast && !(this.objectAlert && RoCode.toast.isOpen(this.objectAlert))) {
+            this.objectAlert = RoCode.toast.alert(
                 Lang.Workspace.add_object_alert,
                 Lang.Workspace.add_object_alert_msg
             );
         }
         return;
     }
-    Entry.do(
+    RoCode.do(
         'addThread',
         parseScript.map((block) => {
-            block.id = Entry.generateHash();
+            block.id = RoCode.generateHash();
             return block;
         })
     );
 };
 
-Entry.Utils.addNewObject = function(sprite) {
+RoCode.Utils.addNewObject = function(sprite) {
     if (sprite) {
         const {
             objects,
@@ -1899,11 +1899,11 @@ Entry.Utils.addNewObject = function(sprite) {
         } = sprite;
 
         if (
-            Entry.getMainWS().mode === Entry.Workspace.MODE_VIMBOARD &&
-            (!Entry.TextCodingUtil.canUsePythonVariables(variables) ||
-                !Entry.TextCodingUtil.canUsePythonFunctions(functions))
+            RoCode.getMainWS().mode === RoCode.Workspace.MODE_VIMBOARD &&
+            (!RoCode.TextCodingUtil.canUsePythonVariables(variables) ||
+                !RoCode.TextCodingUtil.canUsePythonFunctions(functions))
         ) {
-            return entrylms.alert(Lang.Menus.object_import_syntax_error);
+            return RoCodelms.alert(Lang.Menus.object_import_syntax_error);
         }
         const objectIdMap = {};
         DataTable.setTables(tables);
@@ -1913,9 +1913,9 @@ Entry.Utils.addNewObject = function(sprite) {
             if (object) {
                 const id = variable.id;
                 const idMap = objectIdMap[object];
-                variable.id = Entry.generateHash();
+                variable.id = RoCode.generateHash();
                 if (!idMap) {
-                    variable.object = Entry.generateHash();
+                    variable.object = RoCode.generateHash();
                     objectIdMap[object] = {
                         objectId: variable.object,
                         variableOriginId: [id],
@@ -1928,9 +1928,9 @@ Entry.Utils.addNewObject = function(sprite) {
                 }
             }
         });
-        Entry.variableContainer.appendMessages(messages);
-        Entry.variableContainer.appendVariables(variables);
-        Entry.variableContainer.appendFunctions(functions);
+        RoCode.variableContainer.appendMessages(messages);
+        RoCode.variableContainer.appendVariables(variables);
+        RoCode.variableContainer.appendFunctions(functions);
 
         objects.forEach((object) => {
             const idMap = objectIdMap[object.id];
@@ -1942,18 +1942,18 @@ Entry.Utils.addNewObject = function(sprite) {
                 });
                 object.script = script;
                 object.id = idMap.objectId;
-            } else if (Entry.container.getObject(object.id)) {
-                object.id = Entry.generateHash();
+            } else if (RoCode.container.getObject(object.id)) {
+                object.id = RoCode.generateHash();
             }
             if (!object.objectType) {
                 object.objectType = 'sprite';
             }
-            Entry.container.addObject(object, 0);
+            RoCode.container.addObject(object, 0);
         });
     }
 };
 
-Entry.Utils.COLLISION = {
+RoCode.Utils.COLLISION = {
     NONE: 0,
     UP: 1,
     RIGHT: 2,
@@ -1961,7 +1961,7 @@ Entry.Utils.COLLISION = {
     DOWN: 4,
 };
 
-Entry.Utils.createMouseEvent = function(type, event) {
+RoCode.Utils.createMouseEvent = function(type, event) {
     const e = document.createEvent('MouseEvent');
     e.initMouseEvent(
         type,
@@ -1983,43 +1983,43 @@ Entry.Utils.createMouseEvent = function(type, event) {
     return e;
 };
 
-Entry.Utils.stopProjectWithToast = async (scope, message, error) => {
+RoCode.Utils.stopProjectWithToast = async (scope, message, error) => {
     let block = scope.block;
     message = message || 'Runtime Error';
     const toast = error.toast;
-    const engine = Entry.engine;
+    const engine = RoCode.engine;
 
     if (engine) {
         await engine.toggleStop();
     }
-    if (Entry.type === 'workspace') {
+    if (RoCode.type === 'workspace') {
         if (scope.block && 'funcBlock' in scope.block) {
             block = scope.block.funcBlock;
         } else if (scope.funcExecutor) {
             block = scope.funcExecutor.scope.block;
-            Entry.Func.edit(scope.type);
+            RoCode.Func.edit(scope.type);
         }
 
         if (block) {
             const id = block.getCode().object && block.getCode().object.id;
             if (id) {
-                Entry.container.selectObject(block.getCode().object.id, true);
+                RoCode.container.selectObject(block.getCode().object.id, true);
             }
             const view = block.view;
             view && view.getBoard().activateBlock(block);
         }
     }
 
-    if (message === 'IncompatibleError' && Entry.toast) {
-        Entry.toast.alert(
+    if (message === 'IncompatibleError' && RoCode.toast) {
+        RoCode.toast.alert(
             Lang.Msgs.warn,
             toast || [Lang.Workspace.check_runtime_error, Lang.Workspace.check_browser_error],
             true
         );
-        Entry.engine.hideAllAudioPanel();
+        RoCode.engine.hideAllAudioPanel();
     }
-    if (message === 'OfflineError' && Entry.toast) {
-        Entry.toast.alert(
+    if (message === 'OfflineError' && RoCode.toast) {
+        RoCode.toast.alert(
             Lang.Msgs.warn,
             toast || [
                 Lang.Workspace.check_runtime_error,
@@ -2027,8 +2027,8 @@ Entry.Utils.stopProjectWithToast = async (scope, message, error) => {
             ],
             true
         );
-    } else if (Entry.toast) {
-        Entry.toast.alert(Lang.Msgs.warn, Lang.Workspace.check_runtime_error, true);
+    } else if (RoCode.toast) {
+        RoCode.toast.alert(Lang.Msgs.warn, Lang.Workspace.check_runtime_error, true);
     }
 
     if (error) {
@@ -2039,35 +2039,35 @@ Entry.Utils.stopProjectWithToast = async (scope, message, error) => {
     throw new Error(message);
 };
 
-Entry.Utils.AsyncError = function(message) {
+RoCode.Utils.AsyncError = function(message) {
     this.name = 'AsyncError';
     this.message = message || 'Waiting for callback';
 };
 
-Entry.Utils.AsyncError.prototype = new Error();
-Entry.Utils.AsyncError.prototype.constructor = Entry.Utils.AsyncError;
+RoCode.Utils.AsyncError.prototype = new Error();
+RoCode.Utils.AsyncError.prototype.constructor = RoCode.Utils.AsyncError;
 
-Entry.Utils.IncompatibleError = function(message, toast) {
+RoCode.Utils.IncompatibleError = function(message, toast) {
     this.name = 'IncompatibleError';
     this.message = message || 'IncompatibleError';
     this.toast = toast || null;
 };
-Entry.Utils.IncompatibleError.prototype = new Error();
-Entry.Utils.IncompatibleError.prototype.constructor = Entry.Utils.IncompatibleError;
+RoCode.Utils.IncompatibleError.prototype = new Error();
+RoCode.Utils.IncompatibleError.prototype.constructor = RoCode.Utils.IncompatibleError;
 
-Entry.Utils.OfflineError = function(message, toast) {
+RoCode.Utils.OfflineError = function(message, toast) {
     this.name = 'OfflineError';
     this.message = message || 'OfflineError';
     this.toast = toast || null;
 };
-Entry.Utils.OfflineError.prototype = new Error();
-Entry.Utils.OfflineError.prototype.constructor = Entry.Utils.OfflineError;
+RoCode.Utils.OfflineError.prototype = new Error();
+RoCode.Utils.OfflineError.prototype.constructor = RoCode.Utils.OfflineError;
 
-Entry.Utils.isChrome = function() {
+RoCode.Utils.isChrome = function() {
     return /chrom(e|ium)/.test(navigator.userAgent.toLowerCase());
 };
 
-Entry.Utils.getUsedFonts = function(project) {
+RoCode.Utils.getUsedFonts = function(project) {
     if (!project) {
         return;
     }
@@ -2079,7 +2079,7 @@ Entry.Utils.getUsedFonts = function(project) {
     return _uniq(project.objects.filter((x) => x.objectType === 'textBox').map(getFamily));
 };
 
-Entry.Utils.waitForWebfonts = function(fonts, callback) {
+RoCode.Utils.waitForWebfonts = function(fonts, callback) {
     return Promise.all(
         fonts.map(
             (font) =>
@@ -2113,9 +2113,9 @@ window.requestAnimFrame = (function() {
     );
 })();
 
-Entry.isMobile = function() {
-    if (Entry.device) {
-        return Entry.device === 'tablet';
+RoCode.isMobile = function() {
+    if (RoCode.device) {
+        return RoCode.device === 'tablet';
     }
 
     const platform = window.platform;
@@ -2123,15 +2123,15 @@ Entry.isMobile = function() {
         platform && platform.type && (platform.type === 'tablet' || platform.type === 'mobile');
 
     if (ret) {
-        Entry.device = 'tablet';
+        RoCode.device = 'tablet';
         return true;
     } else {
-        Entry.device = 'desktop';
+        RoCode.device = 'desktop';
         return false;
     }
 };
 
-Entry.Utils.mobileAgentParser = function(userAgent) {
+RoCode.Utils.mobileAgentParser = function(userAgent) {
     const applePhone = /iPhone/i;
     const appleIpod = /iPod/i;
     const appleTablet = /iPad/i;
@@ -2241,7 +2241,7 @@ Entry.Utils.mobileAgentParser = function(userAgent) {
     return this;
 };
 
-Entry.Utils.convertMouseEvent = function(e) {
+RoCode.Utils.convertMouseEvent = function(e) {
     if (e.originalEvent && e.originalEvent.touches) {
         return e.originalEvent.touches[0];
     } else if (e.changedTouches) {
@@ -2251,12 +2251,12 @@ Entry.Utils.convertMouseEvent = function(e) {
     }
 };
 
-Entry.Utils.hasSpecialCharacter = function(str) {
+RoCode.Utils.hasSpecialCharacter = function(str) {
     const reg = /!|@|#|\$|%|\^|&|\*|\(|\)|\+|=|-|\[|\]|\\|\'|;|,|\.|\/|{|}|\||\"|:|<|>|\?/g;
     return reg.test(str);
 };
 
-Entry.Utils.getBlockCategory = (function() {
+RoCode.Utils.getBlockCategory = (function() {
     const map = {};
     let allBlocks;
     return function(blockType) {
@@ -2269,7 +2269,7 @@ Entry.Utils.getBlockCategory = (function() {
         }
 
         if (!allBlocks) {
-            allBlocks = EntryStatic.getAllBlocks();
+            allBlocks = RoCodeStatic.getAllBlocks();
         }
 
         for (let i = 0; i < allBlocks.length; i++) {
@@ -2283,13 +2283,13 @@ Entry.Utils.getBlockCategory = (function() {
     };
 })();
 
-Entry.Utils.getUniqObjectsBlocks = function(objects) {
+RoCode.Utils.getUniqObjectsBlocks = function(objects) {
     const _typePicker = _.partial(_.result, _, 'type');
 
-    return _.chain(objects || Entry.container.objects_)
+    return _.chain(objects || RoCode.container.objects_)
         .map(({ script }) => {
-            if (!(script instanceof Entry.Code)) {
-                script = new Entry.Code(script);
+            if (!(script instanceof RoCode.Code)) {
+                script = new RoCode.Code(script);
             }
             return script.getBlockList().map(_typePicker);
         })
@@ -2298,13 +2298,13 @@ Entry.Utils.getUniqObjectsBlocks = function(objects) {
         .value();
 };
 
-Entry.Utils.getObjectsBlocks = function(objects) {
+RoCode.Utils.getObjectsBlocks = function(objects) {
     const _typePicker = _.partial(_.result, _, 'type');
 
-    return _.chain(objects || Entry.container.objects_)
+    return _.chain(objects || RoCode.container.objects_)
         .map(({ script }) => {
-            if (!(script instanceof Entry.Code)) {
-                script = new Entry.Code(script);
+            if (!(script instanceof RoCode.Code)) {
+                script = new RoCode.Code(script);
             }
             return script.getBlockList(true).map(_typePicker);
         })
@@ -2312,13 +2312,13 @@ Entry.Utils.getObjectsBlocks = function(objects) {
         .value();
 };
 
-Entry.Utils.makeCategoryDataByBlocks = function(blockArr) {
+RoCode.Utils.makeCategoryDataByBlocks = function(blockArr) {
     if (!blockArr) {
         return;
     }
     const that = this;
 
-    const data = EntryStatic.getAllBlocks();
+    const data = RoCodeStatic.getAllBlocks();
     const categoryIndexMap = {};
     for (let i = 0; i < data.length; i++) {
         const datum = data[i];
@@ -2335,7 +2335,7 @@ Entry.Utils.makeCategoryDataByBlocks = function(blockArr) {
         data[index].blocks.push(b);
     });
 
-    const allBlocks = EntryStatic.getAllBlocks();
+    const allBlocks = RoCodeStatic.getAllBlocks();
     return allBlocks
         .map((block) => {
             const { category, blocks } = block;
@@ -2350,24 +2350,24 @@ Entry.Utils.makeCategoryDataByBlocks = function(blockArr) {
         .filter(({ blocks }) => blocks.length);
 };
 
-Entry.Utils.blur = function() {
+RoCode.Utils.blur = function() {
     const elem = document.activeElement;
     elem && elem.blur && elem.blur();
 };
 
-Entry.Utils.getWindow = function(hashId) {
+RoCode.Utils.getWindow = function(hashId) {
     if (!hashId) {
         return;
     }
     for (let i = 0; i < window.frames.length; i++) {
         const frame = window.frames[i];
-        if (frame.Entry && frame.Entry.hashId === hashId) {
+        if (frame.RoCode && frame.RoCode.hashId === hashId) {
             return frame;
         }
     }
 };
 
-Entry.Utils.restrictAction = function(exceptions = [], callback, noDispose) {
+RoCode.Utils.restrictAction = function(exceptions = [], callback, noDispose) {
     const that = this;
     exceptions = exceptions.map(_.head);
 
@@ -2399,43 +2399,43 @@ Entry.Utils.restrictAction = function(exceptions = [], callback, noDispose) {
 
     this._restrictHandler = handler;
 
-    const entryDom = Entry.getDom();
-    Entry.Utils.disableContextmenu(entryDom);
-    if (entryDom.addEventListener) {
-        entryDom.addEventListener('click', handler, true);
-        entryDom.addEventListener('mousedown', handler, true);
-        entryDom.addEventListener('mouseup', handler, true);
-        entryDom.addEventListener('touchstart', handler, true);
+    const RoCodeDom = RoCode.getDom();
+    RoCode.Utils.disableContextmenu(RoCodeDom);
+    if (RoCodeDom.addEventListener) {
+        RoCodeDom.addEventListener('click', handler, true);
+        RoCodeDom.addEventListener('mousedown', handler, true);
+        RoCodeDom.addEventListener('mouseup', handler, true);
+        RoCodeDom.addEventListener('touchstart', handler, true);
     } else {
-        entryDom.attachEvent('onclick', handler);
-        entryDom.attachEvent('onmousedown', handler);
-        entryDom.attachEvent('onmouseup', handler);
-        entryDom.attachEvent('ontouchstart', handler);
+        RoCodeDom.attachEvent('onclick', handler);
+        RoCodeDom.attachEvent('onmousedown', handler);
+        RoCodeDom.attachEvent('onmouseup', handler);
+        RoCodeDom.attachEvent('ontouchstart', handler);
     }
 };
 
-Entry.Utils.allowAction = function() {
-    const entryDom = Entry.getDom();
-    Entry.Utils.enableContextmenu(entryDom);
+RoCode.Utils.allowAction = function() {
+    const RoCodeDom = RoCode.getDom();
+    RoCode.Utils.enableContextmenu(RoCodeDom);
     if (this._restrictHandler) {
-        if (entryDom.addEventListener) {
-            entryDom.removeEventListener('click', this._restrictHandler, true);
-            entryDom.removeEventListener('mousedown', this._restrictHandler, true);
-            entryDom.removeEventListener('mouseup', this._restrictHandler, true);
-            entryDom.removeEventListener('touchstart', this._restrictHandler, true);
+        if (RoCodeDom.addEventListener) {
+            RoCodeDom.removeEventListener('click', this._restrictHandler, true);
+            RoCodeDom.removeEventListener('mousedown', this._restrictHandler, true);
+            RoCodeDom.removeEventListener('mouseup', this._restrictHandler, true);
+            RoCodeDom.removeEventListener('touchstart', this._restrictHandler, true);
         } else {
-            entryDom.detachEvent('onclick', this._restrictHandler);
-            entryDom.detachEvent('onmousedown', this._restrictHandler);
-            entryDom.detachEvent('onmouseup', this._restrictHandler);
-            entryDom.detachEvent('ontouchstart', this._restrictHandler);
+            RoCodeDom.detachEvent('onclick', this._restrictHandler);
+            RoCodeDom.detachEvent('onmousedown', this._restrictHandler);
+            RoCodeDom.detachEvent('onmouseup', this._restrictHandler);
+            RoCodeDom.detachEvent('ontouchstart', this._restrictHandler);
         }
         delete this._restrictHandler;
     }
 };
 
-Entry.Utils.glideBlock = function(svgGroup, x, y, callback) {
+RoCode.Utils.glideBlock = function(svgGroup, x, y, callback) {
     const rect = svgGroup.getBoundingClientRect();
-    const svgDom = Entry.Dom(
+    const svgDom = RoCode.Dom(
         $(
             '<svg id="globalSvg" width="10" height="10"' +
                 'version="1.1" xmlns="http://www.w3.org/2000/svg"></svg>'
@@ -2467,17 +2467,17 @@ Entry.Utils.glideBlock = function(svgGroup, x, y, callback) {
     );
 };
 
-Entry.Utils.getScrollPos = function() {
+RoCode.Utils.getScrollPos = function() {
     return {
         left: window.pageXOffset || document.documentElement.scrollLeft,
         top: window.pageYOffset || document.documentElement.scrollTop,
     };
 };
 
-Entry.Utils.isPointInRect = ({ x, y }, { top, bottom, left, right }) =>
+RoCode.Utils.isPointInRect = ({ x, y }, { top, bottom, left, right }) =>
     _.inRange(x, left, right) && _.inRange(y, top, bottom);
 
-Entry.Utils.getBoundingClientRectMemo = _.memoize((target, offset = {}) => {
+RoCode.Utils.getBoundingClientRectMemo = _.memoize((target, offset = {}) => {
     const rect = target.getBoundingClientRect();
     const result = {
         top: rect.top,
@@ -2491,11 +2491,11 @@ Entry.Utils.getBoundingClientRectMemo = _.memoize((target, offset = {}) => {
     return result;
 });
 
-Entry.Utils.clearClientRectMemo = () => {
-    Entry.Utils.getBoundingClientRectMemo.cache = new _.memoize.Cache();
+RoCode.Utils.clearClientRectMemo = () => {
+    RoCode.Utils.getBoundingClientRectMemo.cache = new _.memoize.Cache();
 };
 
-Entry.Utils.getPosition = (event) => {
+RoCode.Utils.getPosition = (event) => {
     const position = {
         x: 0,
         y: 0,
@@ -2511,25 +2511,25 @@ Entry.Utils.getPosition = (event) => {
     return position;
 };
 
-Entry.Utils.copy = function(target) {
+RoCode.Utils.copy = function(target) {
     return JSON.parse(JSON.stringify(target));
 };
 
 //helper function for development and debug
-Entry.Utils.getAllObjectsBlockList = function() {
-    return Entry.container.objects_.reduce(
+RoCode.Utils.getAllObjectsBlockList = function() {
+    return RoCode.container.objects_.reduce(
         (prev, { script }) => prev.concat(script.getBlockList()),
         []
     );
 };
 
-Entry.Utils.toFixed = function(value, len) {
+RoCode.Utils.toFixed = function(value, len) {
     const length = len || 1;
     const powValue = Math.pow(10, length);
 
     let retValue = Math.round(value * powValue) / powValue;
 
-    if (Entry.isFloat(retValue)) {
+    if (RoCode.isFloat(retValue)) {
         return String(retValue);
     } else {
         retValue += '.';
@@ -2540,74 +2540,74 @@ Entry.Utils.toFixed = function(value, len) {
     }
 };
 
-Entry.Utils.setVolume = function(volume) {
+RoCode.Utils.setVolume = function(volume) {
     this._volume = _clamp(volume, 0, 1);
 
-    Entry.soundInstances
+    RoCode.soundInstances
         .filter(({ soundType }) => !soundType)
         .forEach((instance) => {
             instance.volume = this._volume;
         });
 };
 
-Entry.Utils.getVolume = function() {
+RoCode.Utils.getVolume = function() {
     if (this._volume || this._volume === 0) {
         return this._volume;
     }
     return 1;
 };
 
-Entry.Utils.forceStopSounds = function() {
-    _.each(Entry.soundInstances, (instance) => {
+RoCode.Utils.forceStopSounds = function() {
+    _.each(RoCode.soundInstances, (instance) => {
         instance?.dispatchEvent?.('complete');
         instance?.stop?.();
     });
-    Entry.soundInstances = [];
+    RoCode.soundInstances = [];
 };
 
-Entry.Utils.playSound = function(id, option = {}) {
+RoCode.Utils.playSound = function(id, option = {}) {
     return createjs.Sound.play(id, Object.assign({ volume: this._volume }, option));
 };
 
-Entry.Utils.addSoundInstances = function(instance) {
-    Entry.soundInstances.push(instance);
+RoCode.Utils.addSoundInstances = function(instance) {
+    RoCode.soundInstances.push(instance);
     instance.on('complete', () => {
-        const index = Entry.soundInstances.indexOf(instance);
+        const index = RoCode.soundInstances.indexOf(instance);
         if (index > -1) {
-            Entry.soundInstances.splice(index, 1);
+            RoCode.soundInstances.splice(index, 1);
         }
     });
 };
 
-Entry.Utils.pauseSoundInstances = function() {
-    Entry.soundInstances.map((instance) => {
+RoCode.Utils.pauseSoundInstances = function() {
+    RoCode.soundInstances.map((instance) => {
         instance.paused = true;
     });
 };
 
-Entry.Utils.recoverSoundInstances = function() {
-    Entry.soundInstances.map((instance) => {
+RoCode.Utils.recoverSoundInstances = function() {
+    RoCode.soundInstances.map((instance) => {
         instance.paused = false;
     });
 };
 
-Entry.Utils.hasClass = (elem, name) => ` ${elem.getAttribute('class')} `.indexOf(` ${name} `) >= 0;
+RoCode.Utils.hasClass = (elem, name) => ` ${elem.getAttribute('class')} `.indexOf(` ${name} `) >= 0;
 
-Entry.Utils.addClass = (elem, name) => {
-    if (!Entry.Utils.hasClass(elem, name)) {
+RoCode.Utils.addClass = (elem, name) => {
+    if (!RoCode.Utils.hasClass(elem, name)) {
         elem.setAttribute('class', (elem.getAttribute('class') ? `${elem.className} ` : '') + name);
     }
 };
 
-Entry.Utils.toggleClass = (elem, name, force) => {
-    if (force || (typeof force === 'undefined' && !Entry.Utils.hasClass(elem, name))) {
-        Entry.Utils.addClass(elem, name);
+RoCode.Utils.toggleClass = (elem, name, force) => {
+    if (force || (typeof force === 'undefined' && !RoCode.Utils.hasClass(elem, name))) {
+        RoCode.Utils.addClass(elem, name);
     } else {
-        Entry.Utils.removeClass(elem, name);
+        RoCode.Utils.removeClass(elem, name);
     }
 };
 
-Entry.Utils.removeClass = (elem, name) => {
+RoCode.Utils.removeClass = (elem, name) => {
     let set = ` ${elem.getAttribute('class')} `;
 
     while (set.indexOf(` ${name} `) >= 0) {
@@ -2618,8 +2618,8 @@ Entry.Utils.removeClass = (elem, name) => {
     elem.setAttribute('class', result);
 };
 
-Entry.Utils.bindBlockViewHoverEvent = function(board, dom) {
-    if (Entry.isMobile()) {
+RoCode.Utils.bindBlockViewHoverEvent = function(board, dom) {
+    if (RoCode.isMobile()) {
         return;
     }
 
@@ -2644,18 +2644,18 @@ Entry.Utils.bindBlockViewHoverEvent = function(board, dom) {
     });
 };
 
-Entry.Utils.bindBlockExecuteFocusEvents = function() {
-    Entry.addEventListener('blockExecute', (view) => {
+RoCode.Utils.bindBlockExecuteFocusEvents = function() {
+    RoCode.addEventListener('blockExecute', (view) => {
         if (!view) {
             return;
         }
         this.focusBlockView(view.getBoard(), view);
     });
 
-    Entry.addEventListener('blockExecuteEnd', this.focusBlockView);
+    RoCode.addEventListener('blockExecuteEnd', this.focusBlockView);
 };
 
-Entry.Utils.focusBlockView = (() => {
+RoCode.Utils.focusBlockView = (() => {
     let _last;
 
     function _getAllElem(elem) {
@@ -2663,7 +2663,7 @@ Entry.Utils.focusBlockView = (() => {
     }
 
     return (board, blockView) => {
-        const { svgGroup, suffix } = board || Entry.getMainWS().board || {};
+        const { svgGroup, suffix } = board || RoCode.getMainWS().board || {};
 
         if (!svgGroup || !suffix || (_last && _last === blockView)) {
             return;
@@ -2671,7 +2671,7 @@ Entry.Utils.focusBlockView = (() => {
 
         if (blockView) {
             //darken all
-            _getAllElem(svgGroup).attr('filter', `url(#entryBlockDarkenFilter_${suffix})`);
+            _getAllElem(svgGroup).attr('filter', `url(#RoCodeBlockDarkenFilter_${suffix})`);
 
             //brighten only block
             const { _path, contentSvgGroup } = blockView;
@@ -2688,11 +2688,11 @@ Entry.Utils.focusBlockView = (() => {
     };
 })();
 
-Entry.Utils.isDomActive = function(dom) {
+RoCode.Utils.isDomActive = function(dom) {
     return !!(dom && document.activeElement === dom);
 };
 
-Entry.Utils.when = function(predicate, fn) {
+RoCode.Utils.when = function(predicate, fn) {
     return function(...args) {
         if (predicate.apply(this, args)) {
             return fn && fn.apply(this, args);
@@ -2700,15 +2700,15 @@ Entry.Utils.when = function(predicate, fn) {
     };
 };
 
-Entry.Utils.whenEnter = function(fn) {
-    return Entry.Utils.when(({ keyCode, repeat }) => keyCode === 13 && !repeat, fn);
+RoCode.Utils.whenEnter = function(fn) {
+    return RoCode.Utils.when(({ keyCode, repeat }) => keyCode === 13 && !repeat, fn);
 };
 
-Entry.Utils.blurWhenEnter = Entry.Utils.whenEnter(function() {
+RoCode.Utils.blurWhenEnter = RoCode.Utils.whenEnter(function() {
     this.blur();
 });
 
-Entry.Utils.whenWithTimeout = function(predicate, fn, time = 200) {
+RoCode.Utils.whenWithTimeout = function(predicate, fn, time = 200) {
     return function(...args) {
         if (this._timer) {
             clearTimeout(this._timer);
@@ -2722,8 +2722,8 @@ Entry.Utils.whenWithTimeout = function(predicate, fn, time = 200) {
     };
 };
 
-Entry.Utils.setBlurredTimer = function(func) {
-    return Entry.Utils.whenWithTimeout(function() {
+RoCode.Utils.setBlurredTimer = function(func) {
+    return RoCode.Utils.whenWithTimeout(function() {
         if (this._focused) {
             this._focused = false;
             return true;
@@ -2732,7 +2732,7 @@ Entry.Utils.setBlurredTimer = function(func) {
     }, func);
 };
 
-Entry.Utils.setFocused = function() {
+RoCode.Utils.setFocused = function() {
     if (this._timer) {
         clearTimeout(this._timer);
         delete this._timer;
@@ -2740,20 +2740,20 @@ Entry.Utils.setFocused = function() {
     this._focused = true;
 };
 
-Entry.Utils.focusIfNotActive = function(dom) {
+RoCode.Utils.focusIfNotActive = function(dom) {
     if (Array.isArray(dom)) {
-        dom = Entry.getDom(dom);
+        dom = RoCode.getDom(dom);
     }
     if (!dom) {
         return;
     }
-    if (!Entry.Utils.isDomActive(dom)) {
+    if (!RoCode.Utils.isDomActive(dom)) {
         dom.focus && dom.focus();
     }
 };
 
 // 터치와 마우스의 이벤트를 맞춰주는 함수
-Entry.Utils.getMouseEvent = function(event) {
+RoCode.Utils.getMouseEvent = function(event) {
     let mouseEvent;
     if (event.originalEvent && event.originalEvent.touches) {
         mouseEvent = event.originalEvent.touches[0];
@@ -2765,24 +2765,24 @@ Entry.Utils.getMouseEvent = function(event) {
     return mouseEvent;
 };
 
-Entry.Utils.removeBlockByType = function(blockType, callback) {
-    const objects = Entry.container.getAllObjects();
+RoCode.Utils.removeBlockByType = function(blockType, callback) {
+    const objects = RoCode.container.getAllObjects();
     objects.forEach(({ id, script }) => {
-        Entry.do('selectObject', id).isPass(true);
+        RoCode.do('selectObject', id).isPass(true);
         script.getBlockList(false, blockType).forEach((b, index) => {
-            Entry.do('destroyBlock', b).isPass(true);
+            RoCode.do('destroyBlock', b).isPass(true);
         });
     });
-    Entry.variableContainer.removeBlocksInFunctionByType(blockType);
+    RoCode.variableContainer.removeBlocksInFunctionByType(blockType);
 
     if (callback) {
         callback();
     }
 };
 
-Entry.Utils.removeBlockByType2 = function(blockType, callback) {
-    Entry.variableContainer.removeBlocksInFunctionByType(blockType);
-    const objects = Entry.container.getAllObjects();
+RoCode.Utils.removeBlockByType2 = function(blockType, callback) {
+    RoCode.variableContainer.removeBlocksInFunctionByType(blockType);
+    const objects = RoCode.container.getAllObjects();
     objects.forEach(({ id, script }) => {
         script.getBlockList(false, blockType).forEach((block, index) => {
             block.destroy();
@@ -2794,55 +2794,55 @@ Entry.Utils.removeBlockByType2 = function(blockType, callback) {
     }
 };
 
-Entry.Utils.sleep = (time = 0) => {
+RoCode.Utils.sleep = (time = 0) => {
     return new Promise((resolve) => {
         setTimeout(resolve, time);
     });
 };
 
-Entry.Utils.runAsync = async (func) => {
-    await Entry.Utils.sleep();
+RoCode.Utils.runAsync = async (func) => {
+    await RoCode.Utils.sleep();
     await func();
 };
 
-Entry.Utils.runAsyncCurry = (func, time = 0) => async (...args) => {
-    await Entry.Utils.sleep(time);
+RoCode.Utils.runAsyncCurry = (func, time = 0) => async (...args) => {
+    await RoCode.Utils.sleep(time);
     await func(...args);
 };
 
-Entry.Utils.removeBlockByTypeAsync = async (blockType, callback) => {
-    Entry.dispatchEvent('removeFunctionsStart');
-    await Entry.variableContainer.removeBlocksInFunctionByTypeAsync(blockType);
-    const objects = Entry.container.getAllObjects();
+RoCode.Utils.removeBlockByTypeAsync = async (blockType, callback) => {
+    RoCode.dispatchEvent('removeFunctionsStart');
+    await RoCode.variableContainer.removeBlocksInFunctionByTypeAsync(blockType);
+    const objects = RoCode.container.getAllObjects();
     await Promise.all(
         objects.map(async ({ script }) => {
             await Promise.all(
                 script.getBlockList(false, blockType).map(
-                    Entry.Utils.runAsyncCurry(async (block) => {
+                    RoCode.Utils.runAsyncCurry(async (block) => {
                         block.destroy();
                     })
                 )
             );
         })
     );
-    Entry.dispatchEvent('removeFunctionsEnd');
+    RoCode.dispatchEvent('removeFunctionsEnd');
     if (callback) {
         callback();
     }
 };
 
-Entry.Utils.isUsedBlockType = function(blockType) {
-    const objects = Entry.container.getAllObjects();
+RoCode.Utils.isUsedBlockType = function(blockType) {
+    const objects = RoCode.container.getAllObjects();
     const usedInObject = objects.some(
         ({ script }) => !!script.getBlockList(false, blockType).length
     );
     if (usedInObject) {
         return true;
     }
-    return Entry.variableContainer.isUsedBlockTypeInFunction(blockType);
+    return RoCode.variableContainer.isUsedBlockTypeInFunction(blockType);
 };
 
-Entry.Utils.combineCloudVariable = ({ variables, cloudVariable }) => {
+RoCode.Utils.combineCloudVariable = ({ variables, cloudVariable }) => {
     let items;
     if (typeof cloudVariable === 'string') {
         try {

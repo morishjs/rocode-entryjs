@@ -1,4 +1,4 @@
-Entry.Youtube = class Youtube {
+RoCode.Youtube = class Youtube {
     constructor(youtube) {
         this.generateView(youtube);
     }
@@ -8,14 +8,14 @@ Entry.Youtube = class Youtube {
     }
 
     generateView(youtubeHash) {
-        const movieContainer = Entry.createElement('div');
-        movieContainer.addClass('entryContainerMovieWorkspace');
-        movieContainer.addClass('entryRemove');
+        const movieContainer = RoCode.createElement('div');
+        movieContainer.addClass('RoCodeContainerMovieWorkspace');
+        movieContainer.addClass('RoCodeRemove');
 
         this.movieContainer = movieContainer;
 
         const url = 'https://www.youtube.com/embed/';
-        const iframe = Entry.createElement('iframe');
+        const iframe = RoCode.createElement('iframe');
         iframe.setAttribute('id', 'youtubeIframe');
         iframe.setAttribute('allowfullscreen', '');
         iframe.setAttribute('frameborder', 0);

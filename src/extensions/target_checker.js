@@ -10,7 +10,7 @@ require("../extensions/extension")
 /**
  * @constructor
  */
-Entry.TargetChecker = function(code, isForEdit, type) {
+RoCode.TargetChecker = function(code, isForEdit, type) {
     this.isForEdit = isForEdit;
     this.goals = [];
     this.publicGoals = [];
@@ -20,8 +20,8 @@ Entry.TargetChecker = function(code, isForEdit, type) {
     this.lastMessage = "";
     if (this.isForEdit) {
         this.watchingBlocks = [];
-        Entry.playground.mainWorkspace.blockMenu.unbanClass("checker");
-        Entry.addEventListener("run", this.reRegisterAll.bind(this));
+        RoCode.playground.mainWorkspace.blockMenu.unbanClass("checker");
+        RoCode.addEventListener("run", this.reRegisterAll.bind(this));
     }
 
     this.type = type || "mission";
@@ -32,26 +32,26 @@ Entry.TargetChecker = function(code, isForEdit, type) {
     this.entity = this;
     this.parent = this;
 
-    Entry.achieveEvent = new Entry.Event();
-    Entry.addEventListener("stop", this.reset.bind(this));
+    RoCode.achieveEvent = new RoCode.Event();
+    RoCode.addEventListener("stop", this.reset.bind(this));
 
-    Entry.registerAchievement = this.registerAchievement.bind(this);
-    this.script = new Entry.Code(code ? code : [], this);
-    Entry.targetChecker = this;
+    RoCode.registerAchievement = this.registerAchievement.bind(this);
+    this.script = new RoCode.Code(code ? code : [], this);
+    RoCode.targetChecker = this;
 };
 
 (function(p) {
     p.renderView = function() {
-        this._view = Entry.Dom('li', {
+        this._view = RoCode.Dom('li', {
             class: "targetChecker"
         });
 
         this._view.bindOnClick(function(e) {
-            Entry.playground.injectObject(this);
+            RoCode.playground.injectObject(this);
         }.bind(this));
         this.updateView();
         if (!this.isForEdit)
-            this._view.addClass("entryRemove");
+            this._view.addClass("RoCodeRemove");
         return this._view;
     };
 
@@ -59,27 +59,27 @@ Entry.TargetChecker = function(code, isForEdit, type) {
         if(this.statusViewDisabled) {
             return ;
         }
-        this._statusView = Entry.Dom('div', {
-            class: "entryTargetStatus"
+        this._statusView = RoCode.Dom('div', {
+            class: "RoCodeTargetStatus"
         });
-        var innerWrapper = Entry.Dom('div', {
+        var innerWrapper = RoCode.Dom('div', {
             class: "innerWrapper",
             parent: this._statusView
         });
-        this._statusViewIndicator = Entry.Dom('div', {
+        this._statusViewIndicator = RoCode.Dom('div', {
             class: "statusIndicator",
             parent: innerWrapper
         });
-        var statusViewContentWrapper = Entry.Dom('div', {
+        var statusViewContentWrapper = RoCode.Dom('div', {
             class: "statusMessage",
             parent: innerWrapper
         });
-        this._statusViewContent = Entry.Dom('p', {
+        this._statusViewContent = RoCode.Dom('p', {
             parent: statusViewContentWrapper
         });
         if (isForIframe) {
-            $(Entry.view_).addClass("iframeWithTargetStatus")
-            Entry.view_.appendChild(this._statusView[0]);
+            $(RoCode.view_).addClass("iframeWithTargetStatus")
+            RoCode.view_.appendChild(this._statusView[0]);
         }
         this.updateView();
         this.showDefaultMessage();
@@ -118,7 +118,7 @@ Entry.TargetChecker = function(code, isForEdit, type) {
     };
 
     p.achieveCheck = function(isSuccess, id) {
-        if (this.isFail || !Entry.engine.achieveEnabled)
+        if (this.isFail || !RoCode.engine.achieveEnabled)
             return;
         if (isSuccess)
             this.achieveGoal(id);
@@ -135,7 +135,7 @@ Entry.TargetChecker = function(code, isForEdit, type) {
         if (this.remainPublicGoal === 0) {
             this.isSuccess = true;
             this.showSuccessMessage();
-            Entry.achieveEvent.notify("success", id);
+            RoCode.achieveEvent.notify("success", id);
         }
         this.updateView()
     };
@@ -145,7 +145,7 @@ Entry.TargetChecker = function(code, isForEdit, type) {
             return;
         this.showStatusMessage(id);
         this.isFail = true;
-        Entry.achieveEvent.notify("fail", id);
+        RoCode.achieveEvent.notify("fail", id);
         this.updateView();
     };
 
@@ -196,7 +196,7 @@ Entry.TargetChecker = function(code, isForEdit, type) {
 
     p.registerAchievement = function(originBlock) {
         const block = $.extend(true, {}, originBlock);
-        block.params = originBlock.params.map(p => p instanceof Entry.Block ? p.data.params[0] : p);
+        block.params = originBlock.params.map(p => p instanceof RoCode.Block ? p.data.params[0] : p);
 
         if (this.isForEdit)
             this.watchingBlocks.push(block);
@@ -212,7 +212,7 @@ Entry.TargetChecker = function(code, isForEdit, type) {
     p.reRegisterAll = function() {
         const blocks = this.script.getBlockList(false, 'check_lecture_goal').map(originBlock => {
             const block = $.extend(true, {}, originBlock);
-            block.params = originBlock.params.map(p => p instanceof Entry.Block ? p.data.params[0] : p);
+            block.params = originBlock.params.map(p => p instanceof RoCode.Block ? p.data.params[0] : p);
             return block;
         });
 
@@ -241,7 +241,7 @@ Entry.TargetChecker = function(code, isForEdit, type) {
 
     p.destroy = function() {
         this.reset();
-        Entry.achieveEvent.clear();
+        RoCode.achieveEvent.clear();
         this.script.destroy();
         $(this._view).remove();
     };
@@ -270,4 +270,4 @@ Entry.TargetChecker = function(code, isForEdit, type) {
         )
     }
 
-})(Entry.TargetChecker.prototype);
+})(RoCode.TargetChecker.prototype);

@@ -1,4 +1,4 @@
-Entry.skeleton.clickable_text = {
+RoCode.skeleton.clickable_text = {
     path(blockView) {
         let width = blockView.contentWidth;
         let height = blockView.contentHeight;

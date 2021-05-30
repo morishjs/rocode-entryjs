@@ -6,7 +6,7 @@
 const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_util');
 
 (function(c) {
-    const { COMMAND_TYPES, RECORDABLE } = Entry.STATIC;
+    const { COMMAND_TYPES, RECORDABLE } = RoCode.STATIC;
 
     const {
         variableContainerSelectFilter,
@@ -114,7 +114,7 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
         undo: 'variableContainerRemoveVariable',
         restrict(data, domQuery, callback) {
             getVC().clickVariableAddButton(true, true);
-            $('.entryVariableAddSpaceInputWorkspace').val(
+            $('.RoCodeVariableAddSpaceInputWorkspace').val(
                 _.result(getExpectedData('variable'), 'name') || ''
             );
 
@@ -130,7 +130,7 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
         do(value) {
             let { dom } = c[variableAddSetName];
 
-            dom = Entry.getDom(dom);
+            dom = RoCode.getDom(dom);
             dom._focused = false;
             dom.value = getExpectedData('value', value);
         },
@@ -142,8 +142,8 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
         },
         restrict(data, domQuery, callback) {
             getVC().clickVariableAddButton(true);
-            const dom = Entry.getDom(this.dom);
-            Entry.Utils.focusIfNotActive(dom);
+            const dom = RoCode.getDom(this.dom);
+            RoCode.Utils.focusIfNotActive(dom);
             dom.enterKeyDisabled = true;
             const { title, content } = data.tooltip;
             return createTooltip(title, content, domQuery, callback, {
@@ -251,7 +251,7 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
                 info.object = null;
                 info.isCloud = isCloud;
             } else if (type === 'local') {
-                const { object } = Entry.playground;
+                const { object } = RoCode.playground;
                 if (!object) {
                     return;
                 }
@@ -331,7 +331,7 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
         do(id, value) {
             const VC = getVC();
             const variable = VC.getVariable(id);
-            Entry.getDom(['variableContainer', 'variableSetDefaultValue'])._focused = false;
+            RoCode.getDom(['variableContainer', 'variableSetDefaultValue'])._focused = false;
             variable.setValue(value);
             VC.updateVariableSettingView(variable);
         },
@@ -472,7 +472,7 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
         undo: 'variableContainerRemoveList',
         restrict(data, domQuery, callback) {
             getVC().clickListAddButton(true, true);
-            Entry.getDom(['variableContainer', 'listAddInput']).value =
+            RoCode.getDom(['variableContainer', 'listAddInput']).value =
                 _.result(getExpectedData('list'), 'name') || '';
 
             const { title, content } = data.tooltip;
@@ -502,7 +502,7 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
         do(value) {
             let { dom } = c[listAddSetName];
 
-            dom = Entry.getDom(dom);
+            dom = RoCode.getDom(dom);
             dom._focused = false;
             dom.value = getExpectedData('value', value);
         },
@@ -514,8 +514,8 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
         },
         restrict(data, domQuery, callback) {
             getVC().clickListAddButton(true);
-            const dom = Entry.getDom(this.dom);
-            Entry.Utils.focusIfNotActive(dom);
+            const dom = RoCode.getDom(this.dom);
+            RoCode.Utils.focusIfNotActive(dom);
             dom.enterKeyDisabled = true;
             const { title, content } = data.tooltip;
             return createTooltip(title, content, domQuery, callback, {
@@ -536,7 +536,7 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
                 info.object = null;
                 info.isCloud = isCloud;
             } else if (type === 'local') {
-                const { object } = Entry.playground;
+                const { object } = RoCode.playground;
                 if (!object) {
                     return;
                 }
@@ -628,7 +628,7 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
             } else if (value === 'plus') {
                 result = length + 1;
                 await list.appendValue(0);
-            } else if (Entry.Utils.isNumber(value) && value >= 0) {
+            } else if (RoCode.Utils.isNumber(value) && value >= 0) {
                 result = value;
             } else {
                 result = length;
@@ -643,7 +643,7 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
             return [
                 ['id', id],
                 ['value', value],
-                ['dom', Entry.Utils.isNumber(value) ? 'lengthInput' : value],
+                ['dom', RoCode.Utils.isNumber(value) ? 'lengthInput' : value],
             ];
         },
         recordable: RECORDABLE.SUPPORT,
@@ -681,7 +681,7 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
         undo: 'listSetDefaultValue',
         restrict(data, domQuery, callback) {
             _updateSelected(data.content);
-            Entry.Utils.focusIfNotActive(Entry.getDom(domQuery));
+            RoCode.Utils.focusIfNotActive(RoCode.getDom(domQuery));
             const { title, content } = data.tooltip;
             return createTooltip(title, content, domQuery, callback, {
                 noDispose: true,
@@ -706,7 +706,7 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
         recordable: RECORDABLE.SUPPORT,
         undo: 'setMessageEditable',
         restrict(data, domQuery, callback) {
-            Entry.Utils.blur();
+            RoCode.Utils.blur();
             getVC()
                 .getMessage(data.content[1][1])
                 .listElement.addClass('activeForce');
@@ -738,7 +738,7 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
         recordable: RECORDABLE.SUPPORT,
         undo: 'setVariableEditable',
         restrict(data, domQuery, callback) {
-            Entry.Utils.blur();
+            RoCode.Utils.blur();
             const VC = getVC();
             VC.updateSelectedVariable(null, 'variable');
             VC.getVariable(data.content[1][1]).listElement.addClass('activeForce');
@@ -767,7 +767,7 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
         recordable: RECORDABLE.SUPPORT,
         undo: 'setListEditable',
         restrict(data, domQuery, callback) {
-            Entry.Utils.blur();
+            RoCode.Utils.blur();
             getVC()
                 .getList(data.content[1][1])
                 .listElement.addClass('activeForce');
@@ -799,7 +799,7 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
         restrict({ tooltip, content }, domQuery, callback) {
             _updateSelected(content);
 
-            Entry.Utils.focusIfNotActive(domQuery);
+            RoCode.Utils.focusIfNotActive(domQuery);
 
             const { title: tooltipTitle, content: tooltipContent } = tooltip;
             return createTooltip(tooltipTitle, tooltipContent, domQuery, callback, {
@@ -833,7 +833,7 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
         restrict({ tooltip, content }, domQuery, callback) {
             _updateSelected(content);
 
-            Entry.Utils.focusIfNotActive(domQuery);
+            RoCode.Utils.focusIfNotActive(domQuery);
 
             const { title: tooltipTitle, content: tooltipContent } = tooltip;
             return createTooltip(tooltipTitle, tooltipContent, domQuery, callback, {
@@ -855,7 +855,7 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
     }
 
     function getVC() {
-        return Entry.variableContainer;
+        return RoCode.variableContainer;
     }
 
     function _updateSelected(content) {
@@ -872,4 +872,4 @@ const { createTooltip, returnEmptyArr, getExpectedData } = require('../command_u
         const { title: tooltipTitle, content: tooltipContent } = tooltip;
         return createTooltip(tooltipTitle, tooltipContent, domQuery, callback);
     }
-})(Entry.Command);
+})(RoCode.Command);

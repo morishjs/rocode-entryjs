@@ -60,7 +60,7 @@ function getInitialCategoryMap() {
     };
 }
 
-Entry.EXPANSION_BLOCK.behaviorConductDisaster = {
+RoCode.EXPANSION_BLOCK.behaviorConductDisaster = {
     name: 'behaviorConductDisaster',
     imageName: 'disaster.png',
     title: {
@@ -76,13 +76,13 @@ Entry.EXPANSION_BLOCK.behaviorConductDisaster = {
         if (this.isInitialized) {
             return;
         }
-        Entry.EXPANSION_BLOCK.behaviorConductDisaster.isInitialized = true;
+        RoCode.EXPANSION_BLOCK.behaviorConductDisaster.isInitialized = true;
     },
     api: '/api/expansionBlock/behaviorConduct',
     apiType: '01',
 };
 
-Entry.EXPANSION_BLOCK.behaviorConductDisaster.getBlocks = function() {
+RoCode.EXPANSION_BLOCK.behaviorConductDisaster.getBlocks = function() {
     const categoryMap = getInitialCategoryMap();
     const getCategory = function() {
         return Object.keys(categoryMap).map((category) => [categoryMap[category].lang, category]);
@@ -95,12 +95,12 @@ Entry.EXPANSION_BLOCK.behaviorConductDisaster.getBlocks = function() {
                 options: getCategory(),
                 value: defaultCategory,
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.EXPANSION,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.EXPANSION,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 dropdownSync: 'disaster',
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
@@ -120,8 +120,8 @@ Entry.EXPANSION_BLOCK.behaviorConductDisaster.getBlocks = function() {
                 },
                 needDeepCopy: true,
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.EXPANSION,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.EXPANSION,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
                 defaultValue: (value, options) => {
                     if (options.length) {
                         return options[0][1];
@@ -130,7 +130,7 @@ Entry.EXPANSION_BLOCK.behaviorConductDisaster.getBlocks = function() {
                 },
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
@@ -141,7 +141,7 @@ Entry.EXPANSION_BLOCK.behaviorConductDisaster.getBlocks = function() {
         return new PromiseManager()
             .Promise((resolve) => {
                 callApi(key, {
-                    url: `${Entry.EXPANSION_BLOCK.behaviorConductDisaster.api}/${params.category}/${params.subCategory}`,
+                    url: `${RoCode.EXPANSION_BLOCK.behaviorConductDisaster.api}/${params.category}/${params.subCategory}`,
                 })
                     .then((result) => {
                         if (result) {
@@ -165,12 +165,12 @@ Entry.EXPANSION_BLOCK.behaviorConductDisaster.getBlocks = function() {
     return {
         behaviorConductDisaster_title: {
             skeleton: 'basic_text',
-            color: EntryStatic.colorSet.common.TRANSPARENT,
+            color: RoCodeStatic.colorSet.common.TRANSPARENT,
             params: [
                 {
                     type: 'Text',
                     text: Lang.template.behaviorConductDisaster_title_text,
-                    color: EntryStatic.colorSet.common.TEXT,
+                    color: RoCodeStatic.colorSet.common.TEXT,
                     align: 'center',
                 },
             ],
@@ -182,8 +182,8 @@ Entry.EXPANSION_BLOCK.behaviorConductDisaster.getBlocks = function() {
             events: {},
         },
         count_disaster_behavior: {
-            color: EntryStatic.colorSet.block.default.EXPANSION,
-            outerLine: EntryStatic.colorSet.block.darken.EXPANSION,
+            color: RoCodeStatic.colorSet.block.default.EXPANSION,
+            outerLine: RoCodeStatic.colorSet.block.darken.EXPANSION,
             skeleton: 'basic_string_field',
             statements: [],
             params: [params.getCategory(), params.getSubCategory()],
@@ -204,7 +204,7 @@ Entry.EXPANSION_BLOCK.behaviorConductDisaster.getBlocks = function() {
             isNotFor: ['behaviorConductDisaster'],
             func(sprite, script) {
                 const params = {
-                    category: Entry.EXPANSION_BLOCK.behaviorConductDisaster.apiType,
+                    category: RoCode.EXPANSION_BLOCK.behaviorConductDisaster.apiType,
                     subCategory: script.getField('CATEGORY', script),
                     subCategory2: script.getField('SUB_CATEGORY', script),
                 };
@@ -217,8 +217,8 @@ Entry.EXPANSION_BLOCK.behaviorConductDisaster.getBlocks = function() {
             },
         },
         get_disaster_behavior: {
-            color: EntryStatic.colorSet.block.default.EXPANSION,
-            outerLine: EntryStatic.colorSet.block.darken.EXPANSION,
+            color: RoCodeStatic.colorSet.block.default.EXPANSION,
+            outerLine: RoCodeStatic.colorSet.block.darken.EXPANSION,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -250,7 +250,7 @@ Entry.EXPANSION_BLOCK.behaviorConductDisaster.getBlocks = function() {
                 const number = script.getStringValue('NUMBER', script);
                 const defaultValue = Lang.Blocks.no_data;
                 const params = {
-                    category: Entry.EXPANSION_BLOCK.behaviorConductDisaster.apiType,
+                    category: RoCode.EXPANSION_BLOCK.behaviorConductDisaster.apiType,
                     subCategory: script.getField('CATEGORY', script),
                     subCategory2: script.getField('SUB_CATEGORY', script),
                 };

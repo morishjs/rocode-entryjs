@@ -1,5 +1,5 @@
 
-Entry.FieldTextDynamic = class FieldTextDynamic extends Entry.Field {
+RoCode.FieldTextDynamic = class FieldTextDynamic extends RoCode.Field {
     constructor(content, blockView, index) {
         super(content, blockView, index, null, null, true);
         const { fontSize, align = 'left', text, color, setValue } = content;
@@ -7,7 +7,7 @@ Entry.FieldTextDynamic = class FieldTextDynamic extends Entry.Field {
         this._blockView = blockView;
         this._index = index;
 
-        this.box = new Entry.BoxModel();
+        this.box = new RoCode.BoxModel();
 
         this._font_size = fontSize || blockView.getSkeleton().fontSize || 12;
         this._color =
@@ -43,7 +43,7 @@ Entry.FieldTextDynamic = class FieldTextDynamic extends Entry.Field {
                 style: 'white-space: pre;',
                 'font-size': `${this._font_size}px`,
                 'font-weight': 'bold',
-                'font-family': EntryStatic.fontFamily || 'NanumGothic',
+                'font-family': RoCodeStatic.fontFamily || 'NanumGothic',
                 class: 'dragNone',
                 fill: this._color,
             });
@@ -64,7 +64,7 @@ Entry.FieldTextDynamic = class FieldTextDynamic extends Entry.Field {
 
         const { width, height } = this.getTextBBox();
         const x = this._align == 'center' ? -width / 2 : 0;
-        const offsetY = EntryStatic.fontOffsetY || 0;
+        const offsetY = RoCodeStatic.fontOffsetY || 0;
         this.textElement.attr({
             x,
             y: height * 0.5 + offsetY,

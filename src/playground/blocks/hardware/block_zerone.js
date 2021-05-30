@@ -1,19 +1,19 @@
 'use strict';
 
-Entry.Zerone = {
+RoCode.Zerone = {
     setZero() {
-        Entry.Robomation.setZero();
+        RoCode.Robomation.setZero();
     },
     afterReceive(pd) {
-        Entry.Robomation.afterReceive(pd, false);
+        RoCode.Robomation.afterReceive(pd, false);
     },
     afterSend(sq) {
-        Entry.Robomation.afterSend(sq);
+        RoCode.Robomation.afterSend(sq);
     },
     getRobot() {
-        const robot = Entry.Robomation.getRobot('zerone', 0);
+        const robot = RoCode.Robomation.getRobot('zerone', 0);
         if (robot) {
-            robot.setMotoring(Entry.hw.sendQueue);
+            robot.setMotoring(RoCode.hw.sendQueue);
         }
         return robot;
     },
@@ -124,7 +124,7 @@ Entry.Zerone = {
     }),
 };
 
-Entry.Zerone.setLanguage = () => ({
+RoCode.Zerone.setLanguage = () => ({
     ko: {
         template: {
             zerone_is_gesture: '제스처가 %1 인가?',
@@ -777,7 +777,7 @@ Entry.Zerone.setLanguage = () => ({
     },
 });
 
-Entry.Zerone.blockMenuBlocks = [
+RoCode.Zerone.blockMenuBlocks = [
     'zerone_value',
     'zerone_is_gesture',
     'zerone_touching_color',
@@ -808,11 +808,11 @@ Entry.Zerone.blockMenuBlocks = [
     'zerone_set_tempo_to',
 ];
 
-Entry.Zerone.getBlocks = function() {
+RoCode.Zerone.getBlocks = function() {
     return {
         zerone_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -833,8 +833,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'LEFT_PROXIMITY',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -848,7 +848,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_sensor',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 if (robot) {
                     return robot.getValue(script);
                 }
@@ -876,9 +876,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'LEFT_PROXIMITY',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -886,8 +886,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_is_gesture: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -906,8 +906,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'FORWARD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -921,7 +921,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_sensor',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.checkGesture(script) : false;
             },
             syntax: {
@@ -945,9 +945,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'FORWARD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -955,8 +955,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_touching_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -973,8 +973,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -988,7 +988,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_sensor',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.checkTouchingColor(script) : false;
             },
             syntax: {
@@ -1010,9 +1010,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1020,8 +1020,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_boolean: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -1035,8 +1035,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'BATTERY_NORMAL',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -1050,7 +1050,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_sensor',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.checkBoolean(script) : false;
             },
             syntax: {
@@ -1069,9 +1069,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'BATTERY_NORMAL',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1079,8 +1079,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_start_sensor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1092,8 +1092,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'GESTURE',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1112,7 +1112,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_sensor',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.startSensor(script) : script;
             },
             syntax: {
@@ -1129,9 +1129,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'GESTURE',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1139,8 +1139,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_move_forward_unit: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1157,8 +1157,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'CM',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1185,7 +1185,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_wheel',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.moveForwardUnit(script) : script;
             },
             syntax: {
@@ -1207,9 +1207,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'CM',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1217,8 +1217,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_move_backward_unit: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1235,8 +1235,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'CM',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1263,7 +1263,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_wheel',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.moveBackwardUnit(script) : script;
             },
             syntax: {
@@ -1285,9 +1285,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'CM',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1295,8 +1295,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_turn_unit_in_place: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1308,8 +1308,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1324,8 +1324,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'DEG',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1354,7 +1354,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_wheel',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.turnUnit(script) : script;
             },
             syntax: {
@@ -1371,9 +1371,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -1388,9 +1388,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'DEG',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1398,8 +1398,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_change_both_wheels_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1439,7 +1439,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_wheel',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.changeWheels(script) : script;
             },
             syntax: {
@@ -1462,8 +1462,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_set_both_wheels_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1503,7 +1503,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_wheel',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.setWheels(script) : script;
             },
             syntax: {
@@ -1526,8 +1526,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_change_wheel_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1540,8 +1540,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1572,7 +1572,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_wheel',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.changeWheel(script) : script;
             },
             syntax: {
@@ -1590,9 +1590,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -1604,8 +1604,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_set_wheel_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1618,8 +1618,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'LEFT',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1650,7 +1650,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_wheel',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.setWheel(script) : script;
             },
             syntax: {
@@ -1668,9 +1668,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'LEFT',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -1682,8 +1682,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1701,7 +1701,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_wheel',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.stop(script) : script;
             },
             syntax: {
@@ -1714,8 +1714,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_set_led_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1734,8 +1734,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'HEAD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1752,8 +1752,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'RED',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1773,7 +1773,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_led',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.setLed(script) : script;
             },
             syntax: {
@@ -1797,9 +1797,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'HEAD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -1816,9 +1816,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'RED',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1826,8 +1826,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_pick_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1846,8 +1846,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'HEAD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Color',
@@ -1870,7 +1870,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_led',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.pickLed(script) : script;
             },
             syntax: {
@@ -1894,13 +1894,13 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'HEAD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Color',
-                                converter: Entry.block.converters.returnStringValue,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -1908,8 +1908,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_change_led_by_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1928,8 +1928,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'HEAD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1978,7 +1978,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_led',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.changeRgb(script) : script;
             },
             syntax: {
@@ -2002,9 +2002,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'HEAD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -2024,8 +2024,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_set_led_to_rgb: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2044,8 +2044,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'HEAD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2094,7 +2094,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_led',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.setRgb(script) : script;
             },
             syntax: {
@@ -2118,9 +2118,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'HEAD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -2140,8 +2140,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_clear_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2160,8 +2160,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'HEAD',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2180,7 +2180,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_led',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.clearLed(script) : script;
             },
             syntax: {
@@ -2204,9 +2204,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'HEAD',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                         ],
                     },
@@ -2214,8 +2214,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_play_sound_times: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2240,8 +2240,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'BEEP',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2272,7 +2272,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_sound',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.playSound(script) : script;
             },
             syntax: {
@@ -2302,9 +2302,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'BEEP',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -2316,8 +2316,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_play_sound_times_until_done: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2342,8 +2342,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'BEEP',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2374,7 +2374,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_sound',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.playSoundUntil(script) : script;
             },
             syntax: {
@@ -2404,9 +2404,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'BEEP',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Block',
@@ -2418,8 +2418,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_change_buzzer_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2450,7 +2450,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_sound',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.changeBuzzer(script) : script;
             },
             syntax: {
@@ -2463,8 +2463,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_set_buzzer_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2495,7 +2495,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_sound',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.setBuzzer(script) : script;
             },
             syntax: {
@@ -2508,8 +2508,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_clear_sound: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2527,7 +2527,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_sound',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.clearSound(script) : script;
             },
             syntax: {
@@ -2541,8 +2541,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_play_note: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2564,8 +2564,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2580,8 +2580,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2601,7 +2601,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_sound',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.playNote(script) : script;
             },
             syntax: {
@@ -2628,9 +2628,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'C',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2645,9 +2645,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                         ],
                     },
@@ -2655,8 +2655,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_play_note_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2678,8 +2678,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2694,8 +2694,8 @@ Entry.Zerone.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2728,7 +2728,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_sound',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.playNoteBeat(script) : script;
             },
             syntax: {
@@ -2755,9 +2755,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: 'C',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringValue,
                             },
                             {
                                 type: 'Dropdown',
@@ -2772,9 +2772,9 @@ Entry.Zerone.getBlocks = function() {
                                 ],
                                 value: '1',
                                 fontSize: 11,
-                                bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                                arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
-                                converter: Entry.block.converters.returnStringOrNumberByValue,
+                                bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                                arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
+                                converter: RoCode.block.converters.returnStringOrNumberByValue,
                             },
                             {
                                 type: 'Block',
@@ -2786,8 +2786,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_rest_for: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2818,7 +2818,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_sound',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.restBeat(script) : script;
             },
             syntax: {
@@ -2837,8 +2837,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_change_tempo_by: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2869,7 +2869,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_sound',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.changeTempo(script) : script;
             },
             syntax: {
@@ -2888,8 +2888,8 @@ Entry.Zerone.getBlocks = function() {
             },
         },
         zerone_set_tempo_to: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2920,7 +2920,7 @@ Entry.Zerone.getBlocks = function() {
             class: 'zerone_sound',
             isNotFor: ['zerone'],
             func(sprite, script) {
-                const robot = Entry.Zerone.getRobot();
+                const robot = RoCode.Zerone.getRobot();
                 return robot ? robot.setTempo(script) : script;
             },
             syntax: {
@@ -2941,4 +2941,4 @@ Entry.Zerone.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Zerone;
+module.exports = RoCode.Zerone;

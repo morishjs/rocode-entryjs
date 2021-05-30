@@ -1,8 +1,8 @@
 'use strict';
 
-import { Angle, Number } from '@entrylabs/tool';
+import { Angle, Number } from '@RoCodelabs/tool';
 
-Entry.FieldTextInput = class FieldTextInput extends Entry.Field {
+RoCode.FieldTextInput = class FieldTextInput extends RoCode.Field {
     constructor(content, blockView, index) {
         super(content, blockView, index);
         const { data = {} } = blockView;
@@ -14,7 +14,7 @@ Entry.FieldTextInput = class FieldTextInput extends Entry.Field {
         this.board = this._blockView.getBoard();
         this._block = blockView.block;
 
-        this.box = new Entry.BoxModel();
+        this.box = new RoCode.BoxModel();
 
         this.svgGroup = null;
         this.optionWidget = null;
@@ -66,11 +66,11 @@ Entry.FieldTextInput = class FieldTextInput extends Entry.Field {
                 fill: this._contents.color || 'black',
                 'font-size': `${this._font_size}px`,
                 'font-weight': 'bold',
-                'font-family': EntryStatic.fontFamily || 'NanumGothic',
+                'font-family': RoCodeStatic.fontFamily || 'NanumGothic',
             });
         }
 
-        this.svgGroup.attr({ class: 'entry-input-field' });
+        this.svgGroup.attr({ class: 'RoCode-input-field' });
 
         this._setConvertedValue();
 
@@ -116,12 +116,12 @@ Entry.FieldTextInput = class FieldTextInput extends Entry.Field {
             this._neighborFields = neighborFields;
         }
 
-        this.optionGroup = Entry.Dom('div', {
-            class: 'entry-widget-parent',
+        this.optionGroup = RoCode.Dom('div', {
+            class: 'RoCode-widget-parent',
             parent: $('body'),
         });
 
-        if (Entry.isMobile()) {
+        if (RoCode.isMobile()) {
             if (defaultType === 'number') {
                 this.optionWidget = this._getNumberOptionWidget();
             } else if (defaultType === 'angle') {
@@ -176,7 +176,7 @@ Entry.FieldTextInput = class FieldTextInput extends Entry.Field {
     /**
      *
      * @param {Array} excludeDom outside 로 판단하지 않을 dom target list
-     * @returns {EntryTool} Angle Widget
+     * @returns {RoCodeTool} Angle Widget
      * @private
      */
     _getAngleOptionWidget(...excludeDom) {
@@ -214,8 +214,8 @@ Entry.FieldTextInput = class FieldTextInput extends Entry.Field {
     }
 
     _getInputFieldOption() {
-        const inputField = Entry.Dom('input', {
-            class: 'entry-widget-input-field',
+        const inputField = RoCode.Dom('input', {
+            class: 'RoCode-widget-input-field',
             parent: $('body'),
         });
 
@@ -258,7 +258,7 @@ Entry.FieldTextInput = class FieldTextInput extends Entry.Field {
             top: y + (scale - 1) * 4 + 2 * scale - 1 * (scale / 2) - this.box.height / 2,
             width: this.box.width * scale,
             'font-size': `${this._font_size}px`,
-            'background-color': EntryStatic.colorSet.block.lighten.CALC,
+            'background-color': RoCodeStatic.colorSet.block.lighten.CALC,
         });
 
         inputField.focus && inputField.focus();
@@ -276,7 +276,7 @@ Entry.FieldTextInput = class FieldTextInput extends Entry.Field {
                         angle: FieldTextInput._refineDegree(value),
                     };
                     if (
-                        Entry.Utils.isNumber(value) &&
+                        RoCode.Utils.isNumber(value) &&
                         value.lastIndexOf('.') !== value.length - 1
                     ) {
                         result = String(result % 360);
@@ -347,7 +347,7 @@ Entry.FieldTextInput = class FieldTextInput extends Entry.Field {
 
     getNeighborFields() {
         if (!this._neighborFields) {
-            const FIELD_TEXT_INPUT = Entry.FieldTextInput;
+            const FIELD_TEXT_INPUT = RoCode.FieldTextInput;
             this._neighborFields = this._block
                 .getRootBlock()
                 .getThread()
@@ -443,6 +443,6 @@ Entry.FieldTextInput = class FieldTextInput extends Entry.Field {
     }
 
     static _isValidInputValue(value) {
-        return Entry.Utils.isNumber(value) || value === '-' || value === '.';
+        return RoCode.Utils.isNumber(value) || value === '-' || value === '.';
     }
 };

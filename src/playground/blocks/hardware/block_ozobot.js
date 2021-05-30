@@ -6,7 +6,7 @@ var OzobotState = {
 	STATE_DONE: 'done',
 };
 
-Entry.Ozobot = {
+RoCode.Ozobot = {
 	PORT_MAP: {
 		seq: 0,
 		cat: 0,
@@ -20,15 +20,15 @@ Entry.Ozobot = {
 		p6: 0
 	},
 	setZero: function () {
-		var portMap = Entry.Ozobot.PORT_MAP;
-		var sq = Entry.hw.sendQueue;
-		Entry.Ozobot.sequance = 1;
-		Entry.Ozobot.isStarted = false;
-		Entry.Ozobot.state = OzobotState.STATE_DONE;
+		var portMap = RoCode.Ozobot.PORT_MAP;
+		var sq = RoCode.hw.sendQueue;
+		RoCode.Ozobot.sequance = 1;
+		RoCode.Ozobot.isStarted = false;
+		RoCode.Ozobot.state = OzobotState.STATE_DONE;
 		for (var port in portMap) {
 			sq[port] = portMap[port];
 		}
-		Entry.hw.update();
+		RoCode.hw.update();
 	},
 	id: '24.2',
 	name: 'Ozobot Evo',
@@ -47,7 +47,7 @@ Entry.Ozobot = {
 	isStarted: false,
 	state: OzobotState.STATE_DONE,
 };
-Entry.Ozobot.blockMenuBlocks = [
+RoCode.Ozobot.blockMenuBlocks = [
 	//region ozobot
 	'Ozobot_Sensor_floor_color',
 	'Ozobot_Sensor_line_color',
@@ -77,12 +77,12 @@ Entry.Ozobot.blockMenuBlocks = [
 	'Ozobot_Power_off',
 	//end region ozobot
 ];
-Entry.Ozobot.getBlocks = function () {
+RoCode.Ozobot.getBlocks = function () {
 	return {
 		// Sensor
 		Ozobot_Sensor_floor_color: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic_boolean_field',
 			template: '바닥 색깔 %1',
 			params: [
@@ -99,8 +99,8 @@ Entry.Ozobot.getBlocks = function () {
 						['흰색', 0x07],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 			],
 			def: {
@@ -114,15 +114,15 @@ Entry.Ozobot.getBlocks = function () {
 			class: 'Ozobot_Sensor',
 			func: function (sprite, script) {
 				var var1 = script.getNumberField('VALUE', script);
-				var pd = Entry.hw.portData;
+				var pd = RoCode.hw.portData;
 				if (var1 == pd.surface_color)
 					return true;
 				return false;
 			},
 		},
 		Ozobot_Sensor_line_color: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic_boolean_field',
 			template: '선 색깔 %1',
 			params: [
@@ -135,8 +135,8 @@ Entry.Ozobot.getBlocks = function () {
 						['파란색', 0x04],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 			],
 			def: {
@@ -150,15 +150,15 @@ Entry.Ozobot.getBlocks = function () {
 			class: 'Ozobot_Sensor',
 			func: function (sprite, script) {
 				var var1 = script.getNumberField('VALUE', script);
-				var pd = Entry.hw.portData;
+				var pd = RoCode.hw.portData;
 				if (var1 == pd.line_color)
 					return true;
 				return false;
 			},
 		},
 		Ozobot_Sensor_obstacle: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic_boolean_field',
 			template: '%1',
 			params: [
@@ -173,8 +173,8 @@ Entry.Ozobot.getBlocks = function () {
 						['뒤쪽 왼편 장애물', 0x05],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 			],
 			def: {
@@ -188,7 +188,7 @@ Entry.Ozobot.getBlocks = function () {
 			class: 'Ozobot_Sensor',
 			func: function (sprite, script) {
 				var var1 = script.getNumberField('VALUE', script);
-				var pd = Entry.hw.portData;
+				var pd = RoCode.hw.portData;
 				switch (var1) {
 					case 0x00:
 						if (pd.obstacle_front_left || pd.obstacle_front_right)
@@ -220,8 +220,8 @@ Entry.Ozobot.getBlocks = function () {
 		},
 		// Movement
 		Ozobot_Move_wheel: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -234,8 +234,8 @@ Entry.Ozobot.getBlocks = function () {
 						['뒤', 0x01],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Dropdown',
@@ -246,8 +246,8 @@ Entry.Ozobot.getBlocks = function () {
 						['매우빠르게', 85],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Dropdown',
@@ -256,8 +256,8 @@ Entry.Ozobot.getBlocks = function () {
 						['뒤', 0x01],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Dropdown',
@@ -268,8 +268,8 @@ Entry.Ozobot.getBlocks = function () {
 						['매우빠르게', 85],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Indicator',
@@ -291,14 +291,14 @@ Entry.Ozobot.getBlocks = function () {
 			class: 'Ozobot_Movement',
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
 				var var1 = script.getNumberField('DIRECTION_LEFT', script);
 				var var2 = script.getNumberField('SPEED_LEFT', script);
 				var var3 = script.getNumberField('DIRECTION_RIGHT', script);
 				var var4 = script.getNumberField('SPEED_RIGHT', script);
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 1;
 					sq.act = 0;
 					sq.pcnt = 4;
@@ -306,23 +306,23 @@ Entry.Ozobot.getBlocks = function () {
 					sq.p2 = var2;
 					sq.p3 = var3;
 					sq.p4 = var4;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 100);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -331,8 +331,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_Move1: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -345,8 +345,8 @@ Entry.Ozobot.getBlocks = function () {
 						['뒤', 0x01],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Block',
@@ -361,8 +361,8 @@ Entry.Ozobot.getBlocks = function () {
 						['매우빠르게', 85],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Indicator',
@@ -383,38 +383,38 @@ Entry.Ozobot.getBlocks = function () {
 			class: 'Ozobot_Movement',
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
 				var var1 = script.getNumberField('DIRECTION', script);
 				var var2 = script.getNumberValue('DISTANCE', script);
 				var var3 = script.getNumberField('SPEED', script);
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 1;
 					sq.act = 1;
 					sq.pcnt = 3;
 					sq.p1 = var1;
 					sq.p2 = var2 * 10;
 					sq.p3 = var3;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							if (!pd.movement_finish) {
-								Entry.Ozobot.state = OzobotState.STATE_WAIT;
+								RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							}
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							if (pd.movement_finish) {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -423,8 +423,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_Move2: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -456,37 +456,37 @@ Entry.Ozobot.getBlocks = function () {
 			class: 'Ozobot_Movement',
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
 				var var1 = script.getNumberValue('DISTANCE', script);
 				var var2 = script.getNumberValue('SPEED', script);
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 1;
 					sq.act = 1;
 					sq.pcnt = 3;
 					sq.p1 = 0;
 					sq.p2 = var1;
 					sq.p3 = var2;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							if (!pd.movement_finish) {
-								Entry.Ozobot.state = OzobotState.STATE_WAIT;
+								RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							}
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							if (pd.movement_finish) {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -495,8 +495,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_Rotate1: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -509,8 +509,8 @@ Entry.Ozobot.getBlocks = function () {
 						['반시계 방향', 0x00],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Block',
@@ -535,36 +535,36 @@ Entry.Ozobot.getBlocks = function () {
 			class: 'Ozobot_Movement',
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
 				var var1 = script.getNumberField('DIRECTION', script);
 				var var2 = script.getNumberValue('ANGLE', script);
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 1;
 					sq.act = 2;
 					sq.pcnt = 2;
 					sq.p1 = var1;
 					sq.p2 = var2;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							if (!pd.movement_finish) {
-								Entry.Ozobot.state = OzobotState.STATE_WAIT;
+								RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							}
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							if (pd.movement_finish) {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -573,8 +573,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_Rotate2: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -587,8 +587,8 @@ Entry.Ozobot.getBlocks = function () {
 						['반시계 방향', 0x00],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Dropdown',
@@ -597,8 +597,8 @@ Entry.Ozobot.getBlocks = function () {
 						['반 바퀴', 0x01],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Indicator',
@@ -618,36 +618,36 @@ Entry.Ozobot.getBlocks = function () {
 			class: 'Ozobot_Movement',
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
 				var var1 = script.getNumberField('DIRECTION', script);
 				var var2 = script.getNumberField('ANGLE', script);
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 1;
 					sq.act = 2;
 					sq.pcnt = 2;
 					sq.p1 = var1;
 					sq.p2 = var2 == 0 ? 360 : 180;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							if (!pd.movement_finish) {
-								Entry.Ozobot.state = OzobotState.STATE_WAIT;
+								RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							}
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							if (pd.movement_finish) {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -656,8 +656,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_Move_stop: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -678,10 +678,10 @@ Entry.Ozobot.getBlocks = function () {
 			class: 'Ozobot_Movement',
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 1;
 					sq.act = 0;
 					sq.pcnt = 4;
@@ -689,23 +689,23 @@ Entry.Ozobot.getBlocks = function () {
 					sq.p2 = 0;
 					sq.p3 = 0;
 					sq.p4 = 0;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 100);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -715,8 +715,8 @@ Entry.Ozobot.getBlocks = function () {
 		},
 		// Control
 		Ozobot_Line_trace: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -729,8 +729,8 @@ Entry.Ozobot.getBlocks = function () {
 						['멈춤', 0x00],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Indicator',
@@ -749,32 +749,32 @@ Entry.Ozobot.getBlocks = function () {
 			class: 'Ozobot_Line_trace',
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
 				var var1 = script.getNumberField('ON_OFF', script);
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 2;
 					sq.act = 5;
 					sq.pcnt = 1;
 					sq.p1 = var1;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 100);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -783,8 +783,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_LED_head: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -811,32 +811,32 @@ Entry.Ozobot.getBlocks = function () {
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
 				var var1 = script.getStringField('COLOR', script);
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 2;
 					sq.act = 0;
 					sq.pcnt = 2;
 					sq.p1 = 1;
 					sq.p2 = parseInt(parseInt(var1.substr(1, 6), 16));
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 100);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -845,8 +845,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_LED_head_floor: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -867,10 +867,10 @@ Entry.Ozobot.getBlocks = function () {
 			class: 'Ozobot_LED',
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 2;
 					sq.act = 0;
 					sq.pcnt = 2;
@@ -882,23 +882,23 @@ Entry.Ozobot.getBlocks = function () {
 					if (pd.surface_color & 1) sq.p2 |= 16711680;
 					if (pd.surface_color & 2) sq.p2 |= 65280;
 					if (pd.surface_color & 4) sq.p2 |= 255;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 100);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -907,8 +907,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_LED_head_random: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -930,10 +930,10 @@ Entry.Ozobot.getBlocks = function () {
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
 				var var1 = script.getStringField('COLOR', script);
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 2;
 					sq.act = 0;
 					sq.pcnt = 2;
@@ -942,23 +942,23 @@ Entry.Ozobot.getBlocks = function () {
 					sq.p2 |= (Math.floor(Math.random() * 256) << 16);
 					sq.p2 |= (Math.floor(Math.random() * 256) << 8);
 					sq.p2 |= Math.floor(Math.random() * 256);
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 100);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -967,8 +967,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_LED_head_off: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -989,32 +989,32 @@ Entry.Ozobot.getBlocks = function () {
 			class: 'Ozobot_LED',
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 2;
 					sq.act = 0;
 					sq.pcnt = 2;
 					sq.p1 = 1;
 					sq.p2 = 0;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 100);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -1023,8 +1023,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_LED_front: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -1071,10 +1071,10 @@ Entry.Ozobot.getBlocks = function () {
 				var var3 = script.getStringField('COLOR3', script);
 				var var4 = script.getStringField('COLOR4', script);
 				var var5 = script.getStringField('COLOR5', script);
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 2;
 					sq.act = 0;
 					sq.pcnt = 6;
@@ -1084,23 +1084,23 @@ Entry.Ozobot.getBlocks = function () {
 					sq.p4 = parseInt(parseInt(var3.substr(1, 6), 16));
 					sq.p5 = parseInt(parseInt(var2.substr(1, 6), 16));
 					sq.p6 = parseInt(parseInt(var1.substr(1, 6), 16));
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 100);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -1109,8 +1109,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_LED_front_floor: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -1131,10 +1131,10 @@ Entry.Ozobot.getBlocks = function () {
 			class: 'Ozobot_LED',
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 2;
 					sq.act = 0;
 					sq.pcnt = 6;
@@ -1162,23 +1162,23 @@ Entry.Ozobot.getBlocks = function () {
 					if (pd.surface_color & 1) sq.p6 |= 16711680;
 					if (pd.surface_color & 2) sq.p6 |= 65280;
 					if (pd.surface_color & 4) sq.p6 |= 255;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 100);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -1187,8 +1187,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_LED_front_random: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -1214,10 +1214,10 @@ Entry.Ozobot.getBlocks = function () {
 				var var3 = script.getStringField('COLOR3', script);
 				var var4 = script.getStringField('COLOR4', script);
 				var var5 = script.getStringField('COLOR5', script);
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 2;
 					sq.act = 0;
 					sq.pcnt = 6;
@@ -1242,23 +1242,23 @@ Entry.Ozobot.getBlocks = function () {
 					sq.p6 |= (Math.floor(Math.random() * 256) << 16);
 					sq.p6 |= (Math.floor(Math.random() * 256) << 8);
 					sq.p6 |= Math.floor(Math.random() * 256);
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 100);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -1267,8 +1267,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_LED_front_off: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -1289,10 +1289,10 @@ Entry.Ozobot.getBlocks = function () {
 			class: 'Ozobot_LED',
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 2;
 					sq.act = 0;
 					sq.pcnt = 2;
@@ -1302,23 +1302,23 @@ Entry.Ozobot.getBlocks = function () {
 					sq.p4 = 0;
 					sq.p5 = 0;
 					sq.p6 = 0;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 100);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -1327,8 +1327,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_Sound_emotion: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -1343,8 +1343,8 @@ Entry.Ozobot.getBlocks = function () {
 						['웃음', 0x03],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Indicator',
@@ -1364,32 +1364,32 @@ Entry.Ozobot.getBlocks = function () {
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
 				var var1 = script.getNumberField('SOUND', script);
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 2;
 					sq.act = 1;
 					sq.pcnt = 2;
 					sq.p1 = var1;
 					sq.p2 = 0;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 3100);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -1398,8 +1398,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_Sound_direction: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -1414,8 +1414,8 @@ Entry.Ozobot.getBlocks = function () {
 						['Back', 0x03],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Indicator',
@@ -1435,32 +1435,32 @@ Entry.Ozobot.getBlocks = function () {
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
 				var var1 = script.getNumberField('DIRECTION', script);
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 2;
 					sq.act = 1;
 					sq.pcnt = 2;
 					sq.p1 = 4;
 					sq.p2 = var1;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 1600);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -1469,8 +1469,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_Sound_number: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -1491,8 +1491,8 @@ Entry.Ozobot.getBlocks = function () {
 						['10', 0x0A],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Indicator',
@@ -1512,32 +1512,32 @@ Entry.Ozobot.getBlocks = function () {
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
 				var var1 = script.getNumberField('DIRECTION', script);
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 2;
 					sq.act = 1;
 					sq.pcnt = 2;
 					sq.p1 = 5;
 					sq.p2 = var1;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 1600);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -1546,8 +1546,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_Sound_color: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -1565,8 +1565,8 @@ Entry.Ozobot.getBlocks = function () {
 						['Black', 0x00]
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Indicator',
@@ -1586,32 +1586,32 @@ Entry.Ozobot.getBlocks = function () {
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
 				var var1 = script.getNumberField('COLOR', script);
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 2;
 					sq.act = 1;
 					sq.pcnt = 2;
 					sq.p1 = 8;
 					sq.p2 = var1;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 1600);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -1620,8 +1620,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_Sound_tone: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -1636,8 +1636,8 @@ Entry.Ozobot.getBlocks = function () {
 						['8 옥타브', 0x08]
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Dropdown',
@@ -1656,8 +1656,8 @@ Entry.Ozobot.getBlocks = function () {
 						['시', 0x0C],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Indicator',
@@ -1679,33 +1679,33 @@ Entry.Ozobot.getBlocks = function () {
 			func: function (sprite, script) {
 				var var1 = script.getNumberField('OCTAV', script);
 				var var2 = script.getNumberField('TONE', script);
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 2;
 					sq.act = 2;
 					sq.pcnt = 3;
 					sq.p1 = var2;
 					sq.p2 = var1 + 1;
 					sq.p3 = 500;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 600);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -1714,8 +1714,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_Sound_tone_time: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -1730,8 +1730,8 @@ Entry.Ozobot.getBlocks = function () {
 						['8 옥타브', 0x08]
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Dropdown',
@@ -1750,8 +1750,8 @@ Entry.Ozobot.getBlocks = function () {
 						['시', 0x0C],
 					],
 					fontSize: 11,
-					bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-					arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+					bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+					arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
 				},
 				{
 					type: 'Block',
@@ -1779,33 +1779,33 @@ Entry.Ozobot.getBlocks = function () {
 				var var1 = script.getNumberField('OCTAV', script);
 				var var2 = script.getNumberField('TONE', script);
 				var var3 = script.getNumberValue('TIME', script);
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 2;
 					sq.act = 2;
 					sq.pcnt = 3;
 					sq.p1 = var2;
 					sq.p2 = var1 + 1;
 					sq.p3 = var3 * 1000;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, var3 * 1000 + 100);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -1814,8 +1814,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_Sound_stop: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -1836,30 +1836,30 @@ Entry.Ozobot.getBlocks = function () {
 			class: 'Ozobot_Sound',
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 2;
 					sq.act = 3;
 					sq.pcnt = 0;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 100);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -1868,8 +1868,8 @@ Entry.Ozobot.getBlocks = function () {
 			},
 		},
 		Ozobot_Power_off: {
-			color: EntryStatic.colorSet.block.default.HARDWARE,
-			outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+			color: RoCodeStatic.colorSet.block.default.HARDWARE,
+			outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
 			skeleton: 'basic',
 			fontColor: '#fff',
 			statements: [],
@@ -1890,30 +1890,30 @@ Entry.Ozobot.getBlocks = function () {
 			class: 'Ozobot_Power',
 			isNotFor: ['Ozobot Evo'],
 			func: function (sprite, script) {
-				var sq = Entry.hw.sendQueue;
-				var pd = Entry.hw.portData;
-				if (!Entry.Ozobot.isStarted) {
-					sq.seq = Entry.Ozobot.sequance++;
+				var sq = RoCode.hw.sendQueue;
+				var pd = RoCode.hw.portData;
+				if (!RoCode.Ozobot.isStarted) {
+					sq.seq = RoCode.Ozobot.sequance++;
 					sq.cat = 2;
 					sq.act = 4;
 					sq.pcnt = 0;
-					Entry.Ozobot.isStarted = true;
-					Entry.Ozobot.state = OzobotState.STATE_READY;
+					RoCode.Ozobot.isStarted = true;
+					RoCode.Ozobot.state = OzobotState.STATE_READY;
 					return script;
 				} else {
-					switch (Entry.Ozobot.state) {
+					switch (RoCode.Ozobot.state) {
 						case OzobotState.STATE_READY:
 							var timer = setTimeout(() => {
-								Entry.Ozobot.state = OzobotState.STATE_DONE;
+								RoCode.Ozobot.state = OzobotState.STATE_DONE;
 							}, 100);
-							Entry.Ozobot.state = OzobotState.STATE_WAIT;
+							RoCode.Ozobot.state = OzobotState.STATE_WAIT;
 							return script;
 							break;
 						case OzobotState.STATE_WAIT:
 							return script;
 							break;
 						case OzobotState.STATE_DONE:
-							Entry.Ozobot.isStarted = false;
+							RoCode.Ozobot.isStarted = false;
 							return script.callReturn();
 							break;
 					}
@@ -1924,4 +1924,4 @@ Entry.Ozobot.getBlocks = function () {
 	};
 };
 
-module.exports = Entry.Ozobot;
+module.exports = RoCode.Ozobot;

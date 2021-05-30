@@ -11,7 +11,7 @@ interface IAtlasOption extends ITexOption {
     newPacker: () => MaxRectsPacker;
 }
 
-export class EntryTextureOption {
+export class RoCodeTextureOption {
     private _USE_ATLAS: boolean = false;
     get USE_ATLAS(): boolean {
         return this._USE_ATLAS;

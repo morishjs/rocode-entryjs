@@ -4,7 +4,7 @@
     }
 }
 
-.entryContainerWorkspace {
+.RoCodeContainerWorkspace {
     height: 100%;
     background-color: #fff;
 
@@ -19,12 +19,12 @@
     }
 }
 
-.entryContainerPhone {
+.RoCodeContainerPhone {
     width: 100%;
     background-color: #fff;
 }
 
-.entryAddObjectWorkspace {
+.RoCodeAddObjectWorkspace {
     display: block;
     height: 48px;
     background-color: #e7e7e7;
@@ -37,7 +37,7 @@
     cursor: pointer;
 }
 
-.entryContainerListWorkspaceWrapper {
+.RoCodeContainerListWorkspaceWrapper {
     position: absolute;
     bottom: 0;
     padding: 0;
@@ -48,7 +48,7 @@
     background-color: #fff;
 }
 
-.entryContainerExtensions {
+.RoCodeContainerExtensions {
     position: relative;
     margin: 0px;
     padding: 0px;
@@ -57,7 +57,7 @@
     list-style-type: none;
 }
 
-.entryContainerListWorkspace {
+.RoCodeContainerListWorkspace {
     position: relative;
     margin: 0px;
     padding: 0px;
@@ -70,7 +70,7 @@
     }
 }
 
-.entryContainerListPhone {
+.RoCodeContainerListPhone {
     position: relative;
     margin: 0px;
     padding: 0px;
@@ -80,11 +80,11 @@
     border-top: 1pt solid #ebeff1;
 }
 
-.entryContainerListWorkspace::-webkit-scrollbar {
+.RoCodeContainerListWorkspace::-webkit-scrollbar {
     display: none;
 }
 
-.entryContainerListElementWorkspace {
+.RoCodeContainerListElementWorkspace {
     background-color: #ecf8ff;
     display: block;
     padding: 0;
@@ -97,7 +97,7 @@
     border-width: 1px 0;
 }
 
-.entryContainerListElementWorkspace.selectedObject {
+.RoCodeContainerListElementWorkspace.selectedObject {
     background-color: #fff;
     // height: 206px;
 }
@@ -106,8 +106,8 @@
     height: 149px;
 }
 
-.entryContainerListElementWorkspace:first-child,
-.entryContainerListElementWorkspace.selectedObject + .entryContainerListElementWorkspace {
+.RoCodeContainerListElementWorkspace:first-child,
+.RoCodeContainerListElementWorkspace.selectedObject + .RoCodeContainerListElementWorkspace {
     border-top: 0;
 }
 
@@ -138,13 +138,13 @@
     .backgroundImage('property/container_on.png');
 }
 
-.entryContainerTabViewWorkspace {
+.RoCodeContainerTabViewWorkspace {
     width: 100%;
     height: 45px;
     border-bottom: 2px solid #1bafea;
 }
 
-.entryContainerTabItemWorkspace {
+.RoCodeContainerTabItemWorkspace {
     vertical-align: top;
     height: 100%;
     width: 25%;
@@ -157,21 +157,21 @@
     padding-top: 13px;
 }
 
-.entryContainerTabItemWorkspace:nth-child(2) {
+.RoCodeContainerTabItemWorkspace:nth-child(2) {
     border-left: 2px solid white;
     border-right: 2px solid white;
 }
 
-.entryContainerTabItemWorkspace:nth-child(3) {
+.RoCodeContainerTabItemWorkspace:nth-child(3) {
     border-right: 2px solid white;
 }
 
-.entryContainerTabItemWorkspace.selected {
+.RoCodeContainerTabItemWorkspace.selected {
     background-color: #1bafea;
     color: white;
 }
 
-.entryContainerMovieWorkspace {
+.RoCodeContainerMovieWorkspace {
     /*
     position: absolute;
     width: 100%;
@@ -186,11 +186,11 @@
     width: 100%;
     overflow: scroll;
 }
-.entryContainerMovieWorkspace::-webkit-scrollbar {
+.RoCodeContainerMovieWorkspace::-webkit-scrollbar {
     display: none;
 }
 
-.entryContainerDoneWorkspace {
+.RoCodeContainerDoneWorkspace {
     position: absolute;
     width: 100%;
     top: 0px;
@@ -199,7 +199,7 @@
     text-align: center;
 }
 
-.entryContainerHelperWorkspace {
+.RoCodeContainerHelperWorkspace {
     position: absolute;
     width: 100%;
     top: 45px;
@@ -210,7 +210,7 @@
 }
 
 .tablet {
-    .entryContainerListElementWorkspace.selectedObject {
+    .RoCodeContainerListElementWorkspace.selectedObject {
         height: 128px;
     }
 

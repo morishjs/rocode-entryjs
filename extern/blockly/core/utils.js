@@ -103,9 +103,9 @@ Blockly.bindEvent_ = function(element, name, thisObject, func) {
       }
       func.apply(thisObject, arguments);
       // Stop the browser from scrolling/zooming the page
-      if (Entry && Entry.type == 'phone') {
+      if (RoCode && RoCode.type == 'phone') {
           var scroll = $(window).scrollTop();
-          var element = $(Entry.playground.blocklyView_);
+          var element = $(RoCode.playground.blocklyView_);
           var position = element.offset();
           if (e.clientY > position.top - scroll &&
              e.clientY < position.top - scroll + element.height() &&

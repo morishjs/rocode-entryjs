@@ -262,7 +262,7 @@ export class PIXIText extends Text {
     updateTexture() {
         const canvas = this.canvas;
 
-        // 박봉배- entryjs 에서 trim 기능 사용안함. 그리고 trimCanvas 의 참조를 pixi 라이브러리로부터 못갖고 오겠음.
+        // 박봉배- RoCodejs 에서 trim 기능 사용안함. 그리고 trimCanvas 의 참조를 pixi 라이브러리로부터 못갖고 오겠음.
         /*
         if (this._style.trim)
         {

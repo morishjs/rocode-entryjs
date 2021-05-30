@@ -191,10 +191,10 @@ class PingpongBase {
         setTimeout(() => {
             this.sendCommand(this.makePacket(OPCODE.CONTINUOUS_STEPS, 0, -1, [2, 0, 0, 1, 0, 0]));
             setTimeout(() => {
-                Entry.hw.sendQueue.COMMAND = {
+                RoCode.hw.sendQueue.COMMAND = {
                     id: -1,
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
 
                 this.send_cmd_id = 0;
             }, this.delayTime);
@@ -202,15 +202,15 @@ class PingpongBase {
     }
 
     sendCommand(packet) {
-        Entry.hw.sendQueue.COMMAND = {
+        RoCode.hw.sendQueue.COMMAND = {
             id: ++this.send_cmd_id,
             data: packet,
         };
-        Entry.hw.update();
+        RoCode.hw.update();
     }
 
     afterReceive(pd) {
-        if (!Entry.engine.isState('run')) {
+        if (!RoCode.engine.isState('run')) {
             return;
         }
 
@@ -220,7 +220,7 @@ class PingpongBase {
             this.prev_sensor_data.c2_BUTTON != pd.c2_BUTTON ||
             this.prev_sensor_data.c3_BUTTON != pd.c3_BUTTON
         ) {
-            Entry.engine.fireEvent('pp_when_button_pressed');
+            RoCode.engine.fireEvent('pp_when_button_pressed');
 
             this.prev_sensor_data.c0_BUTTON = pd.c0_BUTTON;
             this.prev_sensor_data.c1_BUTTON = pd.c1_BUTTON;
@@ -247,7 +247,7 @@ class PingpongBase {
             tiltXc3 != this.prev_sensor_data.c3_TILT_X ||
             tiltYc3 != this.prev_sensor_data.c3_TILT_Y
         ) {
-            Entry.engine.fireEvent('pp_when_tilted');
+            RoCode.engine.fireEvent('pp_when_tilted');
         }
         this.prev_sensor_data.c0_TILT_X = tiltXc0;
         this.prev_sensor_data.c0_TILT_Y = tiltYc0;
@@ -282,7 +282,7 @@ class PingpongBase {
         } else {
             delete script.is_start;
 
-            //Entry.engine.isContinue = false;
+            //RoCode.engine.isContinue = false;
             return script.callReturn();
         }
     }
@@ -421,7 +421,7 @@ class PingpongBase {
     }
 
     _getTiltValue(cubeNo, tiltDir) {
-        const pd = Entry.hw.portData;
+        const pd = RoCode.hw.portData;
         let tiltValue = 0;
 
         if (cubeNo == 0) {
@@ -470,7 +470,7 @@ class PingpongBase {
     }
 
     _isUpperDir(cubeNo, tiltDir) {
-        const pd = Entry.hw.portData;
+        const pd = RoCode.hw.portData;
         if (cubeNo == 0) {
             if (tiltDir == 'DF_RECTANGLE' && pd.c0_TILT_Y > 70) return true;
             if (tiltDir == 'DB_STAR' && pd.c0_TILT_Y < -70) return true;
@@ -552,7 +552,7 @@ class PingpongBase {
     }
 }
 
-Entry.PingpongG2 = new (class extends PingpongBase {
+RoCode.PingpongG2 = new (class extends PingpongBase {
     constructor() {
         super(2);
 
@@ -592,8 +592,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
     getBlocks() {
         return {
             pingpong_g2_when_button_pressed: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_event',
                 statements: [],
                 params: [
@@ -608,8 +608,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g2_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -625,7 +625,7 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 event: 'pp_when_button_pressed',
                 func(sprite, script) {
                     const cubeId = script.getNumberField('CUBEID');
-                    const pd = Entry.hw.portData;
+                    const pd = RoCode.hw.portData;
 
                     if ((cubeId == 0 && pd.c0_BUTTON == 1) || (cubeId == 1 && pd.c1_BUTTON == 1)) {
                         return script.callReturn();
@@ -634,8 +634,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 },
             },
             pingpong_g2_when_tilted: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_event',
                 statements: [],
                 params: [
@@ -650,16 +650,16 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g2_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_cube_tiltDir,
                         value: 'F_CIRCLE',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -678,8 +678,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                     const cubeId = script.getNumberField('CUBEID');
                     const tiltDir = script.getStringField('TILT_DIR');
 
-                    const tiltValue = Entry.PingpongG2._getTiltValue(cubeId, tiltDir);
-                    if (tiltValue >= Entry.PingpongG2.TILT_THRESHOLD) {
+                    const tiltValue = RoCode.PingpongG2._getTiltValue(cubeId, tiltDir);
+                    if (tiltValue >= RoCode.PingpongG2.TILT_THRESHOLD) {
                         return script.callReturn();
                     }
 
@@ -687,8 +687,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 },
             },
             pingpong_g2_is_button_pressed: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
@@ -697,8 +697,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g2_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 def: {
@@ -712,14 +712,14 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 isNotFor: ['PingpongG2'],
                 func(sprite, script) {
                     const cubeId = script.getNumberField('CUBEID');
-                    const pd = Entry.hw.portData;
+                    const pd = RoCode.hw.portData;
 
                     return (cubeId == 0 && pd.c0_BUTTON == 1) || (cubeId == 1 && pd.c1_BUTTON == 1);
                 },
             },
             pingpong_g2_is_tilted: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
@@ -728,16 +728,16 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g2_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_cube_tiltDir,
                         value: 'F_CIRCLE',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -752,14 +752,14 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                     const cubeId = script.getNumberField('CUBEID');
                     const tiltDir = script.getStringField('TILT_DIR', script);
 
-                    const tiltValue = Entry.PingpongG2._getTiltValue(cubeId, tiltDir);
+                    const tiltValue = RoCode.PingpongG2._getTiltValue(cubeId, tiltDir);
 
-                    return tiltValue >= Entry.PingpongG2.TILT_THRESHOLD;
+                    return tiltValue >= RoCode.PingpongG2.TILT_THRESHOLD;
                 },
             },
             pingpong_g2_get_tilt_value: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_string_field',
                 params: [
                     {
@@ -767,16 +767,16 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g2_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_cube_tiltDir,
                         value: 'F_CIRCLE',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -791,12 +791,12 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                     const cubeId = script.getNumberField('CUBEID');
                     const tiltDir = script.getStringField('DIR', script);
 
-                    return Entry.PingpongG2._getTiltValue(cubeId, tiltDir);
+                    return RoCode.PingpongG2._getTiltValue(cubeId, tiltDir);
                 },
             },
             pingpong_g2_get_sensor_value: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_string_field',
                 params: [
                     {
@@ -804,8 +804,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g2_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
@@ -815,8 +815,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         ],
                         value: 'PROXIMITY',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 def: { params: [], type: 'pingpong_g2_get_sensor_value' },
@@ -826,7 +826,7 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 func(sprite, script) {
                     const cubeId = script.getNumberField('CUBEID');
                     const sensorType = script.getStringField('SENSOR', script);
-                    const pd = Entry.hw.portData;
+                    const pd = RoCode.hw.portData;
                     let value = 0;
 
                     if (sensorType == 'PROXIMITY') {
@@ -847,8 +847,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 },
             },
             pingpong_g2_is_top_shape: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
@@ -857,16 +857,16 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g2_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_cube_dir6,
                         value: 'DF_RECTANGLE',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -877,12 +877,12 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 func(sprite, script) {
                     const cubeId = script.getNumberField('CUBEID');
                     const tiltDir = script.getStringField('TILT_DIR', script);
-                    return Entry.PingpongG2._isUpperDir(cubeId, tiltDir);
+                    return RoCode.PingpongG2._isUpperDir(cubeId, tiltDir);
                 },
             },
             pingpong_g2_multi_motor_rotate: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     {
@@ -893,8 +893,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         ],
                         value: 'RIGHT',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -910,8 +910,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         ],
                         value: 'RIGHT',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -929,7 +929,7 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 class: 'PingpongG2_motor',
                 isNotFor: ['PingpongG2'],
                 func(sprite, script) {
-                    return Entry.PingpongG2.postCallReturn(script, () => {
+                    return RoCode.PingpongG2.postCallReturn(script, () => {
                         const dir1 = script.getStringField('DIR_1');
                         const dir2 = script.getStringField('DIR_2');
                         const degree1 = script.getNumberValue('DEGREE_1');
@@ -938,19 +938,19 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         const speed1 = 80 * (dir1 === 'LEFT' ? -1 : 1);
                         const speed2 = 80 * (dir2 === 'LEFT' ? -1 : 1);
 
-                        const [arr1, delay1] = Entry.PingpongG2.makeSingleStepPacket(
+                        const [arr1, delay1] = RoCode.PingpongG2.makeSingleStepPacket(
                             0,
                             speed1,
                             degree1
                         );
-                        const [arr2, delay2] = Entry.PingpongG2.makeSingleStepPacket(
+                        const [arr2, delay2] = RoCode.PingpongG2.makeSingleStepPacket(
                             1,
                             speed2,
                             degree2
                         );
 
                         const opt = [2, 1, 0, 2];
-                        const packet = Entry.PingpongG2.makeAggregatePacket(
+                        const packet = RoCode.PingpongG2.makeAggregatePacket(
                             OPCODE.AGGREGATE_STEPS,
                             0,
                             [arr1, arr2],
@@ -963,8 +963,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 },
             },
             pingpong_g2_motor_rotate: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -973,8 +973,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g2_cube_all,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
@@ -984,8 +984,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         ],
                         value: 'RIGHT',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -1004,14 +1004,14 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 class: 'PingpongG2_motor',
                 isNotFor: ['PingpongG2'],
                 func(sprite, script) {
-                    return Entry.PingpongG2.postCallReturn(script, () => {
+                    return RoCode.PingpongG2.postCallReturn(script, () => {
                         const cubeId = script.getNumberField('CUBEID');
                         const dir = script.getStringField('DIR');
                         const degree = script.getNumberValue('DEGREE');
 
                         const speed = 80 * (dir === 'LEFT' ? -1 : 1);
 
-                        const [arr, waitTime] = Entry.PingpongG2.makeSingleStepPacket(
+                        const [arr, waitTime] = RoCode.PingpongG2.makeSingleStepPacket(
                             cubeId,
                             speed,
                             degree
@@ -1022,8 +1022,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 },
             },
             pingpong_g2_start_multi_motor_rotate: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     { type: 'Block', accept: 'string', defaultType: 'number', value: 100 },
@@ -1042,15 +1042,15 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 class: 'PingpongG2_motor',
                 isNotFor: ['PingpongG2'],
                 func(sprite, script) {
-                    return Entry.PingpongG2.postCallReturn(script, () => {
+                    return RoCode.PingpongG2.postCallReturn(script, () => {
                         const speed1 = script.getNumberValue('SPEED_1');
                         const speed2 = script.getNumberValue('SPEED_2');
 
-                        const arr1 = Entry.PingpongG2.makeContStepPacket(0, speed1);
-                        const arr2 = Entry.PingpongG2.makeContStepPacket(1, speed2);
+                        const arr1 = RoCode.PingpongG2.makeContStepPacket(0, speed1);
+                        const arr2 = RoCode.PingpongG2.makeContStepPacket(1, speed2);
 
                         const opt = [MODE.MULTIROLE, 0, 0, 2];
-                        const packet = Entry.PingpongG2.makeAggregatePacket(
+                        const packet = RoCode.PingpongG2.makeAggregatePacket(
                             OPCODE.AGGREGATE_STEPS,
                             0,
                             [arr1, arr2],
@@ -1062,8 +1062,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 },
             },
             pingpong_g2_start_motor_rotate: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     {
@@ -1071,8 +1071,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g2_cube_all,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -1094,11 +1094,11 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 class: 'PingpongG2_motor',
                 isNotFor: ['PingpongG2'],
                 func(sprite, script) {
-                    return Entry.PingpongG2.postCallReturn(script, () => {
+                    return RoCode.PingpongG2.postCallReturn(script, () => {
                         const cubeId = script.getNumberField('CUBEID');
                         const speed = script.getNumberValue('SPEED');
 
-                        const arr = Entry.PingpongG2.makeContStepPacket(cubeId, speed);
+                        const arr = RoCode.PingpongG2.makeContStepPacket(cubeId, speed);
 
                         const packet = Buffer.from(arr);
                         const waitTime = Math.round(((1100 - Math.abs(speed)) / 99) * 10) + 400;
@@ -1108,8 +1108,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 },
             },
             pingpong_g2_stop_motor_rotate: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     {
@@ -1117,8 +1117,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g2_cube_all,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -1134,10 +1134,10 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 class: 'PingpongG2_motor',
                 isNotFor: ['PingpongG2'],
                 func(sprite, script) {
-                    return Entry.PingpongG2.postCallReturn(script, () => {
+                    return RoCode.PingpongG2.postCallReturn(script, () => {
                         const cubeId = script.getNumberField('CUBEID');
 
-                        const arr = Entry.PingpongG2.makeContStepPacket(cubeId, 0);
+                        const arr = RoCode.PingpongG2.makeContStepPacket(cubeId, 0);
                         const packet = Buffer.from(arr);
 
                         return [packet];
@@ -1145,8 +1145,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 },
             },
             pingpong_g2_rotate_servo_mortor: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1168,21 +1168,21 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 class: 'PingpongG2_motor',
                 isNotFor: ['PingpongG2'],
                 func(sprite, script) {
-                    return Entry.PingpongG2.postCallReturn(script, () => {
-                        const cubeId = Entry.PingpongG2._getCubeNoFromBlock(script);
+                    return RoCode.PingpongG2.postCallReturn(script, () => {
+                        const cubeId = RoCode.PingpongG2._getCubeNoFromBlock(script);
                         let angle = script.getNumberValue('DEGREE', script);
 
                         angle = Math.min(Math.max(angle, 0), 180);
 
                         const opt = [2, 0, angle, 1];
-                        const packet = Entry.PingpongG2.makePacket(OPCODE.SERVO, 0x00, cubeId, opt);
+                        const packet = RoCode.PingpongG2.makePacket(OPCODE.SERVO, 0x00, cubeId, opt);
                         return [packet];
                     });
                 },
             },
             pingpong_g2_set_dot_pixel: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1197,8 +1197,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         ],
                         value: 1,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -1215,8 +1215,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 class: 'PingpongG2_peripheral_LED',
                 isNotFor: ['PingpongG2'],
                 func(sprite, script) {
-                    return Entry.PingpongG2.postCallReturn(script, () => {
-                        const cubeId = Entry.PingpongG2._getCubeNoFromBlock(script);
+                    return RoCode.PingpongG2.postCallReturn(script, () => {
+                        const cubeId = RoCode.PingpongG2._getCubeNoFromBlock(script);
                         let dotX = script.getNumberValue('X', script);
                         let dotY = script.getNumberValue('Y', script);
                         const onoff = script.getNumberField('onoff', script);
@@ -1225,7 +1225,7 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         dotY = Math.min(Math.max(dotY, 0), 7);
 
                         const opt = [0x70, dotY, dotX, onoff];
-                        const packet = Entry.PingpongG2.makePacket(
+                        const packet = RoCode.PingpongG2.makePacket(
                             OPCODE.LEDMATRIX,
                             0xe1,
                             cubeId,
@@ -1236,8 +1236,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 },
             },
             pingpong_g2_set_dot_string: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1256,8 +1256,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 class: 'PingpongG2_peripheral_LED',
                 isNotFor: ['PingpongG2'],
                 func(sprite, script) {
-                    return Entry.PingpongG2.postCallReturn(script, () => {
-                        const cubeId = Entry.PingpongG2._getCubeNoFromBlock(script);
+                    return RoCode.PingpongG2.postCallReturn(script, () => {
+                        const cubeId = RoCode.PingpongG2._getCubeNoFromBlock(script);
                         const str = script.getStringValue('STR', script);
                         const duration = script.getNumberValue('DURATION', script);
 
@@ -1269,7 +1269,7 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                             Buffer.from(str.substring(0, 20)),
                         ]);
 
-                        const packet = Entry.PingpongG2.makePacket(
+                        const packet = RoCode.PingpongG2.makePacket(
                             OPCODE.LEDMATRIX,
                             0xe3,
                             cubeId,
@@ -1282,8 +1282,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 },
             },
             pingpong_g2_set_dot_clear: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1300,10 +1300,10 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 class: 'PingpongG2_peripheral_LED',
                 isNotFor: ['PingpongG2'],
                 func(sprite, script) {
-                    return Entry.PingpongG2.postCallReturn(script, () => {
-                        const cubeId = Entry.PingpongG2._getCubeNoFromBlock(script);
+                    return RoCode.PingpongG2.postCallReturn(script, () => {
+                        const cubeId = RoCode.PingpongG2._getCubeNoFromBlock(script);
                         const opt = [0x70, 1, 0, ' '];
-                        const packet = Entry.PingpongG2.makePacket(
+                        const packet = RoCode.PingpongG2.makePacket(
                             OPCODE.LEDMATRIX,
                             0xe3,
                             cubeId,
@@ -1315,8 +1315,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
             },
             pingpong_g2_playNoteForBeats: {
                 //'%1 큐브의 %2 번 음을 %3 박자로 연주하기 %4',
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1325,16 +1325,16 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g2_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_music_notes,
                         value: 48,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     { type: 'Block', accept: 'string', defaultType: 'number', value: '1' },
                     {
@@ -1349,16 +1349,16 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 class: 'PingpongG2_Music',
                 isNotFor: ['PingpongG2'],
                 func(sprite, script) {
-                    return Entry.PingpongG2.postCallReturn(script, () => {
+                    return RoCode.PingpongG2.postCallReturn(script, () => {
                         const cubeId = script.getNumberField('CUBEID');
                         const NOTE = script.getNumberField('NOTE', script);
                         const BEATS = script.getNumberValue('BEATS', script);
 
-                        const cBeats = Entry.PingpongG2._clampBeats(BEATS);
-                        const durationSec = Entry.PingpongG2._beatsToDuration(cBeats);
+                        const cBeats = RoCode.PingpongG2._clampBeats(BEATS);
+                        const durationSec = RoCode.PingpongG2._beatsToDuration(cBeats);
 
                         const waitTime = durationSec * 10 + 30; //XXX
-                        const arr = Entry.PingpongG2.makeMusicNotePacket(cubeId, NOTE, durationSec);
+                        const arr = RoCode.PingpongG2.makeMusicNotePacket(cubeId, NOTE, durationSec);
                         const packet = Buffer.from(arr);
 
                         return [packet, waitTime];
@@ -1366,8 +1366,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 },
             },
             pingpong_g2_playChordForBeats: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -1376,32 +1376,32 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g2_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_music_notes,
                         value: 48,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_g2_cube_id,
                         value: 1,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_music_notes,
                         value: 48,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     { type: 'Block', accept: 'string', defaultType: 'number', value: '1' },
                     {
@@ -1422,30 +1422,30 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 class: 'PingpongG2_Music',
                 isNotFor: ['PingpongG2'],
                 func(sprite, script) {
-                    return Entry.PingpongG2.postCallReturn(script, () => {
+                    return RoCode.PingpongG2.postCallReturn(script, () => {
                         const cubeId1 = script.getNumberField('CUBEID_1');
                         const cubeId2 = script.getNumberField('CUBEID_2');
                         const NOTE1 = script.getNumberField('NOTE_1', script);
                         const NOTE2 = script.getNumberField('NOTE_2', script);
 
                         const BEATS = script.getNumberValue('BEATS', script);
-                        const cBeats = Entry.PingpongG2._clampBeats(BEATS);
-                        const durationSec = Entry.PingpongG2._beatsToDuration(cBeats);
+                        const cBeats = RoCode.PingpongG2._clampBeats(BEATS);
+                        const durationSec = RoCode.PingpongG2._beatsToDuration(cBeats);
 
                         const waitTime = durationSec * 10 + 30;
 
-                        const arr1 = Entry.PingpongG2.makeMusicNotePacket(
+                        const arr1 = RoCode.PingpongG2.makeMusicNotePacket(
                             cubeId1,
                             NOTE1,
                             durationSec
                         );
-                        const arr2 = Entry.PingpongG2.makeMusicNotePacket(
+                        const arr2 = RoCode.PingpongG2.makeMusicNotePacket(
                             cubeId2,
                             NOTE2,
                             durationSec
                         );
 
-                        const packet = Entry.PingpongG2.makeAggregatePacket(
+                        const packet = RoCode.PingpongG2.makeAggregatePacket(
                             OPCODE.MUSIC,
                             0xa2,
                             [arr1, arr2],
@@ -1457,8 +1457,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 },
             },
             pingpong_g2_restForBeats: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     { type: 'Block', accept: 'string', defaultType: 'number', value: '1' },
@@ -1473,11 +1473,11 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 class: 'PingpongG2_Music',
                 isNotFor: ['PingpongG2'],
                 func(sprite, script) {
-                    return Entry.PingpongG2.postCallReturn(script, () => {
+                    return RoCode.PingpongG2.postCallReturn(script, () => {
                         const BEATS = script.getNumberValue('BEATS', script);
 
-                        const cBeats = Entry.PingpongG2._clampBeats(BEATS);
-                        const durationSec = Entry.PingpongG2._beatsToDuration(cBeats);
+                        const cBeats = RoCode.PingpongG2._clampBeats(BEATS);
+                        const durationSec = RoCode.PingpongG2._beatsToDuration(cBeats);
 
                         const waitTime = durationSec * 10 + 30;
 
@@ -1487,8 +1487,8 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 },
             },
             pingpong_g2_setTempo: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     { type: 'Block', accept: 'string', defaultType: 'number', value: '60' },
@@ -1504,13 +1504,13 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 isNotFor: ['PingpongG2'],
                 func(sprite, script) {
                     let tempo = script.getNumberValue('TEMPO', script);
-                    Entry.PingpongG2.tempo = Entry.PingpongG2._clampTempo(tempo);
+                    RoCode.PingpongG2.tempo = RoCode.PingpongG2._clampTempo(tempo);
                     return script.callReturn();
                 },
             },
             pingpong_g2_getTempo: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_string_field',
                 params: [],
                 def: { params: [], type: 'pingpong_g2_getTempo' },
@@ -1518,7 +1518,7 @@ Entry.PingpongG2 = new (class extends PingpongBase {
                 class: 'PingpongG2_Music',
                 isNotFor: ['PingpongG2'],
                 func(sprite, script) {
-                    return Entry.PingpongG2.tempo;
+                    return RoCode.PingpongG2.tempo;
                 },
             },
         };
@@ -1612,7 +1612,7 @@ Entry.PingpongG2 = new (class extends PingpongBase {
     }
 })();
 
-Entry.PingpongG3 = new (class extends PingpongBase {
+RoCode.PingpongG3 = new (class extends PingpongBase {
     constructor() {
         super(3);
 
@@ -1652,8 +1652,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
     getBlocks() {
         return {
             pingpong_g3_when_button_pressed: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_event',
                 statements: [],
                 params: [
@@ -1668,8 +1668,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g3_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1685,7 +1685,7 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 event: 'pp_when_button_pressed',
                 func(sprite, script) {
                     const cubeId = script.getNumberField('CUBEID');
-                    const pd = Entry.hw.portData;
+                    const pd = RoCode.hw.portData;
 
                     if (
                         (cubeId == 0 && pd.c0_BUTTON == 1) ||
@@ -1698,8 +1698,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 },
             },
             pingpong_g3_when_tilted: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_event',
                 statements: [],
                 params: [
@@ -1714,16 +1714,16 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g3_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_cube_tiltDir,
                         value: 'F_CIRCLE',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1742,8 +1742,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                     const cubeId = script.getNumberField('CUBEID');
                     const tiltDir = script.getStringField('TILT_DIR');
 
-                    const tiltValue = Entry.PingpongG3._getTiltValue(cubeId, tiltDir);
-                    if (tiltValue >= Entry.PingpongG3.TILT_THRESHOLD) {
+                    const tiltValue = RoCode.PingpongG3._getTiltValue(cubeId, tiltDir);
+                    if (tiltValue >= RoCode.PingpongG3.TILT_THRESHOLD) {
                         return script.callReturn();
                     }
 
@@ -1751,8 +1751,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 },
             },
             pingpong_g3_is_button_pressed: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
@@ -1761,8 +1761,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g3_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 def: {
@@ -1776,7 +1776,7 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 isNotFor: ['PingpongG3'],
                 func(sprite, script) {
                     const cubeId = script.getNumberField('CUBEID');
-                    const pd = Entry.hw.portData;
+                    const pd = RoCode.hw.portData;
 
                     return (
                         (cubeId == 0 && pd.c0_BUTTON == 1) ||
@@ -1786,8 +1786,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 },
             },
             pingpong_g3_is_tilted: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
@@ -1796,16 +1796,16 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g3_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_cube_tiltDir,
                         value: 'F_CIRCLE',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1820,14 +1820,14 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                     const cubeId = script.getNumberField('CUBEID');
                     const tiltDir = script.getStringField('TILT_DIR', script);
 
-                    const tiltValue = Entry.PingpongG3._getTiltValue(cubeId, tiltDir);
+                    const tiltValue = RoCode.PingpongG3._getTiltValue(cubeId, tiltDir);
 
-                    return tiltValue >= Entry.PingpongG3.TILT_THRESHOLD;
+                    return tiltValue >= RoCode.PingpongG3.TILT_THRESHOLD;
                 },
             },
             pingpong_g3_get_tilt_value: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_string_field',
                 params: [
                     {
@@ -1835,16 +1835,16 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g3_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_cube_tiltDir,
                         value: 'F_CIRCLE',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1859,12 +1859,12 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                     const cubeId = script.getNumberField('CUBEID');
                     const tiltDir = script.getStringField('DIR', script);
 
-                    return Entry.PingpongG3._getTiltValue(cubeId, tiltDir);
+                    return RoCode.PingpongG3._getTiltValue(cubeId, tiltDir);
                 },
             },
             pingpong_g3_get_sensor_value: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_string_field',
                 params: [
                     {
@@ -1872,8 +1872,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g3_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
@@ -1883,8 +1883,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         ],
                         value: 'PROXIMITY',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 def: { params: [], type: 'pingpong_g3_get_sensor_value' },
@@ -1894,7 +1894,7 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 func(sprite, script) {
                     const cubeId = script.getNumberField('CUBEID');
                     const sensorType = script.getStringField('SENSOR', script);
-                    const pd = Entry.hw.portData;
+                    const pd = RoCode.hw.portData;
                     let value = 0;
 
                     if (sensorType == 'PROXIMITY') {
@@ -1919,8 +1919,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 },
             },
             pingpong_g3_is_top_shape: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
@@ -1929,16 +1929,16 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g3_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_cube_dir6,
                         value: 'DF_RECTANGLE',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -1949,12 +1949,12 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 func(sprite, script) {
                     const cubeId = script.getNumberField('CUBEID');
                     const tiltDir = script.getStringField('TILT_DIR', script);
-                    return Entry.PingpongG3._isUpperDir(cubeId, tiltDir);
+                    return RoCode.PingpongG3._isUpperDir(cubeId, tiltDir);
                 },
             },
             pingpong_g3_multi_motor_rotate: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     {
@@ -1965,8 +1965,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         ],
                         value: 'RIGHT',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     { type: 'Block', accept: 'string', defaultType: 'number', value: 10 },
                     {
@@ -1977,8 +1977,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         ],
                         value: 'RIGHT',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -1994,8 +1994,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         ],
                         value: 'RIGHT',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     { type: 'Block', accept: 'string', defaultType: 'number', value: 10 },
                     { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
@@ -2015,7 +2015,7 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 class: 'PingpongG3_motor',
                 isNotFor: ['PingpongG3'],
                 func(sprite, script) {
-                    return Entry.PingpongG3.postCallReturn(script, () => {
+                    return RoCode.PingpongG3.postCallReturn(script, () => {
                         const dir1 = script.getStringField('DIR_1');
                         const dir2 = script.getStringField('DIR_2');
                         const dir3 = script.getStringField('DIR_3');
@@ -2027,24 +2027,24 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         const speed2 = 80 * (dir2 === 'LEFT' ? -1 : 1);
                         const speed3 = 80 * (dir3 === 'LEFT' ? -1 : 1);
 
-                        const [arr1, delay1] = Entry.PingpongG3.makeSingleStepPacket(
+                        const [arr1, delay1] = RoCode.PingpongG3.makeSingleStepPacket(
                             0,
                             speed1,
                             degree1
                         );
-                        const [arr2, delay2] = Entry.PingpongG3.makeSingleStepPacket(
+                        const [arr2, delay2] = RoCode.PingpongG3.makeSingleStepPacket(
                             1,
                             speed2,
                             degree2
                         );
-                        const [arr3, delay3] = Entry.PingpongG3.makeSingleStepPacket(
+                        const [arr3, delay3] = RoCode.PingpongG3.makeSingleStepPacket(
                             2,
                             speed3,
                             degree3
                         );
 
                         const opt = [2, 1, 0, 2];
-                        const packet = Entry.PingpongG3.makeAggregatePacket(
+                        const packet = RoCode.PingpongG3.makeAggregatePacket(
                             OPCODE.AGGREGATE_STEPS,
                             0,
                             [arr1, arr2, arr3],
@@ -2057,8 +2057,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 },
             },
             pingpong_g3_motor_rotate: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -2067,8 +2067,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g3_cube_all,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
@@ -2078,8 +2078,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         ],
                         value: 'RIGHT',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     { type: 'Block', accept: 'string', defaultType: 'number', value: 10 },
                     { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
@@ -2093,13 +2093,13 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 class: 'PingpongG3_motor',
                 isNotFor: ['PingpongG3'],
                 func(sprite, script) {
-                    return Entry.PingpongG3.postCallReturn(script, () => {
+                    return RoCode.PingpongG3.postCallReturn(script, () => {
                         const cubeId = script.getNumberField('CUBEID');
                         const dir = script.getStringField('DIR');
                         const degree = script.getNumberValue('DEGREE');
 
                         const speed = 80 * (dir === 'LEFT' ? -1 : 1);
-                        const [arr, waitTime] = Entry.PingpongG3.makeSingleStepPacket(
+                        const [arr, waitTime] = RoCode.PingpongG3.makeSingleStepPacket(
                             cubeId,
                             speed,
                             degree
@@ -2110,8 +2110,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 },
             },
             pingpong_g3_start_multi_motor_rotate: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     { type: 'Block', accept: 'string', defaultType: 'number', value: 100 },
@@ -2131,17 +2131,17 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 class: 'PingpongG3_motor',
                 isNotFor: ['PingpongG3'],
                 func(sprite, script) {
-                    return Entry.PingpongG3.postCallReturn(script, () => {
+                    return RoCode.PingpongG3.postCallReturn(script, () => {
                         const speed1 = script.getNumberValue('SPEED_1');
                         const speed2 = script.getNumberValue('SPEED_2');
                         const speed3 = script.getNumberValue('SPEED_3');
 
-                        const arr1 = Entry.PingpongG3.makeContStepPacket(0, speed1);
-                        const arr2 = Entry.PingpongG3.makeContStepPacket(1, speed2);
-                        const arr3 = Entry.PingpongG3.makeContStepPacket(2, speed3);
+                        const arr1 = RoCode.PingpongG3.makeContStepPacket(0, speed1);
+                        const arr2 = RoCode.PingpongG3.makeContStepPacket(1, speed2);
+                        const arr3 = RoCode.PingpongG3.makeContStepPacket(2, speed3);
 
                         const opt = [2, 0, 0, 2];
-                        const packet = Entry.PingpongG3.makeAggregatePacket(
+                        const packet = RoCode.PingpongG3.makeAggregatePacket(
                             OPCODE.AGGREGATE_STEPS,
                             0,
                             [arr1, arr2, arr3],
@@ -2153,8 +2153,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 },
             },
             pingpong_g3_start_motor_rotate: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     {
@@ -2162,8 +2162,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g3_cube_all,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -2185,11 +2185,11 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 class: 'PingpongG3_motor',
                 isNotFor: ['PingpongG3'],
                 func(sprite, script) {
-                    return Entry.PingpongG3.postCallReturn(script, () => {
+                    return RoCode.PingpongG3.postCallReturn(script, () => {
                         const cubeId = script.getNumberField('CUBEID');
                         const speed = script.getNumberValue('SPEED');
 
-                        const arr = Entry.PingpongG3.makeContStepPacket(cubeId, speed);
+                        const arr = RoCode.PingpongG3.makeContStepPacket(cubeId, speed);
                         const packet = Buffer.from(arr);
 
                         return [packet];
@@ -2197,8 +2197,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 },
             },
             pingpong_g3_stop_motor_rotate: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     {
@@ -2206,8 +2206,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g3_cube_all,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -2223,10 +2223,10 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 class: 'PingpongG3_motor',
                 isNotFor: ['PingpongG3'],
                 func(sprite, script) {
-                    return Entry.PingpongG3.postCallReturn(script, () => {
+                    return RoCode.PingpongG3.postCallReturn(script, () => {
                         const cubeId = script.getNumberField('CUBEID');
 
-                        const arr = Entry.PingpongG3.makeContStepPacket(cubeId, 0);
+                        const arr = RoCode.PingpongG3.makeContStepPacket(cubeId, 0);
                         const packet = Buffer.from(arr);
 
                         return [packet];
@@ -2234,8 +2234,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 },
             },
             pingpong_g3_rotate_servo_mortor: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -2253,21 +2253,21 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 class: 'PingpongG3_motor',
                 isNotFor: ['PingpongG3'],
                 func(sprite, script) {
-                    return Entry.PingpongG3.postCallReturn(script, () => {
-                        const cubeId = Entry.PingpongG3._getCubeNoFromBlock(script);
+                    return RoCode.PingpongG3.postCallReturn(script, () => {
+                        const cubeId = RoCode.PingpongG3._getCubeNoFromBlock(script);
                         let angle = script.getNumberValue('DEGREE', script);
 
                         angle = Math.min(Math.max(angle, 0), 180);
 
                         const opt = [2, 0, angle, 1];
-                        const packet = Entry.PingpongG3.makePacket(OPCODE.SERVO, 0x00, cubeId, opt);
+                        const packet = RoCode.PingpongG3.makePacket(OPCODE.SERVO, 0x00, cubeId, opt);
                         return [packet];
                     });
                 },
             },
             pingpong_g3_set_dot_pixel: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -2282,8 +2282,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         ],
                         value: 1,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -2300,8 +2300,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 class: 'PingpongG3_peripheral_LED',
                 isNotFor: ['PingpongG3'],
                 func(sprite, script) {
-                    return Entry.PingpongG3.postCallReturn(script, () => {
-                        const cubeId = Entry.PingpongG3._getCubeNoFromBlock(script);
+                    return RoCode.PingpongG3.postCallReturn(script, () => {
+                        const cubeId = RoCode.PingpongG3._getCubeNoFromBlock(script);
                         let dotX = script.getNumberValue('X', script);
                         let dotY = script.getNumberValue('Y', script);
                         const onoff = script.getNumberField('onoff', script);
@@ -2310,7 +2310,7 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         dotY = Math.min(Math.max(dotY, 0), 7);
 
                         const opt = [0x70, dotY, dotX, onoff];
-                        const packet = Entry.PingpongG3.makePacket(
+                        const packet = RoCode.PingpongG3.makePacket(
                             OPCODE.LEDMATRIX,
                             0xe1,
                             cubeId,
@@ -2321,8 +2321,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 },
             },
             pingpong_g3_set_dot_string: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -2341,8 +2341,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 class: 'PingpongG3_peripheral_LED',
                 isNotFor: ['PingpongG3'],
                 func(sprite, script) {
-                    return Entry.PingpongG3.postCallReturn(script, () => {
-                        const cubeId = Entry.PingpongG3._getCubeNoFromBlock(script);
+                    return RoCode.PingpongG3.postCallReturn(script, () => {
+                        const cubeId = RoCode.PingpongG3._getCubeNoFromBlock(script);
                         const str = script.getStringValue('STR', script);
                         const duration = script.getNumberValue('DURATION', script);
 
@@ -2354,7 +2354,7 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                             Buffer.from(str.substring(0, 20)),
                         ]);
 
-                        const packet = Entry.PingpongG3.makePacket(
+                        const packet = RoCode.PingpongG3.makePacket(
                             OPCODE.LEDMATRIX,
                             0xe3,
                             cubeId,
@@ -2366,8 +2366,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 },
             },
             pingpong_g3_set_dot_clear: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -2384,10 +2384,10 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 class: 'PingpongG3_peripheral_LED',
                 isNotFor: ['PingpongG3'],
                 func(sprite, script) {
-                    return Entry.PingpongG3.postCallReturn(script, () => {
-                        const cubeId = Entry.PingpongG3._getCubeNoFromBlock(script);
+                    return RoCode.PingpongG3.postCallReturn(script, () => {
+                        const cubeId = RoCode.PingpongG3._getCubeNoFromBlock(script);
                         const opt = [0x70, 1, 0, ' '];
-                        const packet = Entry.PingpongG3.makePacket(
+                        const packet = RoCode.PingpongG3.makePacket(
                             OPCODE.LEDMATRIX,
                             0xe3,
                             cubeId,
@@ -2399,8 +2399,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
             },
             pingpong_g3_playNoteForBeats: {
                 //'%1 큐브의 %2 번 음을 %3 박자로 연주하기 %4',
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -2409,16 +2409,16 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g3_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_music_notes,
                         value: 48,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     { type: 'Block', accept: 'string', defaultType: 'number', value: '1' },
                     {
@@ -2433,16 +2433,16 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 class: 'PingpongG3_Music',
                 isNotFor: ['PingpongG3'],
                 func(sprite, script) {
-                    return Entry.PingpongG3.postCallReturn(script, () => {
+                    return RoCode.PingpongG3.postCallReturn(script, () => {
                         const cubeId = script.getNumberField('CUBEID');
                         const NOTE = script.getNumberField('NOTE', script);
                         const BEATS = script.getNumberValue('BEATS', script);
 
-                        const cBeats = Entry.PingpongG3._clampBeats(BEATS);
-                        const durationSec = Entry.PingpongG3._beatsToDuration(cBeats);
+                        const cBeats = RoCode.PingpongG3._clampBeats(BEATS);
+                        const durationSec = RoCode.PingpongG3._beatsToDuration(cBeats);
 
                         const waitTime = durationSec * 10 + 30; //XXX
-                        const arr = Entry.PingpongG3.makeMusicNotePacket(cubeId, NOTE, durationSec);
+                        const arr = RoCode.PingpongG3.makeMusicNotePacket(cubeId, NOTE, durationSec);
                         const packet = Buffer.from(arr);
 
                         return [packet, waitTime];
@@ -2451,8 +2451,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
             },
             pingpong_g3_playChordForBeats: {
                 //'%1 큐브 %2, %3 큐브 %4, %5 큐브 %6 %7 박자로 연주하기 %8',
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -2461,48 +2461,48 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g3_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_music_notes,
                         value: 48,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_g3_cube_id,
                         value: 1,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_music_notes,
                         value: 48,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_g3_cube_id,
                         value: 2,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_music_notes,
                         value: 48,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     { type: 'Block', accept: 'string', defaultType: 'number', value: '1' },
                     {
@@ -2525,7 +2525,7 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 class: 'PingpongG3_Music',
                 isNotFor: ['PingpongG3'],
                 func(sprite, script) {
-                    return Entry.PingpongG3.postCallReturn(script, () => {
+                    return RoCode.PingpongG3.postCallReturn(script, () => {
                         const cubeId1 = script.getNumberField('CUBEID_1');
                         const cubeId2 = script.getNumberField('CUBEID_2');
                         const cubeId3 = script.getNumberField('CUBEID_3');
@@ -2534,28 +2534,28 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                         const NOTE3 = script.getNumberField('NOTE_3', script);
 
                         const BEATS = script.getNumberValue('BEATS', script);
-                        const cBeats = Entry.PingpongG3._clampBeats(BEATS);
-                        const durationSec = Entry.PingpongG3._beatsToDuration(cBeats);
+                        const cBeats = RoCode.PingpongG3._clampBeats(BEATS);
+                        const durationSec = RoCode.PingpongG3._beatsToDuration(cBeats);
 
                         const waitTime = durationSec * 10 + 30;
 
-                        const arr1 = Entry.PingpongG3.makeMusicNotePacket(
+                        const arr1 = RoCode.PingpongG3.makeMusicNotePacket(
                             cubeId1,
                             NOTE1,
                             durationSec
                         );
-                        const arr2 = Entry.PingpongG3.makeMusicNotePacket(
+                        const arr2 = RoCode.PingpongG3.makeMusicNotePacket(
                             cubeId2,
                             NOTE2,
                             durationSec
                         );
-                        const arr3 = Entry.PingpongG3.makeMusicNotePacket(
+                        const arr3 = RoCode.PingpongG3.makeMusicNotePacket(
                             cubeId3,
                             NOTE3,
                             durationSec
                         );
 
-                        const packet = Entry.PingpongG3.makeAggregatePacket(
+                        const packet = RoCode.PingpongG3.makeAggregatePacket(
                             OPCODE.MUSIC,
                             0xa2,
                             [arr1, arr2, arr3],
@@ -2567,8 +2567,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 },
             },
             pingpong_g3_restForBeats: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     { type: 'Block', accept: 'string', defaultType: 'number', value: '1' },
@@ -2583,11 +2583,11 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 class: 'PingpongG3_Music',
                 isNotFor: ['PingpongG3'],
                 func(sprite, script) {
-                    return Entry.PingpongG3.postCallReturn(script, () => {
+                    return RoCode.PingpongG3.postCallReturn(script, () => {
                         const BEATS = script.getNumberValue('BEATS', script);
 
-                        const cBeats = Entry.PingpongG3._clampBeats(BEATS);
-                        const durationSec = Entry.PingpongG3._beatsToDuration(cBeats);
+                        const cBeats = RoCode.PingpongG3._clampBeats(BEATS);
+                        const durationSec = RoCode.PingpongG3._beatsToDuration(cBeats);
 
                         const waitTime = durationSec * 10 + 30;
 
@@ -2597,8 +2597,8 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 },
             },
             pingpong_g3_setTempo: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     { type: 'Block', accept: 'string', defaultType: 'number', value: '60' },
@@ -2614,13 +2614,13 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 isNotFor: ['PingpongG3'],
                 func(sprite, script) {
                     let tempo = script.getNumberValue('TEMPO', script);
-                    Entry.PingpongG3.tempo = Entry.PingpongG3._clampTempo(tempo);
+                    RoCode.PingpongG3.tempo = RoCode.PingpongG3._clampTempo(tempo);
                     return script.callReturn();
                 },
             },
             pingpong_g3_getTempo: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_string_field',
                 params: [],
                 def: { params: [], type: 'pingpong_g3_getTempo' },
@@ -2628,7 +2628,7 @@ Entry.PingpongG3 = new (class extends PingpongBase {
                 class: 'PingpongG3_Music',
                 isNotFor: ['PingpongG3'],
                 func(sprite, script) {
-                    return Entry.PingpongG3.tempo;
+                    return RoCode.PingpongG3.tempo;
                 },
             },
         };
@@ -2729,7 +2729,7 @@ Entry.PingpongG3 = new (class extends PingpongBase {
     }
 })();
 
-Entry.PingpongG4 = new (class extends PingpongBase {
+RoCode.PingpongG4 = new (class extends PingpongBase {
     constructor() {
         super(4);
 
@@ -2769,8 +2769,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
     getBlocks() {
         return {
             pingpong_g4_when_button_pressed: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_event',
                 statements: [],
                 params: [
@@ -2785,8 +2785,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g4_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -2802,7 +2802,7 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 event: 'pp_when_button_pressed',
                 func(sprite, script) {
                     const cubeId = script.getNumberField('CUBEID');
-                    const pd = Entry.hw.portData;
+                    const pd = RoCode.hw.portData;
 
                     if (
                         (cubeId == 0 && pd.c0_BUTTON == 1) ||
@@ -2816,8 +2816,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 },
             },
             pingpong_g4_when_tilted: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_event',
                 statements: [],
                 params: [
@@ -2832,16 +2832,16 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g4_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_cube_tiltDir,
                         value: 'F_CIRCLE',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -2860,8 +2860,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                     const cubeId = script.getNumberField('CUBEID');
                     const tiltDir = script.getStringField('TILT_DIR');
 
-                    const tiltValue = Entry.PingpongG4._getTiltValue(cubeId, tiltDir);
-                    if (tiltValue >= Entry.PingpongG4.TILT_THRESHOLD) {
+                    const tiltValue = RoCode.PingpongG4._getTiltValue(cubeId, tiltDir);
+                    if (tiltValue >= RoCode.PingpongG4.TILT_THRESHOLD) {
                         return script.callReturn();
                     }
 
@@ -2869,8 +2869,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 },
             },
             pingpong_g4_is_button_pressed: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
@@ -2879,8 +2879,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g4_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 def: {
@@ -2894,7 +2894,7 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 isNotFor: ['PingpongG4'],
                 func(sprite, script) {
                     const cubeId = script.getNumberField('CUBEID');
-                    const pd = Entry.hw.portData;
+                    const pd = RoCode.hw.portData;
 
                     return (
                         (cubeId == 0 && pd.c0_BUTTON == 1) ||
@@ -2905,8 +2905,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 },
             },
             pingpong_g4_is_tilted: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
@@ -2915,16 +2915,16 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g4_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_cube_tiltDir,
                         value: 'F_CIRCLE',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -2939,14 +2939,14 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                     const cubeId = script.getNumberField('CUBEID');
                     const tiltDir = script.getStringField('TILT_DIR', script);
 
-                    const tiltValue = Entry.PingpongG4._getTiltValue(cubeId, tiltDir);
+                    const tiltValue = RoCode.PingpongG4._getTiltValue(cubeId, tiltDir);
 
-                    return tiltValue >= Entry.PingpongG4.TILT_THRESHOLD;
+                    return tiltValue >= RoCode.PingpongG4.TILT_THRESHOLD;
                 },
             },
             pingpong_g4_get_tilt_value: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_string_field',
                 params: [
                     {
@@ -2954,16 +2954,16 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g4_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_cube_tiltDir,
                         value: 'F_CIRCLE',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -2978,12 +2978,12 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                     const cubeId = script.getNumberField('CUBEID');
                     const tiltDir = script.getStringField('DIR', script);
 
-                    return Entry.PingpongG4._getTiltValue(cubeId, tiltDir);
+                    return RoCode.PingpongG4._getTiltValue(cubeId, tiltDir);
                 },
             },
             pingpong_g4_get_sensor_value: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_string_field',
                 params: [
                     {
@@ -2991,8 +2991,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g4_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
@@ -3002,8 +3002,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         ],
                         value: 'PROXIMITY',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 def: { params: [], type: 'pingpong_g4_get_sensor_value' },
@@ -3013,7 +3013,7 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 func(sprite, script) {
                     const cubeId = script.getNumberField('CUBEID');
                     const sensorType = script.getStringField('SENSOR', script);
-                    const pd = Entry.hw.portData;
+                    const pd = RoCode.hw.portData;
                     let value = 0;
 
                     if (sensorType == 'PROXIMITY') {
@@ -3042,8 +3042,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 },
             },
             pingpong_g4_is_top_shape: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
@@ -3052,16 +3052,16 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g4_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_cube_dir6,
                         value: 'DF_RECTANGLE',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                 ],
                 events: {},
@@ -3072,12 +3072,12 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 func(sprite, script) {
                     const cubeId = script.getNumberField('CUBEID');
                     const tiltDir = script.getStringField('TILT_DIR', script);
-                    return Entry.PingpongG4._isUpperDir(cubeId, tiltDir);
+                    return RoCode.PingpongG4._isUpperDir(cubeId, tiltDir);
                 },
             },
             pingpong_g4_multi_motor_rotate: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     {
@@ -3088,8 +3088,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         ],
                         value: 'RIGHT',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     { type: 'Block', accept: 'string', defaultType: 'number', value: 10 },
                     {
@@ -3100,8 +3100,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         ],
                         value: 'RIGHT',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     { type: 'Block', accept: 'string', defaultType: 'number', value: 10 },
                     {
@@ -3112,8 +3112,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         ],
                         value: 'RIGHT',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     { type: 'Block', accept: 'string', defaultType: 'number', value: 10 },
                     {
@@ -3124,8 +3124,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         ],
                         value: 'RIGHT',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     { type: 'Block', accept: 'string', defaultType: 'number', value: 10 },
                     { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
@@ -3147,7 +3147,7 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 class: 'PingpongG4_motor',
                 isNotFor: ['PingpongG4'],
                 func(sprite, script) {
-                    return Entry.PingpongG4.postCallReturn(script, () => {
+                    return RoCode.PingpongG4.postCallReturn(script, () => {
                         const dir1 = script.getStringField('DIR_1');
                         const dir2 = script.getStringField('DIR_2');
                         const dir3 = script.getStringField('DIR_3');
@@ -3162,29 +3162,29 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         const speed3 = 80 * (dir3 === 'LEFT' ? -1 : 1);
                         const speed4 = 80 * (dir4 === 'LEFT' ? -1 : 1);
 
-                        const [arr1, delay1] = Entry.PingpongG4.makeSingleStepPacket(
+                        const [arr1, delay1] = RoCode.PingpongG4.makeSingleStepPacket(
                             0,
                             speed1,
                             degree1
                         );
-                        const [arr2, delay2] = Entry.PingpongG4.makeSingleStepPacket(
+                        const [arr2, delay2] = RoCode.PingpongG4.makeSingleStepPacket(
                             1,
                             speed2,
                             degree2
                         );
-                        const [arr3, delay3] = Entry.PingpongG4.makeSingleStepPacket(
+                        const [arr3, delay3] = RoCode.PingpongG4.makeSingleStepPacket(
                             2,
                             speed3,
                             degree3
                         );
-                        const [arr4, delay4] = Entry.PingpongG4.makeSingleStepPacket(
+                        const [arr4, delay4] = RoCode.PingpongG4.makeSingleStepPacket(
                             3,
                             speed4,
                             degree4
                         );
 
                         const opt = [MODE.MULTIROLE, 1, 0, 2];
-                        const packet = Entry.PingpongG4.makeAggregatePacket(
+                        const packet = RoCode.PingpongG4.makeAggregatePacket(
                             OPCODE.AGGREGATE_STEPS,
                             0,
                             [arr1, arr2, arr3, arr4],
@@ -3197,8 +3197,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 },
             },
             pingpong_g4_motor_rotate: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -3207,8 +3207,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g4_cube_all,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
@@ -3218,8 +3218,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         ],
                         value: 'RIGHT',
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     { type: 'Block', accept: 'string', defaultType: 'number', value: 10 },
                     { type: 'Indicator', img: 'block_icon/hardware_icon.svg', size: 12 },
@@ -3233,13 +3233,13 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 class: 'PingpongG4_motor',
                 isNotFor: ['PingpongG4'],
                 func(sprite, script) {
-                    return Entry.PingpongG4.postCallReturn(script, () => {
+                    return RoCode.PingpongG4.postCallReturn(script, () => {
                         const cubeId = script.getNumberField('CUBEID');
                         const dir = script.getStringField('DIR');
                         const degree = script.getNumberValue('DEGREE');
                         const speed = 80 * (dir === 'LEFT' ? -1 : 1);
 
-                        const [arr, waitTime] = Entry.PingpongG4.makeSingleStepPacket(
+                        const [arr, waitTime] = RoCode.PingpongG4.makeSingleStepPacket(
                             cubeId,
                             speed,
                             degree
@@ -3250,8 +3250,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 },
             },
             pingpong_g4_start_multi_motor_rotate: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     { type: 'Block', accept: 'string', defaultType: 'number', value: 100 },
@@ -3272,19 +3272,19 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 class: 'PingpongG4_motor',
                 isNotFor: ['PingpongG4'],
                 func(sprite, script) {
-                    return Entry.PingpongG4.postCallReturn(script, () => {
+                    return RoCode.PingpongG4.postCallReturn(script, () => {
                         const speed1 = script.getNumberValue('SPEED_1');
                         const speed2 = script.getNumberValue('SPEED_2');
                         const speed3 = script.getNumberValue('SPEED_3');
                         const speed4 = script.getNumberValue('SPEED_4');
 
-                        const arr1 = Entry.PingpongG4.makeContStepPacket(0, speed1);
-                        const arr2 = Entry.PingpongG4.makeContStepPacket(1, speed2);
-                        const arr3 = Entry.PingpongG4.makeContStepPacket(2, speed3);
-                        const arr4 = Entry.PingpongG4.makeContStepPacket(3, speed4);
+                        const arr1 = RoCode.PingpongG4.makeContStepPacket(0, speed1);
+                        const arr2 = RoCode.PingpongG4.makeContStepPacket(1, speed2);
+                        const arr3 = RoCode.PingpongG4.makeContStepPacket(2, speed3);
+                        const arr4 = RoCode.PingpongG4.makeContStepPacket(3, speed4);
 
                         const opt = [MODE.MULTIROLE, 0, 0, 2];
-                        const packet = Entry.PingpongG4.makeAggregatePacket(
+                        const packet = RoCode.PingpongG4.makeAggregatePacket(
                             OPCODE.AGGREGATE_STEPS,
                             0,
                             [arr1, arr2, arr3, arr4],
@@ -3296,8 +3296,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 },
             },
             pingpong_g4_start_motor_rotate: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     {
@@ -3305,8 +3305,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g4_cube_all,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Block',
@@ -3328,11 +3328,11 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 class: 'PingpongG4_motor',
                 isNotFor: ['PingpongG4'],
                 func(sprite, script) {
-                    return Entry.PingpongG4.postCallReturn(script, () => {
+                    return RoCode.PingpongG4.postCallReturn(script, () => {
                         const cubeId = script.getNumberField('CUBEID');
                         const speed = script.getNumberValue('SPEED');
 
-                        const arr = Entry.PingpongG4.makeContStepPacket(cubeId, speed);
+                        const arr = RoCode.PingpongG4.makeContStepPacket(cubeId, speed);
                         const packet = Buffer.from(arr);
 
                         return [packet];
@@ -3340,8 +3340,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 },
             },
             pingpong_g4_stop_motor_rotate: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     {
@@ -3349,8 +3349,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g4_cube_all,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -3366,10 +3366,10 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 class: 'PingpongG4_motor',
                 isNotFor: ['PingpongG4'],
                 func(sprite, script) {
-                    return Entry.PingpongG4.postCallReturn(script, () => {
+                    return RoCode.PingpongG4.postCallReturn(script, () => {
                         const cubeId = script.getNumberField('CUBEID');
 
-                        const arr = Entry.PingpongG4.makeContStepPacket(cubeId, 0);
+                        const arr = RoCode.PingpongG4.makeContStepPacket(cubeId, 0);
                         const packet = Buffer.from(arr);
 
                         return [packet];
@@ -3377,8 +3377,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 },
             },
             pingpong_g4_rotate_servo_mortor: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -3396,21 +3396,21 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 class: 'PingpongG4_motor',
                 isNotFor: ['PingpongG4'],
                 func(sprite, script) {
-                    return Entry.PingpongG4.postCallReturn(script, () => {
-                        const cubeId = Entry.PingpongG4._getCubeNoFromBlock(script);
+                    return RoCode.PingpongG4.postCallReturn(script, () => {
+                        const cubeId = RoCode.PingpongG4._getCubeNoFromBlock(script);
                         let angle = script.getNumberValue('DEGREE', script);
 
                         angle = Math.min(Math.max(angle, 0), 180);
 
                         const opt = [2, 0, angle, 1];
-                        const packet = Entry.PingpongG4.makePacket(OPCODE.SERVO, 0x00, cubeId, opt);
+                        const packet = RoCode.PingpongG4.makePacket(OPCODE.SERVO, 0x00, cubeId, opt);
                         return [packet];
                     });
                 },
             },
             pingpong_g4_set_dot_pixel: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -3425,8 +3425,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         ],
                         value: 1,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Indicator',
@@ -3443,8 +3443,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 class: 'PingpongG4_peripheral_LED',
                 isNotFor: ['PingpongG4'],
                 func(sprite, script) {
-                    return Entry.PingpongG4.postCallReturn(script, () => {
-                        const cubeId = Entry.PingpongG4._getCubeNoFromBlock(script);
+                    return RoCode.PingpongG4.postCallReturn(script, () => {
+                        const cubeId = RoCode.PingpongG4._getCubeNoFromBlock(script);
                         let dotX = script.getNumberValue('X', script);
                         let dotY = script.getNumberValue('Y', script);
                         const onoff = script.getNumberField('onoff', script);
@@ -3453,7 +3453,7 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         dotY = Math.min(Math.max(dotY, 0), 7);
 
                         const opt = [0x70, dotY, dotX, onoff];
-                        const packet = Entry.PingpongG4.makePacket(
+                        const packet = RoCode.PingpongG4.makePacket(
                             OPCODE.LEDMATRIX,
                             0xe1,
                             cubeId,
@@ -3464,8 +3464,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 },
             },
             pingpong_g4_set_dot_string: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -3484,8 +3484,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 class: 'PingpongG4_peripheral_LED',
                 isNotFor: ['PingpongG4'],
                 func(sprite, script) {
-                    return Entry.PingpongG4.postCallReturn(script, () => {
-                        const cubeId = Entry.PingpongG4._getCubeNoFromBlock(script);
+                    return RoCode.PingpongG4.postCallReturn(script, () => {
+                        const cubeId = RoCode.PingpongG4._getCubeNoFromBlock(script);
                         const str = script.getStringValue('STR', script);
                         const duration = script.getNumberValue('DURATION', script);
 
@@ -3497,7 +3497,7 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                             Buffer.from(str.substring(0, 20)),
                         ]);
 
-                        const packet = Entry.PingpongG4.makePacket(
+                        const packet = RoCode.PingpongG4.makePacket(
                             OPCODE.LEDMATRIX,
                             0xe3,
                             cubeId,
@@ -3509,8 +3509,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 },
             },
             pingpong_g4_set_dot_clear: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -3527,10 +3527,10 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 class: 'PingpongG4_peripheral_LED',
                 isNotFor: ['PingpongG4'],
                 func(sprite, script) {
-                    return Entry.PingpongG4.postCallReturn(script, () => {
-                        const cubeId = Entry.PingpongG4._getCubeNoFromBlock(script);
+                    return RoCode.PingpongG4.postCallReturn(script, () => {
+                        const cubeId = RoCode.PingpongG4._getCubeNoFromBlock(script);
                         const opt = [0x70, 1, 0, ' '];
-                        const packet = Entry.PingpongG4.makePacket(
+                        const packet = RoCode.PingpongG4.makePacket(
                             OPCODE.LEDMATRIX,
                             0xe3,
                             cubeId,
@@ -3542,8 +3542,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
             },
             pingpong_g4_playNoteForBeats: {
                 //'%1 큐브의 %2 번 음을 %3 박자로 연주하기 %4',
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -3552,16 +3552,16 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g4_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_music_notes,
                         value: 48,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     { type: 'Block', accept: 'string', defaultType: 'number', value: '1' },
                     {
@@ -3576,16 +3576,16 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 class: 'PingpongG4_Music',
                 isNotFor: ['PingpongG4'],
                 func(sprite, script) {
-                    return Entry.PingpongG4.postCallReturn(script, () => {
+                    return RoCode.PingpongG4.postCallReturn(script, () => {
                         const cubeId = script.getNumberField('CUBEID');
                         const NOTE = script.getNumberField('NOTE', script);
                         const BEATS = script.getNumberValue('BEATS', script);
 
-                        const cBeats = Entry.PingpongG4._clampBeats(BEATS);
-                        const durationSec = Entry.PingpongG4._beatsToDuration(cBeats);
+                        const cBeats = RoCode.PingpongG4._clampBeats(BEATS);
+                        const durationSec = RoCode.PingpongG4._beatsToDuration(cBeats);
 
                         const waitTime = durationSec * 10 + 30; //XXX
-                        const arr = Entry.PingpongG4.makeMusicNotePacket(cubeId, NOTE, durationSec);
+                        const arr = RoCode.PingpongG4.makeMusicNotePacket(cubeId, NOTE, durationSec);
                         const packet = Buffer.from(arr);
 
                         return [packet, waitTime];
@@ -3594,8 +3594,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
             },
             pingpong_g4_playChordForBeats: {
                 //'%1 큐브 %2, %3 큐브 %4, %5 큐브 %6 %7 박자로 연주하기 %8',
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 statements: [],
                 params: [
@@ -3604,48 +3604,48 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         options: Lang.Blocks.pingpong_g4_cube_id,
                         value: 0,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_music_notes,
                         value: 48,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_g4_cube_id,
                         value: 1,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_music_notes,
                         value: 48,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_g4_cube_id,
                         value: 2,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     {
                         type: 'Dropdown',
                         options: Lang.Blocks.pingpong_opts_music_notes,
                         value: 48,
                         fontSize: 11,
-                        bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                     },
                     { type: 'Block', accept: 'string', defaultType: 'number', value: '1' },
                     {
@@ -3668,7 +3668,7 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 class: 'PingpongG4_Music',
                 isNotFor: ['PingpongG4'],
                 func(sprite, script) {
-                    return Entry.PingpongG4.postCallReturn(script, () => {
+                    return RoCode.PingpongG4.postCallReturn(script, () => {
                         const cubeId1 = script.getNumberField('CUBEID_1');
                         const cubeId2 = script.getNumberField('CUBEID_2');
                         const cubeId3 = script.getNumberField('CUBEID_3');
@@ -3677,28 +3677,28 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                         const NOTE3 = script.getNumberField('NOTE_3', script);
 
                         const BEATS = script.getNumberValue('BEATS', script);
-                        const cBeats = Entry.PingpongG4._clampBeats(BEATS);
-                        const durationSec = Entry.PingpongG4._beatsToDuration(cBeats);
+                        const cBeats = RoCode.PingpongG4._clampBeats(BEATS);
+                        const durationSec = RoCode.PingpongG4._beatsToDuration(cBeats);
 
                         const waitTime = durationSec * 10 + 30;
 
-                        const arr1 = Entry.PingpongG4.makeMusicNotePacket(
+                        const arr1 = RoCode.PingpongG4.makeMusicNotePacket(
                             cubeId1,
                             NOTE1,
                             durationSec
                         );
-                        const arr2 = Entry.PingpongG4.makeMusicNotePacket(
+                        const arr2 = RoCode.PingpongG4.makeMusicNotePacket(
                             cubeId2,
                             NOTE2,
                             durationSec
                         );
-                        const arr3 = Entry.PingpongG4.makeMusicNotePacket(
+                        const arr3 = RoCode.PingpongG4.makeMusicNotePacket(
                             cubeId3,
                             NOTE3,
                             durationSec
                         );
 
-                        const packet = Entry.PingpongG4.makeAggregatePacket(
+                        const packet = RoCode.PingpongG4.makeAggregatePacket(
                             OPCODE.MUSIC,
                             0xa2,
                             [arr1, arr2, arr3],
@@ -3710,8 +3710,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 },
             },
             pingpong_g4_restForBeats: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     { type: 'Block', accept: 'string', defaultType: 'number', value: '1' },
@@ -3726,11 +3726,11 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 class: 'PingpongG4_Music',
                 isNotFor: ['PingpongG4'],
                 func(sprite, script) {
-                    return Entry.PingpongG4.postCallReturn(script, () => {
+                    return RoCode.PingpongG4.postCallReturn(script, () => {
                         const BEATS = script.getNumberValue('BEATS', script);
 
-                        const cBeats = Entry.PingpongG4._clampBeats(BEATS);
-                        const durationSec = Entry.PingpongG4._beatsToDuration(cBeats);
+                        const cBeats = RoCode.PingpongG4._clampBeats(BEATS);
+                        const durationSec = RoCode.PingpongG4._beatsToDuration(cBeats);
 
                         const waitTime = durationSec * 10 + 30;
 
@@ -3740,8 +3740,8 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 },
             },
             pingpong_g4_setTempo: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic',
                 params: [
                     { type: 'Block', accept: 'string', defaultType: 'number', value: '60' },
@@ -3757,13 +3757,13 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 isNotFor: ['PingpongG4'],
                 func(sprite, script) {
                     let tempo = script.getNumberValue('TEMPO', script);
-                    Entry.PingpongG4.tempo = Entry.PingpongG4._clampTempo(tempo);
+                    RoCode.PingpongG4.tempo = RoCode.PingpongG4._clampTempo(tempo);
                     return script.callReturn();
                 },
             },
             pingpong_g4_getTempo: {
-                color: EntryStatic.colorSet.block.default.HARDWARE,
-                outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+                color: RoCodeStatic.colorSet.block.default.HARDWARE,
+                outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
                 skeleton: 'basic_string_field',
                 params: [],
                 def: { params: [], type: 'pingpong_g4_getTempo' },
@@ -3771,7 +3771,7 @@ Entry.PingpongG4 = new (class extends PingpongBase {
                 class: 'PingpongG4_Music',
                 isNotFor: ['PingpongG4'],
                 func(sprite, script) {
-                    return Entry.PingpongG4.tempo;
+                    return RoCode.PingpongG4.tempo;
                 },
             },
         };
@@ -3878,4 +3878,4 @@ Entry.PingpongG4 = new (class extends PingpongBase {
     }
 })();
 
-module.exports = [Entry.PingpongG2, Entry.PingpongG3, Entry.PingpongG4];
+module.exports = [RoCode.PingpongG2, RoCode.PingpongG3, RoCode.PingpongG4];

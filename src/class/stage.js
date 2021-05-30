@@ -15,14 +15,14 @@ import { PIXIAtlasManager } from './pixi/atlas/PIXIAtlasManager';
  * class for a canvas
  * @constructor
  */
-Entry.Stage = class Stage {
+RoCode.Stage = class Stage {
     constructor() {
         /** @type {Dictionary} */
         this.variables = {};
         this.objectContainers = [];
         this.selectedObjectContainer = null;
 
-        /** @type {null|Entry.EntryObject} */
+        /** @type {null|RoCode.RoCodeObject} */
         this.selectedObject = null;
         this.isObjectClick = false;
         this._entitySelectable = true;
@@ -55,50 +55,50 @@ Entry.Stage = class Stage {
         this.initHandle();
         this.mouseCoordinate = { x: 0, y: 0 };
 
-        const _addEventListener = Entry.addEventListener.bind(Entry);
+        const _addEventListener = RoCode.addEventListener.bind(RoCode);
 
-        if (Entry.isPhone()) {
+        if (RoCode.isPhone()) {
             canvas.ontouchstart = (e) => {
-                Entry.dispatchEvent('canvasClick', e);
-                Entry.stage.isClick = true;
+                RoCode.dispatchEvent('canvasClick', e);
+                RoCode.stage.isClick = true;
             };
             canvas.ontouchend = (e) => {
-                Entry.stage.isClick = false;
-                Entry.dispatchEvent('canvasClickCanceled', e);
+                RoCode.stage.isClick = false;
+                RoCode.dispatchEvent('canvasClickCanceled', e);
             };
         } else {
             const downFunc = (e) => {
-                Entry.dispatchEvent('canvasClick', e);
+                RoCode.dispatchEvent('canvasClick', e);
                 if (e.which == 2) {
                     console.log('mouse wheel click disabled');
                     return;
                 }
-                Entry.stage.isClick = true;
+                RoCode.stage.isClick = true;
             };
 
             canvas.onmousedown = downFunc;
             canvas.ontouchstart = downFunc;
 
             const upFunc = (e) => {
-                Entry.stage.isClick = false;
-                Entry.dispatchEvent('canvasClickCanceled', e);
+                RoCode.stage.isClick = false;
+                RoCode.dispatchEvent('canvasClickCanceled', e);
             };
 
             canvas.onmouseup = upFunc;
             canvas.ontouchend = upFunc;
 
             $(document).click(({ target: { id } }) => {
-                this.focused = id === 'entryCanvas';
+                this.focused = id === 'RoCodeCanvas';
             });
         }
 
-        _addEventListener('canvasClick', () => (Entry.stage.isObjectClick = false));
+        _addEventListener('canvasClick', () => (RoCode.stage.isObjectClick = false));
         _addEventListener('loadComplete', this.sortZorder.bind(this));
 
-        Entry.windowResized.attach(this, this.updateBoundRect.bind(this));
+        RoCode.windowResized.attach(this, this.updateBoundRect.bind(this));
 
         const razyScroll = _.debounce(() => {
-            Entry.windowResized.notify();
+            RoCode.windowResized.notify();
         }, 200);
 
         $(window).scroll(() => {
@@ -107,26 +107,26 @@ Entry.Stage = class Stage {
 
         const moveFunc = (e) => {
             e.preventDefault();
-            const { offsetY, offsetX } = Entry.Utils.convertMouseEvent(e);
-            const roundRect = Entry.stage.getBoundRect();
+            const { offsetY, offsetX } = RoCode.Utils.convertMouseEvent(e);
+            const roundRect = RoCode.stage.getBoundRect();
             this.mouseCoordinate = {
-                x: Entry.Utils.toFixed((offsetX / roundRect.width - 0.5) * 480),
-                y: Entry.Utils.toFixed((offsetY / roundRect.height - 0.5) * -270),
+                x: RoCode.Utils.toFixed((offsetX / roundRect.width - 0.5) * 480),
+                y: RoCode.Utils.toFixed((offsetY / roundRect.height - 0.5) * -270),
             };
-            Entry.dispatchEvent('stageMouseMove');
+            RoCode.dispatchEvent('stageMouseMove');
         };
 
         canvas.onmousemove = moveFunc;
         canvas.ontouchmove = moveFunc;
 
-        canvas.onmouseout = () => Entry.dispatchEvent('stageMouseOut');
+        canvas.onmouseout = () => RoCode.dispatchEvent('stageMouseOut');
         const updateObjectFunc = () => {
-            if (Entry.engine.isState('stop')) {
-                Entry.stage.updateObject();
+            if (RoCode.engine.isState('stop')) {
+                RoCode.stage.updateObject();
             }
         };
         _addEventListener('updateObject', updateObjectFunc);
-        _addEventListener('run', () => Entry.removeEventListener('updateObject', updateObjectFunc));
+        _addEventListener('run', () => RoCode.removeEventListener('updateObject', updateObjectFunc));
         _addEventListener('stop', () => _addEventListener('updateObject', updateObjectFunc));
         _addEventListener('canvasInputComplete', () => {
             try {
@@ -136,7 +136,7 @@ Entry.Stage = class Stage {
                     ((c) => {
                         c.setInputValue(inputValue);
                         c.inputValue.complete = true;
-                    })(Entry.container);
+                    })(RoCode.container);
                 }
             } catch (exception) {}
         });
@@ -148,30 +148,30 @@ Entry.Stage = class Stage {
     }
 
     render = function stageRender() {
-        if (Entry.stage.timer) {
-            clearTimeout(Entry.stage.timer);
+        if (RoCode.stage.timer) {
+            clearTimeout(RoCode.stage.timer);
         }
         let time = _.now();
-        Entry.stage.update();
+        RoCode.stage.update();
         time = _.now() - time;
-        Entry.stage.timer = setTimeout(stageRender, 16 - (time % 16) + 16 * Math.floor(time / 16));
+        RoCode.stage.timer = setTimeout(stageRender, 16 - (time % 16) + 16 * Math.floor(time / 16));
     };
 
     /**
      * redraw canvas
      */
     update() {
-        if (Entry.type === 'invisible') {
+        if (RoCode.type === 'invisible') {
             return;
         }
 
-        if (!Entry.requestUpdate) {
-            Entry.requestUpdate = false;
+        if (!RoCode.requestUpdate) {
+            RoCode.requestUpdate = false;
             return;
         }
         this._app.render();
 
-        if (Entry.engine.isState('stop') && this.objectUpdated) {
+        if (RoCode.engine.isState('stop') && this.objectUpdated) {
             this.objectUpdated = false;
         }
 
@@ -179,10 +179,10 @@ Entry.Stage = class Stage {
         if (inputField && !inputField._isHidden) {
             inputField.render();
         }
-        if (Entry.requestUpdateTwice) {
-            Entry.requestUpdateTwice = false;
+        if (RoCode.requestUpdateTwice) {
+            RoCode.requestUpdateTwice = false;
         } else {
-            Entry.requestUpdate = false;
+            RoCode.requestUpdate = false;
         }
     }
 
@@ -192,59 +192,59 @@ Entry.Stage = class Stage {
 
     /**
      * add object entity on canvas
-     * @param {Entry.EntryObject} object
+     * @param {RoCode.RoCodeObject} object
      */
     loadObject({ entity: { object }, scene }) {
         this.getObjectContainerByScene(scene).addChild(object);
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
      * add entity directly on canvas
      * This is use for cloned entity
-     * @param {Entry.EntityObject} entity
+     * @param {RoCode.EntityObject} entity
      */
     loadEntity({ parent, object }, index) {
-        const objContainer = Entry.stage.getObjectContainerByScene(parent.scene);
+        const objContainer = RoCode.stage.getObjectContainerByScene(parent.scene);
         if (index > -1) {
             objContainer.addChildAt(object, index);
         } else {
             objContainer.addChild(object);
         }
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
      * Remove entity directly on canvas
-     * @param {Entry.EntityObject} entity
+     * @param {RoCode.EntityObject} entity
      */
     unloadEntity({ parent, object }) {
-        Entry.stage.getObjectContainerByScene(parent.scene).removeChild(object);
-        Entry.requestUpdate = true;
+        RoCode.stage.getObjectContainerByScene(parent.scene).removeChild(object);
+        RoCode.requestUpdate = true;
     }
 
     /**
      * add variable view on canvas
-     * @param {Entry.Variable} object
+     * @param {RoCode.Variable} object
      */
     loadVariable({ view_, id }) {
         this.variables[id] = view_;
         this.variableContainer.addChild(view_);
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
      * remove variable view on canvas
-     * @param {Entry.Variable} object
+     * @param {RoCode.Variable} object
      */
     removeVariable({ view_ }) {
         this.variableContainer.removeChild(view_);
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
      * add dialog on canvas
-     * @param {Entry.Dialog} dialog
+     * @param {RoCode.Dialog} dialog
      */
     loadDialog({ object }) {
         this.dialogContainer.addChild(object);
@@ -252,7 +252,7 @@ Entry.Stage = class Stage {
 
     /**
      * Remove entity directly on canvas
-     * @param {Entry.Dialog} dialog
+     * @param {RoCode.Dialog} dialog
      */
     unloadDialog({ object }) {
         this.dialogContainer.removeChild(object);
@@ -262,21 +262,21 @@ Entry.Stage = class Stage {
         if (index === -1) {
             return;
         }
-        const selectedObjectContainer = Entry.stage.selectedObjectContainer;
+        const selectedObjectContainer = RoCode.stage.selectedObjectContainer;
         const currentIndex = selectedObjectContainer.getChildIndex(object);
 
         if (currentIndex === -1 || currentIndex === index) {
             return;
         }
         selectedObjectContainer.setChildIndex(object, index);
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
      * sort Z index of objects
      */
     sortZorder() {
-        const objects = Entry.container.getCurrentObjects().slice();
+        const objects = RoCode.container.getCurrentObjects().slice();
         const length = objects.length;
         const container = this.selectedObjectContainer;
         let index = 0;
@@ -292,14 +292,14 @@ Entry.Stage = class Stage {
             container.children.length = length;
         }
 
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
      * sort Z index of objects while running
      */
     sortZorderRun() {
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -307,7 +307,7 @@ Entry.Stage = class Stage {
      */
     initCoordinator() {
         const tex = GEHelper.newSpriteWithCallback(
-            `${Entry.mediaFilePath}workspace_coordinate.png`
+            `${RoCode.mediaFilePath}workspace_coordinate.png`
         );
         this.coordinator = Object.assign(tex, {
             scaleX: 0.5,
@@ -327,12 +327,12 @@ Entry.Stage = class Stage {
      */
     toggleCoordinator() {
         this.coordinator.visible = !this.coordinator.visible;
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
      * Select handle object
-     * @param {?Entry.EntryObject} object
+     * @param {?RoCode.RoCodeObject} object
      */
     selectObject(object) {
         //todo
@@ -359,10 +359,10 @@ Entry.Stage = class Stage {
      * object -> handle
      */
     updateObject() {
-        if (Entry.type === 'invisible' || Entry.type === 'playground') {
+        if (RoCode.type === 'invisible' || RoCode.type === 'playground') {
             return;
         }
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
         this.handle.setDraggable(true);
         if (this.editEntity) {
             return;
@@ -409,13 +409,13 @@ Entry.Stage = class Stage {
                     const fontAlign = entity.getTextAlign();
                     regY = -entity.regY * entity.scaleY;
                     switch (fontAlign) {
-                        case Entry.TEXT_ALIGN_LEFT:
+                        case RoCode.TEXT_ALIGN_LEFT:
                             regX = (-entity.getWidth() / 2) * entity.scaleX;
                             break;
-                        case Entry.TEXT_ALIGN_CENTER:
+                        case RoCode.TEXT_ALIGN_CENTER:
                             regX = entity.regX * entity.scaleX;
                             break;
-                        case Entry.TEXT_ALIGN_RIGHT:
+                        case RoCode.TEXT_ALIGN_RIGHT:
                             regX = (entity.getWidth() / 2) * entity.scaleX;
                             break;
                     }
@@ -480,15 +480,15 @@ Entry.Stage = class Stage {
                 entity.setY(-handle.y);
             } else {
                 switch (entity.getTextAlign()) {
-                    case Entry.TEXT_ALIGN_LEFT:
+                    case RoCode.TEXT_ALIGN_LEFT:
                         entity.setX(handle.x - (handle.width / 2) * Math.cos(direction));
                         entity.setY(-handle.y + (handle.width / 2) * Math.sin(direction));
                         break;
-                    case Entry.TEXT_ALIGN_CENTER:
+                    case RoCode.TEXT_ALIGN_CENTER:
                         entity.setX(handle.x);
                         entity.setY(-handle.y);
                         break;
-                    case Entry.TEXT_ALIGN_RIGHT:
+                    case RoCode.TEXT_ALIGN_RIGHT:
                         entity.setX(handle.x + (handle.width / 2) * Math.cos(direction));
                         entity.setY(-handle.y - (handle.width / 2) * Math.sin(direction));
                         break;
@@ -524,7 +524,7 @@ Entry.Stage = class Stage {
     initWall() {
         const wall = GEHelper.newContainer('wall');
         wall.mouseEnabled = false;
-        const tex = GEHelper.newWallTexture(`${Entry.mediaFilePath}media/bound.png`);
+        const tex = GEHelper.newWallTexture(`${RoCode.mediaFilePath}media/bound.png`);
         const newSide = (x, y, sx, sy) => {
             const sp = GEHelper.newWallSprite(tex);
             sp.x = x;
@@ -568,7 +568,7 @@ Entry.Stage = class Stage {
         this.inputField.show();
         this.canvas.addChild(this.inputSubmitButton);
 
-        Entry.requestUpdateTwice = true;
+        RoCode.requestUpdateTwice = true;
 
         function _createInputField() {
             const posX = 15;
@@ -576,9 +576,9 @@ Entry.Stage = class Stage {
             const isWebGL = GEHelper.isWebGL;
             const classRef = isWebGL ? window.PIXICanvasInput : CanvasInput;
             const inputField = new classRef({
-                canvas: document.getElementById('entryCanvas'),
+                canvas: document.getElementById('RoCodeCanvas'),
                 fontSize: 20,
-                fontFamily: EntryStatic.fontFamily || 'NanumGothic',
+                fontFamily: RoCodeStatic.fontFamily || 'NanumGothic',
                 fontColor: '#2c313d',
                 width: 520,
                 height: 24,
@@ -593,7 +593,7 @@ Entry.Stage = class Stage {
                 readonly: false,
                 topPosition: true,
                 onsubmit() {
-                    Entry.dispatchEvent('canvasInputComplete');
+                    RoCode.dispatchEvent('canvasInputComplete');
                 },
             });
 
@@ -611,10 +611,10 @@ Entry.Stage = class Stage {
         } //_createInputField
 
         function _createSubmitButton() {
-            const { confirm_button } = EntryStatic.images || {};
-            const path = confirm_button || `${Entry.mediaFilePath}stage/submit.png`;
+            const { confirm_button } = RoCodeStatic.images || {};
+            const path = confirm_button || `${RoCode.mediaFilePath}stage/submit.png`;
             const inputSubmitButton = GEHelper.newSpriteWithCallback(path, () => {
-                Entry.requestUpdate = true;
+                RoCode.requestUpdate = true;
             });
             inputSubmitButton.mouseEnabled = true;
             inputSubmitButton.x = 190;
@@ -626,7 +626,7 @@ Entry.Stage = class Stage {
             const eventType = isWebGL ? 'pointerdown' : 'mousedown';
             inputSubmitButton.on(eventType, () => {
                 if (!THIS.inputField._readonly) {
-                    Entry.dispatchEvent('canvasInputComplete');
+                    RoCode.dispatchEvent('canvasInputComplete');
                 }
             });
             return inputSubmitButton;
@@ -649,33 +649,33 @@ Entry.Stage = class Stage {
 
         this.canvas.removeChild(this.inputSubmitButton);
 
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
      * init object containers
      */
     initObjectContainers() {
-        const scenes = Entry.scene.scenes_;
+        const scenes = RoCode.scene.scenes_;
         if (!_.isEmpty(scenes)) {
             for (let i = 0; i < scenes.length; i++) {
                 this.objectContainers[i] = this.createObjectContainer(scenes[i]);
             }
             this.selectedObjectContainer = this.objectContainers[0];
         } else {
-            const obj = this.createObjectContainer(Entry.scene.selectedScene);
+            const obj = this.createObjectContainer(RoCode.scene.selectedScene);
             this.objectContainers.push(obj);
             this.selectedObjectContainer = obj;
         }
-        if (Entry.type !== 'invisible' && Entry.type !== 'playground') {
+        if (RoCode.type !== 'invisible' && RoCode.type !== 'playground') {
             this.canvas.addChild(this.selectedObjectContainer);
         }
-        this.selectObjectContainer(Entry.scene.selectedScene);
+        this.selectObjectContainer(RoCode.scene.selectedScene);
     }
 
     /**
      * select object container by scene
-     * @param {Entry.Scene} scene
+     * @param {RoCode.Scene} scene
      */
     selectObjectContainer(scene) {
         const containers = this.objectContainers;
@@ -725,7 +725,7 @@ Entry.Stage = class Stage {
 
     moveSprite({ shiftKey, keyCode }) {
         const selectedObject = this.selectedObject;
-        if (!selectedObject || !Entry.stage.focused || selectedObject.getLock()) {
+        if (!selectedObject || !RoCode.stage.focused || selectedObject.getLock()) {
             return;
         }
 
@@ -772,7 +772,7 @@ Entry.Stage = class Stage {
     }
 
     isEntitySelectable() {
-        return Entry.engine.isState('stop') && this._entitySelectable && !this.dropper.isShow;
+        return RoCode.engine.isState('stop') && this._entitySelectable && !this.dropper.isShow;
     }
 
     destroy() {

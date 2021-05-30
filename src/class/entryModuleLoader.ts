@@ -1,10 +1,10 @@
-type EntryBlockRegisterSchema = {
+type RoCodeBlockRegisterSchema = {
     blockName: string;
-    block: EntryBlock;
+    block: RoCodeBlock;
     isBlockShowBlockMenu?: boolean;
 };
 
-class EntryModuleLoader {
+class RoCodeModuleLoader {
     public moduleList: string[] = [];
 
     /**
@@ -19,7 +19,7 @@ class EntryModuleLoader {
         }
 
         return new Promise((resolve, reject) => {
-            const scriptElementId = `entryModuleScript${Date.now()}`;
+            const scriptElementId = `RoCodeModuleScript${Date.now()}`;
 
             if (!moduleName) {
                 return;
@@ -37,7 +37,7 @@ class EntryModuleLoader {
                 reject(e);
             };
 
-            scriptElement.src = `${Entry.moduleBaseUrl}${moduleName}/files/block`;
+            scriptElement.src = `${RoCode.moduleBaseUrl}${moduleName}/files/block`;
 
             // noinspection JSCheckFunctionSignatures
             document.body.appendChild(scriptElement);
@@ -48,23 +48,23 @@ class EntryModuleLoader {
     /**
      * [!] 외부에서 사용하는 함수입니다. 모듈화된 블록이 엔트리 등록을 위해 사용하는 함수임
      * 각 블록정보가 존재해야할 위치에 모든 데이터를 뿌려준다. 위치는 아래와 같다
-     * - Entry.HARDWARE_LIST
-     * - Entry.block : 실제 블록 정보를 담는다.
+     * - RoCode.HARDWARE_LIST
+     * - RoCode.block : 실제 블록 정보를 담는다.
      *
      * 워크스페이스 리로드시 정보가 저장되지 않는다.
      * 이 후 블록메뉴에 블록들을 실시간으로 추가한 뒤 reDraw 한다.
      * @param moduleObject 하드웨어 모듈. 여타 하드웨어 모듈 파일 참조
      */
-    registerHardwareModule(moduleObject: EntryHardwareBlockModule) {
+    registerHardwareModule(moduleObject: RoCodeHardwareBlockModule) {
         if (!moduleObject.getBlocks || !moduleObject.blockMenuBlocks) {
             return;
         }
 
         if (typeof moduleObject.id === 'string') {
-            Entry.HARDWARE_LIST[moduleObject.id] = moduleObject;
+            RoCode.HARDWARE_LIST[moduleObject.id] = moduleObject;
         } else if (moduleObject.id instanceof Array) {
             moduleObject.id.forEach((id) => {
-                Entry.HARDWARE_LIST[id] = moduleObject;
+                RoCode.HARDWARE_LIST[id] = moduleObject;
             });
         }
 
@@ -81,8 +81,8 @@ class EntryModuleLoader {
             })),
         });
 
-        Entry.hw.setExternalModule(moduleObject);
-        Entry.dispatchEvent('hwChanged');
+        RoCode.hw.setExternalModule(moduleObject);
+        RoCode.dispatchEvent('hwChanged');
     }
 
     /**
@@ -91,9 +91,9 @@ class EntryModuleLoader {
      * 블록은 moduleObject 의 정보에 따라 타이틀, 설명 TextBlock 이 같이 추가된다.
      * @param moduleObject
      */
-    registerBlockModule(moduleObject: EntryBlockModule) {
+    registerBlockModule(moduleObject: RoCodeBlockModule) {
         const { name, title, description, getBlocks } = moduleObject;
-        const blockSchemas: EntryBlockRegisterSchema[] = [];
+        const blockSchemas: RoCodeBlockRegisterSchema[] = [];
 
         title && blockSchemas.push(this.createTextBlock(name, title.ko));
         description && blockSchemas.push(this.createTextBlock(name, description));
@@ -118,9 +118,9 @@ class EntryModuleLoader {
         blockSchemas,
     }: {
         categoryName: string;
-        blockSchemas: EntryBlockRegisterSchema[];
+        blockSchemas: RoCodeBlockRegisterSchema[];
     }) {
-        const blockMenu = Entry.getMainWS().blockMenu;
+        const blockMenu = RoCode.getMainWS().blockMenu;
 
         blockSchemas.forEach((blockSchema) => {
             this.applyDefaultProperties(blockSchema);
@@ -131,7 +131,7 @@ class EntryModuleLoader {
                 block.category = categoryName;
             }
 
-            Entry.block[blockName] = block;
+            RoCode.block[blockName] = block;
 
             if (isBlockShowBlockMenu) {
                 blockMenu.addCategoryData(categoryName, blockName);
@@ -141,10 +141,10 @@ class EntryModuleLoader {
         blockMenu.reDraw();
     }
 
-    private createTextBlock(moduleName: string, content: string): EntryBlockRegisterSchema {
+    private createTextBlock(moduleName: string, content: string): RoCodeBlockRegisterSchema {
         const blockName = `${moduleName}_${Math.random()}`;
-        const block: EntryBlock = {
-            color: EntryStatic.colorSet.common.TRANSPARENT,
+        const block: RoCodeBlock = {
+            color: RoCodeStatic.colorSet.common.TRANSPARENT,
             skeleton: 'basic_text',
             class: moduleName,
             template: '%1',
@@ -152,7 +152,7 @@ class EntryModuleLoader {
                 {
                     type: 'Text',
                     text: content,
-                    color: EntryStatic.colorSet.common.TEXT,
+                    color: RoCodeStatic.colorSet.common.TEXT,
                     align: 'center',
                 },
             ],
@@ -168,7 +168,7 @@ class EntryModuleLoader {
     /**
      * TODO 리로드 되는 경우 다시 불러오지 않기 때문에 템플릿정보 저장이 필요함
      */
-    private setLanguageTemplates(moduleObject: EntryHardwareBlockModule) {
+    private setLanguageTemplates(moduleObject: RoCodeHardwareBlockModule) {
         if (moduleObject.setLanguage) {
             const langTemplate = moduleObject.setLanguage();
             const data = langTemplate[Lang.type] || langTemplate[Lang.fallbackType];
@@ -181,10 +181,10 @@ class EntryModuleLoader {
     /**
      * 블록 모델이 블록객체로서 구현되기 전에 불충분한 프로퍼티나 잘못된 값이 있는 경우 이쪽에서 수정한다.
      */
-    private applyDefaultProperties({ blockName, block }: EntryBlockRegisterSchema) {
+    private applyDefaultProperties({ blockName, block }: RoCodeBlockRegisterSchema) {
         if (!block.color) {
-            block.color = EntryStatic.colorSet.block.default.EXPANSION;
-            block.outerLine = EntryStatic.colorSet.block.darken.EXPANSION;
+            block.color = RoCodeStatic.colorSet.block.default.EXPANSION;
+            block.outerLine = RoCodeStatic.colorSet.block.darken.EXPANSION;
         }
 
         if (!block.type) {
@@ -193,16 +193,16 @@ class EntryModuleLoader {
     }
 }
 
-const instance = new EntryModuleLoader();
+const instance = new RoCodeModuleLoader();
 export default instance;
-Entry.moduleManager = instance;
+RoCode.moduleManager = instance;
 
 /**
  * 프로젝트 가 외부 모듈이 사용되었는지 확인하고, 로드한다
  * @param {*} project 엔트리 프로젝트
  * @return Promise
  */
-Entry.loadExternalModules = async (project = {}) => {
+RoCode.loadExternalModules = async (project = {}) => {
     const { externalModules = [] } = project;
     await Promise.all(externalModules.map(instance.loadModule.bind(instance)));
 };

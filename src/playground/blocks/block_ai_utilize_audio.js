@@ -1,6 +1,6 @@
 import AudioUtils from '../../util/audioUtils';
 
-Entry.AI_UTILIZE_BLOCK.audio = {
+RoCode.AI_UTILIZE_BLOCK.audio = {
     name: 'audio',
     imageName: 'audio.svg',
     sponserText: 'Powered by NAVER Clova',
@@ -15,20 +15,20 @@ Entry.AI_UTILIZE_BLOCK.audio = {
     isInitialized: false,
     async init() {
         await AudioUtils.initialize();
-        Entry.AI_UTILIZE_BLOCK.audio.isInitialized = true;
+        RoCode.AI_UTILIZE_BLOCK.audio.isInitialized = true;
     },
 };
 
-Entry.AI_UTILIZE_BLOCK.audio.getBlocks = function() {
+RoCode.AI_UTILIZE_BLOCK.audio.getBlocks = function() {
     return {
         audio_title: {
             skeleton: 'basic_text',
-            color: EntryStatic.colorSet.common.TRANSPARENT,
+            color: RoCodeStatic.colorSet.common.TRANSPARENT,
             params: [
                 {
                     type: 'Text',
                     text: Lang.template.audio_title_text,
-                    color: EntryStatic.colorSet.common.TEXT,
+                    color: RoCodeStatic.colorSet.common.TEXT,
                     align: 'center',
                 },
             ],
@@ -40,8 +40,8 @@ Entry.AI_UTILIZE_BLOCK.audio.getBlocks = function() {
             events: {},
         },
         check_microphone: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic_boolean_field',
             statements: [],
             params: [],
@@ -67,8 +67,8 @@ Entry.AI_UTILIZE_BLOCK.audio.getBlocks = function() {
         },
 
         speech_to_text_convert: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -96,12 +96,12 @@ Entry.AI_UTILIZE_BLOCK.audio.getBlocks = function() {
                 }
                 try {
                     AudioUtils.isRecording = true;
-                    Entry.container.enableSttValue();
+                    RoCode.container.enableSttValue();
                     const result = await AudioUtils.startRecord(60 * 1000);
-                    Entry.dispatchEvent('audioRecordingDone');
-                    Entry.container.setSttValue(result || 0);
+                    RoCode.dispatchEvent('audioRecordingDone');
+                    RoCode.container.setSttValue(result || 0);
                 } catch (e) {
-                    Entry.container.setSttValue(0);
+                    RoCode.container.setSttValue(0);
                     throw e;
                 }
             },
@@ -112,8 +112,8 @@ Entry.AI_UTILIZE_BLOCK.audio.getBlocks = function() {
         },
 
         speech_to_text_get_value: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [],
@@ -127,7 +127,7 @@ Entry.AI_UTILIZE_BLOCK.audio.getBlocks = function() {
             class: 'audio',
             isNotFor: ['audio'],
             func(sprite, script) {
-                return Entry.container.getSttValue();
+                return RoCode.container.getSttValue();
             },
             syntax: {
                 js: [],
@@ -136,8 +136,8 @@ Entry.AI_UTILIZE_BLOCK.audio.getBlocks = function() {
         },
 
         get_microphone_volume: {
-            color: EntryStatic.colorSet.block.default.AI_UTILIZE,
-            outerLine: EntryStatic.colorSet.block.darken.AI_UTILIZE,
+            color: RoCodeStatic.colorSet.block.default.AI_UTILIZE,
+            outerLine: RoCodeStatic.colorSet.block.darken.AI_UTILIZE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [],

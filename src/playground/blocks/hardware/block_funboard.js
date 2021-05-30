@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.FunBoard = {
+RoCode.FunBoard = {
     // isNotFor": [ "funboard" ] 값
     id: '21.1',
     name: 'funboard',
@@ -11,8 +11,8 @@ Entry.FunBoard = {
         ko: '펀보드',
     },
     Static: {
-        FUNBOARD_BLOCK_color: EntryStatic.colorSet.block.default.HARDWARE, // gray(#848484)
-        FUNBOARD_ARROW_COLOR_HW: EntryStatic.colorSet.block.default.HARDWARE,
+        FUNBOARD_BLOCK_color: RoCodeStatic.colorSet.block.default.HARDWARE, // gray(#848484)
+        FUNBOARD_ARROW_COLOR_HW: RoCodeStatic.colorSet.block.default.HARDWARE,
         FUNBOARD_FONT_COLOR: '#000f0f', // cyan(#000f0f), lightgray(#000113), reddish-brown(#982600)
         FUNBOARD_LED_ON: 255,
         BUTTON_PRESS_VALUE: 0, // 버튼 눌림 값
@@ -22,44 +22,44 @@ Entry.FunBoard = {
         MATRIX_REGISTED_SYMBOL_TOTAL: 10, //펌웨어에 등록되어 있는 symbol 갯수
     },
 
-    //entry [중지]-버튼을 누르면 실행되므로...
+    //RoCode [중지]-버튼을 누르면 실행되므로...
     setZero: function() {
         //-------------------------------------------------
         {
-            if (!Entry.hw.sendQueue['SET']) {
-                Entry.hw.sendQueue['SET'] = {};
+            if (!RoCode.hw.sendQueue['SET']) {
+                RoCode.hw.sendQueue['SET'] = {};
             }
             //reset - [중지] 시
             var port = 13;
-            Entry.hw.sendQueue['SET'][port] = {
-                type: Entry.FunBoard.sensorTypes.ETC,
-                data: Entry.FunBoard.EventTypes.RESET,
+            RoCode.hw.sendQueue['SET'][port] = {
+                type: RoCode.FunBoard.sensorTypes.ETC,
+                data: RoCode.FunBoard.EventTypes.RESET,
                 time: new Date().getTime(),
             };
             for (var i = 0; i < 50000; i++) {}
-            Entry.hw.update();
-            delete Entry.hw.sendQueue[port];
+            RoCode.hw.update();
+            delete RoCode.hw.sendQueue[port];
             for (var i = 0; i < 500000; i++) {}
         }
         //-------------------------------------------------
-        if (!Entry.hw.sendQueue.SET) {
-            Entry.hw.sendQueue = {
+        if (!RoCode.hw.sendQueue.SET) {
+            RoCode.hw.sendQueue = {
                 GET: {},
                 SET: {},
             };
         } else {
-            var keySet = Object.keys(Entry.hw.sendQueue.SET);
+            var keySet = Object.keys(RoCode.hw.sendQueue.SET);
             keySet.forEach(function(key) {
-                Entry.hw.sendQueue.SET[key].type = Entry.FunBoard.sensorTypes.ETC;
-                Entry.hw.sendQueue.SET[key].data = 0;
-                Entry.hw.sendQueue.SET[key].time = new Date().getTime();
+                RoCode.hw.sendQueue.SET[key].type = RoCode.FunBoard.sensorTypes.ETC;
+                RoCode.hw.sendQueue.SET[key].data = 0;
+                RoCode.hw.sendQueue.SET[key].time = new Date().getTime();
             });
         }
-        Entry.hw.update();
+        RoCode.hw.update();
     },
     toByte: function(data) {
         var c = data;
-        data = Entry.FunBoard._str2bin(c);
+        data = RoCode.FunBoard._str2bin(c);
         return data;
     },
     EventTypes: {
@@ -171,8 +171,8 @@ Entry.FunBoard = {
         var isFloat = false;
 
         if (
-            (Entry.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
-            (Entry.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
+            (RoCode.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
+            (RoCode.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
         ) {
             isFloat = true;
         }
@@ -274,7 +274,7 @@ Entry.FunBoard = {
         return bin;
     },
 };
-Entry.FunBoard.setLanguage = function() {
+RoCode.FunBoard.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -437,7 +437,7 @@ Entry.FunBoard.setLanguage = function() {
         }, //
     };
 };
-Entry.FunBoard.blockMenuBlocks = [
+RoCode.FunBoard.blockMenuBlocks = [
     'funboard_list_pushbutton_basic',
     'funboard_list_touchbutton_basic',
     'funboard_list_analogsensor_basic',
@@ -464,12 +464,12 @@ Entry.FunBoard.blockMenuBlocks = [
     'funboard_dotmatrix_1row',
     'funboard_dotmatrix_1column',
 ];
-Entry.FunBoard.getBlocks = function() {
+RoCode.FunBoard.getBlocks = function() {
     return {
         //region FunBoard
         funboard_list_pushbutton_basic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -484,8 +484,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -500,8 +500,8 @@ Entry.FunBoard.getBlocks = function() {
             },
         },
         funboard_list_touchbutton_basic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -519,8 +519,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -535,8 +535,8 @@ Entry.FunBoard.getBlocks = function() {
             },
         },
         funboard_list_analogsensor_basic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -550,8 +550,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -566,8 +566,8 @@ Entry.FunBoard.getBlocks = function() {
             },
         },
         funboard_list_2_state_basic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -580,8 +580,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -596,8 +596,8 @@ Entry.FunBoard.getBlocks = function() {
             },
         },
         funboard_list_ledcolor_basic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -613,8 +613,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -629,8 +629,8 @@ Entry.FunBoard.getBlocks = function() {
             },
         },
         funboard_list_ledcolor_pwm_basic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -643,8 +643,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -659,8 +659,8 @@ Entry.FunBoard.getBlocks = function() {
             },
         },
         funboard_list_onoff_basic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -673,8 +673,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -689,8 +689,8 @@ Entry.FunBoard.getBlocks = function() {
             },
         },
         funboard_list_digital_octave: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -709,8 +709,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -725,8 +725,8 @@ Entry.FunBoard.getBlocks = function() {
             },
         },
         funboard_list_digital_tone: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -750,8 +750,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -766,8 +766,8 @@ Entry.FunBoard.getBlocks = function() {
             },
         },
         funboard_list_matrix_rows: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -786,8 +786,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -802,8 +802,8 @@ Entry.FunBoard.getBlocks = function() {
             },
         },
         funboard_list_matrix_row_or_column: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -816,8 +816,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -832,8 +832,8 @@ Entry.FunBoard.getBlocks = function() {
             },
         },
         funboard_list_matrix_scroll_option: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -849,8 +849,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -865,8 +865,8 @@ Entry.FunBoard.getBlocks = function() {
             },
         },
         funboard_list_matrix_char: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             template: '%1',
@@ -971,8 +971,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -987,8 +987,8 @@ Entry.FunBoard.getBlocks = function() {
             },
         },
         funboard_what_button_pressed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -1015,26 +1015,26 @@ Entry.FunBoard.getBlocks = function() {
             func: function(sprite, script) {
                 var port = 0;
                 var bt_index = script.getNumberValue('PORT');
-                if (bt_index == 1) port = Entry.FunBoard.PORT_MAP['up_bt'];
-                else if (bt_index == 2) port = Entry.FunBoard.PORT_MAP['down_bt'];
-                else if (bt_index == 3) port = Entry.FunBoard.PORT_MAP['left_bt'];
-                else if (bt_index == 4) port = Entry.FunBoard.PORT_MAP['right_bt'];
+                if (bt_index == 1) port = RoCode.FunBoard.PORT_MAP['up_bt'];
+                else if (bt_index == 2) port = RoCode.FunBoard.PORT_MAP['down_bt'];
+                else if (bt_index == 3) port = RoCode.FunBoard.PORT_MAP['left_bt'];
+                else if (bt_index == 4) port = RoCode.FunBoard.PORT_MAP['right_bt'];
 
-                var DIGITAL = Entry.hw.portData.DIGITAL;
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
                 var value = 0;
                 var bt_pressed = 0;
                 value = DIGITAL ? DIGITAL[port] || 0 : 0;
 
-                if (Entry.FunBoard.Static.BUTTON_PRESS_VALUE == 0) {
+                if (RoCode.FunBoard.Static.BUTTON_PRESS_VALUE == 0) {
                     bt_pressed = value > 0 ? 0 : 1;
                 } else {
                     bt_pressed = value > 0 ? 1 : 0;
                 }
                 /*
-            if(!Entry.hw.sendQueue['GET']) {
-                Entry.hw.sendQueue['GET'] = {};
+            if(!RoCode.hw.sendQueue['GET']) {
+                RoCode.hw.sendQueue['GET'] = {};
             }
-            Entry.hw.sendQueue['GET'][Entry.FunBoard.sensorTypes.DIGITAL] = {
+            RoCode.hw.sendQueue['GET'][RoCode.FunBoard.sensorTypes.DIGITAL] = {
                 port: port,
                 time: new Date().getTime()
             };
@@ -1045,8 +1045,8 @@ Entry.FunBoard.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         funboard_what_touch_button_pressed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -1073,34 +1073,34 @@ Entry.FunBoard.getBlocks = function() {
             func: function(sprite, script) {
                 var port = 0;
                 var bt_index = script.getNumberValue('PORT');
-                if (bt_index == 1) port = Entry.FunBoard.PORT_MAP['up_bt'];
-                else if (bt_index == 2) port = Entry.FunBoard.PORT_MAP['down_bt'];
-                else if (bt_index == 3) port = Entry.FunBoard.PORT_MAP['left_bt'];
-                else if (bt_index == 4) port = Entry.FunBoard.PORT_MAP['right_bt'];
-                else if (bt_index == 5) port = Entry.FunBoard.PORT_MAP['space_touchbt'];
-                else if (bt_index == 6) port = Entry.FunBoard.PORT_MAP['enter_touchbt'];
-                else if (bt_index == 7) port = Entry.FunBoard.PORT_MAP['escape_touchbt'];
+                if (bt_index == 1) port = RoCode.FunBoard.PORT_MAP['up_bt'];
+                else if (bt_index == 2) port = RoCode.FunBoard.PORT_MAP['down_bt'];
+                else if (bt_index == 3) port = RoCode.FunBoard.PORT_MAP['left_bt'];
+                else if (bt_index == 4) port = RoCode.FunBoard.PORT_MAP['right_bt'];
+                else if (bt_index == 5) port = RoCode.FunBoard.PORT_MAP['space_touchbt'];
+                else if (bt_index == 6) port = RoCode.FunBoard.PORT_MAP['enter_touchbt'];
+                else if (bt_index == 7) port = RoCode.FunBoard.PORT_MAP['escape_touchbt'];
 
                 var value = 0;
                 var bt_pressed = 0;
 
                 if (bt_index >= 5) {
-                    var ANALOG = Entry.hw.portData.ANALOG;
+                    var ANALOG = RoCode.hw.portData.ANALOG;
                     value = ANALOG ? ANALOG[port] || 0 : 0;
                 } else {
-                    var DIGITAL = Entry.hw.portData.DIGITAL;
+                    var DIGITAL = RoCode.hw.portData.DIGITAL;
                     value = DIGITAL ? DIGITAL[port] || 0 : 0;
                     /*
-                if(!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if(!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.FunBoard.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue['GET'][RoCode.FunBoard.sensorTypes.DIGITAL] = {
                     port: port,
                     time: new Date().getTime()
                 };
                 */
                 }
-                if (Entry.FunBoard.Static.BUTTON_PRESS_VALUE == 0) {
+                if (RoCode.FunBoard.Static.BUTTON_PRESS_VALUE == 0) {
                     bt_pressed = value > 0 ? 0 : 1;
                 } else {
                     bt_pressed = value > 0 ? 1 : 0;
@@ -1110,8 +1110,8 @@ Entry.FunBoard.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         funboard_get_digital_button_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1138,18 +1138,18 @@ Entry.FunBoard.getBlocks = function() {
             func: function(sprite, script) {
                 var port = 0;
                 var bt_index = script.getNumberValue('PORT');
-                if (bt_index == 1) port = Entry.FunBoard.PORT_MAP['up_bt'];
-                else if (bt_index == 2) port = Entry.FunBoard.PORT_MAP['down_bt'];
-                else if (bt_index == 3) port = Entry.FunBoard.PORT_MAP['left_bt'];
-                else if (bt_index == 4) port = Entry.FunBoard.PORT_MAP['right_bt'];
+                if (bt_index == 1) port = RoCode.FunBoard.PORT_MAP['up_bt'];
+                else if (bt_index == 2) port = RoCode.FunBoard.PORT_MAP['down_bt'];
+                else if (bt_index == 3) port = RoCode.FunBoard.PORT_MAP['left_bt'];
+                else if (bt_index == 4) port = RoCode.FunBoard.PORT_MAP['right_bt'];
 
-                var DIGITAL = Entry.hw.portData.DIGITAL;
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
                 var value = 0;
                 /*
-            if(!Entry.hw.sendQueue['GET']) {
-                Entry.hw.sendQueue['GET'] = {};
+            if(!RoCode.hw.sendQueue['GET']) {
+                RoCode.hw.sendQueue['GET'] = {};
             }
-            Entry.hw.sendQueue['GET'][Entry.FunBoard.sensorTypes.DIGITAL] = {
+            RoCode.hw.sendQueue['GET'][RoCode.FunBoard.sensorTypes.DIGITAL] = {
                 port: port,
                 time: new Date().getTime()
             };
@@ -1158,7 +1158,7 @@ Entry.FunBoard.getBlocks = function() {
                 // 버튼 눌림 값 그대로...
                 value = DIGITAL ? DIGITAL[port] || 0 : 0;
                 //누른 경우 1, 아니면 0 으로 알려 준다.
-                if (Entry.FunBoard.Static.BUTTON_PRESS_VALUE == 0) {
+                if (RoCode.FunBoard.Static.BUTTON_PRESS_VALUE == 0) {
                     value = value ? 0 : 1;
                 }
                 return value;
@@ -1166,8 +1166,8 @@ Entry.FunBoard.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         funboard_get_touch_button_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1194,32 +1194,32 @@ Entry.FunBoard.getBlocks = function() {
             func: function(sprite, script) {
                 var port = 0;
                 var bt_index = script.getNumberValue('PORT');
-                if (bt_index == 1) port = Entry.FunBoard.PORT_MAP['up_bt'];
-                else if (bt_index == 2) port = Entry.FunBoard.PORT_MAP['down_bt'];
-                else if (bt_index == 3) port = Entry.FunBoard.PORT_MAP['left_bt'];
-                else if (bt_index == 4) port = Entry.FunBoard.PORT_MAP['right_bt'];
-                else if (bt_index == 5) port = Entry.FunBoard.PORT_MAP['space_touchbt'];
-                else if (bt_index == 6) port = Entry.FunBoard.PORT_MAP['enter_touchbt'];
-                else if (bt_index == 7) port = Entry.FunBoard.PORT_MAP['escape_touchbt'];
+                if (bt_index == 1) port = RoCode.FunBoard.PORT_MAP['up_bt'];
+                else if (bt_index == 2) port = RoCode.FunBoard.PORT_MAP['down_bt'];
+                else if (bt_index == 3) port = RoCode.FunBoard.PORT_MAP['left_bt'];
+                else if (bt_index == 4) port = RoCode.FunBoard.PORT_MAP['right_bt'];
+                else if (bt_index == 5) port = RoCode.FunBoard.PORT_MAP['space_touchbt'];
+                else if (bt_index == 6) port = RoCode.FunBoard.PORT_MAP['enter_touchbt'];
+                else if (bt_index == 7) port = RoCode.FunBoard.PORT_MAP['escape_touchbt'];
 
                 var value = 0;
                 if (bt_index >= 5) {
-                    var ANALOG = Entry.hw.portData.ANALOG;
+                    var ANALOG = RoCode.hw.portData.ANALOG;
                     value = ANALOG ? ANALOG[port] || 0 : 0;
 
                     // 버튼 눌림 값 그대로...
                     value = ANALOG ? ANALOG[port] || 0 : 0;
                     //누른 경우 1, 아니면 0 으로 알려 준다.
-                    if (Entry.FunBoard.Static.BUTTON_PRESS_VALUE == 0) {
+                    if (RoCode.FunBoard.Static.BUTTON_PRESS_VALUE == 0) {
                         value = value ? 0 : 1;
                     }
                 } else {
-                    var DIGITAL = Entry.hw.portData.DIGITAL;
+                    var DIGITAL = RoCode.hw.portData.DIGITAL;
                     /*
-                if(!Entry.hw.sendQueue['GET']) {
-                    Entry.hw.sendQueue['GET'] = {};
+                if(!RoCode.hw.sendQueue['GET']) {
+                    RoCode.hw.sendQueue['GET'] = {};
                 }
-                Entry.hw.sendQueue['GET'][Entry.FunBoard.sensorTypes.DIGITAL] = {
+                RoCode.hw.sendQueue['GET'][RoCode.FunBoard.sensorTypes.DIGITAL] = {
                     port: port,
                     time: new Date().getTime()
                 };
@@ -1228,7 +1228,7 @@ Entry.FunBoard.getBlocks = function() {
                     // 버튼 눌림 값 그대로...
                     value = DIGITAL ? DIGITAL[port] || 0 : 0;
                     //누른 경우 1, 아니면 0 으로 알려 준다.
-                    if (Entry.FunBoard.Static.BUTTON_PRESS_VALUE == 0) {
+                    if (RoCode.FunBoard.Static.BUTTON_PRESS_VALUE == 0) {
                         value = value ? 0 : 1;
                     }
                 }
@@ -1237,8 +1237,8 @@ Entry.FunBoard.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         funboard_get_number_sensor_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1265,19 +1265,19 @@ Entry.FunBoard.getBlocks = function() {
             func: function(sprite, script) {
                 var port = 0;
                 var index = script.getValue('PORT', script);
-                if (index == 1) port = Entry.FunBoard.PORT_MAP['slide'];
-                else if (index == 2) port = Entry.FunBoard.PORT_MAP['cds'];
-                else if (index == 3) port = Entry.FunBoard.PORT_MAP['mic'];
+                if (index == 1) port = RoCode.FunBoard.PORT_MAP['slide'];
+                else if (index == 2) port = RoCode.FunBoard.PORT_MAP['cds'];
+                else if (index == 3) port = RoCode.FunBoard.PORT_MAP['mic'];
 
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var value = ANALOG ? ANALOG[port] || 0 : 0;
                 return value;
             },
             syntax: { js: [], py: [] },
         },
         funboard_get_analog_sensor_2state: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -1317,16 +1317,16 @@ Entry.FunBoard.getBlocks = function() {
                     vlimit;
                 var port = 0;
                 var mode = 1;
-                if (index == 1) port = Entry.FunBoard.PORT_MAP['slide'];
-                else if (index == 2) port = Entry.FunBoard.PORT_MAP['cds'];
-                else if (index == 3) port = Entry.FunBoard.PORT_MAP['mic'];
+                if (index == 1) port = RoCode.FunBoard.PORT_MAP['slide'];
+                else if (index == 2) port = RoCode.FunBoard.PORT_MAP['cds'];
+                else if (index == 3) port = RoCode.FunBoard.PORT_MAP['mic'];
 
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var value = ANALOG ? ANALOG[port] || 0 : 0;
 
                 vlimit =
                     vmin +
-                    Math.max(0, Math.abs(vmax - vmin) * Entry.FunBoard.Static.ANALOG_STATE_PERCENT);
+                    Math.max(0, Math.abs(vmax - vmin) * RoCode.FunBoard.Static.ANALOG_STATE_PERCENT);
 
                 var ret = 0;
                 //작다
@@ -1342,8 +1342,8 @@ Entry.FunBoard.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         funboard_convert_scale: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -1406,9 +1406,9 @@ Entry.FunBoard.getBlocks = function() {
             func: function(sprite, script) {
                 var index = script.getValue('PORT', script);
                 var port = 0;
-                if (index == 1) port = Entry.FunBoard.PORT_MAP['slide'];
-                else if (index == 2) port = Entry.FunBoard.PORT_MAP['cds'];
-                else if (index == 3) port = Entry.FunBoard.PORT_MAP['mic'];
+                if (index == 1) port = RoCode.FunBoard.PORT_MAP['slide'];
+                else if (index == 2) port = RoCode.FunBoard.PORT_MAP['cds'];
+                else if (index == 3) port = RoCode.FunBoard.PORT_MAP['mic'];
 
                 var value2 = script.getNumberValue('VALUE2', script);
                 var value3 = script.getNumberValue('VALUE3', script);
@@ -1419,13 +1419,13 @@ Entry.FunBoard.getBlocks = function() {
                 var stringValue5 = script.getValue('VALUE5', script);
                 var isFloat = false;
                 if (
-                    (Entry.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
-                    (Entry.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
+                    (RoCode.Utils.isNumber(stringValue4) && stringValue4.indexOf('.') > -1) ||
+                    (RoCode.Utils.isNumber(stringValue5) && stringValue5.indexOf('.') > -1)
                 ) {
                     isFloat = true;
                 }
 
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 var value1 = ANALOG ? ANALOG[port] || 0 : 0;
                 var result = value1;
 
@@ -1457,8 +1457,8 @@ Entry.FunBoard.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         funboard_set_digital_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic',
             statements: [],
@@ -1506,15 +1506,15 @@ Entry.FunBoard.getBlocks = function() {
             class: 'funboardset',
             isNotFor: ['funboard'],
             func: function(sprite, script) {
-                var port = Entry.FunBoard.PORT_MAP['buzzer'];
+                var port = RoCode.FunBoard.PORT_MAP['buzzer'];
                 var duration = script.getNumberValue('DURATION');
                 var octave = script.getNumberValue('OCTAVE') - 1;
                 var value = 0;
 
                 if (!script.isStart) {
                     var note = script.getValue('NOTE');
-                    if (!Entry.Utils.isNumber(note)) {
-                        note = Entry.FunBoard.toneTable[note];
+                    if (!RoCode.Utils.isNumber(note)) {
+                        note = RoCode.FunBoard.toneTable[note];
                     }
                     if (note < 0) {
                         note = 0;
@@ -1524,12 +1524,12 @@ Entry.FunBoard.getBlocks = function() {
                     if (duration < 0) {
                         duration = 0;
                     }
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     if (duration === 0) {
-                        Entry.hw.sendQueue['SET'][port] = {
-                            type: Entry.FunBoard.sensorTypes.TONE,
+                        RoCode.hw.sendQueue['SET'][port] = {
+                            type: RoCode.FunBoard.sensorTypes.TONE,
                             data: 0,
                             time: new Date().getTime(),
                         };
@@ -1541,15 +1541,15 @@ Entry.FunBoard.getBlocks = function() {
                         octave = 8;
                     }
                     if (note != 0) {
-                        value = Entry.FunBoard.toneMap[note][octave];
+                        value = RoCode.FunBoard.toneMap[note][octave];
                     }
 
                     duration = duration * 1000;
                     script.isStart = true;
                     script.timeFlag = 1;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.FunBoard.sensorTypes.TONE,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.FunBoard.sensorTypes.TONE,
                         data: {
                             value: value,
                             duration: duration,
@@ -1566,12 +1566,12 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.FunBoard.sensorTypes.TONE,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.FunBoard.sensorTypes.TONE,
                         data: 0,
                         time: new Date().getTime(),
                     };
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
 
                     return script.callReturn();
                 }
@@ -1579,8 +1579,8 @@ Entry.FunBoard.getBlocks = function() {
             syntax: { js: [], py: [] },
         },
         funboard_buzzer_second: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1627,14 +1627,14 @@ Entry.FunBoard.getBlocks = function() {
                 if (!script.isStart) {
                     {
                         var port = 0;
-                        if (onoff == '1') port = Entry.FunBoard.EventTypes.BUZZER_ON;
-                        else port = Entry.FunBoard.EventTypes.BUZZER_OFF;
+                        if (onoff == '1') port = RoCode.FunBoard.EventTypes.BUZZER_ON;
+                        else port = RoCode.FunBoard.EventTypes.BUZZER_OFF;
 
-                        if (!Entry.hw.sendQueue['SET']) {
-                            Entry.hw.sendQueue['SET'] = {};
+                        if (!RoCode.hw.sendQueue['SET']) {
+                            RoCode.hw.sendQueue['SET'] = {};
                         }
-                        Entry.hw.sendQueue['SET'][port] = {
-                            type: Entry.FunBoard.sensorTypes.ETC,
+                        RoCode.hw.sendQueue['SET'][port] = {
+                            type: RoCode.FunBoard.sensorTypes.ETC,
                             data: li_duration,
                             time: new Date().getTime(),
                         };
@@ -1642,8 +1642,8 @@ Entry.FunBoard.getBlocks = function() {
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var timeValue = li_duration; // * Entry.FunBoard.Static.DELAY_SECOND;
-                    var fps = Entry.FPS || 60;
+                    var timeValue = li_duration; // * RoCode.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
                     timeValue = (60 / fps) * timeValue * 1000;
                     setTimeout(function() {
                         script.timeFlag = 0;
@@ -1654,15 +1654,15 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         funboard_buzzer_tone_simple: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1679,8 +1679,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: 'C',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1694,8 +1694,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1728,7 +1728,7 @@ Entry.FunBoard.getBlocks = function() {
             class: 'funboardset',
             isNotFor: ['funboard'],
             func: function(sprite, script) {
-                var sq = Entry.hw.sendQueue;
+                var sq = RoCode.hw.sendQueue;
                 var note = script.getStringField('NOTE', script);
                 var octave = script.getStringField('OCTAVE', script);
                 var duration = script.getNumberValue('VALUE', script);
@@ -1741,16 +1741,16 @@ Entry.FunBoard.getBlocks = function() {
                 else if (note == 'G') value = 183;
                 else if (note == 'A') value = 219;
                 else if (note == 'B') value = 255;
-                var port = Entry.FunBoard.PORT_MAP['buzzer'];
-                Entry.hw.sendQueue[port] = value;
+                var port = RoCode.FunBoard.PORT_MAP['buzzer'];
+                RoCode.hw.sendQueue[port] = value;
 
                 return script.callReturn();
             },
             syntax: { js: [], py: [] },
         },
         funboard_buzzer_onoff: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1788,14 +1788,14 @@ Entry.FunBoard.getBlocks = function() {
                         var eff_value = Math.floor(Math.random() * (123 - 1)) + 1;
 
                         var port = 0;
-                        if (onoff == '1') port = Entry.FunBoard.EventTypes.BUZZER_ON;
-                        else port = Entry.FunBoard.EventTypes.BUZZER_OFF;
+                        if (onoff == '1') port = RoCode.FunBoard.EventTypes.BUZZER_ON;
+                        else port = RoCode.FunBoard.EventTypes.BUZZER_OFF;
 
-                        if (!Entry.hw.sendQueue['SET']) {
-                            Entry.hw.sendQueue['SET'] = {};
+                        if (!RoCode.hw.sendQueue['SET']) {
+                            RoCode.hw.sendQueue['SET'] = {};
                         }
-                        Entry.hw.sendQueue['SET'][port] = {
-                            type: Entry.FunBoard.sensorTypes.ETC,
+                        RoCode.hw.sendQueue['SET'][port] = {
+                            type: RoCode.FunBoard.sensorTypes.ETC,
                             data: eff_value,
                             time: new Date().getTime(),
                         };
@@ -1803,9 +1803,9 @@ Entry.FunBoard.getBlocks = function() {
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = Math.max(1, 3 * Entry.FunBoard.Static.DELAY_SECOND);
-                    timeValue = Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = Math.max(1, 3 * RoCode.FunBoard.Static.DELAY_SECOND);
+                    timeValue = RoCode.FunBoard.Static.DELAY_SECOND;
                     timeValue = (60 / fps) * timeValue * 1000;
                     setTimeout(function() {
                         script.timeFlag = 0;
@@ -1816,15 +1816,15 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         funboard_color_led_onoff: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1890,41 +1890,41 @@ Entry.FunBoard.getBlocks = function() {
                             }
 
                             if (portR > 0) {
-                                if (!Entry.hw.sendQueue['SET']) {
-                                    Entry.hw.sendQueue['SET'] = {};
+                                if (!RoCode.hw.sendQueue['SET']) {
+                                    RoCode.hw.sendQueue['SET'] = {};
                                 }
-                                Entry.hw.sendQueue['SET'][Entry.FunBoard.PORT_MAP['led_red']] = {
-                                    type: Entry.FunBoard.sensorTypes.DIGITAL,
+                                RoCode.hw.sendQueue['SET'][RoCode.FunBoard.PORT_MAP['led_red']] = {
+                                    type: RoCode.FunBoard.sensorTypes.DIGITAL,
                                     data: portR,
                                     time: new Date().getTime(),
                                 };
                             }
                             if (portY > 0) {
-                                if (!Entry.hw.sendQueue['SET']) {
-                                    Entry.hw.sendQueue['SET'] = {};
+                                if (!RoCode.hw.sendQueue['SET']) {
+                                    RoCode.hw.sendQueue['SET'] = {};
                                 }
-                                Entry.hw.sendQueue['SET'][Entry.FunBoard.PORT_MAP['led_yellow']] = {
-                                    type: Entry.FunBoard.sensorTypes.DIGITAL,
+                                RoCode.hw.sendQueue['SET'][RoCode.FunBoard.PORT_MAP['led_yellow']] = {
+                                    type: RoCode.FunBoard.sensorTypes.DIGITAL,
                                     data: portY,
                                     time: new Date().getTime(),
                                 };
                             }
                             if (portG > 0) {
-                                if (!Entry.hw.sendQueue['SET']) {
-                                    Entry.hw.sendQueue['SET'] = {};
+                                if (!RoCode.hw.sendQueue['SET']) {
+                                    RoCode.hw.sendQueue['SET'] = {};
                                 }
-                                Entry.hw.sendQueue['SET'][Entry.FunBoard.PORT_MAP['led_green']] = {
-                                    type: Entry.FunBoard.sensorTypes.DIGITAL,
+                                RoCode.hw.sendQueue['SET'][RoCode.FunBoard.PORT_MAP['led_green']] = {
+                                    type: RoCode.FunBoard.sensorTypes.DIGITAL,
                                     data: portG,
                                     time: new Date().getTime(),
                                 };
                             }
                             if (portB > 0) {
-                                if (!Entry.hw.sendQueue['SET']) {
-                                    Entry.hw.sendQueue['SET'] = {};
+                                if (!RoCode.hw.sendQueue['SET']) {
+                                    RoCode.hw.sendQueue['SET'] = {};
                                 }
-                                Entry.hw.sendQueue['SET'][Entry.FunBoard.PORT_MAP['led_blue']] = {
-                                    type: Entry.FunBoard.sensorTypes.DIGITAL,
+                                RoCode.hw.sendQueue['SET'][RoCode.FunBoard.PORT_MAP['led_blue']] = {
+                                    type: RoCode.FunBoard.sensorTypes.DIGITAL,
                                     data: portB,
                                     time: new Date().getTime(),
                                 };
@@ -1948,41 +1948,41 @@ Entry.FunBoard.getBlocks = function() {
                             }
 
                             if (portR < 1) {
-                                if (!Entry.hw.sendQueue['SET']) {
-                                    Entry.hw.sendQueue['SET'] = {};
+                                if (!RoCode.hw.sendQueue['SET']) {
+                                    RoCode.hw.sendQueue['SET'] = {};
                                 }
-                                Entry.hw.sendQueue['SET'][Entry.FunBoard.PORT_MAP['led_red']] = {
-                                    type: Entry.FunBoard.sensorTypes.DIGITAL,
+                                RoCode.hw.sendQueue['SET'][RoCode.FunBoard.PORT_MAP['led_red']] = {
+                                    type: RoCode.FunBoard.sensorTypes.DIGITAL,
                                     data: portR,
                                     time: new Date().getTime(),
                                 };
                             }
                             if (portY < 1) {
-                                if (!Entry.hw.sendQueue['SET']) {
-                                    Entry.hw.sendQueue['SET'] = {};
+                                if (!RoCode.hw.sendQueue['SET']) {
+                                    RoCode.hw.sendQueue['SET'] = {};
                                 }
-                                Entry.hw.sendQueue['SET'][Entry.FunBoard.PORT_MAP['led_yellow']] = {
-                                    type: Entry.FunBoard.sensorTypes.DIGITAL,
+                                RoCode.hw.sendQueue['SET'][RoCode.FunBoard.PORT_MAP['led_yellow']] = {
+                                    type: RoCode.FunBoard.sensorTypes.DIGITAL,
                                     data: portY,
                                     time: new Date().getTime(),
                                 };
                             }
                             if (portG < 1) {
-                                if (!Entry.hw.sendQueue['SET']) {
-                                    Entry.hw.sendQueue['SET'] = {};
+                                if (!RoCode.hw.sendQueue['SET']) {
+                                    RoCode.hw.sendQueue['SET'] = {};
                                 }
-                                Entry.hw.sendQueue['SET'][Entry.FunBoard.PORT_MAP['led_green']] = {
-                                    type: Entry.FunBoard.sensorTypes.DIGITAL,
+                                RoCode.hw.sendQueue['SET'][RoCode.FunBoard.PORT_MAP['led_green']] = {
+                                    type: RoCode.FunBoard.sensorTypes.DIGITAL,
                                     data: portG,
                                     time: new Date().getTime(),
                                 };
                             }
                             if (portB < 1) {
-                                if (!Entry.hw.sendQueue['SET']) {
-                                    Entry.hw.sendQueue['SET'] = {};
+                                if (!RoCode.hw.sendQueue['SET']) {
+                                    RoCode.hw.sendQueue['SET'] = {};
                                 }
-                                Entry.hw.sendQueue['SET'][Entry.FunBoard.PORT_MAP['led_blue']] = {
-                                    type: Entry.FunBoard.sensorTypes.DIGITAL,
+                                RoCode.hw.sendQueue['SET'][RoCode.FunBoard.PORT_MAP['led_blue']] = {
+                                    type: RoCode.FunBoard.sensorTypes.DIGITAL,
                                     data: portB,
                                     time: new Date().getTime(),
                                 };
@@ -1992,8 +1992,8 @@ Entry.FunBoard.getBlocks = function() {
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = RoCode.FunBoard.Static.DELAY_SECOND;
                     timeValue = (60 / fps) * timeValue * 1000;
                     setTimeout(function() {
                         script.timeFlag = 0;
@@ -2004,15 +2004,15 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         funboard_color_led_on_pwm: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2064,9 +2064,9 @@ Entry.FunBoard.getBlocks = function() {
             func: function(sprite, script) {
                 var color_index = script.getNumberValue('VALUE');
                 var li_percent = script.getNumberValue('PERCENT');
-                li_percent = Entry.FunBoard.MinMax(li_percent, 0, 100);
+                li_percent = RoCode.FunBoard.MinMax(li_percent, 0, 100);
                 var pwm_value = Math.round(
-                    Entry.FunBoard.Static.FUNBOARD_LED_ON * (li_percent / 100)
+                    RoCode.FunBoard.Static.FUNBOARD_LED_ON * (li_percent / 100)
                 );
 
                 if (!script.isStart) {
@@ -2077,21 +2077,21 @@ Entry.FunBoard.getBlocks = function() {
                         else if (color_index === 2) portY = pwm_value;
 
                         if (portR > 0) {
-                            if (!Entry.hw.sendQueue['SET']) {
-                                Entry.hw.sendQueue['SET'] = {};
+                            if (!RoCode.hw.sendQueue['SET']) {
+                                RoCode.hw.sendQueue['SET'] = {};
                             }
-                            Entry.hw.sendQueue['SET'][Entry.FunBoard.PORT_MAP['led_red']] = {
-                                type: Entry.FunBoard.sensorTypes.PWM,
+                            RoCode.hw.sendQueue['SET'][RoCode.FunBoard.PORT_MAP['led_red']] = {
+                                type: RoCode.FunBoard.sensorTypes.PWM,
                                 data: portR,
                                 time: new Date().getTime(),
                             };
                         }
                         if (portY > 0) {
-                            if (!Entry.hw.sendQueue['SET']) {
-                                Entry.hw.sendQueue['SET'] = {};
+                            if (!RoCode.hw.sendQueue['SET']) {
+                                RoCode.hw.sendQueue['SET'] = {};
                             }
-                            Entry.hw.sendQueue['SET'][Entry.FunBoard.PORT_MAP['led_yellow']] = {
-                                type: Entry.FunBoard.sensorTypes.PWM,
+                            RoCode.hw.sendQueue['SET'][RoCode.FunBoard.PORT_MAP['led_yellow']] = {
+                                type: RoCode.FunBoard.sensorTypes.PWM,
                                 data: portY,
                                 time: new Date().getTime(),
                             };
@@ -2100,8 +2100,8 @@ Entry.FunBoard.getBlocks = function() {
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = RoCode.FunBoard.Static.DELAY_SECOND;
                     timeValue = (60 / fps) * timeValue * 1000;
                     setTimeout(function() {
                         script.timeFlag = 0;
@@ -2112,15 +2112,15 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         funboard_dotmatrix_intensity: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2163,18 +2163,18 @@ Entry.FunBoard.getBlocks = function() {
             func: function(sprite, script) {
                 var li_percent = script.getNumberValue('PERCENT');
                 //1-based value (setZero와 구별)
-                li_percent = Entry.FunBoard.MinMax(li_percent, 0, 100);
+                li_percent = RoCode.FunBoard.MinMax(li_percent, 0, 100);
                 li_percent = li_percent + 1;
 
                 if (!script.isStart) {
                     {
-                        var port = Entry.FunBoard.EventTypes.MATRIX_INTENSITY;
+                        var port = RoCode.FunBoard.EventTypes.MATRIX_INTENSITY;
 
-                        if (!Entry.hw.sendQueue['SET']) {
-                            Entry.hw.sendQueue['SET'] = {};
+                        if (!RoCode.hw.sendQueue['SET']) {
+                            RoCode.hw.sendQueue['SET'] = {};
                         }
-                        Entry.hw.sendQueue['SET'][port] = {
-                            type: Entry.FunBoard.sensorTypes.ETC,
+                        RoCode.hw.sendQueue['SET'][port] = {
+                            type: RoCode.FunBoard.sensorTypes.ETC,
                             data: li_percent,
                             time: new Date().getTime(),
                         };
@@ -2182,8 +2182,8 @@ Entry.FunBoard.getBlocks = function() {
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = 1 * Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = 1 * RoCode.FunBoard.Static.DELAY_SECOND;
                     timeValue = (60 / fps) * timeValue * 1000;
                     setTimeout(function() {
                         script.timeFlag = 0;
@@ -2194,15 +2194,15 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         funboard_dotmatrix_scroll_option: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2236,17 +2236,17 @@ Entry.FunBoard.getBlocks = function() {
                 if (value.length < 1) return script.callReturn();
 
                 if (!script.isStart) {
-                    var port = Entry.FunBoard.EventTypes.MATRIX_SCROLL_DIR;
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    var port = RoCode.FunBoard.EventTypes.MATRIX_SCROLL_DIR;
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = RoCode.FunBoard.Static.DELAY_SECOND;
                     timeValue = (60 / fps) * timeValue * 1000;
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.FunBoard.sensorTypes.ETC,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.FunBoard.sensorTypes.ETC,
                         data: value,
                         time: new Date().getTime(),
                     };
@@ -2260,15 +2260,15 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         funboard_dotmatrix_scroll_rapid: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2311,17 +2311,17 @@ Entry.FunBoard.getBlocks = function() {
             func: function(sprite, script) {
                 var li_percent = script.getNumberValue('PERCENT');
                 //1-based value로 (setZero와 구별)
-                li_percent = Entry.FunBoard.MinMax(li_percent, 0, 100);
+                li_percent = RoCode.FunBoard.MinMax(li_percent, 0, 100);
                 li_percent = li_percent + 1;
 
                 if (!script.isStart) {
                     {
-                        var port = Entry.FunBoard.EventTypes.MATRIX_SCROLL_RAPID;
-                        if (!Entry.hw.sendQueue['SET']) {
-                            Entry.hw.sendQueue['SET'] = {};
+                        var port = RoCode.FunBoard.EventTypes.MATRIX_SCROLL_RAPID;
+                        if (!RoCode.hw.sendQueue['SET']) {
+                            RoCode.hw.sendQueue['SET'] = {};
                         }
-                        Entry.hw.sendQueue['SET'][port] = {
-                            type: Entry.FunBoard.sensorTypes.ETC,
+                        RoCode.hw.sendQueue['SET'][port] = {
+                            type: RoCode.FunBoard.sensorTypes.ETC,
                             data: li_percent,
                             time: new Date().getTime(),
                         };
@@ -2329,8 +2329,8 @@ Entry.FunBoard.getBlocks = function() {
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = RoCode.FunBoard.Static.DELAY_SECOND;
                     timeValue = (60 / fps) * timeValue * 1000;
                     setTimeout(function() {
                         script.timeFlag = 0;
@@ -2341,15 +2341,15 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         funboard_dotmatrix_onoff: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2383,21 +2383,21 @@ Entry.FunBoard.getBlocks = function() {
                 var eff_value = Math.floor(Math.random() * (123 - 1)) + 1;
 
                 if (!script.isStart) {
-                    var port = Entry.FunBoard.EventTypes.MATRIX_OFF_ALL;
-                    if (onoff == '1') port = Entry.FunBoard.EventTypes.MATRIX_ON_ALL;
+                    var port = RoCode.FunBoard.EventTypes.MATRIX_OFF_ALL;
+                    if (onoff == '1') port = RoCode.FunBoard.EventTypes.MATRIX_ON_ALL;
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = 1 * Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = 1 * RoCode.FunBoard.Static.DELAY_SECOND;
                     timeValue = (60 / fps) * timeValue * 1000;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.FunBoard.sensorTypes.ETC,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.FunBoard.sensorTypes.ETC,
                         data: eff_value,
                         time: new Date().getTime(),
                     };
@@ -2410,15 +2410,15 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         funboard_dotmatrix_char_display: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2457,29 +2457,29 @@ Entry.FunBoard.getBlocks = function() {
                 var char_tot = 1;
 
                 if (!script.isStart) {
-                    var port = Entry.FunBoard.EventTypes.CHAR_OUT;
+                    var port = RoCode.FunBoard.EventTypes.CHAR_OUT;
 
                     var text = [];
                     if (typeof string === 'string') {
                         for (var i = 0; i < char_tot; i++) {
-                            text[i] = Entry.FunBoard.toByte(string[i]);
+                            text[i] = RoCode.FunBoard.toByte(string[i]);
                         }
                     } else {
                         text[0] = string[0];
                     }
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = (char_tot + 0.5) * Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = (char_tot + 0.5) * RoCode.FunBoard.Static.DELAY_SECOND;
                     timeValue = (60 / fps) * timeValue * 1000;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.FunBoard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.FunBoard.sensorTypes.MATRIX,
                         data: {
                             text0: text[0],
                             text1: text[1],
@@ -2510,15 +2510,15 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         funboard_dotmatrix_string_display: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2565,34 +2565,34 @@ Entry.FunBoard.getBlocks = function() {
                 }
                 var char_tot = Math.min(
                     string.length,
-                    Entry.FunBoard.Static.FUNBOARD_MATRIX_STRING_MAX
+                    RoCode.FunBoard.Static.FUNBOARD_MATRIX_STRING_MAX
                 );
 
                 if (!script.isStart) {
-                    var port = Entry.FunBoard.EventTypes.STR_OUT_DEFAULT;
+                    var port = RoCode.FunBoard.EventTypes.STR_OUT_DEFAULT;
 
                     var text = [];
                     if (typeof string === 'string') {
                         for (var i = 0; i < char_tot; i++) {
-                            text[i] = Entry.FunBoard.toByte(string[i]);
+                            text[i] = RoCode.FunBoard.toByte(string[i]);
                         }
                     } else {
                         text[0] = string[0];
                     }
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = char_tot * Entry.FunBoard.Static.DELAY_SECOND;
-                    //scroll//var timeValue = (char_tot*3)*Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = char_tot * RoCode.FunBoard.Static.DELAY_SECOND;
+                    //scroll//var timeValue = (char_tot*3)*RoCode.FunBoard.Static.DELAY_SECOND;
                     timeValue = (60 / fps) * timeValue * 1000;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.FunBoard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.FunBoard.sensorTypes.MATRIX,
                         data: {
                             text0: text[0],
                             text1: text[1],
@@ -2623,15 +2623,15 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         funboard_dotmatrix_string_display_scroll: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2690,32 +2690,32 @@ Entry.FunBoard.getBlocks = function() {
 
                 var char_tot = Math.min(
                     string.length,
-                    Entry.FunBoard.Static.FUNBOARD_MATRIX_STRING_MAX
+                    RoCode.FunBoard.Static.FUNBOARD_MATRIX_STRING_MAX
                 );
 
                 if (!script.isStart) {
-                    var port = Entry.FunBoard.EventTypes.STR_OUT_NO_SCROLL;
-                    if (scroll_opt == '1') port = Entry.FunBoard.EventTypes.STR_OUT_NO_SCROLL;
-                    else if (scroll_opt == '2') port = Entry.FunBoard.EventTypes.STR_OUT_LEFT;
-                    else if (scroll_opt == '3') port = Entry.FunBoard.EventTypes.STR_OUT_UP;
-                    else if (scroll_opt == '4') port = Entry.FunBoard.EventTypes.STR_OUT_RIGHT;
-                    else if (scroll_opt == '5') port = Entry.FunBoard.EventTypes.STR_OUT_DOWN;
+                    var port = RoCode.FunBoard.EventTypes.STR_OUT_NO_SCROLL;
+                    if (scroll_opt == '1') port = RoCode.FunBoard.EventTypes.STR_OUT_NO_SCROLL;
+                    else if (scroll_opt == '2') port = RoCode.FunBoard.EventTypes.STR_OUT_LEFT;
+                    else if (scroll_opt == '3') port = RoCode.FunBoard.EventTypes.STR_OUT_UP;
+                    else if (scroll_opt == '4') port = RoCode.FunBoard.EventTypes.STR_OUT_RIGHT;
+                    else if (scroll_opt == '5') port = RoCode.FunBoard.EventTypes.STR_OUT_DOWN;
 
                     var text = [];
                     if (typeof string === 'string') {
                         for (var i = 0; i < char_tot; i++) {
-                            text[i] = Entry.FunBoard.toByte(string[i]);
+                            text[i] = RoCode.FunBoard.toByte(string[i]);
                         }
                     } else {
                         text[0] = string[0];
                     }
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.FunBoard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.FunBoard.sensorTypes.MATRIX,
                         data: {
                             text0: text[0],
                             text1: text[1],
@@ -2739,8 +2739,8 @@ Entry.FunBoard.getBlocks = function() {
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    //var timeValue = char_tot*Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    //var timeValue = char_tot*RoCode.FunBoard.Static.DELAY_SECOND;
                     var timeValue = char_tot;
                     //var timeValue = Math.ceil(char_tot*0.6);
                     //var timeValue = (char_tot*0.8);
@@ -2754,7 +2754,7 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -2764,8 +2764,8 @@ Entry.FunBoard.getBlocks = function() {
             },
         },
         funboard_dotmatrix_symbol: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2785,8 +2785,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2808,26 +2808,26 @@ Entry.FunBoard.getBlocks = function() {
                 var string = script.getField('VALUE');
                 //1 based value (setZero 구별)
                 var value = parseInt(string);
-                if (value < 1 || value > Entry.FunBoard.Static.MATRIX_REGISTED_SYMBOL_TOTAL) {
+                if (value < 1 || value > RoCode.FunBoard.Static.MATRIX_REGISTED_SYMBOL_TOTAL) {
                     return script.callReturn();
                 }
 
                 if (!script.isStart) {
-                    var port = Entry.FunBoard.EventTypes.MATRIX_SYMBOL_OUT;
+                    var port = RoCode.FunBoard.EventTypes.MATRIX_SYMBOL_OUT;
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.FunBoard.sensorTypes.ETC,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.FunBoard.sensorTypes.ETC,
                         data: value,
                         time: new Date().getTime(),
                     };
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = 1 * Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = 1 * RoCode.FunBoard.Static.DELAY_SECOND;
                     timeValue = (60 / fps) * timeValue * 1000;
                     setTimeout(function() {
                         script.timeFlag = 0;
@@ -2838,15 +2838,15 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         funboard_dotmatrix_num: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2866,8 +2866,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2893,33 +2893,33 @@ Entry.FunBoard.getBlocks = function() {
                 }
                 var char_tot = Math.min(
                     string.length,
-                    Entry.FunBoard.Static.FUNBOARD_MATRIX_STRING_MAX
+                    RoCode.FunBoard.Static.FUNBOARD_MATRIX_STRING_MAX
                 );
 
                 if (!script.isStart) {
-                    var port = Entry.FunBoard.EventTypes.STR_OUT_NO_SCROLL;
+                    var port = RoCode.FunBoard.EventTypes.STR_OUT_NO_SCROLL;
 
                     var text = [];
                     if (typeof string === 'string') {
                         for (var i = 0; i < char_tot; i++) {
-                            text[i] = Entry.FunBoard.toByte(string[i]);
+                            text[i] = RoCode.FunBoard.toByte(string[i]);
                         }
                     } else {
                         text[0] = string[0];
                     }
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = char_tot * Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = char_tot * RoCode.FunBoard.Static.DELAY_SECOND;
                     timeValue = (60 / fps) * timeValue * 1000;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.FunBoard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.FunBoard.sensorTypes.MATRIX,
                         data: {
                             text0: text[0],
                             text1: text[1],
@@ -2950,15 +2950,15 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         funboard_dotmatrix_big_eng: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2994,8 +2994,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: 'A',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3020,33 +3020,33 @@ Entry.FunBoard.getBlocks = function() {
                 }
                 var char_tot = Math.min(
                     string.length,
-                    Entry.FunBoard.Static.FUNBOARD_MATRIX_STRING_MAX
+                    RoCode.FunBoard.Static.FUNBOARD_MATRIX_STRING_MAX
                 );
 
                 if (!script.isStart) {
-                    var port = Entry.FunBoard.EventTypes.STR_OUT_NO_SCROLL;
+                    var port = RoCode.FunBoard.EventTypes.STR_OUT_NO_SCROLL;
 
                     var text = [];
                     if (typeof string === 'string') {
                         for (var i = 0; i < char_tot; i++) {
-                            text[i] = Entry.FunBoard.toByte(string[i]);
+                            text[i] = RoCode.FunBoard.toByte(string[i]);
                         }
                     } else {
                         text[0] = string;
                     }
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = char_tot * Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = char_tot * RoCode.FunBoard.Static.DELAY_SECOND;
                     timeValue = (60 / fps) * timeValue * 1000;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.FunBoard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.FunBoard.sensorTypes.MATRIX,
                         data: {
                             text0: text[0],
                             text1: text[1],
@@ -3077,15 +3077,15 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         funboard_dotmatrix_small_eng: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3121,8 +3121,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: 'a',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3147,33 +3147,33 @@ Entry.FunBoard.getBlocks = function() {
                 }
                 var char_tot = Math.min(
                     string.length,
-                    Entry.FunBoard.Static.FUNBOARD_MATRIX_STRING_MAX
+                    RoCode.FunBoard.Static.FUNBOARD_MATRIX_STRING_MAX
                 );
 
                 if (!script.isStart) {
-                    var port = Entry.FunBoard.EventTypes.STR_OUT_NO_SCROLL;
+                    var port = RoCode.FunBoard.EventTypes.STR_OUT_NO_SCROLL;
 
                     var text = [];
                     if (typeof string === 'string') {
                         for (var i = 0; i < char_tot; i++) {
-                            text[i] = Entry.FunBoard.toByte(string[i]);
+                            text[i] = RoCode.FunBoard.toByte(string[i]);
                         }
                     } else {
                         text[0] = string[0];
                     }
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = char_tot * Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = char_tot * RoCode.FunBoard.Static.DELAY_SECOND;
                     timeValue = (60 / fps) * timeValue * 1000;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.FunBoard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.FunBoard.sensorTypes.MATRIX,
                         data: {
                             text0: text[0],
                             text1: text[1],
@@ -3204,15 +3204,15 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         funboard_dotmatrix_extra_char: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3257,8 +3257,8 @@ Entry.FunBoard.getBlocks = function() {
                     ],
                     value: '!',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -3283,32 +3283,32 @@ Entry.FunBoard.getBlocks = function() {
                 }
                 var char_tot = Math.min(
                     string.length,
-                    Entry.FunBoard.Static.FUNBOARD_MATRIX_STRING_MAX
+                    RoCode.FunBoard.Static.FUNBOARD_MATRIX_STRING_MAX
                 );
 
                 if (!script.isStart) {
-                    var port = Entry.FunBoard.EventTypes.STR_OUT_NO_SCROLL;
+                    var port = RoCode.FunBoard.EventTypes.STR_OUT_NO_SCROLL;
 
                     var text = [];
                     if (typeof string === 'string') {
                         for (var i = 0; i < char_tot; i++) {
-                            text[i] = Entry.FunBoard.toByte(string[i]);
+                            text[i] = RoCode.FunBoard.toByte(string[i]);
                         }
                     } else {
                         text[0] = string[0];
                     }
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = char_tot * Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = char_tot * RoCode.FunBoard.Static.DELAY_SECOND;
                     timeValue = (60 / fps) * timeValue * 1000;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.FunBoard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.FunBoard.sensorTypes.MATRIX,
                         data: {
                             text0: text[0],
                             text1: text[1],
@@ -3339,15 +3339,15 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         funboard_dotmatrix_1row: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3401,31 +3401,31 @@ Entry.FunBoard.getBlocks = function() {
                 }
 
                 if (!script.isStart) {
-                    var port = Entry.FunBoard.EventTypes.SET_ROW1;
+                    var port = RoCode.FunBoard.EventTypes.SET_ROW1;
                     var text = [];
                     text[0] = str;
-                    text[1] = Entry.FunBoard.toByte(str3[0]);
-                    text[2] = Entry.FunBoard.toByte(str3[1]);
-                    text[3] = Entry.FunBoard.toByte(str3[2]);
-                    text[4] = Entry.FunBoard.toByte(str3[3]);
-                    text[5] = Entry.FunBoard.toByte(str3[4]);
-                    text[6] = Entry.FunBoard.toByte(str3[5]);
-                    text[7] = Entry.FunBoard.toByte(str3[6]);
-                    text[8] = Entry.FunBoard.toByte(str3[7]);
+                    text[1] = RoCode.FunBoard.toByte(str3[0]);
+                    text[2] = RoCode.FunBoard.toByte(str3[1]);
+                    text[3] = RoCode.FunBoard.toByte(str3[2]);
+                    text[4] = RoCode.FunBoard.toByte(str3[3]);
+                    text[5] = RoCode.FunBoard.toByte(str3[4]);
+                    text[6] = RoCode.FunBoard.toByte(str3[5]);
+                    text[7] = RoCode.FunBoard.toByte(str3[6]);
+                    text[8] = RoCode.FunBoard.toByte(str3[7]);
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = RoCode.FunBoard.Static.DELAY_SECOND;
                     //timeValue = 60/fps*timeValue*1000;
                     timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.FunBoard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.FunBoard.sensorTypes.MATRIX,
                         data: {
                             text0: text[0],
                             text1: text[1],
@@ -3457,15 +3457,15 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         funboard_dotmatrix_1column: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3518,33 +3518,33 @@ Entry.FunBoard.getBlocks = function() {
                     else str3 = str3.concat('1');
                 }
 
-                var port = Entry.FunBoard.EventTypes.SET_COL1;
+                var port = RoCode.FunBoard.EventTypes.SET_COL1;
 
                 if (!script.isStart) {
                     var text = [];
                     text[0] = str;
-                    text[1] = Entry.FunBoard.toByte(str3[0]);
-                    text[2] = Entry.FunBoard.toByte(str3[1]);
-                    text[3] = Entry.FunBoard.toByte(str3[2]);
-                    text[4] = Entry.FunBoard.toByte(str3[3]);
-                    text[5] = Entry.FunBoard.toByte(str3[4]);
-                    text[6] = Entry.FunBoard.toByte(str3[5]);
-                    text[7] = Entry.FunBoard.toByte(str3[6]);
-                    text[8] = Entry.FunBoard.toByte(str3[7]);
+                    text[1] = RoCode.FunBoard.toByte(str3[0]);
+                    text[2] = RoCode.FunBoard.toByte(str3[1]);
+                    text[3] = RoCode.FunBoard.toByte(str3[2]);
+                    text[4] = RoCode.FunBoard.toByte(str3[3]);
+                    text[5] = RoCode.FunBoard.toByte(str3[4]);
+                    text[6] = RoCode.FunBoard.toByte(str3[5]);
+                    text[7] = RoCode.FunBoard.toByte(str3[6]);
+                    text[8] = RoCode.FunBoard.toByte(str3[7]);
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = RoCode.FunBoard.Static.DELAY_SECOND;
                     //timeValue = 60/fps*timeValue*1000;
                     timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.FunBoard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.FunBoard.sensorTypes.MATRIX,
                         data: {
                             text0: text[0],
                             text1: text[1],
@@ -3576,15 +3576,15 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: [] },
         },
         funboard_dotmatrix_1row_1column: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3646,34 +3646,34 @@ Entry.FunBoard.getBlocks = function() {
                     else str3 = str3.concat('1');
                 }
 
-                var port = Entry.FunBoard.EventTypes.SET_ROW1;
-                if (how == '2') port = Entry.FunBoard.EventTypes.SET_COL1;
+                var port = RoCode.FunBoard.EventTypes.SET_ROW1;
+                if (how == '2') port = RoCode.FunBoard.EventTypes.SET_COL1;
 
                 if (!script.isStart) {
                     var text = [];
                     text[0] = str;
-                    text[1] = Entry.FunBoard.toByte(str3[0]);
-                    text[2] = Entry.FunBoard.toByte(str3[1]);
-                    text[3] = Entry.FunBoard.toByte(str3[2]);
-                    text[4] = Entry.FunBoard.toByte(str3[3]);
-                    text[5] = Entry.FunBoard.toByte(str3[4]);
-                    text[6] = Entry.FunBoard.toByte(str3[5]);
-                    text[7] = Entry.FunBoard.toByte(str3[6]);
-                    text[8] = Entry.FunBoard.toByte(str3[7]);
+                    text[1] = RoCode.FunBoard.toByte(str3[0]);
+                    text[2] = RoCode.FunBoard.toByte(str3[1]);
+                    text[3] = RoCode.FunBoard.toByte(str3[2]);
+                    text[4] = RoCode.FunBoard.toByte(str3[3]);
+                    text[5] = RoCode.FunBoard.toByte(str3[4]);
+                    text[6] = RoCode.FunBoard.toByte(str3[5]);
+                    text[7] = RoCode.FunBoard.toByte(str3[6]);
+                    text[8] = RoCode.FunBoard.toByte(str3[7]);
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = RoCode.FunBoard.Static.DELAY_SECOND;
                     //timeValue = 60/fps*timeValue*1000;
                     timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.FunBoard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.FunBoard.sensorTypes.MATRIX,
                         data: {
                             text0: text[0],
                             text1: text[1],
@@ -3705,7 +3705,7 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -3715,8 +3715,8 @@ Entry.FunBoard.getBlocks = function() {
             },
         },
         funboard_dotmatrix_set: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -3766,7 +3766,7 @@ Entry.FunBoard.getBlocks = function() {
                 var str_col = script.getNumberValue('COL');
                 var str_onoff = script.getValue('ONOFF');
 
-                var port = Entry.FunBoard.EventTypes.SET_ROW_COL;
+                var port = RoCode.FunBoard.EventTypes.SET_ROW_COL;
 
                 if (!script.isStart) {
                     var text = [];
@@ -3774,19 +3774,19 @@ Entry.FunBoard.getBlocks = function() {
                     text[1] = str_col;
                     text[2] = str_onoff;
 
-                    if (!Entry.hw.sendQueue['SET']) {
-                        Entry.hw.sendQueue['SET'] = {};
+                    if (!RoCode.hw.sendQueue['SET']) {
+                        RoCode.hw.sendQueue['SET'] = {};
                     }
 
                     script.isStart = true;
                     script.timeFlag = 1;
-                    var fps = Entry.FPS || 60;
-                    var timeValue = Entry.FunBoard.Static.DELAY_SECOND;
+                    var fps = RoCode.FPS || 60;
+                    var timeValue = RoCode.FunBoard.Static.DELAY_SECOND;
                     //timeValue = 60/fps*timeValue*1000;
                     timeValue = (60 / fps) * 50;
 
-                    Entry.hw.sendQueue['SET'][port] = {
-                        type: Entry.FunBoard.sensorTypes.MATRIX,
+                    RoCode.hw.sendQueue['SET'][port] = {
+                        type: RoCode.FunBoard.sensorTypes.MATRIX,
                         data: {
                             text0: text[0],
                             text1: text[1],
@@ -3818,7 +3818,7 @@ Entry.FunBoard.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     return script.callReturn();
                 }
             },
@@ -3828,4 +3828,4 @@ Entry.FunBoard.getBlocks = function() {
     };
 };
 
-module.exports = Entry.FunBoard;
+module.exports = RoCode.FunBoard;

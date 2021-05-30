@@ -22,7 +22,7 @@ const COMMAND_TYPE = {
     RESET:0xFF
 };
 
-Entry.Kamibot = {
+RoCode.Kamibot = {
     id: '42.1',
     name: 'kamibot',
     url: 'http://www.kamibot.com/',
@@ -37,18 +37,18 @@ Entry.Kamibot = {
         if (key.length === 1) {
             key += ((Math.random() * 16) | 0).toString(16);
         }
-        return Entry.generateHash() + key;
+        return RoCode.generateHash() + key;
     },
 
     /**
      * 정지버튼을 누르면 실행
      */
     setZero: function() {
-        Entry.hw.update(); // 해당 데이터를 하드웨어에 전달한다.
+        RoCode.hw.update(); // 해당 데이터를 하드웨어에 전달한다.
     },
 };
 
-Entry.Kamibot.setLanguage = function() {
+RoCode.Kamibot.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -117,8 +117,8 @@ Entry.Kamibot.setLanguage = function() {
     };
 };
 
-Entry.Kamibot.blockMenuBlocks = [
-    
+RoCode.Kamibot.blockMenuBlocks = [
+
     'kamibot_move_forward',
     'kamibot_turn_left',
     'kamibot_turn_right',
@@ -136,11 +136,11 @@ Entry.Kamibot.blockMenuBlocks = [
     'kamibot_infrared',
 ];
 
-Entry.Kamibot.getBlocks = function() {
+RoCode.Kamibot.getBlocks = function() {
     return {
         kamibot_move_forward: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -172,13 +172,13 @@ Entry.Kamibot.getBlocks = function() {
             class: 'kamibot_mapboard',
             isNotFor: ['kamibot'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
                 const value = parseInt( script.getValue('VALUE'));
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Kamibot.getHashKey();
+                    const msgId = RoCode.Kamibot.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -191,8 +191,8 @@ Entry.Kamibot.getBlocks = function() {
                     };
                     sq.msg = msg;
                     return script;
-                } 
-                
+                }
+
                 if ((pd.msg_id) && (pd.msg_id.indexOf(script.msg_id) >= 0)) {
                     delete script.is_started;
                     delete script.msg_id;
@@ -203,8 +203,8 @@ Entry.Kamibot.getBlocks = function() {
             },
         },
         kamibot_turn_left: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -226,12 +226,12 @@ Entry.Kamibot.getBlocks = function() {
             class: 'kamibot_mapboard',
             isNotFor: ['kamibot'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Kamibot.getHashKey();
+                    const msgId = RoCode.Kamibot.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -243,8 +243,8 @@ Entry.Kamibot.getBlocks = function() {
                     };
                     sq.msg = msg;
                     return script;
-                } 
-                
+                }
+
                 if ((pd.msg_id) && (pd.msg_id.indexOf(script.msg_id) >= 0)) {
                     delete script.is_started;
                     delete script.msg_id;
@@ -255,8 +255,8 @@ Entry.Kamibot.getBlocks = function() {
             },
         },
         kamibot_turn_right: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -278,13 +278,13 @@ Entry.Kamibot.getBlocks = function() {
             class: 'kamibot_mapboard',
             isNotFor: ['kamibot'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
 
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Kamibot.getHashKey();
+                    const msgId = RoCode.Kamibot.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -296,8 +296,8 @@ Entry.Kamibot.getBlocks = function() {
                     };
                     sq.msg = msg;
                     return script;
-                } 
-                
+                }
+
                 if ((pd.msg_id) && (pd.msg_id.indexOf(script.msg_id) >= 0)) {
                     delete script.is_started;
                     delete script.msg_id;
@@ -308,8 +308,8 @@ Entry.Kamibot.getBlocks = function() {
             },
         },
         kamibot_turn_back: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -331,13 +331,13 @@ Entry.Kamibot.getBlocks = function() {
             class: 'kamibot_mapboard',
             isNotFor: ['kamibot'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
 
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Kamibot.getHashKey();
+                    const msgId = RoCode.Kamibot.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -349,8 +349,8 @@ Entry.Kamibot.getBlocks = function() {
                     };
                     sq.msg = msg;
                     return script;
-                } 
-                
+                }
+
                 if ((pd.msg_id) && (pd.msg_id.indexOf(script.msg_id) >= 0)) {
                     delete script.is_started;
                     delete script.msg_id;
@@ -361,8 +361,8 @@ Entry.Kamibot.getBlocks = function() {
             },
         },
         kamibot_forward_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -394,14 +394,14 @@ Entry.Kamibot.getBlocks = function() {
             class: 'kamibot_control',
             isNotFor: ['kamibot'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
 
                 const speed = script.getValue('SPEED');
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Kamibot.getHashKey();
+                    const msgId = RoCode.Kamibot.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -415,8 +415,8 @@ Entry.Kamibot.getBlocks = function() {
                     };
                     sq.msg = msg;
                     return script;
-                } 
-                
+                }
+
                 if ((pd.msg_id) && (pd.msg_id.indexOf(script.msg_id) >= 0)) {
                     delete script.is_started;
                     delete script.msg_id;
@@ -427,8 +427,8 @@ Entry.Kamibot.getBlocks = function() {
             },
         },
         kamibot_left_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -460,14 +460,14 @@ Entry.Kamibot.getBlocks = function() {
             class: 'kamibot_control',
             isNotFor: ['kamibot'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
 
                 const speed = script.getValue('SPEED');
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Kamibot.getHashKey();
+                    const msgId = RoCode.Kamibot.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -480,8 +480,8 @@ Entry.Kamibot.getBlocks = function() {
                     };
                     sq.msg = msg;
                     return script;
-                } 
-                
+                }
+
                 if ((pd.msg_id) && (pd.msg_id.indexOf(script.msg_id) >= 0)) {
                     delete script.is_started;
                     delete script.msg_id;
@@ -492,8 +492,8 @@ Entry.Kamibot.getBlocks = function() {
             },
         },
         kamibot_right_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -525,12 +525,12 @@ Entry.Kamibot.getBlocks = function() {
             class: 'kamibot_control',
             isNotFor: ['kamibot'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
                 const speed = script.getValue('SPEED');
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Kamibot.getHashKey();
+                    const msgId = RoCode.Kamibot.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -543,8 +543,8 @@ Entry.Kamibot.getBlocks = function() {
                     };
                     sq.msg = msg;
                     return script;
-                } 
-                
+                }
+
                 if ((pd.msg_id) && (pd.msg_id.indexOf(script.msg_id) >= 0)) {
                     delete script.is_started;
                     delete script.msg_id;
@@ -555,8 +555,8 @@ Entry.Kamibot.getBlocks = function() {
             },
         },
         kamibot_backward_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -588,14 +588,14 @@ Entry.Kamibot.getBlocks = function() {
             class: 'kamibot_control',
             isNotFor: ['kamibot'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
 
                 const speed = script.getValue('SPEED');
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Kamibot.getHashKey();
+                    const msgId = RoCode.Kamibot.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -608,8 +608,8 @@ Entry.Kamibot.getBlocks = function() {
                     };
                     sq.msg = msg;
                     return script;
-                } 
-                
+                }
+
                 if ((pd.msg_id) && (pd.msg_id.indexOf(script.msg_id) >= 0)) {
                     delete script.is_started;
                     delete script.msg_id;
@@ -621,8 +621,8 @@ Entry.Kamibot.getBlocks = function() {
         },
         // '----------------------------------------------------------------------------'
         kamibot_forward_lr_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -664,15 +664,15 @@ Entry.Kamibot.getBlocks = function() {
             class: 'kamibot_control',
             isNotFor: ['kamibot'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
 
                 const lspeed = script.getValue('LSPEED');
                 const rspeed = script.getValue('RSPEED');
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Kamibot.getHashKey();
+                    const msgId = RoCode.Kamibot.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -686,8 +686,8 @@ Entry.Kamibot.getBlocks = function() {
                     };
                     sq.msg = msg;
                     return script;
-                } 
-                
+                }
+
                 if ((pd.msg_id) && (pd.msg_id.indexOf(script.msg_id) >= 0)) {
                     delete script.is_started;
                     delete script.msg_id;
@@ -698,8 +698,8 @@ Entry.Kamibot.getBlocks = function() {
             },
         },
         kamibot_backward_lr_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -741,15 +741,15 @@ Entry.Kamibot.getBlocks = function() {
             class: 'kamibot_control',
             isNotFor: ['kamibot'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
 
                 const lspeed = script.getValue('LSPEED');
                 const rspeed = script.getValue('RSPEED');
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Kamibot.getHashKey();
+                    const msgId = RoCode.Kamibot.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -763,8 +763,8 @@ Entry.Kamibot.getBlocks = function() {
                     };
                     sq.msg = msg;
                     return script;
-                } 
-                
+                }
+
                 if ((pd.msg_id) && (pd.msg_id.indexOf(script.msg_id) >= 0)) {
                     delete script.is_started;
                     delete script.msg_id;
@@ -775,8 +775,8 @@ Entry.Kamibot.getBlocks = function() {
             },
         },
         kamibot_stop: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -798,12 +798,12 @@ Entry.Kamibot.getBlocks = function() {
             class: 'kamibot_control',
             isNotFor: ['kamibot'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Kamibot.getHashKey();
+                    const msgId = RoCode.Kamibot.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -815,8 +815,8 @@ Entry.Kamibot.getBlocks = function() {
                     };
                     sq.msg = msg;
                     return script;
-                } 
-                
+                }
+
                 if ((pd.msg_id) && (pd.msg_id.indexOf(script.msg_id) >= 0)) {
                     delete script.is_started;
                     delete script.msg_id;
@@ -827,8 +827,8 @@ Entry.Kamibot.getBlocks = function() {
             },
         },
         kamibot_color: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -845,8 +845,8 @@ Entry.Kamibot.getBlocks = function() {
                     ],
                     value: 'green',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -867,14 +867,14 @@ Entry.Kamibot.getBlocks = function() {
             class: 'kamibot_sensor',
             isNotFor: ['kamibot'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
 
                 const color = script.getField('COLOR');
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Kamibot.getHashKey();
+                    const msgId = RoCode.Kamibot.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -887,8 +887,8 @@ Entry.Kamibot.getBlocks = function() {
                     };
                     sq.msg = msg;
                     return script;
-                } 
-                
+                }
+
                 if ((pd.msg_id) && (pd.msg_id.indexOf(script.msg_id) >= 0)) {
                     delete script.is_started;
                     delete script.msg_id;
@@ -900,8 +900,8 @@ Entry.Kamibot.getBlocks = function() {
             syntax: undefined,
         },
         kamibot_servor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -924,8 +924,8 @@ Entry.Kamibot.getBlocks = function() {
                     ],
                     value: '90',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -947,14 +947,14 @@ Entry.Kamibot.getBlocks = function() {
             class: 'kamibot_sensor',
             isNotFor: ['kamibot'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
 
                 const angle = parseInt(script.getField('VALUE'), 10);
 
                 if (!script.is_started) {
                     script.is_started = true;
-                    const msgId = Entry.Kamibot.getHashKey();
+                    const msgId = RoCode.Kamibot.getHashKey();
                     script.msg_id = msgId;
                     sq.msg_id = script.msg_id;
                     const msg = {
@@ -967,8 +967,8 @@ Entry.Kamibot.getBlocks = function() {
                     };
                     sq.msg = msg;
                     return script;
-                } 
-                
+                }
+
                 if ((pd.msg_id) && (pd.msg_id.indexOf(script.msg_id) >= 0)) {
                     delete script.is_started;
                     delete script.msg_id;
@@ -980,8 +980,8 @@ Entry.Kamibot.getBlocks = function() {
         },
         // '-------------------------------------------------------------------------------------'
         kamibot_ultrasonic: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -1003,8 +1003,8 @@ Entry.Kamibot.getBlocks = function() {
             class: 'kamibot_sensor',
             isNotFor: ['kamibot'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
                 let retVal = 0;
                 if (pd.sensorData) {
                     retVal = pd.sensorData.ultra;
@@ -1013,8 +1013,8 @@ Entry.Kamibot.getBlocks = function() {
             },
         },
         kamibot_infrared: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -1029,8 +1029,8 @@ Entry.Kamibot.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1052,10 +1052,10 @@ Entry.Kamibot.getBlocks = function() {
             class: 'kamibot_sensor',
             isNotFor: ['kamibot'],
             func: function (sprite, script) {
-                const sq = Entry.hw.sendQueue;
-                const pd = Entry.hw.portData;
+                const sq = RoCode.hw.sendQueue;
+                const pd = RoCode.hw.portData;
                 const no = parseInt(script.getField('VALUE'), 10);
-                
+
                 let retVal = 0;
                 if (pd.sensorData) {
                     if (no === 1) {
@@ -1076,4 +1076,4 @@ Entry.Kamibot.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Kamibot;
+module.exports = RoCode.Kamibot;

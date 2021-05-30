@@ -13,9 +13,9 @@ Test.randomNumber = function() {
 };
 
 Test.parsePython = function(textCode) {
-    textCode = "# object code\n\nimport Entry\n\n" + textCode;
-    var parser = new Entry.Parser();
-    parser.setParser(Entry.Vim.WORKSPACE_MODE, Entry.Vim.PARSER_TYPE_PY_TO_BLOCK);
+    textCode = "# object code\n\nimport RoCode\n\n" + textCode;
+    var parser = new RoCode.Parser();
+    parser.setParser(RoCode.Vim.WORKSPACE_MODE, RoCode.Vim.PARSER_TYPE_PY_TO_BLOCK);
 
     var blockOutput = parser.parse(textCode);
 

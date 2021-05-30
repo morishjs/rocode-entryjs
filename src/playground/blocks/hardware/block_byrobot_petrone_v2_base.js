@@ -17,7 +17,7 @@
  *  장치 기본 정의
  ***************************************************************************************/
 
-Entry.byrobot_petrone_v2_base =
+RoCode.byrobot_petrone_v2_base =
 {
     /***************************************************************************************
      *  시간 지연 함수
@@ -33,7 +33,7 @@ Entry.byrobot_petrone_v2_base =
             script.isStart = true;
             script.timeFlag = 1;
 
-            const fps = Entry.FPS || 60;
+            const fps = RoCode.FPS || 60;
             const timeValue = (60 / fps) * _ms;
 
             setTimeout(() => {
@@ -50,7 +50,7 @@ Entry.byrobot_petrone_v2_base =
         {
             delete script.timeFlag;
             delete script.isStart;
-            Entry.engine.isContinue = false;
+            RoCode.engine.isContinue = false;
             return 'Finish';
         }
     },
@@ -62,11 +62,11 @@ Entry.byrobot_petrone_v2_base =
 
     transferBufferClear()
     {
-        Entry.hw.setDigitalPortValue('buffer_clear', 0);
+        RoCode.hw.setDigitalPortValue('buffer_clear', 0);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['buffer_clear'];
+        delete RoCode.hw.sendQueue['buffer_clear'];
     },
 
 
@@ -77,7 +77,7 @@ Entry.byrobot_petrone_v2_base =
 
 
     /***************************************************************************************
-     *  데이터 전송 함수 (Entry -> Hardware)
+     *  데이터 전송 함수 (RoCode -> Hardware)
      ***************************************************************************************/
 
     // 데이터 전송
@@ -89,15 +89,15 @@ Entry.byrobot_petrone_v2_base =
         brightness  = this.fit(0, brightness, 255);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', target);
-        Entry.hw.setDigitalPortValue('light_manual_flags', flags);
-        Entry.hw.setDigitalPortValue('light_manual_brightness', brightness);
+        RoCode.hw.setDigitalPortValue('target', target);
+        RoCode.hw.setDigitalPortValue('light_manual_flags', flags);
+        RoCode.hw.setDigitalPortValue('light_manual_brightness', brightness);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['light_manual_flags'];
-        delete Entry.hw.sendQueue['light_manual_brightness'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['light_manual_flags'];
+        delete RoCode.hw.sendQueue['light_manual_brightness'];
     },
 
 
@@ -112,15 +112,15 @@ Entry.byrobot_petrone_v2_base =
         interval = Math.min(interval, 65535);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', target);
-        Entry.hw.setDigitalPortValue('light_mode_mode', mode);
-        Entry.hw.setDigitalPortValue('light_mode_interval', interval);
+        RoCode.hw.setDigitalPortValue('target', target);
+        RoCode.hw.setDigitalPortValue('light_mode_mode', mode);
+        RoCode.hw.setDigitalPortValue('light_mode_interval', interval);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['light_mode_mode'];
-        delete Entry.hw.sendQueue['light_mode_interval'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['light_mode_mode'];
+        delete RoCode.hw.sendQueue['light_mode_interval'];
     },
 
 
@@ -135,34 +135,34 @@ Entry.byrobot_petrone_v2_base =
         blue        = this.fit(0, blue,     255);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target',              target);
-        Entry.hw.setDigitalPortValue('light_mode_mode',     mode);
-        Entry.hw.setDigitalPortValue('light_mode_interval', interval);
-        Entry.hw.setDigitalPortValue('light_color_r',       red);
-        Entry.hw.setDigitalPortValue('light_color_g',       green);
-        Entry.hw.setDigitalPortValue('light_color_b',       blue);
+        RoCode.hw.setDigitalPortValue('target',              target);
+        RoCode.hw.setDigitalPortValue('light_mode_mode',     mode);
+        RoCode.hw.setDigitalPortValue('light_mode_interval', interval);
+        RoCode.hw.setDigitalPortValue('light_color_r',       red);
+        RoCode.hw.setDigitalPortValue('light_color_g',       green);
+        RoCode.hw.setDigitalPortValue('light_color_b',       blue);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['light_mode_mode'];
-        delete Entry.hw.sendQueue['light_mode_interval'];
-        delete Entry.hw.sendQueue['light_color_r'];
-        delete Entry.hw.sendQueue['light_color_g'];
-        delete Entry.hw.sendQueue['light_color_b'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['light_mode_mode'];
+        delete RoCode.hw.sendQueue['light_mode_interval'];
+        delete RoCode.hw.sendQueue['light_color_r'];
+        delete RoCode.hw.sendQueue['light_color_g'];
+        delete RoCode.hw.sendQueue['light_color_b'];
     },
 
 
     transferDisplayClearAll(target, pixel)
     {
         // 전송
-        Entry.hw.setDigitalPortValue('target', target);
-        Entry.hw.setDigitalPortValue('display_clearall_pixel', pixel);
-    
-        Entry.hw.update();
-    
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['display_clearall_pixel'];
+        RoCode.hw.setDigitalPortValue('target', target);
+        RoCode.hw.setDigitalPortValue('display_clearall_pixel', pixel);
+
+        RoCode.hw.update();
+
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['display_clearall_pixel'];
     },
 
 
@@ -176,21 +176,21 @@ Entry.byrobot_petrone_v2_base =
         height = this.fit(0, height, 64);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', target);
-        Entry.hw.setDigitalPortValue('display_clear_x', x);
-        Entry.hw.setDigitalPortValue('display_clear_y', y);
-        Entry.hw.setDigitalPortValue('display_clear_width', width);
-        Entry.hw.setDigitalPortValue('display_clear_height', height);
-        Entry.hw.setDigitalPortValue('display_clear_pixel', pixel);
+        RoCode.hw.setDigitalPortValue('target', target);
+        RoCode.hw.setDigitalPortValue('display_clear_x', x);
+        RoCode.hw.setDigitalPortValue('display_clear_y', y);
+        RoCode.hw.setDigitalPortValue('display_clear_width', width);
+        RoCode.hw.setDigitalPortValue('display_clear_height', height);
+        RoCode.hw.setDigitalPortValue('display_clear_pixel', pixel);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['display_clear_x'];
-        delete Entry.hw.sendQueue['display_clear_y'];
-        delete Entry.hw.sendQueue['display_clear_width'];
-        delete Entry.hw.sendQueue['display_clear_height'];
-        delete Entry.hw.sendQueue['display_clear_pixel'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['display_clear_x'];
+        delete RoCode.hw.sendQueue['display_clear_y'];
+        delete RoCode.hw.sendQueue['display_clear_width'];
+        delete RoCode.hw.sendQueue['display_clear_height'];
+        delete RoCode.hw.sendQueue['display_clear_pixel'];
     },
 
 
@@ -203,19 +203,19 @@ Entry.byrobot_petrone_v2_base =
         height = this.fit(0, height, 64);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', target);
-        Entry.hw.setDigitalPortValue('display_invert_x', x);
-        Entry.hw.setDigitalPortValue('display_invert_y', y);
-        Entry.hw.setDigitalPortValue('display_invert_width', width);
-        Entry.hw.setDigitalPortValue('display_invert_height', height);
+        RoCode.hw.setDigitalPortValue('target', target);
+        RoCode.hw.setDigitalPortValue('display_invert_x', x);
+        RoCode.hw.setDigitalPortValue('display_invert_y', y);
+        RoCode.hw.setDigitalPortValue('display_invert_width', width);
+        RoCode.hw.setDigitalPortValue('display_invert_height', height);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['display_invert_x'];
-        delete Entry.hw.sendQueue['display_invert_y'];
-        delete Entry.hw.sendQueue['display_invert_width'];
-        delete Entry.hw.sendQueue['display_invert_height'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['display_invert_x'];
+        delete RoCode.hw.sendQueue['display_invert_y'];
+        delete RoCode.hw.sendQueue['display_invert_width'];
+        delete RoCode.hw.sendQueue['display_invert_height'];
     },
 
 
@@ -226,17 +226,17 @@ Entry.byrobot_petrone_v2_base =
         y = this.fit(0, y, 64);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', target);
-        Entry.hw.setDigitalPortValue('display_draw_point_x', x);
-        Entry.hw.setDigitalPortValue('display_draw_point_y', y);
-        Entry.hw.setDigitalPortValue('display_draw_point_pixel', pixel);
+        RoCode.hw.setDigitalPortValue('target', target);
+        RoCode.hw.setDigitalPortValue('display_draw_point_x', x);
+        RoCode.hw.setDigitalPortValue('display_draw_point_y', y);
+        RoCode.hw.setDigitalPortValue('display_draw_point_pixel', pixel);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['display_draw_point_x'];
-        delete Entry.hw.sendQueue['display_draw_point_y'];
-        delete Entry.hw.sendQueue['display_draw_point_pixel'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['display_draw_point_x'];
+        delete RoCode.hw.sendQueue['display_draw_point_y'];
+        delete RoCode.hw.sendQueue['display_draw_point_pixel'];
     },
 
 
@@ -249,23 +249,23 @@ Entry.byrobot_petrone_v2_base =
         y2 = this.fit(0, y2, 64);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', target);
-        Entry.hw.setDigitalPortValue('display_draw_line_x1', x1);
-        Entry.hw.setDigitalPortValue('display_draw_line_y1', y1);
-        Entry.hw.setDigitalPortValue('display_draw_line_x2', x2);
-        Entry.hw.setDigitalPortValue('display_draw_line_y2', y2);
-        Entry.hw.setDigitalPortValue('display_draw_line_pixel', pixel);
-        Entry.hw.setDigitalPortValue('display_draw_line_line', line);
+        RoCode.hw.setDigitalPortValue('target', target);
+        RoCode.hw.setDigitalPortValue('display_draw_line_x1', x1);
+        RoCode.hw.setDigitalPortValue('display_draw_line_y1', y1);
+        RoCode.hw.setDigitalPortValue('display_draw_line_x2', x2);
+        RoCode.hw.setDigitalPortValue('display_draw_line_y2', y2);
+        RoCode.hw.setDigitalPortValue('display_draw_line_pixel', pixel);
+        RoCode.hw.setDigitalPortValue('display_draw_line_line', line);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['display_draw_line_x1'];
-        delete Entry.hw.sendQueue['display_draw_line_y1'];
-        delete Entry.hw.sendQueue['display_draw_line_x2'];
-        delete Entry.hw.sendQueue['display_draw_line_y2'];
-        delete Entry.hw.sendQueue['display_draw_line_pixel'];
-        delete Entry.hw.sendQueue['display_draw_line_line'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['display_draw_line_x1'];
+        delete RoCode.hw.sendQueue['display_draw_line_y1'];
+        delete RoCode.hw.sendQueue['display_draw_line_x2'];
+        delete RoCode.hw.sendQueue['display_draw_line_y2'];
+        delete RoCode.hw.sendQueue['display_draw_line_pixel'];
+        delete RoCode.hw.sendQueue['display_draw_line_line'];
     },
 
 
@@ -278,25 +278,25 @@ Entry.byrobot_petrone_v2_base =
         height = this.fit(0, height, 64);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', target);
-        Entry.hw.setDigitalPortValue('display_draw_rect_x', x);
-        Entry.hw.setDigitalPortValue('display_draw_rect_y', y);
-        Entry.hw.setDigitalPortValue('display_draw_rect_width', width);
-        Entry.hw.setDigitalPortValue('display_draw_rect_height', height);
-        Entry.hw.setDigitalPortValue('display_draw_rect_pixel', pixel);
-        Entry.hw.setDigitalPortValue('display_draw_rect_flagfill', flagFill);
-        Entry.hw.setDigitalPortValue('display_draw_rect_line', line);
+        RoCode.hw.setDigitalPortValue('target', target);
+        RoCode.hw.setDigitalPortValue('display_draw_rect_x', x);
+        RoCode.hw.setDigitalPortValue('display_draw_rect_y', y);
+        RoCode.hw.setDigitalPortValue('display_draw_rect_width', width);
+        RoCode.hw.setDigitalPortValue('display_draw_rect_height', height);
+        RoCode.hw.setDigitalPortValue('display_draw_rect_pixel', pixel);
+        RoCode.hw.setDigitalPortValue('display_draw_rect_flagfill', flagFill);
+        RoCode.hw.setDigitalPortValue('display_draw_rect_line', line);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['display_draw_rect_x'];
-        delete Entry.hw.sendQueue['display_draw_rect_y'];
-        delete Entry.hw.sendQueue['display_draw_rect_width'];
-        delete Entry.hw.sendQueue['display_draw_rect_height'];
-        delete Entry.hw.sendQueue['display_draw_rect_pixel'];
-        delete Entry.hw.sendQueue['display_draw_rect_flagfill'];
-        delete Entry.hw.sendQueue['display_draw_rect_line'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['display_draw_rect_x'];
+        delete RoCode.hw.sendQueue['display_draw_rect_y'];
+        delete RoCode.hw.sendQueue['display_draw_rect_width'];
+        delete RoCode.hw.sendQueue['display_draw_rect_height'];
+        delete RoCode.hw.sendQueue['display_draw_rect_pixel'];
+        delete RoCode.hw.sendQueue['display_draw_rect_flagfill'];
+        delete RoCode.hw.sendQueue['display_draw_rect_line'];
     },
 
 
@@ -308,21 +308,21 @@ Entry.byrobot_petrone_v2_base =
         radius = this.fit(1, radius, 200);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', target);
-        Entry.hw.setDigitalPortValue('display_draw_circle_x', x);
-        Entry.hw.setDigitalPortValue('display_draw_circle_y', y);
-        Entry.hw.setDigitalPortValue('display_draw_circle_radius', radius);
-        Entry.hw.setDigitalPortValue('display_draw_circle_pixel', pixel);
-        Entry.hw.setDigitalPortValue('display_draw_circle_flagfill', flagFill);
+        RoCode.hw.setDigitalPortValue('target', target);
+        RoCode.hw.setDigitalPortValue('display_draw_circle_x', x);
+        RoCode.hw.setDigitalPortValue('display_draw_circle_y', y);
+        RoCode.hw.setDigitalPortValue('display_draw_circle_radius', radius);
+        RoCode.hw.setDigitalPortValue('display_draw_circle_pixel', pixel);
+        RoCode.hw.setDigitalPortValue('display_draw_circle_flagfill', flagFill);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['display_draw_circle_x'];
-        delete Entry.hw.sendQueue['display_draw_circle_y'];
-        delete Entry.hw.sendQueue['display_draw_circle_radius'];
-        delete Entry.hw.sendQueue['display_draw_circle_pixel'];
-        delete Entry.hw.sendQueue['display_draw_circle_flagfill'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['display_draw_circle_x'];
+        delete RoCode.hw.sendQueue['display_draw_circle_y'];
+        delete RoCode.hw.sendQueue['display_draw_circle_radius'];
+        delete RoCode.hw.sendQueue['display_draw_circle_pixel'];
+        delete RoCode.hw.sendQueue['display_draw_circle_flagfill'];
     },
 
 
@@ -333,21 +333,21 @@ Entry.byrobot_petrone_v2_base =
         y = this.fit(0, y, 60);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', target);
-        Entry.hw.setDigitalPortValue('display_draw_string_x', x);
-        Entry.hw.setDigitalPortValue('display_draw_string_y', y);
-        Entry.hw.setDigitalPortValue('display_draw_string_font', font);
-        Entry.hw.setDigitalPortValue('display_draw_string_pixel', pixel);
-        Entry.hw.setDigitalPortValue('display_draw_string_string', string);
+        RoCode.hw.setDigitalPortValue('target', target);
+        RoCode.hw.setDigitalPortValue('display_draw_string_x', x);
+        RoCode.hw.setDigitalPortValue('display_draw_string_y', y);
+        RoCode.hw.setDigitalPortValue('display_draw_string_font', font);
+        RoCode.hw.setDigitalPortValue('display_draw_string_pixel', pixel);
+        RoCode.hw.setDigitalPortValue('display_draw_string_string', string);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['display_draw_string_x'];
-        delete Entry.hw.sendQueue['display_draw_string_y'];
-        delete Entry.hw.sendQueue['display_draw_string_font'];
-        delete Entry.hw.sendQueue['display_draw_string_pixel'];
-        delete Entry.hw.sendQueue['display_draw_string_string'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['display_draw_string_x'];
+        delete RoCode.hw.sendQueue['display_draw_string_y'];
+        delete RoCode.hw.sendQueue['display_draw_string_font'];
+        delete RoCode.hw.sendQueue['display_draw_string_pixel'];
+        delete RoCode.hw.sendQueue['display_draw_string_string'];
     },
 
 
@@ -359,42 +359,42 @@ Entry.byrobot_petrone_v2_base =
         y      = this.fit(0, y, 60);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', target);
-        Entry.hw.setDigitalPortValue('display_draw_string_align_x_start', xStart);
-        Entry.hw.setDigitalPortValue('display_draw_string_align_x_end', xEnd);
-        Entry.hw.setDigitalPortValue('display_draw_string_align_y', y);
-        Entry.hw.setDigitalPortValue('display_draw_string_align_align', align);
-        Entry.hw.setDigitalPortValue('display_draw_string_align_font', font);
-        Entry.hw.setDigitalPortValue('display_draw_string_align_pixel', pixel);
-        Entry.hw.setDigitalPortValue('display_draw_string_align_string', string);
+        RoCode.hw.setDigitalPortValue('target', target);
+        RoCode.hw.setDigitalPortValue('display_draw_string_align_x_start', xStart);
+        RoCode.hw.setDigitalPortValue('display_draw_string_align_x_end', xEnd);
+        RoCode.hw.setDigitalPortValue('display_draw_string_align_y', y);
+        RoCode.hw.setDigitalPortValue('display_draw_string_align_align', align);
+        RoCode.hw.setDigitalPortValue('display_draw_string_align_font', font);
+        RoCode.hw.setDigitalPortValue('display_draw_string_align_pixel', pixel);
+        RoCode.hw.setDigitalPortValue('display_draw_string_align_string', string);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['display_draw_string_align_x_start'];
-        delete Entry.hw.sendQueue['display_draw_string_align_x_end'];
-        delete Entry.hw.sendQueue['display_draw_string_align_y'];
-        delete Entry.hw.sendQueue['display_draw_string_align_align'];
-        delete Entry.hw.sendQueue['display_draw_string_align_font'];
-        delete Entry.hw.sendQueue['display_draw_string_align_pixel'];
-        delete Entry.hw.sendQueue['display_draw_string_align_string'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['display_draw_string_align_x_start'];
+        delete RoCode.hw.sendQueue['display_draw_string_align_x_end'];
+        delete RoCode.hw.sendQueue['display_draw_string_align_y'];
+        delete RoCode.hw.sendQueue['display_draw_string_align_align'];
+        delete RoCode.hw.sendQueue['display_draw_string_align_font'];
+        delete RoCode.hw.sendQueue['display_draw_string_align_pixel'];
+        delete RoCode.hw.sendQueue['display_draw_string_align_string'];
     },
 
 
     transferBuzzer(mode, value, time)
     {
         // 전송
-        Entry.hw.setDigitalPortValue('target', 0x31);
-        Entry.hw.setDigitalPortValue('buzzer_mode', mode);
-        Entry.hw.setDigitalPortValue('buzzer_value', value);
-        Entry.hw.setDigitalPortValue('buzzer_time', time);
+        RoCode.hw.setDigitalPortValue('target', 0x31);
+        RoCode.hw.setDigitalPortValue('buzzer_mode', mode);
+        RoCode.hw.setDigitalPortValue('buzzer_value', value);
+        RoCode.hw.setDigitalPortValue('buzzer_time', time);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['buzzer_mode'];
-        delete Entry.hw.sendQueue['buzzer_value'];
-        delete Entry.hw.sendQueue['buzzer_time'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['buzzer_mode'];
+        delete RoCode.hw.sendQueue['buzzer_value'];
+        delete RoCode.hw.sendQueue['buzzer_time'];
     },
 
 
@@ -405,19 +405,19 @@ Entry.byrobot_petrone_v2_base =
         timeOff = this.fit(1, timeOff, 60000);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', 0x31);
-        Entry.hw.setDigitalPortValue('vibrator_mode', mode);
-        Entry.hw.setDigitalPortValue('vibrator_on', timeOn);
-        Entry.hw.setDigitalPortValue('vibrator_off', timeOff);
-        Entry.hw.setDigitalPortValue('vibrator_total', timeRun);
+        RoCode.hw.setDigitalPortValue('target', 0x31);
+        RoCode.hw.setDigitalPortValue('vibrator_mode', mode);
+        RoCode.hw.setDigitalPortValue('vibrator_on', timeOn);
+        RoCode.hw.setDigitalPortValue('vibrator_off', timeOff);
+        RoCode.hw.setDigitalPortValue('vibrator_total', timeRun);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['vibrator_mode'];
-        delete Entry.hw.sendQueue['vibrator_on'];
-        delete Entry.hw.sendQueue['vibrator_off'];
-        delete Entry.hw.sendQueue['vibrator_total'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['vibrator_mode'];
+        delete RoCode.hw.sendQueue['vibrator_on'];
+        delete RoCode.hw.sendQueue['vibrator_off'];
+        delete RoCode.hw.sendQueue['vibrator_total'];
     },
 
 
@@ -427,15 +427,15 @@ Entry.byrobot_petrone_v2_base =
         irmessage = this.fit(-2147483647, irmessage, 2147483647);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', 0x30);
-        Entry.hw.setDigitalPortValue('irmessage_direction', irdirection);
-        Entry.hw.setDigitalPortValue('irmessage_irdata', irmessage);
+        RoCode.hw.setDigitalPortValue('target', 0x30);
+        RoCode.hw.setDigitalPortValue('irmessage_direction', irdirection);
+        RoCode.hw.setDigitalPortValue('irmessage_irdata', irmessage);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['irmessage_direction'];
-        delete Entry.hw.sendQueue['irmessage_irdata'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['irmessage_direction'];
+        delete RoCode.hw.sendQueue['irmessage_irdata'];
     },
 
 
@@ -445,32 +445,32 @@ Entry.byrobot_petrone_v2_base =
         motorSpeed = this.fit(0, motorSpeed, 4096);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', 0x30);
-        Entry.hw.setDigitalPortValue('motorsingle_target', motorIndex);
-        Entry.hw.setDigitalPortValue('motorsingle_rotation', motorRotation);
-        Entry.hw.setDigitalPortValue('motorsingle_value', motorSpeed);
+        RoCode.hw.setDigitalPortValue('target', 0x30);
+        RoCode.hw.setDigitalPortValue('motorsingle_target', motorIndex);
+        RoCode.hw.setDigitalPortValue('motorsingle_rotation', motorRotation);
+        RoCode.hw.setDigitalPortValue('motorsingle_value', motorSpeed);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['motorsingle_target'];
-        delete Entry.hw.sendQueue['motorsingle_rotation'];
-        delete Entry.hw.sendQueue['motorsingle_value'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['motorsingle_target'];
+        delete RoCode.hw.sendQueue['motorsingle_rotation'];
+        delete RoCode.hw.sendQueue['motorsingle_value'];
     },
 
 
     transferCommand(target, command, option)
     {
         // 전송
-        Entry.hw.setDigitalPortValue('target', target);
-        Entry.hw.setDigitalPortValue('command_command', command);
-        Entry.hw.setDigitalPortValue('command_option', option);
+        RoCode.hw.setDigitalPortValue('target', target);
+        RoCode.hw.setDigitalPortValue('command_command', command);
+        RoCode.hw.setDigitalPortValue('command_option', option);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['command_command'];
-        delete Entry.hw.sendQueue['command_option'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['command_command'];
+        delete RoCode.hw.sendQueue['command_option'];
     },
 
 
@@ -481,15 +481,15 @@ Entry.byrobot_petrone_v2_base =
         accel = this.fit(-100, accel, 100);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', 0x30);
-        Entry.hw.setDigitalPortValue('control_wheel', wheel);
-        Entry.hw.setDigitalPortValue('control_accel', accel);
+        RoCode.hw.setDigitalPortValue('target', 0x30);
+        RoCode.hw.setDigitalPortValue('control_wheel', wheel);
+        RoCode.hw.setDigitalPortValue('control_accel', accel);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['control_wheel'];
-        delete Entry.hw.sendQueue['control_accel'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['control_wheel'];
+        delete RoCode.hw.sendQueue['control_accel'];
     },
 
 
@@ -502,19 +502,19 @@ Entry.byrobot_petrone_v2_base =
         throttle = this.fit(-100, throttle, 100);
 
         // 전송
-        Entry.hw.setDigitalPortValue('target', 0x30);
-        Entry.hw.setDigitalPortValue('control_roll', roll);
-        Entry.hw.setDigitalPortValue('control_pitch', pitch);
-        Entry.hw.setDigitalPortValue('control_yaw', yaw);
-        Entry.hw.setDigitalPortValue('control_throttle', throttle);
+        RoCode.hw.setDigitalPortValue('target', 0x30);
+        RoCode.hw.setDigitalPortValue('control_roll', roll);
+        RoCode.hw.setDigitalPortValue('control_pitch', pitch);
+        RoCode.hw.setDigitalPortValue('control_yaw', yaw);
+        RoCode.hw.setDigitalPortValue('control_throttle', throttle);
 
-        Entry.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue['target'];
-        delete Entry.hw.sendQueue['control_roll'];
-        delete Entry.hw.sendQueue['control_pitch'];
-        delete Entry.hw.sendQueue['control_yaw'];
-        delete Entry.hw.sendQueue['control_throttle'];
+        delete RoCode.hw.sendQueue['target'];
+        delete RoCode.hw.sendQueue['control_roll'];
+        delete RoCode.hw.sendQueue['control_pitch'];
+        delete RoCode.hw.sendQueue['control_yaw'];
+        delete RoCode.hw.sendQueue['control_throttle'];
     },
 
 
@@ -525,7 +525,7 @@ Entry.byrobot_petrone_v2_base =
     // 데이터 읽기
     getData(script, device)
     {
-        return Entry.hw.portData[device];
+        return RoCode.hw.portData[device];
     },
 
 
@@ -1143,13 +1143,13 @@ Entry.byrobot_petrone_v2_base =
                     value = this.fit(-100, value, 100);
 
                     // 전송
-                    Entry.hw.setDigitalPortValue('target', 0x30);
-                    Entry.hw.setDigitalPortValue(controlTarget, value);
+                    RoCode.hw.setDigitalPortValue('target', 0x30);
+                    RoCode.hw.setDigitalPortValue(controlTarget, value);
 
-                    Entry.hw.update();
+                    RoCode.hw.update();
 
-                    delete Entry.hw.sendQueue['target'];
-                    delete Entry.hw.sendQueue[controlTarget];
+                    delete RoCode.hw.sendQueue['target'];
+                    delete RoCode.hw.sendQueue[controlTarget];
                 }
                 return script;
 
@@ -1162,13 +1162,13 @@ Entry.byrobot_petrone_v2_base =
                     // 블럭을 빠져나갈 때 변경했던 값을 초기화
 
                     // 전송
-                    Entry.hw.setDigitalPortValue('target', 0x30);
-                    Entry.hw.setDigitalPortValue(controlTarget, 0);
+                    RoCode.hw.setDigitalPortValue('target', 0x30);
+                    RoCode.hw.setDigitalPortValue(controlTarget, 0);
 
-                    Entry.hw.update();
+                    RoCode.hw.update();
 
-                    delete Entry.hw.sendQueue['target'];
-                    delete Entry.hw.sendQueue[controlTarget];
+                    delete RoCode.hw.sendQueue['target'];
+                    delete RoCode.hw.sendQueue[controlTarget];
                 }
                 return script.callReturn();
 
@@ -1211,5 +1211,5 @@ Entry.byrobot_petrone_v2_base =
 };
 
 
-module.exports = Entry.byrobot_petrone_v2_base;
+module.exports = RoCode.byrobot_petrone_v2_base;
 

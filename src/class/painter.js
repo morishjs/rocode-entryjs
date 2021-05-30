@@ -1,13 +1,13 @@
 import Extension from '../extensions/extension';
 
-let EntryPaint;
-Entry.Painter = class Painter {
+let RoCodePaint;
+RoCode.Painter = class Painter {
     constructor(view) {
         this.view = view;
         this.cache = [];
 
         this.file = {
-            id: Entry.generateHash(),
+            id: RoCode.generateHash(),
             name: '새그림',
             modified: false,
             mode: 'new', // new or edit
@@ -17,74 +17,74 @@ Entry.Painter = class Painter {
         this.isShow = false;
         this.clipboard = null;
         this._keyboardEvents = [];
-        Entry.addEventListener('pictureImport', this.addPicture.bind(this));
-        Entry.addEventListener('run', this.detachKeyboardEvents.bind(this));
-        Entry.addEventListener('stop', this.attachKeyboardEvents.bind(this));
-        this.importEntryPaint();
+        RoCode.addEventListener('pictureImport', this.addPicture.bind(this));
+        RoCode.addEventListener('run', this.detachKeyboardEvents.bind(this));
+        RoCode.addEventListener('stop', this.attachKeyboardEvents.bind(this));
+        this.importRoCodePaint();
     }
 
-    async importEntryPaint() {
-        EntryPaint = window.EntryPaint.default;
+    async importRoCodePaint() {
+        RoCodePaint = window.RoCodePaint.default;
         if (this.requestShow) {
             this.initialize();
         }
     }
 
     get graphicsMode() {
-        return this.entryPaint.graphicsMode;
+        return this.RoCodePaint.graphicsMode;
     }
 
     initialize() {
-        if (this.entryPaint || !EntryPaint) {
+        if (this.RoCodePaint || !RoCodePaint) {
             this.requestShow = true;
             return;
         }
 
         this.isShow = true;
 
-        this.entryPaint = EntryPaint.create({ parent: this.view, mode: 'entry' });
-        this.entryPaint.setDropper && this.entryPaint.setDropper(this.dropper);
+        this.RoCodePaint = RoCodePaint.create({ parent: this.view, mode: 'RoCode' });
+        this.RoCodePaint.setDropper && this.RoCodePaint.setDropper(this.dropper);
 
         this.isImport = true;
-        this.entryPaint.on('SNAPSHOT_SAVED', (e) => {
-            if (!this.isImport && Entry.stage.selectedObject) {
-                Entry.do('editPicture', e, this.entryPaint);
+        this.RoCodePaint.on('SNAPSHOT_SAVED', (e) => {
+            if (!this.isImport && RoCode.stage.selectedObject) {
+                RoCode.do('editPicture', e, this.RoCodePaint);
                 this.file.modified = true;
             }
             this.isImport = false;
         });
-        this.entryPaint.on('NEW_PICTURE', this.newPicture.bind(this));
-        this.entryPaint.on('IMPORT_IMAGE', () => {
-            Entry.dispatchEvent('openPictureImport');
+        this.RoCodePaint.on('NEW_PICTURE', this.newPicture.bind(this));
+        this.RoCodePaint.on('IMPORT_IMAGE', () => {
+            RoCode.dispatchEvent('openPictureImport');
         });
-        this.entryPaint.on('SAVE_PICTURE', () => {
+        this.RoCodePaint.on('SAVE_PICTURE', () => {
             this.fileSave(false);
         });
-        this.entryPaint.on('SAVE_NEW_PICTURE', () => {
+        this.RoCodePaint.on('SAVE_NEW_PICTURE', () => {
             this.file.mode = 'new';
             this.fileSave(false);
         });
-        this.entryPaint.on('FULL_SCREEN_ON', () => {
+        this.RoCodePaint.on('FULL_SCREEN_ON', () => {
             this.toggleFullscreen(true);
         });
-        this.entryPaint.on('FULL_SCREEN_OFF', () => {
+        this.RoCodePaint.on('FULL_SCREEN_OFF', () => {
             this.toggleFullscreen(false);
         });
 
-        Entry.addEventListener('pictureSelected', this.changePicture.bind(this));
+        RoCode.addEventListener('pictureSelected', this.changePicture.bind(this));
     }
 
     show() {
         if (!this.isShow) {
             this.initialize();
         }
-        this.realign && Entry.windowResized.detach(this.realign);
-        this.realign = Entry.windowResized.attach(this.view, this.entryPaint.realign);
+        this.realign && RoCode.windowResized.detach(this.realign);
+        this.realign = RoCode.windowResized.attach(this.view, this.RoCodePaint.realign);
     }
 
     hide() {
         this.alertSaveModifiedPicture();
-        this.entryPaint && Entry.windowResized.detach(this.realign);
+        this.RoCodePaint && RoCode.windowResized.detach(this.realign);
     }
 
     newPicture() {
@@ -93,22 +93,22 @@ Entry.Painter = class Painter {
                 height: 1,
                 width: 1,
             },
-            fileurl: `${Entry.mediaFilePath}_1x1.png`,
+            fileurl: `${RoCode.mediaFilePath}_1x1.png`,
             name: Lang.Painter.new_picture,
             imageType: 'png',
         };
 
-        newPicture.id = Entry.generateHash();
+        newPicture.id = RoCode.generateHash();
         if (this.file && this.file.objectId) {
             newPicture.objectId = this.file.objectId;
         }
-        Entry.playground.addPicture(newPicture, true);
+        RoCode.playground.addPicture(newPicture, true);
     }
 
     changePicture(picture = {}, removed) {
         if (this.file && this.file.id === picture.id) {
             if (!this.file.isUpdate) {
-                Entry.stage.updateObject();
+                RoCode.stage.updateObject();
                 this.file.isUpdate = true;
             }
             return;
@@ -121,8 +121,8 @@ Entry.Painter = class Painter {
 
             this.isConfirm = true;
             let wasRun = false;
-            if (Entry.engine.state === 'run') {
-                Entry.engine.toggleStop();
+            if (RoCode.engine.state === 'run') {
+                RoCode.engine.toggleStop();
                 wasRun = true;
             }
 
@@ -132,15 +132,15 @@ Entry.Painter = class Painter {
                 this.alertSaveModifiedPicture(picture, wasRun);
             }
         }
-        Entry.stage.updateObject();
+        RoCode.stage.updateObject();
         this.file.isUpdate = true;
     }
 
     updatePicture(picture = {}, wasRun = true, result = true) {
         this.isConfirm = false;
         result ? this.fileSave(true) : (this.file.modified = false);
-        wasRun ? Entry.playground.injectPicture() : this.afterModified(picture);
-        Entry.stage.updateObject();
+        wasRun ? RoCode.playground.injectPicture() : this.afterModified(picture);
+        RoCode.stage.updateObject();
     }
 
     alertSaveModifiedPicture(picture, wasRun) {
@@ -148,7 +148,7 @@ Entry.Painter = class Painter {
             return;
         }
 
-        entrylms.confirm(Lang.Menus.save_modified_shape).then((result) => {
+        RoCodelms.confirm(Lang.Menus.save_modified_shape).then((result) => {
             this.updatePicture(picture, wasRun, result);
         });
     }
@@ -159,18 +159,18 @@ Entry.Painter = class Painter {
         this.isImport = true;
 
         if (picture.id) {
-            file.id = picture.id || Entry.generateHash();
+            file.id = picture.id || RoCode.generateHash();
             file.name = picture.name;
             file.mode = 'edit';
             file.objectId = picture.objectId;
 
             this.addPicture(picture, true);
         } else {
-            file.id = Entry.generateHash();
-            this.entryPaint.reset();
+            file.id = RoCode.generateHash();
+            this.RoCodePaint.reset();
         }
 
-        Entry.stateManager.removeAllPictureCommand();
+        RoCode.stateManager.removeAllPictureCommand();
     }
 
     getImageSrc(picture) {
@@ -180,7 +180,7 @@ Entry.Painter = class Painter {
         }
 
         const { imageType = 'png', filename } = picture || {};
-        return `${Entry.defaultPath}/uploads/${filename.substring(0, 2)}/${filename.substring(
+        return `${RoCode.defaultPath}/uploads/${filename.substring(0, 2)}/${filename.substring(
             2,
             4
         )}/image/${filename}.${imageType}`;
@@ -195,12 +195,12 @@ Entry.Painter = class Painter {
 
         switch (imageType) {
             case 'png':
-                this.entryPaint.addBitmap(imageSrc, {
+                this.RoCodePaint.addBitmap(imageSrc, {
                     graphicsMode: this.isImport ? this.graphicsMode.BITMAP : '',
                 });
                 break;
             case 'svg':
-                this.entryPaint.addSVG(imageSrc, {
+                this.RoCodePaint.addSVG(imageSrc, {
                     graphicsMode: this.isImport ? this.graphicsMode.VECTOR : '',
                 });
                 break;
@@ -208,7 +208,7 @@ Entry.Painter = class Painter {
     }
 
     _getImageType() {
-        if (this.entryPaint.mode === this.graphicsMode.VECTOR) {
+        if (this.RoCodePaint.mode === this.graphicsMode.VECTOR) {
             return 'svg';
         } else {
             return 'png';
@@ -216,18 +216,18 @@ Entry.Painter = class Painter {
     }
 
     fileSave(taskParam) {
-        if (!Entry.stage.selectedObject) {
+        if (!RoCode.stage.selectedObject) {
             return;
         }
-        const dataURL = this.entryPaint.getDataURL();
-        if (this.entryPaint.mode === this.graphicsMode.VECTOR) {
-            this.file.svg = this.entryPaint.exportSVG();
+        const dataURL = this.RoCodePaint.getDataURL();
+        if (this.RoCodePaint.mode === this.graphicsMode.VECTOR) {
+            this.file.svg = this.RoCodePaint.exportSVG();
         } else {
             delete this.file.svg;
         }
         this.file.ext = this._getImageType();
         const file = JSON.parse(JSON.stringify(this.file));
-        Entry.dispatchEvent('saveCanvasImage', {
+        RoCode.dispatchEvent('saveCanvasImage', {
             file,
             image: dataURL,
             task: taskParam,
@@ -241,10 +241,10 @@ Entry.Painter = class Painter {
 
         const events = this._keyboardEvents;
 
-        let evt = Entry.keyPressed;
+        let evt = RoCode.keyPressed;
         evt && events.push(evt.attach(this, this._keyboardPressControl));
 
-        evt = Entry.keyUpped;
+        evt = RoCode.keyUpped;
         evt && events.push(evt.attach(this, this._keyboardUpControl));
     }
 
@@ -264,7 +264,7 @@ Entry.Painter = class Painter {
     _keyboardPressControl(e) {}
 
     toggleFullscreen(isFullscreen) {
-        const { pictureView_ } = Entry.playground;
+        const { pictureView_ } = RoCode.playground;
         const $view = $(this.view);
         if ((isFullscreen !== true && $view.hasClass('fullscreen')) || isFullscreen === false) {
             pictureView_.appendChild(this.view);
@@ -281,7 +281,7 @@ Entry.Painter = class Painter {
                 this.fullscreenButton.setAttribute('alt', Lang.Painter.exit_fullscreen);
             }
         }
-        this.entryPaint && this.entryPaint.realign();
+        this.RoCodePaint && this.RoCodePaint.realign();
     }
 
     clear() {
@@ -289,10 +289,10 @@ Entry.Painter = class Painter {
     }
 
     undo() {
-        this.entryPaint.undo();
+        this.RoCodePaint.undo();
     }
 
     redo() {
-        this.entryPaint.redo();
+        this.RoCodePaint.redo();
     }
 };

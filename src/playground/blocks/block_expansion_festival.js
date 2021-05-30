@@ -294,7 +294,7 @@ function getLocationMap() {
     };
 }
 
-Entry.EXPANSION_BLOCK.festival = {
+RoCode.EXPANSION_BLOCK.festival = {
     name: 'festival',
     imageName: 'festival.png',
     title: {
@@ -310,7 +310,7 @@ Entry.EXPANSION_BLOCK.festival = {
         if (this.isInitialized) {
             return;
         }
-        Entry.EXPANSION_BLOCK.festival.isInitialized = true;
+        RoCode.EXPANSION_BLOCK.festival.isInitialized = true;
     },
     api: '/api/expansionBlock/ko/festival',
     locationMap: getLocationMap(),
@@ -346,7 +346,7 @@ Entry.EXPANSION_BLOCK.festival = {
     },
 };
 
-Entry.EXPANSION_BLOCK.festival.getBlocks = function() {
+RoCode.EXPANSION_BLOCK.festival.getBlocks = function() {
     const params = {
         getLocation(isPython) {
             const param = {
@@ -372,11 +372,11 @@ Entry.EXPANSION_BLOCK.festival.getBlocks = function() {
                 ],
                 value: 'Seoul',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.EXPANSION,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.EXPANSION,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
@@ -399,11 +399,11 @@ Entry.EXPANSION_BLOCK.festival.getBlocks = function() {
                 ],
                 value: 'January',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.EXPANSION,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.EXPANSION,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
@@ -422,11 +422,11 @@ Entry.EXPANSION_BLOCK.festival.getBlocks = function() {
                 ],
                 value: 'title',
                 fontSize: 11,
-                bgColor: EntryStatic.colorSet.block.darken.EXPANSION,
-                arrowColor: EntryStatic.colorSet.common.WHITE,
+                bgColor: RoCodeStatic.colorSet.block.darken.EXPANSION,
+                arrowColor: RoCodeStatic.colorSet.common.WHITE,
             };
             if (isPython) {
-                param.converter = Entry.block.converters.returnStringValue;
+                param.converter = RoCode.block.converters.returnStringValue;
             }
             return param;
         },
@@ -435,11 +435,11 @@ Entry.EXPANSION_BLOCK.festival.getBlocks = function() {
     const getDetailInfo = (contentid, defaultValue, infoType) => {
         const key = `festival.api.detail_${contentid}`;
         return new PromiseManager().Promise((resolve) => {
-            callApi(key, { url: `${Entry.EXPANSION_BLOCK.festival.api}/${contentid}` })
+            callApi(key, { url: `${RoCode.EXPANSION_BLOCK.festival.api}/${contentid}` })
                 .then((response) => {
                     const item = response.data.response.body.items.item;
                     if (item && item[infoType]) {
-                        return resolve(Entry.EXPANSION_BLOCK.festival.strip(item[infoType]));
+                        return resolve(RoCode.EXPANSION_BLOCK.festival.strip(item[infoType]));
                     }
                     return resolve(defaultValue);
                 })
@@ -450,7 +450,7 @@ Entry.EXPANSION_BLOCK.festival.getBlocks = function() {
     const getFestivalCount = (params, defaultValue) => {
         const key = `festival.api-${JSON.stringify(params)}`;
         return new PromiseManager().Promise((resolve) => {
-            callApi(key, { url: Entry.EXPANSION_BLOCK.festival.api, params })
+            callApi(key, { url: RoCode.EXPANSION_BLOCK.festival.api, params })
                 .then((result) => {
                     if (result && result.hasOwnProperty('data')) {
                         return resolve(result.data.response.body.items.item.totalCnt);
@@ -470,7 +470,7 @@ Entry.EXPANSION_BLOCK.festival.getBlocks = function() {
         params.page = Math.floor((number - 1) / 10 + 1);
         const key = `festival.api-${JSON.stringify(params)}`;
         return new PromiseManager().Promise((resolve) => {
-            callApi(key, { url: Entry.EXPANSION_BLOCK.festival.api, params })
+            callApi(key, { url: RoCode.EXPANSION_BLOCK.festival.api, params })
                 .then((result) => {
                     const items = result.data.response.body.items.item;
                     let item = null;
@@ -488,12 +488,12 @@ Entry.EXPANSION_BLOCK.festival.getBlocks = function() {
     return {
         festival_title: {
             skeleton: 'basic_text',
-            color: EntryStatic.colorSet.common.TRANSPARENT,
+            color: RoCodeStatic.colorSet.common.TRANSPARENT,
             params: [
                 {
                     type: 'Text',
                     text: Lang.template.festival_title_text,
-                    color: EntryStatic.colorSet.common.TEXT,
+                    color: RoCodeStatic.colorSet.common.TEXT,
                     align: 'center',
                 },
             ],
@@ -505,8 +505,8 @@ Entry.EXPANSION_BLOCK.festival.getBlocks = function() {
             events: {},
         },
         count_festival: {
-            color: EntryStatic.colorSet.block.default.EXPANSION,
-            outerLine: EntryStatic.colorSet.block.darken.EXPANSION,
+            color: RoCodeStatic.colorSet.block.default.EXPANSION,
+            outerLine: RoCodeStatic.colorSet.block.darken.EXPANSION,
             skeleton: 'basic_string_field',
             statements: [],
             params: [params.getLocation(), params.getMonth()],
@@ -529,11 +529,11 @@ Entry.EXPANSION_BLOCK.festival.getBlocks = function() {
                 const defaultValue = 0;
                 const params = {
                     area:
-                    Entry.EXPANSION_BLOCK.festival.locationMap[
+                    RoCode.EXPANSION_BLOCK.festival.locationMap[
                         script.getField('LOCATION', script)
                         ].code,
                     month:
-                        Entry.EXPANSION_BLOCK.festival.monthMap[script.getField('MONTH', script)],
+                        RoCode.EXPANSION_BLOCK.festival.monthMap[script.getField('MONTH', script)],
                     list: 'N',
                 };
                 return getFestivalCount(params, defaultValue);
@@ -550,8 +550,8 @@ Entry.EXPANSION_BLOCK.festival.getBlocks = function() {
             },
         },
         get_festival_info: {
-            color: EntryStatic.colorSet.block.default.EXPANSION,
-            outerLine: EntryStatic.colorSet.block.darken.EXPANSION,
+            color: RoCodeStatic.colorSet.block.default.EXPANSION,
+            outerLine: RoCodeStatic.colorSet.block.darken.EXPANSION,
             skeleton: 'basic_string_field',
             statements: [],
             params: [
@@ -589,14 +589,14 @@ Entry.EXPANSION_BLOCK.festival.getBlocks = function() {
             func(sprite, script) {
                 const number = script.getStringValue('NUMBER', script);
                 const type = script.getField('TYPE', script);
-                const infoType = Entry.EXPANSION_BLOCK.festival.infoTypeMap[type];
+                const infoType = RoCode.EXPANSION_BLOCK.festival.infoTypeMap[type];
                 const location =
-                    Entry.EXPANSION_BLOCK.festival.locationMap[script.getField('LOCATION', script)];
+                    RoCode.EXPANSION_BLOCK.festival.locationMap[script.getField('LOCATION', script)];
                 const defaultValue = Lang.Blocks.no_data;
                 const params = {
                     area: location.code,
                     month:
-                        Entry.EXPANSION_BLOCK.festival.monthMap[script.getField('MONTH', script)],
+                        RoCode.EXPANSION_BLOCK.festival.monthMap[script.getField('MONTH', script)],
                 };
 
                 return getFestivals(number, params, {}).then((festival) => {

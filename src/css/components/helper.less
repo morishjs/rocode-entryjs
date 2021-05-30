@@ -1,9 +1,9 @@
 /* helper */
-.entryBlockHelperIntro .renderViewContainer {
+.RoCodeBlockHelperIntro .renderViewContainer {
     display: none;
 }
 
-#entryBlockHelperBlockWorkspace > .renderViewContainer {
+#RoCodeBlockHelperBlockWorkspace > .renderViewContainer {
     width: 100%;
 
     .renderView {
@@ -11,7 +11,7 @@
     }
 }
 
-#entryBlockHelperBlockWorkspace > .renderViewContainer > svg {
+#RoCodeBlockHelperBlockWorkspace > .renderViewContainer > svg {
     overflow: visible;
 }
 
@@ -105,12 +105,12 @@
         top: 100%;
     }
 }
-#entryBlockHelperWorkspaceWrapper {
+#RoCodeBlockHelperWorkspaceWrapper {
     background-color: #ecf8ff;
     height: 100%;
 }
 
-#entryBlockHelperWorkspace {
+#RoCodeBlockHelperWorkspace {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -120,16 +120,16 @@
     .animation-duration(0.6s);
 }
 
-#entryBlockHelperWorkspace.lecture {
+#RoCodeBlockHelperWorkspace.lecture {
     .animation-duration(0s);
 }
 
-#entryBlockHelperWorkspace.dispose {
+#RoCodeBlockHelperWorkspace.dispose {
     display: none;
     .animation-name(blockHelperDown);
 }
 
-#entryBlockHelperHeaderWorkspace {
+#RoCodeBlockHelperHeaderWorkspace {
     position: absolute;
     width: 100%;
     height: 40px;
@@ -140,7 +140,7 @@
     color: #fff;
 }
 
-#entryBlockHelperDisposeWorkspace {
+#RoCodeBlockHelperDisposeWorkspace {
     float: right;
     .backgroundImage('block_helper_dispose.png');
     background-repeat: no-repeat;
@@ -150,7 +150,7 @@
     margin-right: 5px;
 }
 
-#entryBlockHelperContentWorkspace {
+#RoCodeBlockHelperContentWorkspace {
     position: absolute;
     width: 100%;
     top: 40px;
@@ -160,7 +160,7 @@
     white-space: pre-line;
 }
 
-.entryBlockHelperIntro {
+.RoCodeBlockHelperIntro {
     .backgroundImage('block_help_icon_2.png');
     background-size: 104px;
     background-repeat: no-repeat;
@@ -172,7 +172,7 @@
     font-size: 12px;
 }
 
-#entryBlockHelpBtn {
+#RoCodeBlockHelpBtn {
     position: absolute;
     .backgroundImage('block_help.png');
     background-repeat: no-repeat;
@@ -183,7 +183,7 @@
     z-index: 100;
 }
 
-#entryBlockHelperBlockWorkspace {
+#RoCodeBlockHelperBlockWorkspace {
     width: 100%;
     bottom: 0px;
     overflow: hidden;
@@ -191,11 +191,11 @@
     text-align: center;
 }
 
-#entryBlockHelperBlockWorkspace > svg {
+#RoCodeBlockHelperBlockWorkspace > svg {
     position: relative;
 }
 
-#entryBlockHelperDescriptionWorkspace {
+#RoCodeBlockHelperDescriptionWorkspace {
     line-height: 20px;
     width: 100%;
     font-size: 14px;
@@ -214,7 +214,7 @@
     display: none;
 }
 
-#entryBlockHelperContentWorkspace.textMode {
+#RoCodeBlockHelperContentWorkspace.textMode {
     padding: 18px;
     top: 0;
 
@@ -222,14 +222,14 @@
         display: block;
     }
 
-    .entryBlockHelperTitle {
-        font-family: EntryFont, NanumGothic;
+    .RoCodeBlockHelperTitle {
+        font-family: RoCodeFont, NanumGothic;
         font-size: 18px;
         font-weight: bold;
         color: #3b3b3b;
     }
 
-    .entryBlockHelperTitle:not(:first-child) {
+    .RoCodeBlockHelperTitle:not(:first-child) {
         margin-top: 20px;
     }
 
@@ -238,28 +238,28 @@
         margin-top: 9px;
     }
 
-    #entryBlockHelperBlockWorkspace {
+    #RoCodeBlockHelperBlockWorkspace {
         height: auto;
     }
 
-    #entryBlockHelperBlockWorkspace > div > svg {
+    #RoCodeBlockHelperBlockWorkspace > div > svg {
         position: relative;
         left: auto;
     }
 
-    #entryBlockHelperDescriptionWorkspace {
+    #RoCodeBlockHelperDescriptionWorkspace {
         text-align: left;
         padding: 0;
     }
 
-    .entryBlockHelperContent {
-        font-family: EntryFont, NanumGothic;
+    .RoCodeBlockHelperContent {
+        font-family: RoCodeFont, NanumGothic;
         font-size: 14px;
         color: #3b3b3b;
         margin-top: 8px;
     }
 
-    .entryBlockHelperElementsContainer {
+    .RoCodeBlockHelperElementsContainer {
         .elementLeft {
             display: inline-block;
             vertical-align: top;
@@ -272,11 +272,11 @@
         }
     }
 
-    .entryBlockHelperElementsContainer:not(:first-child) {
+    .RoCodeBlockHelperElementsContainer:not(:first-child) {
         margin-top: 12px;
     }
 
-    #entryBlockHelperCodeMirrorContainer {
+    #RoCodeBlockHelperCodeMirrorContainer {
         margin-top: 8px;
     }
 }

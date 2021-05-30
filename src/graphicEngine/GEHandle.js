@@ -11,7 +11,7 @@ export const GEHandle = function(canvas) {
     if (typeof createjs != 'object') {
         throw 'createjs is not founded';
     }
-    const colorSet = EntryStatic.colorSet.canvas || {};
+    const colorSet = RoCodeStatic.colorSet.canvas || {};
     this.canvas = canvas;
     this.borderColor = colorSet.handleBorder || '#e2e2e2';
     this.knobColor = colorSet.handleKnob || '#4f80ff';
@@ -192,7 +192,7 @@ export const GEHandle = function(canvas) {
         this.edge = edge;
 
         //rotate knob
-        const rotateKnob = GEHelper.newSpriteWithCallback(`${Entry.mediaFilePath}stage/rotate.png`);
+        const rotateKnob = GEHelper.newSpriteWithCallback(`${RoCode.mediaFilePath}stage/rotate.png`);
         rotateKnob.scaleX = 0.4;
         rotateKnob.scaleY = 0.4;
         rotateKnob.regX = 25;
@@ -369,8 +369,8 @@ export const GEHandle = function(canvas) {
     p.checkCenterPointState = function(x, y) {
         const standard = 718;
         const res = Math.sqrt(x * x + y * y);
-        if (res > standard && Entry.engine.isState('stop')) {
-            Entry.toast.warning(
+        if (res > standard && RoCode.engine.isState('stop')) {
+            RoCode.toast.warning(
                 Lang.Workspace.toast_error_title_object_center,
                 Lang.Workspace.toast_error_contents_object_center
             );

@@ -27,7 +27,7 @@ Specifically, lines with the following formats are extracted:
 Adjacent "///" lines are concatenated.
 
 There are two output files, each of which is proper JSON.  For each key, the
-file en.json would get an entry of the form:
+file en.json would get an RoCode of the form:
 
     "Blockly.SOME_KEY", "Some value",
 
@@ -35,7 +35,7 @@ The file qqq.json would get:
 
     "Blockly.SOME_KEY", "Here is a description of the following message.",
 
-Commas would of course be omitted for the final entry of each value.
+Commas would of course be omitted for the final RoCode of each value.
 
 @author Ellen Spertus (ellen.spertus@gmail.com)
 """

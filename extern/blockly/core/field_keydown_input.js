@@ -44,7 +44,7 @@ goog.require('goog.userAgent');
  */
 Blockly.FieldKeydownInput = function(value) {
   this.arrow_ = Blockly.createSvgElement('tspan', {}, null);
-  var keyMap = Entry.getKeyCodeMap();
+  var keyMap = RoCode.getKeyCodeMap();
   this.value_ = value;
   Blockly.FieldKeydownInput.superClass_.constructor.call(this, keyMap[value]);
 };
@@ -203,7 +203,7 @@ Blockly.FieldKeydownInput.hide = function() {
  */
 fkip.setValue = function(value) {
   this.value_ = value;
-  var keyMap = Entry.getKeyCodeMap();
+  var keyMap = RoCode.getKeyCodeMap();
   var text = keyMap[value];
   if (text) {
       this.setText(String(text));

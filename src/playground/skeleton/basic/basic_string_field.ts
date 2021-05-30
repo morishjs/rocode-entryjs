@@ -1,4 +1,4 @@
-Entry.skeleton.basic_string_field = {
+RoCode.skeleton.basic_string_field = {
     path(blockView) {
         let width =
             blockView.contentWidth < 10 ? blockView.contentWidth : blockView.contentWidth + 2;

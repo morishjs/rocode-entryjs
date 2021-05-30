@@ -42,7 +42,7 @@ export default class AILearning {
 
     removeAllBlocks() {
         const utilizeBlock = [];
-        Object.values(Entry.AI_UTILIZE_BLOCK_LIST)
+        Object.values(RoCode.AI_UTILIZE_BLOCK_LIST)
             .map((x) => Object.keys(x.getBlocks()))
             .forEach((category) => {
                 category.forEach((block) => {
@@ -50,13 +50,13 @@ export default class AILearning {
                 });
             });
 
-        const { blocks } = EntryStatic.getAllBlocks().find(
+        const { blocks } = RoCodeStatic.getAllBlocks().find(
             ({ category }) => category === 'ai_utilize'
         );
         blocks
             .filter((x) => !utilizeBlock.includes(x))
             .forEach((blockType) => {
-                Entry.Utils.removeBlockByType(blockType);
+                RoCode.Utils.removeBlockByType(blockType);
             });
         this.banBlocks();
         this.destroy();
@@ -66,13 +66,13 @@ export default class AILearning {
         if (!this.isLoaded) {
             return;
         }
-        const { blocks } = EntryStatic.getAllBlocks().find(
+        const { blocks } = RoCodeStatic.getAllBlocks().find(
             ({ category }) => category === 'ai_utilize'
         );
         blocks
-            .filter((x) => Entry.block[x].class === 'ai_learning')
+            .filter((x) => RoCode.block[x].class === 'ai_learning')
             .forEach((blockType) => {
-                Entry.Utils.removeBlockByType(blockType);
+                RoCode.Utils.removeBlockByType(blockType);
             });
         this.banBlocks();
         this.destroy();
@@ -122,7 +122,7 @@ export default class AILearning {
             });
         } else if (type === 'number') {
             this.#tableData = tableData || createDataTable(classes, name);
-            this.#module = new NumberClassification({ 
+            this.#module = new NumberClassification({
                 name,
                 result,
                 url,
@@ -132,7 +132,7 @@ export default class AILearning {
             this.#labels = this.#module.getLabels();
         } else if (type === 'cluster') {
             this.#tableData = tableData || createDataTable(classes, name);
-            this.#module = new Cluster({ 
+            this.#module = new Cluster({
                 name,
                 result,
                 trainParam,
@@ -140,7 +140,7 @@ export default class AILearning {
             });
         } else if (type === 'regression') {
             this.#tableData = tableData || createDataTable(classes, name);
-            this.#module = new Regression({ 
+            this.#module = new Regression({
                 name,
                 result,
                 url,
@@ -212,7 +212,7 @@ export default class AILearning {
 
     openManager() {
         if (this.isEnable) {
-            Entry.dispatchEvent('openAIUtilizeTrainManager');
+            RoCode.dispatchEvent('openAIUtilizeTrainManager');
         } else {
             console.log('Disabled learning for offline');
         }

@@ -1,7 +1,7 @@
 'use strict';
 
 /* eslint-disable */
-var EntryStatic = {
+var RoCodeStatic = {
     isPracticalCourse: true,
     fontFamily: 'NanumGothic',
     exportBlockFontFamily:
@@ -11,7 +11,7 @@ var EntryStatic = {
     objectTypes: ['sprite', 'textBox'],
 };
 
-EntryStatic.usageList = [
+RoCodeStatic.usageList = [
     'usage_event',
     'usage_signal',
     'usage_scene',
@@ -41,7 +41,7 @@ EntryStatic.usageList = [
     'usage_arduino',
 ];
 
-EntryStatic.conceptList = [
+RoCodeStatic.conceptList = [
     'concept_resource_analytics',
     'concept_individual',
     'concept_abstractive',
@@ -51,7 +51,7 @@ EntryStatic.conceptList = [
     'concept_parallel',
 ];
 
-EntryStatic.subjectList = [
+RoCodeStatic.subjectList = [
     'subject_korean',
     'subject_mathmatics',
     'subject_social',
@@ -64,11 +64,11 @@ EntryStatic.subjectList = [
     'subject_progmatic',
 ];
 
-EntryStatic.lectureLevels = [1, 2, 3];
+RoCodeStatic.lectureLevels = [1, 2, 3];
 
-// EntryStatic.lectureLevels = ['level_high', 'level_mid','level_row'];
+// RoCodeStatic.lectureLevels = ['level_high', 'level_mid','level_row'];
 
-EntryStatic.lectureGrades = [
+RoCodeStatic.lectureGrades = [
     'e_1',
     'e_2',
     'e_3',
@@ -81,7 +81,7 @@ EntryStatic.lectureGrades = [
     'general',
 ];
 
-EntryStatic.categoryList = [
+RoCodeStatic.categoryList = [
     'category_game',
     'category_animation',
     'category_media_art',
@@ -89,9 +89,9 @@ EntryStatic.categoryList = [
     'category_etc',
 ];
 
-EntryStatic.requiredTimes = [1, 2, 3, 4, 5];
+RoCodeStatic.requiredTimes = [1, 2, 3, 4, 5];
 
-EntryStatic.searchProjectOption = [
+RoCodeStatic.searchProjectOption = [
     {
         key: 'search_updated',
         lang: 'search_updated',
@@ -124,7 +124,7 @@ EntryStatic.searchProjectOption = [
     },
 ];
 
-EntryStatic.getAllBlocks = function() {
+RoCodeStatic.getAllBlocks = function() {
     return [
         {
             category: 'start',
@@ -399,12 +399,12 @@ EntryStatic.getAllBlocks = function() {
         {
             category: 'arduino',
             visible: false,
-            blocks: EntryStatic.DynamicHardwareBlocks,
+            blocks: RoCodeStatic.DynamicHardwareBlocks,
         },
     ];
 };
-EntryStatic.DynamicHardwareBlocks = [];
-EntryStatic.discussCategories = [
+RoCodeStatic.DynamicHardwareBlocks = [];
+RoCodeStatic.discussCategories = [
     // 'notice',
     'qna',
     'tips',
@@ -413,7 +413,7 @@ EntryStatic.discussCategories = [
     'notice',
 ];
 
-EntryStatic.artCategories = [
+RoCodeStatic.artCategories = [
     {
         key: 'art_category_',
         lang: 'art_category_all',
@@ -446,7 +446,7 @@ EntryStatic.artCategories = [
     },
 ];
 
-EntryStatic.artSortOptions = [
+RoCodeStatic.artSortOptions = [
     {
         key: 'art_sort_updated',
         lang: 'art_sort_updated',
@@ -469,7 +469,7 @@ EntryStatic.artSortOptions = [
     },
 ];
 
-EntryStatic.discussSortOptions = [
+RoCodeStatic.discussSortOptions = [
     {
         lang: 'discuss_sort_created',
         value: 'created',
@@ -487,7 +487,7 @@ EntryStatic.discussSortOptions = [
         value: 'commentsLength',
     },
 ];
-EntryStatic.discussPeriodOptions = [
+RoCodeStatic.discussPeriodOptions = [
     {
         key: 'discuss_period_',
         lang: 'discuss_period_all',
@@ -515,7 +515,7 @@ EntryStatic.discussPeriodOptions = [
     },
 ];
 
-EntryStatic.artPeriodOptions = [
+RoCodeStatic.artPeriodOptions = [
     {
         key: 'art_period_',
         lang: 'art_period_all',
@@ -543,11 +543,11 @@ EntryStatic.artPeriodOptions = [
     },
 ];
 
-EntryStatic.getCategoryByBlock = function(blockName) {
+RoCodeStatic.getCategoryByBlock = function(blockName) {
     if (!blockName) {
         return false;
     }
-    let allBlocks = EntryStatic.getAllBlocks();
+    let allBlocks = RoCodeStatic.getAllBlocks();
     for (let i = 0, len = allBlocks.length; i < len; i++) {
         let blocks = allBlocks[i].blocks;
         if (blocks.indexOf(blockName) > -1) {
@@ -557,8 +557,8 @@ EntryStatic.getCategoryByBlock = function(blockName) {
     return false;
 };
 
-EntryStatic.objectMainCategories = [
-    'entrybot_friends',
+RoCodeStatic.objectMainCategories = [
+    'RoCodebot_friends',
     'people',
     'animal',
     'plant',
@@ -572,8 +572,8 @@ EntryStatic.objectMainCategories = [
     'background',
 ];
 
-EntryStatic.objectSubCategories = {
-    entrybot_friends: [],
+RoCodeStatic.objectSubCategories = {
+    RoCodebot_friends: [],
     people: [],
     animal: ['animal_flying', 'animal_land', 'animal_water', 'animal_others'],
     plant: ['plant_flower', 'plant_grass', 'plant_tree', 'plant_others'],
@@ -592,7 +592,7 @@ EntryStatic.objectSubCategories = {
     ],
 };
 
-EntryStatic.fonts = [
+RoCodeStatic.fonts = [
     {
         name: Lang.Fonts.batang,
         family: 'KoPub Batang',
@@ -703,7 +703,7 @@ EntryStatic.fonts = [
     },
 ];
 
-EntryStatic.colorSet = {
+RoCodeStatic.colorSet = {
     arrow: {
         default: {
             DEFAULT: '#FFFFFF',
@@ -802,15 +802,15 @@ EntryStatic.colorSet = {
     },
 };
 
-EntryStatic.initOptions = {
+RoCodeStatic.initOptions = {
     listEnable: false,
     functionEnable: false,
     sceneEditable: false,
 };
 
-EntryStatic.hwCategoryList = ['hw_motor', 'hw_melody', 'hw_sensor', 'hw_led'];
+RoCodeStatic.hwCategoryList = ['hw_motor', 'hw_melody', 'hw_sensor', 'hw_led'];
 
-EntryStatic.hwMiniSupportList = [
+RoCodeStatic.hwMiniSupportList = [
     'neobot',
     'roborobo_schoolkit',
     'robotis_openCM70',
@@ -818,7 +818,7 @@ EntryStatic.hwMiniSupportList = [
     'robotis_Dream',
 ];
 
-EntryStatic.COMMAND_TYPES = {
+RoCodeStatic.COMMAND_TYPES = {
     addThread: 101,
     destroyThread: 102,
     destroyBlock: 103,
@@ -838,21 +838,21 @@ EntryStatic.COMMAND_TYPES = {
     redo: 303,
 };
 
-EntryStatic.getDefaultFontFamily = function() {
+RoCodeStatic.getDefaultFontFamily = function() {
     const localLang = Lang || {};
     const type = localLang.type;
     const fallbackType = localLang.fallbackType;
     const langType = type || fallbackType || 'en';
     switch (langType) {
         default:
-            return "EntryNG, NanumGothic, 나눔고딕, NanumGothicWeb, '맑은 고딕', 'Malgun Gothic', Dotum";
+            return "RoCodeNG, NanumGothic, 나눔고딕, NanumGothicWeb, '맑은 고딕', 'Malgun Gothic', Dotum";
     }
 };
 
 // for server node js code
 if (typeof exports == 'object') {
-    exports.blockInfo = EntryStatic.blockInfo;
-    exports.getAllBlocks = EntryStatic.getAllBlocks;
-    exports.getCategoryByBlock = EntryStatic.getCategoryByBlock;
-    exports.EntryStatic = EntryStatic;
+    exports.blockInfo = RoCodeStatic.blockInfo;
+    exports.getAllBlocks = RoCodeStatic.getAllBlocks;
+    exports.getCategoryByBlock = RoCodeStatic.getCategoryByBlock;
+    exports.RoCodeStatic = RoCodeStatic;
 }

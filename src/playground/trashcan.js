@@ -1,5 +1,5 @@
 'use strict';
-Entry.FieldTrashcan = class FieldTrashcan {
+RoCode.FieldTrashcan = class FieldTrashcan {
     constructor(board) {
         if (board) {
             this.setBoard(board);
@@ -7,8 +7,8 @@ Entry.FieldTrashcan = class FieldTrashcan {
         this.dragBlock = null;
         this.dragBlockObserver = null;
         this.isOver = false;
-        if (Entry.windowResized) {
-            Entry.windowResized.attach(this, this.setPosition);
+        if (RoCode.windowResized) {
+            RoCode.windowResized.attach(this, this.setPosition);
         }
     }
 
@@ -19,7 +19,7 @@ Entry.FieldTrashcan = class FieldTrashcan {
     }
 
     renderStart() {
-        const path = `${Entry.mediaFilePath}delete_`;
+        const path = `${RoCode.mediaFilePath}delete_`;
         this.svgGroup.elem('image', {
             href: `${path}body.svg`,
             y: 19,
@@ -35,9 +35,9 @@ Entry.FieldTrashcan = class FieldTrashcan {
 
     _addControl() {
         $(this.svgGroup).bind('mousedown', function(e) {
-            if (Entry.Utils.isRightButton(e)) {
+            if (RoCode.Utils.isRightButton(e)) {
                 e.stopPropagation();
-                $('#entryWorkspaceBoard').css('background', 'white');
+                $('#RoCodeWorkspaceBoard').css('background', 'white');
             }
         });
     }
@@ -52,24 +52,24 @@ Entry.FieldTrashcan = class FieldTrashcan {
         }
 
         if (block) {
-            if (block instanceof Entry.Comment) {
+            if (block instanceof RoCode.Comment) {
                 this.dragBlockObserver = block.observe(this, 'checkBlock', ['moveX', 'moveY']);
             } else {
                 this.dragBlockObserver = block.observe(this, 'checkBlock', ['x', 'y']);
             }
         } else {
             if (this.isOver && this.dragBlock) {
-                if (this.dragBlock instanceof Entry.BlockView) {
+                if (this.dragBlock instanceof RoCode.BlockView) {
                     const prevBlock = this.dragBlock.block.getPrevBlock();
                     if (!prevBlock) {
-                        Entry.do('destroyThread', this.dragBlock.block.thread, 'trashcan').isPass(
+                        RoCode.do('destroyThread', this.dragBlock.block.thread, 'trashcan').isPass(
                             true,
                             true
                         );
-                        Entry.Utils.playSound('entryDelete');
+                        RoCode.Utils.playSound('RoCodeDelete');
                     }
-                } else if (this.dragBlock instanceof Entry.Comment) {
-                    Entry.do('removeComment', this.dragBlock).isPass(true, true);
+                } else if (this.dragBlock instanceof RoCode.Comment) {
+                    RoCode.do('removeComment', this.dragBlock).isPass(true, true);
                 }
             }
             this.tAnimation(false);
@@ -163,7 +163,7 @@ Entry.FieldTrashcan = class FieldTrashcan {
 
         this._dragBlockObserver = board.observe(this, 'updateDragBlock', ['dragBlock']);
         this.svgGroup.attr({
-            filter: `url(#entryTrashcanFilter_${board.suffix})`,
+            filter: `url(#RoCodeTrashcanFilter_${board.suffix})`,
         });
         this.setPosition();
     }

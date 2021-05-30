@@ -1,9 +1,9 @@
 /**
- * @fileoverview Scene controller for entry.
+ * @fileoverview Scene controller for RoCode.
  */
 'use strict';
 
-import { Sortable } from '@entrylabs/tool';
+import { Sortable } from '@RoCodelabs/tool';
 
 /**
  * Class for a scene controller.
@@ -12,16 +12,16 @@ import { Sortable } from '@entrylabs/tool';
  */
 const STATIC_SCENES_COUNT = 30;
 
-Entry.Scene = class {
+RoCode.Scene = class {
     constructor() {
         this.scenes_ = [];
         this.selectedScene = null;
         this.maxCount = this.getMaxSceneCount() || 30;
         $(window).on('resize', this.resize.bind(this));
 
-        this.disposeEvent = Entry.disposeEvent.attach(this, (e) => {
+        this.disposeEvent = RoCode.disposeEvent.attach(this, (e) => {
             const elem = document.activeElement;
-            if (e && elem && elem !== e.target && $(elem).hasClass('entrySceneFieldWorkspace')) {
+            if (e && elem && elem !== e.target && $(elem).hasClass('RoCodeSceneFieldWorkspace')) {
                 elem.blur();
             }
         });
@@ -29,14 +29,14 @@ Entry.Scene = class {
 
     /**
      * Control bar view generator.
-     * @param {!Element} sceneView sceneView from Entry.
+     * @param {!Element} sceneView sceneView from RoCode.
      * @param {?string} option for choose type of view.
      */
     generateView(sceneView, option) {
         this.view_ = sceneView;
-        this.view_.addClass('entryScene');
+        this.view_.addClass('RoCodeScene');
         if (!option || option === 'workspace' || option === 'playground') {
-            this.view_.addClass('entrySceneWorkspace');
+            this.view_.addClass('RoCodeSceneWorkspace');
 
             $(this.view_).on('mousedown touchstart', (e) => {
                 const offset = $(this.view_).offset();
@@ -45,7 +45,7 @@ Entry.Scene = class {
                 const slope = -40 / 55;
                 const selectedScene = this.selectedScene;
                 const selectedLeft = $(selectedScene.view)
-                    .find('.entrySceneRemoveButtonCoverWorkspace')
+                    .find('.RoCodeSceneRemoveButtonCoverWorkspace')
                     .offset().left;
 
                 const x = e.pageX - offset.left + $window.scrollLeft() - selectedLeft;
@@ -60,7 +60,7 @@ Entry.Scene = class {
             this.view_.appendChild(listView);
             this.listView_ = listView;
 
-            if (Entry.sceneEditable) {
+            if (RoCode.sceneEditable) {
                 const addButton = this.createAddButton();
                 this.view_.appendChild(addButton);
                 this.addButton_ = addButton;
@@ -76,22 +76,22 @@ Entry.Scene = class {
                 this.prevButton_ = scenePrevButton;
                 this.nextButton_ = sceneNextButton;
 
-                this.sceneListWidth = Entry.scene.listView_.offsetWidth;
+                this.sceneListWidth = RoCode.scene.listView_.offsetWidth;
                 this.updateView();
             }
         }
     }
 
     createAddButton() {
-        const addButton = Entry.createElement('span').addClass(
-            'entrySceneElementWorkspace entrySceneAddButtonWorkspace'
+        const addButton = RoCode.createElement('span').addClass(
+            'RoCodeSceneElementWorkspace RoCodeSceneAddButtonWorkspace'
         );
 
         addButton.bindOnClick((e) => {
-            if (Entry.engine.isState('run')) {
+            if (RoCode.engine.isState('run')) {
                 return;
             }
-            Entry.do('sceneAdd', Entry.generateHash());
+            RoCode.do('sceneAdd', RoCode.generateHash());
         });
 
         return addButton;
@@ -100,13 +100,13 @@ Entry.Scene = class {
      * prev scene button
      */
     scenePrevButton() {
-        const prevButton = Entry.createElement('span').addClass(
-            'entrySceneElementWorkspace entryScenePrevButtonWorkspace'
+        const prevButton = RoCode.createElement('span').addClass(
+            'RoCodeSceneElementWorkspace RoCodeScenePrevButtonWorkspace'
         );
 
         const prevBtn = document.createElement('span').addClass('prevBtn');
         prevButton.bindOnClick((e) => {
-            this.selectScene(Entry.scene.getPrevScene());
+            this.selectScene(RoCode.scene.getPrevScene());
         });
 
         prevButton.appendChild(prevBtn);
@@ -117,23 +117,23 @@ Entry.Scene = class {
      * next scene, add scene button
      */
     sceneNextButton() {
-        const nextButton = Entry.createElement('span').addClass(
-            'entrySceneElementWorkspace entrySceneNextButtonWorkspace'
+        const nextButton = RoCode.createElement('span').addClass(
+            'RoCodeSceneElementWorkspace RoCodeSceneNextButtonWorkspace'
         );
 
         const nextBtn = document.createElement('span').addClass('nextBtn');
         nextBtn.bindOnClick((e) => {
-            this.selectScene(Entry.scene.getNextScene());
+            this.selectScene(RoCode.scene.getNextScene());
         });
 
         const addButton = document.createElement('span').addClass('addButton');
         addButton.bindOnClick((e) => {
-            if (Entry.engine.isState('run')) {
+            if (RoCode.engine.isState('run')) {
                 return;
             }
-            this.sceneListwidth = Entry.scene.listView_.offsetWidth;
+            this.sceneListwidth = RoCode.scene.listView_.offsetWidth;
 
-            Entry.do('sceneAdd', Entry.generateHash());
+            RoCode.do('sceneAdd', RoCode.generateHash());
         });
 
         this.nextAddButton_ = addButton;
@@ -144,22 +144,22 @@ Entry.Scene = class {
     }
 
     createListView() {
-        const listView = Entry.createElement('div');
-        listView.addClass('entrySceneListWorkspace');
+        const listView = RoCode.createElement('div');
+        listView.addClass('RoCodeSceneListWorkspace');
 
         this.sceneSortableListWidget = new Sortable({
             data: {
                 height: '100%',
-                sortableTarget: ['entrySceneRemoveButtonWorkspace', 'entrySceneInputCover'],
+                sortableTarget: ['RoCodeSceneRemoveButtonWorkspace', 'RoCodeSceneInputCover'],
                 lockAxis: 'x',
                 axis: 'x',
                 items: this._getSortableSceneList(),
             },
             container: listView,
         });
-        if (Entry.sceneEditable) {
+        if (RoCode.sceneEditable) {
             this.sceneSortableListWidget.on('change', ([newIndex, oldIndex]) => {
-                Entry.scene.moveScene(newIndex, oldIndex);
+                RoCode.scene.moveScene(newIndex, oldIndex);
             });
         }
         return listView;
@@ -189,7 +189,7 @@ Entry.Scene = class {
      */
     generateElement(scene) {
         const viewTemplate = this.createViewTemplate(scene);
-        Entry.Utils.disableContextmenu(viewTemplate);
+        RoCode.Utils.disableContextmenu(viewTemplate);
 
         const nameField = this.createNameField(scene);
         viewTemplate.nameField = nameField;
@@ -205,20 +205,20 @@ Entry.Scene = class {
         const removeButtonCover = this.createRemoveButtonCover();
         viewTemplate.appendChild(removeButtonCover);
 
-        if (Entry.sceneEditable) {
+        if (RoCode.sceneEditable) {
             scene.removeButton = this.createRemoveButton(scene, removeButtonCover);
 
-            Entry.ContextMenu.onContextmenu(viewTemplate, (coordinate) => {
+            RoCode.ContextMenu.onContextmenu(viewTemplate, (coordinate) => {
                 const options = [
                     {
                         text: Lang.Workspace.duplicate_scene,
-                        enable: Entry.engine.isState('stop') && !this.isMax(),
+                        enable: RoCode.engine.isState('stop') && !this.isMax(),
                         callback() {
-                            Entry.scene.cloneScene(scene);
+                            RoCode.scene.cloneScene(scene);
                         },
                     },
                 ];
-                Entry.ContextMenu.show(options, 'workspace-contextmenu', coordinate);
+                RoCode.ContextMenu.show(options, 'workspace-contextmenu', coordinate);
             });
         }
 
@@ -228,56 +228,56 @@ Entry.Scene = class {
     }
 
     createRemoveButton(scene, removeButtonCover) {
-        return Entry.createElement('button')
-            .addClass('entrySceneRemoveButtonWorkspace')
+        return RoCode.createElement('button')
+            .addClass('RoCodeSceneRemoveButtonWorkspace')
             .bindOnClick((e) => {
-                if (Entry.engine.isState('run')) {
+                if (RoCode.engine.isState('run')) {
                     return;
                 }
-                const isDeletable = Entry.scene.getScenes().length > 1;
+                const isDeletable = RoCode.scene.getScenes().length > 1;
                 if (!isDeletable) {
-                    Entry.toast.alert(
+                    RoCode.toast.alert(
                         Lang.Msgs.runtime_error,
                         Lang.Workspace.Scene_delete_error,
                         false
                     );
                     return;
                 }
-                Entry.do('sceneRemove', scene.id);
+                RoCode.do('sceneRemove', scene.id);
             })
             .appendTo(removeButtonCover);
     }
 
     createRemoveButtonCover() {
-        const removeButtonCover = Entry.createElement('span');
-        removeButtonCover.addClass('entrySceneRemoveButtonCoverWorkspace');
+        const removeButtonCover = RoCode.createElement('span');
+        removeButtonCover.addClass('RoCodeSceneRemoveButtonCoverWorkspace');
         return removeButtonCover;
     }
 
     createSceneDivider() {
-        const divide = Entry.createElement('span');
-        divide.addClass('entrySceneInputCover');
+        const divide = RoCode.createElement('span');
+        divide.addClass('RoCodeSceneInputCover');
         return divide;
     }
 
     createSceneLeft() {
-        const sceneLeft = Entry.createElement('span');
-        sceneLeft.addClass('entrySceneLeftWorkspace');
+        const sceneLeft = RoCode.createElement('span');
+        sceneLeft.addClass('RoCodeSceneLeftWorkspace');
         return sceneLeft;
     }
 
     createNameField(scene) {
-        const nameField = Entry.createElement('input');
-        nameField.addClass('entrySceneFieldWorkspace');
+        const nameField = RoCode.createElement('input');
+        nameField.addClass('RoCodeSceneFieldWorkspace');
         nameField.value = scene.name;
 
         nameField.addEventListener('keyup', ({ keyCode: code }) => {
-            if (Entry.isArrowOrBackspace(code)) {
+            if (RoCode.isArrowOrBackspace(code)) {
                 return;
             }
 
             const applyValue = (value) => {
-                value !== scene.name && Entry.do('sceneRename', scene.id, value);
+                value !== scene.name && RoCode.do('sceneRename', scene.id, value);
                 nameField.blur();
             };
 
@@ -292,17 +292,17 @@ Entry.Scene = class {
         });
         nameField.addEventListener('blur', (e) => {
             if (nameField.value !== scene.name) {
-                Entry.do('sceneRename', scene.id, nameField.value);
+                RoCode.do('sceneRename', scene.id, nameField.value);
             }
 
-            const { playground = {} } = Entry;
+            const { playground = {} } = RoCode;
             const { mainWorkspace } = playground;
             if (mainWorkspace) {
                 mainWorkspace.reDraw();
             }
         });
 
-        if (!Entry.sceneEditable) {
+        if (!RoCode.sceneEditable) {
             nameField.disabled = 'disabled';
         }
 
@@ -310,14 +310,14 @@ Entry.Scene = class {
     }
 
     createViewTemplate(scene) {
-        const viewTemplate = Entry.createElement('div', scene.id);
-        viewTemplate.addClass('entrySceneElementWorkspace  entrySceneButtonWorkspace minValue');
+        const viewTemplate = RoCode.createElement('div', scene.id);
+        viewTemplate.addClass('RoCodeSceneElementWorkspace  RoCodeSceneButtonWorkspace minValue');
         $(viewTemplate).on('mousedown touchstart', (e) => {
-            if (Entry.engine.isState('run')) {
+            if (RoCode.engine.isState('run')) {
                 return;
             }
-            if (Entry.scene.selectedScene !== scene) {
-                Entry.do('sceneSelect', scene.id);
+            if (RoCode.scene.selectedScene !== scene) {
+                RoCode.do('sceneSelect', scene.id);
                 if (e.type === 'touchstart') {
                     e.preventDefault();
                 }
@@ -327,28 +327,28 @@ Entry.Scene = class {
     }
 
     updateView() {
-        if (!Entry.type || Entry.type === 'workspace') {
+        if (!RoCode.type || RoCode.type === 'workspace') {
             // var parent = this.listView_;
             // this.getScenes().forEach(({ view }) => parent.appendChild(view));
             const addBtnWidth = 44;
             const sceneListWidth = this.sceneListWidth + addBtnWidth;
-            const browserWidth = Entry.view_.offsetWidth;
-            const maxSceneCount = Entry.scene.scenes_.length || STATIC_SCENES_COUNT;
+            const browserWidth = RoCode.view_.offsetWidth;
+            const maxSceneCount = RoCode.scene.scenes_.length || STATIC_SCENES_COUNT;
             if (this.addButton_) {
                 if (maxSceneCount >= STATIC_SCENES_COUNT) {
-                    this.addButton_.addClass('entryRemove');
-                    this.nextAddButton_.addClass('entryRemove');
+                    this.addButton_.addClass('RoCodeRemove');
+                    this.nextAddButton_.addClass('RoCodeRemove');
                 } else {
-                    this.addButton_.removeClass('entryRemove');
-                    this.prevButton_.removeClass('entryRemove');
-                    this.nextButton_.removeClass('entryRemove');
+                    this.addButton_.removeClass('RoCodeRemove');
+                    this.prevButton_.removeClass('RoCodeRemove');
+                    this.nextButton_.removeClass('RoCodeRemove');
 
                     if (sceneListWidth > browserWidth) {
-                        this.addButton_.addClass('entryRemove');
-                        this.nextAddButton_.removeClass('entryRemove');
+                        this.addButton_.addClass('RoCodeRemove');
+                        this.nextAddButton_.removeClass('RoCodeRemove');
                     } else {
-                        this.nextButton_.addClass('entryRemove');
-                        this.prevButton_.addClass('entryRemove');
+                        this.nextButton_.addClass('RoCodeRemove');
+                        this.prevButton_.addClass('RoCodeRemove');
                     }
                 }
             }
@@ -393,13 +393,13 @@ Entry.Scene = class {
             this.getScenes().splice(index, 0, scene);
         }
 
-        Entry.stage.objectContainers.push(Entry.stage.createObjectContainer(scene));
+        RoCode.stage.objectContainers.push(RoCode.stage.createObjectContainer(scene));
         this.selectScene(scene);
 
-        if (Entry.creationChangedEvent) {
-            Entry.creationChangedEvent.notify();
+        if (RoCode.creationChangedEvent) {
+            RoCode.creationChangedEvent.notify();
         }
-        const { playground = {} } = Entry || {};
+        const { playground = {} } = RoCode || {};
         const { mainWorkspace } = playground;
         if (mainWorkspace) {
             mainWorkspace.reDraw();
@@ -413,17 +413,17 @@ Entry.Scene = class {
      */
     removeScene(scene) {
         if (this.getScenes().length <= 1) {
-            Entry.toast.alert(Lang.Msgs.runtime_error, Lang.Workspace.Scene_delete_error, false);
+            RoCode.toast.alert(Lang.Msgs.runtime_error, Lang.Workspace.Scene_delete_error, false);
             return;
         }
-        Entry.Utils.forceStopSounds();
+        RoCode.Utils.forceStopSounds();
         scene = this.getSceneById(typeof scene === 'string' ? scene : scene.id);
 
         this.getScenes().splice(this.getScenes().indexOf(scene), 1);
-        Entry.container
+        RoCode.container
             .getSceneObjects(scene)
-            .forEach((object) => Entry.container.removeObject(object, true));
-        Entry.stage.removeObjectContainer(scene);
+            .forEach((object) => RoCode.container.removeObject(object, true));
+        RoCode.stage.removeObjectContainer(scene);
         $(scene.view).remove();
         this.selectScene();
         this.updateView();
@@ -431,7 +431,7 @@ Entry.Scene = class {
 
     selectScene(scene) {
         const targetScene = scene || this.getScenes()[0];
-        const container = Entry.container;
+        const container = RoCode.container;
 
         container.resetSceneDuringRun();
 
@@ -439,9 +439,9 @@ Entry.Scene = class {
             return;
         }
         if (
-            Entry.playground.getViewMode() === 'picture' &&
-            Entry.playground.nameViewFocus &&
-            Entry.playground.nameViewBlur()
+            RoCode.playground.getViewMode() === 'picture' &&
+            RoCode.playground.nameViewFocus &&
+            RoCode.playground.nameViewBlur()
         ) {
             return;
         }
@@ -457,8 +457,8 @@ Entry.Scene = class {
         this.selectedScene = targetScene;
         targetScene.view.addClass('selectedScene');
 
-        const stage = Entry.stage;
-        const playground = Entry.playground;
+        const stage = RoCode.stage;
+        const playground = RoCode.playground;
 
         container.setCurrentObjects();
 
@@ -466,12 +466,12 @@ Entry.Scene = class {
 
         const targetObject = container.getCurrentObjects()[0];
 
-        if (targetObject && Entry.type !== 'minimize') {
+        if (targetObject && RoCode.type !== 'minimize') {
             container.selectObject(targetObject.id);
             playground.refreshPlayground();
         } else {
-            if (Entry.isTextMode) {
-                const workspace = Entry.getMainWS();
+            if (RoCode.isTextMode) {
+                const workspace = RoCode.getMainWS();
                 const vimBoard = workspace && workspace.vimBoard;
                 if (vimBoard) {
                     const sObject = vimBoard._currentObject;
@@ -493,17 +493,17 @@ Entry.Scene = class {
 
             stage.selectObject(null);
             playground.flushPlayground();
-            Entry.variableContainer.selected = null;
-            Entry.variableContainer.updateList();
+            RoCode.variableContainer.selected = null;
+            RoCode.variableContainer.updateList();
         }
         !container.listView_ && stage.sortZorder();
 
         container.updateListView();
-        if (Entry.type && Entry.type !== 'minimize' && Entry.scene.listView_) {
-            this.sceneListWidth = Entry.scene.listView_.offsetWidth;
+        if (RoCode.type && RoCode.type !== 'minimize' && RoCode.scene.listView_) {
+            this.sceneListWidth = RoCode.scene.listView_.offsetWidth;
         }
         this.updateView();
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     /**
@@ -522,11 +522,11 @@ Entry.Scene = class {
      */
     moveScene(start, end) {
         this.getScenes().splice(end, 0, this.getScenes().splice(start, 1)[0]);
-        Entry.container.updateObjectsOrder();
-        Entry.stage.sortZorder();
+        RoCode.container.updateObjectsOrder();
+        RoCode.stage.sortZorder();
         this.updateSceneView();
         //style properties are not removed sometimes
-        $('.entrySceneElementWorkspace').removeAttr('style');
+        $('.RoCodeSceneElementWorkspace').removeAttr('style');
     }
 
     /**
@@ -539,7 +539,7 @@ Entry.Scene = class {
     }
 
     /**
-     * @return {Array<Entry scene>}
+     * @return {Array<RoCode scene>}
      */
     getScenes() {
         return this.scenes_;
@@ -567,13 +567,13 @@ Entry.Scene = class {
      */
     createScene(sceneId) {
         const regex = /[0-9]/;
-        let name = Entry.getOrderedName(`${Lang.Blocks.SCENE} `, this.scenes_, 'name');
+        let name = RoCode.getOrderedName(`${Lang.Blocks.SCENE} `, this.scenes_, 'name');
         if (!regex.test(name)) {
             name += '1';
         }
         const scene = {
             name,
-            id: sceneId || Entry.generateHash(),
+            id: sceneId || RoCode.generateHash(),
         };
 
         this.generateElement(scene);
@@ -586,19 +586,19 @@ Entry.Scene = class {
      */
     cloneScene(scene) {
         if (this.isMax()) {
-            Entry.toast.alert(Lang.Msgs.runtime_error, Lang.Workspace.Scene_add_error, false);
+            RoCode.toast.alert(Lang.Msgs.runtime_error, Lang.Workspace.Scene_add_error, false);
             return;
         }
 
         const clonedScene = {
             name: (Lang.Workspace.cloned_scene + scene.name).substring(0, 10),
-            id: Entry.generateHash(),
+            id: RoCode.generateHash(),
         };
 
         this.generateElement(clonedScene);
         this.addScene(clonedScene);
 
-        const container = Entry.container;
+        const container = RoCode.container;
         const objects = container.getSceneObjects(scene);
 
         try {
@@ -612,14 +612,14 @@ Entry.Scene = class {
                 newIds.push(ret.id);
             }
             container.adjustClonedValues(oldIds, newIds);
-            const WS = Entry.getMainWS();
+            const WS = RoCode.getMainWS();
             WS && WS.board && WS.board.reDraw();
             this.isSceneCloning = false;
             container.setCurrentObjects();
             container.updateObjectsOrder();
             container.updateListView();
             container.selectObject(newIds[newIds.length - 1]);
-            Entry.variableContainer.updateViews();
+            RoCode.variableContainer.updateViews();
         } catch (e) {
             console.log('error', e);
         }
@@ -655,7 +655,7 @@ Entry.Scene = class {
             isSelectedView = view === this.selectedScene.view;
             view = $(view);
 
-            const width = parseFloat(Entry.computeInputWidth(scene.name));
+            const width = parseFloat(RoCode.computeInputWidth(scene.name));
             const adjusted = (width * 10) / 9;
             if (scene === this.selectedScene) {
                 diff = adjusted - width;
@@ -709,11 +709,11 @@ Entry.Scene = class {
     }
 
     isMax() {
-        return Entry.scene.scenes_.length >= STATIC_SCENES_COUNT;
+        return RoCode.scene.scenes_.length >= STATIC_SCENES_COUNT;
     }
 
     clear() {
-        this.scenes_.forEach((s) => Entry.stage.removeObjectContainer(s));
+        this.scenes_.forEach((s) => RoCode.stage.removeObjectContainer(s));
         this.scenes_ = [];
         this.selectedScene = null;
         this.updateView();

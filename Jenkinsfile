@@ -1,7 +1,7 @@
 pipeline {
   agent none
   stages {
-    stage('EntryJS Test') {
+    stage('RoCodeJS Test') {
       when {
         beforeAgent true
         expression {
@@ -27,7 +27,7 @@ pipeline {
       }
     }
     stage('SonarQube Analysis') {
-      when { 
+      when {
         beforeAgent true
         expression {
           return env.CHANGE_ID
@@ -43,11 +43,11 @@ pipeline {
           def scannerHome = tool "sonarqube-scanner";
           withSonarQubeEnv("sonar") {
             sh "${scannerHome}/bin/sonar-scanner " +
-            "-Dsonar.projectKey=entry.entryjs " +
-            "-Dsonar.projectName=entryjs " +
+            "-Dsonar.projectKey=RoCode.RoCodejs " +
+            "-Dsonar.projectName=RoCodejs " +
             "-Dsonar.sourceEncoding=UTF-8 " +
             "-Dsonar.analysis.mode=preview " +
-            "-Dsonar.github.repository=entrylabs/entryjs " +
+            "-Dsonar.github.repository=RoCodelabs/RoCodejs " +
             "-Dsonar.github.endpoint=https://api.github.com " +
             "-Dsonar.github.oauth=${GH_TOKEN} " +
             "-Dsonar.issuesReport.console.enable=true " +
@@ -76,15 +76,15 @@ pipeline {
           def scannerHome = tool "sonarqube-scanner";
           withSonarQubeEnv("sonar") {
             sh "${scannerHome}/bin/sonar-scanner " +
-            "-Dsonar.projectKey=entry.entryjs " +
-            "-Dsonar.projectName=entryjs " +
+            "-Dsonar.projectKey=RoCode.RoCodejs " +
+            "-Dsonar.projectName=RoCodejs " +
             "-Dsonar.sourceEncoding=UTF-8 " +
             "-Dsonar.sources=src "
           }
         }
       }
     }
-    stage('EntryJS Deploy') {
+    stage('RoCodeJS Deploy') {
       when {
         beforeAgent true
         allOf {
@@ -110,7 +110,7 @@ chmod +x ./scripts/deploy.sh
     }
   }
   environment {
-    GH_REPO = 'https://github.com/entrylabs/entryjs.git'
-    GH_REF = 'github.com/entrylabs/entryjs.git'
+    GH_REPO = 'https://github.com/RoCodelabs/RoCodejs.git'
+    GH_REF = 'github.com/RoCodelabs/RoCodejs.git'
   }
 }

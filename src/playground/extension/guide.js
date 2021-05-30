@@ -2,7 +2,7 @@
 
 const TRANSFORM = 'transform';
 
-Entry.ExtGuide = class ExtGuide {
+RoCode.ExtGuide = class ExtGuide {
     constructor(content, blockView, mode) {
         this.blockView = blockView;
         this.block = blockView.block;

@@ -13,7 +13,7 @@ import ModelClass from '../core/modelClass';
 const VARIABLE = 'variable';
 const HW = 'arduino';
 const practicalCourseCategoryList = ['hw_motor', 'hw_melody', 'hw_sensor', 'hw_led', 'hw_robot'];
-const splitterHPadding = EntryStatic.splitterHPadding || 20;
+const splitterHPadding = RoCodeStatic.splitterHPadding || 20;
 const BETA_LIST = ['ai_utilize', 'analysis'];
 
 type BlockMenuAlignType = 'LEFT' | 'CENTER';
@@ -35,31 +35,31 @@ class BlockMenu extends ModelClass<Schema> {
     public visible = true;
     public hwCodeOutdated = false;
     public code: any;
-    public view: EntryDom;
-    public changeEvent: any; // Entry.Event
-    public categoryDoneEvent: any; // Entry.Event
-    public codeListener: any; // Entry.Event
+    public view: RoCodeDom;
+    public changeEvent: any; // RoCode.Event
+    public categoryDoneEvent: any; // RoCode.Event
+    public codeListener: any; // RoCode.Event
     private readonly _svgId = `blockMenu${Date.now()}`;
     private readonly suffix = 'blockMenu';
     private readonly _dSelectMenu: any;
     private readonly _scroll: boolean;
-    private readonly _scroller: any; // Entry.BlockMenuScroller
+    private readonly _scroller: any; // RoCode.BlockMenuScroller
     private readonly _bannedClass: string[];
     private readonly _splitters: any[];
     // view elements
-    private svg: any; // Entry.SVG
-    private svgDom: EntryDom;
+    private svg: any; // RoCode.SVG
+    private svgDom: RoCodeDom;
     private pattern: any;
     private svgGroup: any;
     private svgThreadGroup: any;
     private svgBlockGroup: any;
     private svgCommentGroup: any;
     private _boardBlockView: any; // in block
-    private _categoryCol: EntryDom;
+    private _categoryCol: RoCodeDom;
     private _offset: JQuery.Coordinates;
-    private categoryWrapper: EntryDom;
-    private blockMenuContainer: EntryDom;
-    private blockMenuWrapper: EntryDom;
+    private categoryWrapper: RoCodeDom;
+    private blockMenuContainer: RoCodeDom;
+    private blockMenuWrapper: RoCodeDom;
     private objectAlert: any;
     private _dynamicThreads: any[];
     private _selectDynamic: boolean;
@@ -67,8 +67,8 @@ class BlockMenu extends ModelClass<Schema> {
     private _align: BlockMenuAlignType;
     private _categories: any[];
     private _categoryData: CategoryData[];
-    private _categoryElems: { [categoryName: string]: EntryDom };
-    private _selectedCategoryView?: EntryDom;
+    private _categoryElems: { [categoryName: string]: RoCodeDom };
+    private _selectedCategoryView?: RoCodeDom;
     private _renderedCategories: { [key: string]: boolean };
     private _threadsMap: { [key: string]: any }; // any => thread
     private _svgWidth: number;
@@ -79,7 +79,7 @@ class BlockMenu extends ModelClass<Schema> {
 
     private firstSelector: string;
     private workspace: any;
-    private dragInstance: any; // Entry.dragInstance
+    private dragInstance: any; // RoCode.dragInstance
     // schema
     private selectedBlockView: any;
     private dragBlock: any;
@@ -127,7 +127,7 @@ class BlockMenu extends ModelClass<Schema> {
     }, 100);
 
     constructor(
-        dom: EntryDom,
+        dom: RoCodeDom,
         align: BlockMenuAlignType,
         categoryData: CategoryData[],
         scroll: boolean
@@ -141,7 +141,7 @@ class BlockMenu extends ModelClass<Schema> {
             },
             false
         );
-        const { hardwareEnable } = Entry;
+        const { hardwareEnable } = RoCode;
 
         this._dSelectMenu = debounce(this.selectMenu, 0);
 
@@ -175,9 +175,9 @@ class BlockMenu extends ModelClass<Schema> {
         this._splitters = [];
         this.setWidth();
 
-        this.svg = Entry.SVG(this._svgId);
-        Entry.Utils.addFilters(this.svg, this.suffix);
-        const { pattern } = Entry.Utils.addBlockPattern(this.svg, this.suffix);
+        this.svg = RoCode.SVG(this._svgId);
+        RoCode.Utils.addFilters(this.svg, this.suffix);
+        const { pattern } = RoCode.Utils.addBlockPattern(this.svg, this.suffix);
         this.pattern = pattern;
 
         this.svgGroup = this.svg.elem('g');
@@ -191,39 +191,39 @@ class BlockMenu extends ModelClass<Schema> {
         this.svgCommentGroup = this.svgGroup.elem('g');
         this.svgCommentGroup.board = this;
 
-        this.changeEvent = new Entry.Event(this);
-        this.categoryDoneEvent = new Entry.Event(this);
+        this.changeEvent = new RoCode.Event(this);
+        this.categoryDoneEvent = new RoCode.Event(this);
 
         this.observe(this, '_handleDragBlock', ['dragBlock']);
 
-        this.changeCode(new Entry.Code([]));
+        this.changeCode(new RoCode.Code([]));
         this._categoryData && this._generateCategoryCodes();
 
         if (this._scroll) {
-            this._scroller = new Entry.BlockMenuScroller(this);
+            this._scroller = new RoCode.BlockMenuScroller(this);
             this._addControl($dom.find('.blockMenuContainer'));
         }
 
-        if (this.code && Entry.keyPressed) {
-            Entry.keyPressed.attach(this, this._captureKeyEvent);
+        if (this.code && RoCode.keyPressed) {
+            RoCode.keyPressed.attach(this, this._captureKeyEvent);
         }
-        if (Entry.windowResized) {
-            Entry.windowResized.attach(this, debounce(this.updateOffset, 200));
+        if (RoCode.windowResized) {
+            RoCode.windowResized.attach(this, debounce(this.updateOffset, 200));
         }
 
-        Entry.addEventListener(
+        RoCode.addEventListener(
             'setBlockMenuDynamic',
             function() {
                 this._setDynamicTimer = this._setDynamic.apply(this, arguments);
             }.bind(this)
         );
 
-        Entry.addEventListener('cancelBlockMenuDynamic', this._cancelDynamic.bind(this));
-        Entry.addEventListener('fontLoaded', this.reDraw.bind(this));
+        RoCode.addEventListener('cancelBlockMenuDynamic', this._cancelDynamic.bind(this));
+        RoCode.addEventListener('fontLoaded', this.reDraw.bind(this));
     }
 
     foldBlockMenu() {
-        const playground = Entry.playground;
+        const playground = RoCode.playground;
         if (!playground || playground.resizing) {
             return;
         }
@@ -241,10 +241,10 @@ class BlockMenu extends ModelClass<Schema> {
 
     changeCode(code: any) {
         if (code instanceof Array) {
-            code = new Entry.Code(code);
+            code = new RoCode.Code(code);
         }
 
-        if (!(code instanceof Entry.Code)) {
+        if (!(code instanceof RoCode.Code)) {
             return console.error('You must inject code instance');
         }
 
@@ -305,7 +305,7 @@ class BlockMenu extends ModelClass<Schema> {
             blockView.set({ display: true });
             shouldReDraw && blockView.reDraw();
 
-            const className = Entry.block[type].class;
+            const className = RoCode.block[type].class;
             if (pastClass && pastClass !== className) {
                 this._createSplitter(marginFromTop);
                 marginFromTop += vPadding;
@@ -330,11 +330,11 @@ class BlockMenu extends ModelClass<Schema> {
         if (this.workspace) {
             const mode = this.workspace.getMode();
             switch (mode) {
-                case Entry.Workspace.MODE_BOARD:
-                case Entry.Workspace.MODE_OVERLAYBOARD:
+                case RoCode.Workspace.MODE_BOARD:
+                case RoCode.Workspace.MODE_OVERLAYBOARD:
                     this.renderBlock(blocks);
                     break;
-                case Entry.Workspace.MODE_VIMBOARD:
+                case RoCode.Workspace.MODE_VIMBOARD:
                     this.renderText(blocks);
                     break;
                 default:
@@ -357,10 +357,10 @@ class BlockMenu extends ModelClass<Schema> {
             return;
         }
 
-        const GS = Entry.GlobalSvg;
+        const GS = RoCode.GlobalSvg;
         const workspace = this.workspace;
         const workspaceMode = workspace.getMode();
-        const { MODE_BOARD, MODE_OVERLAYBOARD } = Entry.Workspace;
+        const { MODE_BOARD, MODE_OVERLAYBOARD } = RoCode.Workspace;
 
         const svgWidth = this._svgWidth;
 
@@ -370,8 +370,8 @@ class BlockMenu extends ModelClass<Schema> {
         const dy = e.pageY - y;
         if (board && (workspaceMode === MODE_BOARD || workspaceMode === MODE_OVERLAYBOARD)) {
             if (!board.code) {
-                if (Entry.toast && !(this.objectAlert && Entry.toast.isOpen(this.objectAlert))) {
-                    this.objectAlert = Entry.toast.alert(
+                if (RoCode.toast && !(this.objectAlert && RoCode.toast.isOpen(this.objectAlert))) {
+                    this.objectAlert = RoCode.toast.alert(
                         Lang.Workspace.add_object_alert,
                         Lang.Workspace.add_object_alert_msg
                     );
@@ -396,7 +396,7 @@ class BlockMenu extends ModelClass<Schema> {
                 firstBlock.x = firstBlock.x - svgWidth + (dx || 0);
                 firstBlock.y = firstBlock.y + distance + (dy || 0);
 
-                const newBlock = Entry.do('addThreadFromBlockMenu', datum).value.getFirstBlock();
+                const newBlock = RoCode.do('addThreadFromBlockMenu', datum).value.getFirstBlock();
                 const newBlockView = newBlock?.view;
 
                 // if some error occured
@@ -436,7 +436,7 @@ class BlockMenu extends ModelClass<Schema> {
         this._boardBlockView = null;
 
         //board block should be removed below the amount of range
-        const { left, width } = Entry.GlobalSvg;
+        const { left, width } = RoCode.GlobalSvg;
         return left < boardBlockView.getBoard().offset().left - width / 2;
     }
 
@@ -447,7 +447,7 @@ class BlockMenu extends ModelClass<Schema> {
     setSelectedBlock(blockView?: any) {
         this.selectedBlockView?.removeSelected();
 
-        if (blockView instanceof Entry.BlockView) {
+        if (blockView instanceof RoCode.BlockView) {
             blockView.addSelected();
         } else {
             blockView = null;
@@ -457,11 +457,11 @@ class BlockMenu extends ModelClass<Schema> {
     }
 
     hide() {
-        this.view.addClass('entryRemove');
+        this.view.addClass('RoCodeRemove');
     }
 
     show() {
-        this.view.removeClass('entryRemove');
+        this.view.removeClass('RoCodeRemove');
     }
 
     renderText(blocks?: any[]) {
@@ -470,7 +470,7 @@ class BlockMenu extends ModelClass<Schema> {
         }
 
         blocks = blocks || this._getSortedBlocks();
-        const targetMode = Entry.BlockView.RENDER_MODE_TEXT;
+        const targetMode = RoCode.BlockView.RENDER_MODE_TEXT;
 
         blocks[0].forEach((block: any) => {
             if (targetMode === block.view.renderMode) {
@@ -481,7 +481,7 @@ class BlockMenu extends ModelClass<Schema> {
             if (view) {
                 view.renderText();
             } else {
-                thread.createView(this, Entry.BlockView.RENDER_MODE_TEXT);
+                thread.createView(this, RoCode.BlockView.RENDER_MODE_TEXT);
             }
         });
         return blocks;
@@ -493,7 +493,7 @@ class BlockMenu extends ModelClass<Schema> {
         }
 
         blocks = blocks || this._getSortedBlocks();
-        const targetMode = Entry.BlockView.RENDER_MODE_BLOCK;
+        const targetMode = RoCode.BlockView.RENDER_MODE_BLOCK;
 
         blocks[0].forEach((block: any) => {
             if (targetMode === block.view.renderMode) {
@@ -504,14 +504,14 @@ class BlockMenu extends ModelClass<Schema> {
             if (view) {
                 view.renderBlock();
             } else {
-                thread.createView(this, Entry.BlockView.RENDER_MODE_BLOCK);
+                thread.createView(this, RoCode.BlockView.RENDER_MODE_BLOCK);
             }
         });
         return blocks;
     }
 
     _createSplitter(topPos: number) {
-        const { common = {} } = EntryStatic.colorSet || {};
+        const { common = {} } = RoCodeStatic.colorSet || {};
         this._splitters.push(
             this.svgBlockGroup.elem('line', {
                 x1: splitterHPadding,
@@ -556,7 +556,7 @@ class BlockMenu extends ModelClass<Schema> {
             }
             const inVisible =
                 threads.reduce(
-                    (count, type) => (this.checkBanClass(Entry.block[type]) ? count - 1 : count),
+                    (count, type) => (this.checkBanClass(RoCode.block[type]) ? count - 1 : count),
                     threads.length
                 ) === 0;
             const elem = this._categoryElems[category];
@@ -570,16 +570,16 @@ class BlockMenu extends ModelClass<Schema> {
 
         requestAnimationFrame(() => {
             //visible
-            sorted[0].forEach((elem) => elem.removeClass('entryRemove'));
+            sorted[0].forEach((elem) => elem.removeClass('RoCodeRemove'));
             //invisible
-            sorted[1].forEach((elem) => elem.addClass('entryRemove'));
+            sorted[1].forEach((elem) => elem.addClass('RoCodeRemove'));
             this.selectMenu(0, true, doNotAlign);
         });
     }
 
     selectMenu(selector: number | string, doNotFold: boolean, doNotAlign?: boolean) {
-        if (Entry.disposeEvent) {
-            Entry.disposeEvent.notify();
+        if (RoCode.disposeEvent) {
+            RoCode.disposeEvent.notify();
         }
         if (!this._isOn() || !this._categoryData) {
             return;
@@ -599,7 +599,7 @@ class BlockMenu extends ModelClass<Schema> {
 
         switch (name) {
             case VARIABLE:
-                Entry.playground.checkVariables();
+                RoCode.playground.checkVariables();
                 break;
             case HW:
                 this._generateHwCode();
@@ -611,8 +611,8 @@ class BlockMenu extends ModelClass<Schema> {
         let animate = false;
         const board = this.workspace.board;
         const boardView = board.view;
-        const className = 'entrySelectedCategory';
-        const className2 = 'entryUnSelectedCategory';
+        const className = 'RoCodeSelectedCategory';
+        const className2 = 'RoCodeUnSelectedCategory';
 
         if (oldView) {
             oldView.removeClass(className);
@@ -626,14 +626,14 @@ class BlockMenu extends ModelClass<Schema> {
                 elem.removeClass(className);
                 elem.addClass(className2);
             }
-            Entry.playground.hideTabs();
+            RoCode.playground.hideTabs();
             animate = true;
             this.visible = false;
         } else if (!oldView && this.hasCategory()) {
             if (!this.visible) {
                 animate = true;
                 boardView.addClass('foldOut');
-                Entry.playground.showTabs();
+                RoCode.playground.showTabs();
             }
             boardView.removeClass('folding');
             this.visible = true;
@@ -642,10 +642,10 @@ class BlockMenu extends ModelClass<Schema> {
         }
 
         if (animate) {
-            Entry.bindAnimationCallbackOnce(boardView, () => {
+            RoCode.bindAnimationCallbackOnce(boardView, () => {
                 board.scroller.resizeScrollBar.call(board.scroller);
                 boardView.removeClass('foldOut');
-                Entry.windowResized.notify();
+                RoCode.windowResized.notify();
             });
         }
 
@@ -665,7 +665,7 @@ class BlockMenu extends ModelClass<Schema> {
         if (!categoryElem) {
             return;
         }
-        categoryElem.addClass('entryRemoveCategory');
+        categoryElem.addClass('RoCodeRemoveCategory');
         if (this.lastSelector === categoryName) {
             this._dSelectMenu(this.firstSelector, true);
         }
@@ -679,14 +679,14 @@ class BlockMenu extends ModelClass<Schema> {
         }
 
         const count = blockList.reduce(
-            (count, block) => (this.checkBanClass(Entry.block[block]) ? count - 1 : count),
+            (count, block) => (this.checkBanClass(RoCode.block[block]) ? count - 1 : count),
             blockList.length
         );
 
         const categoryElem = this._categoryElems[category];
         if (categoryElem && count > 0) {
-            categoryElem.removeClass('entryRemoveCategory');
-            categoryElem.removeClass('entryRemove');
+            categoryElem.removeClass('RoCodeRemoveCategory');
+            categoryElem.removeClass('RoCodeRemove');
         }
     }
 
@@ -739,7 +739,7 @@ class BlockMenu extends ModelClass<Schema> {
     /**
      * 특정 카테고리에 특정 블록명을 추가한다.
      * 카테고리가 존재하지 않거나 블록명이 이미 등록된 경우 스킵한다.
-     * Entry.block 목록에 실제 데이터가 있는지, blockMenu 의 그리기 갱신이 필요한지는 상관하지 않는다.
+     * RoCode.block 목록에 실제 데이터가 있는지, blockMenu 의 그리기 갱신이 필요한지는 상관하지 않는다.
      * @param categoryName {string}
      * @param blockName {string}
      */
@@ -770,11 +770,11 @@ class BlockMenu extends ModelClass<Schema> {
     onMouseMove(e: JQuery.MouseMoveEvent) {
         e?.stopPropagation();
 
-        if (Entry.isMobile()) {
+        if (RoCode.isMobile()) {
             this._scroller.setOpacity(0.8);
         }
 
-        const { pageY } = Entry.Utils.convertMouseEvent(e);
+        const { pageY } = RoCode.Utils.convertMouseEvent(e);
 
         const dragInstance = this.dragInstance;
         this._scroller.scroll(-pageY + dragInstance.offsetY);
@@ -782,7 +782,7 @@ class BlockMenu extends ModelClass<Schema> {
     }
 
     onMouseUp(e: JQuery.MouseUpEvent) {
-        if (Entry.isMobile()) {
+        if (RoCode.isMobile()) {
             this._scroller.setOpacity(0);
         }
         if (e.which == 2) {
@@ -804,16 +804,16 @@ class BlockMenu extends ModelClass<Schema> {
             return;
         }
         if (e.button === 0 || e.originalEvent?.touches) {
-            const mouseEvent = Entry.Utils.convertMouseEvent(e);
-            if (Entry.documentMousedown) {
-                Entry.documentMousedown.notify(mouseEvent);
+            const mouseEvent = RoCode.Utils.convertMouseEvent(e);
+            if (RoCode.documentMousedown) {
+                RoCode.documentMousedown.notify(mouseEvent);
             }
             const doc = $(document);
 
             doc.bind('mousemove.blockMenu touchmove.blockMenu', this.onMouseMove.bind(this));
             doc.bind('mouseup.blockMenu touchend.blockMenu', this.onMouseUp.bind(this));
 
-            this.dragInstance = new Entry.DragInstance({
+            this.dragInstance = new RoCode.DragInstance({
                 startY: mouseEvent.pageY,
                 offsetY: mouseEvent.pageY,
             });
@@ -840,7 +840,7 @@ class BlockMenu extends ModelClass<Schema> {
     }
 
     /**
-     * lms, entry-web 에서 사용 중
+     * lms, RoCode-web 에서 사용 중
      */
     setCategoryData(data: CategoryData[]) {
         this._clearCategory();
@@ -848,7 +848,7 @@ class BlockMenu extends ModelClass<Schema> {
         this._generateCategoryView(data);
         this._generateCategoryCodes();
         this.setMenu();
-        Entry.resizeElement();
+        RoCode.resizeElement();
     }
 
     /**
@@ -856,17 +856,17 @@ class BlockMenu extends ModelClass<Schema> {
      */
     setNoCategoryData(data: any) {
         this._clearCategory();
-        Entry.resizeElement();
+        RoCode.resizeElement();
         this.changeCode(data);
         this.categoryDoneEvent.notify();
     }
 
     makeScrollIndicator() {
         ['append', 'prepend'].forEach((action) => {
-            const point = Entry.Dom('li', {
+            const point = RoCode.Dom('li', {
                 class: `visiblePoint ${action}`,
             });
-            const indicator = Entry.Dom('a', {
+            const indicator = RoCode.Dom('a', {
                 class: `scrollIndicator ${action}`,
             });
             indicator.bindOnClick(() => {
@@ -882,7 +882,7 @@ class BlockMenu extends ModelClass<Schema> {
             this._categoryCol[action](indicator);
         });
 
-        this.categoryIndicatorVisible = new Visible('.entryCategoryListWorkspace', {
+        this.categoryIndicatorVisible = new Visible('.RoCodeCategoryListWorkspace', {
             targetClass: 'visiblePoint',
             expandSize: 0,
         });
@@ -907,8 +907,8 @@ class BlockMenu extends ModelClass<Schema> {
         setTimeout(() => {
             this.categoryIndicatorVisible.check();
         }, 0);
-        if (Entry.windowResized) {
-            Entry.windowResized.attach(this, () => {
+        if (RoCode.windowResized) {
+            RoCode.windowResized.attach(this, () => {
                 this.categoryIndicatorVisible.check();
             });
         }
@@ -952,7 +952,7 @@ class BlockMenu extends ModelClass<Schema> {
         }
 
         this._buildCategoryCodes(
-            blocks.filter((b) => !this.checkBanClass(Entry.block[b])),
+            blocks.filter((b) => !this.checkBanClass(RoCode.block[b])),
             HW
         ).forEach((t: any) => {
             if (shouldHide) {
@@ -963,11 +963,11 @@ class BlockMenu extends ModelClass<Schema> {
         });
 
         this.hwCodeOutdated = false;
-        Entry.dispatchEvent('hwCodeGenerated');
+        RoCode.dispatchEvent('hwCodeGenerated');
     }
 
     /**
-     * Ntry systems/entryPlayground.js#loadConfig 에서 사용됨
+     * Ntry systems/RoCodePlayground.js#loadConfig 에서 사용됨
      * 그 외에는 쓸모없음
      * @deprecated
      */
@@ -1069,7 +1069,7 @@ class BlockMenu extends ModelClass<Schema> {
 
     private _buildCategoryCodes(blocks: any, category: string) {
         return blocks.reduce((threads: any, type: string) => {
-            const block = Entry.block[type];
+            const block = RoCode.block[type];
             if (!block || !block.def) {
                 return [...threads, [{ type, category }]];
             } else {
@@ -1084,17 +1084,17 @@ class BlockMenu extends ModelClass<Schema> {
     private _generateView(categoryData: CategoryData[]) {
         categoryData && this._generateCategoryView(categoryData);
 
-        this.blockMenuContainer = Entry.Dom('div', {
+        this.blockMenuContainer = RoCode.Dom('div', {
             class: 'blockMenuContainer',
             parent: this.view,
         });
-        Entry.Utils.disableContextmenu(this.blockMenuContainer);
-        this.blockMenuWrapper = Entry.Dom('div', {
+        RoCode.Utils.disableContextmenu(this.blockMenuContainer);
+        this.blockMenuWrapper = RoCode.Dom('div', {
             class: 'blockMenuWrapper',
             parent: this.blockMenuContainer,
         });
 
-        this.svgDom = Entry.Dom(
+        this.svgDom = RoCode.Dom(
             $(
                 // eslint-disable-next-line max-len
                 `<svg id="${this._svgId}" class="blockMenu" version="1.1" xmlns="http://www.w3.org/2000/svg"></svg>`
@@ -1106,17 +1106,17 @@ class BlockMenu extends ModelClass<Schema> {
 
             const selectedBlockView = this.workspace.selectedBlockView;
             if (
-                !Entry.playground ||
-                Entry.playground.resizing ||
-                selectedBlockView?.dragMode === Entry.DRAG_MODE_DRAG ||
-                Entry.GlobalSvg.isShow
+                !RoCode.playground ||
+                RoCode.playground.resizing ||
+                selectedBlockView?.dragMode === RoCode.DRAG_MODE_DRAG ||
+                RoCode.GlobalSvg.isShow
             ) {
                 return;
             }
             const bBox = this.svgGroup.getBBox();
             const adjust = this.hasCategory() ? 64 : 0;
             const expandWidth = bBox.width + bBox.x + adjust + 2;
-            const { menuWidth } = Entry.interfaceState;
+            const { menuWidth } = RoCode.interfaceState;
             if (expandWidth > menuWidth) {
                 this.widthBackup = menuWidth - adjust - 2;
                 $(this.blockMenuWrapper).css('width', expandWidth - adjust);
@@ -1127,7 +1127,7 @@ class BlockMenu extends ModelClass<Schema> {
             this.foldBlockMenu();
         });
 
-        Entry.Utils.bindBlockViewHoverEvent(this, this.svgDom);
+        RoCode.Utils.bindBlockViewHoverEvent(this, this.svgDom);
         $(window).scroll(this.updateOffset.bind(this));
     }
 
@@ -1138,7 +1138,7 @@ class BlockMenu extends ModelClass<Schema> {
     }
 
     private _convertSelector(selector: number | string) {
-        if (!Entry.Utils.isNumber(selector)) {
+        if (!RoCode.Utils.isNumber(selector)) {
             return selector;
         }
 
@@ -1147,7 +1147,7 @@ class BlockMenu extends ModelClass<Schema> {
         const elems = this._categoryElems;
         for (let i = 0; i < categories.length; i++) {
             const key = categories[i];
-            const visible = !elems[key].hasClass('entryRemove');
+            const visible = !elems[key].hasClass('RoCodeRemove');
             if (visible) {
                 if (selectorNumber-- === 0) {
                     return key;
@@ -1221,7 +1221,7 @@ class BlockMenu extends ModelClass<Schema> {
         code.changeEvent.notify();
     }
 
-    private _addControl(dom: EntryDom) {
+    private _addControl(dom: RoCodeDom) {
         dom.on('wheel', this._mouseWheel.bind(this));
 
         if (this._scroller) {
@@ -1233,7 +1233,7 @@ class BlockMenu extends ModelClass<Schema> {
     private _mouseWheel(e: any) {
         const originalEvent = e.originalEvent;
         originalEvent.preventDefault();
-        const disposeEvent = Entry.disposeEvent;
+        const disposeEvent = RoCode.disposeEvent;
         if (disposeEvent) {
             disposeEvent.notify(originalEvent);
         }
@@ -1241,11 +1241,11 @@ class BlockMenu extends ModelClass<Schema> {
     }
 
     private _captureKeyEvent(e: KeyboardEvent) {
-        let keyCode = Entry.Utils.inputToKeycode(e);
+        let keyCode = RoCode.Utils.inputToKeycode(e);
         if (!keyCode) {
             return;
         }
-        if (e.ctrlKey && Entry.type === 'workspace' && keyCode > 48 && keyCode < 58) {
+        if (e.ctrlKey && RoCode.type === 'workspace' && keyCode > 48 && keyCode < 58) {
             e.preventDefault();
             setTimeout(() => {
                 this._cancelDynamic(true);
@@ -1268,7 +1268,7 @@ class BlockMenu extends ModelClass<Schema> {
         this._categoryElems = {};
 
         const code = this.code;
-        if (code?.constructor == Entry.Code) {
+        if (code?.constructor == RoCode.Code) {
             code.clear();
         }
 
@@ -1278,7 +1278,7 @@ class BlockMenu extends ModelClass<Schema> {
 
     /**
      * 카테고리의 목록 뷰를 그린다.
-     * @param data {{category: string, blocks: object[]}[]} EntryStatic.getAllBlocks
+     * @param data {{category: string, blocks: object[]}[]} RoCodeStatic.getAllBlocks
      * @private
      */
     private _generateCategoryView(data: CategoryData[]) {
@@ -1291,15 +1291,15 @@ class BlockMenu extends ModelClass<Schema> {
         // 카테고리가 이미 만들어져있는 상태에서 데이터만 새로 추가된 경우,
         // categoryWrapper 는 살리고 내부 컬럼 엘리먼트만 치환한다.
         if (!this.categoryWrapper) {
-            this.categoryWrapper = Entry.Dom('div', {
-                class: 'entryCategoryListWorkspace',
+            this.categoryWrapper = RoCode.Dom('div', {
+                class: 'RoCodeCategoryListWorkspace',
             });
         } else {
             this.categoryWrapper.innerHTML = '';
         }
 
-        this._categoryCol = Entry.Dom('ul', {
-            class: 'entryCategoryList',
+        this._categoryCol = RoCode.Dom('ul', {
+            class: 'RoCodeCategoryList',
             parent: this.categoryWrapper,
         });
         this.view.prepend(this.categoryWrapper);
@@ -1307,7 +1307,7 @@ class BlockMenu extends ModelClass<Schema> {
         const fragment = document.createDocumentFragment();
 
         /*
-        visible = static_mini 의 실과형 하드웨어에서만 사용됩니다. (EntryStatic 에 책임)
+        visible = static_mini 의 실과형 하드웨어에서만 사용됩니다. (RoCodeStatic 에 책임)
          */
         data.forEach(({ category, visible }) =>
             fragment.appendChild(this._generateCategoryElement(category, visible)[0])
@@ -1318,12 +1318,12 @@ class BlockMenu extends ModelClass<Schema> {
     }
 
     private _generateCategoryElement(name: string, visible: boolean) {
-        this._categoryElems[name] = Entry.Dom('li', {
-            id: `entryCategory${name}`,
+        this._categoryElems[name] = RoCode.Dom('li', {
+            id: `RoCodeCategory${name}`,
             classes: [
-                'entryCategoryElementWorkspace',
-                'entryRemove',
-                visible === false ? 'entryRemoveCategory' : '',
+                'RoCodeCategoryElementWorkspace',
+                'RoCodeRemove',
+                visible === false ? 'RoCodeRemoveCategory' : '',
             ],
         })
             .bindOnClick(() => {
@@ -1335,9 +1335,9 @@ class BlockMenu extends ModelClass<Schema> {
             .text(Lang.Blocks[name.toUpperCase()]);
         if (BETA_LIST.includes(name)) {
             this._categoryElems[name][0].appendChild(
-                Entry.Dom('div', {
-                    id: `entryCategory${name}BetaTag`,
-                    classes: ['entryCategoryBetaTag'],
+                RoCode.Dom('div', {
+                    id: `RoCodeCategory${name}BetaTag`,
+                    classes: ['RoCodeCategoryBetaTag'],
                 })[0]
             );
         }
@@ -1372,7 +1372,7 @@ class BlockMenu extends ModelClass<Schema> {
         } else {
             inVisibles = [];
             allBlocks.forEach((block) => {
-                if (!this._isNotVisible(Entry.block[block.type])) {
+                if (!this._isNotVisible(RoCode.block[block.type])) {
                     visibles.push(block);
                 } else {
                     inVisibles.push(block);
@@ -1420,4 +1420,4 @@ class BlockMenu extends ModelClass<Schema> {
 }
 
 export default BlockMenu;
-Entry.BlockMenu = BlockMenu;
+RoCode.BlockMenu = BlockMenu;

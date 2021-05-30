@@ -1,4 +1,4 @@
-Entry.skeleton.basic_button_disabled = {
+RoCode.skeleton.basic_button_disabled = {
     path() {
         return `m 6 0
             h 150

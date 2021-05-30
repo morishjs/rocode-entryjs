@@ -1,31 +1,31 @@
 import debounce from 'lodash/debounce';
 
-Entry.Board = class Board {
+RoCode.Board = class Board {
     constructor(option) {
-        Entry.Model(this, false);
+        RoCode.Model(this, false);
         this.scale = option.scale || 1;
         this.readOnly = option.readOnly === undefined ? false : option.readOnly;
-        this.changeEvent = new Entry.Event(this);
+        this.changeEvent = new RoCode.Event(this);
 
         this.createView(option);
         this.updateOffset();
 
-        this.scroller = new Entry.Scroller(this, true, true);
+        this.scroller = new RoCode.Scroller(this, true, true);
 
         this._magnetMap = {};
 
-        Entry.ANIMATION_DURATION = 200;
-        Entry.BOARD_PADDING = 100;
+        RoCode.ANIMATION_DURATION = 200;
+        RoCode.BOARD_PADDING = 100;
 
         this._initContextOptions();
-        Entry.Utils.disableContextmenu(this.svgDom);
+        RoCode.Utils.disableContextmenu(this.svgDom);
 
         this._addControl();
         this._bindEvent();
         this.observe(this, 'handleVisibleComment', ['isVisibleComment'], false);
-        Entry.addEventListener('fontLoaded', this.reDraw.bind(this));
+        RoCode.addEventListener('fontLoaded', this.reDraw.bind(this));
 
-        Entry.Utils.setSVGDom(this.svgDom);
+        RoCode.Utils.setSVGDom(this.svgDom);
     }
 
     static get OPTION_PASTE() {
@@ -80,21 +80,21 @@ Entry.Board = class Board {
 
         this._activatedBlockView = null;
 
-        this.wrapper = Entry.Dom('div', {
+        this.wrapper = RoCode.Dom('div', {
             parent: dom,
-            class: 'entryBoardWrapper',
+            class: 'RoCodeBoardWrapper',
         });
 
-        this.svgDom = Entry.Dom(
+        this.svgDom = RoCode.Dom(
             $(
-                `<svg id="${this._svgId}" class="entryBoard" width="100%" height="100%"` +
+                `<svg id="${this._svgId}" class="RoCodeBoard" width="100%" height="100%"` +
                     `version="1.1" xmlns="http://www.w3.org/2000/svg"></svg>`
             ),
             { parent: this.wrapper }
         );
 
         this.visible = true;
-        this.svg = Entry.SVG(this._svgId);
+        this.svg = RoCode.SVG(this._svgId);
         $(window).scroll(this.updateOffset.bind(this));
 
         this.svgGroup = this.svg.elem('g');
@@ -109,15 +109,15 @@ Entry.Board = class Board {
         this.svgCommentGroup.board = this;
 
         if (option.isOverlay) {
-            this.wrapper.addClass('entryOverlayBoard');
+            this.wrapper.addClass('RoCodeOverlayBoard');
             this.generateButtons();
             this.suffix = 'overlayBoard';
         } else {
             this.suffix = 'board';
         }
 
-        Entry.Utils.addFilters(this.svg, this.suffix);
-        this.pattern = Entry.Utils.addBlockPattern(this.svg, this.suffix).pattern;
+        RoCode.Utils.addFilters(this.svg, this.suffix);
+        this.pattern = RoCode.Utils.addBlockPattern(this.svg, this.suffix).pattern;
     }
 
     changeCode(code, shouldNotCreateView, cb) {
@@ -200,7 +200,7 @@ Entry.Board = class Board {
             });
         }
 
-        Entry.Utils.bindBlockViewHoverEvent(this, dom);
+        RoCode.Utils.bindBlockViewHoverEvent(this, dom);
     }
 
     removeControl(eventType) {
@@ -208,7 +208,7 @@ Entry.Board = class Board {
     }
 
     onMouseDown(e) {
-        if (this.workspace.getMode() == Entry.Workspace.MODE_VIMBOARD) {
+        if (this.workspace.getMode() == RoCode.Workspace.MODE_VIMBOARD) {
             return;
         }
 
@@ -229,19 +229,19 @@ Entry.Board = class Board {
 
         this.workingEvent = true;
 
-        if (Entry.isMobile()) {
+        if (RoCode.isMobile()) {
             this.scroller.setOpacity(0.8);
         }
         const board = this;
         let longPressTimer = null;
-        let dragMode = Entry.DRAG_MODE_NONE;
+        let dragMode = RoCode.DRAG_MODE_NONE;
         if (e.button === 0 || (e.originalEvent && e.originalEvent.touches)) {
             const eventType = e.type;
-            const mouseEvent = Entry.Utils.convertMouseEvent(e);
-            if (Entry.documentMousedown) {
-                Entry.documentMousedown.notify(mouseEvent);
+            const mouseEvent = RoCode.Utils.convertMouseEvent(e);
+            if (RoCode.documentMousedown) {
+                RoCode.documentMousedown.notify(mouseEvent);
             }
-            dragMode = Entry.DRAG_MODE_MOUSEDOWN;
+            dragMode = RoCode.DRAG_MODE_MOUSEDOWN;
             const doc = $(document);
 
             this.mouseDownCoordinate = {
@@ -249,18 +249,18 @@ Entry.Board = class Board {
                 y: mouseEvent.pageY,
             };
 
-            doc.bind('mousemove.entryBoard', onMouseMove);
-            doc.bind('mouseup.entryBoard', onMouseUp);
-            doc.bind('touchmove.entryBoard', onMouseMove);
-            doc.bind('touchend.entryBoard', onMouseUp);
-            this.dragInstance = new Entry.DragInstance({
+            doc.bind('mousemove.RoCodeBoard', onMouseMove);
+            doc.bind('mouseup.RoCodeBoard', onMouseUp);
+            doc.bind('touchmove.RoCodeBoard', onMouseMove);
+            doc.bind('touchend.RoCodeBoard', onMouseUp);
+            this.dragInstance = new RoCode.DragInstance({
                 startX: mouseEvent.pageX,
                 startY: mouseEvent.pageY,
                 offsetX: mouseEvent.pageX,
                 offsetY: mouseEvent.pageY,
             });
 
-            if (eventType === 'touchstart' || Entry.isMobile()) {
+            if (eventType === 'touchstart' || RoCode.isMobile()) {
                 longPressTimer = setTimeout(() => {
                     if (longPressTimer) {
                         longPressTimer = null;
@@ -269,7 +269,7 @@ Entry.Board = class Board {
                     }
                 }, 1000);
             }
-        } else if (Entry.Utils.isRightButton(e)) {
+        } else if (RoCode.Utils.isRightButton(e)) {
             this._rightClick(e);
         }
 
@@ -281,7 +281,7 @@ Entry.Board = class Board {
                 e.preventDefault();
             }
 
-            const mouseEvent = Entry.Utils.convertMouseEvent(e);
+            const mouseEvent = RoCode.Utils.convertMouseEvent(e);
 
             const mouseDownCoordinate = board.mouseDownCoordinate;
             const pageX = mouseEvent.pageX;
@@ -292,10 +292,10 @@ Entry.Board = class Board {
             );
 
             if (
-                (dragMode === Entry.DRAG_MODE_DRAG && diff > Entry.Board.DRAG_RADIUS) ||
-                (dragMode === Entry.DRAG_MODE_MOUSEDOWN && diff > Entry.Board.FIRST_DRAG_RADIUS)
+                (dragMode === RoCode.DRAG_MODE_DRAG && diff > RoCode.Board.DRAG_RADIUS) ||
+                (dragMode === RoCode.DRAG_MODE_MOUSEDOWN && diff > RoCode.Board.FIRST_DRAG_RADIUS)
             ) {
-                dragMode = Entry.DRAG_MODE_DRAG;
+                dragMode = RoCode.DRAG_MODE_DRAG;
                 if (longPressTimer) {
                     clearTimeout(longPressTimer);
                     longPressTimer = null;
@@ -312,10 +312,10 @@ Entry.Board = class Board {
                 clearTimeout(longPressTimer);
                 longPressTimer = null;
             }
-            if (Entry.isMobile()) {
+            if (RoCode.isMobile()) {
                 board.scroller.setOpacity(0);
             }
-            $(document).unbind('.entryBoard');
+            $(document).unbind('.RoCodeBoard');
             delete board.workingEvent;
             delete board.mouseDownCoordinate;
             delete board.dragInstance;
@@ -325,7 +325,7 @@ Entry.Board = class Board {
     mouseWheel(e) {
         e = e.originalEvent;
         e.preventDefault();
-        const disposeEvent = Entry.disposeEvent;
+        const disposeEvent = RoCode.disposeEvent;
         if (disposeEvent) {
             disposeEvent.notify(e);
         }
@@ -340,7 +340,7 @@ Entry.Board = class Board {
             old.removeSelected();
         }
 
-        if (blockView instanceof Entry.BlockView) {
+        if (blockView instanceof RoCode.BlockView) {
             blockView.addSelected();
         } else {
             blockView = null;
@@ -350,12 +350,12 @@ Entry.Board = class Board {
     }
 
     hide() {
-        this.wrapper.addClass('entryRemove');
+        this.wrapper.addClass('RoCodeRemove');
         this.visible = false;
     }
 
     show() {
-        this.wrapper.removeClass('entryRemove');
+        this.wrapper.removeClass('RoCodeRemove');
         this.visible = true;
     }
 
@@ -365,7 +365,7 @@ Entry.Board = class Board {
 
         keys.forEach((id) => {
             const comment = blockMap[id];
-            if (comment instanceof Entry.Comment) {
+            if (comment instanceof RoCode.Comment) {
                 comment.initSchema();
             }
         });
@@ -390,7 +390,7 @@ Entry.Board = class Board {
             if (!block) {
                 return;
             }
-            if (!this.isVisibleComment && block instanceof Entry.Comment) {
+            if (!this.isVisibleComment && block instanceof RoCode.Comment) {
                 return;
             }
             reDraw && thread.view.reDraw();
@@ -407,7 +407,7 @@ Entry.Board = class Board {
             }
             columWidth = Math.max(columWidth, bBox.width * this.scale);
             top = acculmulatedTop + verticalGap;
-            if (block instanceof Entry.Block) {
+            if (block instanceof RoCode.Block) {
                 blockView.moveTo(left, top, false);
             } else {
                 blockView.moveTo(left / this.scale, top / this.scale, false);
@@ -454,8 +454,8 @@ Entry.Board = class Board {
         this.btnWrapper = this.svg.elem('g');
         const btnWrapper = this.btnWrapper;
 
-        const BLUE_CLASS = 'entryFunctionButtonText';
-        const WHITE_CLASS = 'entryFunctionButton';
+        const BLUE_CLASS = 'RoCodeFunctionButtonText';
+        const WHITE_CLASS = 'RoCodeFunctionButton';
 
         const saveButton = btnWrapper.elem('rect', {
             x: 74,
@@ -475,7 +475,7 @@ Entry.Board = class Board {
             height: 32,
             rx: 4,
             ry: 4,
-            class: 'entryFunctionButtonBorder',
+            class: 'RoCodeFunctionButtonBorder',
         });
 
         const saveText = btnWrapper.elem('text', {
@@ -503,13 +503,13 @@ Entry.Board = class Board {
     }
 
     cancelEdit() {
-        Entry.disposeEvent.notify();
-        Entry.do('funcEditEnd', 'cancel');
+        RoCode.disposeEvent.notify();
+        RoCode.do('funcEditEnd', 'cancel');
     }
 
     save() {
-        Entry.disposeEvent.notify();
-        Entry.do('funcEditEnd', 'save');
+        RoCode.disposeEvent.notify();
+        RoCode.do('funcEditEnd', 'save');
     }
 
     generateCodeMagnetMap() {
@@ -706,7 +706,7 @@ Entry.Board = class Board {
         let cursorY = offset.y;
         for (let i = 0; i < blocks.length; i++) {
             const block = blocks[i];
-            if (block instanceof Entry.Comment) {
+            if (block instanceof RoCode.Comment) {
                 break;
             }
             const blockView = block.view;
@@ -751,7 +751,7 @@ Entry.Board = class Board {
         cursorY += blockView.contentPos.y;
         for (let i = 0; i < contents.length; i++) {
             const content = contents[i];
-            if (!(content instanceof Entry.FieldBlock)) {
+            if (!(content instanceof RoCode.FieldBlock)) {
                 continue;
             }
             const contentBlock = content._valueBlock;
@@ -802,7 +802,7 @@ Entry.Board = class Board {
         for (let i = 0; i < blocks.length; i++) {
             const block = blocks[i];
             const blockView = block.view;
-            if (blockView instanceof Entry.Comment) {
+            if (blockView instanceof RoCode.Comment) {
                 continue;
             }
             if (blockView.dragInstance) {
@@ -851,7 +851,7 @@ Entry.Board = class Board {
             const startX = cursorX + contentScaleX;
             const startY = cursorY - 24;
             const endY = cursorY;
-            if (content instanceof Entry.FieldBlock) {
+            if (content instanceof RoCode.FieldBlock) {
                 if (content.acceptType === targetType) {
                     metaData.push({
                         point: startY,
@@ -881,7 +881,7 @@ Entry.Board = class Board {
                     );
                 }
                 continue;
-            } else if (content instanceof Entry.FieldOutput) {
+            } else if (content instanceof RoCode.FieldOutput) {
                 if (content.acceptType !== targetType) {
                     continue;
                 }
@@ -1052,8 +1052,8 @@ Entry.Board = class Board {
             const prevBlock = block.getPrevBlock();
             if (
                 !prevBlock &&
-                block.thread instanceof Entry.Thread &&
-                block.thread.parent instanceof Entry.Code
+                block.thread instanceof RoCode.Thread &&
+                block.thread.parent instanceof RoCode.Code
             ) {
                 nextBlock = block.thread.getBlock(block.thread.indexOf(block) + count);
 
@@ -1100,15 +1100,15 @@ Entry.Board = class Board {
             } else {
                 targetObj = pointer;
             }
-            if (targetObj instanceof Entry.Block) {
+            if (targetObj instanceof RoCode.Block) {
                 if (block.getBlockType() === 'basic') {
                     block.view.bindPrev(targetObj);
                 }
                 block.doInsert(targetObj);
-            } else if (targetObj instanceof Entry.FieldStatement) {
+            } else if (targetObj instanceof RoCode.FieldStatement) {
                 block.view.bindPrev(targetObj);
                 targetObj.insertTopBlock(block);
-            } else if (targetObj instanceof Entry.Thread) {
+            } else if (targetObj instanceof RoCode.Thread) {
                 targetObj = targetObj.view.getParent();
                 block.view.bindPrev(targetObj);
                 targetObj.insertTopBlock(block);
@@ -1144,18 +1144,18 @@ Entry.Board = class Board {
 
     _initContextOptions() {
         const that = this;
-        const { options = {} } = Entry;
+        const { options = {} } = RoCode;
         this._contextOptions = [
             {
                 activated: true,
                 option: {
                     text: Lang.Blocks.Paste_blocks,
-                    enable: !!Entry.clipboard && !this.readOnly,
+                    enable: !!RoCode.clipboard && !this.readOnly,
                     callback() {
-                        if (Entry.clipboard.type === 'comment') {
-                            Entry.do('createComment', Entry.clipboard, that);
+                        if (RoCode.clipboard.type === 'comment') {
+                            RoCode.do('createComment', RoCode.clipboard, that);
                         } else {
-                            Entry.do('addThread', Entry.clipboard)
+                            RoCode.do('addThread', RoCode.clipboard)
                                 .value.getFirstBlock()
                                 .copyToClipboard();
                         }
@@ -1178,13 +1178,13 @@ Entry.Board = class Board {
                     text: Lang.Blocks.Clear_all_blocks,
                     enable: !this.readOnly,
                     callback() {
-                        Entry.do('destroyThreads');
+                        RoCode.do('destroyThreads');
                     },
                 },
             },
             {
                 activated:
-                    Entry.type === 'workspace' && Entry.Utils.isChrome() && !Entry.isMobile(),
+                    RoCode.type === 'workspace' && RoCode.Utils.isChrome() && !RoCode.isMobile(),
                 option: {
                     text: Lang.Menus.save_as_image_all,
                     enable: !this.readOnly,
@@ -1196,11 +1196,11 @@ Entry.Board = class Board {
                             if (!topBlock) {
                                 return;
                             }
-                            if (threads.length > 1 && Entry.isOffline) {
+                            if (threads.length > 1 && RoCode.isOffline) {
                                 topBlock.view.getDataUrl().then((data) => {
                                     images.push(data);
                                     if (images.length == threads.length) {
-                                        Entry.dispatchEvent('saveBlockImages', {
+                                        RoCode.dispatchEvent('saveBlockImages', {
                                             images,
                                         });
                                     }
@@ -1219,12 +1219,12 @@ Entry.Board = class Board {
                     enable: !this.readOnly,
                     callback: () => {
                         const { left: x, top: y } = that.offset();
-                        Entry.do(
+                        RoCode.do(
                             'createComment',
                             {
-                                id: Entry.Utils.generateId(),
-                                x: (Entry.ContextMenu.mouseCoordinate.x - x) / that.scale,
-                                y: (Entry.ContextMenu.mouseCoordinate.y - y) / that.scale,
+                                id: RoCode.Utils.generateId(),
+                                x: (RoCode.ContextMenu.mouseCoordinate.x - x) / that.scale,
+                                y: (RoCode.ContextMenu.mouseCoordinate.y - y) / that.scale,
                             },
                             that
                         );
@@ -1238,8 +1238,8 @@ Entry.Board = class Board {
                     enable: !this.readOnly,
                     callback() {
                         that.isVisibleComment
-                            ? Entry.do('hideAllComment', that)
-                            : Entry.do('showAllComment', that);
+                            ? RoCode.do('hideAllComment', that)
+                            : RoCode.do('showAllComment', that);
                     },
                 },
             },
@@ -1255,13 +1255,13 @@ Entry.Board = class Board {
     }
 
     _bindEvent() {
-        let evt = Entry.documentMousedown;
+        let evt = RoCode.documentMousedown;
         if (evt) {
             evt.attach(this, this.setSelectedBlock);
             evt.attach(this, this._removeActivated);
         }
 
-        evt = Entry.windowResized;
+        evt = RoCode.windowResized;
         if (evt) {
             evt.attach(this, debounce(this.updateOffset, 200));
         }
@@ -1277,22 +1277,22 @@ Entry.Board = class Board {
 
     _rightClick(e) {
         delete this.workingEvent;
-        const disposeEvent = Entry.disposeEvent;
+        const disposeEvent = RoCode.disposeEvent;
         disposeEvent && disposeEvent.notify(e);
         if (!this.visible) {
             return;
         }
 
         const contextOptions = this._contextOptions;
-        contextOptions[Entry.Board.OPTION_PASTE].option.enable = !!Entry.clipboard;
-        contextOptions[Entry.Board.OPTION_DOWNLOAD].option.enable =
+        contextOptions[RoCode.Board.OPTION_PASTE].option.enable = !!RoCode.clipboard;
+        contextOptions[RoCode.Board.OPTION_DOWNLOAD].option.enable =
             this.code.getThreads().length !== 0;
-        contextOptions[Entry.Board.VISIBLE_COMMENT].option.text = this.isVisibleComment
+        contextOptions[RoCode.Board.VISIBLE_COMMENT].option.text = this.isVisibleComment
             ? Lang.Blocks.hide_all_comment
             : Lang.Blocks.show_all_comment;
 
-        const { clientX: x, clientY: y } = Entry.Utils.convertMouseEvent(e);
-        Entry.ContextMenu.show(
+        const { clientX: x, clientY: y } = RoCode.Utils.convertMouseEvent(e);
+        RoCode.ContextMenu.show(
             contextOptions.reduce((options, { activated, option }) => {
                 if (activated) {
                     options.push(option);
@@ -1310,7 +1310,7 @@ Entry.Board = class Board {
         } else {
             this.view.addClass('invisibleComment');
         }
-        Entry.dispatchEvent('commentVisibleChanged');
+        RoCode.dispatchEvent('commentVisibleChanged');
     }
 
     getDom(query) {
@@ -1359,10 +1359,10 @@ Entry.Board = class Board {
     scrollToPointer(pointer) {
         const obj = this.code.getByPointer(pointer);
         let pos;
-        if (obj instanceof Entry.Block) {
+        if (obj instanceof RoCode.Block) {
             pos = obj.view.getAbsoluteCoordinate();
             obj.view.dominate();
-        } else if (obj instanceof Entry.Thread) {
+        } else if (obj instanceof RoCode.Thread) {
             pos = obj.view.requestAbsoluteCoordinate();
         } else if (obj.getAbsolutePosFromBoard) {
             pos = obj.getAbsolutePosFromBoard();

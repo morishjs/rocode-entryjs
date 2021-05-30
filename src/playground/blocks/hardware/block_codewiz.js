@@ -2,7 +2,7 @@
 
 const PromiseManager = require('../../../core/promiseManager');
 
-Entry.CodeWiz = {
+RoCode.CodeWiz = {
     id: '1.12',
     name: 'CodeWiz',
     url: 'http://codable.co.kr/page/?pid=codewiz',
@@ -29,20 +29,20 @@ Entry.CodeWiz = {
     },
 
     setZero: function() {
-        Entry.hw.sendQueue = {
+        RoCode.hw.sendQueue = {
             GET: {},
             SET: {},
             RESET: 0,
         };
 
-        Entry.hw.sendQueue = {
+        RoCode.hw.sendQueue = {
             RESET: 1,
         };
-        Entry.hw.update();
-        Entry.hw.update();
+        RoCode.hw.update();
+        RoCode.hw.update();
 
-        delete Entry.hw.sendQueue.RESET;
-        Entry.CodeWiz.removeAllTimeouts();
+        delete RoCode.hw.sendQueue.RESET;
+        RoCode.CodeWiz.removeAllTimeouts();
     },
     monitorTemplate: {
         imgPath: 'hw/codeino.png',
@@ -61,7 +61,7 @@ Entry.CodeWiz = {
     defaultWaitTime: 90,
 };
 
-Entry.CodeWiz.setLanguage = function() {
+RoCode.CodeWiz.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -109,7 +109,7 @@ Entry.CodeWiz.setLanguage = function() {
         },
     };
 };
-Entry.CodeWiz.blockMenuBlocks = [
+RoCode.CodeWiz.blockMenuBlocks = [
     'CodeWiz_get_sensor',
     'CodeWiz_get_gyroSensor',
     'CodeWiz_isPushedButton',
@@ -148,14 +148,14 @@ Entry.CodeWiz.blockMenuBlocks = [
     'CodeWiz_DIGITAL_OUTPUT_pwmWrite',
 ];
 
-Entry.CodeWiz.getBlocks = function() {
+RoCode.CodeWiz.getBlocks = function() {
     const promiseManager = new PromiseManager();
     return {
         //region codeino 코드위즈
         CodeWiz_get_sensor: {
             // Block UI : %1센서 값
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             params: [
@@ -170,8 +170,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: 'SOUND',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -185,14 +185,14 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_default_sensor',
             func: function(sprite, script) {
                 var sensor = script.getField('SENSOR', script);
-                var hw_sensorData = Entry.hw.portData;
+                var hw_sensorData = RoCode.hw.portData;
                 return hw_sensorData ? hw_sensorData[sensor] : 0;
             },
         },
         CodeWiz_get_gyroSensor: {
             // Block UI : 자이로 센서 %1값
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             params: [
@@ -205,8 +205,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: 'GYRO_X',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -220,14 +220,14 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_default_sensor',
             func: function(sprite, script) {
                 var sensor = script.getField('GYRO_TYPE', script);
-                var hw_sensorData = Entry.hw.portData;
+                var hw_sensorData = RoCode.hw.portData;
                 return hw_sensorData ? hw_sensorData[sensor] : 0;
             },
         },
         CodeWiz_isPushedButton: {
             // Block UI : %1 스위치 버튼 값
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -240,8 +240,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: 'switchButton_26',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -256,14 +256,14 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_default_sensor',
             func: function(sprite, script) {
                 var sensor = script.getField('SWITCH', script);
-                var hw_sensorData = Entry.hw.portData;
+                var hw_sensorData = RoCode.hw.portData;
                 return hw_sensorData ? hw_sensorData[sensor] : 0;
             },
         },
         CodeWiz_touchPin: {
             // Block UI : "터치핀 %1 값",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -280,8 +280,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: 'touchPin_32',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -296,14 +296,14 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_default_sensor',
             func: function(sprite, script) {
                 var sensor = script.getField('SWITCH', script);
-                var hw_sensorData = Entry.hw.portData;
+                var hw_sensorData = RoCode.hw.portData;
                 return hw_sensorData ? hw_sensorData[sensor] : 0;
             },
         },
         CodeWiz_default_buzzer: {
             // Block UI : "부저를 %1옥타브, %2음, %3분음표로 연주하기%4",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -320,8 +320,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -341,8 +341,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -355,8 +355,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -377,7 +377,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_buzzer',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xdf;
                 let octave = Number.parseInt(script.getValue('OCTAVE', script));
                 let note = Number.parseInt(script.getValue('NOTE', script));
@@ -387,7 +387,7 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.BUZZER,
+                    type: RoCode.CodeWiz.sensorTypes.BUZZER,
                     value: {
                         octave: octave,
                         note: note,
@@ -395,15 +395,15 @@ Entry.CodeWiz.getBlocks = function() {
                     },
                 };
 
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep((1000 / beat) * 1.3 + Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep((1000 / beat) * 1.3 + RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_neopixel_brightness: {
             // Block UI : "네오픽셀 밝기를 %1로 설정(0~255)%2",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -431,7 +431,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_neopixel',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xff;
                 let value = script.getNumberValue('BRIGHTNESS', script);
 
@@ -446,21 +446,21 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.NEOPIXEL,
+                    type: RoCode.CodeWiz.sensorTypes.NEOPIXEL,
                     value: {
                         opcode: 0,
                         value: value,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_neopixel_setColor_one: {
             // Block UI : "네오픽셀 %1번 LED를 <색상표>%2(으)로 켜기%3",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -489,7 +489,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_neopixel',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xfe;
                 let num = script.getNumberValue('NUM', script) - 1;
                 let value = script.getStringField('COLOR', script);
@@ -503,7 +503,7 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.NEOPIXEL,
+                    type: RoCode.CodeWiz.sensorTypes.NEOPIXEL,
                     value: {
                         opcode: 1,
                         num: num,
@@ -514,15 +514,15 @@ Entry.CodeWiz.getBlocks = function() {
                         },
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_neopixel_setColor_one2: {
             // Block UI : "네오픽셀 %1번 LED를 빨강%2초록%3파랑%4(으)로 켜기%5",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -562,7 +562,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_neopixel',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xe6;
                 let num = script.getNumberValue('NUM', script) - 1;
                 let r = script.getNumberValue('R', script);
@@ -573,7 +573,7 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.NEOPIXEL,
+                    type: RoCode.CodeWiz.sensorTypes.NEOPIXEL,
                     value: {
                         opcode:1,
                         num:num,
@@ -585,15 +585,15 @@ Entry.CodeWiz.getBlocks = function() {
                     }
                 }
 
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_neopixel_off_one: {
             // Block UI : "네오픽셀 %1번 LED 끄기%2",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -618,7 +618,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_neopixel',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xfd;
                 let num = script.getNumberValue('NUM', script) - 1;
 
@@ -626,21 +626,21 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.NEOPIXEL,
+                    type: RoCode.CodeWiz.sensorTypes.NEOPIXEL,
                     value: {
                         opcode: 2,
                         num: num,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_neopixel_setColor_all: {
             // Block UI : "네오픽셀 %1(으)로 모두 켜기%2",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -664,7 +664,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_neopixel',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xfc;
                 let value = script.getStringField('COLOR', script);
 
@@ -677,7 +677,7 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.NEOPIXEL,
+                    type: RoCode.CodeWiz.sensorTypes.NEOPIXEL,
                     value: {
                         opcode: 3,
                         value: {
@@ -687,15 +687,15 @@ Entry.CodeWiz.getBlocks = function() {
                         },
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_neopixel_setColor_all2: {
             // Block UI : "네오픽셀 빨강%1초록%2파랑%3(으)로 모두 켜기%4",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -730,7 +730,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_neopixel',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xe5;
                 let r = script.getNumberValue('R', script);
                 let g = script.getNumberValue('G', script);
@@ -740,7 +740,7 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.NEOPIXEL,
+                    type: RoCode.CodeWiz.sensorTypes.NEOPIXEL,
                     value: {
                         opcode:3,
                         value:{
@@ -750,15 +750,15 @@ Entry.CodeWiz.getBlocks = function() {
                         }
                     }
                 }
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_neopixel_off_all: {
             // Block UI : "네오픽셀 모두 끄기%1",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -777,27 +777,27 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_neopixel',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xfb;
 
                 if (!sq['SET']) {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.NEOPIXEL,
+                    type: RoCode.CodeWiz.sensorTypes.NEOPIXEL,
                     value: {
                         opcode: 4,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_OLED_clear: {
             // Block UI : "OLED 클리어%1",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -816,27 +816,27 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_OLED',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xfa;
 
                 if (!sq['SET']) {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.OLED,
+                    type: RoCode.CodeWiz.sensorTypes.OLED,
                     value: {
                         opcode: 0,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_OLED_mirror: {
             // Block UI : "OLED 반전%1 %2",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -848,8 +848,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -868,28 +868,28 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_OLED',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xf9;
                 let _value = script.getNumberValue('SWITCH', script);
                 if (!sq['SET']) {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.OLED,
+                    type: RoCode.CodeWiz.sensorTypes.OLED,
                     value: {
                         opcode: 1,
                         isTrue: _value,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_OLED_setSize: {
             // Block UI : "OLED 문자열 크기를 %1(으)로 설정%2",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -914,7 +914,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_OLED',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xf8;
                 let _value = script.getNumberValue('SIZE', script);
                 _value = Math.round(_value);
@@ -927,21 +927,21 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.OLED,
+                    type: RoCode.CodeWiz.sensorTypes.OLED,
                     value: {
                         opcode: 2,
                         size: _value,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_OLED_setPosition: {
             // Block UI : "OLED 커서위치(%1,%2)(으)로 지정%3",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -971,7 +971,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_OLED',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xf7;
                 let _x = script.getNumberValue('X', script);
                 _x = Math.round(_x);
@@ -993,22 +993,22 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.OLED,
+                    type: RoCode.CodeWiz.sensorTypes.OLED,
                     value: {
                         opcode: 3,
                         x: _x,
                         y: _y,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_OLED_println: {
             // Block UI : "OLED에 %1출력%2",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1033,7 +1033,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_OLED',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xf6;
                 let _value = script.getStringValue('TEXT');
                 if (!sq['SET']) {
@@ -1041,21 +1041,21 @@ Entry.CodeWiz.getBlocks = function() {
                 }
                 
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.OLED,
+                    type: RoCode.CodeWiz.sensorTypes.OLED,
                     value: {
                         opcode: 4,
                         text: _value,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_OLED_isCollision: {
             // Block UI : "OLED 문자열겹치기%1%2",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1067,8 +1067,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1087,28 +1087,28 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_OLED',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xf5;
                 let _value = script.getNumberValue('SWITCH', script);
                 if (!sq['SET']) {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.OLED,
+                    type: RoCode.CodeWiz.sensorTypes.OLED,
                     value: {
                         opcode: 5,
                         isTrue: _value,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_OLED_specialChar: {
             // Block UI : "OLED에 특수기호%1 출력하기%2",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1125,8 +1125,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '14',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1145,28 +1145,28 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_OLED',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xf4;
                 let _value = script.getNumberValue('CHAR', script);
                 if (!sq['SET']) {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.OLED,
+                    type: RoCode.CodeWiz.sensorTypes.OLED,
                     value: {
                         opcode: 6,
                         c: _value,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_OLED_setFont: {
             // Block UI : "OLED 폰트%1를 크기%2(으)로 설정",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1179,8 +1179,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1191,8 +1191,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1212,7 +1212,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_OLED',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xf3;
                 let _value = script.getNumberValue('FONT', script);
                 let _size = script.getNumberValue('SIZE', script);
@@ -1220,22 +1220,22 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.OLED,
+                    type: RoCode.CodeWiz.sensorTypes.OLED,
                     value: {
                         opcode: 7,
                         font: _value,
                         size: _size,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_OLED_startScroll: {
             // Block UI : "OLED 스크롤%1 시작페이지%2 종료페이지%3%4",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1249,8 +1249,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -1279,7 +1279,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_OLED',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xf2;
                 let _value = script.getNumberValue('DIRECTION', script);
                 let _st = script.getNumberValue('START', script);
@@ -1301,7 +1301,7 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.OLED,
+                    type: RoCode.CodeWiz.sensorTypes.OLED,
                     value: {
                         opcode: 8,
                         direction: _value,
@@ -1309,15 +1309,15 @@ Entry.CodeWiz.getBlocks = function() {
                         end: _ed,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_OLED_stopScroll: {
             // Block UI : "OLED 스크롤 정지%1",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1336,28 +1336,28 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_OLED',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xf1;
 
                 if (!sq['SET']) {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.OLED,
+                    type: RoCode.CodeWiz.sensorTypes.OLED,
                     value: {
                         opcode: 9,
                     },
                 };
                 
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_OLED_drawPoint: {
             // Block UI : "OLED의 좌표(%1,%2)에 점 그리기 색%3%4",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1377,8 +1377,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1399,7 +1399,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_OLED',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xf0;
 
                 let _x = script.getNumberValue('X', script);
@@ -1424,7 +1424,7 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.OLED,
+                    type: RoCode.CodeWiz.sensorTypes.OLED,
                     value: {
                         opcode: 10,
                         x: _x,
@@ -1432,15 +1432,15 @@ Entry.CodeWiz.getBlocks = function() {
                         color: _color,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_OLED_drawLine1: {
             // Block UI : "OLED에 선 그리기 시작(%1,%2) 끝(%3,%4) 색%5%6",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1468,8 +1468,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1492,7 +1492,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_OLED',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xef;
                 let _sx = script.getNumberValue('SX', script);
                 _sx = Math.round(_sx);
@@ -1527,7 +1527,7 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.OLED,
+                    type: RoCode.CodeWiz.sensorTypes.OLED,
                     value: {
                         opcode: 11,
                         sx: _sx,
@@ -1537,15 +1537,15 @@ Entry.CodeWiz.getBlocks = function() {
                         color: _color,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_OLED_drawLine2: {
             // Block UI : "OLED에 수직 선 그리기 시작(%1,%2) 길이%3 색%4%5",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1569,8 +1569,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1592,7 +1592,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_OLED',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xee;
                 let _sx = script.getNumberValue('SX', script);
                 _sx = Math.round(_sx);
@@ -1620,7 +1620,7 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.OLED,
+                    type: RoCode.CodeWiz.sensorTypes.OLED,
                     value: {
                         opcode: 12,
                         sx: _sx,
@@ -1629,15 +1629,15 @@ Entry.CodeWiz.getBlocks = function() {
                         color: _color,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_OLED_drawLine3: {
             // Block UI : "OLED에 수평 선 그리기 시작(%1,%2) 길이%3 색%4%5",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1661,8 +1661,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1684,7 +1684,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_OLED',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xed;
                 let _sx = script.getNumberValue('SX', script);
                 _sx = Math.round(_sx);
@@ -1712,7 +1712,7 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.OLED,
+                    type: RoCode.CodeWiz.sensorTypes.OLED,
                     value: {
                         opcode: 13,
                         sx: _sx,
@@ -1721,15 +1721,15 @@ Entry.CodeWiz.getBlocks = function() {
                         color: _color,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_OLED_drawRect: {
             // Block UI : "OLED에 시작(%1,%2)에서 가로%3 세로%4인 직사각형 그리기(채우기%5)색%6%7",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1757,8 +1757,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1768,8 +1768,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1793,7 +1793,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_OLED',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xec;
                 let _sx = script.getNumberValue('SX', script);
                 _sx = Math.round(_sx);
@@ -1829,7 +1829,7 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.OLED,
+                    type: RoCode.CodeWiz.sensorTypes.OLED,
                     value: {
                         opcode: 14,
                         x: _sx,
@@ -1840,15 +1840,15 @@ Entry.CodeWiz.getBlocks = function() {
                         color: _color,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_OLED_drawCircle: {
             // Block UI : "OLED에 시작(%1,%2)에서 반지름%3인 원 그리기(채우기%4)색%5%6",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1872,8 +1872,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -1883,8 +1883,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -1907,7 +1907,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_OLED',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xeb;
                 let _rx = script.getNumberValue('RX', script);
                 _rx = Math.round(_rx);
@@ -1936,7 +1936,7 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.OLED,
+                    type: RoCode.CodeWiz.sensorTypes.OLED,
                     value: {
                         opcode: 15,
                         x: _rx,
@@ -1946,15 +1946,15 @@ Entry.CodeWiz.getBlocks = function() {
                         color: _color,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_OLED_drawPoligon: {
             // Block UI : "OLED에 왼쪽(%1,%2) 위(%3,%4) 오른쪽(%5,%6) 점으로 삼각형 그리기(채우기%7)색%8%9",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -1990,8 +1990,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2001,8 +2001,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2028,7 +2028,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_OLED',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xea;
                 let _x1 = script.getNumberValue('X1', script);
                 _x1 = Math.round(_x1);
@@ -2078,7 +2078,7 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.OLED,
+                    type: RoCode.CodeWiz.sensorTypes.OLED,
                     value: {
                         opcode: 16,
                         x1: _x1,
@@ -2091,16 +2091,16 @@ Entry.CodeWiz.getBlocks = function() {
                         color: _color,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
 
         CodeWiz_DIGITAL_OUTPUT_setup: {
             // Block UI : "터치센서 출력으로 사용%1",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2119,27 +2119,27 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_DIGITAL_OUTPUT',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xe9;
 
                 if (!sq['SET']) {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.DIGITAL_OUTPUT,
+                    type: RoCode.CodeWiz.sensorTypes.DIGITAL_OUTPUT,
                     value: {
                         opcode: 0,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_DIGITAL_OUTPUT_digitalWrite: {
             // Block UI : "터치센서 디지털 %1(으)로 %2내보내기%3",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2155,8 +2155,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '13',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -2166,8 +2166,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -2187,7 +2187,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_DIGITAL_OUTPUT',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xe8;
                 let _pin = script.getNumberValue('PIN', script);
                 let _val = script.getNumberValue('VALUE', script);
@@ -2195,22 +2195,22 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.DIGITAL_OUTPUT,
+                    type: RoCode.CodeWiz.sensorTypes.DIGITAL_OUTPUT,
                     value: {
                         opcode: 1,
                         pin: _pin,
                         output: _val,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
         CodeWiz_DIGITAL_OUTPUT_pwmWrite: {
             // Block UI : "터치센서 PWM %1(으)로 %2내보내기(0~255)%3",
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -2226,8 +2226,8 @@ Entry.CodeWiz.getBlocks = function() {
                     ],
                     value: '13',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -2251,7 +2251,7 @@ Entry.CodeWiz.getBlocks = function() {
             class: 'CodeWiz_DIGITAL_OUTPUT',
             isNotFor: ['CodeWiz'],
             func(sprite, script) {
-                const sq = Entry.hw.sendQueue;
+                const sq = RoCode.hw.sendQueue;
                 const port = 0xe7; // 위에서 ff~e5까지 씀 추가할거면 e4부터 쓸것
 
                 let _pin = script.getNumberValue('PIN', script);
@@ -2268,16 +2268,16 @@ Entry.CodeWiz.getBlocks = function() {
                     sq['SET'] = {};
                 }
                 sq['SET'][port] = {
-                    type: Entry.CodeWiz.sensorTypes.DIGITAL_OUTPUT,
+                    type: RoCode.CodeWiz.sensorTypes.DIGITAL_OUTPUT,
                     value: {
                         opcode: 2,
                         pin: _pin,
                         writeVal: _val,
                     },
                 };
-                Entry.hw.update();
+                RoCode.hw.update();
                 sq['SET'] = {};
-                return promiseManager.sleep(Entry.CodeWiz.defaultWaitTime);
+                return promiseManager.sleep(RoCode.CodeWiz.defaultWaitTime);
             },
         },
 
@@ -2285,4 +2285,4 @@ Entry.CodeWiz.getBlocks = function() {
     };
 };
 
-module.exports = Entry.CodeWiz;
+module.exports = RoCode.CodeWiz;

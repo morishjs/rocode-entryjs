@@ -1,25 +1,25 @@
 'use strict';
 
-Entry.Restrictor = class Restrictor {
+RoCode.Restrictor = class Restrictor {
     constructor(controller) {
         this._controller = controller;
-        this.startEvent = new Entry.Event(this);
-        this.endEvent = new Entry.Event(this);
+        this.startEvent = new RoCode.Event(this);
+        this.endEvent = new RoCode.Event(this);
 
-        Entry.Curtain.init(controller && controller.isRestrictorCloseable);
+        RoCode.Curtain.init(controller && controller.isRestrictorCloseable);
 
         this.currentTooltip = null;
     }
     restrict(data, toolTipRender) {
         this._data = data;
-        Entry.expectedAction = data.content.concat();
+        RoCode.expectedAction = data.content.concat();
         this.toolTipRender = toolTipRender;
 
         this.end();
 
         const log = data.content.concat();
         const commandType = log.shift();
-        const command = Entry.Command[commandType];
+        const command = RoCode.Command[commandType];
 
         let domQuery = command.dom;
         this.startEvent.notify();
@@ -43,7 +43,7 @@ Entry.Restrictor = class Restrictor {
             );
             return;
         } else {
-            this.currentTooltip = new Entry.Tooltip(
+            this.currentTooltip = new RoCode.Tooltip(
                 [
                     {
                         title: data.tooltip.title,

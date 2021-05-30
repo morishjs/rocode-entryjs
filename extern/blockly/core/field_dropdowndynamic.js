@@ -177,8 +177,8 @@ Blockly.FieldDropdownDynamic.prototype.showEditor_ = function() {
         }
       }
       if (value !== null) {
-        if (typeof(Entry) == "object" && this.getValue() != value) {
-          Entry.dispatchEvent("entryBlocklyChanged");
+        if (typeof(RoCode) == "object" && this.getValue() != value) {
+          RoCode.dispatchEvent("RoCodeBlocklyChanged");
         }
         this.setValue(value);
       }
@@ -332,9 +332,9 @@ Blockly.FieldDropdownDynamic.prototype.trimOptions_ = function() {
  * @private
  */
 Blockly.FieldDropdownDynamic.prototype.getOptions_ = function() {
-  if (typeof(Entry.container) == "object") {
+  if (typeof(RoCode.container) == "object") {
     if (this.menuName_)
-      return Entry.container.getDropdownList(this.menuName_);
+      return RoCode.container.getDropdownList(this.menuName_);
     else {
       return this.menuFunc_.call(this);
     }

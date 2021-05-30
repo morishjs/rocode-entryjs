@@ -5,8 +5,8 @@ module.exports = {
     getBlocks() {
         return {
             is_clicked: {
-                color: EntryStatic.colorSet.block.default.JUDGE,
-                outerLine: EntryStatic.colorSet.block.darken.JUDGE,
+                color: RoCodeStatic.colorSet.block.default.JUDGE,
+                outerLine: RoCodeStatic.colorSet.block.darken.JUDGE,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
@@ -24,21 +24,21 @@ module.exports = {
                 class: 'boolean_input',
                 isNotFor: [],
                 func(sprite, script) {
-                    return Entry.stage.isClick;
+                    return RoCode.stage.isClick;
                 },
                 syntax: {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.is_mouse_clicked()',
+                            syntax: 'RoCode.is_mouse_clicked()',
                             blockType: 'param',
                         },
                     ],
                 },
             },
             is_press_some_key: {
-                color: EntryStatic.colorSet.block.default.JUDGE,
-                outerLine: EntryStatic.colorSet.block.darken.JUDGE,
+                color: RoCodeStatic.colorSet.block.default.JUDGE,
+                outerLine: RoCodeStatic.colorSet.block.darken.JUDGE,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
@@ -47,8 +47,8 @@ module.exports = {
                         options: keyInputList,
                         value: 'next',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.JUDGE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.JUDGE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Text',
@@ -72,21 +72,21 @@ module.exports = {
                 isNotFor: [],
                 func(sprite, script) {
                     const keycode = Number(script.getField('VALUE', script));
-                    return Entry.pressedKeys.indexOf(keycode) >= 0;
+                    return RoCode.pressedKeys.indexOf(keycode) >= 0;
                 },
                 syntax: {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.is_key_pressed(%1)',
+                            syntax: 'RoCode.is_key_pressed(%1)',
                             blockType: 'param',
                             textParams: [
                                 {
                                     type: 'Dropdown',
                                     value: 'next',
                                     options: keyInputList,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.JUDGE,
-                                    converter: Entry.block.converters.keyboardCode,
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.JUDGE,
+                                    converter: RoCode.block.converters.keyboardCode,
                                 },
                             ],
                         },
@@ -94,8 +94,8 @@ module.exports = {
                 },
             },
             reach_something: {
-                color: EntryStatic.colorSet.block.default.JUDGE,
-                outerLine: EntryStatic.colorSet.block.darken.JUDGE,
+                color: RoCodeStatic.colorSet.block.default.JUDGE,
+                outerLine: RoCodeStatic.colorSet.block.darken.JUDGE,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
@@ -109,8 +109,8 @@ module.exports = {
                         value: null,
                         menuName: 'collision',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.JUDGE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.JUDGE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Text',
@@ -143,7 +143,7 @@ module.exports = {
                     const isWall = reg.test(targetSpriteId);
                     const collision = ndgmr.checkPixelCollision;
                     if (isWall) {
-                        const wall = Entry.stage.wall;
+                        const wall = RoCode.stage.wall;
                         switch (targetSpriteId) {
                             case 'wall':
                                 return !!(
@@ -164,11 +164,11 @@ module.exports = {
                     } else if (targetSpriteId === 'mouse') {
                         return GEHelper.hitTestMouse(object);
                     } else {
-                        const targetSprite = Entry.container.getEntity(targetSpriteId);
+                        const targetSprite = RoCode.container.getEntity(targetSpriteId);
                         if (targetSprite.type === 'textBox' || sprite.type === 'textBox') {
                             const targetBound = GEHelper.getTransformedBounds(targetSprite.object);
                             const bound = GEHelper.getTransformedBounds(object);
-                            if (Entry.checkCollisionRect(bound, targetBound)) {
+                            if (RoCode.checkCollisionRect(bound, targetBound)) {
                                 return true;
                             }
                             const clonedEntities = targetSprite.parent.clonedEntities;
@@ -178,7 +178,7 @@ module.exports = {
                                     continue;
                                 }
                                 if (
-                                    Entry.checkCollisionRect(
+                                    RoCode.checkCollisionRect(
                                         bound,
                                         GEHelper.getTransformedBounds(entity.object)
                                     )
@@ -211,7 +211,7 @@ module.exports = {
                     js: [],
                     py: [
                         {
-                            syntax: 'Entry.is_touched(%2)',
+                            syntax: 'RoCode.is_touched(%2)',
                             blockType: 'param',
                             textParams: [
                                 undefined,
@@ -220,9 +220,9 @@ module.exports = {
                                     value: null,
                                     menuName: 'collision',
                                     fontSize: 11,
-                                    arrowColor: EntryStatic.colorSet.arrow.default.JUDGE,
-                                    converter: Entry.block.converters.returnObjectOrStringValue,
-                                    codeMap: 'Entry.CodeMap.Entry.reach_something[1]',
+                                    arrowColor: RoCodeStatic.colorSet.arrow.default.JUDGE,
+                                    converter: RoCode.block.converters.returnObjectOrStringValue,
+                                    codeMap: 'RoCode.CodeMap.RoCode.reach_something[1]',
                                 },
                             ],
                         },
@@ -230,8 +230,8 @@ module.exports = {
                 },
             },
             boolean_basic_operator: {
-                color: EntryStatic.colorSet.block.default.JUDGE,
-                outerLine: EntryStatic.colorSet.block.darken.JUDGE,
+                color: RoCodeStatic.colorSet.block.default.JUDGE,
+                outerLine: RoCodeStatic.colorSet.block.darken.JUDGE,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
@@ -251,7 +251,7 @@ module.exports = {
                         ],
                         value: 'EQUAL',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.JUDGE,
+                        bgColor: RoCodeStatic.colorSet.block.darken.JUDGE,
                         noArrow: true,
                     },
                     {
@@ -441,7 +441,7 @@ module.exports = {
                                     value: 'EQUAL',
                                     fontSize: 11,
                                     noArrow: true,
-                                    converter: Entry.block.converters.returnOperator,
+                                    converter: RoCode.block.converters.returnOperator,
                                 },
                                 {
                                     type: 'Block',
@@ -453,8 +453,8 @@ module.exports = {
                 },
             },
             boolean_and_or: {
-                color: EntryStatic.colorSet.block.default.JUDGE,
-                outerLine: EntryStatic.colorSet.block.darken.JUDGE,
+                color: RoCodeStatic.colorSet.block.default.JUDGE,
+                outerLine: RoCodeStatic.colorSet.block.darken.JUDGE,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [
@@ -470,8 +470,8 @@ module.exports = {
                         ],
                         value: 'AND',
                         fontSize: 10,
-                        bgColor: EntryStatic.colorSet.block.darken.JUDGE,
-                        arrowColor: EntryStatic.colorSet.arrow.default.DEFAULT,
+                        bgColor: RoCodeStatic.colorSet.block.darken.JUDGE,
+                        arrowColor: RoCodeStatic.colorSet.arrow.default.DEFAULT,
                     },
                     {
                         type: 'Block',
@@ -545,7 +545,7 @@ module.exports = {
                                         [Lang.Blocks.JUDGEMENT_boolean_and, 'AND'],
                                         [Lang.Blocks.JUDGEMENT_boolean_or, 'OR'],
                                     ],
-                                    converter: Entry.block.converters.returnOperator,
+                                    converter: RoCode.block.converters.returnOperator,
                                     value: 'AND',
                                     fontSize: 11,
                                 },
@@ -559,8 +559,8 @@ module.exports = {
                 },
             },
             boolean_not: {
-                color: EntryStatic.colorSet.block.default.JUDGE,
-                outerLine: EntryStatic.colorSet.block.darken.JUDGE,
+                color: RoCodeStatic.colorSet.block.default.JUDGE,
+                outerLine: RoCodeStatic.colorSet.block.darken.JUDGE,
                 skeleton: 'basic_boolean_field',
                 statements: [],
                 params: [

@@ -1,5 +1,5 @@
 import singleInstance from '../core/singleInstance';
-import { Dropper } from '@entrylabs/tool';
+import { Dropper } from '@RoCodelabs/tool';
 
 class DropperExtension {
     #view = null;
@@ -9,9 +9,9 @@ class DropperExtension {
     }
 
     #createView() {
-        this.#view = Entry.Dom('div', {
-            class: 'entryDropper',
-            parent: $('.entryExtension'),
+        this.#view = RoCode.Dom('div', {
+            class: 'RoCodeDropper',
+            parent: $('.RoCodeExtension'),
         });
 
         this.#dropper = new Dropper({

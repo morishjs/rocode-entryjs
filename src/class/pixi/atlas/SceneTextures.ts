@@ -3,9 +3,9 @@ import { AtlasImageLoadingInfo } from './loader/AtlasImageLoadingInfo';
 import { PrimitiveMap } from './structure/PrimitiveMap';
 import { ImageRect } from '../../maxrect-packer/geom/ImageRect';
 import { AtlasImageLoader } from './loader/AtlasImageLoader';
-import { EntryTextureOption } from './EntryTextureOption';
-import { EntryTexture } from './texture/EntryTexture';
-import { EntryBaseTexture } from './texture/EntryBaseTexture';
+import { RoCodeTextureOption } from './RoCodeTextureOption';
+import { RoCodeTexture } from './texture/RoCodeTexture';
+import { RoCodeBaseTexture } from './texture/RoCodeBaseTexture';
 import { IRawPicture } from './model/IRawPicture';
 import { PIXIAtlasHelper } from './PIXIAtlasHelper';
 import { clog } from '../utils/logs';
@@ -13,13 +13,13 @@ import { PrimitiveSet } from './structure/PrimitiveSet';
 import { TimeoutTimer } from '../utils/TimeoutTimer';
 
 export class SceneTextures implements ISceneTextures {
-    private _path_tex_map: PrimitiveMap<EntryTexture> = new PrimitiveMap();
+    private _path_tex_map: PrimitiveMap<RoCodeTexture> = new PrimitiveMap();
     private _activated: boolean;
     private _gcTimer: TimeoutTimer = new TimeoutTimer();
 
     constructor(
         public sceneID: string,
-        private _option: EntryTextureOption,
+        private _option: RoCodeTextureOption,
         private _loader: AtlasImageLoader
     ) {}
 
@@ -35,7 +35,7 @@ export class SceneTextures implements ISceneTextures {
     _gcTexture(): void {
         const usedPathSet: PrimitiveSet = PIXIAtlasHelper.getScenePathSet(this.sceneID);
         let deleteCnt = 0;
-        this._path_tex_map.each((tex: EntryTexture, path: string) => {
+        this._path_tex_map.each((tex: RoCodeTexture, path: string) => {
             if (usedPathSet.hasValue(path)) {
                 return;
             }
@@ -50,7 +50,7 @@ export class SceneTextures implements ISceneTextures {
 
     activate(): void {
         this._activated = true;
-        this._path_tex_map.each((tex: EntryTexture, path: string) => {
+        this._path_tex_map.each((tex: RoCodeTexture, path: string) => {
             const info = this._loader.getImageInfo(path);
             if (!info || !info.isReady) {
                 return;
@@ -78,30 +78,30 @@ export class SceneTextures implements ISceneTextures {
         }
     }
 
-    private _newTexture(path: string, rect: ImageRect): EntryTexture {
-        const baseTex: EntryBaseTexture = new EntryBaseTexture();
+    private _newTexture(path: string, rect: ImageRect): RoCodeTexture {
+        const baseTex: RoCodeBaseTexture = new RoCodeBaseTexture();
         baseTex.width = rect.width;
         baseTex.height = rect.height;
         baseTex.mipmap = this._option.mipmap;
         baseTex.scaleMode = this._option.scaleMode;
-        const tex = new EntryTexture(baseTex, rect);
+        const tex = new RoCodeTexture(baseTex, rect);
         this._path_tex_map.add(path, tex);
         return tex;
     }
 
     deactivate(): void {
         this._activated = false;
-        this._path_tex_map.each((tex: EntryTexture, path: string) => {
+        this._path_tex_map.each((tex: RoCodeTexture, path: string) => {
             tex.getBaseTexture().dispose();
         });
     }
 
-    getTexture(path: string): EntryTexture {
+    getTexture(path: string): RoCodeTexture {
         return this._path_tex_map.getValue(path);
     }
 
     putImage(info: AtlasImageLoadingInfo, forceUpdateBaseTexture: boolean): void {
-        const tex: EntryTexture = this._path_tex_map.getValue(info.path);
+        const tex: RoCodeTexture = this._path_tex_map.getValue(info.path);
         if (!tex) {
             return;
         }
@@ -122,7 +122,7 @@ export class SceneTextures implements ISceneTextures {
         }
         baseTex.updateSource(source);
 
-        Entry.requestUpdate = true;
+        RoCode.requestUpdate = true;
     }
 
     destroy(): void {
@@ -130,7 +130,7 @@ export class SceneTextures implements ISceneTextures {
         this._gcTimer.reset();
         this._gcTimer = null;
 
-        this._path_tex_map.each((tex: EntryTexture, path: string) => {
+        this._path_tex_map.each((tex: RoCodeTexture, path: string) => {
             tex.destroy(true);
         });
         this._path_tex_map.destroy();

@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.Kingcoding = {
+RoCode.Kingcoding = {
     id: '34.1',
     name: 'Kingcoding',
     url: 'http://www.kingkongedu.co.kr/',
@@ -13,25 +13,25 @@ Entry.Kingcoding = {
         //정지시 초기화 부분
 
         //200210 setDigitalPortValue 추후 지원 않을 예정임으로 변경
-        Entry.hw.sendQueue.MOTOR1 = 0;
-        Entry.hw.sendQueue.MOTOR2 = 0;
-        Entry.hw.sendQueue.LED = 0;
-        Entry.hw.sendQueue.BUZZER = 0;
+        RoCode.hw.sendQueue.MOTOR1 = 0;
+        RoCode.hw.sendQueue.MOTOR2 = 0;
+        RoCode.hw.sendQueue.LED = 0;
+        RoCode.hw.sendQueue.BUZZER = 0;
 
-        Entry.hw.sendQueue.ANAL1 = 0; //a1값 요청 명령 변수
-        Entry.hw.sendQueue.ANAL2 = 0;
-        Entry.hw.sendQueue.DIGI1 = 0; //d1값 요청 명령 변수
-        Entry.hw.sendQueue.DIGI2 = 0;
+        RoCode.hw.sendQueue.ANAL1 = 0; //a1값 요청 명령 변수
+        RoCode.hw.sendQueue.ANAL2 = 0;
+        RoCode.hw.sendQueue.DIGI1 = 0; //d1값 요청 명령 변수
+        RoCode.hw.sendQueue.DIGI2 = 0;
 
-        Entry.hw.sendQueue.SET_DIGI1 = 0; //d1 출력 명령
-        Entry.hw.sendQueue.SET_DIGI2 = 0;
-        Entry.hw.sendQueue.USE_SET_DIGITAL = 0; //digital 입력을 받을 것인지 출력을 줄것인지 결정하는 flag
+        RoCode.hw.sendQueue.SET_DIGI1 = 0; //d1 출력 명령
+        RoCode.hw.sendQueue.SET_DIGI2 = 0;
+        RoCode.hw.sendQueue.USE_SET_DIGITAL = 0; //digital 입력을 받을 것인지 출력을 줄것인지 결정하는 flag
 
-        Entry.hw.update();
+        RoCode.hw.update();
     },
 };
 
-Entry.Kingcoding.setLanguage = function() {
+RoCode.Kingcoding.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -62,7 +62,7 @@ Entry.Kingcoding.setLanguage = function() {
     };
 };
 
-Entry.Kingcoding.blockMenuBlocks = [
+RoCode.Kingcoding.blockMenuBlocks = [
     'kingcoding_set_motor',
     'kingcoding_set_led',
     'kingcoding_set_buzzer',
@@ -74,11 +74,11 @@ Entry.Kingcoding.blockMenuBlocks = [
     'kingcoding_get_digital_2_value',
 ];
 
-Entry.Kingcoding.getBlocks = function() {
+RoCode.Kingcoding.getBlocks = function() {
     return {
         kingcoding_set_motor: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -99,8 +99,8 @@ Entry.Kingcoding.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -124,7 +124,7 @@ Entry.Kingcoding.getBlocks = function() {
                     script.timeFlag = 1;
                     const timeValue = 50; //지연 시간 ms
                     const blockId = script.block.id;
-                    Entry.TimeWaitManager.add(
+                    RoCode.TimeWaitManager.add(
                         blockId,
                         () => {
                             script.timeFlag = 0;
@@ -138,47 +138,47 @@ Entry.Kingcoding.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
+                    RoCode.engine.isContinue = false;
                     const value = script.getNumberField('PORT', script);
                     console.log(`motor :${value}`);
                     switch (value) {
                         case 1:
-                            Entry.hw.sendQueue.MOTOR1 = 1; //정
+                            RoCode.hw.sendQueue.MOTOR1 = 1; //정
                             break;
                         case 2:
-                            Entry.hw.sendQueue.MOTOR1 = 2; //역
+                            RoCode.hw.sendQueue.MOTOR1 = 2; //역
                             break;
                         case 3:
-                            Entry.hw.sendQueue.MOTOR1 = 0; //STOP
+                            RoCode.hw.sendQueue.MOTOR1 = 0; //STOP
                             break;
                         case 4:
-                            Entry.hw.sendQueue.MOTOR2 = 1; //정
+                            RoCode.hw.sendQueue.MOTOR2 = 1; //정
                             break;
                         case 5:
-                            Entry.hw.sendQueue.MOTOR2 = 2; //역
+                            RoCode.hw.sendQueue.MOTOR2 = 2; //역
                             break;
                         case 6:
-                            Entry.hw.sendQueue.MOTOR2 = 0; //STOP
+                            RoCode.hw.sendQueue.MOTOR2 = 0; //STOP
                             break;
                         case 7:
-                            Entry.hw.sendQueue.MOTOR1 = 1; //정
-                            Entry.hw.sendQueue.MOTOR2 = 1; //정
+                            RoCode.hw.sendQueue.MOTOR1 = 1; //정
+                            RoCode.hw.sendQueue.MOTOR2 = 1; //정
                             break;
                         case 8:
-                            Entry.hw.sendQueue.MOTOR1 = 2; //역
-                            Entry.hw.sendQueue.MOTOR2 = 2; //역
+                            RoCode.hw.sendQueue.MOTOR1 = 2; //역
+                            RoCode.hw.sendQueue.MOTOR2 = 2; //역
                             break;
                         case 9:
-                            Entry.hw.sendQueue.MOTOR1 = 1; //정
-                            Entry.hw.sendQueue.MOTOR2 = 2; //역
+                            RoCode.hw.sendQueue.MOTOR1 = 1; //정
+                            RoCode.hw.sendQueue.MOTOR2 = 2; //역
                             break;
                         case 10:
-                            Entry.hw.sendQueue.MOTOR1 = 2; //역
-                            Entry.hw.sendQueue.MOTOR2 = 1; //정
+                            RoCode.hw.sendQueue.MOTOR1 = 2; //역
+                            RoCode.hw.sendQueue.MOTOR2 = 1; //정
                             break;
                         case 11:
-                            Entry.hw.sendQueue.MOTOR1 = 0; //STOP
-                            Entry.hw.sendQueue.MOTOR2 = 0; //STOP
+                            RoCode.hw.sendQueue.MOTOR1 = 0; //STOP
+                            RoCode.hw.sendQueue.MOTOR2 = 0; //STOP
                             break;
                     }
 
@@ -189,8 +189,8 @@ Entry.Kingcoding.getBlocks = function() {
         },
 
         kingcoding_set_led: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -208,8 +208,8 @@ Entry.Kingcoding.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator', 
@@ -233,7 +233,7 @@ Entry.Kingcoding.getBlocks = function() {
                     script.timeFlag = 1;
                     const timeValue = 25; //시간지연
                     const blockId = script.block.id;
-                    Entry.TimeWaitManager.add(
+                    RoCode.TimeWaitManager.add(
                         blockId,
                         () => {
                             script.timeFlag = 0;
@@ -247,17 +247,17 @@ Entry.Kingcoding.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
-                    Entry.hw.sendQueue.LED = script.getNumberField('PORT', script);
-                    console.log(`led :${Entry.hw.sendQueue.LED}`);
+                    RoCode.engine.isContinue = false;
+                    RoCode.hw.sendQueue.LED = script.getNumberField('PORT', script);
+                    console.log(`led :${RoCode.hw.sendQueue.LED}`);
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: ['Kingcoding.set_led(%1)'] },
         },
         kingcoding_set_buzzer: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             statements: [],
             params: [
@@ -271,8 +271,8 @@ Entry.Kingcoding.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator', 
@@ -296,7 +296,7 @@ Entry.Kingcoding.getBlocks = function() {
                     script.timeFlag = 1;
                     const timeValue = 25; //시간지연
                     const blockId = script.block.id;
-                    Entry.TimeWaitManager.add(
+                    RoCode.TimeWaitManager.add(
                         blockId,
                         () => {
                             script.timeFlag = 0;
@@ -310,17 +310,17 @@ Entry.Kingcoding.getBlocks = function() {
                 } else {
                     delete script.timeFlag;
                     delete script.isStart;
-                    Entry.engine.isContinue = false;
-                    Entry.hw.sendQueue.BUZZER = script.getNumberField('PORT', script);
-                    console.log(`buzzer :${Entry.hw.sendQueue.BUZZER}`);
+                    RoCode.engine.isContinue = false;
+                    RoCode.hw.sendQueue.BUZZER = script.getNumberField('PORT', script);
+                    console.log(`buzzer :${RoCode.hw.sendQueue.BUZZER}`);
                     return script.callReturn();
                 }
             },
             syntax: { js: [], py: ['Kingcoding.set_buzzer(%1)'] },
         },
         // kingcoding_set_digital1: {
-        //     color: EntryStatic.colorSet.block.default.HARDWARE,
-        //     outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+        //     color: RoCodeStatic.colorSet.block.default.HARDWARE,
+        //     outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
         //     skeleton: 'basic',
         //     statements: [],
         //     params: [
@@ -329,8 +329,8 @@ Entry.Kingcoding.getBlocks = function() {
         //             options: [['켜기', '1'], ['끄기', '0']],
         //             value: '1',
         //             fontSize: 11,
-        //             bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-        //             arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+        //             bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+        //             arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
         //         },
         //         {
         //             type: 'Indicator',
@@ -354,7 +354,7 @@ Entry.Kingcoding.getBlocks = function() {
         //             script.timeFlag = 1;
         //             var timeValue = 25;//시간지연
         //             const blockId = script.block.id;
-        //             Entry.TimeWaitManager.add(
+        //             RoCode.TimeWaitManager.add(
         //                 blockId,
         //                 function() {
         //                     script.timeFlag = 0;
@@ -367,11 +367,11 @@ Entry.Kingcoding.getBlocks = function() {
         //         } else {
         //             delete script.timeFlag;
         //             delete script.isStart;
-        //             Entry.engine.isContinue = false;
+        //             RoCode.engine.isContinue = false;
         //             var value = script.getNumberField('PORT', script);
         //             console.log("digital1 :"+value);
-        //             Entry.hw.setDigitalPortValue(`11`, value); 
-        //             Entry.hw.setDigitalPortValue(`13`, 1); //출력을 사용한다는 플래그 세움
+        //             RoCode.hw.setDigitalPortValue(`11`, value); 
+        //             RoCode.hw.setDigitalPortValue(`13`, 1); //출력을 사용한다는 플래그 세움
         //             return script.callReturn();
         //         }
         //       },
@@ -379,8 +379,8 @@ Entry.Kingcoding.getBlocks = function() {
         // },
 
         // kingcoding_set_digital2: {
-        //     color: EntryStatic.colorSet.block.default.HARDWARE,
-        //     outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+        //     color: RoCodeStatic.colorSet.block.default.HARDWARE,
+        //     outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
         //     skeleton: 'basic',
         //     statements: [],
         //     params: [
@@ -389,8 +389,8 @@ Entry.Kingcoding.getBlocks = function() {
         //             options: [['켜기', '1'], ['끄기', '0']],
         //             value: '1',
         //             fontSize: 11,
-        //             bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-        //             arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+        //             bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+        //             arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
         //         },
         //         {
         //             type: 'Indicator',
@@ -414,7 +414,7 @@ Entry.Kingcoding.getBlocks = function() {
         //             script.timeFlag = 1;
         //             var timeValue = 25;//시간지연
         //             const blockId = script.block.id;
-        //             Entry.TimeWaitManager.add(
+        //             RoCode.TimeWaitManager.add(
         //                 blockId,
         //                 function() {
         //                     script.timeFlag = 0;
@@ -427,11 +427,11 @@ Entry.Kingcoding.getBlocks = function() {
         //         } else {
         //             delete script.timeFlag;
         //             delete script.isStart;
-        //             Entry.engine.isContinue = false;
+        //             RoCode.engine.isContinue = false;
         //             var value = script.getNumberField('PORT', script);
         //             console.log("digital1 :"+value);
-        //             Entry.hw.setDigitalPortValue(`12`, value); 
-        //             Entry.hw.setDigitalPortValue(`13`, 1); //출력을 사용한다는 플래그 세움
+        //             RoCode.hw.setDigitalPortValue(`12`, value); 
+        //             RoCode.hw.setDigitalPortValue(`13`, 1); //출력을 사용한다는 플래그 세움
         //             return script.callReturn();
         //         }
         //       },
@@ -439,8 +439,8 @@ Entry.Kingcoding.getBlocks = function() {
         // },
 
         kingcoding_get_number_sensor_1_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -448,8 +448,8 @@ Entry.Kingcoding.getBlocks = function() {
                 {
                     type: 'Text',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -463,8 +463,8 @@ Entry.Kingcoding.getBlocks = function() {
             class: 'Kingcoding3',
             isNotFor: ['Kingcoding'],
             func(sprite, script) {
-                Entry.hw.sendQueue.ANAL1 = 1;
-                let ret = Entry.hw.portData.ANAL1; //값을 받기
+                RoCode.hw.sendQueue.ANAL1 = 1;
+                let ret = RoCode.hw.portData.ANAL1; //값을 받기
                 ret = ret & 63; // mask: 00111111
                 ret = (ret * 100) / 63; //(0~100 으로 변환)
                 console.log(`anal 1 :${ret}`);
@@ -473,8 +473,8 @@ Entry.Kingcoding.getBlocks = function() {
             syntax: { js: [], py: ['Kingcoding.sensor_1_value()'] },
         },
         kingcoding_get_number_sensor_2_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_string_field',
             statements: [],
@@ -482,8 +482,8 @@ Entry.Kingcoding.getBlocks = function() {
                 {
                     type: 'Text',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -495,8 +495,8 @@ Entry.Kingcoding.getBlocks = function() {
             class: 'Kingcoding3',
             isNotFor: ['Kingcoding'],
             func(sprite, script) {
-                Entry.hw.sendQueue.ANAL2 = 1;
-                let ret = Entry.hw.portData.ANAL2; //값을 받기
+                RoCode.hw.sendQueue.ANAL2 = 1;
+                let ret = RoCode.hw.portData.ANAL2; //값을 받기
                 ret = ret & 63; // mask: 00111111
                 ret = (ret * 100) / 63; //(0~100 으로 변환)
                 console.log(`anal 2 :${ret}`);
@@ -513,8 +513,8 @@ Entry.Kingcoding.getBlocks = function() {
             },
         },
         kingcoding_get_digital_1_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -522,8 +522,8 @@ Entry.Kingcoding.getBlocks = function() {
                 {
                     type: 'Text',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -537,8 +537,8 @@ Entry.Kingcoding.getBlocks = function() {
             class: 'Kingcoding3',
             isNotFor: ['Kingcoding'],
             func(sprite, script) {
-                Entry.hw.sendQueue.DIGI1 = 1;
-                let ret = Entry.hw.portData.DIGI_1_2; //값을 받기
+                RoCode.hw.sendQueue.DIGI1 = 1;
+                let ret = RoCode.hw.portData.DIGI_1_2; //값을 받기
                 ret = ret & 1; // mask: 0000 0001
                 console.log(`digi 1 :${ret}`);
                 return ret;
@@ -546,8 +546,8 @@ Entry.Kingcoding.getBlocks = function() {
             syntax: { js: [], py: ['Kingcoding.is_button_1_pressed()'] },
         },
         kingcoding_get_digital_2_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             fontColor: '#fff',
             skeleton: 'basic_boolean_field',
             statements: [],
@@ -555,8 +555,8 @@ Entry.Kingcoding.getBlocks = function() {
                 {
                     type: 'Text',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             events: {},
@@ -570,8 +570,8 @@ Entry.Kingcoding.getBlocks = function() {
             class: 'Kingcoding3',
             isNotFor: ['Kingcoding'],
             func(sprite, script) {
-                Entry.hw.sendQueue.DIGI2 = 1;
-                let ret = Entry.hw.portData.DIGI_1_2; //값을 받기
+                RoCode.hw.sendQueue.DIGI2 = 1;
+                let ret = RoCode.hw.portData.DIGI_1_2; //값을 받기
                 ret = ret & 2; // mask: 0000 0010
                 console.log(`digi 2 :${ret}`);
                 return ret;
@@ -581,4 +581,4 @@ Entry.Kingcoding.getBlocks = function() {
     };
 };
 
-module.exports = Entry.Kingcoding;
+module.exports = RoCode.Kingcoding;

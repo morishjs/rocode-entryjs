@@ -1,6 +1,6 @@
 'use strict';
 
-Entry.freearduino = {
+RoCode.freearduino = {
     id: '2B.1',
     name: 'freearduino',
     url: 'https://cafe.naver.com/robotclubmokdong',
@@ -10,22 +10,22 @@ Entry.freearduino = {
         "en": "freearduino"
     },
     setZero: function() {
-        Entry.hw.sendQueue.readablePorts = [];
+        RoCode.hw.sendQueue.readablePorts = [];
         for (var port = 0; port < 20; port++) {
-            Entry.hw.sendQueue.readablePorts.push(port);
+            RoCode.hw.sendQueue.readablePorts.push(port);
         }
         for (var port = 2; port < 20; port++) {
-            Entry.hw.sendQueue[port] = 199;
+            RoCode.hw.sendQueue[port] = 199;
         }
         for (var port = 20; port < 25; port++) {
-            Entry.hw.sendQueue[port] = 0;
+            RoCode.hw.sendQueue[port] = 0;
         }
-        Entry.hw.sendQueue[0] = 0;
-        Entry.hw.update();
+        RoCode.hw.sendQueue[0] = 0;
+        RoCode.hw.update();
     },
 };
 
-Entry.freearduino.blockMenuBlocks = [
+RoCode.freearduino.blockMenuBlocks = [
     "freearduino_set_digital_value",
     "freearduino_get_digital_value",
     "freearduino_get_digital_value_pullup",
@@ -41,7 +41,7 @@ Entry.freearduino.blockMenuBlocks = [
     "freearduino_set_motor_speed",
 ];
 
-Entry.freearduino.setLanguage = function() {
+RoCode.freearduino.setLanguage = function() {
     return {
         ko: {
             template: {
@@ -80,11 +80,11 @@ Entry.freearduino.setLanguage = function() {
     }
 };
 
-Entry.freearduino.getBlocks = function() {
+RoCode.freearduino.getBlocks = function() {
     return {
         freearduino_get_analog_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,  
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             params: [
@@ -100,8 +100,8 @@ Entry.freearduino.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -115,15 +115,15 @@ Entry.freearduino.getBlocks = function() {
             isNotFor: ['freearduino'],
             func: function(sprite, script) {
                 var port = script.getField('PORT',script);
-                var ANALOG = Entry.hw.portData.ANALOG;
+                var ANALOG = RoCode.hw.portData.ANALOG;
                 return ANALOG[port];
             },
             syntax: { js: [], py: ['freearduino.get_analog_value(%1)'] },
         },
 
         freearduino_get_analog_value_pullup: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,  
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             params: [
@@ -139,8 +139,8 @@ Entry.freearduino.getBlocks = function() {
                     ],
                     value: '0',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -154,15 +154,15 @@ Entry.freearduino.getBlocks = function() {
             isNotFor: ['freearduino'],
             func: function(sprite, script) {
                 var port = script.getField('PORT',script);
-                var ANALOG = Entry.hw.portData.ANALOG_PULLUP;
+                var ANALOG = RoCode.hw.portData.ANALOG_PULLUP;
                 return ANALOG[port];
             },
             syntax: { js: [], py: ['freearduino.get_analog_value_pullup(%1)'] },
         },
 
         freearduino_get_analog_mapped_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,  
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             params: [
@@ -202,7 +202,7 @@ Entry.freearduino.getBlocks = function() {
                     {
                         type: 'freearduino_get_analog_value',
                         params: [ '0'],
-                    }, 
+                    },
                     null, null, null, null],
                 type: 'freearduino_get_analog_mapped_value',
             },
@@ -227,9 +227,9 @@ Entry.freearduino.getBlocks = function() {
                 var isFloat = false;
 
                 if (
-                    (Entry.Utils.isNumber(stringValue4) &&
+                    (RoCode.Utils.isNumber(stringValue4) &&
                         stringValue4.indexOf('.') > -1) ||
-                    (Entry.Utils.isNumber(stringValue5) &&
+                    (RoCode.Utils.isNumber(stringValue5) &&
                         stringValue5.indexOf('.') > -1)
                 ) {
                     isFloat = true;
@@ -267,8 +267,8 @@ Entry.freearduino.getBlocks = function() {
         },
 
         freearduino_get_humidity_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,  
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             params: [
@@ -296,8 +296,8 @@ Entry.freearduino.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -311,16 +311,16 @@ Entry.freearduino.getBlocks = function() {
             isNotFor: ['freearduino'],
             func: function(sprite, script) {
                 var port = script.getField('PORT');
-                Entry.hw.setDigitalPortValue(port, 201);
+                RoCode.hw.setDigitalPortValue(port, 201);
                 script.callReturn();
-                return Entry.hw.portData.DHT_HUMI;
+                return RoCode.hw.portData.DHT_HUMI;
             },
             syntax: { js: [], py: ['freearduino.get_humidity_value(%1)'] },
         },
 
         freearduino_get_temperature_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,  
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             params: [
@@ -348,8 +348,8 @@ Entry.freearduino.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -363,16 +363,16 @@ Entry.freearduino.getBlocks = function() {
             isNotFor: ['freearduino'],
             func: function(sprite, script) {
                 var port = script.getField('PORT');
-                Entry.hw.setDigitalPortValue(port, 201);
+                RoCode.hw.setDigitalPortValue(port, 201);
                 script.callReturn();
-                return Entry.hw.portData.DHT_TEMP;
+                return RoCode.hw.portData.DHT_TEMP;
             },
             syntax: { js: [], py: ['freearduino.get_temperature_value(%1)'] },
         },
 
         freearduino_get_distance_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,  
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             params: [
@@ -400,8 +400,8 @@ Entry.freearduino.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -427,8 +427,8 @@ Entry.freearduino.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -444,17 +444,17 @@ Entry.freearduino.getBlocks = function() {
             func: function(sprite, script) {
                 var trig = script.getField('PORT1');
                 var echo = script.getField('PORT2');
-                Entry.hw.setDigitalPortValue(trig, 202);
-                Entry.hw.setDigitalPortValue(echo, 203);
+                RoCode.hw.setDigitalPortValue(trig, 202);
+                RoCode.hw.setDigitalPortValue(echo, 203);
                 script.callReturn();
-                return Entry.hw.portData.US_DISTANCE;
+                return RoCode.hw.portData.US_DISTANCE;
             },
             syntax: { js: [], py: ['freearduino.get_distance_value(%1, %2)'] },
         },
 
         freearduino_set_digital_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,  
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             params: [
@@ -482,16 +482,16 @@ Entry.freearduino.getBlocks = function() {
                     ],
                     value: '13',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
                     options: [['HIGH', '255'], ['LOW', '0']],
                     value: '255',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -512,15 +512,15 @@ Entry.freearduino.getBlocks = function() {
             func: function(sprite, script) {
                 var port = script.getField('PORT');
                 var value = script.getNumberField('OPERATOR');
-                Entry.hw.setDigitalPortValue(port,value === 255 ? 200 : 199);
+                RoCode.hw.setDigitalPortValue(port,value === 255 ? 200 : 199);
                 return script.callReturn();
             },
             syntax: { js: [], py: ['freearduino.set_digital_value(%1, %2)'] },
         },
 
         freearduino_get_digital_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,  
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             params: [
@@ -548,8 +548,8 @@ Entry.freearduino.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -563,15 +563,15 @@ Entry.freearduino.getBlocks = function() {
             isNotFor: ['freearduino'],
             func: function(sprite, script) {
                 var port = script.getField('PORT',script);
-                var DIGITAL = Entry.hw.portData.DIGITAL;
+                var DIGITAL = RoCode.hw.portData.DIGITAL;
                 return DIGITAL[port];
             },
             syntax: { js: [], py: ['freearduino.get_digital_value(%1)'] },
         },
 
         freearduino_get_digital_value_pullup: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,  
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic_string_field',
             fontColor: '#fff',
             params: [
@@ -599,8 +599,8 @@ Entry.freearduino.getBlocks = function() {
                     ],
                     value: '2',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
             ],
             def: {
@@ -614,15 +614,15 @@ Entry.freearduino.getBlocks = function() {
             isNotFor: ['freearduino'],
             func: function(sprite, script) {
                 var port = script.getField('PORT',script);
-                var DIGITAL = Entry.hw.portData.DIGITAL_PULLUP;
+                var DIGITAL = RoCode.hw.portData.DIGITAL_PULLUP;
                 return DIGITAL[port];
             },
             syntax: { js: [], py: ['freearduino.get_digital_value_pullup(%1)'] },
         },
 
         freearduino_set_pwm_value: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,  
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             params: [
@@ -638,8 +638,8 @@ Entry.freearduino.getBlocks = function() {
                     ],
                     value: '3',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -676,8 +676,8 @@ Entry.freearduino.getBlocks = function() {
                 if(port == 9) port2 = 23;
                 if(port == 10) port2 = 24;
                 if(port == 11) port2 = 25;
-                Entry.hw.setDigitalPortValue(port2, value);
-                Entry.hw.removePortReadable(port);
+                RoCode.hw.setDigitalPortValue(port2, value);
+                RoCode.hw.removePortReadable(port);
                 return script.callReturn();
             },
             syntax: {
@@ -688,8 +688,8 @@ Entry.freearduino.getBlocks = function() {
 
 
         freearduino_set_servo_angle: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,  
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             params: [
@@ -717,8 +717,8 @@ Entry.freearduino.getBlocks = function() {
                     ],
                     value: '9',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -748,15 +748,15 @@ Entry.freearduino.getBlocks = function() {
                 value = Math.round(value);
                 value = Math.max(value, 0);
                 value = Math.min(value, 180);
-                Entry.hw.setDigitalPortValue(port, value+1);
+                RoCode.hw.setDigitalPortValue(port, value+1);
                 return script.callReturn();
             },
             syntax: { js: [], py: ['freearduino.set_servo_angle(%1, %2)'] },
         },
 
         freearduino_set_motor_run: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,  
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             params: [
@@ -770,8 +770,8 @@ Entry.freearduino.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Dropdown',
@@ -782,8 +782,8 @@ Entry.freearduino.getBlocks = function() {
                     ],
                     value: '4',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Indicator',
@@ -809,17 +809,17 @@ Entry.freearduino.getBlocks = function() {
                 if (value1 === 2) port = 3;
                 if (value1 === 3) port = 5;
                 if (value1 === 4) port = 6;
-                Entry.hw.sendQueue[0] = 1;
-                Entry.hw.setDigitalPortValue(26,value1*10+value2);
-                Entry.hw.removePortReadable(port);
+                RoCode.hw.sendQueue[0] = 1;
+                RoCode.hw.setDigitalPortValue(26,value1*10+value2);
+                RoCode.hw.removePortReadable(port);
                 return script.callReturn();
             },
             syntax: { js: [], py: ['freearduino.set_motor_run(%1, %2)'] },
         },
 
         freearduino_set_motor_speed: {
-            color: EntryStatic.colorSet.block.default.HARDWARE,
-            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,  
+            color: RoCodeStatic.colorSet.block.default.HARDWARE,
+            outerLine: RoCodeStatic.colorSet.block.darken.HARDWARE,
             skeleton: 'basic',
             fontColor: '#fff',
             params: [
@@ -833,8 +833,8 @@ Entry.freearduino.getBlocks = function() {
                     ],
                     value: '1',
                     fontSize: 11,
-                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
-                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                    bgColor: RoCodeStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: RoCodeStatic.colorSet.arrow.default.HARDWARE,
                 },
                 {
                     type: 'Block',
@@ -869,9 +869,9 @@ Entry.freearduino.getBlocks = function() {
                 if (value1 === 2) port = 3;
                 if (value1 === 3) port = 5;
                 if (value1 === 4) port = 6;
-                Entry.hw.sendQueue[0] = 1;
-                Entry.hw.setDigitalPortValue(value1+26,value2);
-                Entry.hw.removePortReadable(port);
+                RoCode.hw.sendQueue[0] = 1;
+                RoCode.hw.setDigitalPortValue(value1+26,value2);
+                RoCode.hw.removePortReadable(port);
                 return script.callReturn();
             },
             syntax: { js: [], py: ['freearduino.set_motor_speed(%1, %2)'] },
@@ -879,4 +879,4 @@ Entry.freearduino.getBlocks = function() {
     };
 };
 
-module.exports = Entry.freearduino;
+module.exports = RoCode.freearduino;

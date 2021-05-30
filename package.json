@@ -1,24 +1,24 @@
 {
-    "name": "entry-js",
-    "title": "EntryJS",
+    "name": "RoCode-js",
+    "title": "RoCodeJS",
     "description": "JavaScript library for visual programming",
     "version": "0.1.1",
-    "main": "dist/entry.js",
-    "homepage": "https://playentry.org",
+    "main": "dist/RoCode.js",
+    "homepage": "https://playRoCode.org",
     "author": {
-        "name": "Entry Korea corp and other contributors"
+        "name": "RoCode Korea corp and other contributors"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/entrylabs/entryjs.git"
+        "url": "https://github.com/RoCodelabs/RoCodejs.git"
     },
     "keywords": [
-        "entry",
-        "entryjs",
+        "RoCode",
+        "RoCodejs",
         "javascript"
     ],
     "bugs": {
-        "url": "https://github.com/entrylabs/entryjs/issues"
+        "url": "https://github.com/RoCodelabs/RoCodejs/issues"
     },
     "scripts": {
         "lint": "cross-env NODE_ENV=lint webpack -w",

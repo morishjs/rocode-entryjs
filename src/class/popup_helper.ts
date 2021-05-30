@@ -10,21 +10,21 @@ export default class PopupHelper {
 
     constructor(reset: boolean) {
         if (reset) {
-            $('.entryPopup.popupHelper').remove();
+            $('.RoCodePopup.popupHelper').remove();
             window.popupHelper = null;
         }
-        Entry.assert(!window.popupHelper, 'Popup exist');
+        RoCode.assert(!window.popupHelper, 'Popup exist');
 
         const ignoreCloseType = ['confirm', 'spinner'];
         const spanArea = [
-            'entryPopupHelperTopSpan',
-            'entryPopupHelperBottomSpan',
-            'entryPopupHelperLeftSpan',
-            'entryPopupHelperRightSpan',
+            'RoCodePopupHelperTopSpan',
+            'RoCodePopupHelperBottomSpan',
+            'RoCodePopupHelperLeftSpan',
+            'RoCodePopupHelperRightSpan',
         ];
 
-        this.body_ = Entry.Dom('div', {
-            classes: ['entryPopup', 'hiddenPopup', 'popupHelper'],
+        this.body_ = RoCode.Dom('div', {
+            classes: ['RoCodePopup', 'hiddenPopup', 'popupHelper'],
         });
 
         const popupClickEvent = (e: JQuery.ClickEvent) => {
@@ -47,28 +47,28 @@ export default class PopupHelper {
         window.popupHelper = this;
         this.body_.prop('popup', this);
 
-        Entry.Dom('div', {
-            class: 'entryPopupHelperTopSpan',
+        RoCode.Dom('div', {
+            class: 'RoCodePopupHelperTopSpan',
             parent: this.body_,
         });
-        const middle = Entry.Dom('div', {
-            class: 'entryPopupHelperMiddleSpan',
+        const middle = RoCode.Dom('div', {
+            class: 'RoCodePopupHelperMiddleSpan',
             parent: this.body_,
         });
-        Entry.Dom('div', {
-            class: 'entryPopupHelperBottomSpan',
+        RoCode.Dom('div', {
+            class: 'RoCodePopupHelperBottomSpan',
             parent: this.body_,
         });
-        Entry.Dom('div', {
-            class: 'entryPopupHelperLeftSpan',
+        RoCode.Dom('div', {
+            class: 'RoCodePopupHelperLeftSpan',
             parent: middle,
         });
-        this.window_ = Entry.Dom('div', {
-            class: 'entryPopupHelperWindow',
+        this.window_ = RoCode.Dom('div', {
+            class: 'RoCodePopupHelperWindow',
             parent: middle,
         });
-        Entry.Dom('div', {
-            class: 'entryPopupHelperRightSpan',
+        RoCode.Dom('div', {
+            class: 'RoCodePopupHelperRightSpan',
             parent: middle,
         });
 
@@ -83,10 +83,10 @@ export default class PopupHelper {
     }
 
     addPopup(key: string, popupObject: any) {
-        const content_ = Entry.Dom('div');
+        const content_ = RoCode.Dom('div');
 
-        const titleButton_ = Entry.Dom('div', {
-            class: 'entryPopupHelperCloseButton',
+        const titleButton_ = RoCode.Dom('div', {
+            class: 'RoCodePopupHelperCloseButton',
         });
 
         titleButton_.bindOnClick(() => {
@@ -96,15 +96,15 @@ export default class PopupHelper {
             this.hide();
         });
 
-        const popupWrapper_ = Entry.Dom('div', {
-            class: 'entryPopupHelperWrapper',
+        const popupWrapper_ = RoCode.Dom('div', {
+            class: 'RoCodePopupHelperWrapper',
         });
 
         popupWrapper_.append(titleButton_);
 
         if (popupObject.title) {
-            const title_ = Entry.Dom('div', {
-                class: 'entryPopupHelperTitle',
+            const title_ = RoCode.Dom('div', {
+                class: 'RoCodePopupHelperTitle',
             });
             popupWrapper_.append(title_);
             title_.text(popupObject.title);
@@ -196,5 +196,5 @@ export default class PopupHelper {
     }
 }
 
-// Entry Legacy 에서 사용 중
-Entry.popupHelper = PopupHelper;
+// RoCode Legacy 에서 사용 중
+RoCode.popupHelper = PopupHelper;
