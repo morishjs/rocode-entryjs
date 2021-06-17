@@ -1259,6 +1259,7 @@
                 fn();
             } else {
                 const img = new Image();
+                img.crossOrigin = "anonymous";
                 img.src = self._backgroundImage;
                 img.onload = function() {
                     ctx.drawImage(
